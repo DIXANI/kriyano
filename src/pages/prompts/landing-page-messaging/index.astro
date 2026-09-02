@@ -1,0 +1,827 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert conversion copywriter, landing-page strategist, UX messaging specialist and product marketer.
+
+TASK:
+Create a complete landing-page messaging strategy and copy structure for the supplied product, service, offer, tool or campaign.
+
+The goal is to help the target customer quickly understand:
+- what the offer is
+- who it is for
+- what problem it addresses
+- what value it provides
+- how it works
+- why it should be trusted
+- what action to take next
+
+Prioritize clarity, relevance, credibility and conversion intent over clever marketing language.
+
+BUSINESS / BRAND:
+[Name and short description.]
+
+PRODUCT / SERVICE / OFFER:
+[What is the landing page promoting?]
+
+TARGET AUDIENCE:
+[Who is the page for?]
+
+TRAFFIC SOURCE:
+[Google / Facebook / Instagram / LinkedIn / email / organic search / direct / other.]
+
+CAMPAIGN MESSAGE:
+[What message or promise brings visitors to this page?]
+
+CUSTOMER AWARENESS STAGE:
+[Problem-aware / solution-aware / product-aware / most aware / mixed / unknown.]
+
+PRIMARY CUSTOMER PROBLEM:
+[What important problem are they trying to solve?]
+
+DESIRED OUTCOME:
+[What do they want instead?]
+
+JOB TO BE DONE:
+[What are they trying to accomplish?]
+
+VALUE PROPOSITION:
+[Why should they consider this offer?]
+
+KEY BENEFITS:
+[List supported benefits.]
+
+KEY FEATURES / CAPABILITIES:
+[List real features.]
+
+DIFFERENTIATORS:
+[List genuine differences.]
+
+OFFER:
+[Price / free trial / free tool / consultation / download / discount / other.]
+
+PRIMARY CTA:
+[Buy / start trial / calculate / download / book / request quote / other.]
+
+SECONDARY CTA:
+[Optional.]
+
+PROOF AVAILABLE:
+[Reviews / testimonials / case studies / data / demonstration / credentials / none.]
+
+COMMON OBJECTIONS:
+[Price / trust / complexity / switching / time / other.]
+
+FAQ INFORMATION:
+[Known questions and factual answers.]
+
+BRAND TONE:
+[Professional / practical / friendly / premium / technical / simple / other.]
+
+PAGE TYPE:
+[Lead generation / product / SaaS / service / free tool / download / event / other.]
+
+SPECIAL REQUIREMENTS:
+[Any other instructions.]
+
+LANDING PAGE MESSAGING REQUIREMENTS:
+
+1. START WITH MESSAGE MATCH
+The landing page must logically continue the promise or topic that brought the visitor to the page.
+
+2. COMPARE TRAFFIC MESSAGE WITH LANDING-PAGE MESSAGE
+
+3. IDENTIFY ANY MESSAGE GAP
+If the ad says one thing and the page focuses on something else, flag it.
+
+4. DEFINE THE PRIMARY PAGE GOAL
+Use one primary conversion action.
+
+5. DO NOT GIVE MULTIPLE CTAS EQUAL PRIORITY UNLESS NECESSARY
+
+6. IDENTIFY THE CUSTOMER'S AWARENESS STAGE
+
+7. ADAPT PAGE DEPTH TO AWARENESS
+
+8. PROBLEM-AWARE VISITORS
+May need:
+Problem clarification
+Education
+Solution explanation
+Trust
+
+9. SOLUTION-AWARE VISITORS
+May need:
+Approach
+Benefits
+Differentiation
+Proof
+
+10. PRODUCT-AWARE VISITORS
+May need:
+Features
+Proof
+Offer
+Objection handling
+
+11. MOST-AWARE VISITORS
+May need:
+Offer
+Pricing
+CTA
+Risk reduction
+
+12. IF THE AUDIENCE IS MIXED
+Build a page that communicates core value quickly while allowing deeper evaluation below.
+
+13. CREATE THE HERO SECTION FIRST
+
+14. HERO MUST ANSWER QUICKLY:
+What is this?
+Who is it for?
+Why does it matter?
+What should I do?
+
+15. CREATE A CLEAR HEADLINE
+
+16. PRIORITIZE CLARITY OVER CLEVERNESS
+
+17. AVOID GENERIC HEADLINES SUCH AS:
+Transform your business
+Unlock your potential
+Work smarter
+The future starts here
+Take it to the next level
+
+18. USE SPECIFIC CUSTOMER VALUE
+
+19. CREATE A SUPPORTING SUBHEAD
+
+20. THE SUBHEAD SHOULD ADD INFORMATION
+Do not merely rewrite the headline.
+
+21. CREATE A PRIMARY CTA
+
+22. CTA SHOULD DESCRIBE THE NEXT ACTION CLEARLY
+
+23. USE LOW-FRICTION CTA LANGUAGE WHEN APPROPRIATE
+
+24. EXAMPLES:
+Try the Tool
+Calculate Now
+See How It Works
+Download the Template
+Start Free
+Request a Quote
+
+25. DO NOT ADD "FREE" UNLESS THE OFFER IS ACTUALLY FREE
+
+26. DO NOT ADD "NO CREDIT CARD" UNLESS CONFIRMED
+
+27. CREATE OPTIONAL SUPPORTING HERO COPY
+
+28. DO NOT OVERLOAD THE HERO
+
+29. IDENTIFY THE PRIMARY CUSTOMER PROBLEM
+
+30. EXPLAIN THE PROBLEM IN CUSTOMER LANGUAGE
+
+31. DO NOT EXAGGERATE THE PROBLEM
+
+32. DO NOT CREATE FEAR UNNECESSARILY
+
+33. EXPLAIN THE CONSEQUENCE WHEN RELEVANT
+
+34. CONNECT THE PROBLEM TO THE OFFER NATURALLY
+
+35. INTRODUCE THE SOLUTION
+
+36. EXPLAIN WHAT THE PRODUCT OR SERVICE ACTUALLY DOES
+
+37. DO NOT ASSUME THE VISITOR UNDERSTANDS THE PRODUCT CATEGORY
+
+38. CREATE A BENEFIT HIERARCHY
+
+39. PRIMARY BENEFIT
+The most purchase-relevant customer value.
+
+40. SECONDARY BENEFITS
+Supporting reasons to care.
+
+41. FEATURES
+Evidence of how those benefits are delivered.
+
+42. DISTINGUISH FEATURES FROM BENEFITS
+
+43. MAP:
+Feature → Benefit → Customer outcome
+
+44. DO NOT INVENT FEATURES
+
+45. DO NOT INVENT BENEFITS
+
+46. DO NOT INVENT RESULTS
+
+47. DO NOT INVENT SAVINGS
+
+48. DO NOT INVENT PERFORMANCE NUMBERS
+
+49. CREATE A "HOW IT WORKS" SECTION WHEN APPROPRIATE
+
+50. KEEP THE PROCESS SIMPLE
+
+51. USE 3–5 STEPS WHEN POSSIBLE
+
+52. DO NOT CREATE FAKE SIMPLICITY
+If implementation is genuinely complex, explain it accurately.
+
+53. CREATE USE-CASE MESSAGING
+
+54. SHOW HOW DIFFERENT RELEVANT CUSTOMERS MAY USE THE OFFER
+
+55. DO NOT CREATE FAKE USE CASES THAT THE PRODUCT CANNOT SUPPORT
+
+56. CREATE DIFFERENTIATION MESSAGING
+
+57. EXPLAIN WHY THE OFFER DESERVES CONSIDERATION
+
+58. DIFFERENTIATION MAY INCLUDE:
+Specialization
+Workflow
+Ease of use
+Accessibility
+Integration
+Service
+Expertise
+Price structure
+Format
+
+59. DO NOT CLAIM "UNIQUE" WITHOUT EVIDENCE
+
+60. DO NOT ATTACK COMPETITORS
+
+61. CREATE TRUST MESSAGING
+
+62. ONLY USE REAL PROOF
+
+63. POSSIBLE PROOF:
+Verified testimonials
+Case studies
+Demonstrations
+Customer numbers
+Performance data
+Credentials
+Certifications
+Reviews
+
+64. DO NOT INVENT SOCIAL PROOF
+
+65. DO NOT INVENT TESTIMONIALS
+
+66. DO NOT INVENT RATINGS
+
+67. DO NOT INVENT CUSTOMER COUNTS
+
+68. DO NOT INVENT LOGOS OF CUSTOMERS
+
+69. DO NOT INVENT AWARDS
+
+70. IF NO SOCIAL PROOF EXISTS
+Use alternative trust builders such as:
+Transparent explanation
+Product demonstration
+Methodology
+Screenshots
+Clear pricing
+FAQ
+About information
+Privacy information
+Contact information
+
+71. DO NOT LABEL THESE AS CUSTOMER PROOF
+
+72. CREATE OBJECTION HANDLING
+
+73. IDENTIFY THE MOST IMPORTANT REASONS A CUSTOMER MAY HESITATE
+
+74. POSSIBLE OBJECTIONS:
+Price
+Trust
+Complexity
+Time
+Implementation
+Compatibility
+Switching cost
+Need for approval
+Uncertainty
+
+75. ADDRESS OBJECTIONS WITH FACTS
+
+76. DO NOT INVENT GUARANTEES
+
+77. DO NOT INVENT REFUND POLICIES
+
+78. DO NOT INVENT SECURITY CERTIFICATIONS
+
+79. CREATE AN FAQ SECTION
+
+80. FAQ SHOULD ADDRESS REAL DECISION QUESTIONS
+
+81. POSSIBLE FAQ TOPICS:
+Who is this for?
+How does it work?
+What does it cost?
+What do I need?
+How long does it take?
+Can I cancel?
+What happens next?
+
+82. ONLY ANSWER QUESTIONS USING AVAILABLE FACTS
+
+83. IF INFORMATION IS UNKNOWN
+Mark:
+Information required
+
+84. DO NOT FABRICATE FAQ ANSWERS
+
+85. CREATE CTA HIERARCHY
+
+86. PRIMARY CTA
+Main conversion action.
+
+87. SECONDARY CTA
+Lower-commitment action when useful.
+
+88. REPEAT THE PRIMARY CTA AT LOGICAL DECISION POINTS
+
+89. DO NOT PLACE CTAS RANDOMLY AFTER EVERY PARAGRAPH
+
+90. POSSIBLE CTA LOCATIONS:
+Hero
+After key benefits
+After proof
+After objections
+Final section
+
+91. KEEP CTA WORDING CONSISTENT
+
+92. CREATE A FINAL CTA SECTION
+
+93. FINAL CTA SHOULD REINFORCE:
+Value
+Next action
+Low-friction reassurance when factual
+
+94. CREATE PAGE SECTION ORDER
+
+95. DEFAULT STRUCTURE MAY INCLUDE:
+Hero
+Problem
+Solution
+Benefits
+How it works
+Use cases
+Proof
+Objections
+FAQ
+Final CTA
+
+96. DO NOT USE THIS ORDER MECHANICALLY
+Adjust it to:
+Audience
+Awareness
+Offer complexity
+Traffic source
+
+97. SHORT LANDING PAGE MODE
+Use for:
+Simple offer
+Known audience
+Low risk
+Single task
+
+98. LONG LANDING PAGE MODE
+Use for:
+Higher price
+Complex solution
+New category
+High trust requirement
+Longer consideration
+
+99. DO NOT ADD LENGTH WITHOUT PURPOSE
+
+100. CREATE SCANNABLE COPY
+
+101. USE:
+Short paragraphs
+Clear headings
+Benefit bullets
+Specific labels
+
+102. AVOID LARGE WALLS OF TEXT
+
+103. CREATE SECTION HEADLINES THAT COMMUNICATE VALUE
+
+104. AVOID LABEL-ONLY HEADINGS WHEN A BENEFIT-LED HEADING WOULD BE CLEARER
+
+105. CREATE MOBILE-FIRST MESSAGING
+
+106. IMPORTANT INFORMATION SHOULD APPEAR EARLY
+
+107. KEEP HERO COPY CONCISE
+
+108. KEEP BUTTON COPY SHORT
+
+109. DO NOT DEPEND ON HOVER STATES FOR IMPORTANT INFORMATION
+
+110. CREATE VISUAL SUGGESTIONS
+
+111. VISUALS SHOULD HELP EXPLAIN OR PROVE THE OFFER
+
+112. POSSIBLE VISUALS:
+Product interface
+Product photograph
+Demonstration
+Process diagram
+Before/after when legitimate
+Example output
+Calculator result
+Template preview
+
+113. AVOID DECORATIVE VISUALS THAT DISTRACT FROM THE MESSAGE
+
+114. CREATE PRODUCT-DEMO MESSAGING WHEN USEFUL
+
+115. SHOW RATHER THAN CLAIM WHEN POSSIBLE
+
+116. EXAMPLE:
+Instead of saying:
+"Easy to use"
+
+show:
+"Enter three values and get the calculated reorder point."
+
+117. CREATE MICROCOPY
+
+118. POSSIBLE MICROCOPY:
+Form labels
+Button support text
+Input guidance
+Error messages
+Privacy reassurance
+
+119. ONLY INCLUDE REASSURANCE THAT IS TRUE
+
+120. CREATE FORM MESSAGING WHEN LEAD GENERATION IS INVOLVED
+
+121. ASK ONLY FOR INFORMATION NECESSARY FOR THE NEXT STEP
+
+122. EXPLAIN WHY SENSITIVE OR UNUSUAL INFORMATION IS NEEDED
+
+123. DO NOT CREATE DARK PATTERNS
+
+124. DO NOT HIDE IMPORTANT CONDITIONS
+
+125. CREATE SEO-AWARE COPY WHEN ORGANIC SEARCH IS RELEVANT
+
+126. USE SEARCH LANGUAGE NATURALLY
+
+127. DO NOT KEYWORD STUFF
+
+128. DO NOT SACRIFICE CONVERSION CLARITY FOR SEO
+
+129. CREATE AD-TO-PAGE CONSISTENCY
+
+130. MATCH:
+Offer
+Audience
+Problem
+Headline
+Visual context
+CTA
+
+131. IF AN AD PROMISES A SPECIFIC RESOURCE
+The landing page should immediately confirm that resource.
+
+132. CREATE CLAIM VALIDATION
+
+133. CLASSIFY IMPORTANT CLAIMS:
+Supported
+Partially supported
+Unverified
+
+134. FLAG HIGH-RISK CLAIMS
+
+135. EXAMPLES:
+Guaranteed
+Best
+Fastest
+Eliminates
+Doubles
+Saves 50%
+Number one
+
+136. SUGGEST SAFER WORDING WHEN EVIDENCE IS LIMITED
+
+137. CREATE CONVERSION FRICTION REVIEW
+
+138. CHECK FOR:
+Unclear CTA
+Too many choices
+Missing price context
+Missing explanation
+Weak trust
+Unexpected form
+Message mismatch
+Unanswered objection
+
+139. DO NOT ASSUME EVERY PAGE NEEDS MORE PERSUASION
+Sometimes clarity is the primary problem.
+
+140. CREATE A/B TEST IDEAS
+
+141. TEST ONE IMPORTANT VARIABLE AT A TIME
+
+142. POSSIBLE TESTS:
+Headline angle
+CTA wording
+Hero visual
+Benefit order
+Proof placement
+Page length
+
+143. CREATE A TEST HYPOTHESIS
+
+144. DO NOT GUARANTEE TEST RESULTS
+
+145. CREATE INFORMATION-GAP LIST
+Identify what is needed before final copy can be safely published.
+
+146. CREATE FINAL PAGE COPY
+
+147. KEEP LANGUAGE NATURAL
+
+148. REMOVE GENERIC FILLER
+
+149. REMOVE DUPLICATION
+
+150. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- target customer is clear
+- traffic source is considered
+- message match is strong
+- awareness stage is considered
+- page goal is clear
+- primary CTA is clear
+- hero explains the offer quickly
+- headline communicates real value
+- subhead adds useful information
+- customer problem is specific
+- desired outcome is clear
+- features and benefits are separated
+- no product feature was invented
+- no result was invented
+- no social proof was invented
+- differentiation is credible
+- proof is placed appropriately
+- objections are addressed factually
+- FAQ answers are supported
+- CTA hierarchy is consistent
+- page structure matches offer complexity
+- copy is scannable
+- mobile readability is considered
+- ad promise matches page message
+- unsupported claims are flagged
+- important information gaps are identified
+- final copy is actionable
+
+OUTPUT FORMAT:
+
+1. LANDING PAGE STRATEGY
+Provide:
+Audience
+Traffic source
+Awareness stage
+Primary problem
+Desired outcome
+Value proposition
+Primary conversion goal
+
+2. MESSAGE-MATCH CHECK
+Compare:
+Traffic / campaign message
+Landing-page message
+Any mismatch
+Recommended correction
+
+3. HERO SECTION
+Provide:
+Eyebrow if useful
+Headline
+Subheadline
+Primary CTA
+Secondary CTA if needed
+Supporting microcopy
+
+4. PROBLEM SECTION
+Provide:
+Section headline
+Problem explanation
+Relevant consequence
+Transition to solution
+
+5. SOLUTION SECTION
+Explain:
+What the offer is
+How it addresses the problem
+Why the approach matters
+
+6. BENEFIT SECTION
+For each benefit provide:
+Benefit headline
+Explanation
+Supporting feature
+Desired outcome
+
+7. HOW IT WORKS
+Create a simple step-by-step explanation.
+
+8. USE CASES
+Provide relevant customer situations.
+
+9. DIFFERENTIATION SECTION
+Explain credible reasons to consider the offer.
+
+10. PROOF & TRUST SECTION
+Recommend:
+Available proof
+Where to place it
+Missing proof
+Alternative trust elements
+
+11. OBJECTION HANDLING
+For each important objection provide:
+Objection
+Response
+Evidence required
+
+12. FAQ
+Create decision-relevant questions and answers.
+Mark unknown answers as "Information required."
+
+13. CTA PLAN
+Provide:
+Primary CTA
+Secondary CTA
+Recommended placements
+Final CTA copy
+
+14. PAGE STRUCTURE
+Provide the recommended section order and explain why.
+
+15. VISUAL DIRECTION
+Recommend useful visuals for each major section.
+
+16. MICROCOPY
+Provide useful:
+Button text
+Form guidance
+Supporting reassurance where factual
+
+17. CLAIM CHECK
+For important claims provide:
+Claim
+Support status
+Risk
+Recommended wording
+
+18. CONVERSION FRICTION CHECK
+Identify possible points of confusion or hesitation.
+
+19. A/B TEST IDEAS
+Provide:
+Element
+Control
+Variant
+Hypothesis
+Metric
+
+20. INFORMATION REQUIRED
+List missing facts needed before publication.
+
+21. FINAL LANDING PAGE COPY
+Assemble the recommended copy in page order so it can be used as a practical first draft.
+
+IMPORTANT:
+- Prioritize clarity over cleverness.
+- Maintain message consistency with the traffic source.
+- Do not invent features, results, offers or proof.
+- Do not fabricate testimonials or customer numbers.
+- Do not answer unknown FAQs with guesses.
+- Use one clear primary conversion goal.
+- Keep claims proportional to evidence.
+- Build the page around the customer's decision process rather than a generic template.`;
+
+const steps = [
+  {
+    title: "Match the visitor's expectation",
+    description:
+      "Start with the ad, search or campaign message that brought the visitor to the page and make sure the hero immediately continues that conversation.",
+  },
+  {
+    title: "Build one conversion path",
+    description:
+      "Choose a clear primary action and organize the page around the information, benefits, proof and objections needed to support that decision.",
+  },
+  {
+    title: "Show value before adding persuasion",
+    description:
+      "Explain what the offer actually does and connect real features to customer outcomes before relying on slogans, social proof or promotional language.",
+  },
+  {
+    title: "Remove conversion friction",
+    description:
+      "Check for unclear CTAs, message mismatch, unanswered questions, weak trust, unnecessary form fields and unsupported claims before publishing.",
+  },
+];
+
+const example = {
+  input: [
+    "Page: Reorder Point Calculator.",
+    "Audience: Small-business owners and inventory professionals.",
+    "Traffic source: LinkedIn educational post.",
+    "Customer problem: Uncertainty about when stock should be reordered.",
+    "Capability: Calculates reorder point using demand, lead time and safety stock.",
+    "Offer: Free online calculator.",
+    "Primary CTA: Use the calculator.",
+  ],
+
+  output: [
+    "HERO HEADLINE: Know When It's Time to Reorder Stock.",
+    "SUBHEAD: Enter your demand, lead time and safety stock to calculate a practical reorder point for an inventory item.",
+    "CTA: Calculate Your Reorder Point.",
+    "PROBLEM SECTION: Replenishment decisions become harder when reorder timing is based only on instinct or inconsistent rules.",
+    "HOW IT WORKS: Enter the required inventory values, calculate the reorder point, then use the result as one input in your replenishment planning.",
+    "TRUST APPROACH: Show the formula, explain each input and provide a worked example rather than inventing testimonials.",
+    "CLAIM CHECK: Do not promise that the calculator prevents stockouts because supplier reliability, demand accuracy and other operating conditions also affect availability.",
+    "FINAL CTA: Ready to check an item? Enter your inventory data and calculate the reorder point.",
+  ],
+};
+
+const tips = [
+  {
+    title: "The first screen should answer the basic questions",
+    description:
+      "Visitors should quickly understand what the offer is, why it is relevant and what they can do next without having to interpret a clever slogan.",
+  },
+  {
+    title: "Proof does not have to mean testimonials",
+    description:
+      "When customer evidence is unavailable, transparent methodology, demonstrations, screenshots, examples and clear explanations can still reduce uncertainty without fabricating social proof.",
+  },
+  {
+    title: "Every section should support the decision",
+    description:
+      "Remove sections that exist only because other landing pages have them. Page length and structure should reflect the customer's actual information needs.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Landing Page Messaging Prompt | KRIYANO"
+  description="Build conversion-focused landing page messaging with stronger headlines, benefits, CTAs, proof, objection handling, FAQs and message-match checks."
+>
+  <PromptPage
+    category="MARKETING"
+    title="Landing Page Messaging"
+    accentTitle="Prompt."
+    description="Plan and write clearer landing-page messaging around customer intent, value, benefits, proof, objections and one focused conversion action."
+    meta={[
+      "Free prompt",
+      "Landing pages",
+      "Conversion copy",
+    ]}
+    bestFor={[
+      "Product pages",
+      "Lead generation",
+      "SaaS",
+      "Online tools",
+      "Service pages",
+      "Campaign landing pages",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Turn campaign interest into a clear conversion path."
+    introDescription="Match the visitor's expectation, explain the offer quickly, build a credible value story and organize the page around the information needed to take the next step."
+    steps={steps}
+    exampleTitle="Build clearer messaging for a free inventory calculator."
+    example={example}
+    tipsTitle="A landing page converts by reducing uncertainty, not by adding more hype."
+    tips={tips}
+    sidebarTitle="Need ad messaging first?"
+    sidebarDescription="Use KRIYANO's Ad Copy Writer Prompt to create the campaign message and then carry the same promise, audience and CTA into the landing page."
+    warningTitle="Landing-page copy must reflect the real offer"
+    warningText="Verify product capabilities, pricing, guarantees, testimonials, performance results, savings and comparative claims before publishing. Mark unknown information rather than filling gaps with persuasive-sounding assumptions."
+  />
+</BaseLayout>

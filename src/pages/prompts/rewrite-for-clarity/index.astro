@@ -1,0 +1,194 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced editor who specializes in clear, concise and professional communication.
+
+TASK:
+Rewrite the text below so it is easier to understand while preserving the original meaning.
+
+ORIGINAL TEXT:
+[Paste the text here.]
+
+PURPOSE:
+[Example: email, report, article, proposal, policy, social media post, website copy.]
+
+TARGET AUDIENCE:
+[Who will read this?]
+
+DESIRED TONE:
+[Example: professional, neutral, friendly, direct, formal, conversational.]
+
+LANGUAGE:
+[Specify the language or write "keep the original language".]
+
+LENGTH PREFERENCE:
+[Example: keep similar length, shorten where possible, concise version.]
+
+IMPORTANT DETAILS TO PRESERVE:
+[List names, dates, figures, instructions, technical terms or commitments that must remain unchanged.]
+
+STYLE REQUIREMENTS:
+[Add any special requirements.]
+
+REWRITE REQUIREMENTS:
+
+1. PRESERVE THE MEANING
+- Keep the original message, facts and intent.
+- Do not invent new information.
+- Do not remove important details.
+
+2. IMPROVE CLARITY
+- Replace confusing or vague wording.
+- Simplify overly complicated sentences.
+- Make relationships between ideas easier to follow.
+- Explain unclear references where the original context allows it.
+
+3. REMOVE UNNECESSARY WORDS
+- Eliminate repetition.
+- Remove filler.
+- Shorten wordy phrases.
+- Avoid saying the same thing in several different ways.
+
+4. IMPROVE STRUCTURE
+- Put information in a logical order.
+- Use paragraphs, bullets or headings where they improve readability.
+- Keep related ideas together.
+
+5. IMPROVE SENTENCE QUALITY
+- Avoid excessively long sentences.
+- Reduce awkward sentence structures.
+- Use active voice where it improves clarity.
+- Keep technical language when it is necessary.
+
+6. PRESERVE IMPORTANT TERMINOLOGY
+Do not unnecessarily replace:
+- technical terms
+- legal wording
+- product names
+- job titles
+- measurements
+- figures
+- dates
+when they are important to the meaning.
+
+7. MATCH THE AUDIENCE
+Adjust complexity and vocabulary based on who will read the text.
+
+8. KEEP THE TONE
+Improve clarity without changing the intended emotional or professional tone unless requested.
+
+9. IDENTIFY UNCLEAR INFORMATION
+If the original text contains something genuinely ambiguous, contradictory or incomplete:
+- do not guess
+- flag the issue separately
+
+OUTPUT FORMAT:
+
+1. Rewritten Version
+
+2. What Was Improved
+Briefly summarize the main clarity improvements.
+
+3. Unclear or Missing Information
+Only include this section if something in the original text cannot be clarified safely without additional information.
+
+IMPORTANT:
+- Do not add facts.
+- Do not change numbers, dates, names or commitments unless specifically instructed.
+- Do not make the writing more formal than necessary.
+- Do not replace simple language with complicated vocabulary.
+- Prioritize understanding over impressive wording.`;
+
+const steps = [
+  {
+    title: "Paste the complete text",
+    description:
+      "Include enough surrounding context so important details are not removed or misunderstood during the rewrite.",
+  },
+  {
+    title: "Define the audience",
+    description:
+      "A message for customers, managers, technical staff and the general public may need very different levels of explanation.",
+  },
+  {
+    title: "Lock critical details",
+    description:
+      "List figures, dates, names, technical terms and commitments that must remain exactly accurate.",
+  },
+  {
+    title: "Review meaning before sending",
+    description:
+      "Compare the revised version with the original to confirm that clearer wording has not changed the intended message.",
+  },
+];
+
+const example = {
+  input: [
+    "Purpose: Internal operations email.",
+    "Audience: Warehouse team.",
+    "Tone: Direct and professional.",
+    "Original: Due to the fact that we have observed several instances whereby stock has been physically located in locations that are different from the location which is reflected within the system, all employees are hereby requested to make sure that stock movements are updated accordingly.",
+  ],
+
+  output: [
+    "We have found several cases where physical stock is stored in a different location from the system record.",
+    "Please make sure every stock movement is updated in the system immediately so the physical and system locations remain accurate.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Clarity is not always shorter",
+    description:
+      "Some text needs a little more explanation to become clear. The goal is easier understanding, not simply reducing the word count.",
+  },
+  {
+    title: "Protect important facts",
+    description:
+      "For business and technical documents, explicitly identify figures, dates and terminology that must not change.",
+  },
+  {
+    title: "Use structure where useful",
+    description:
+      "Long paragraphs often become easier to understand when responsibilities, actions or requirements are separated into short sections or bullets.",
+  },
+];
+---
+
+<BaseLayout
+  title="Rewrite for Clarity Prompt | KRIYANO"
+  description="Rewrite confusing or wordy text into clearer, more concise and easier-to-understand communication without changing the original meaning."
+>
+  <PromptPage
+    category="WRITING"
+    title="Rewrite for"
+    accentTitle="Clarity."
+    description="Improve confusing, wordy or poorly structured writing while preserving the original meaning, important details and intended tone."
+    meta={[
+      "Free prompt",
+      "Writing",
+      "Clarity focused",
+    ]}
+    bestFor={[
+      "Emails",
+      "Reports",
+      "Business documents",
+      "Instructions",
+      "Website copy",
+      "Professional writing",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Make the message easier to understand."
+    introDescription="Paste your original text and explain who will read it. The prompt simplifies wording, removes unnecessary repetition and improves structure without rewriting the message into something different."
+    steps={steps}
+    exampleTitle="From wordy to clear."
+    example={example}
+    tipsTitle="Improve clarity without losing meaning."
+    tips={tips}
+    sidebarTitle="Want a different writing style?"
+    sidebarDescription="Use the KRIYANO Prompt Builder to create custom writing instructions around your exact audience, tone, purpose and output requirements."
+    warningTitle="Check critical details"
+    warningText="When rewriting legal, technical, financial or operational text, verify names, figures, dates, responsibilities and commitments against the original before using the revised version."
+  />
+</BaseLayout>

@@ -1,0 +1,819 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert short-form content strategist, social media creative director and video concept developer.
+
+TASK:
+Generate practical, original short-form video ideas for the supplied creator, business, product, service or topic.
+
+The ideas should be suitable for platforms such as:
+- Instagram Reels
+- Facebook Reels
+- TikTok
+- YouTube Shorts
+- LinkedIn short-form video when appropriate
+
+Do NOT simply generate random viral ideas.
+
+Build ideas around:
+- the target audience
+- audience problems
+- audience questions
+- desired outcomes
+- content objectives
+- creator or brand expertise
+- available resources
+- platform behaviour
+- realistic production capability
+
+CREATOR / BRAND:
+[Name and short description.]
+
+NICHE:
+[Topic, industry or content category.]
+
+TARGET AUDIENCE:
+[Who should watch this content?]
+
+AUDIENCE KNOWLEDGE LEVEL:
+[Beginner / intermediate / advanced / mixed.]
+
+AUDIENCE PROBLEMS:
+[List important problems.]
+
+AUDIENCE QUESTIONS:
+[List common questions if known.]
+
+AUDIENCE DESIRES:
+[What do they want to achieve?]
+
+CONTENT OBJECTIVE:
+[Reach / engagement / education / authority / traffic / leads / sales / community / other.]
+
+PLATFORMS:
+[Instagram / Facebook / TikTok / YouTube Shorts / LinkedIn / other.]
+
+CONTENT PILLARS:
+[List existing pillars or ask AI to recommend them.]
+
+PRODUCT / SERVICE:
+[Optional.]
+
+PRIMARY CTA:
+[Follow / comment / save / share / visit / download / enquire / buy / other.]
+
+BRAND VOICE:
+[Professional / friendly / practical / educational / humorous / premium / conversational / other.]
+
+CREATOR STYLE:
+[Talking head / voice-over / faceless / demonstration / screen recording / cinematic / mixed.]
+
+AVAILABLE RESOURCES:
+[Phone / camera / AI video / screen recorder / product / location / staff / existing footage / other.]
+
+PRODUCTION LIMITATIONS:
+[Time / budget / editing ability / no-face content / location / equipment / other.]
+
+VIDEO LENGTH:
+[For example: 15–30 seconds / 30–60 seconds / mixed.]
+
+POSTING FREQUENCY:
+[Optional.]
+
+EXISTING HIGH-PERFORMING CONTENT:
+[Optional.]
+
+TOPICS TO AVOID:
+[Optional.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+SHORT-FORM VIDEO IDEA REQUIREMENTS:
+
+1. START WITH AUDIENCE NEEDS
+
+2. IDENTIFY THE MAIN AUDIENCE PROBLEMS
+
+3. IDENTIFY THE MAIN AUDIENCE QUESTIONS
+
+4. IDENTIFY THE MAIN DESIRED OUTCOMES
+
+5. IDENTIFY WHAT THE CREATOR OR BRAND CAN CREDIBLY TEACH, SHOW OR DISCUSS
+
+6. DO NOT CREATE IDEAS PURELY BECAUSE THEY APPEAR TRENDY
+
+7. CREATE CONTENT PILLARS IF NONE ARE PROVIDED
+
+8. CONTENT PILLARS SHOULD BE BROAD ENOUGH TO SUPPORT MULTIPLE VIDEOS
+
+9. POSSIBLE PILLARS:
+Education
+How-to
+Mistakes
+Problem solving
+Behind the scenes
+Demonstration
+FAQ
+Comparison
+Story
+Opinion
+Case example
+Myth correction
+Process
+Tools
+Industry insight
+
+10. DO NOT CREATE TOO MANY OVERLAPPING PILLARS
+
+11. CREATE DISTINCT VIDEO CONCEPTS
+
+12. EACH IDEA SHOULD HAVE ONE MAIN MESSAGE
+
+13. DO NOT TRY TO EXPLAIN AN ENTIRE SUBJECT IN ONE SHORT VIDEO
+
+14. BREAK LARGE TOPICS INTO A SERIES WHEN APPROPRIATE
+
+15. CREATE MULTIPLE IDEA ANGLES
+
+16. POSSIBLE ANGLES:
+Problem-led
+Question-led
+Mistake-led
+Outcome-led
+Curiosity-led
+Demonstration-led
+Story-led
+Comparison-led
+Checklist-led
+Myth-led
+Process-led
+
+17. KEEP HOOKS TRUTHFUL
+
+18. DO NOT CREATE MISLEADING CURIOSITY GAPS
+
+19. DO NOT USE FALSE URGENCY
+
+20. DO NOT USE FALSE SCARCITY
+
+21. DO NOT INVENT CONTROVERSY
+
+22. DO NOT INVENT CUSTOMER STORIES
+
+23. DO NOT INVENT RESULTS
+
+24. DO NOT INVENT STATISTICS
+
+25. DO NOT INVENT TRENDS
+
+26. DO NOT CLAIM SOMETHING IS VIRAL UNLESS EVIDENCE IS PROVIDED
+
+27. CREATE A HOOK FOR EACH IDEA
+
+28. THE HOOK SHOULD COMMUNICATE WHY SOMEONE SHOULD KEEP WATCHING
+
+29. POSSIBLE HOOK TYPES:
+Direct question
+Specific problem
+Common mistake
+Useful result
+Unexpected observation
+Before-you-do-this warning
+Quick demonstration
+Challenge
+Comparison
+
+30. AVOID GENERIC HOOKS SUCH AS:
+"You won't believe this"
+"This will change your life"
+"Nobody tells you this"
+
+unless the claim can genuinely be supported.
+
+31. CREATE THE VIDEO PAYOFF
+
+32. THE PAYOFF SHOULD DELIVER WHAT THE HOOK PROMISES
+
+33. DO NOT DELAY ALL VALUE UNTIL THE END
+
+34. GIVE USEFUL INFORMATION EARLY
+
+35. CREATE A SIMPLE VIDEO FLOW
+
+36. DEFAULT STRUCTURE:
+Hook
+Context
+Main value
+Payoff
+CTA
+
+37. ADAPT THE STRUCTURE WHEN THE IDEA NEEDS SOMETHING DIFFERENT
+
+38. CREATE VISUAL-FIRST IDEAS
+
+39. ASK:
+What will viewers SEE during the first few seconds?
+
+40. DO NOT RELY ONLY ON SPOKEN WORDS
+
+41. POSSIBLE OPENING VISUALS:
+Result
+Problem
+Product
+Demonstration
+Screen
+Process
+Before/after when legitimate
+Ingredient
+Tool
+Workplace situation
+Strong visual detail
+
+42. CREATE B-ROLL IDEAS
+
+43. B-ROLL SHOULD SUPPORT THE MESSAGE
+
+44. DO NOT ADD RANDOM CINEMATIC B-ROLL THAT DOES NOT HELP EXPLAIN THE VIDEO
+
+45. CREATE ON-SCREEN TEXT
+
+46. KEEP ON-SCREEN TEXT CONCISE
+
+47. USE TEXT TO:
+Clarify
+Emphasize
+Label
+Summarize
+
+48. DO NOT PUT FULL PARAGRAPHS ON SCREEN
+
+49. CREATE TALKING-HEAD IDEAS WHEN APPROPRIATE
+
+50. TALKING-HEAD VIDEOS SHOULD HAVE:
+Immediate topic clarity
+Natural delivery
+Supporting visuals when useful
+
+51. CREATE FACELESS IDEAS WHEN REQUESTED
+
+52. FACELESS OPTIONS MAY INCLUDE:
+Hands-on demonstration
+Screen recording
+Product footage
+Process footage
+Voice-over
+Text-led video
+Animation
+AI-generated supporting visuals
+
+53. CREATE DEMONSTRATION IDEAS WHEN THE SUBJECT CAN BE SHOWN
+
+54. SHOWING IS OFTEN BETTER THAN EXPLAINING
+
+55. CREATE SCREEN-RECORDING IDEAS FOR:
+Software
+Websites
+AI tools
+Spreadsheets
+Online workflows
+
+56. CREATE BEFORE/AFTER IDEAS ONLY WHEN A LEGITIMATE COMPARISON EXISTS
+
+57. DO NOT FABRICATE BEFORE/AFTER RESULTS
+
+58. CREATE STORY-BASED IDEAS WHEN REAL EXPERIENCES ARE AVAILABLE
+
+59. DO NOT INVENT PERSONAL STORIES
+
+60. CREATE FAQ-BASED IDEAS
+
+61. TURN REAL CUSTOMER OR AUDIENCE QUESTIONS INTO VIDEO TOPICS
+
+62. IF QUESTIONS ARE NOT PROVIDED
+Generate likely question categories but label them as suggested questions, not verified audience data.
+
+63. CREATE PROBLEM-SOLVING VIDEOS
+
+64. STRUCTURE:
+Problem
+Likely cause
+What to check
+Next action
+
+65. CREATE MISTAKE-BASED VIDEOS
+
+66. EXPLAIN:
+Mistake
+Why it matters
+Better approach
+
+67. DO NOT SHAME BEGINNERS
+
+68. CREATE CHECKLIST VIDEOS
+
+69. KEEP CHECKLISTS SHORT ENOUGH FOR THE VIDEO FORMAT
+
+70. SPLIT LONG CHECKLISTS INTO A SERIES
+
+71. CREATE COMPARISON VIDEOS
+
+72. COMPARE MEANINGFUL DIFFERENCES
+
+73. DO NOT CREATE FALSE WINNERS
+
+74. ACKNOWLEDGE TRADE-OFFS WHEN APPROPRIATE
+
+75. CREATE MYTH-CORRECTION VIDEOS CAREFULLY
+
+76. DO NOT LABEL SOMETHING A MYTH WITHOUT A REASONABLE BASIS
+
+77. CREATE PROCESS VIDEOS
+
+78. POSSIBLE STRUCTURE:
+Starting point
+Key steps
+Final result
+
+79. CREATE BEHIND-THE-SCENES IDEAS
+
+80. BTS CONTENT SHOULD STILL GIVE THE AUDIENCE A REASON TO CARE
+
+81. CREATE AUTHORITY-BUILDING CONTENT
+
+82. AUTHORITY SHOULD COME FROM:
+Useful explanation
+Demonstration
+Experience
+Method
+Evidence
+
+83. DO NOT RELY ON SELF-PROMOTIONAL CLAIMS
+
+84. CREATE ENGAGEMENT IDEAS
+
+85. POSSIBLE ENGAGEMENT MECHANICS:
+Question
+Choice
+Opinion request
+Experience sharing
+Simple challenge
+
+86. DO NOT USE MEANINGLESS ENGAGEMENT BAIT
+
+87. CREATE SAVEABLE CONTENT
+
+88. SAVEABLE CONTENT MAY INCLUDE:
+Checklist
+Steps
+Formula
+Framework
+Reference
+Quick guide
+
+89. CREATE SHAREABLE CONTENT
+
+90. SHAREABLE CONTENT SHOULD SOLVE OR EXPLAIN SOMETHING RELEVANT TO THE AUDIENCE
+
+91. CREATE SERIES OPPORTUNITIES
+
+92. EXAMPLE:
+"Warehouse Mistakes — Part 1"
+"Warehouse Mistakes — Part 2"
+
+93. SERIES SHOULD HAVE A REAL CONTENT CONNECTION
+
+94. DO NOT LABEL UNRELATED VIDEOS AS A SERIES
+
+95. CREATE PLATFORM-NATIVE VARIATIONS
+
+96. INSTAGRAM REELS:
+Prioritize strong visual presentation, useful content and save/share potential.
+
+97. FACEBOOK REELS:
+Prioritize accessibility, practical value, relatable situations and shareability.
+
+98. TIKTOK:
+Prioritize immediate context, natural delivery, demonstration and fast progression.
+
+99. YOUTUBE SHORTS:
+Prioritize clear topic, retention, useful payoff and potential connection to deeper content.
+
+100. LINKEDIN VIDEO:
+Prioritize professional relevance, practical lessons and workplace/business insights.
+
+101. DO NOT POST IDENTICAL EDITS EVERYWHERE BY DEFAULT
+
+102. RECOMMEND SMALL PLATFORM-SPECIFIC ADAPTATIONS
+
+103. CREATE IDEAS FOR DIFFERENT AWARENESS STAGES
+
+104. DISCOVERY CONTENT:
+Broad relevant problem
+Question
+Mistake
+Quick insight
+
+105. DEPTH CONTENT:
+Process
+Framework
+Explanation
+Case example
+
+106. CONVERSION-SUPPORT CONTENT:
+Product use case
+Demo
+FAQ
+Objection answer
+
+107. DO NOT TURN EVERY VIDEO INTO A SALES VIDEO
+
+108. CREATE CTA OPTIONS
+
+109. MATCH CTA TO VIDEO PURPOSE
+
+110. EDUCATIONAL CTA:
+Save this
+Share this
+Follow for more
+Read the guide
+
+111. ENGAGEMENT CTA:
+What would you check first?
+Which one do you use?
+Have you experienced this?
+
+112. CONVERSION CTA:
+Try the tool
+Download the resource
+See the product
+Book a consultation
+
+113. ONLY USE CTAS THAT ACTUALLY EXIST
+
+114. CREATE VIDEO IDEAS AT DIFFERENT PRODUCTION LEVELS
+
+115. LOW-EFFORT:
+Talking head
+Screen recording
+Simple demonstration
+Voice-over
+
+116. MEDIUM-EFFORT:
+Multiple shots
+B-roll
+Product demonstration
+Carousel-style video
+
+117. HIGHER-EFFORT:
+Cinematic production
+Complex animation
+Multi-location story
+
+118. PRIORITIZE IDEAS THE USER CAN REALISTICALLY PRODUCE
+
+119. DO NOT RECOMMEND EXPENSIVE PRODUCTION WHEN IT IS UNNECESSARY
+
+120. CREATE BATCH-FRIENDLY IDEAS
+
+121. GROUP VIDEOS THAT CAN BE RECORDED:
+In same location
+With same setup
+Using same product
+Using same screen workflow
+
+122. CREATE REPURPOSING OPPORTUNITIES
+
+123. ONE LONGER CONTENT PIECE MAY PRODUCE:
+Question video
+Mistake video
+Checklist
+Demonstration
+FAQ
+Summary
+
+124. DO NOT SIMPLY CUT RANDOM CLIPS WITHOUT CONTEXT
+
+125. CREATE EVERGREEN IDEAS
+
+126. IDENTIFY WHICH IDEAS CAN REMAIN USEFUL LONG-TERM
+
+127. CREATE TIMELY IDEAS ONLY WHEN CURRENT INFORMATION IS PROVIDED
+
+128. DO NOT INVENT CURRENT TRENDS
+
+129. CREATE CONTENT MIX
+
+130. BALANCE:
+Discovery
+Education
+Authority
+Engagement
+Conversion
+
+131. AVOID A FEED MADE ENTIRELY OF ONE FORMAT
+
+132. CREATE A PRIORITY SCORE
+
+133. SCORE IDEAS USING:
+Audience relevance
+Clarity
+Visual potential
+Production effort
+Strategic value
+
+134. USE SIMPLE LABELS:
+High
+Medium
+Low
+
+135. DO NOT CREATE FALSE PRECISION
+
+136. IDENTIFY THE BEST FIRST IDEAS
+
+137. PRIORITIZE IDEAS THAT:
+Solve a real audience problem
+Are easy to understand
+Have a strong visual
+Fit creator expertise
+Can be produced realistically
+
+138. CREATE A 7-DAY CONTENT OPTION
+
+139. CREATE A 30-DAY IDEA BANK WHEN REQUESTED
+
+140. DO NOT FORCE DAILY POSTING IF THE USER HAS LIMITED production capacity.
+
+141. CREATE BATCHING RECOMMENDATIONS
+
+142. EXAMPLE:
+Record 4 talking-head videos together.
+Capture 6 B-roll clips during one process.
+Record 3 screen tutorials in one session.
+
+143. CREATE TESTING IDEAS
+
+144. TEST:
+Hook style
+Video length
+Opening visual
+Topic angle
+CTA
+
+145. CHANGE ONE IMPORTANT VARIABLE AT A TIME WHEN POSSIBLE
+
+146. DO NOT GUARANTEE VIRALITY
+
+147. DO NOT GUARANTEE FOLLOWERS
+
+148. DO NOT GUARANTEE SALES
+
+149. CREATE A CONTENT-GAP REVIEW
+
+150. IDENTIFY IMPORTANT AUDIENCE QUESTIONS NOT COVERED BY THE CURRENT IDEAS
+
+151. CREATE A DUPLICATION CHECK
+
+152. REMOVE OR DIFFERENTIATE NEAR-IDENTICAL IDEAS
+
+153. CREATE A FACT CHECK
+
+154. FLAG ANY IDEA REQUIRING:
+Current statistics
+Scientific claims
+Financial claims
+Health claims
+Legal claims
+Product performance claims
+Current platform information
+
+155. CREATE A PRODUCTION CHECK
+
+156. ASK:
+Can this be filmed with available resources?
+Is the first visual clear?
+Is one main idea being communicated?
+Is the payoff worth watching for?
+Is the CTA appropriate?
+
+157. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- ideas match the target audience
+- ideas support the stated objective
+- each video has one main idea
+- hooks are truthful
+- payoff matches hook
+- videos are visually understandable
+- concepts are not unnecessarily repetitive
+- platform differences are considered
+- production requirements are realistic
+- no trends are fabricated
+- no statistics are invented
+- no customer stories are invented
+- no results are invented
+- educational videos provide real value
+- sales content is not overused
+- CTAs match audience intent
+- ideas can be batched where useful
+- evergreen opportunities are identified
+- important claims are flagged for verification
+- the strongest ideas are prioritized
+
+OUTPUT FORMAT:
+
+1. CONTENT STRATEGY SNAPSHOT
+Provide:
+Audience
+Audience problems
+Audience desired outcomes
+Objective
+Recommended content pillars
+Recommended content mix
+
+2. CONTENT PILLARS
+For each pillar provide:
+Pillar
+Purpose
+Audience need
+Example topics
+
+3. SHORT-FORM VIDEO IDEA BANK
+
+For each idea provide:
+Idea title
+Content pillar
+Objective
+Platform
+Format
+Audience stage
+Hook
+Opening visual
+Core message
+Video flow
+Payoff
+CTA
+Production effort
+Priority
+
+4. TOP 10 IDEAS TO CREATE FIRST
+Rank the strongest concepts and explain briefly why each deserves priority.
+
+5. HOOK BANK
+Create multiple truthful hook options based on the strongest topics.
+
+6. VISUAL OPENING BANK
+Provide practical first-shot ideas.
+
+7. FACELESS VIDEO IDEAS
+Provide options when appropriate.
+
+8. TALKING-HEAD IDEAS
+Provide options when appropriate.
+
+9. DEMONSTRATION / SCREEN-RECORDING IDEAS
+Provide options when relevant.
+
+10. VIDEO SERIES
+Recommend logical multi-part series.
+
+11. BATCH PRODUCTION PLAN
+Group ideas that can be produced efficiently together.
+
+12. 7-DAY CONTENT PLAN
+Create a realistic one-week plan based on available production capacity.
+
+13. REPURPOSING OPPORTUNITIES
+Show which ideas can come from existing articles, guides, videos or other content.
+
+14. TEST PLAN
+For each useful test provide:
+Variable
+Version A
+Version B
+Metric to observe
+
+15. CONTENT GAPS
+Identify important audience questions or themes that still need content.
+
+16. FACT-CHECK LIST
+Identify ideas requiring additional verification before publishing.
+
+17. FINAL RECOMMENDATION
+Provide:
+Best first video
+Best recurring series
+Best low-effort format
+Best authority-building format
+Best engagement format
+Best conversion-support format
+
+IMPORTANT:
+- Generate useful ideas, not generic viral concepts.
+- Do not fabricate trends, statistics, stories or results.
+- Do not guarantee virality or growth.
+- Keep each short video focused on one main idea.
+- Make the first visual meaningful.
+- Match the hook to the actual payoff.
+- Prioritize ideas that the creator or business can realistically produce.`;
+
+const steps = [
+  {
+    title: "Start with audience problems",
+    description:
+      "Build video concepts around questions, frustrations, mistakes and desired outcomes that actually matter to the intended viewer.",
+  },
+  {
+    title: "Give each video one job",
+    description:
+      "Choose one clear idea and one content objective instead of trying to compress an entire subject into a 30-second video.",
+  },
+  {
+    title: "Think visually from the first second",
+    description:
+      "Decide what viewers will see immediately and use demonstrations, screens, products, processes or relevant B-roll to support the message.",
+  },
+  {
+    title: "Build repeatable content systems",
+    description:
+      "Turn strong topics into series and batch-friendly formats so useful short-form content can be produced consistently without starting from zero every time.",
+  },
+];
+
+const example = {
+  input: [
+    "Niche: Warehouse and inventory management.",
+    "Audience: Storekeepers, inventory controllers and warehouse supervisors.",
+    "Objective: Education and professional authority.",
+    "Platform: LinkedIn, Facebook Reels and YouTube Shorts.",
+    "Style: Talking head, warehouse B-roll and simple graphics.",
+    "Video length: 30–45 seconds.",
+  ],
+
+  output: [
+    "IDEA 1 — 'Physical stock doesn't match the system. Where do you check first?' Open with a visible stock-count difference, then show the first three investigation areas. CTA: Save the checklist.",
+    "IDEA 2 — 'One receiving mistake can create an inventory problem weeks later.' Demonstrate how an incorrect receiving quantity can flow into the system. CTA: Share with your receiving team.",
+    "IDEA 3 — '3 numbers every inventory controller should watch.' Introduce three relevant KPIs and explain what each tells the operator rather than simply displaying formulas.",
+    "IDEA 4 — 'Before adjusting the stock, check this.' Explain why transaction history, open movements and recent receipts should be reviewed before making an adjustment.",
+    "SERIES — 'Warehouse Problems in 30 Seconds': receiving discrepancy, picking error, wrong location, unposted transfer, damage and stock-adjustment investigation.",
+    "BATCH PLAN — Record the six talking-head openings in one session, then capture reusable warehouse and system-screen B-roll separately.",
+  ],
+};
+
+const tips = [
+  {
+    title: "A strong hook needs a strong payoff",
+    description:
+      "Getting someone to stop scrolling is only useful if the video quickly delivers the information or result promised by the opening.",
+  },
+  {
+    title: "One topic can produce several videos",
+    description:
+      "A detailed subject can become separate question, mistake, checklist, demonstration and FAQ videos rather than one overloaded short.",
+  },
+  {
+    title: "Production simplicity is an advantage",
+    description:
+      "A useful talking-head explanation, screen recording or clear demonstration can outperform a complicated production when the idea itself is relevant.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Short-Form Video Idea Generator Prompt | KRIYANO"
+  description="Generate practical short-form video ideas, hooks, visual openings, series and production plans for Reels, TikTok, YouTube Shorts and other social platforms."
+>
+  <PromptPage
+    category="CREATORS"
+    title="Short-Form Video Idea Generator"
+    accentTitle="Prompt."
+    description="Generate audience-focused short-form video concepts with truthful hooks, strong opening visuals, clear payoffs and realistic production plans."
+    meta={[
+      "Free prompt",
+      "Short-form video",
+      "Content ideas",
+    ]}
+    bestFor={[
+      "Instagram Reels",
+      "Facebook Reels",
+      "TikTok",
+      "YouTube Shorts",
+      "Content creators",
+      "Small businesses",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Turn audience problems into videos worth watching."
+    introDescription="Build a practical bank of short-form video concepts around real questions, problems and outcomes, then prioritize the ideas with the strongest audience fit and realistic production requirements."
+    steps={steps}
+    exampleTitle="Build a short-form video series around warehouse expertise."
+    example={example}
+    tipsTitle="The idea matters before the editing starts."
+    tips={tips}
+    sidebarTitle="Ready to turn an idea into a script?"
+    sidebarDescription="After choosing a concept, use KRIYANO's Short-Form Video Script Prompt to develop the hook, scene flow, spoken lines, visuals and CTA."
+    warningTitle="Do not manufacture virality"
+    warningText="Trends, audience behaviour and platform performance change constantly. Verify current trends separately when needed, and do not fabricate statistics, customer stories or results simply to make a video concept more dramatic."
+  />
+</BaseLayout>

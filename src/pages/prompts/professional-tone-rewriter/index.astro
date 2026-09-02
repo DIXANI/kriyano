@@ -1,0 +1,246 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced professional editor and workplace communication specialist.
+
+TASK:
+Rewrite the text below in a professional, natural and appropriate tone while preserving the original meaning.
+
+ORIGINAL TEXT:
+[Paste the text here.]
+
+PURPOSE:
+[Example: email, message, report, proposal, complaint, request, follow-up, internal communication.]
+
+AUDIENCE:
+[Who will read it?]
+
+RELATIONSHIP:
+[Example: manager, customer, colleague, supplier, recruiter, senior management.]
+
+DESIRED TONE:
+[Example: professional, polite, confident, diplomatic, firm, warm, concise.]
+
+FORMALITY LEVEL:
+[Low / Medium / High]
+
+LENGTH:
+[Shorter / Similar length / More detailed]
+
+IMPORTANT DETAILS TO PRESERVE:
+[List names, dates, figures, commitments, technical terms or facts that must not change.]
+
+WORDS OR PHRASES TO AVOID:
+[List anything that should not appear.]
+
+SPECIAL INSTRUCTIONS:
+[Add any other requirements.]
+
+REWRITING REQUIREMENTS:
+
+1. PRESERVE MEANING
+- Keep the original intent and factual meaning.
+- Do not add promises, commitments, facts or explanations that were not provided.
+- Preserve important names, dates, amounts and technical information.
+
+2. PROFESSIONAL TONE
+Make the wording:
+- respectful
+- clear
+- confident
+- natural
+- appropriate for the audience
+
+Avoid language that sounds:
+- rude
+- defensive
+- overly emotional
+- passive-aggressive
+- robotic
+- unnecessarily formal
+
+3. CLARITY
+- Improve sentence structure.
+- Remove repetition.
+- Replace awkward wording.
+- Make the main request or message easy to understand.
+- Use concise language where possible.
+
+4. DIPLOMACY
+For sensitive messages:
+- acknowledge the situation without sounding weak
+- communicate concerns calmly
+- avoid blame unless the facts require it
+- make requests clearly
+- maintain a constructive tone
+
+5. CONFIDENCE
+Do not weaken reasonable statements with excessive phrases such as:
+- "I just wanted to"
+- "I was wondering if maybe"
+- "Sorry to bother you"
+unless the context genuinely requires them.
+
+6. NATURAL LANGUAGE
+Write like a competent professional person, not like a generic corporate template.
+
+Avoid:
+- unnecessary jargon
+- excessive buzzwords
+- exaggerated politeness
+- repetitive greetings
+- artificial phrases
+
+7. TONE MATCHING
+Adjust the tone according to the situation.
+
+For customers:
+Professional, helpful and respectful.
+
+For managers:
+Clear, concise and accountable.
+
+For colleagues:
+Professional but natural.
+
+For suppliers:
+Clear, specific and commercially appropriate.
+
+For complaints:
+Firm, factual and respectful.
+
+For recruiters:
+Professional, confident and concise.
+
+8. STRUCTURE
+Where appropriate, organize the message into:
+- short opening
+- main point
+- relevant context
+- request / action needed
+- professional closing
+
+Do not over-format short messages.
+
+9. EMAIL SUBJECT
+If the text is clearly an email and a subject line would help, provide one.
+
+10. ALTERNATIVE VERSION
+If the message is sensitive or the tone could reasonably vary, provide:
+- Recommended version
+- Slightly warmer or firmer alternative
+
+Otherwise provide only the strongest version.
+
+OUTPUT FORMAT:
+
+1. Rewritten Version
+2. Optional Subject Line
+3. Optional Alternative Version
+
+Do not explain every edit unless specifically requested.
+
+IMPORTANT:
+- Preserve the original meaning.
+- Do not invent missing facts.
+- Do not change dates, names, figures or commitments.
+- Do not make the message unnecessarily formal.
+- Keep the result human and natural.`;
+
+const steps = [
+  {
+    title: "Paste your original message",
+    description:
+      "Use your real draft, even if it is informal, repetitive or grammatically incorrect.",
+  },
+  {
+    title: "Choose the audience and tone",
+    description:
+      "A message to a manager should usually sound different from one sent to a customer, recruiter or colleague.",
+  },
+  {
+    title: "Protect important facts",
+    description:
+      "List any names, dates, figures or commitments that must remain exactly the same.",
+  },
+  {
+    title: "Adjust firmness when needed",
+    description:
+      "For complaints, follow-ups or difficult conversations, specify whether you want the message polite, diplomatic or firm.",
+  },
+];
+
+const example = {
+  input: [
+    "Original: Hi, I sent this already last week but still no update. Please check and tell me what is happening because I need this urgently.",
+    "Purpose: Follow-up email.",
+    "Audience: Supplier.",
+    "Tone: Professional and firm.",
+    "Length: Short.",
+  ],
+
+  output: [
+    "Subject: Follow-Up on Pending Update",
+    "Dear [Name],",
+    "I am following up on the request I sent last week, as I have not yet received an update.",
+    "Could you please check the current status and advise when I can expect a response? This matter is time-sensitive, so I would appreciate your prompt attention.",
+    "Thank you.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Tell the AI who will read it",
+    description:
+      "Audience information often improves tone more than simply asking for professional wording.",
+  },
+  {
+    title: "Professional does not mean complicated",
+    description:
+      "Short, clear sentences usually sound more professional than overly formal corporate language.",
+  },
+  {
+    title: "Use firm language carefully",
+    description:
+      "For overdue actions or complaints, ask for a firm but factual tone instead of aggressive wording.",
+  },
+];
+---
+
+<BaseLayout
+  title="Professional Tone Rewriter Prompt | KRIYANO"
+  description="Rewrite emails, messages and workplace communication in a clear, professional and natural tone while preserving the original meaning."
+>
+  <PromptPage
+    category="WRITING"
+    title="Professional Tone"
+    accentTitle="Rewriter."
+    description="Rewrite emails, messages and workplace communication so they sound clear, professional and natural without changing the original meaning."
+    meta={[
+      "Free prompt",
+      "Writing",
+      "Work communication",
+    ]}
+    bestFor={[
+      "Professional emails",
+      "Manager communication",
+      "Customer messages",
+      "Recruiter replies",
+      "Supplier follow-ups",
+      "Sensitive workplace messages",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Improve the tone without changing the message."
+    introDescription="Paste your original wording, identify the audience and choose the level of formality or firmness you need. The prompt focuses on preserving facts while making the communication clearer and more professional."
+    steps={steps}
+    exampleTitle="Turn a rough follow-up into a professional message."
+    example={example}
+    tipsTitle="Get better professional rewrites."
+    tips={tips}
+    sidebarTitle="Need a different kind of rewrite?"
+    sidebarDescription="Use Rewrite for Clarity when structure and readability are the main problem, or Humanize AI-Written Text when content sounds too mechanical."
+    warningTitle="Check important details"
+    warningText="Always verify names, dates, amounts, commitments and sensitive wording before sending an important professional message."
+  />
+</BaseLayout>

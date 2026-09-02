@@ -1,0 +1,743 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced warehouse receiving, inventory-control and 3PL operations specialist.
+
+TASK:
+Investigate the receiving discrepancy described below and create a practical root-cause and corrective-action plan.
+
+RECEIVING CONTEXT:
+[Describe the warehouse, business or customer operation.]
+
+RECEIPT TYPE:
+[Purchase order / ASN / Supplier delivery / Transfer / Return / Import shipment / Other.]
+
+SUPPLIER / ORIGIN:
+[Supplier, warehouse, branch or origin location.]
+
+PO / ASN / DOCUMENT REFERENCE:
+[Reference if available.]
+
+EXPECTED RECEIPT:
+[Expected SKU, description, quantity, UOM, batch, expiry, serial number or other expected details.]
+
+ACTUAL RECEIPT:
+[What was physically received.]
+
+DISCREPANCY TYPE:
+[Shortage / Overage / Wrong SKU / Wrong UOM / Damage / Missing batch / Expiry issue / Label issue / System receipt issue / Other.]
+
+DISCREPANCY DETAILS:
+[Describe exactly what was found.]
+
+RECEIVING DATE:
+[Date.]
+
+VEHICLE / CONTAINER:
+[If relevant.]
+
+RECEIVING LOCATION:
+[Dock, warehouse, branch or staging area.]
+
+SYSTEM:
+[WMS / ERP / SAP / Spreadsheet / Manual.]
+
+EVIDENCE AVAILABLE:
+[Photos, count sheets, PO, ASN, delivery note, packing list, seal number, system transaction, CCTV, driver acknowledgement, etc.]
+
+CURRENT ACTION TAKEN:
+[Quarantine, hold, partial receipt, rejected, received with discrepancy, escalated, etc.]
+
+BUSINESS / CUSTOMER REQUIREMENT:
+[Receiving tolerance, escalation rule, expiry rule, quality requirement, claim process or SLA.]
+
+ANALYSIS GOAL:
+[Example: confirm root cause, decide responsibility, correct system stock, prevent recurrence.]
+
+RECEIVING DISCREPANCY INVESTIGATION:
+
+1. DEFINE THE DISCREPANCY
+Clearly state:
+
+Expected:
+Actual:
+Variance:
+Discrepancy type:
+Affected SKU:
+Affected quantity:
+Affected batch / lot:
+Affected value:
+Operational impact:
+
+If any information is missing, state it clearly.
+
+2. DOCUMENT CHECK
+Compare the available documents.
+
+Review where relevant:
+- purchase order
+- ASN
+- delivery note
+- packing list
+- invoice
+- transfer document
+- import document
+- supplier label
+- pallet label
+- carton label
+- batch / lot information
+- expiry information
+- serial numbers
+- seal details
+- vehicle / container details
+
+Identify inconsistencies between documents.
+
+3. PHYSICAL RECEIPT CHECK
+Review how the receipt was physically verified.
+
+Check:
+- pallet count
+- carton count
+- inner quantity
+- loose pieces
+- packaging condition
+- mixed SKU cartons
+- hidden shortage
+- damaged cartons
+- broken seals
+- resealed cartons
+- wrong labels
+- duplicate labels
+- mixed batches
+- unreadable barcodes
+
+Do not rely only on outer carton quantity.
+
+4. SHORTAGE INVESTIGATION
+If the issue is shortage, check:
+
+- supplier shipped quantity
+- packing list quantity
+- physical quantity
+- pallet count
+- carton count
+- inner-pack quantity
+- open / damaged cartons
+- missing pallet
+- possible short loading
+- possible transport loss
+- receiving count error
+- wrong UOM
+- stock received into wrong SKU / location
+- partial receipt already processed
+
+Calculate:
+
+Shortage Quantity =
+Expected Quantity - Actual Quantity
+
+Only when expected quantity is greater than actual quantity.
+
+5. OVERAGE INVESTIGATION
+If the issue is overage, check:
+
+- supplier over-shipment
+- incorrect PO quantity
+- duplicate carton
+- wrong UOM
+- wrong pack size
+- duplicate system receipt
+- stock belonging to another PO
+- mixed delivery
+
+Calculate:
+
+Overage Quantity =
+Actual Quantity - Expected Quantity
+
+Only when actual quantity is greater than expected quantity.
+
+6. WRONG SKU INVESTIGATION
+If the wrong item was received, compare:
+
+- SKU code
+- supplier item code
+- barcode
+- description
+- model
+- color
+- size
+- pack configuration
+- customer-specific code
+- product label
+
+Determine whether the problem is:
+- supplier picking
+- supplier labeling
+- master data
+- barcode mapping
+- receiving identification
+- mixed pallet / carton
+
+7. UOM INVESTIGATION
+Check for unit-of-measure mismatch.
+
+Examples:
+- EA vs carton
+- carton vs case
+- case vs pallet
+- kg vs piece
+- pack of 6 entered as 1
+- supplier UOM different from WMS UOM
+
+Compare:
+- document UOM
+- physical pack
+- system UOM
+- conversion factor
+
+Do not correct inventory until the correct UOM relationship is confirmed.
+
+8. DAMAGE INVESTIGATION
+If stock is damaged, document:
+
+Damage type:
+Affected quantity:
+Packaging condition:
+Product condition:
+Pallet condition:
+Location of damage:
+Possible timing of damage:
+
+Investigate whether damage likely occurred during:
+- supplier packing
+- loading
+- transportation
+- unloading
+- receiving
+- staging
+- internal handling
+
+Do not assign responsibility without evidence.
+
+9. BATCH / LOT CHECK
+Where batch-controlled inventory is involved, compare:
+
+Expected batch:
+Actual batch:
+Document batch:
+System batch:
+
+Check:
+- missing batch
+- wrong batch
+- mixed batch
+- duplicate batch
+- batch not in system
+- incorrect batch format
+
+10. EXPIRY CHECK
+For expiry-controlled items compare:
+
+Required expiry:
+Actual expiry:
+Remaining shelf life:
+Customer acceptance requirement:
+
+Check for:
+- expired stock
+- short-dated stock
+- wrong expiry label
+- missing expiry
+- mixed expiry dates
+- system expiry mismatch
+
+Do not accept or reject based on assumed shelf-life rules.
+
+11. SERIAL NUMBER CHECK
+For serialized inventory check:
+
+- expected serials
+- received serials
+- duplicate serials
+- missing serials
+- invalid serials
+- serials belonging to another SKU
+- system registration failure
+
+12. LABEL / BARCODE CHECK
+Review:
+
+- pallet label
+- carton label
+- product label
+- SSCC
+- SKU barcode
+- batch barcode
+- expiry barcode
+- customer label
+- supplier label
+
+Check for:
+- wrong label
+- missing label
+- duplicated label
+- unreadable label
+- barcode mismatch
+- incorrect barcode mapping
+
+13. SEAL / VEHICLE CHECK
+Where relevant, verify:
+
+- seal number
+- seal condition
+- vehicle number
+- container number
+- driver details
+- loading records
+- delivery route
+- delivery stops
+
+If the seal was broken or different, flag this for investigation.
+
+14. SYSTEM RECEIPT CHECK
+Review WMS / ERP transactions.
+
+Check:
+- correct PO
+- correct SKU
+- correct quantity
+- correct UOM
+- correct location
+- correct batch
+- correct expiry
+- correct receipt date
+- duplicate receipt
+- partial receipt
+- reversal
+- manual adjustment
+- delayed transaction
+
+Separate physical discrepancy from system discrepancy.
+
+15. RECEIVING PROCESS CHECK
+Review whether the receiving process was followed.
+
+Check:
+- document verification
+- counting
+- scanning
+- inspection
+- discrepancy identification
+- supervisor verification
+- quarantine
+- system posting
+- evidence collection
+- escalation
+
+Identify skipped controls.
+
+16. EVIDENCE REVIEW
+List all evidence available.
+
+For each item state:
+
+Evidence:
+What it proves:
+What it does not prove:
+Reliability:
+Additional evidence needed:
+
+Possible evidence:
+- photos
+- signed delivery note
+- count sheet
+- CCTV
+- WMS transaction log
+- supplier packing list
+- ASN
+- driver acknowledgement
+- seal record
+- weighbridge record
+- loading photo
+- pallet ID
+- barcode scan log
+
+17. QUARANTINE DECISION
+Recommend whether affected stock should be:
+
+- accepted
+- partially accepted
+- quarantined
+- blocked
+- rejected
+- returned
+- held pending clarification
+
+Base the recommendation on operational rules and available evidence.
+
+Do not invent company policy.
+
+18. RESPONSIBILITY ANALYSIS
+Assess possible responsibility areas:
+
+SUPPLIER
+Packing, picking, quantity, wrong SKU, labeling.
+
+TRANSPORTER
+Loss, damage, seal issue, handling.
+
+WAREHOUSE RECEIVING
+Counting, scanning, identification, system posting.
+
+SYSTEM / MASTER DATA
+UOM, barcode, SKU mapping, PO data.
+
+UPSTREAM WAREHOUSE
+Transfer preparation or dispatch error.
+
+CUSTOMER / ORDER DATA
+Incorrect order or requirement.
+
+Use:
+- confirmed
+- likely
+- possible
+- unsupported
+
+Do not assign blame without evidence.
+
+19. ROOT-CAUSE ANALYSIS
+Analyze possible causes using:
+
+People
+Process
+System
+Equipment
+Packaging
+Supplier
+Transport
+Documentation
+Master data
+Communication
+
+Use 5 Whys where appropriate.
+
+Clearly separate:
+- symptom
+- immediate cause
+- contributing cause
+- root cause
+
+20. INVENTORY IMPACT
+Explain the inventory effect.
+
+Check:
+- stock shortage
+- stock overage
+- wrong SKU balance
+- wrong batch
+- wrong expiry
+- blocked stock
+- negative stock
+- available stock impact
+- customer order impact
+
+Recommend system correction only after physical and documentary evidence is validated.
+
+21. FINANCIAL IMPACT
+Where unit cost is provided, calculate:
+
+Variance Value =
+Variance Quantity × Unit Cost
+
+Damage Value =
+Damaged Quantity × Unit Cost
+
+Do not invent cost.
+
+22. CUSTOMER / OPERATIONAL IMPACT
+Assess effects such as:
+- order delay
+- stockout
+- allocation issue
+- production delay
+- customer complaint
+- SLA impact
+- additional handling
+- claim requirement
+- inventory inaccuracy
+
+23. IMMEDIATE ACTIONS
+Recommend immediate containment actions.
+
+Examples:
+- segregate affected stock
+- label as HOLD
+- stop putaway
+- recount
+- supervisor verification
+- photograph discrepancy
+- record driver acknowledgement
+- block system stock
+- notify supplier
+- preserve packaging
+- verify other pallets
+- review similar receipts
+
+24. CORRECTIVE ACTION
+For confirmed causes recommend corrective actions.
+
+For each:
+
+Issue:
+Cause:
+Corrective action:
+Responsible role:
+Due date:
+Evidence of completion:
+Verification method:
+
+Do not invent names or dates.
+
+25. PREVENTIVE ACTION
+Recommend controls to reduce recurrence.
+
+Examples:
+- receiving checklist
+- dual verification for high-risk receipts
+- barcode validation
+- UOM master-data review
+- supplier labeling standard
+- ASN validation
+- discrepancy escalation process
+- supplier performance review
+- packaging improvement
+- training
+- system validation
+
+26. SUPPLIER / TRANSPORT CLAIM
+If relevant, identify information needed for a claim:
+
+- PO
+- delivery note
+- packing list
+- discrepancy report
+- photos
+- quantity
+- value
+- batch
+- expiry
+- seal details
+- driver acknowledgement
+- receiving time
+- claim deadline
+
+Do not state a claim is valid unless evidence supports it.
+
+27. ESCALATION
+Recommend escalation based on severity.
+
+Possible escalation factors:
+- high value
+- customer-critical SKU
+- food / pharmaceutical risk
+- repeated supplier discrepancy
+- major shortage
+- damaged shipment
+- broken seal
+- incorrect expiry
+- system-wide issue
+
+Use roles such as:
+- Receiving Supervisor
+- Inventory Controller
+- Warehouse Manager
+- Procurement
+- Quality
+- Customer Service
+- Supplier
+- Transport Coordinator
+
+28. TREND CHECK
+If historical data is available, check whether the issue is recurring by:
+
+- supplier
+- SKU
+- transporter
+- shift
+- receiver
+- discrepancy type
+- warehouse
+- packaging type
+
+A repeated discrepancy may indicate a systemic control failure.
+
+29. KPI RECOMMENDATIONS
+Where relevant recommend:
+
+Receiving Accuracy %
+Discrepancy Rate
+Supplier Delivery Accuracy %
+Damage Rate
+Shortage Rate
+Overage Rate
+ASN Accuracy %
+Receipt Correction Rate
+Receiving Claims Value
+Dock-to-Stock Time
+
+Only recommend measurable KPIs.
+
+30. FINAL INVESTIGATION SUMMARY
+Summarize:
+
+Discrepancy:
+Confirmed facts:
+Missing information:
+Likely cause:
+Root cause status:
+Responsible area:
+Inventory impact:
+Financial impact:
+Immediate action:
+Corrective action:
+Preventive action:
+Escalation required:
+Final recommendation:
+
+OUTPUT FORMAT:
+
+1. Executive Summary
+2. Expected vs Actual
+3. Discrepancy Classification
+4. Document Findings
+5. Physical Receipt Findings
+6. SKU / UOM / Label Findings
+7. Batch / Expiry / Serial Findings
+8. System Receipt Findings
+9. Evidence Review
+10. Responsibility Assessment
+11. Root-Cause Analysis
+12. Inventory & Financial Impact
+13. Immediate Containment
+14. Corrective Actions
+15. Preventive Actions
+16. Claim / Escalation Requirements
+17. KPI Recommendations
+18. Final Investigation Summary
+
+IMPORTANT:
+- Do not invent missing receiving data.
+- Do not automatically blame the supplier, driver or receiving employee.
+- Separate physical discrepancies from system discrepancies.
+- Preserve evidence before recommending stock adjustment.
+- Confirm UOM before quantity correction.
+- Treat batch and expiry discrepancies as separate risks where relevant.
+- Do not approve stock that should be quarantined under business or quality rules.
+- Clearly distinguish confirmed facts, likely causes and assumptions.
+- Recommend recount or verification when evidence is insufficient.
+- Focus on practical containment, investigation and recurrence prevention.`;
+
+const steps = [
+  {
+    title: "Confirm expected vs actual",
+    description:
+      "Start with the PO, ASN, delivery documents and physical receipt so the discrepancy is clearly quantified before investigating causes.",
+  },
+  {
+    title: "Preserve the evidence",
+    description:
+      "Keep photos, labels, packaging, count records, transaction logs and acknowledgements before stock is moved or adjusted.",
+  },
+  {
+    title: "Separate physical and system issues",
+    description:
+      "A genuine supplier shortage requires a different response from a correct physical receipt that was posted incorrectly in the WMS.",
+  },
+  {
+    title: "Contain before correcting",
+    description:
+      "Quarantine or hold uncertain stock where necessary, complete the investigation and only then make validated inventory corrections.",
+  },
+];
+
+const example = {
+  input: [
+    "PO quantity: 120 cartons.",
+    "Delivery note: 120 cartons.",
+    "Physical receipt: 118 cartons.",
+    "Vehicle seal matched the delivery paperwork.",
+    "Two pallets appeared intact.",
+    "No system receipt has been posted yet.",
+    "Goal: Determine the next receiving action.",
+  ],
+
+  output: [
+    "Confirmed discrepancy: Physical shortage of 2 cartons against the documented expected quantity.",
+    "Immediate action: Hold the receiving transaction at the verified physical quantity, perform an independent recount and preserve photos, pallet labels and delivery paperwork.",
+    "Evidence gap: Confirm carton quantity per pallet and whether supplier loading records or pallet-level counts are available.",
+    "Responsibility should remain unconfirmed until loading, packing and transport evidence are reviewed.",
+    "If the recount confirms 118 cartons, record the receipt according to approved discrepancy procedure and raise the shortage with the appropriate supplier/procurement contact.",
+    "Do not create the missing 2 cartons in system inventory merely to match the PO.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Do not adjust first and investigate later",
+    description:
+      "Once stock quantities are changed or goods are mixed with available inventory, important evidence can be lost.",
+  },
+  {
+    title: "UOM errors can look like shortages",
+    description:
+      "Always verify pack size and conversion factors when the physical quantity and system quantity appear dramatically different.",
+  },
+  {
+    title: "Document responsibility carefully",
+    description:
+      "A discrepancy report should show what the evidence supports rather than assigning blame based only on where the problem was first discovered.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Receiving Discrepancy Investigation Prompt | KRIYANO"
+  description="Investigate warehouse receiving shortages, overages, wrong SKUs, UOM errors, damage, batch, expiry, labeling and system receipt discrepancies with a structured corrective-action process."
+>
+  <PromptPage
+    category="OPERATIONS & LOGISTICS"
+    title="Receiving Discrepancy"
+    accentTitle="Investigation."
+    description="Investigate receiving shortages, overages, wrong items, UOM errors, damage, batch and expiry problems using documentary, physical and system evidence."
+    meta={[
+      "Free prompt",
+      "Warehouse receiving",
+      "Discrepancy investigation",
+    ]}
+    bestFor={[
+      "Receiving teams",
+      "Inventory controllers",
+      "Warehouse supervisors",
+      "3PL operations",
+      "Supplier discrepancies",
+      "Inbound investigations",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Confirm the discrepancy before assigning the cause."
+    introDescription="Compare expected, documented, physical and system quantities first, preserve evidence and then determine whether the issue originated with the supplier, transportation, receiving process, master data or system transaction."
+    steps={steps}
+    exampleTitle="Investigate a receiving shortage correctly."
+    example={example}
+    tipsTitle="Protect receiving accuracy and evidence."
+    tips={tips}
+    sidebarTitle="Is the issue already affecting inventory?"
+    sidebarDescription="Use KRIYANO's Inventory Discrepancy Investigation Prompt when the receiving issue has already resulted in a physical versus system stock difference."
+    warningTitle="Preserve evidence before adjustment"
+    warningText="Receiving discrepancies can become difficult to verify once goods are moved, mixed, put away or inventory transactions are corrected. Preserve relevant physical, documentary and system evidence before making adjustments."
+  />
+</BaseLayout>

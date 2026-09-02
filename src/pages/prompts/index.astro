@@ -1,0 +1,1423 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { promptLibrary } from "../../data/promptLibrary";
+
+const categories = [
+  {
+    title: "Work & Productivity",
+    description: "Prompts for emails, reports, planning, summaries, meetings and everyday professional work.",
+    count: "12 prompts",
+    href: "/prompts/work-productivity/",
+  },
+  {
+    title: "Business",
+    description: "Prompts for business planning, customer communication, operations and decision-making.",
+    count: "10 prompts",
+    href: "/prompts/business/",
+  },
+  {
+    title: "Marketing",
+    description: "Prompts for campaigns, social media, offers, positioning, ads and customer research.",
+    count: "10 prompts",
+    href: "/prompts/marketing/",
+  },
+  {
+    title: "Writing",
+    description: "Prompts for articles, rewriting, editing, outlines, summaries and professional writing.",
+    count: "8 prompts",
+    href: "/prompts/writing/",
+  },
+  {
+    title: "Research",
+    description: "Prompts for structured research, comparisons, analysis, fact-finding and synthesis.",
+    count: "8 prompts",
+    href: "/prompts/research/",
+  },
+  {
+    title: "Creators",
+    description: "Prompts for content ideas, scripts, captions, storytelling and creator workflows.",
+    count: "10 prompts",
+    href: "/prompts/creators/",
+  },
+  {
+    title: "Image Generation",
+    description: "Prompt frameworks for product photography, food, portraits, thumbnails and visual concepts.",
+    count: "8 prompts",
+    href: "/prompts/image-generation/",
+  },
+  {
+    title: "Video Generation",
+    description: "Prompts for AI video scenes, camera direction, motion, visual continuity and short-form content.",
+    count: "8 prompts",
+    href: "/prompts/video-generation/",
+  },
+  {
+    title: "Operations & Logistics",
+    description: "Prompts for SOPs, inventory, warehouse processes, investigations, reporting and workflow improvement.",
+    count: "10 prompts",
+    href: "/prompts/operations-logistics/",
+  },
+];
+
+const featuredPrompts = [
+  {
+    title: "Professional Email Writer",
+    category: "Work",
+    description: "Turn a rough message into a clear, professional email with the right tone and structure.",
+    href: "/prompts/professional-email-writer/",
+  },
+{
+  title: "SOP Creation Prompt",
+  category: "Operations",
+  description: "Create a structured standard operating procedure from a process, task or workflow.",
+  href: "/prompts/sop-creation/",
+},
+  {
+  title: "Product Photography Prompt",
+  category: "Image Generation",
+  description: "Create detailed prompts for professional product photography and commercial visuals.",
+  href: "/prompts/product-photography/",
+  },
+  {
+    title: "Research & Comparison Prompt",
+    category: "Research",
+    description: "Guide AI through a structured comparison using clear criteria, evidence and recommendations.",
+    href: "/prompts/research-comparison/",
+  },
+  {
+  title: "Social Media Content Planner",
+  category: "Creators",
+  description: "Plan useful social media content around your audience, goals and content pillars.",
+  href: "/prompts/social-media-content-planner/",
+},
+  {
+    title: "Inventory Discrepancy Investigation",
+    category: "Operations",
+    description: "Investigate physical-versus-system stock differences before making inventory adjustments.",
+    href: "/prompts/inventory-discrepancy-investigation/",
+  },
+];
+---
+
+<BaseLayout
+  title="AI Prompt Library | KRIYANO"
+  description="Explore practical AI prompts for work, business, creators, research, marketing, operations and more."
+>
+  <section class="prompt-hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="section-kicker">KRIYANO PROMPT LIBRARY</div>
+
+        <h1>
+          Prompts built around
+          <span>real tasks.</span>
+        </h1>
+
+        <p>
+          Browse practical prompt frameworks for work, business, research,
+          content creation and everyday problem-solving.
+        </p>
+      </div>
+
+      <div class="prompt-search-box">
+        <span class="search-label">Find a prompt</span>
+
+        <div class="search-input-wrap">
+          <input
+            type="search"
+            id="promptSearch"
+            placeholder="Search emails, SOPs, research, images..."
+            aria-label="Search prompts"
+          />
+
+          <span class="search-icon">⌕</span>
+        </div>
+
+        <div class="search-filter-wrap">
+  <label for="promptCategory">
+    Filter by category
+  </label>
+
+  <select
+    id="promptCategory"
+    aria-label="Filter prompts by category"
+  >
+    <option value="all">All Categories</option>
+    <option value="work & productivity">Work & Productivity</option>
+    <option value="business">Business</option>
+    <option value="marketing">Marketing</option>
+    <option value="writing">Writing</option>
+    <option value="research">Research</option>
+    <option value="creators">Creators</option>
+    <option value="image generation">Image Generation</option>
+    <option value="video generation">Video Generation</option>
+    <option value="operations & logistics">Operations & Logistics</option>
+  </select>
+  <button
+    type="button"
+    class="search-reset"
+    id="searchReset"
+  >
+    Clear search
+  </button>
+</div>
+
+        <div class="search-note">
+          Search prompt categories and featured prompts.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section
+  class="global-search-results hidden"
+  id="globalSearchResults"
+>
+  <div class="container">
+    <div class="search-results-head">
+      <div>
+        <div class="section-kicker">Search results</div>
+        <h2>
+          Matching prompts.
+        </h2>
+      </div>
+
+      <div
+        class="search-results-count"
+        id="searchResultsCount"
+      >
+        0 results
+      </div>
+    </div>
+
+    <div
+      class="global-results-list"
+      id="globalResultsList"
+    >
+      {
+        promptLibrary.map((prompt) => (
+          
+
+          <article
+  class="global-result-row"
+  data-category={prompt.category.toLowerCase()}
+  data-search={`
+    ${prompt.title}
+    ${prompt.category}
+    ${prompt.description}
+    ${prompt.keywords ?? ""}
+  `.toLowerCase()}
+>
+
+            <div class="global-result-category">
+              {prompt.category}
+            </div>
+
+            <div class="global-result-content">
+           <h3
+            class="search-highlight-target"
+           data-original={prompt.title}
+           >
+            {prompt.title}
+           </h3>
+
+            <p
+             class="search-highlight-target"
+             data-original={prompt.description}
+             >
+             {prompt.description}
+               </p>
+            </div>
+
+            <div class="global-result-action">
+              <a href={prompt.href}>
+                View prompt ↗
+              </a>
+            </div>
+          </article>
+        ))
+      }
+
+      <div
+        class="global-no-results hidden"
+        id="globalNoResults"
+      >
+        <strong>No matching prompts found.</strong>
+
+        <span>
+          Try another keyword such as inventory, email, video,
+          business or research.
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <section class="library-strip">
+    <div class="container strip-grid">
+      <div>
+        <strong>9</strong>
+        <span>Categories</span>
+      </div>
+
+      <div>
+        <strong>Practical</strong>
+        <span>Task-focused prompts</span>
+      </div>
+
+      <div>
+        <strong>Editable</strong>
+        <span>Customize for your needs</span>
+      </div>
+
+      <div>
+        <strong>Free</strong>
+        <span>Core library</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Browse by category</div>
+
+          <h2>
+            Start with what
+            you need to do.
+          </h2>
+        </div>
+
+        <p>
+          Instead of organizing prompts by AI model, KRIYANO organizes them
+          around practical jobs, outcomes and workflows.
+        </p>
+      </div>
+
+      <div class="category-grid">
+        {
+  categories.map((category, index) => {
+    const isAvailable = category.href !== "#";
+
+    return (
+     <a
+  href={isAvailable ? category.href : "#"}
+  class:list={[
+    "category-card",
+    !isAvailable && "category-card-disabled",
+  ]}
+  data-search={`${category.title} ${category.description}`.toLowerCase()}
+  aria-disabled={!isAvailable}
+  tabindex={isAvailable ? 0 : -1}
+>
+        <div class="category-top">
+          <span class="category-number">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+
+          <span class="category-count">{category.count}</span>
+        </div>
+
+        <h3>{category.title}</h3>
+
+        <p>{category.description}</p>
+
+        <div class="category-bottom-row">
+          <span
+            class:list={[
+              "category-status",
+              isAvailable ? "status-live" : "status-soon",
+            ]}
+          >
+            {isAvailable ? "Explore category" : "Coming soon"}
+          </span>
+
+          <span class="category-arrow">
+            {isAvailable ? "↗" : "—"}
+          </span>
+        </div>
+      </a>
+    );
+  })
+}
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-section">
+    <div class="container">
+      <div class="featured-head">
+        <div>
+          <div class="section-kicker">Featured prompts</div>
+          <h2>Useful starting points.</h2>
+        </div>
+
+        <a href="/tools/prompt-builder/" class="builder-link">
+          Need something custom? Use Prompt Builder ↗
+        </a>
+      </div>
+
+      <div class="prompt-list" id="promptList">
+        {
+          featuredPrompts.map((prompt, index) => (
+            <article
+              class="prompt-row"
+              data-search={`${prompt.title} ${prompt.category} ${prompt.description}`.toLowerCase()}
+            >
+              <div class="prompt-index">
+                {String(index + 1).padStart(2, "0")}
+              </div>
+
+              <div class="prompt-info">
+                <span>{prompt.category}</span>
+                <h3>{prompt.title}</h3>
+                <p>{prompt.description}</p>
+              </div>
+
+              <div class="prompt-action">
+                {
+                  prompt.href !== "#" ? (
+                    <a href={prompt.href}>View prompt ↗</a>
+                  ) : (
+                    <span>Coming soon</span>
+                  )
+                }
+              </div>
+            </article>
+          ))
+        }
+
+        <div id="noResults" class="no-results hidden">
+          No matching prompts found.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="library-cta">
+    <div class="container">
+      <div class="cta-box">
+        <div>
+          <div class="section-kicker">Create your own</div>
+
+          <h2>
+            Can't find the exact prompt?
+            Build one.
+          </h2>
+
+          <p>
+            Use the KRIYANO Prompt Builder to turn your task, context and
+            requirements into a structured prompt.
+          </p>
+        </div>
+
+        <a href="/tools/prompt-builder/" class="button button-primary">
+          Open Prompt Builder
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const searchInput =
+    document.querySelector("#promptSearch");
+
+  const categorySelect =
+    document.querySelector("#promptCategory");
+
+  const resetButton =
+    document.querySelector("#searchReset");
+
+  const searchSection =
+    document.querySelector("#globalSearchResults");
+
+  const resultRows =
+    document.querySelectorAll(".global-result-row");
+
+  const resultsCount =
+    document.querySelector("#searchResultsCount");
+
+  const noResults =
+    document.querySelector("#globalNoResults");
+
+  function normalizeSearchText(value) {
+    return value
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, " ");
+  }
+
+  function escapeRegExp(value) {
+    return value.replace(
+      /[.*+?^${}()|[\]\\]/g,
+      "\\$&"
+    );
+  }
+
+  function escapeHTML(value) {
+    return value
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function clearHighlights() {
+    document
+      .querySelectorAll(".search-highlight-target")
+      .forEach((element) => {
+        if (!(element instanceof HTMLElement)) return;
+
+        const original =
+          element.dataset.original || "";
+
+        element.textContent = original;
+      });
+  }
+
+  function highlightMatches(words) {
+    document
+      .querySelectorAll(".search-highlight-target")
+      .forEach((element) => {
+        if (!(element instanceof HTMLElement)) return;
+
+        const original =
+          element.dataset.original || "";
+
+        let highlighted =
+          escapeHTML(original);
+
+        words.forEach((word) => {
+          if (!word) return;
+
+          const safeWord =
+            escapeRegExp(word);
+
+          const regex =
+            new RegExp(`(${safeWord})`, "gi");
+
+          highlighted =
+            highlighted.replace(
+              regex,
+              "<mark>$1</mark>"
+            );
+        });
+
+        element.innerHTML = highlighted;
+      });
+  }
+
+  function runGlobalSearch() {
+    if (!(searchInput instanceof HTMLInputElement)) {
+      return;
+    }
+
+    if (!(categorySelect instanceof HTMLSelectElement)) {
+      return;
+    }
+
+    if (!(searchSection instanceof HTMLElement)) {
+      return;
+    }
+
+    const searchTerm =
+      normalizeSearchText(searchInput.value);
+
+    const selectedCategory =
+      normalizeSearchText(categorySelect.value);
+
+    const categoryIsFiltered =
+      selectedCategory !== "all";
+
+    clearHighlights();
+
+    /*
+      Hide results only when:
+      - search box is empty
+      - AND All Categories is selected
+    */
+    if (
+      searchTerm === "" &&
+      !categoryIsFiltered
+    ) {
+      searchSection.classList.add("hidden");
+
+      resultRows.forEach((row) => {
+        row.classList.remove("hidden");
+      });
+
+      return;
+    }
+
+    searchSection.classList.remove("hidden");
+
+    const words = searchTerm
+      .split(" ")
+      .filter(Boolean);
+
+    let visibleCount = 0;
+
+    resultRows.forEach((row) => {
+      if (!(row instanceof HTMLElement)) {
+        return;
+      }
+
+      const searchData =
+        normalizeSearchText(
+          row.dataset.search || ""
+        );
+
+      const rowCategory =
+        normalizeSearchText(
+          row.dataset.category || ""
+        );
+
+      const matchesSearch =
+        words.length === 0 ||
+        words.every((word) =>
+          searchData.includes(word)
+        );
+
+      const matchesCategory =
+        !categoryIsFiltered ||
+        rowCategory === selectedCategory;
+
+      const isMatch =
+        matchesSearch && matchesCategory;
+
+      row.classList.toggle(
+        "hidden",
+        !isMatch
+      );
+
+      if (isMatch) {
+        visibleCount++;
+      }
+    });
+
+    if (words.length > 0) {
+      highlightMatches(words);
+    }
+
+    if (resultsCount instanceof HTMLElement) {
+      resultsCount.textContent =
+        `${visibleCount} ${
+          visibleCount === 1
+            ? "result"
+            : "results"
+        }`;
+    }
+
+    if (noResults instanceof HTMLElement) {
+      noResults.classList.toggle(
+        "hidden",
+        visibleCount !== 0
+      );
+    }
+  }
+
+  searchInput?.addEventListener(
+    "input",
+    runGlobalSearch
+  );
+
+  categorySelect?.addEventListener(
+    "change",
+    runGlobalSearch
+  );  
+
+  resetButton?.addEventListener(
+  "click",
+  () => {
+    if (searchInput instanceof HTMLInputElement) {
+      searchInput.value = "";
+    }
+
+    if (categorySelect instanceof HTMLSelectElement) {
+      categorySelect.value = "all";
+    }
+
+    clearHighlights();
+
+    resultRows.forEach((row) => {
+      row.classList.remove("hidden");
+    });
+
+    if (searchSection instanceof HTMLElement) {
+      searchSection.classList.add("hidden");
+    }
+
+    if (noResults instanceof HTMLElement) {
+      noResults.classList.add("hidden");
+    }
+
+    searchInput?.focus();
+  }
+);
+</script>
+
+
+
+
+<style>
+  .prompt-hero {
+    padding: 105px 0 85px;
+    border-bottom: 1px solid var(--line);
+
+    background:
+      radial-gradient(
+        circle at 80% 20%,
+        rgba(77, 226, 197, 0.08),
+        transparent 27%
+      );
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 80px;
+    align-items: end;
+  }
+
+  .prompt-hero h1 {
+    max-width: 850px;
+    margin-top: 14px;
+
+    font-size: clamp(3.2rem, 7vw, 6.5rem);
+    line-height: 0.94;
+    letter-spacing: -0.06em;
+  }
+
+  .prompt-hero h1 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .prompt-hero p {
+    max-width: 680px;
+    margin-top: 25px;
+
+    color: var(--muted);
+
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .prompt-search-box {
+    padding: 24px;
+
+    border: 1px solid rgba(183, 255, 74, 0.14);
+    border-radius: 18px;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.03),
+        transparent
+      ),
+      var(--surface);
+  }
+
+  .search-label {
+    display: block;
+    margin-bottom: 10px;
+
+    color: var(--text);
+
+    font-size: 0.8rem;
+    font-weight: 750;
+  }
+
+  .search-filter-wrap {
+  margin-top: 14px;
+}
+
+.search-reset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 14px;
+  padding: 10px 16px;
+
+  border: 1px solid rgba(183, 255, 74, 0.35);
+  border-radius: 9px;
+
+  background: rgba(183, 255, 74, 0.08);
+  color: var(--lime);
+
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.search-reset:hover {
+  background: rgba(183, 255, 74, 0.14);
+  border-color: rgba(183, 255, 74, 0.6);
+
+  transform: translateY(-1px);
+}
+
+.search-filter-wrap label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: var(--muted);
+
+  font-size: 0.7rem;
+  font-weight: 700;
+
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
+}
+
+.search-filter-wrap select {
+  width: 100%;
+
+  padding: 13px 42px 13px 14px;
+
+  border: 1px solid rgba(183, 255, 74, 0.18);
+  border-radius: 11px;
+
+  outline: none;
+
+  background: #07120e;
+  color: var(--text);
+
+  font: inherit;
+  font-size: 0.82rem;
+
+  cursor: pointer;
+}
+
+.search-filter-wrap select:focus {
+  border-color: rgba(183, 255, 74, 0.6);
+
+  box-shadow:
+    0 0 0 3px rgba(183, 255, 74, 0.07);
+}
+
+  .search-highlight-target mark {
+  padding: 1px 3px;
+
+  border-radius: 4px;
+
+  background: rgba(183, 255, 74, 0.18);
+
+  color: var(--lime);
+
+  font-weight: inherit;
+}
+
+  .search-input-wrap {
+    position: relative;
+  }
+
+  .search-input-wrap input {
+    width: 100%;
+
+    padding: 14px 46px 14px 15px;
+
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 11px;
+
+    outline: none;
+
+    background: #07120e;
+    color: var(--text);
+
+    font-size: 0.88rem;
+  }
+
+  .search-input-wrap input:focus {
+    border-color: rgba(183, 255, 74, 0.6);
+
+    box-shadow:
+      0 0 0 3px rgba(183, 255, 74, 0.07);
+  }
+
+  .search-input-wrap input::placeholder {
+    color: #7f8e86;
+  }
+
+  .search-icon {
+    position: absolute;
+
+    right: 15px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: var(--lime);
+
+    font-size: 1.2rem;
+
+    pointer-events: none;
+  }
+
+  .search-note {
+    margin-top: 10px;
+
+    color: var(--muted);
+
+    font-size: 0.72rem;
+  }
+
+  .library-strip {
+    border-bottom: 1px solid var(--line);
+
+    background: rgba(255, 255, 255, 0.018);
+  }
+
+  .strip-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .strip-grid > div {
+    padding: 24px 20px;
+
+    border-right: 1px solid var(--line);
+  }
+
+  .strip-grid > div:last-child {
+    border-right: 0;
+  }
+
+  .strip-grid strong {
+    display: block;
+
+    font-size: 0.95rem;
+  }
+
+  .strip-grid span {
+    color: var(--muted);
+
+    font-size: 0.78rem;
+  }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+
+    gap: 70px;
+
+    align-items: end;
+
+    margin-bottom: 48px;
+  }
+
+  .section-head h2 {
+    max-width: 700px;
+
+    margin-top: 13px;
+
+    font-size: clamp(2.5rem, 5vw, 4.4rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .section-head > p {
+    max-width: 480px;
+
+    color: var(--muted);
+  }
+
+  .category-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+  }
+
+  .category-card {
+    position: relative;
+
+    min-height: 285px;
+
+    padding: 24px;
+
+    border: 1px solid var(--line);
+    border-radius: 18px;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.024),
+        transparent
+      ),
+      var(--surface);
+
+    transition:
+      transform 0.22s ease,
+      border-color 0.22s ease;
+  }
+
+  .category-card:hover {
+    transform: translateY(-4px);
+
+    border-color: rgba(183, 255, 74, 0.25);
+  }
+
+  .category-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 14px;
+  }
+  .category-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.category-status {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.status-live {
+  color: var(--lime);
+}
+
+.status-soon {
+  color: var(--muted);
+}
+
+.category-card-disabled {
+  cursor: default;
+  opacity: 0.62;
+}
+
+.category-card-disabled:hover {
+  transform: none;
+}
+
+.category-card-disabled .category-arrow {
+  color: var(--muted);
+}
+
+  .category-number {
+    color: var(--lime);
+
+    font-size: 0.7rem;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+  }
+
+  .category-count {
+    color: var(--muted);
+
+    font-size: 0.68rem;
+
+    text-transform: uppercase;
+  }
+
+  .category-card h3 {
+    max-width: 320px;
+
+    margin-top: 38px;
+
+    font-size: 1.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  .category-card p {
+    max-width: 360px;
+
+    margin-top: 13px;
+
+    color: var(--muted);
+
+    font-size: 0.87rem;
+  }
+
+  .category-arrow {
+    position: absolute;
+
+    right: 22px;
+    bottom: 20px;
+
+    color: var(--lime);
+  }
+
+  .featured-section {
+    padding: 100px 0;
+
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+
+    background: var(--bg-soft);
+  }
+
+  .featured-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+
+    gap: 40px;
+
+    margin-bottom: 42px;
+  }
+
+  .featured-head h2 {
+    margin-top: 12px;
+
+    font-size: clamp(2.4rem, 5vw, 4.2rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .builder-link {
+    color: var(--lime);
+
+    font-size: 0.82rem;
+    font-weight: 750;
+  }
+
+  .prompt-list {
+    border-top: 1px solid var(--line);
+  }
+
+ .prompt-row {
+  display: grid;
+
+  grid-template-columns: 65px minmax(0, 850px) 130px;
+
+  gap: 25px;
+
+  align-items: center;
+
+  padding: 25px 0;
+
+  border-bottom: 1px solid var(--line);
+}
+
+  .prompt-index {
+    color: var(--lime);
+
+    font-size: 0.72rem;
+    font-weight: 800;
+
+    letter-spacing: 0.1em;
+  }
+
+  .prompt-info > span {
+    color: var(--mint);
+
+    font-size: 0.68rem;
+    font-weight: 750;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.08em;
+  }
+
+  .prompt-info h3 {
+    margin-top: 4px;
+
+    font-size: 1.15rem;
+  }
+
+  .prompt-info p {
+    max-width: 700px;
+
+    margin-top: 6px;
+
+    color: var(--muted);
+
+    font-size: 0.84rem;
+  }
+
+.prompt-action {
+  min-width: 120px;
+  text-align: left;
+  font-size: 0.75rem;
+}
+
+  .prompt-action a {
+    color: var(--lime);
+
+    font-weight: 750;
+  }
+
+  .no-results {
+    padding: 35px 0;
+
+    color: var(--muted);
+
+    text-align: center;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  .library-cta {
+    padding: 90px 0;
+  }
+
+  .cta-box {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+
+    gap: 50px;
+
+    padding: 50px;
+
+    border: 1px solid rgba(183, 255, 74, 0.16);
+    border-radius: 24px;
+
+    background:
+      radial-gradient(
+        circle at 82% 45%,
+        rgba(183, 255, 74, 0.1),
+        transparent 25%
+      ),
+      var(--surface);
+  }
+
+  .cta-box h2 {
+    max-width: 680px;
+
+    margin-top: 12px;
+
+    font-size: clamp(2.3rem, 5vw, 4rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .cta-box p {
+    max-width: 620px;
+
+    margin-top: 16px;
+
+    color: var(--muted);
+  }
+
+  .global-search-results {
+  padding: 70px 0 80px;
+
+  border-bottom: 1px solid var(--line);
+
+  background: var(--bg-soft);
+}
+
+.search-results-head {
+  display: flex;
+
+  align-items: end;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-bottom: 34px;
+}
+
+.search-results-head h2 {
+  margin-top: 10px;
+
+  font-size: clamp(2rem, 4vw, 3.5rem);
+
+  line-height: 1;
+
+  letter-spacing: -0.04em;
+}
+
+.search-results-count {
+  color: var(--muted);
+
+  font-size: 0.78rem;
+
+  font-weight: 700;
+}
+
+.global-results-list {
+  border-top: 1px solid var(--line);
+}
+
+.global-result-row {
+  display: grid;
+
+  grid-template-columns:
+    170px minmax(0, 1fr) 130px;
+
+  gap: 28px;
+
+  align-items: center;
+
+  padding: 24px 0;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.global-result-category {
+  color: var(--mint);
+
+  font-size: 0.68rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.07em;
+
+  text-transform: uppercase;
+}
+
+.global-result-content h3 {
+  font-size: 1.08rem;
+}
+
+.global-result-content p {
+  max-width: 720px;
+
+  margin-top: 6px;
+
+  color: var(--muted);
+
+  font-size: 0.82rem;
+
+  line-height: 1.6;
+}
+
+.global-result-action {
+  text-align: left;
+}
+
+.global-result-action a {
+  color: var(--lime);
+
+  font-size: 0.75rem;
+
+  font-weight: 750;
+}
+
+.global-no-results {
+  padding: 45px 20px;
+
+  text-align: center;
+}
+
+.global-no-results strong {
+  display: block;
+
+  color: var(--text);
+
+  font-size: 1rem;
+}
+
+.global-no-results span {
+  display: block;
+
+  max-width: 520px;
+
+  margin: 8px auto 0;
+
+  color: var(--muted);
+
+  font-size: 0.82rem;
+}
+
+  @media (max-width: 950px) {
+    .hero-grid,
+    .section-head {
+      grid-template-columns: 1fr;
+
+      gap: 35px;
+    }
+
+    .category-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .cta-box {
+      flex-direction: column;
+
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .prompt-hero {
+      padding: 70px 0 60px;
+    }
+
+    .strip-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .strip-grid > div:nth-child(2) {
+      border-right: 0;
+    }
+
+    .strip-grid > div:nth-child(-n + 2) {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .search-results-head {
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.global-result-row {
+  grid-template-columns: 1fr;
+
+  gap: 10px;
+}
+
+.global-result-action {
+  margin-top: 4px;
+}
+
+    .category-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .featured-head {
+      flex-direction: column;
+
+      align-items: flex-start;
+    }
+
+.prompt-row {
+  display: grid;
+
+  grid-template-columns: 65px minmax(0, 760px) 130px;
+
+  gap: 24px;
+
+  align-items: center;
+
+  padding: 25px 0;
+
+  border-bottom: 1px solid var(--line);
+}
+  }
+</style>
+<script>
+  document.querySelectorAll(".category-card-disabled").forEach((card) => {
+    card.addEventListener("click", (event) => {
+      event.preventDefault();
+    });
+  });
+</script>

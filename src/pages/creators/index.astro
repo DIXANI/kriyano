@@ -1,0 +1,1101 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const creatorAreas = [
+  {
+    number: "01",
+    title: "Content Ideas",
+    description:
+      "Generate stronger content directions, audience questions, hooks and repeatable content pillars.",
+    links: [
+      {
+        label: "Short-Form Video Idea Generator",
+        href: "/prompts/short-form-video-idea-generator/",
+      },
+      {
+        label: "Hook Generator",
+        href: "/prompts/hook-generator/",
+      },
+      {
+        label: "Audience Question Generator",
+        href: "/prompts/audience-question-generator/",
+      },
+      {
+        label: "Creator Content Pillar Builder",
+        href: "/prompts/creator-content-pillar-builder/",
+      },
+    ],
+  },
+  {
+    number: "02",
+    title: "Scripts & Captions",
+    description:
+      "Turn ideas into clearer video scripts, captions and structured creator content.",
+    links: [
+      {
+        label: "Short-Form Video Script",
+        href: "/prompts/short-form-video-script/",
+      },
+      {
+        label: "YouTube Video Outline",
+        href: "/prompts/youtube-video-outline/",
+      },
+      {
+        label: "Caption Writer",
+        href: "/prompts/caption-writer/",
+      },
+      {
+        label: "Rewrite for Clarity",
+        href: "/prompts/rewrite-for-clarity/",
+      },
+    ],
+  },
+  {
+    number: "03",
+    title: "Visual Content",
+    description:
+      "Create stronger visual concepts for thumbnails, social posts, branded graphics and campaign creatives.",
+    links: [
+      {
+        label: "AI Image Prompt Builder",
+        href: "/prompts/ai-image-prompt-builder/",
+      },
+      {
+        label: "Social Media Visual",
+        href: "/prompts/social-media-visual/",
+      },
+      {
+        label: "Thumbnail Design",
+        href: "/prompts/thumbnail-design/",
+      },
+      {
+        label: "Advertising Creative",
+        href: "/prompts/advertising-creative/",
+      },
+    ],
+  },
+  {
+    number: "04",
+    title: "AI Video Creation",
+    description:
+      "Build structured prompts for short-form, cinematic, commercial and multi-scene AI video generation.",
+    links: [
+      {
+        label: "AI Video Prompt Builder",
+        href: "/prompts/ai-video-prompt-builder/",
+      },
+      {
+        label: "Text to Video",
+        href: "/prompts/text-to-video/",
+      },
+      {
+        label: "Image to Video",
+        href: "/prompts/image-to-video/",
+      },
+      {
+        label: "Multi-Scene Video",
+        href: "/prompts/multi-scene-video/",
+      },
+    ],
+  },
+  {
+    number: "05",
+    title: "Consistency & Production",
+    description:
+      "Keep visual identity, scenes, characters and production workflows more consistent across content.",
+    links: [
+      {
+        label: "Character Consistency",
+        href: "/prompts/character-consistency/",
+      },
+      {
+        label: "Character & Scene Continuity",
+        href: "/prompts/character-scene-continuity/",
+      },
+      {
+        label: "Cinematic Camera Motion",
+        href: "/prompts/cinematic-camera-motion/",
+      },
+      {
+        label: "Creator Workflow Planner",
+        href: "/prompts/creator-workflow-planner/",
+      },
+    ],
+  },
+  {
+    number: "06",
+    title: "Growth & Repurposing",
+    description:
+      "Plan content more strategically, reuse strong ideas and turn one piece of content into multiple useful formats.",
+    links: [
+      {
+        label: "Social Media Content Planner",
+        href: "/prompts/social-media-content-planner/",
+      },
+      {
+        label: "Content Repurposing",
+        href: "/prompts/content-repurposing/",
+      },
+      {
+        label: "Marketing Strategy",
+        href: "/prompts/marketing-strategy/",
+      },
+      {
+        label: "Marketing Performance Review",
+        href: "/prompts/marketing-performance-review/",
+      },
+    ],
+  },
+];
+
+const creatorPrinciples = [
+  {
+    title: "Idea first",
+    description:
+      "Start with a useful concept or audience problem before choosing the AI tool.",
+  },
+  {
+    title: "AI assists the process",
+    description:
+      "Use AI for research, ideation, scripting, visual planning and production support.",
+  },
+  {
+    title: "Keep your identity",
+    description:
+      "Strong creators use AI to amplify their style rather than produce generic content.",
+  },
+  {
+    title: "Review performance",
+    description:
+      "Use real audience response to improve future ideas, hooks, formats and workflows.",
+  },
+];
+
+const workflow = [
+  "Idea",
+  "Research",
+  "Plan",
+  "Create",
+  "Review",
+  "Publish",
+  "Repurpose",
+  "Learn",
+];
+---
+
+<BaseLayout
+  title="AI for Creators | KRIYANO"
+  description="Practical AI prompts, tools and workflows for creators, including content ideas, scripts, visuals, AI video and content repurposing."
+>
+  <section class="creator-hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="section-kicker">AI FOR CREATORS</div>
+
+        <h1>
+          Create faster.
+          <span>Stay original.</span>
+        </h1>
+
+        <p>
+          Practical AI resources for ideas, scripts, visuals, video production,
+          content planning and repeatable creator workflows.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#creator-areas" class="button button-primary">
+            Explore creator resources
+          </a>
+
+          <a href="/prompts/creators/" class="hero-secondary-link">
+            Browse creator prompts ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="creator-console">
+        <div class="console-header">
+          <span>CREATOR PIPELINE</span>
+          <span class="console-status">LIVE</span>
+        </div>
+
+        <div class="console-body">
+          <div class="console-stage">
+            <span>01</span>
+            <div>
+              <strong>IDEA</strong>
+              <p>Find a useful topic or audience problem.</p>
+            </div>
+          </div>
+
+          <div class="console-stage">
+            <span>02</span>
+            <div>
+              <strong>BUILD</strong>
+              <p>Use AI for scripts, visuals and production planning.</p>
+            </div>
+          </div>
+
+          <div class="console-stage">
+            <span>03</span>
+            <div>
+              <strong>REVIEW</strong>
+              <p>Keep the content accurate, human and on-brand.</p>
+            </div>
+          </div>
+
+          <div class="console-output">
+            <span>GOAL</span>
+            <strong>
+              More consistent content without losing creator identity.
+            </strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="creator-strip">
+    <div class="container strip-grid">
+      <div>
+        <strong>Ideas</strong>
+        <span>Topics & hooks</span>
+      </div>
+
+      <div>
+        <strong>Scripts</strong>
+        <span>Structure & storytelling</span>
+      </div>
+
+      <div>
+        <strong>Visuals</strong>
+        <span>Images & video</span>
+      </div>
+
+      <div>
+        <strong>Workflow</strong>
+        <span>Plan → publish → improve</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="creator-areas">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Creator resource areas</div>
+
+          <h2>
+            Build the content
+            around the outcome.
+          </h2>
+        </div>
+
+        <p>
+          KRIYANO helps creators use AI across the full content process instead
+          of treating every post, image or video as a separate task.
+        </p>
+      </div>
+
+      <div class="creator-grid">
+        {
+          creatorAreas.map((area) => (
+            <article class="creator-card">
+              <div class="card-head">
+                <span class="card-number">{area.number}</span>
+                <span class="card-type">CREATE</span>
+              </div>
+
+              <h3>{area.title}</h3>
+
+              <p>{area.description}</p>
+
+              <div class="resource-list">
+                {
+                  area.links.map((link) => (
+                    <a href={link.href}>
+                      <span>{link.label}</span>
+                      <span>↗</span>
+                    </a>
+                  ))
+                }
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="workflow-section">
+    <div class="container">
+      <div class="workflow-head">
+        <div>
+          <div class="section-kicker">Creator workflow</div>
+
+          <h2>
+            One content system.
+            Multiple AI assists.
+          </h2>
+        </div>
+
+        <p>
+          AI becomes more useful when it supports a repeatable workflow rather
+          than generating disconnected pieces of content.
+        </p>
+      </div>
+
+      <div class="workflow-line">
+        {
+          workflow.map((step, index) => (
+            <div class="workflow-step">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{step}</strong>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="principles-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Using AI as a creator</div>
+
+          <h2>
+            Faster production
+            should not mean generic content.
+          </h2>
+        </div>
+
+        <p>
+          The strongest creator workflows combine AI speed with human
+          perspective, judgment and audience understanding.
+        </p>
+      </div>
+
+      <div class="principles-grid">
+        {
+          creatorPrinciples.map((item, index) => (
+            <article class="principle-card">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+
+              <h3>{item.title}</h3>
+
+              <p>{item.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="creator-focus">
+    <div class="container focus-grid">
+      <div>
+        <div class="section-kicker">From one idea to many assets</div>
+
+        <h2>
+          Create once.
+          Adapt intelligently.
+        </h2>
+
+        <p>
+          A strong topic can become a short-form video, carousel, caption,
+          thumbnail, article, email or follow-up post. AI can help transform the
+          format while you preserve the core idea.
+        </p>
+
+        <a href="/prompts/content-repurposing/" class="text-link">
+          Explore Content Repurposing ↗
+        </a>
+      </div>
+
+      <div class="asset-map">
+        <div class="source-asset">
+          <span>CORE IDEA</span>
+          <strong>One useful piece of content</strong>
+        </div>
+
+        <div class="asset-grid">
+          <div>
+            <span>01</span>
+            <strong>Short Video</strong>
+          </div>
+
+          <div>
+            <span>02</span>
+            <strong>Carousel</strong>
+          </div>
+
+          <div>
+            <span>03</span>
+            <strong>Caption</strong>
+          </div>
+
+          <div>
+            <span>04</span>
+            <strong>Article</strong>
+          </div>
+
+          <div>
+            <span>05</span>
+            <strong>Email</strong>
+          </div>
+
+          <div>
+            <span>06</span>
+            <strong>Visual</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="creator-cta">
+    <div class="container">
+      <div class="cta-box">
+        <div>
+          <div class="section-kicker">Build your next piece</div>
+
+          <h2>
+            Turn your content idea
+            into a stronger AI prompt.
+          </h2>
+
+          <p>
+            Use the KRIYANO Prompt Builder to define the goal, audience,
+            context, tone, format and creative requirements.
+          </p>
+        </div>
+
+        <a href="/tools/prompt-builder/" class="button button-primary">
+          Open Prompt Builder
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .creator-hero {
+    padding: 105px 0 90px;
+
+    border-bottom: 1px solid var(--line);
+
+    background:
+      radial-gradient(
+        circle at 84% 25%,
+        rgba(77, 226, 197, 0.1),
+        transparent 28%
+      ),
+      radial-gradient(
+        circle at 15% 0%,
+        rgba(183, 255, 74, 0.055),
+        transparent 25%
+      );
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.08fr 0.92fr;
+    gap: 76px;
+    align-items: center;
+  }
+
+  .hero-copy h1 {
+    margin-top: 15px;
+
+    font-size: clamp(3.5rem, 7vw, 6.8rem);
+    line-height: 0.93;
+    letter-spacing: -0.065em;
+  }
+
+  .hero-copy h1 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .hero-copy > p {
+    max-width: 680px;
+    margin-top: 26px;
+
+    color: var(--muted);
+
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 22px;
+    margin-top: 34px;
+  }
+
+  .hero-secondary-link,
+  .text-link {
+    color: var(--lime);
+
+    font-size: 0.82rem;
+    font-weight: 750;
+  }
+
+  .creator-console {
+    overflow: hidden;
+
+    border: 1px solid rgba(77, 226, 197, 0.18);
+    border-radius: 21px;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.03),
+        transparent
+      ),
+      var(--surface);
+
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.23);
+  }
+
+  .console-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 14px 18px;
+
+    border-bottom: 1px solid var(--line);
+
+    color: var(--muted);
+
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .console-status {
+    color: var(--mint);
+  }
+
+  .console-body {
+    padding: 10px 22px 22px;
+  }
+
+  .console-stage {
+    display: grid;
+    grid-template-columns: 45px 1fr;
+    gap: 16px;
+
+    padding: 19px 0;
+
+    border-bottom: 1px solid var(--line);
+  }
+
+  .console-stage > span {
+    color: var(--lime);
+
+    font-size: 0.65rem;
+    font-weight: 800;
+  }
+
+  .console-stage strong {
+    font-size: 0.8rem;
+  }
+
+  .console-stage p {
+    margin-top: 5px;
+
+    color: var(--muted);
+
+    font-size: 0.76rem;
+    line-height: 1.55;
+  }
+
+  .console-output {
+    margin-top: 22px;
+    padding: 18px;
+
+    border: 1px solid rgba(183, 255, 74, 0.14);
+    border-radius: 12px;
+
+    background: rgba(183, 255, 74, 0.05);
+  }
+
+  .console-output span {
+    display: block;
+    margin-bottom: 7px;
+
+    color: var(--lime);
+
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .console-output strong {
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .creator-strip {
+    border-bottom: 1px solid var(--line);
+
+    background: rgba(255, 255, 255, 0.018);
+  }
+
+  .strip-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .strip-grid > div {
+    padding: 24px 20px;
+
+    border-right: 1px solid var(--line);
+  }
+
+  .strip-grid > div:last-child {
+    border-right: 0;
+  }
+
+  .strip-grid strong {
+    display: block;
+
+    font-size: 0.94rem;
+  }
+
+  .strip-grid span {
+    color: var(--muted);
+
+    font-size: 0.77rem;
+  }
+
+  .section-head,
+  .workflow-head {
+    display: grid;
+    grid-template-columns: 1.08fr 0.92fr;
+    gap: 70px;
+
+    align-items: end;
+
+    margin-bottom: 48px;
+  }
+
+  .section-head h2,
+  .workflow-head h2 {
+    max-width: 760px;
+    margin-top: 13px;
+
+    font-size: clamp(2.6rem, 5vw, 4.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+  }
+
+  .section-head > p,
+  .workflow-head > p {
+    max-width: 500px;
+
+    color: var(--muted);
+
+    line-height: 1.75;
+  }
+
+  .creator-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px;
+  }
+
+  .creator-card {
+    padding: 27px;
+
+    border: 1px solid var(--line);
+    border-radius: 19px;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.024),
+        transparent
+      ),
+      var(--surface);
+  }
+
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-number {
+    color: var(--lime);
+
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+  }
+
+  .card-type {
+    color: var(--muted);
+
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .creator-card h3 {
+    margin-top: 34px;
+
+    font-size: 1.55rem;
+    letter-spacing: -0.035em;
+  }
+
+  .creator-card > p {
+    max-width: 540px;
+    margin-top: 12px;
+
+    color: var(--muted);
+
+    font-size: 0.87rem;
+    line-height: 1.65;
+  }
+
+  .resource-list {
+    margin-top: 25px;
+
+    border-top: 1px solid var(--line);
+  }
+
+  .resource-list a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+    padding: 13px 0;
+
+    border-bottom: 1px solid var(--line);
+
+    color: var(--text);
+
+    font-size: 0.78rem;
+
+    transition:
+      color 0.2s ease,
+      padding-left 0.2s ease;
+  }
+
+  .resource-list a > span:last-child {
+    color: var(--lime);
+  }
+
+  .resource-list a:hover {
+    padding-left: 5px;
+
+    color: var(--lime);
+  }
+
+  .workflow-section {
+    padding: 100px 0;
+
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+
+    background: var(--bg-soft);
+  }
+
+  .workflow-line {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .workflow-step {
+    padding: 21px 14px;
+
+    border-right: 1px solid var(--line);
+  }
+
+  .workflow-step:last-child {
+    border-right: 0;
+  }
+
+  .workflow-step span {
+    display: block;
+
+    color: var(--lime);
+
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .workflow-step strong {
+    display: block;
+
+    margin-top: 8px;
+
+    font-size: 0.76rem;
+  }
+
+  .principles-section {
+    padding: 100px 0;
+  }
+
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+
+  .principle-card {
+    min-height: 235px;
+
+    padding: 22px;
+
+    border: 1px solid var(--line);
+    border-radius: 17px;
+
+    background: var(--surface);
+  }
+
+  .principle-card > span {
+    color: var(--mint);
+
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+  }
+
+  .principle-card h3 {
+    margin-top: 48px;
+
+    font-size: 1.1rem;
+    letter-spacing: -0.025em;
+  }
+
+  .principle-card p {
+    margin-top: 10px;
+
+    color: var(--muted);
+
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+
+  .creator-focus {
+    padding: 100px 0;
+
+    border-top: 1px solid var(--line);
+
+    background: var(--bg-soft);
+  }
+
+  .focus-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 80px;
+
+    align-items: center;
+  }
+
+  .focus-grid h2 {
+    margin-top: 13px;
+
+    font-size: clamp(2.4rem, 5vw, 4.1rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .focus-grid > div:first-child > p {
+    max-width: 570px;
+    margin-top: 18px;
+
+    color: var(--muted);
+
+    line-height: 1.75;
+  }
+
+  .text-link {
+    display: inline-block;
+    margin-top: 24px;
+  }
+
+  .asset-map {
+    padding: 24px;
+
+    border: 1px solid var(--line);
+    border-radius: 20px;
+
+    background: var(--surface);
+  }
+
+  .source-asset {
+    padding: 20px;
+
+    border: 1px solid rgba(183, 255, 74, 0.16);
+    border-radius: 12px;
+
+    background: rgba(183, 255, 74, 0.05);
+  }
+
+  .source-asset span {
+    display: block;
+
+    color: var(--lime);
+
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .source-asset strong {
+    display: block;
+
+    margin-top: 7px;
+
+    font-size: 0.9rem;
+  }
+
+  .asset-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 10px;
+
+    margin-top: 10px;
+  }
+
+  .asset-grid > div {
+    padding: 16px;
+
+    border: 1px solid var(--line);
+    border-radius: 10px;
+
+    background: var(--bg-soft);
+  }
+
+  .asset-grid span {
+    display: block;
+
+    color: var(--mint);
+
+    font-size: 0.6rem;
+    font-weight: 800;
+  }
+
+  .asset-grid strong {
+    display: block;
+
+    margin-top: 6px;
+
+    font-size: 0.76rem;
+  }
+
+  .creator-cta {
+    padding: 100px 0;
+  }
+
+  .cta-box {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+
+    gap: 50px;
+
+    padding: 48px;
+
+    border: 1px solid rgba(183, 255, 74, 0.15);
+    border-radius: 23px;
+
+    background: var(--surface);
+  }
+
+  .cta-box h2 {
+    max-width: 700px;
+
+    margin-top: 12px;
+
+    font-size: clamp(2.3rem, 5vw, 4rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .cta-box p {
+    max-width: 650px;
+
+    margin-top: 16px;
+
+    color: var(--muted);
+
+    line-height: 1.7;
+  }
+
+  @media (max-width: 1000px) {
+    .hero-grid,
+    .section-head,
+    .workflow-head,
+    .focus-grid {
+      grid-template-columns: 1fr;
+
+      gap: 38px;
+    }
+
+    .workflow-line {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .principles-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cta-box {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .creator-hero {
+      padding: 72px 0 62px;
+    }
+
+    .strip-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .strip-grid > div:nth-child(2) {
+      border-right: 0;
+    }
+
+    .strip-grid > div:nth-child(-n + 2) {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .creator-grid,
+    .principles-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .workflow-line {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .workflow-step:nth-child(even) {
+      border-right: 0;
+    }
+
+    .asset-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-box {
+      padding: 32px 24px;
+    }
+  }
+</style>

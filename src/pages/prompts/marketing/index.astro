@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptCategoryPage from "../../../components/PromptCategoryPage.astro";
+
+const prompts = [
+  {
+    title: "Marketing Strategy Prompt",
+    description:
+      "Build a practical marketing strategy around your audience, offer, channels, goals and competitive position.",
+    category: "Strategy",
+    href: "/prompts/marketing-strategy/",
+  },
+  {
+    title: "Social Media Content Planner",
+    description:
+      "Create a structured social media calendar based on your audience, goals, platforms and content pillars.",
+    category: "Social Media",
+    href: "/prompts/social-media-content-planner/",
+  },
+  {
+    title: "Campaign Idea Generator",
+    description:
+      "Generate focused campaign concepts around a product, service, launch, promotion or business objective.",
+    category: "Campaigns",
+    href: "/prompts/campaign-idea-generator/",
+  },
+  {
+    title: "Customer Pain Point Research",
+    description:
+      "Identify likely customer problems, frustrations, motivations and questions to guide stronger marketing messages.",
+    category: "Audience",
+    href: "/prompts/customer-pain-point-research/",
+  },
+  {
+    title: "Value Proposition Builder",
+    description:
+      "Clarify what makes an offer useful, different and relevant to a specific target customer.",
+    category: "Positioning",
+    href: "/prompts/value-proposition-builder/",
+  },
+  {
+    title: "Ad Copy Writer",
+    description:
+      "Create concise advertising copy with clear hooks, benefits, offers and calls to action.",
+    category: "Advertising",
+    href: "/prompts/ad-copy-writer/",
+  },
+  {
+    title: "Landing Page Messaging Prompt",
+    description:
+      "Structure persuasive landing-page messaging around customer needs, benefits, proof and conversion goals.",
+    category: "Conversion",
+    href: "/prompts/landing-page-messaging/",
+  },
+  {
+    title: "Content Repurposing Prompt",
+    description:
+      "Turn one strong piece of content into multiple platform-specific posts, short-form ideas and supporting assets.",
+    category: "Content",
+    href: "/prompts/content-repurposing/",
+  },
+  {
+    title: "Email Marketing Campaign Prompt",
+    description:
+      "Plan a practical email sequence for launches, promotions, nurturing, follow-ups or customer retention.",
+    category: "Email",
+    href: "/prompts/email-marketing-campaign/",
+  },
+  {
+    title: "Marketing Performance Review",
+    description:
+      "Analyze marketing results, identify weak points and suggest practical improvements based on available data.",
+    category: "Analysis",
+    href: "/prompts/marketing-performance-review/",
+  },
+];
+---
+
+<BaseLayout
+  title="Marketing AI Prompts | KRIYANO"
+  description="Practical AI prompts for marketing strategy, campaigns, social media, advertising, positioning, email marketing and content."
+>
+  <PromptCategoryPage
+    kicker="MARKETING"
+    title="AI prompts for"
+    accentTitle="smarter marketing."
+    description="Practical prompts for strategy, campaigns, audience research, positioning, advertising, social media and content."
+    prompts={prompts}
+  />
+</BaseLayout>

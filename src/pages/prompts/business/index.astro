@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptCategoryPage from "../../../components/PromptCategoryPage.astro";
+
+const prompts = [
+  {
+  title: "Business Idea Evaluator",
+  description:
+    "Evaluate a business idea based on demand, competition, risks, startup requirements and commercial potential.",
+  category: "Planning",
+  href: "/prompts/business-idea-evaluator/",
+},
+  {
+    title: "Business Plan Builder",
+    description:
+      "Turn a business concept into a practical business plan covering customers, operations, revenue and growth.",
+    category: "Planning",
+    href: "/prompts/business-plan-builder/",
+  },
+  {
+    title: "Competitor Analysis Prompt",
+    description:
+      "Compare competitors, identify strengths and weaknesses, and uncover possible market gaps.",
+    category: "Research",
+    href: "/prompts/competitor-analysis/",
+  },
+  {
+    title: "Customer Persona Builder",
+    description:
+      "Create realistic customer profiles based on needs, behaviours, motivations and buying concerns.",
+    category: "Customers",
+    href: "/prompts/customer-persona-builder/",
+  },
+  {
+    title: "Pricing Strategy Prompt",
+    description:
+      "Evaluate pricing options using costs, customer value, competitors, margins and positioning.",
+    category: "Pricing",
+    href: "/prompts/pricing-strategy/",
+  },
+  {
+    title: "SWOT Analysis Prompt",
+    description:
+      "Build a structured strengths, weaknesses, opportunities and threats analysis around a real business situation.",
+    category: "Strategy",
+    href: "/prompts/swot-analysis/",
+  },
+  {
+    title: "Business Risk Analysis",
+    description:
+      "Identify operational, financial, customer, supplier and market risks and suggest practical controls.",
+    category: "Risk",
+    href: "/prompts/business-risk-analysis/",
+  },
+  {
+    title: "Process Improvement Prompt",
+    description:
+      "Review a business process for unnecessary steps, delays, errors, costs and improvement opportunities.",
+    category: "Operations",
+    href: "/prompts/process-improvement/",
+  },
+  {
+    title: "Business Decision Framework",
+    description:
+      "Compare business options using priorities, costs, benefits, risks, trade-offs and long-term impact.",
+    category: "Decision Support",
+    href: "/prompts/business-decision-framework/",
+  },
+  {
+    title: "SOP Creation Prompt",
+    description:
+      "Turn a business or operational workflow into a clear, structured Standard Operating Procedure.",
+    category: "Operations",
+    href: "/prompts/sop-creation/",
+  },
+];
+---
+
+<BaseLayout
+  title="Business AI Prompts | KRIYANO"
+  description="Practical AI prompts for business planning, competitors, customers, pricing, risks, operations and decision-making."
+>
+  <PromptCategoryPage
+    kicker="BUSINESS"
+    title="AI prompts for"
+    accentTitle="better business."
+    description="Structured prompts for planning, strategy, customers, pricing, risk, operations and everyday business decisions."
+    prompts={prompts}
+  />
+</BaseLayout>

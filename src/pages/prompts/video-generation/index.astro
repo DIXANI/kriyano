@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptCategoryPage from "../../../components/PromptCategoryPage.astro";
+
+const prompts = [
+  {
+    title: "AI Video Prompt Builder",
+    description:
+      "Build structured video-generation prompts with clear subject, action, camera direction, timing, style and constraints.",
+    category: "Prompting",
+    href: "/prompts/ai-video-prompt-builder/",
+  },
+  {
+    title: "Text-to-Video Prompt",
+    description:
+      "Turn a written idea into a production-ready AI video prompt with scene, motion, camera and visual direction.",
+    category: "Text to Video",
+    href: "/prompts/text-to-video/",
+  },
+  {
+    title: "Image-to-Video Prompt",
+    description:
+      "Animate a reference image while preserving subject identity, composition, environment and important visual details.",
+    category: "Image to Video",
+    href: "/prompts/image-to-video/",
+  },
+  {
+    title: "Multi-Scene Video Prompt",
+    description:
+      "Plan a sequence of connected AI-generated scenes with consistent story flow, timing and visual continuity.",
+    category: "Sequences",
+    href: "/prompts/multi-scene-video/",
+  },
+  {
+    title: "Product Commercial Video Prompt",
+    description:
+      "Create polished product-video concepts with commercial lighting, camera movement, product focus and advertising structure.",
+    category: "Commercial",
+    href: "/prompts/product-commercial-video/",
+  },
+  {
+    title: "Cinematic Camera & Motion Prompt",
+    description:
+      "Control camera angle, lens feel, movement, subject motion and pacing for more intentional cinematic AI video.",
+    category: "Camera",
+    href: "/prompts/cinematic-camera-motion/",
+  },
+  {
+    title: "Short-Form Reel Video Prompt",
+    description:
+      "Structure vertical short-form AI videos with a strong opening, concise scenes, motion and mobile-first framing.",
+    category: "Short Form",
+    href: "/prompts/short-form-reel-video/",
+  },
+  {
+    title: "Character & Scene Continuity Prompt",
+    description:
+      "Keep characters, wardrobe, props, environment and scene details visually consistent across generated video clips.",
+    category: "Continuity",
+    href: "/prompts/character-scene-continuity/",
+  },
+];
+---
+
+<BaseLayout
+  title="AI Video Generation Prompts | KRIYANO"
+  description="Practical AI video-generation prompts for text-to-video, image-to-video, product commercials, camera motion, short-form videos and scene continuity."
+>
+  <PromptCategoryPage
+    kicker="VIDEO GENERATION"
+    title="AI prompts for"
+    accentTitle="better video."
+    description="Structured prompts for controlling scenes, motion, camera direction, continuity, timing and visual style in AI-generated video."
+    prompts={prompts}
+  />
+</BaseLayout>

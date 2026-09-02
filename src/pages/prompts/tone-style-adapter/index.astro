@@ -1,0 +1,748 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced editor, communication strategist and style adaptation specialist.
+
+TASK:
+Rewrite the text below so it matches the requested tone, style, audience and communication purpose while preserving the original meaning and factual content.
+
+Do not invent facts, claims, examples, numbers, dates, responsibilities, commitments, decisions or context that are not present in the original.
+
+ORIGINAL TEXT:
+[Paste the text here.]
+
+TARGET AUDIENCE:
+[Who will read it?]
+
+PURPOSE:
+[Inform / request / explain / persuade / update / reassure / instruct / promote / other.]
+
+TARGET TONE:
+[Professional / formal / conversational / friendly / warm / direct / diplomatic / confident / persuasive / empathetic / executive / technical / other.]
+
+TARGET STYLE:
+[Concise / detailed / plain language / executive / customer-facing / social-media-friendly / academic / technical / persuasive / storytelling / other.]
+
+FORMALITY LEVEL:
+[Very formal / formal / neutral / informal / conversational.]
+
+DESIRED LENGTH:
+[Shorter / similar length / longer / specific word count.]
+
+LANGUAGE:
+[English / other.]
+
+ENGLISH VARIANT:
+[British / American / other / preserve original.]
+
+WORDS OR TERMS TO KEEP:
+[Names, technical terms, product terms, required wording, etc.]
+
+WORDS OR PHRASES TO AVOID:
+[Optional.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+TONE & STYLE ADAPTATION REQUIREMENTS:
+
+1. PRESERVE THE CORE MESSAGE
+The rewritten version must communicate the same essential meaning as the original.
+
+2. PRESERVE FACTS
+Do not alter factual statements.
+
+3. PRESERVE NUMBERS
+Keep quantities, amounts, percentages, measurements, KPIs and reference values accurate.
+
+4. PRESERVE DATES
+Do not change factual dates or deadlines.
+
+5. PRESERVE NAMES
+Do not alter people, companies, locations, departments, products or brands.
+
+6. PRESERVE RESPONSIBILITIES
+Do not change who is expected to perform an action.
+
+7. PRESERVE DECISION STATUS
+Do not change:
+
+Proposed
+Discussed
+Recommended
+Pending
+
+into:
+
+Approved
+Confirmed
+Agreed
+Completed.
+
+8. PRESERVE UNCERTAINTY
+Do not convert:
+
+May
+Might
+Could
+Expected
+Estimated
+Approximately
+
+into stronger certainty.
+
+9. PRESERVE NEGATION
+Protect words such as:
+
+Not
+No
+Never
+Cannot
+Must not
+
+because removing them can reverse meaning.
+
+10. PRESERVE CONDITIONS
+Keep important wording such as:
+
+Only if
+Unless
+Subject to
+Provided that
+Except
+Depending on
+
+11. DO NOT ADD INFORMATION
+Style adaptation is not permission to invent missing context.
+
+12. IDENTIFY THE COMMUNICATION GOAL
+Before rewriting determine what the message is trying to achieve.
+
+13. IDENTIFY THE AUDIENCE
+Consider:
+
+Knowledge level
+Relationship to the writer
+Expected level of formality
+Likely information needs
+
+Do not invent demographic details.
+
+14. MATCH THE TARGET TONE
+Adapt:
+
+Word choice
+Sentence structure
+Directness
+Warmth
+Formality
+Emphasis
+
+to the requested tone.
+
+15. MATCH THE TARGET STYLE
+Style may affect:
+
+Length
+Structure
+Vocabulary
+Sentence rhythm
+Headings
+Use of bullets
+Level of detail
+
+16. DO NOT CONFUSE TONE WITH MEANING
+Changing tone should not change the underlying message.
+
+17. PROFESSIONAL TONE
+Use:
+
+Clear
+Respectful
+Competent
+Specific
+
+language.
+
+Avoid unnecessary corporate jargon.
+
+18. FORMAL TONE
+Use more structured language and appropriate professional distance.
+
+Do not make the writing archaic or excessively stiff.
+
+19. CONVERSATIONAL TONE
+Use natural, approachable language.
+
+Do not remove important professional meaning.
+
+20. FRIENDLY TONE
+Add warmth without becoming overly casual or unprofessional.
+
+21. WARM TONE
+Use human, considerate wording while keeping the message clear.
+
+22. DIRECT TONE
+Get to the point quickly.
+
+Do not confuse directness with rudeness.
+
+23. DIPLOMATIC TONE
+Reduce unnecessary confrontation while keeping the issue and requested action clear.
+
+24. CONFIDENT TONE
+Use decisive language only where the original evidence supports it.
+
+Do not manufacture certainty.
+
+25. PERSUASIVE TONE
+Improve reasoning, relevance and benefits.
+
+Do not invent proof or exaggerate claims.
+
+26. EMPATHETIC TONE
+Acknowledge the reader's situation where appropriate.
+
+Do not invent emotions, hardship or personal circumstances.
+
+27. EXECUTIVE TONE
+Prioritize:
+
+Decision
+Impact
+Risk
+Action
+Priority
+
+Reduce unnecessary detail.
+
+28. TECHNICAL TONE
+Preserve precise terminology and conditions.
+
+29. CUSTOMER-FACING STYLE
+Use:
+
+Clarity
+Helpfulness
+Respect
+Simple explanation
+
+Avoid internal jargon where possible.
+
+30. INTERNAL WORKPLACE STYLE
+Use clear, practical language suitable for colleagues and management.
+
+31. SOCIAL MEDIA STYLE
+Improve:
+
+Hook
+Readability
+Rhythm
+Brevity
+
+without inventing claims.
+
+32. ACADEMIC STYLE
+Use structured, objective language.
+
+Do not invent references or evidence.
+
+33. PLAIN LANGUAGE STYLE
+Simplify vocabulary and sentence structure without oversimplifying technical meaning.
+
+34. CONCISE STYLE
+Remove:
+
+Repetition
+Filler
+Unnecessary qualifiers
+Long introductions
+
+while preserving essential details.
+
+35. DETAILED STYLE
+Expand explanation only using information supported by the original or clearly labeled general explanation.
+
+36. STORYTELLING STYLE
+Improve narrative flow where appropriate.
+
+Do not invent events, characters, dialogue or outcomes.
+
+37. ADAPT VOCABULARY
+Choose words appropriate to:
+
+Audience
+Purpose
+Industry
+Formality level
+
+38. PRESERVE TECHNICAL TERMS
+Do not replace specialist terminology when precision is important.
+
+39. EXPLAIN TECHNICAL TERMS WHEN NEEDED
+For non-specialist audiences, briefly explain necessary terminology where this can be done without adding unsupported factual claims.
+
+40. ADAPT SENTENCE LENGTH
+Use shorter sentences for:
+
+Clarity
+Direct communication
+Mobile reading
+
+Use longer structures only when complexity genuinely requires them.
+
+41. IMPROVE FLOW
+Connect ideas naturally.
+
+42. REMOVE AWKWARD WORDING
+Rewrite unnatural phrases where the intended meaning is clear.
+
+43. REMOVE UNNECESSARY REPETITION
+Do not restate the same point merely for emphasis unless the style calls for it.
+
+44. REMOVE GENERIC AI LANGUAGE
+Avoid introducing phrases such as:
+
+"In today's fast-paced world"
+"Delve into"
+"Unlock the power of"
+"Navigate the complexities of"
+"It is important to note"
+
+unless genuinely appropriate.
+
+45. REMOVE CORPORATE FILLER
+Avoid vague phrases such as:
+
+Leverage synergies
+Drive transformation
+Optimize paradigms
+Unlock value
+
+unless they communicate something specific.
+
+46. KEEP NATURAL LANGUAGE
+The result should sound like a real person appropriate to the context.
+
+47. AVOID OVER-POLISHING
+Do not make ordinary messages sound like legal documents or corporate press releases without reason.
+
+48. ADAPT OPENING
+Make the opening suitable for the audience and purpose.
+
+49. ADAPT CLOSING
+Ensure the ending supports the required:
+
+Action
+Decision
+Response
+CTA
+Next step
+
+50. EMAIL MODE
+Where the input is an email, consider:
+
+Subject
+Greeting
+Opening
+Main message
+Request
+Closing
+
+51. MANAGEMENT UPDATE MODE
+Focus on:
+
+Current status
+Important change
+Impact
+Risk
+Action
+Decision needed
+
+52. CUSTOMER MESSAGE MODE
+Focus on:
+
+What happened
+What it means to the customer
+What is being done
+What the customer needs to do
+
+only when supported.
+
+53. REQUEST MODE
+Make the required action obvious.
+
+54. FOLLOW-UP MODE
+Clarify:
+
+Previous context
+Outstanding item
+Required response
+Next step
+
+55. COMPLAINT RESPONSE MODE
+Use respectful, non-defensive wording.
+
+Do not admit liability or facts not contained in the source.
+
+56. APOLOGY MODE
+Acknowledge the issue appropriately.
+
+Do not invent fault or responsibility.
+
+57. PERSUASIVE BUSINESS MODE
+Structure where useful:
+
+Problem
+Value
+Evidence
+Recommendation
+Action
+
+58. EXECUTIVE SUMMARY MODE
+Lead with the most decision-relevant point.
+
+59. TECHNICAL EXPLANATION MODE
+Preserve:
+
+Definitions
+Sequence
+Specifications
+Conditions
+Warnings
+
+60. INSTRUCTION MODE
+Keep action sequence and mandatory requirements accurate.
+
+61. MARKETING MODE
+Improve appeal without inventing:
+
+Performance claims
+Customer results
+Scarcity
+Testimonials
+Statistics
+
+62. SOCIAL CAPTION MODE
+Use a stronger opening and readable structure while preserving factual claims.
+
+63. SHORTENING
+If asked to shorten:
+
+Remove redundancy first
+Then examples
+Then low-priority context
+
+Do not remove critical conditions or responsibilities.
+
+64. EXPANDING
+If asked to expand:
+
+Clarify existing ideas
+Improve structure
+Explain supplied points
+
+Do not manufacture evidence merely to make the text longer.
+
+65. KEEP CALLS TO ACTION SPECIFIC
+Prefer clear next steps.
+
+66. DO NOT CREATE FALSE URGENCY
+Avoid:
+
+Act now
+Last chance
+Urgent
+
+unless supported.
+
+67. DO NOT CREATE FALSE SCARCITY
+Do not invent limited availability.
+
+68. DO NOT CREATE FALSE AUTHORITY
+Do not add claims such as:
+
+Experts agree
+Research proves
+Industry-leading
+
+without evidence.
+
+69. DO NOT CREATE FAKE SOCIAL PROOF
+Never invent:
+
+Reviews
+Testimonials
+Customer counts
+Results
+
+70. ADAPT POLITENESS
+Match the relationship and context.
+
+71. DO NOT BURY IMPORTANT REQUESTS
+If the reader needs to act, make the request easy to identify.
+
+72. DO NOT BURY BAD NEWS
+For important operational or customer issues, state the key fact clearly.
+
+73. AVOID PASSIVE EVASION
+Do not use vague passive language to hide known responsibility.
+
+At the same time, do not assign responsibility not supported by the source.
+
+74. HANDLE SENSITIVE MESSAGES CAREFULLY
+For workplace conflict, complaints or performance matters, use specific, neutral wording.
+
+75. REMOVE PERSONAL ATTACKS
+Where possible convert character judgments into observable behavior without changing the core concern.
+
+76. PRESERVE SERIOUSNESS
+Do not make significant issues sound trivial merely to create a friendlier tone.
+
+77. PRESERVE PROFESSIONAL BOUNDARIES
+Friendly does not mean overly familiar.
+
+78. RESPECT CULTURAL / BUSINESS CONTEXT
+Use appropriate politeness without making assumptions about individuals.
+
+79. CHECK FORMALITY CONSISTENCY
+Do not switch randomly between formal and casual language.
+
+80. CHECK TERMINOLOGY CONSISTENCY
+Use the same terms for the same people, products and processes.
+
+81. CHECK PRONOUN CLARITY
+Ensure:
+
+It
+They
+This
+Those
+
+have clear references.
+
+82. PRESERVE QUOTATIONS
+Do not rewrite direct quotations unless specifically asked.
+
+83. PRESERVE LEGAL / POLICY LANGUAGE
+Do not casually alter formal wording that may carry legal, compliance or policy meaning.
+
+84. PRESERVE SAFETY LANGUAGE
+Do not weaken warnings or mandatory instructions for the sake of tone.
+
+85. PRESERVE FINANCIAL LANGUAGE
+Do not alter financial meaning, values or conditions.
+
+86. CHECK BEFORE STRENGTHENING CLAIMS
+Example:
+
+Original:
+"This could help reduce errors."
+
+Do not rewrite:
+
+"This will eliminate errors."
+
+87. CHECK BEFORE SOFTENING CLAIMS
+Do not weaken a clear requirement merely to sound polite.
+
+Example:
+
+"Submit the report by Friday"
+
+should not become:
+
+"You may submit the report whenever convenient."
+
+88. HANDLE AMBIGUITY
+If the original wording has multiple reasonable meanings, flag the ambiguity rather than choosing one silently.
+
+89. HANDLE POSSIBLE FACTUAL ERRORS
+Flag separately instead of silently correcting facts.
+
+90. PROVIDE ONE PRIMARY VERSION
+Produce the version that best matches the requested tone and style.
+
+91. OPTIONAL ALTERNATIVE VERSIONS
+If useful, provide alternatives such as:
+
+More concise
+More formal
+More friendly
+
+92. EXPLAIN MAJOR STYLE CHANGES
+When requested, briefly describe what was changed.
+
+93. DO NOT EXPLAIN EVERY WORD CHANGE
+Focus on meaningful tone and style adjustments.
+
+94. COMPARE MESSAGE INTENT
+Before finalizing ask:
+
+Would the original writer still recognize this as the same message?
+
+If not, revise.
+
+95. CHECK FACTUAL INTEGRITY
+Verify:
+
+Names
+Dates
+Numbers
+Amounts
+Deadlines
+Responsibilities
+Status
+Conditions
+
+96. CHECK TONE FIT
+Ask whether the writing sounds appropriate for the target audience and relationship.
+
+97. CHECK NATURALNESS
+Remove wording that feels templated, robotic or excessively polished.
+
+98. CHECK ACTIONABILITY
+If the purpose involves a response or action, make it clear.
+
+99. CHECK LENGTH
+Meet the requested length without sacrificing critical meaning.
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- meaning is preserved
+- facts are preserved
+- numbers are preserved
+- dates are preserved
+- responsibilities are preserved
+- decision status is preserved
+- uncertainty is preserved
+- conditions are preserved
+- no facts were invented
+- no claims were exaggerated
+- tone matches the request
+- style matches the request
+- formality is consistent
+- technical terminology remains accurate
+- the writing sounds natural
+- the required action is clear
+- unnecessary filler is removed
+
+OUTPUT FORMAT:
+
+1. Adapted Version
+
+2. Alternative Version
+[Optional — only when useful or requested.]
+
+3. Important Meaning / Accuracy Notes
+[Only when relevant.]
+
+4. Style Changes
+[Only when requested.]
+
+IMPORTANT:
+- Change the presentation, not the facts.
+- Preserve meaning, numbers, dates, responsibilities, conditions and uncertainty.
+- Do not invent missing context.
+- Do not create unsupported claims, urgency, authority or social proof.
+- Do not make requirements weaker merely to sound polite.
+- Do not make uncertain statements sound guaranteed merely to sound confident.
+- Keep the final writing natural and appropriate for the intended reader.`;
+
+const steps = [
+  {
+    title: "Choose the audience and purpose",
+    description:
+      "The same message may need very different wording for senior management, a colleague, a customer or a social-media audience.",
+  },
+  {
+    title: "Select tone and style separately",
+    description:
+      "Tone controls how the message feels, while style controls how it is presented. For example, a message can be friendly in tone but concise and executive in style.",
+  },
+  {
+    title: "Protect the original meaning",
+    description:
+      "Changing how something sounds should not change facts, commitments, deadlines, responsibilities, uncertainty or decision status.",
+  },
+  {
+    title: "Review the final action",
+    description:
+      "For emails, requests and business messages, check that the reader can still clearly understand what response or action is required.",
+  },
+];
+
+const example = {
+  input: [
+    "Original: Please send the stock report today. We cannot complete the reconciliation without it.",
+    "Audience: Colleague.",
+    "Target tone: Friendly and professional.",
+    "Style: Concise.",
+  ],
+
+  output: [
+    "Adapted version: Hi, could you please send the stock report today? We need it to complete the reconciliation. Thanks.",
+    "Meaning preserved: The report is still required today.",
+    "Dependency preserved: The reconciliation cannot be completed without the report.",
+    "Tone change: The request is warmer and more conversational without weakening the required timing.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Tone and style are different",
+    description:
+      "A message can be professional but conversational, formal but concise, or friendly but direct. Define both when you need precise control.",
+  },
+  {
+    title: "Don't soften away the requirement",
+    description:
+      "Making a message more polite should not accidentally turn a deadline, instruction or required action into an optional suggestion.",
+  },
+  {
+    title: "Confidence should come from evidence",
+    description:
+      "A confident writing style should make the wording clearer and more decisive, not turn uncertain claims into guaranteed outcomes.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Tone & Style Adapter Prompt | KRIYANO"
+  description="Adapt writing for different audiences, tones and communication styles while preserving the original meaning, facts, responsibilities and conditions."
+>
+  <PromptPage
+    category="WRITING"
+    title="Tone & Style"
+    accentTitle="Adapter."
+    description="Adapt the same message for different audiences, tones and communication styles without changing the underlying facts or intent."
+    meta={[
+      "Free prompt",
+      "Writing style",
+      "Tone adaptation",
+    ]}
+    bestFor={[
+      "Emails",
+      "Business communication",
+      "Customer messages",
+      "Management updates",
+      "Social content",
+      "Professional writing",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Change how the message sounds without changing what it means."
+    introDescription="Control formality, warmth, directness, detail and audience fit while protecting facts, responsibilities, deadlines, conditions and uncertainty."
+    steps={steps}
+    exampleTitle="Make a workplace request friendlier without weakening it."
+    example={example}
+    tipsTitle="Control tone without losing message accuracy."
+    tips={tips}
+    sidebarTitle="Only need a professional version?"
+    sidebarDescription="Use KRIYANO's Professional Tone Rewriter when your main goal is specifically to make existing writing more polished and professional."
+    warningTitle="Style changes can accidentally change meaning"
+    warningText="Always review deadlines, responsibilities, conditions, uncertainty and decision status after adaptation. A friendlier, stronger or more persuasive version should still communicate the same factual message."
+  />
+</BaseLayout>

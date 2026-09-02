@@ -1,0 +1,679 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert cinematographer, camera operator, director of photography and AI video prompt specialist.
+
+TASK:
+Create a precise cinematic camera-and-motion prompt for an AI-generated video.
+
+Focus primarily on:
+- shot size
+- lens feel
+- camera angle
+- camera movement
+- subject movement
+- movement speed
+- parallax
+- focus behaviour
+- depth of field
+- stabilization
+- spatial continuity
+- realistic physical motion
+
+The goal is to create camera direction that feels intentional, achievable and visually coherent.
+
+VIDEO SUBJECT:
+[Person / product / food / environment / action.]
+
+SCENE:
+[Describe the scene.]
+
+VIDEO GOAL:
+[What should the shot communicate?]
+
+DURATION:
+[For example: 5 sec / 8 sec / 10 sec.]
+
+ASPECT RATIO:
+[9:16 / 16:9 / 1:1 / other.]
+
+SHOT SIZE:
+[Extreme close-up / close-up / medium close-up / medium / wide / extreme wide / other.]
+
+CAMERA ANGLE:
+[Eye level / low angle / high angle / top-down / Dutch angle / three-quarter / over-the-shoulder / other.]
+
+LENS FEEL:
+[Wide-angle / normal / portrait compression / telephoto / macro / cinematic anamorphic feel / other.]
+
+CAMERA MOVEMENT:
+[Static / push-in / pull-back / dolly / tracking / pan / tilt / orbit / crane / pedestal / handheld / gimbal / other.]
+
+CAMERA SPEED:
+[Very slow / slow / moderate / fast.]
+
+SUBJECT MOVEMENT:
+[What does the subject do?]
+
+FOCUS TARGET:
+[What should remain sharp?]
+
+FOCUS BEHAVIOUR:
+[Locked focus / continuous focus / focus pull / rack focus / other.]
+
+DEPTH OF FIELD:
+[Shallow / moderate / deep.]
+
+STABILIZATION:
+[Locked tripod / smooth gimbal / controlled handheld / stabilized tracking / other.]
+
+START FRAME:
+[Describe the exact opening composition.]
+
+END FRAME:
+[Describe the exact final composition.]
+
+LIGHTING:
+[Optional.]
+
+VISUAL STYLE:
+[Photorealistic / cinematic / commercial / documentary / food-commercial / editorial / other.]
+
+REFERENCE REQUIREMENTS:
+[Important identity or object details that must remain stable.]
+
+ELEMENTS TO AVOID:
+[Optional.]
+
+SPECIAL REQUIREMENTS:
+[Any additional constraints.]
+
+CINEMATIC CAMERA & MOTION REQUIREMENTS:
+
+1. DEFINE ONE DOMINANT CAMERA IDEA
+The shot should have one primary visual movement.
+
+2. DO NOT STACK CONFLICTING CAMERA MOVES
+Avoid combinations such as:
+Orbit + pan + tilt + zoom + tracking
+unless they are clearly part of one physically achievable move.
+
+3. KEEP CAMERA MOVEMENT ACHIEVABLE
+The movement should make sense for a real camera rig.
+
+4. CHOOSE SHOT SIZE PURPOSEFULLY
+Use:
+Extreme close-up for tiny detail.
+Close-up for emotion or product detail.
+Medium for human action.
+Wide for context and environment.
+
+5. MATCH SHOT SIZE TO STORY PURPOSE
+Do not use a wide shot when the important detail is tiny.
+
+6. DEFINE THE CAMERA ANGLE
+Specify how the camera relates vertically and horizontally to the subject.
+
+7. USE EYE-LEVEL FOR NEUTRALITY
+Useful for:
+Natural dialogue
+Product presentation
+Tutorials
+Straightforward action
+
+8. USE LOW ANGLE PURPOSEFULLY
+It may increase visual dominance or scale.
+
+9. USE HIGH ANGLE PURPOSEFULLY
+It may reveal layout, process or spatial relationships.
+
+10. USE TOP-DOWN ONLY WHEN IT IMPROVES CLARITY
+Especially useful for:
+Food
+Desk work
+Processes
+Products
+Flat-lay compositions
+
+11. AVOID RANDOM DUTCH ANGLES
+Use tilted framing only when intentionally communicating instability or tension.
+
+12. DEFINE LENS FEEL
+Describe the visual perspective rather than relying only on technical millimetres.
+
+13. WIDE-ANGLE FEEL
+Useful for:
+Environment
+Dynamic proximity
+Strong foreground-background separation
+
+14. DO NOT PLACE FACES TOO CLOSE TO EXTREME WIDE LENSES
+This can distort facial proportions.
+
+15. NORMAL-LENS FEEL
+Use for natural perspective.
+
+16. TELEPHOTO FEEL
+Use for:
+Compression
+Portraits
+Isolated subjects
+Elegant product shots
+
+17. MACRO FEEL
+Use for:
+Food texture
+Product detail
+Small mechanisms
+Material surfaces
+
+18. CONTROL PERSPECTIVE
+Do not allow lens changes to randomly alter subject proportions.
+
+19. DEFINE STARTING CAMERA POSITION
+Describe:
+Height
+Distance
+Angle
+Framing
+
+20. DEFINE ENDING CAMERA POSITION
+Give the movement a clear spatial destination.
+
+21. STATIC CAMERA MODE
+Use when subject movement provides enough visual interest.
+
+22. PUSH-IN MODE
+Camera moves physically closer to the subject.
+
+23. PUSH-IN PURPOSE
+Use to:
+Increase intimacy
+Reveal detail
+Emphasize a result
+Focus viewer attention
+
+24. DO NOT CONFUSE PUSH-IN WITH DIGITAL ZOOM
+Specify physical camera movement when cinematic parallax is desired.
+
+25. PULL-BACK MODE
+Camera physically moves away.
+
+26. PULL-BACK PURPOSE
+Use to:
+Reveal context
+Show scale
+End a scene
+Reveal surrounding environment
+
+27. DOLLY MODE
+Use smooth movement on a defined path.
+
+28. TRACKING MODE
+Move with a subject while maintaining controlled framing.
+
+29. DEFINE TRACKING DIRECTION
+Examples:
+Left to right
+Right to left
+Forward
+Backward
+Parallel
+
+30. MAINTAIN SUBJECT SCREEN DIRECTION
+Do not randomly reverse motion.
+
+31. PAN MODE
+Camera rotates horizontally from a fixed position.
+
+32. TILT MODE
+Camera rotates vertically from a fixed position.
+
+33. DISTINGUISH PAN FROM TRACKING
+Pan rotates.
+Tracking translates through space.
+
+34. DISTINGUISH TILT FROM CRANE MOVEMENT
+Tilt rotates vertically.
+Crane physically changes camera height.
+
+35. ORBIT MODE
+Camera moves around a subject.
+
+36. USE ORBIT CAREFULLY
+Large orbit movements require the model to generate unseen sides of the scene.
+
+37. REDUCE ORBIT ANGLE WHEN IDENTITY IS CRITICAL
+Small controlled arcs are safer than full rotations.
+
+38. CRANE / JIB MODE
+Use for:
+Vertical reveals
+Environmental scale
+Elegant transitions
+
+39. PEDESTAL MODE
+Camera moves vertically without tilting.
+
+40. HANDHELD MODE
+Use subtle natural micro-movement.
+
+41. DO NOT EQUATE HANDHELD WITH SHAKY
+Professional handheld should remain watchable.
+
+42. GIMBAL MODE
+Use smooth stabilized movement for:
+Walk-throughs
+Tracking
+Lifestyle scenes
+
+43. DEFINE MOVEMENT SPEED
+Avoid vague "cinematic movement" without speed.
+
+44. VERY SLOW MOVEMENT
+Useful for:
+Luxury
+Food
+Product beauty
+Emotional detail
+
+45. MODERATE MOVEMENT
+Useful for:
+Lifestyle
+Process
+General storytelling
+
+46. FAST MOVEMENT
+Use only when energy or urgency is intentional.
+
+47. MATCH SPEED TO DURATION
+Do not request a large camera move in an unrealistically short clip.
+
+48. CONTROL ACCELERATION
+Where useful, describe:
+Gentle start
+Smooth acceleration
+Gentle stop
+
+49. AVOID SUDDEN CAMERA JERKS
+Unless explicitly intended.
+
+50. USE PARALLAX
+Physical camera movement should create believable foreground/background relative motion.
+
+51. DO NOT FAKE PARALLAX WITH SUBJECT WARPING
+
+52. DEFINE FOREGROUND ELEMENTS
+Foreground objects can improve depth during tracking or push-in shots.
+
+53. KEEP FOREGROUND SECONDARY
+Do not obscure the subject unintentionally.
+
+54. DEFINE SUBJECT MOVEMENT SEPARATELY
+Camera motion and subject motion are different systems.
+
+55. SIMPLE SUBJECT + MOVING CAMERA
+Useful for:
+Product hero shots
+Portraits
+Food presentation
+
+56. MOVING SUBJECT + STATIC CAMERA
+Useful for:
+Process
+Demonstration
+Performance
+Action
+
+57. MOVING SUBJECT + MOVING CAMERA
+Use only when necessary and clearly choreographed.
+
+58. MAINTAIN RELATIVE POSITION
+During tracking, specify whether the subject remains:
+Centered
+Left third
+Right third
+Foreground
+Mid-frame
+
+59. CONTROL HEADROOM
+Avoid excessive empty space above faces.
+
+60. CONTROL LEAD ROOM
+Give moving or looking subjects visual space in their direction of travel or gaze.
+
+61. USE RULE OF THIRDS WHEN HELPFUL
+Do not apply it mechanically.
+
+62. CENTRAL COMPOSITION
+Useful for:
+Symmetry
+Product hero
+Direct-address content
+
+63. ASYMMETRIC COMPOSITION
+Useful when leaving:
+Text space
+Environmental context
+Direction of movement
+
+64. DEFINE FOCUS TARGET
+State exactly what should remain sharp.
+
+65. LOCKED FOCUS MODE
+Useful when subject distance remains stable.
+
+66. CONTINUOUS FOCUS MODE
+Use when subject distance changes.
+
+67. FOCUS PULL MODE
+Shift focus deliberately from one object to another.
+
+68. DEFINE FOCUS-PULL START
+Specify first focus subject.
+
+69. DEFINE FOCUS-PULL END
+Specify final focus subject.
+
+70. DO NOT REQUEST RANDOM FOCUS HUNTING
+
+71. SHALLOW DEPTH OF FIELD
+Use for:
+Portraits
+Products
+Food
+Detail isolation
+
+72. DO NOT MAKE DEPTH TOO SHALLOW FOR IMPORTANT ACTION
+Hands and objects may need to remain readable together.
+
+73. MODERATE DEPTH OF FIELD
+Useful for:
+Process
+People interacting with products
+Tutorials
+
+74. DEEP FOCUS
+Useful for:
+Architecture
+Wide scenes
+Spatial explanations
+
+75. MAINTAIN FOCUS CONTINUITY
+Do not let the subject drift in and out of focus without reason.
+
+76. CONTROL MOTION BLUR
+Fast movement may have natural motion blur, but key subject identity should remain recognizable.
+
+77. DO NOT OVER-BLUR IMPORTANT DETAILS
+
+78. DEFINE STABILIZATION
+State how controlled the camera should feel.
+
+79. TRIPOD / LOCKED MODE
+No camera drift.
+
+80. GIMBAL MODE
+Smooth but not unnaturally robotic.
+
+81. HANDHELD MODE
+Subtle operator movement with realistic inertia.
+
+82. TRACKING-RIG MODE
+Consistent speed and horizon.
+
+83. CONTROL HORIZON
+Avoid accidental tilting.
+
+84. KEEP VERTICAL LINES STABLE
+Especially in:
+Architecture
+Warehouses
+Offices
+Product sets
+
+85. MAINTAIN CAMERA HEIGHT
+Unless vertical movement is intentional.
+
+86. MAINTAIN CAMERA AXIS
+Avoid unexplained jumps around the subject.
+
+87. PRESERVE 180-DEGREE SPATIAL LOGIC
+When multiple people or directions are involved.
+
+88. PRESERVE GAZE DIRECTION
+Subjects should continue looking toward the correct object or person.
+
+89. PRESERVE OBJECT POSITION
+Camera movement should not cause props to relocate.
+
+90. PROTECT SUBJECT IDENTITY
+Do not allow:
+Face morphing
+Body distortion
+Product redesign
+Food transformation
+
+91. CONTROL ENVIRONMENTAL WARPING
+Straight lines and surfaces should remain stable.
+
+92. AVOID FLOATING CAMERA PHYSICS
+The move should feel supported by:
+Tripod
+Dolly
+Gimbal
+Crane
+Handheld operator
+
+93. USE DRONE-LIKE MOVEMENT ONLY WHEN APPROPRIATE
+
+94. DO NOT USE IMPOSSIBLE WALL OR OBJECT PENETRATION
+
+95. DO NOT PASS THE CAMERA THROUGH SOLID OBJECTS
+Unless explicitly creating a stylized effect.
+
+96. CREATE TARGETED NEGATIVE CONSTRAINTS
+Examples:
+No camera jump
+No lens warping
+No face distortion
+No subject duplication
+No horizon drift
+No random focus pulsing
+No impossible orbit
+No background bending
+
+97. CREATE A CAMERA PATH DESCRIPTION
+Explain where the camera starts, how it travels and where it ends.
+
+98. CREATE A SUBJECT MOTION DESCRIPTION
+Explain what the subject does independently of the camera.
+
+99. CREATE A FOCUS & DEPTH PLAN
+Define sharpness priorities throughout the shot.
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- shot purpose is clear
+- shot size suits the subject
+- angle is intentional
+- lens feel is appropriate
+- camera movement is physically achievable
+- only one dominant move is used
+- camera speed fits the duration
+- start position is defined
+- end position is defined
+- subject movement is separate from camera movement
+- screen direction is preserved
+- framing remains controlled
+- focus target is clear
+- depth of field supports the action
+- stabilization style is consistent
+- horizon remains stable
+- parallax is believable
+- subject identity is preserved
+- environment does not warp
+- motion does not pass through solid objects
+- final composition feels intentional
+
+OUTPUT FORMAT:
+
+1. SHOT INTENT
+Explain what the camera should make the viewer notice or feel.
+
+2. STARTING COMPOSITION
+Specify:
+Shot size
+Camera height
+Angle
+Subject position
+Foreground
+Background
+
+3. CAMERA PATH
+Describe:
+Movement type
+Direction
+Distance / scale of movement
+Speed
+Acceleration / deceleration
+
+4. SUBJECT MOTION
+Describe what the subject does while the camera moves.
+
+5. LENS & PERSPECTIVE PLAN
+Specify:
+Lens feel
+Perspective
+Compression
+Parallax behaviour
+
+6. FOCUS & DEPTH PLAN
+Specify:
+Focus target
+Focus behaviour
+Depth of field
+
+7. STABILIZATION PLAN
+Specify the physical feel of the camera rig.
+
+8. FULL CINEMATIC CAMERA PROMPT
+Provide one polished model-ready video prompt.
+
+9. NEGATIVE / PROTECTION INSTRUCTIONS
+List only likely motion and camera failures.
+
+10. FINAL FRAME
+Describe the exact ending composition.
+
+IMPORTANT:
+- Use one dominant camera movement.
+- Distinguish camera movement from subject movement.
+- Keep the motion physically achievable.
+- Define start and end positions.
+- Preserve perspective, focus and spatial continuity.
+- Avoid conflicting cinematic instructions.
+- Protect character, product and environment identity while the camera moves.`;
+
+const steps = [
+  {
+    title: "Decide what the camera must communicate",
+    description:
+      "Choose whether the shot should reveal context, emphasize detail, follow action, create intimacy or showcase scale before selecting a camera movement.",
+  },
+  {
+    title: "Choose one dominant move",
+    description:
+      "A controlled push-in, track, pan or orbit usually produces stronger results than stacking several incompatible camera instructions into one short clip.",
+  },
+  {
+    title: "Separate subject motion from camera motion",
+    description:
+      "Describe what the subject does independently, then explain how the camera reacts or moves around that action.",
+  },
+  {
+    title: "Lock focus and final framing",
+    description:
+      "Specify what remains sharp and where the camera should finish so the shot has a clear visual destination.",
+  },
+];
+
+const example = {
+  input: [
+    "Subject: Premium coffee cup on a wooden café table.",
+    "Duration: 6 seconds.",
+    "Shot: Close-up product beauty shot.",
+    "Camera movement: Slow left-to-right tracking move.",
+    "Lens feel: Mild telephoto compression.",
+    "Focus: Coffee cup remains sharp.",
+    "Background: Warm café interior with soft bokeh.",
+  ],
+
+  output: [
+    "SHOT INTENT: Create a premium product reveal while using gentle parallax in the café background to add depth.",
+    "START: Close-up three-quarter view with the cup slightly left of centre and the softly blurred café visible behind it.",
+    "CAMERA PATH: Move slowly and smoothly from left to right on a short stabilized track while maintaining nearly constant distance from the cup.",
+    "FOCUS: Lock focus on the front rim and logo area of the cup; keep background softly defocused.",
+    "END: Finish with the cup slightly right of centre, retaining the same scale and lighting.",
+    "PROTECTION: No digital zoom, no cup deformation, no random rotation, no horizon drift, no focus pulsing and no background warping.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Camera verbs mean different things",
+    description:
+      "A pan rotates the camera, while a tracking move physically changes its position. Using precise motion language helps reduce unpredictable results.",
+  },
+  {
+    title: "Large camera moves create more continuity risk",
+    description:
+      "The farther a camera travels around a character or product, the more unseen geometry the model must invent. Smaller controlled moves are often more reliable.",
+  },
+  {
+    title: "Focus is part of the storytelling",
+    description:
+      "Decide what should be sharp and when. Random focus changes can make even otherwise good AI footage feel artificial.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Cinematic Camera & Motion Prompt | KRIYANO"
+  description="Create precise AI video camera prompts with better shot size, lens feel, tracking, push-ins, focus control, depth of field and realistic motion."
+>
+  <PromptPage
+    category="VIDEO GENERATION"
+    title="Cinematic Camera & Motion"
+    accentTitle="Prompt."
+    description="Design controlled cinematic camera movement with clearer shot size, lens perspective, focus, stabilization, parallax and physically achievable motion."
+    meta={[
+      "Free prompt",
+      "Cinematography",
+      "Camera motion",
+    ]}
+    bestFor={[
+      "Cinematic AI video",
+      "Product shots",
+      "Food videos",
+      "Character scenes",
+      "Commercials",
+      "Professional B-roll",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Move the camera for a reason."
+    introDescription="Choose one camera idea, define its physical path, separate it from subject motion and control focus, framing and final position for more coherent AI video."
+    steps={steps}
+    exampleTitle="Turn a simple product shot into a controlled cinematic track."
+    example={example}
+    tipsTitle="Use real cinematography language without over-directing the model."
+    tips={tips}
+    sidebarTitle="Planning several scenes?"
+    sidebarDescription="Use KRIYANO's Multi-Scene Video Prompt when you need camera progression, continuity and editing decisions across a complete sequence rather than one individual shot."
+    warningTitle="Complex camera language can reduce generation stability"
+    warningText="AI video models may interpret overlapping movement instructions unpredictably. Review perspective, horizon, focus, subject identity and background geometry throughout the complete clip, especially with tracking and orbit shots."
+  />
+</BaseLayout>

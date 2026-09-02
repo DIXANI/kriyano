@@ -1,0 +1,1242 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const learningPaths = [
+  {
+    number: "01",
+    level: "START HERE",
+    title: "AI Fundamentals",
+    description:
+      "Understand what generative AI can do, where it struggles and how to use it realistically.",
+    lessons: [
+      "What Generative AI Actually Does",
+      "What AI Is Good At",
+      "Where AI Can Go Wrong",
+      "AI vs Human Judgment",
+    ],
+  },
+  {
+    number: "02",
+    level: "PRACTICAL",
+    title: "Prompting Fundamentals",
+    description:
+      "Learn how clear instructions, context and constraints can produce more useful AI responses.",
+    lessons: [
+      "Anatomy of a Good Prompt",
+      "How to Give AI Better Context",
+      "Using Roles, Constraints & Examples",
+      "Improving a Weak Prompt",
+    ],
+  },
+  {
+    number: "03",
+    level: "WORKFLOW",
+    title: "Using AI for Real Work",
+    description:
+      "Move beyond one-off questions and build AI into practical, repeatable workflows.",
+    lessons: [
+      "Choosing Tasks for AI",
+      "AI-Assisted Workflows",
+      "Human Review & Quality Control",
+      "Building Reusable Prompts",
+    ],
+  },
+  {
+    number: "04",
+    level: "VERIFY",
+    title: "Accuracy & Research",
+    description:
+      "Learn why AI answers need verification and how to evaluate sources, claims and research.",
+    lessons: [
+      "Why AI Can Produce Wrong Answers",
+      "How to Fact-Check AI Output",
+      "Evaluating Sources",
+      "AI-Assisted Research",
+    ],
+  },
+  {
+    number: "05",
+    level: "RESPONSIBLE",
+    title: "Safe & Responsible Use",
+    description:
+      "Understand privacy, sensitive information, copyright concerns and responsible workplace use.",
+    lessons: [
+      "What Not to Share With AI",
+      "AI & Workplace Information",
+      "Copyright & AI Content",
+      "Responsible AI Use",
+    ],
+  },
+  {
+    number: "06",
+    level: "ADVANCE",
+    title: "Better AI Systems",
+    description:
+      "Turn useful prompting techniques into repeatable systems for work, business and content creation.",
+    lessons: [
+      "Creating Prompt Templates",
+      "Building AI Workflows",
+      "Combining Multiple AI Tasks",
+      "Reviewing & Improving Your System",
+    ],
+  },
+];
+
+const promptFormula = [
+  {
+    label: "TASK",
+    text: "What exactly should AI do?",
+  },
+  {
+    label: "CONTEXT",
+    text: "What information does it need?",
+  },
+  {
+    label: "OUTPUT",
+    text: "What should the result look like?",
+  },
+  {
+    label: "CONSTRAINTS",
+    text: "What rules or limits should it follow?",
+  },
+  {
+    label: "REVIEW",
+    text: "What must you verify before using it?",
+  },
+];
+
+const principles = [
+  {
+    number: "01",
+    title: "Be specific",
+    description:
+      "Clear tasks and useful context usually produce better results than vague instructions.",
+  },
+  {
+    number: "02",
+    title: "Don't assume accuracy",
+    description:
+      "A confident AI response can still contain incorrect facts, weak reasoning or invented details.",
+  },
+  {
+    number: "03",
+    title: "Protect sensitive information",
+    description:
+      "Think carefully before entering confidential, personal or company information into an AI service.",
+  },
+  {
+    number: "04",
+    title: "Keep human judgment",
+    description:
+      "Use AI to assist thinking and execution—not to remove responsibility for important decisions.",
+  },
+];
+
+const quickResources = [
+  {
+    label: "Build a better prompt",
+    description:
+      "Turn a rough task into a structured prompt.",
+    href: "/tools/prompt-builder/",
+  },
+  {
+    label: "Browse the Prompt Library",
+    description:
+      "Find ready-to-use prompts for practical tasks.",
+    href: "/prompts/",
+  },
+  {
+    label: "AI for Work",
+    description:
+      "Explore AI resources for everyday professional work.",
+    href: "/ai-for-work/",
+  },
+  {
+    label: "AI for Business",
+    description:
+      "Explore planning, research and operational use cases.",
+    href: "/ai-for-business/",
+  },
+];
+---
+
+<BaseLayout
+  title="Learn Practical AI | KRIYANO"
+  description="Learn how to use AI more effectively for real work, including prompting, workflows, verification, research and responsible AI use."
+>
+  <section class="learn-hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="section-kicker">LEARN PRACTICAL AI</div>
+
+        <h1>
+          Understand AI.
+          <span>Then put it to work.</span>
+        </h1>
+
+        <p>
+          Practical guides for using AI more effectively—from writing better
+          prompts to building workflows, checking accuracy and using AI
+          responsibly.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#learning-paths" class="button button-primary">
+            Start learning
+          </a>
+
+          <a href="/tools/prompt-builder/" class="secondary-link">
+            Try the Prompt Builder ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="learning-map">
+        <div class="map-header">
+          <span>KRIYANO LEARNING PATH</span>
+          <span class="map-status">START → APPLY</span>
+        </div>
+
+        <div class="map-body">
+          <div class="map-step active">
+            <span>01</span>
+            <div>
+              <strong>UNDERSTAND</strong>
+              <p>Know what AI can and cannot do.</p>
+            </div>
+          </div>
+
+          <div class="map-connector"></div>
+
+          <div class="map-step">
+            <span>02</span>
+            <div>
+              <strong>INSTRUCT</strong>
+              <p>Give AI clearer tasks and context.</p>
+            </div>
+          </div>
+
+          <div class="map-connector"></div>
+
+          <div class="map-step">
+            <span>03</span>
+            <div>
+              <strong>VERIFY</strong>
+              <p>Check important facts and outputs.</p>
+            </div>
+          </div>
+
+          <div class="map-connector"></div>
+
+          <div class="map-step">
+            <span>04</span>
+            <div>
+              <strong>APPLY</strong>
+              <p>Build AI into useful workflows.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-footer">
+          <span>PRINCIPLE</span>
+          <strong>Learn → Test → Review → Improve</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="learn-strip">
+    <div class="container strip-grid">
+      <div>
+        <strong>Beginner-friendly</strong>
+        <span>Start without technical knowledge</span>
+      </div>
+
+      <div>
+        <strong>Practical</strong>
+        <span>Focused on real tasks</span>
+      </div>
+
+      <div>
+        <strong>Responsible</strong>
+        <span>Accuracy, privacy & review</span>
+      </div>
+
+      <div>
+        <strong>Action-oriented</strong>
+        <span>Learn something you can use</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="learning-paths">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Learning paths</div>
+
+          <h2>
+            Learn the skills
+            behind useful AI.
+          </h2>
+        </div>
+
+        <p>
+          Start with the fundamentals and progress toward practical workflows.
+          You do not need programming knowledge to use these concepts.
+        </p>
+      </div>
+
+      <div class="learning-grid">
+        {
+          learningPaths.map((path) => (
+            <article class="learning-card">
+              <div class="card-top">
+                <span class="card-number">{path.number}</span>
+                <span class="level">{path.level}</span>
+              </div>
+
+              <h3>{path.title}</h3>
+
+              <p>{path.description}</p>
+
+              <div class="lesson-list">
+                {
+                  path.lessons.map((lesson) => (
+                    <div>
+                      <span>→</span>
+                      <span>{lesson}</span>
+                    </div>
+                  ))
+                }
+              </div>
+
+              <div class="coming-label">
+                Guides coming progressively
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="formula-section">
+    <div class="container">
+      <div class="formula-layout">
+        <div class="formula-copy">
+          <div class="section-kicker">A useful starting framework</div>
+
+          <h2>
+            Better prompts begin
+            before you start typing.
+          </h2>
+
+          <p>
+            You do not need a complicated formula for every prompt. But for
+            important tasks, these five questions can dramatically improve the
+            quality and usefulness of the response.
+          </p>
+
+          <a href="/tools/prompt-builder/" class="secondary-link">
+            Build one with KRIYANO ↗
+          </a>
+        </div>
+
+        <div class="formula-stack">
+          {
+            promptFormula.map((item, index) => (
+              <div class="formula-row">
+                <span class="formula-number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+
+                <div>
+                  <strong>{item.label}</strong>
+                  <p>{item.text}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="example-section">
+    <div class="container">
+      <div class="example-head">
+        <div>
+          <div class="section-kicker">Prompt transformation</div>
+
+          <h2>
+            Same AI.
+            Better instruction.
+          </h2>
+        </div>
+
+        <p>
+          One of the easiest ways to improve AI output is to replace a vague
+          request with a clear task, context and expected result.
+        </p>
+      </div>
+
+      <div class="comparison-grid">
+        <article class="comparison-card weak">
+          <div class="comparison-label">
+            <span>WEAK PROMPT</span>
+            <span>01</span>
+          </div>
+
+          <blockquote>
+            "Write an email about the stock problem."
+          </blockquote>
+
+          <div class="problem-list">
+            <span>Missing audience</span>
+            <span>Missing context</span>
+            <span>Missing objective</span>
+            <span>Missing output requirements</span>
+          </div>
+        </article>
+
+        <article class="comparison-card strong">
+          <div class="comparison-label">
+            <span>IMPROVED PROMPT</span>
+            <span>02</span>
+          </div>
+
+          <blockquote>
+            "Write a concise professional email to the warehouse manager
+            reporting a stock discrepancy. Explain that the physical count is
+            24 units lower than the system quantity, state that transaction
+            history is being reviewed, and request approval for a recount
+            before any adjustment is made."
+          </blockquote>
+
+          <div class="strength-list">
+            <span>✓ Clear task</span>
+            <span>✓ Relevant context</span>
+            <span>✓ Defined audience</span>
+            <span>✓ Expected action</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="principles-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Four rules worth remembering</div>
+
+          <h2>
+            Useful AI still
+            needs human judgment.
+          </h2>
+        </div>
+
+        <p>
+          AI can save time and improve structure, but responsible use means
+          knowing where human checking and decision-making still matter.
+        </p>
+      </div>
+
+      <div class="principles-grid">
+        {
+          principles.map((principle) => (
+            <article class="principle-card">
+              <span>{principle.number}</span>
+
+              <h3>{principle.title}</h3>
+
+              <p>{principle.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="resources-section">
+    <div class="container">
+      <div class="resources-layout">
+        <div class="resources-copy">
+          <div class="section-kicker">Learn by doing</div>
+
+          <h2>
+            Put the lesson
+            into practice.
+          </h2>
+
+          <p>
+            Learning AI becomes easier when you apply each concept to a real
+            task. These KRIYANO resources give you somewhere practical to start.
+          </p>
+        </div>
+
+        <div class="resource-links">
+          {
+            quickResources.map((resource) => (
+              <a href={resource.href} class="resource-row">
+                <div>
+                  <strong>{resource.label}</strong>
+                  <p>{resource.description}</p>
+                </div>
+
+                <span>↗</span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="learn-cta">
+    <div class="container">
+      <div class="cta-box">
+        <div>
+          <div class="section-kicker">Ready to apply it?</div>
+
+          <h2>
+            Start with a real task.
+          </h2>
+
+          <p>
+            Choose something you actually need to accomplish and use KRIYANO
+            to turn it into a clearer, more structured AI prompt.
+          </p>
+        </div>
+
+        <a href="/tools/prompt-builder/" class="button button-primary">
+          Open Prompt Builder
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .learn-hero {
+    padding: 105px 0 90px;
+
+    border-bottom: 1px solid var(--line);
+
+    background:
+      radial-gradient(
+        circle at 80% 22%,
+        rgba(183, 255, 74, 0.08),
+        transparent 28%
+      ),
+      radial-gradient(
+        circle at 16% 5%,
+        rgba(77, 226, 197, 0.07),
+        transparent 25%
+      );
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.08fr 0.92fr;
+
+    gap: 76px;
+
+    align-items: center;
+  }
+
+  .hero-copy h1 {
+    margin-top: 15px;
+
+    font-size: clamp(3.5rem, 7vw, 6.8rem);
+    line-height: 0.93;
+
+    letter-spacing: -0.065em;
+  }
+
+  .hero-copy h1 span {
+    display: block;
+
+    color: var(--lime);
+  }
+
+  .hero-copy > p {
+    max-width: 680px;
+
+    margin-top: 26px;
+
+    color: var(--muted);
+
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 22px;
+
+    margin-top: 34px;
+  }
+
+  .secondary-link {
+    color: var(--lime);
+
+    font-size: 0.82rem;
+    font-weight: 750;
+  }
+
+  .learning-map {
+    overflow: hidden;
+
+    border: 1px solid rgba(183, 255, 74, 0.15);
+    border-radius: 21px;
+
+    background: var(--surface);
+
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.23);
+  }
+
+  .map-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 14px 18px;
+
+    border-bottom: 1px solid var(--line);
+
+    color: var(--muted);
+
+    font-size: 0.62rem;
+    font-weight: 800;
+
+    letter-spacing: 0.09em;
+  }
+
+  .map-status {
+    color: var(--lime);
+  }
+
+  .map-body {
+    padding: 23px;
+  }
+
+  .map-step {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+
+    gap: 16px;
+
+    align-items: start;
+  }
+
+  .map-step > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid var(--line);
+    border-radius: 50%;
+
+    color: var(--muted);
+
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .map-step.active > span {
+    border-color: rgba(183, 255, 74, 0.35);
+
+    background: rgba(183, 255, 74, 0.08);
+
+    color: var(--lime);
+  }
+
+  .map-step strong {
+    font-size: 0.79rem;
+  }
+
+  .map-step p {
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 0.74rem;
+    line-height: 1.5;
+  }
+
+  .map-connector {
+    width: 1px;
+    height: 25px;
+
+    margin: 5px 0 5px 17px;
+
+    background: var(--line);
+  }
+
+  .map-footer {
+    padding: 18px 22px;
+
+    border-top: 1px solid var(--line);
+
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .map-footer span {
+    display: block;
+
+    color: var(--lime);
+
+    font-size: 0.6rem;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+  }
+
+  .map-footer strong {
+    display: block;
+
+    margin-top: 6px;
+
+    font-size: 0.83rem;
+  }
+
+  .learn-strip {
+    border-bottom: 1px solid var(--line);
+
+    background: rgba(255, 255, 255, 0.018);
+  }
+
+  .strip-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .strip-grid > div {
+    padding: 24px 20px;
+
+    border-right: 1px solid var(--line);
+  }
+
+  .strip-grid > div:last-child {
+    border-right: 0;
+  }
+
+  .strip-grid strong {
+    display: block;
+
+    font-size: 0.9rem;
+  }
+
+  .strip-grid span {
+    color: var(--muted);
+
+    font-size: 0.74rem;
+  }
+
+  .section-head,
+  .example-head {
+    display: grid;
+    grid-template-columns: 1.08fr 0.92fr;
+
+    gap: 70px;
+
+    align-items: end;
+
+    margin-bottom: 48px;
+  }
+
+  .section-head h2,
+  .example-head h2 {
+    max-width: 760px;
+
+    margin-top: 13px;
+
+    font-size: clamp(2.6rem, 5vw, 4.5rem);
+    line-height: 0.98;
+
+    letter-spacing: -0.055em;
+  }
+
+  .section-head > p,
+  .example-head > p {
+    max-width: 500px;
+
+    color: var(--muted);
+
+    line-height: 1.75;
+  }
+
+  .learning-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 17px;
+  }
+
+  .learning-card {
+    padding: 27px;
+
+    border: 1px solid var(--line);
+    border-radius: 19px;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.024),
+        transparent
+      ),
+      var(--surface);
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-number {
+    color: var(--lime);
+
+    font-size: 0.68rem;
+    font-weight: 800;
+  }
+
+  .level {
+    color: var(--muted);
+
+    font-size: 0.6rem;
+    font-weight: 800;
+
+    letter-spacing: 0.09em;
+  }
+
+  .learning-card h3 {
+    margin-top: 32px;
+
+    font-size: 1.55rem;
+
+    letter-spacing: -0.035em;
+  }
+
+  .learning-card > p {
+    max-width: 540px;
+
+    margin-top: 12px;
+
+    color: var(--muted);
+
+    font-size: 0.86rem;
+    line-height: 1.65;
+  }
+
+  .lesson-list {
+    margin-top: 24px;
+
+    border-top: 1px solid var(--line);
+  }
+
+  .lesson-list > div {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+
+    gap: 8px;
+
+    padding: 11px 0;
+
+    border-bottom: 1px solid var(--line);
+
+    font-size: 0.77rem;
+  }
+
+  .lesson-list > div span:first-child {
+    color: var(--mint);
+  }
+
+  .coming-label {
+    display: inline-block;
+
+    margin-top: 20px;
+    padding: 7px 10px;
+
+    border: 1px solid var(--line);
+    border-radius: 7px;
+
+    color: var(--muted);
+
+    font-size: 0.62rem;
+    font-weight: 700;
+  }
+
+  .formula-section {
+    padding: 100px 0;
+
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+
+    background: var(--bg-soft);
+  }
+
+  .formula-layout {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+
+    gap: 80px;
+
+    align-items: center;
+  }
+
+  .formula-copy h2 {
+    margin-top: 13px;
+
+    font-size: clamp(2.5rem, 5vw, 4.2rem);
+    line-height: 1;
+
+    letter-spacing: -0.05em;
+  }
+
+  .formula-copy > p {
+    max-width: 560px;
+
+    margin-top: 18px;
+
+    color: var(--muted);
+
+    line-height: 1.75;
+  }
+
+  .formula-copy .secondary-link {
+    display: inline-block;
+
+    margin-top: 24px;
+  }
+
+  .formula-stack {
+    border-top: 1px solid var(--line);
+  }
+
+  .formula-row {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+
+    gap: 18px;
+
+    padding: 18px 0;
+
+    border-bottom: 1px solid var(--line);
+  }
+
+  .formula-number {
+    color: var(--lime);
+
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .formula-row strong {
+    font-size: 0.8rem;
+  }
+
+  .formula-row p {
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 0.76rem;
+  }
+
+  .example-section {
+    padding: 100px 0;
+  }
+
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 17px;
+  }
+
+  .comparison-card {
+    padding: 28px;
+
+    border: 1px solid var(--line);
+    border-radius: 18px;
+
+    background: var(--surface);
+  }
+
+  .comparison-card.strong {
+    border-color: rgba(183, 255, 74, 0.2);
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(183, 255, 74, 0.035),
+        transparent 50%
+      ),
+      var(--surface);
+  }
+
+  .comparison-label {
+    display: flex;
+    justify-content: space-between;
+
+    color: var(--muted);
+
+    font-size: 0.62rem;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+  }
+
+  .strong .comparison-label {
+    color: var(--lime);
+  }
+
+  blockquote {
+    min-height: 145px;
+
+    margin: 34px 0 25px;
+
+    color: var(--text);
+
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .problem-list,
+  .strength-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 7px;
+  }
+
+  .problem-list span,
+  .strength-list span {
+    padding: 6px 9px;
+
+    border: 1px solid var(--line);
+    border-radius: 6px;
+
+    color: var(--muted);
+
+    font-size: 0.66rem;
+  }
+
+  .strength-list span {
+    color: var(--lime);
+  }
+
+  .principles-section {
+    padding: 100px 0;
+
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+
+    background: var(--bg-soft);
+  }
+
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 14px;
+  }
+
+  .principle-card {
+    min-height: 235px;
+
+    padding: 22px;
+
+    border: 1px solid var(--line);
+    border-radius: 17px;
+
+    background: var(--surface);
+  }
+
+  .principle-card > span {
+    color: var(--lime);
+
+    font-size: 0.65rem;
+    font-weight: 800;
+  }
+
+  .principle-card h3 {
+    margin-top: 47px;
+
+    font-size: 1.08rem;
+  }
+
+  .principle-card p {
+    margin-top: 10px;
+
+    color: var(--muted);
+
+    font-size: 0.79rem;
+    line-height: 1.65;
+  }
+
+  .resources-section {
+    padding: 100px 0;
+  }
+
+  .resources-layout {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+
+    gap: 80px;
+  }
+
+  .resources-copy h2 {
+    margin-top: 13px;
+
+    font-size: clamp(2.5rem, 5vw, 4.2rem);
+    line-height: 1;
+
+    letter-spacing: -0.05em;
+  }
+
+  .resources-copy p {
+    max-width: 540px;
+
+    margin-top: 18px;
+
+    color: var(--muted);
+
+    line-height: 1.75;
+  }
+
+  .resource-links {
+    border-top: 1px solid var(--line);
+  }
+
+  .resource-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    padding: 19px 0;
+
+    border-bottom: 1px solid var(--line);
+
+    color: var(--text);
+  }
+
+  .resource-row strong {
+    font-size: 0.87rem;
+  }
+
+  .resource-row p {
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 0.74rem;
+  }
+
+  .resource-row > span {
+    color: var(--lime);
+  }
+
+  .learn-cta {
+    padding: 0 0 100px;
+  }
+
+  .cta-box {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+
+    gap: 50px;
+
+    padding: 48px;
+
+    border: 1px solid rgba(183, 255, 74, 0.15);
+    border-radius: 23px;
+
+    background: var(--surface);
+  }
+
+  .cta-box h2 {
+    margin-top: 12px;
+
+    font-size: clamp(2.3rem, 5vw, 4rem);
+    line-height: 1;
+
+    letter-spacing: -0.05em;
+  }
+
+  .cta-box p {
+    max-width: 650px;
+
+    margin-top: 16px;
+
+    color: var(--muted);
+
+    line-height: 1.7;
+  }
+
+  @media (max-width: 950px) {
+    .hero-grid,
+    .section-head,
+    .example-head,
+    .formula-layout,
+    .resources-layout {
+      grid-template-columns: 1fr;
+
+      gap: 38px;
+    }
+
+    .principles-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cta-box {
+      flex-direction: column;
+
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .learn-hero {
+      padding: 72px 0 62px;
+    }
+
+    .strip-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .strip-grid > div:nth-child(2) {
+      border-right: 0;
+    }
+
+    .strip-grid > div:nth-child(-n + 2) {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .learning-grid,
+    .comparison-grid,
+    .principles-grid {
+      grid-template-columns: 1fr;
+    }
+
+    blockquote {
+      min-height: auto;
+    }
+
+    .cta-box {
+      padding: 32px 24px;
+    }
+  }
+</style>

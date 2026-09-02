@@ -1,0 +1,385 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as a careful fact-checking researcher and evidence analyst.
+
+TASK:
+Evaluate the factual accuracy of the claim or content provided below.
+
+CLAIM / CONTENT TO CHECK:
+[Paste the claim, statement, statistic, quote, paragraph or AI-generated answer.]
+
+CONTEXT:
+[Explain where the claim appeared and any relevant background.]
+
+SOURCE OF THE CLAIM:
+[Website, social media post, article, video, AI response, person, report, etc.]
+
+DATE OF CLAIM:
+[Date if known.]
+
+LOCATION / MARKET:
+[Country, region or jurisdiction if relevant.]
+
+REASON FOR CHECKING:
+[Example: article, business decision, social media post, research, presentation, personal verification.]
+
+AVAILABLE SOURCES:
+[Paste any sources or evidence already available.]
+
+FACT-CHECKING REQUIREMENTS:
+
+1. EXTRACT THE CLAIMS
+Break the content into individual factual claims that can reasonably be checked.
+
+Separate:
+- factual claims
+- opinions
+- predictions
+- interpretations
+- recommendations
+
+Do not attempt to fact-check subjective opinions as though they were factual statements.
+
+2. IDENTIFY CHECKABLE ELEMENTS
+For each factual claim identify what needs verification.
+
+Examples:
+- person
+- organization
+- event
+- date
+- number
+- statistic
+- location
+- quote
+- law
+- scientific finding
+- product feature
+- price
+- historical event
+
+3. CHECK THE ORIGINAL SOURCE
+Whenever possible, identify the primary or original source.
+
+Examples:
+- government database
+- legislation
+- regulator
+- company announcement
+- financial filing
+- original research paper
+- official statistics
+- court document
+- original interview
+- full speech or transcript
+
+Prefer the original source over articles repeating the information.
+
+4. VERIFY WITH INDEPENDENT EVIDENCE
+For important claims, look for credible independent confirmation.
+
+Do not treat several websites repeating information from the same original source as independent confirmation.
+
+5. CHECK DATES
+Verify:
+- publication date
+- event date
+- data collection period
+- effective date
+- whether the information is still current
+
+Watch for old information being presented as current.
+
+6. CHECK NUMBERS & STATISTICS
+For numerical claims verify:
+- original number
+- units
+- percentage vs percentage-point differences
+- sample size
+- geographic scope
+- time period
+- denominator
+- calculation method
+- whether context has been removed
+
+Recalculate simple derived figures when useful.
+
+7. CHECK QUOTES
+For quotations:
+- locate the original source when possible
+- verify the wording
+- check surrounding context
+- determine whether the quote has been shortened in a misleading way
+- verify who actually said it
+
+Do not invent quotations or missing context.
+
+8. CHECK IMAGES / VIDEO CLAIMS
+If a claim relies on visual media, consider:
+- original upload
+- publication date
+- location
+- whether the image or video predates the claimed event
+- whether the caption accurately describes the content
+- whether editing or cropping could change the meaning
+
+Do not claim that media is AI-generated or manipulated without sufficient evidence.
+
+9. CHECK CAUSAL CLAIMS
+If the statement says that one thing caused another, determine whether the evidence establishes:
+- causation
+- correlation
+- association only
+- no demonstrated relationship
+
+Do not convert correlation into causation.
+
+10. CHECK COMPARISONS
+For claims such as:
+"largest"
+"cheapest"
+"best"
+"fastest"
+"most popular"
+"number one"
+
+Identify:
+- comparison group
+- measurement
+- geographic scope
+- time period
+- evidence source
+
+If these are undefined, flag the claim.
+
+11. CHECK CURRENT INFORMATION
+For topics that change frequently, such as:
+- prices
+- laws
+- regulations
+- political positions
+- company leadership
+- product features
+- market statistics
+- employment data
+- exchange rates
+- technology
+
+Require current evidence.
+
+12. DETECT MISSING CONTEXT
+Look for technically correct statements that may still mislead because important context is missing.
+
+Examples:
+- selective time periods
+- omitted comparison groups
+- cherry-picked statistics
+- unusual denominators
+- missing qualifications
+- misleading headlines
+
+13. IDENTIFY SOURCE PROBLEMS
+Check for:
+- circular reporting
+- anonymous unsupported claims
+- citation chains with no original source
+- outdated sources
+- promotional sources
+- fabricated-looking references
+- incorrectly attributed studies
+- unverifiable statistics
+
+14. HANDLE CONFLICTING EVIDENCE
+If credible sources disagree:
+- explain the disagreement
+- compare source quality
+- compare methodology
+- compare dates
+- identify what remains unresolved
+
+Do not force a definitive verdict when the evidence does not support one.
+
+15. FACT-CHECK VERDICT
+Classify each important claim as one of:
+
+VERIFIED
+Strong evidence supports the claim as stated.
+
+MOSTLY TRUE
+The central claim is supported but requires minor qualification.
+
+MISLEADING
+The claim contains factual elements but creates an inaccurate impression because of missing context, wording or comparison.
+
+MOSTLY FALSE
+A small part may be correct, but the main claim is contradicted by evidence.
+
+FALSE
+Reliable evidence directly contradicts the claim.
+
+UNSUPPORTED
+There is not sufficient reliable evidence supporting the claim.
+
+OUTDATED
+The claim may previously have been accurate but is no longer current.
+
+UNVERIFIABLE
+Available evidence is insufficient to reach a responsible conclusion.
+
+16. CONFIDENCE
+For each verdict give:
+- High confidence
+- Medium confidence
+- Low confidence
+
+Explain significant uncertainty.
+
+17. CORRECTION
+If a claim is inaccurate or misleading, provide a corrected version using the strongest available evidence.
+
+Do not exaggerate beyond what the evidence establishes.
+
+18. SOURCE TRANSPARENCY
+For important findings identify:
+- source
+- source type
+- publication date
+- why it is relevant
+
+Prioritize primary and authoritative evidence.
+
+19. FINAL SUMMARY
+Summarize:
+- overall verdict
+- strongest supporting evidence
+- strongest contradictory evidence
+- missing context
+- unresolved questions
+- corrected claim if needed
+
+OUTPUT FORMAT:
+
+1. Claim(s) Identified
+2. What Needs Verification
+3. Evidence Review
+4. Source Quality
+5. Date / Recency Check
+6. Numerical or Statistical Check
+7. Context Check
+8. Conflicting Evidence
+9. Verdict for Each Claim
+10. Confidence Level
+11. Corrected Version
+12. Information Gaps
+13. Final Fact-Check Summary
+
+IMPORTANT:
+- Never invent evidence, citations, sources, quotes or statistics.
+- If you do not have access to current information, say so clearly.
+- Do not claim that something has been verified unless appropriate evidence has actually been examined.
+- Distinguish absence of evidence from evidence that something is false.
+- Prefer original and authoritative sources.
+- Use independent corroboration for important claims when appropriate.
+- Separate factual accuracy from opinion.
+- Clearly identify uncertainty.
+- Do not change the strength of a claim beyond what the evidence supports.`;
+
+const steps = [
+  {
+    title: "Isolate the exact claim",
+    description:
+      "Fact-checking works best when broad statements are separated into specific claims about dates, numbers, events, people or other verifiable details.",
+  },
+  {
+    title: "Find where the information originated",
+    description:
+      "Trace statistics, quotations and reports back to their primary source instead of relying only on websites or posts repeating them.",
+  },
+  {
+    title: "Check context and recency",
+    description:
+      "A statement can contain a correct number and still be misleading if it uses old data, the wrong comparison group or missing context.",
+  },
+  {
+    title: "Match the verdict to the evidence",
+    description:
+      "Use unsupported or unverifiable when evidence is insufficient instead of automatically labeling a claim false.",
+  },
+];
+
+const example = {
+  input: [
+    "Claim: 'Online sales in this market increased by 300% last year.'",
+    "Source: Social media post.",
+    "Original source: Not provided.",
+    "Purpose: Business market research.",
+  ],
+
+  output: [
+    "Claim identified: Online sales in the specified market supposedly increased by 300% during the previous year.",
+    "Verification required: The market definition, geographic area, measurement period, sales metric and original dataset must be identified.",
+    "Evidence status: No original source or supporting data has been provided.",
+    "Verdict: UNSUPPORTED.",
+    "Confidence: High confidence that the claim is currently unsupported; this does not establish that the claim itself is false.",
+    "Next step: Locate official statistics, an original industry dataset or another authoritative source covering the same market and period before using the figure.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Unsupported does not mean false",
+    description:
+      "If reliable evidence cannot be found, the responsible conclusion may simply be that the claim cannot currently be verified.",
+  },
+  {
+    title: "Trace viral statistics backward",
+    description:
+      "Many websites and social posts can repeat the same statistic. Find the earliest identifiable dataset or report before treating repetition as confirmation.",
+  },
+  {
+    title: "Check what the number actually measures",
+    description:
+      "Percentages can sound impressive while hiding a tiny starting value, unusual denominator or narrow time period.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Fact-Checking Prompt | KRIYANO"
+  description="Check claims, statistics, quotes and online information using structured evidence review, source verification, context checks and clear fact-checking verdicts."
+>
+  <PromptPage
+    category="RESEARCH"
+    title="Fact-Checking"
+    accentTitle="Prompt."
+    description="Investigate claims systematically using original sources, independent evidence, recency checks and transparent verdicts."
+    meta={[
+      "Free prompt",
+      "Research",
+      "Fact checking",
+    ]}
+    bestFor={[
+      "Online claims",
+      "Statistics",
+      "AI-generated information",
+      "Social media claims",
+      "Quotes",
+      "Business research",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Check the evidence, not just the statement."
+    introDescription="Break a claim into verifiable parts, trace information back to its original source and check dates, numbers and missing context before deciding whether the evidence supports it."
+    steps={steps}
+    exampleTitle="Do not turn missing evidence into a false verdict."
+    example={example}
+    tipsTitle="Fact-check more carefully."
+    tips={tips}
+    sidebarTitle="Need to evaluate the source itself?"
+    sidebarDescription="Use the KRIYANO Source Evaluation Prompt to examine authority, methodology, bias, relevance and overall source reliability in greater depth."
+    warningTitle="Verification requires evidence"
+    warningText="An AI model should not claim that a fact has been verified unless it can examine suitable evidence. For current or important claims, use up-to-date authoritative sources and independently confirm critical information."
+  />
+</BaseLayout>

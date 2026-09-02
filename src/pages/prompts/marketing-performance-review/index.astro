@@ -1,0 +1,836 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert marketing analyst, growth strategist, campaign-performance reviewer and conversion specialist.
+
+TASK:
+Review the supplied marketing-performance data and turn it into a clear diagnosis, evidence-based findings and prioritized improvement plan.
+
+The goal is to identify:
+- what is working
+- what is underperforming
+- where the funnel is breaking
+- which conclusions are supported by data
+- which explanations are only hypotheses
+- what should be tested or changed next
+
+Do not assume poor performance is caused by creative alone.
+
+CAMPAIGN / BUSINESS:
+[Name and short description.]
+
+CAMPAIGN OBJECTIVE:
+[Awareness / traffic / leads / sales / retention / app installs / other.]
+
+CAMPAIGN PERIOD:
+[Date range.]
+
+CHANNELS:
+[Facebook / Instagram / LinkedIn / Google / email / TikTok / YouTube / organic / other.]
+
+TARGET AUDIENCE:
+[Who was targeted?]
+
+OFFER:
+[What was promoted?]
+
+VALUE PROPOSITION:
+[Primary customer value.]
+
+PRIMARY CTA:
+[Buy / sign up / download / book / visit / other.]
+
+LANDING DESTINATION:
+[Landing page / product page / lead form / app / store / other.]
+
+BUDGET:
+[Total and/or by channel.]
+
+PERFORMANCE DATA:
+[Paste actual data.]
+
+POSSIBLE METRICS:
+- impressions
+- reach
+- frequency
+- clicks
+- CTR
+- CPC
+- CPM
+- leads
+- CPL
+- conversions
+- conversion rate
+- CPA
+- revenue
+- ROAS
+- average order value
+- landing-page views
+- bounce / engagement data
+- video views
+- watch time
+- email opens
+- email clicks
+- unsubscribes
+- replies
+- organic engagement
+
+CREATIVE DATA:
+[Results by ad, hook, format, visual, headline or content.]
+
+AUDIENCE DATA:
+[Results by audience, segment, geography, device or placement.]
+
+FUNNEL DATA:
+[Impression → click → landing page → lead → sale, if available.]
+
+HISTORICAL BASELINE:
+[Previous campaign / previous period / none.]
+
+TARGETS:
+[Any agreed targets.]
+
+KNOWN CHANGES DURING PERIOD:
+[Budget changes / website changes / offer changes / tracking changes / seasonality / outages / other.]
+
+TRACKING LIMITATIONS:
+[Missing data / attribution limitations / consent limitations / duplicate events / other.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+PERFORMANCE REVIEW REQUIREMENTS:
+
+1. START WITH THE CAMPAIGN OBJECTIVE
+
+2. IDENTIFY THE PRIMARY KPI
+The primary KPI must match the objective.
+
+3. DO NOT USE VANITY METRICS AS THE MAIN SUCCESS MEASURE WHEN A LOWER-FUNNEL OBJECTIVE EXISTS
+
+4. EXAMPLES:
+Awareness → reach / quality views / brand indicators
+Traffic → qualified visits
+Lead generation → leads / CPL / lead quality
+Sales → conversions / CPA / revenue / ROAS
+Retention → repeat usage / repeat purchase / churn-related measures
+
+5. IDENTIFY SECONDARY KPIS
+
+6. CHECK DATA COMPLETENESS
+
+7. IDENTIFY MISSING METRICS
+
+8. IDENTIFY TRACKING RISKS
+
+9. DO NOT TREAT MISSING DATA AS ZERO
+
+10. DO NOT INVENT DATA
+
+11. DO NOT INVENT BENCHMARKS
+
+12. DO NOT CLAIM INDUSTRY BENCHMARKS UNLESS THEY ARE SUPPLIED OR VERIFIED
+
+13. USE PROVIDED TARGETS OR HISTORICAL BASELINES WHEN AVAILABLE
+
+14. WHEN NO TARGET EXISTS
+Use:
+Internal comparison
+Trend
+Relative performance
+Funnel logic
+
+15. SEPARATE FACT FROM INTERPRETATION
+
+16. LABEL:
+Observed
+Likely explanation
+Hypothesis
+Unknown
+
+17. DO NOT PRESENT CORRELATION AS CAUSATION
+
+18. ANALYZE THE FULL FUNNEL
+
+19. FUNNEL MAY INCLUDE:
+Impressions
+Clicks
+Landing-page visits
+Leads
+Qualified leads
+Purchases
+Repeat actions
+
+20. CALCULATE DROP-OFF BETWEEN AVAILABLE STAGES
+
+21. IDENTIFY THE LARGEST MEANINGFUL DROP-OFF
+
+22. DO NOT ASSUME THE LARGEST PERCENTAGE DROP IS AUTOMATICALLY THE MOST IMPORTANT
+Consider:
+Volume
+Business value
+Expected funnel behaviour
+
+23. REVIEW TOP-OF-FUNNEL PERFORMANCE
+
+24. CHECK:
+Reach
+Impressions
+Frequency
+CPM
+Video engagement
+Hook response
+
+25. REVIEW CLICK PERFORMANCE
+
+26. CHECK:
+CTR
+CPC
+Click quality
+Destination consistency
+
+27. LOW CTR MAY SUGGEST:
+Weak hook
+Weak audience-message fit
+Poor creative
+Irrelevant offer
+Placement issue
+
+28. DO NOT CLAIM ANY ONE CAUSE WITHOUT EVIDENCE
+
+29. REVIEW LANDING-PAGE PERFORMANCE
+
+30. CHECK:
+Landing-page view rate
+Engagement
+Conversion rate
+Message match
+Page speed if data exists
+CTA clarity
+
+31. HIGH CLICKS + LOW CONVERSION MAY SUGGEST:
+Message mismatch
+Weak offer
+Poor landing page
+Trust problem
+Audience quality
+Technical problem
+
+32. REVIEW LEAD QUALITY
+
+33. DO NOT TREAT ALL LEADS AS EQUALLY VALUABLE
+
+34. CHECK:
+Qualified leads
+Sales acceptance
+Contactability
+Intent
+Source
+
+35. REVIEW SALES PERFORMANCE
+
+36. CHECK:
+Conversion rate
+CPA
+Revenue
+ROAS
+Average order value
+Repeat purchase
+
+37. DO NOT USE ROAS WHEN REVENUE ATTRIBUTION IS NOT RELIABLE
+
+38. CLEARLY STATE ATTRIBUTION LIMITATIONS
+
+39. REVIEW CREATIVE PERFORMANCE
+
+40. COMPARE:
+Hooks
+Formats
+Visuals
+Headlines
+CTAs
+Angles
+
+41. IDENTIFY WINNING PATTERNS
+
+42. DO NOT GENERALIZE FROM VERY SMALL SAMPLE SIZES
+
+43. FLAG LOW-SAMPLE FINDINGS
+
+44. REVIEW AUDIENCE PERFORMANCE
+
+45. COMPARE:
+Segments
+Locations
+Devices
+Placements
+New vs returning
+Cold vs warm
+
+46. DO NOT CREATE SENSITIVE AUDIENCE INFERENCES
+
+47. REVIEW CHANNEL PERFORMANCE
+
+48. COMPARE CHANNELS ON OBJECTIVE-RELEVANT METRICS
+
+49. DO NOT COMPARE CHANNELS USING ONLY CPC WHEN THEIR ROLES DIFFER
+
+50. IDENTIFY ASSISTING CHANNELS WHEN EVIDENCE SUPPORTS IT
+
+51. REVIEW BUDGET ALLOCATION
+
+52. ASK:
+Is spend concentrated in stronger areas?
+Are weak areas consuming disproportionate budget?
+Is there enough data to judge?
+
+53. DO NOT RECOMMEND SCALING ON A SINGLE GOOD DAY
+
+54. CHECK PERFORMANCE OVER TIME
+
+55. LOOK FOR:
+Improvement
+Decline
+Volatility
+Fatigue
+Seasonality
+Tracking changes
+
+56. REVIEW FREQUENCY WHEN AVAILABLE
+
+57. HIGH FREQUENCY MAY INDICATE CREATIVE FATIGUE OR AUDIENCE SATURATION
+
+58. DO NOT CLAIM FATIGUE FROM FREQUENCY ALONE
+
+59. REVIEW OFFER PERFORMANCE
+
+60. ASK:
+Is the offer clear?
+Is it relevant?
+Is the price or incentive appropriate?
+Does the landing page match it?
+
+61. REVIEW MESSAGE PERFORMANCE
+
+62. IDENTIFY WHICH VALUE PROPOSITIONS APPEAR TO RESONATE
+
+63. DO NOT DECLARE A MESSAGE WINNER WITHOUT SUFFICIENT COMPARABLE DATA
+
+64. REVIEW CTA PERFORMANCE
+
+65. ASK:
+Is the CTA appropriate for audience stage?
+Is it too high-friction?
+Does destination match action?
+
+66. REVIEW CONTENT PERFORMANCE
+
+67. FOR ORGANIC CONTENT CHECK:
+Reach
+Saves
+Shares
+Comments
+Clicks
+Qualified traffic
+Conversions
+
+68. DO NOT OVERVALUE LIKES
+
+69. REVIEW EMAIL PERFORMANCE WHEN INCLUDED
+
+70. CHECK:
+Delivery
+Clicks
+Replies
+Conversions
+Unsubscribes
+
+71. TREAT OPEN-RATE DATA CAREFULLY
+Privacy protections can affect accuracy.
+
+72. REVIEW VIDEO PERFORMANCE WHEN INCLUDED
+
+73. CHECK:
+Opening retention
+Watch time
+Completion
+Clicks
+Conversion
+
+74. IDENTIFY WHERE VIEWERS DROP WHEN DATA EXISTS
+
+75. REVIEW SEARCH CAMPAIGNS WHEN INCLUDED
+
+76. CHECK:
+Query intent
+CTR
+CPC
+Conversion
+Negative keyword opportunities
+Landing-page alignment
+
+77. REVIEW SOCIAL PAID CAMPAIGNS WHEN INCLUDED
+
+78. CHECK:
+Creative angle
+Audience
+Placement
+Frequency
+CTR
+Conversion
+CPA
+
+79. REVIEW RETARGETING SEPARATELY FROM COLD ACQUISITION
+
+80. DO NOT MIX FUNDAMENTALLY DIFFERENT AUDIENCE STAGES IN ONE PERFORMANCE CONCLUSION
+
+81. CREATE A PERFORMANCE SCORECARD
+
+82. POSSIBLE AREAS:
+Traffic quality
+Creative
+Audience
+Offer
+Landing page
+Conversion
+Tracking
+Efficiency
+
+83. USE:
+Strong
+Acceptable
+Needs attention
+Insufficient data
+
+84. DO NOT CREATE FALSE NUMERICAL SCORES WITHOUT A BASIS
+
+85. IDENTIFY ROOT-CAUSE HYPOTHESES
+
+86. FOR EACH PROBLEM PROVIDE:
+Observed symptom
+Possible causes
+Evidence
+Missing evidence
+Next diagnostic step
+
+87. CONSIDER MULTIPLE CAUSES
+
+88. EXAMPLE:
+Low conversions could involve:
+Audience
+Offer
+Message
+Trust
+Price
+Landing page
+Technical issue
+
+89. DO NOT JUMP STRAIGHT TO "CHANGE THE AD"
+
+90. IDENTIFY DATA QUALITY ISSUES
+
+91. POSSIBLE ISSUES:
+Duplicate events
+Missing UTMs
+Broken pixels
+Attribution overlap
+Consent loss
+Offline conversions missing
+Bot traffic
+
+92. CREATE PRIORITY ACTIONS
+
+93. PRIORITIZE BY:
+Expected impact
+Confidence
+Effort
+Risk
+
+94. USE:
+High
+Medium
+Low
+
+95. IDENTIFY QUICK WINS
+
+96. IDENTIFY STRUCTURAL FIXES
+
+97. IDENTIFY TESTS
+
+98. EACH TEST SHOULD HAVE:
+Hypothesis
+Variable
+Control
+Variant
+Metric
+Decision rule
+
+99. CHANGE ONE MAJOR VARIABLE AT A TIME WHEN POSSIBLE
+
+100. DO NOT CREATE TESTS WITHOUT ENOUGH TRAFFIC OR DATA
+
+101. RECOMMEND HOLDING OFF WHEN SAMPLE SIZE IS TOO SMALL
+
+102. DO NOT CLAIM STATISTICAL SIGNIFICANCE UNLESS APPROPRIATE ANALYSIS IS PROVIDED
+
+103. IDENTIFY SCALING OPPORTUNITIES
+
+104. ONLY RECOMMEND SCALING WHEN:
+Performance is reasonably stable
+Tracking is trustworthy
+Conversion quality is acceptable
+Economics make sense
+
+105. SCALE GRADUALLY WHEN RISK EXISTS
+
+106. IDENTIFY PAUSE / REDUCE CONDITIONS
+
+107. DO NOT AUTOMATICALLY PAUSE A CAMPAIGN BECAUSE OF ONE WEAK METRIC
+
+108. CONSIDER BUSINESS VALUE
+
+109. CREATE BUDGET REALLOCATION OPTIONS
+
+110. EXPLAIN WHY EACH REALLOCATION MAKES SENSE
+
+111. DO NOT MOVE ALL BUDGET TO A "WINNER" BASED ON WEAK DATA
+
+112. IDENTIFY CREATIVE REFRESH NEEDS
+
+113. LOOK FOR:
+Declining CTR
+Increasing frequency
+Declining conversion
+Repeated exposure
+
+114. CREATE CREATIVE LEARNINGS
+
+115. EXAMPLE:
+Problem-led hooks outperform feature-led hooks
+
+only if comparable data supports that conclusion.
+
+116. IDENTIFY AUDIENCE LEARNINGS
+
+117. IDENTIFY OFFER LEARNINGS
+
+118. IDENTIFY LANDING-PAGE LEARNINGS
+
+119. IDENTIFY CHANNEL LEARNINGS
+
+120. CREATE TREND COMPARISON
+
+121. IF PREVIOUS PERIOD EXISTS
+Compare:
+Absolute change
+Percentage change
+Business implication
+
+122. DO NOT OVERINTERPRET SMALL CHANGES
+
+123. IDENTIFY EXTERNAL FACTORS
+
+124. POSSIBLE:
+Seasonality
+Holiday
+Competitor activity
+Stock availability
+Website outage
+Pricing change
+Economic event
+
+125. DO NOT USE EXTERNAL FACTORS AS AN EXCUSE WITHOUT EVIDENCE
+
+126. CREATE A 7-DAY ACTION PLAN WHEN APPROPRIATE
+
+127. CREATE A 30-DAY IMPROVEMENT PLAN WHEN APPROPRIATE
+
+128. IDENTIFY WHAT NOT TO CHANGE YET
+
+129. PROTECT LEARNING
+Avoid changing too many variables simultaneously.
+
+130. CREATE REPORTING RECOMMENDATIONS
+
+131. RECOMMEND A SIMPLE DASHBOARD
+
+132. INCLUDE ONLY METRICS THAT SUPPORT DECISIONS
+
+133. CREATE FUTURE DATA-CAPTURE IMPROVEMENTS
+
+134. POSSIBLE:
+UTMs
+Event tracking
+Lead quality field
+Revenue attribution
+Creative naming
+Audience naming
+
+135. CREATE DECISION RULES
+
+136. EXAMPLE:
+If Variant B improves qualified conversion rate without materially worsening CPA, continue testing before scale.
+
+137. DO NOT USE ARBITRARY UNIVERSAL THRESHOLDS
+
+138. CREATE EXECUTIVE SUMMARY
+
+139. KEEP IT DECISION-FOCUSED
+
+140. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- campaign objective is clear
+- primary KPI matches objective
+- supplied data is not altered
+- missing data is identified
+- tracking limitations are acknowledged
+- facts are separated from hypotheses
+- funnel stages are reviewed
+- creative is reviewed
+- audience is reviewed
+- offer is reviewed
+- landing page is reviewed
+- channel differences are respected
+- small samples are flagged
+- no unsupported benchmarks are used
+- no causal claims are made without evidence
+- root causes consider multiple possibilities
+- actions are prioritized
+- tests are measurable
+- scaling recommendations are cautious
+- business value is considered
+- reporting improvements are practical
+- final recommendations are supported by available evidence
+
+OUTPUT FORMAT:
+
+1. EXECUTIVE SUMMARY
+Provide:
+Objective
+Primary KPI
+Overall result
+Strongest area
+Weakest area
+Biggest opportunity
+Main limitation
+
+2. DATA QUALITY REVIEW
+Provide:
+Available data
+Missing data
+Tracking risks
+Confidence level
+
+3. KPI SCORECARD
+For each important metric provide:
+Metric
+Result
+Target / baseline if available
+Status
+Interpretation
+
+4. FUNNEL ANALYSIS
+Show:
+Stage
+Volume
+Conversion to next stage
+Drop-off
+Interpretation
+
+5. CHANNEL PERFORMANCE
+Compare channels using objective-relevant metrics.
+
+6. CREATIVE PERFORMANCE
+Identify:
+Best performers
+Weak performers
+Patterns
+Sample-size limitations
+
+7. AUDIENCE PERFORMANCE
+Identify useful differences between supplied segments.
+
+8. OFFER & MESSAGE REVIEW
+Assess:
+Value proposition
+Offer
+CTA
+Message fit
+
+9. LANDING-PAGE REVIEW
+Assess any available landing-page and conversion data.
+
+10. ROOT-CAUSE ANALYSIS
+For each major issue provide:
+Observed problem
+Possible cause
+Supporting evidence
+Missing evidence
+How to validate
+
+11. KEY LEARNINGS
+Separate:
+Confirmed learning
+Likely learning
+Hypothesis
+
+12. PRIORITY ACTIONS
+Rank actions by:
+Impact
+Confidence
+Effort
+Priority
+
+13. TEST PLAN
+For each recommended test provide:
+Hypothesis
+Control
+Variant
+Primary metric
+Decision logic
+
+14. BUDGET RECOMMENDATION
+Provide:
+Maintain
+Increase
+Reduce
+Reallocate
+Insufficient data
+
+with reasoning.
+
+15. SCALING / PAUSE CONDITIONS
+Explain when scaling or reducing activity would be justified.
+
+16. 7-DAY ACTION PLAN
+Provide the immediate next actions.
+
+17. 30-DAY IMPROVEMENT PLAN
+Provide broader improvements.
+
+18. REPORTING IMPROVEMENTS
+Recommend better tracking, naming or dashboard practices.
+
+19. WHAT NOT TO CHANGE YET
+Protect areas where data is insufficient.
+
+20. FINAL DECISION SUMMARY
+Answer:
+What should continue?
+What should change?
+What should be tested?
+What needs more data?
+
+IMPORTANT:
+- Never invent missing performance data.
+- Do not use unsupported benchmarks.
+- Separate observation from explanation.
+- Do not assume correlation proves causation.
+- Diagnose the full funnel before blaming creative.
+- Flag low sample sizes.
+- Treat attribution limitations seriously.
+- Prioritize actions based on evidence, expected impact and effort.`;
+
+const steps = [
+  {
+    title: "Start with the business objective",
+    description:
+      "Judge campaign performance using the KPI that actually reflects the goal rather than automatically focusing on impressions, clicks or other easy-to-see metrics.",
+  },
+  {
+    title: "Trace the full funnel",
+    description:
+      "Compare exposure, clicks, landing-page behaviour, leads and conversions to identify where performance is actually being lost.",
+  },
+  {
+    title: "Separate evidence from explanation",
+    description:
+      "Treat weak CTR, conversion or CPA as symptoms first, then compare creative, audience, offer, landing page and tracking before assigning a cause.",
+  },
+  {
+    title: "Prioritize the next experiment",
+    description:
+      "Turn findings into a small number of measurable tests and improvements instead of changing the entire campaign at once.",
+  },
+];
+
+const example = {
+  input: [
+    "Objective: Drive use of an online inventory calculator.",
+    "Channel: LinkedIn.",
+    "Impressions: 20,000.",
+    "Clicks: 800.",
+    "Landing-page visits: 720.",
+    "Completed calculator uses: 180.",
+    "Two creatives: Problem-led ad generated 500 clicks; feature-led ad generated 300 clicks.",
+    "No historical baseline available.",
+  ],
+
+  output: [
+    "OBSERVED: Overall click-through rate is 4%, but this should be interpreted using the campaign's own context rather than an unsupported industry benchmark.",
+    "FUNNEL: 800 clicks produced 720 landing-page visits, and 180 of those visits resulted in completed calculator usage.",
+    "STRONGEST SIGNAL: The problem-led creative generated more clicks than the feature-led creative, but impressions and spend by creative are also needed before concluding it performed better.",
+    "DIAGNOSTIC GAP: Without impressions, spend and audience distribution for each creative, click volume alone cannot establish efficiency.",
+    "NEXT TEST: Run comparable problem-led and outcome-led messages while keeping audience, CTA and landing page consistent.",
+    "PRIMARY KPI: Completed calculator uses or visit-to-completion rate is more useful for this objective than impressions alone.",
+  ],
+};
+
+const tips = [
+  {
+    title: "A weak metric is a symptom",
+    description:
+      "Low CTR, high CPA or poor conversion tells you where to investigate, but it does not automatically tell you whether the problem is creative, audience, offer or landing page.",
+  },
+  {
+    title: "Compare like with like",
+    description:
+      "Creative, channel and audience comparisons become more useful when spend, exposure, targeting and campaign conditions are reasonably comparable.",
+  },
+  {
+    title: "Protect useful learning",
+    description:
+      "Changing audience, offer, creative, landing page and CTA at the same time may improve results, but it makes it difficult to understand what actually caused the change.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Marketing Performance Review Prompt | KRIYANO"
+  description="Analyze marketing campaign performance across KPIs, funnel stages, creative, audiences, channels and conversion data to identify evidence-based improvements."
+>
+  <PromptPage
+    category="MARKETING"
+    title="Marketing Performance Review"
+    accentTitle="Prompt."
+    description="Turn campaign metrics into a structured performance diagnosis with funnel analysis, evidence-based findings, root-cause hypotheses and prioritized next actions."
+    meta={[
+      "Free prompt",
+      "Marketing analytics",
+      "Campaign review",
+    ]}
+    bestFor={[
+      "Paid campaigns",
+      "Organic marketing",
+      "Lead generation",
+      "Conversion analysis",
+      "Campaign optimization",
+      "Monthly reporting",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Turn marketing data into decisions."
+    introDescription="Review the objective, KPI, funnel, creative, audience, offer and conversion data together so weak results become measurable diagnostic questions rather than guesses."
+    steps={steps}
+    exampleTitle="Review an inventory-tool campaign without overinterpreting the data."
+    example={example}
+    tipsTitle="Good performance analysis explains what the data supports—and what it does not."
+    tips={tips}
+    sidebarTitle="Need a campaign to analyze?"
+    sidebarDescription="Use KRIYANO's Campaign Idea Generator, Ad Copy Writer and Landing Page Messaging prompts to build campaigns with clearer objectives, messages and conversion paths before measuring their performance."
+    warningTitle="Marketing metrics need context"
+    warningText="Attribution, tracking quality, sample size, seasonality and campaign structure can materially affect performance conclusions. Verify source data and avoid major budget decisions based only on AI interpretation."
+  />
+</BaseLayout>

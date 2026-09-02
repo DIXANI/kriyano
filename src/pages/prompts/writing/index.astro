@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptCategoryPage from "../../../components/PromptCategoryPage.astro";
+
+const prompts = [
+  {
+    title: "Rewrite for Clarity",
+    description:
+      "Rewrite confusing or wordy text so it becomes clearer, shorter and easier to understand without changing the meaning.",
+    category: "Editing",
+    href: "/prompts/rewrite-for-clarity/",
+  },
+  {
+    title: "Professional Tone Rewriter",
+    description:
+      "Improve informal or rough writing so it sounds professional, natural and appropriate for work or business use.",
+    category: "Tone",
+    href: "/prompts/professional-tone-rewriter/",
+  },
+  {
+    title: "Humanize AI-Written Text",
+    description:
+      "Make AI-generated writing sound more natural, less repetitive and more like genuine human communication.",
+    category: "Editing",
+    href: "/prompts/humanize-ai-written-text/",
+  },
+  {
+    title: "Article & Blog Writer",
+    description:
+      "Turn a topic, audience and objective into a structured article with clear sections and useful information.",
+    category: "Long-form",
+    href: "/prompts/article-blog-writer/",
+  },
+  {
+    title: "Text Summarizer",
+    description:
+      "Turn long text into a concise summary while preserving the most important facts, decisions and ideas.",
+    category: "Summarizing",
+    href: "/prompts/text-summarizer/",
+  },
+  {
+    title: "Report Writer",
+    description:
+      "Transform notes, findings or operational information into a clear and professionally structured report.",
+    category: "Business Writing",
+    href: "/prompts/report-writer/",
+  },
+  {
+    title: "Proofreading & Grammar Prompt",
+    description:
+      "Correct grammar, spelling, punctuation and awkward wording while preserving the writer's original meaning.",
+    category: "Proofreading",
+    href: "/prompts/proofreading-grammar/",
+  },
+  {
+    title: "Tone & Style Adapter",
+    description:
+      "Rewrite the same message for different audiences, tones or communication styles without changing the core information.",
+    category: "Style",
+    href: "/prompts/tone-style-adapter/",
+  },
+];
+---
+
+<BaseLayout
+  title="Writing AI Prompts | KRIYANO"
+  description="Practical AI prompts for rewriting, summarizing, proofreading, reports, articles, tone improvement and clearer communication."
+>
+  <PromptCategoryPage
+    kicker="WRITING"
+    title="AI prompts for"
+    accentTitle="better writing."
+    description="Practical prompts for rewriting, clarity, tone, summarizing, reports, proofreading and professional communication."
+    prompts={prompts}
+  />
+</BaseLayout>

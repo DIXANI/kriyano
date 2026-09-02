@@ -1,0 +1,1091 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced business risk analyst, operations advisor and management decision-support specialist.
+
+TASK:
+Create a practical business risk analysis for the situation below.
+
+The goal is to identify material risks, understand their causes and consequences, evaluate existing controls, prioritize what matters, define realistic mitigation actions and identify where more evidence is needed.
+
+Do not invent probabilities, financial losses, legal requirements, incident history, control effectiveness, market conditions or business facts.
+
+Clearly distinguish between:
+
+- confirmed risks
+- potential risks
+- assumptions
+- unknowns
+- existing controls
+- proposed controls
+
+BUSINESS / SUBJECT:
+[Business, product, project, department, process or decision.]
+
+OBJECTIVE:
+[What decision or activity is being assessed?]
+
+SCOPE:
+[What is included and excluded.]
+
+TIME HORIZON:
+[Immediate / next 3 months / 12 months / longer term / other.]
+
+MARKET / LOCATION:
+[Country / region / industry if relevant.]
+
+BUSINESS MODEL:
+[How the business operates and generates value.]
+
+CUSTOMERS:
+[Who is affected.]
+
+OPERATIONS:
+[Main processes, systems, people, locations and dependencies.]
+
+SUPPLIERS / PARTNERS:
+[Important external dependencies.]
+
+TECHNOLOGY:
+[Systems, software, platforms, data, automation, etc.]
+
+FINANCIAL CONTEXT:
+[Known cost, revenue, margin, cash-flow or budget information.]
+
+REGULATORY / CONTRACTUAL CONTEXT:
+[Known requirements only.]
+
+EXISTING CONTROLS:
+[Processes, approvals, checks, insurance, backups, monitoring, policies, etc.]
+
+KNOWN INCIDENTS / ISSUES:
+[Past events, failures, complaints, delays or losses if known.]
+
+KNOWN RISKS:
+[List already identified risks.]
+
+CONSTRAINTS:
+[Budget, time, staffing, systems, contracts, geography, etc.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+RISK ANALYSIS REQUIREMENTS:
+
+1. DEFINE THE ASSESSMENT
+State clearly:
+
+Objective
+Scope
+Time horizon
+Business area
+Decision being supported
+
+Do not analyze unrelated areas unless they create a material dependency.
+
+2. REVIEW THE INPUT QUALITY
+Classify available information as:
+
+CONFIRMED
+Directly supplied or supported.
+
+PARTIALLY SUPPORTED
+Some evidence exists but important detail is missing.
+
+ASSUMPTION
+Used for analysis but not verified.
+
+UNKNOWN
+Important information not provided.
+
+3. IDENTIFY RISK EVENTS
+Describe risks as events or conditions that could affect objectives.
+
+Prefer:
+
+"Key supplier fails to deliver critical materials on time."
+
+Instead of:
+
+"Supplier risk."
+
+4. USE CAUSE → EVENT → IMPACT
+For each important risk identify:
+
+Cause:
+Risk event:
+Impact:
+
+Example:
+
+Cause:
+Single-source dependency.
+
+Event:
+Supplier becomes unavailable.
+
+Impact:
+Production delays and lost customer orders.
+
+Do not confuse causes with impacts.
+
+5. IDENTIFY STRATEGIC RISKS
+Where relevant consider:
+
+Market demand
+Competition
+Business model
+Pricing
+Growth
+Reputation
+Strategic dependency
+Expansion
+Customer concentration
+
+6. IDENTIFY FINANCIAL RISKS
+Where relevant consider:
+
+Cash flow
+Margin pressure
+Cost increase
+Credit
+Bad debt
+Currency exposure
+Funding
+Fraud
+Payment failure
+
+Do not invent financial exposure.
+
+7. IDENTIFY OPERATIONAL RISKS
+Consider:
+
+Process failure
+Capacity
+Quality
+Inventory
+Equipment
+People
+Supplier delay
+Delivery
+Documentation
+Manual dependency
+Single-point failure
+
+8. IDENTIFY SUPPLY-CHAIN RISKS
+Where relevant assess:
+
+Single supplier
+Long lead time
+Transport
+Customs
+Material availability
+Quality
+Supplier financial stability
+Geographic concentration
+
+9. IDENTIFY CUSTOMER RISKS
+Consider:
+
+Customer concentration
+Churn
+Complaints
+Service failure
+Contract loss
+Changing expectations
+Payment behavior
+
+10. IDENTIFY PEOPLE RISKS
+Consider:
+
+Key-person dependency
+Skill shortage
+Turnover
+Training gap
+Succession
+Workload
+Segregation of duties
+
+Do not make unsupported claims about employee behavior or morale.
+
+11. IDENTIFY TECHNOLOGY RISKS
+Where relevant assess:
+
+System outage
+Data loss
+Integration failure
+Platform dependency
+Cybersecurity
+Access control
+Obsolescence
+Vendor dependency
+Automation failure
+
+12. IDENTIFY DATA RISKS
+Consider:
+
+Data accuracy
+Availability
+Confidentiality
+Integrity
+Backup
+Access
+Manual entry
+Reporting quality
+
+13. IDENTIFY LEGAL / COMPLIANCE RISKS
+Use only supplied or reliable information.
+
+Do not invent laws or regulatory obligations.
+
+If specific legal interpretation is needed, state that qualified review may be required.
+
+14. IDENTIFY HEALTH / SAFETY RISKS
+Where relevant, preserve safety significance.
+
+Do not reduce serious safety risks to ordinary operational inconvenience.
+
+15. IDENTIFY REPUTATIONAL RISKS
+Assess:
+
+Customer trust
+Public complaints
+Service failure
+Quality issues
+Data incidents
+Supplier behavior
+
+Do not assume reputational damage without a plausible pathway.
+
+16. IDENTIFY PROJECT RISKS
+For projects consider:
+
+Scope
+Schedule
+Budget
+Resources
+Dependencies
+Requirements
+Change
+Quality
+Acceptance
+
+17. IDENTIFY THIRD-PARTY RISKS
+Consider:
+
+Supplier
+Contractor
+Marketplace
+Cloud platform
+Payment provider
+Logistics partner
+Consultant
+
+18. IDENTIFY CONCENTRATION RISK
+Look for excessive reliance on:
+
+One customer
+One supplier
+One employee
+One system
+One sales channel
+One geography
+One product
+
+19. IDENTIFY PROCESS DEPENDENCIES
+Map important dependencies between:
+
+People
+Systems
+Approvals
+Suppliers
+Data
+Facilities
+
+20. IDENTIFY SINGLE POINTS OF FAILURE
+Flag any dependency where one failure could stop a critical activity.
+
+21. DISTINGUISH RISK FROM ISSUE
+RISK:
+Something uncertain that may happen.
+
+ISSUE:
+A problem already happening.
+
+Classify correctly.
+
+22. DISTINGUISH RISK FROM ASSUMPTION
+If a risk depends on an unverified assumption, state that explicitly.
+
+23. DISTINGUISH RISK FROM ROOT CAUSE
+Do not list the same underlying cause as several unrelated risks without explanation.
+
+24. DEFINE THE IMPACT
+For each risk consider relevant impact areas:
+
+Financial
+Operational
+Customer
+Legal / compliance
+Safety
+Reputation
+Strategic
+Schedule
+Quality
+
+25. ASSESS LIKELIHOOD
+Use qualitative ratings unless actual historical data exists:
+
+Low
+Medium
+High
+
+Explain the rationale.
+
+Do not invent percentage probabilities.
+
+26. ASSESS IMPACT
+Use:
+
+Low
+Medium
+High
+
+based on the stated objective and available information.
+
+27. OPTIONAL 1–5 SCORING
+Where useful:
+
+Likelihood: 1–5
+Impact: 1–5
+
+Risk Score = Likelihood × Impact
+
+If ratings are inferred, label them provisional.
+
+28. AVOID FALSE PRECISION
+Do not create unsupported values such as:
+
+"37% likelihood"
+"$84,500 expected loss"
+
+unless the data actually supports them.
+
+29. IDENTIFY INHERENT RISK
+Assess the risk before considering existing controls where enough information exists.
+
+30. IDENTIFY EXISTING CONTROLS
+For each material risk list supplied controls.
+
+Examples:
+
+Approval
+Reconciliation
+Backup
+Dual sourcing
+Insurance
+Access control
+Inspection
+Review
+Monitoring
+
+Do not invent controls.
+
+31. CLASSIFY CONTROL TYPE
+Where useful classify controls as:
+
+Preventive
+Detective
+Corrective
+Recovery
+
+32. ASSESS CONTROL DESIGN
+Ask:
+
+Does the control address the actual cause or event?
+Is ownership clear?
+Is it performed at the right time?
+Is evidence retained?
+
+33. DO NOT ASSUME CONTROL EFFECTIVENESS
+If the control exists but performance evidence is unavailable, state:
+
+"Effectiveness not verified."
+
+34. IDENTIFY CONTROL GAPS
+Look for:
+
+No control
+Weak control
+Unclear ownership
+Manual dependency
+No monitoring
+No backup
+No escalation
+No evidence
+
+35. ASSESS RESIDUAL RISK
+After considering existing controls, estimate residual risk qualitatively.
+
+Clearly state when control effectiveness is uncertain.
+
+36. IDENTIFY RISK APPETITE
+If risk appetite or tolerance is supplied, compare risks against it.
+
+Do not invent management tolerance.
+
+If unknown state:
+
+"Risk tolerance not established."
+
+37. PRIORITIZE RISKS
+Rank risks based on:
+
+Impact
+Likelihood
+Control weakness
+Urgency
+Strategic importance
+
+Do not prioritize only by mathematical score.
+
+38. IDENTIFY CRITICAL RISKS
+Highlight the small number that could materially affect the objective.
+
+Avoid calling every risk critical.
+
+39. IDENTIFY EMERGING RISKS
+Where relevant identify risks that may increase over time.
+
+Label weakly supported emerging risks as hypotheses.
+
+40. IDENTIFY INTERCONNECTED RISKS
+Explain where one risk can trigger another.
+
+Example:
+
+Supplier delay → stock shortage → service failure → customer complaints.
+
+41. IDENTIFY RISK VELOCITY
+Where useful assess how quickly impact may occur after the event:
+
+Immediate
+Fast
+Gradual
+
+42. IDENTIFY RISK DURATION
+Where relevant estimate whether impact is:
+
+Short-lived
+Medium-term
+Long-term
+
+Use qualitative terms.
+
+43. IDENTIFY REVERSIBILITY
+Assess whether consequences are:
+
+Easy to recover
+Moderately difficult
+Hard to reverse
+
+44. IDENTIFY MITIGATION OPTIONS
+For each priority risk consider:
+
+Avoid
+Reduce
+Transfer
+Share
+Accept
+
+Explain which treatment fits and why.
+
+45. DO NOT DEFAULT TO MITIGATION
+Some low-priority risks may reasonably be accepted.
+
+46. IDENTIFY PREVENTIVE ACTIONS
+Actions that reduce likelihood.
+
+47. IDENTIFY IMPACT-REDUCTION ACTIONS
+Actions that reduce consequence if the event occurs.
+
+48. IDENTIFY DETECTION CONTROLS
+Actions that identify problems early.
+
+49. IDENTIFY RECOVERY CONTROLS
+Actions that restore operations after failure.
+
+50. IDENTIFY CONTINGENCY PLANS
+For high-impact risks define:
+
+Trigger
+Immediate response
+Decision owner
+Fallback option
+Communication need
+
+Do not invent emergency procedures where technical expertise is required.
+
+51. IDENTIFY BUSINESS CONTINUITY NEEDS
+For critical processes assess:
+
+Alternative people
+Alternative location
+Backup system
+Alternative supplier
+Data recovery
+Manual fallback
+
+52. IDENTIFY REDUNDANCY
+Where practical assess whether critical dependencies need alternatives.
+
+53. IDENTIFY INSURANCE ROLE
+If insurance is relevant, distinguish:
+
+Risk transfer
+Risk reduction
+
+Insurance does not prevent the underlying event.
+
+54. DEFINE RISK OWNER
+Use role-based ownership.
+
+Examples:
+
+Operations Manager
+Finance Manager
+IT Lead
+Founder
+Procurement Lead
+
+Do not invent personal names.
+
+If unclear use:
+
+"Owner to be assigned."
+
+55. DEFINE ACTION OWNER
+Risk owner and mitigation action owner may differ.
+
+Make this distinction when useful.
+
+56. IDENTIFY ACTION PRIORITY
+Use:
+
+P1 — Immediate / critical
+P2 — High
+P3 — Medium
+P4 — Low
+
+Explain logic.
+
+57. DEFINE TIMEFRAME
+Use supplied deadlines.
+
+If timing is unknown state:
+
+"Timing to be agreed."
+
+58. IDENTIFY DEPENDENCIES
+For each major mitigation identify:
+
+Approval
+Budget
+Supplier
+Technology
+Training
+Data
+Contract
+People
+
+59. IDENTIFY COST CONSIDERATIONS
+Where actual data exists compare:
+
+Mitigation cost
+Potential exposure
+Operational burden
+
+Do not invent ROI.
+
+60. AVOID OVER-CONTROL
+Controls should be proportionate.
+
+Do not recommend expensive or complex controls for trivial risks without reason.
+
+61. IDENTIFY CONTROL SIDE EFFECTS
+Consider whether a control creates:
+
+Delay
+Cost
+Complexity
+Poor customer experience
+New dependency
+
+62. IDENTIFY EARLY-WARNING INDICATORS
+For priority risks suggest measurable warning signs.
+
+Examples:
+
+Supplier lead-time increase
+Backlog
+Error rate
+Customer complaints
+Cash balance
+System downtime
+Employee absence
+
+Only use indicators relevant to the risk.
+
+63. DEFINE KRIs
+Where appropriate create Key Risk Indicators.
+
+Include:
+
+Indicator
+What it signals
+Data source
+Owner
+Review frequency
+
+Do not invent thresholds.
+
+64. DEFINE TRIGGERS
+If thresholds are unknown, state:
+
+"Trigger threshold to be established from baseline."
+
+65. DEFINE MONITORING
+For each priority risk specify:
+
+What to monitor
+Who monitors
+How often
+What happens if deterioration is detected
+
+Do not invent review frequency when context does not support one; recommend establishing it.
+
+66. CREATE A RISK REGISTER
+For each risk include:
+
+ID
+Risk statement
+Category
+Cause
+Impact
+Likelihood
+Impact rating
+Existing controls
+Control effectiveness
+Residual risk
+Owner
+Treatment
+Action
+Status
+
+67. USE CLEAR RISK STATEMENTS
+Prefer concise, specific statements.
+
+68. IDENTIFY TOP 5 RISKS
+After the full register, identify the most important risks.
+
+Explain why they matter.
+
+69. CREATE A RISK HEAT VIEW
+Group risks qualitatively into:
+
+High
+Medium
+Low
+
+Do not imply statistical precision.
+
+70. IDENTIFY QUICK WINS
+Suggest low-effort controls with meaningful risk reduction.
+
+71. IDENTIFY STRUCTURAL ACTIONS
+Separate deeper fixes from quick controls.
+
+Examples:
+
+Supplier diversification
+System replacement
+Process redesign
+Cross-training
+Contract revision
+
+72. IDENTIFY NO-REGRET ACTIONS
+Prioritize actions that improve resilience under multiple plausible scenarios.
+
+73. TEST MITIGATION EFFECTIVENESS
+For each major action ask:
+
+What risk does it reduce?
+How will effectiveness be measured?
+What residual risk remains?
+
+74. IDENTIFY ACCEPTANCE CRITERIA
+Where risks are consciously accepted, document:
+
+Reason
+Owner
+Conditions
+Review requirement
+
+75. IDENTIFY ESCALATION CRITERIA
+Specify situations that should be escalated.
+
+Avoid inventing organizational authority.
+
+76. IDENTIFY MANAGEMENT DECISIONS
+Separate:
+
+Actions that can proceed
+Actions needing approval
+Actions needing budget
+Actions needing external expertise
+
+77. IDENTIFY INFORMATION GAPS
+Examples:
+
+Incident history
+Supplier reliability
+Customer concentration
+Financial exposure
+Backup effectiveness
+Insurance coverage
+Contract obligations
+System recovery time
+
+78. PRIORITIZE RESEARCH
+Use:
+
+P1 — Could significantly change risk treatment
+P2 — Important
+P3 — Useful
+
+79. IDENTIFY ASSUMPTIONS
+Create an assumption register:
+
+Assumption
+Why it matters
+Confidence
+Validation method
+Effect if wrong
+
+80. IDENTIFY SCENARIOS
+For major risks consider:
+
+Best case
+Expected / base case
+Adverse case
+
+Do not assign probabilities unless supported.
+
+81. CONSIDER COMPOUND EVENTS
+Assess whether several moderate risks could occur together and create a larger impact.
+
+82. STRESS TEST
+Ask:
+
+What happens if a critical supplier fails?
+What happens if revenue drops?
+What happens if the system is unavailable?
+What happens if a key employee is absent?
+
+Use only relevant scenarios.
+
+83. IDENTIFY RECOVERY OBJECTIVES
+For critical operations, if business continuity data exists consider:
+
+Recovery time
+Recovery point
+Minimum service level
+
+Do not invent RTO or RPO values.
+
+84. IDENTIFY FRAUD RISKS
+Where relevant assess:
+
+Payment
+Purchasing
+Inventory
+Refunds
+Access
+Segregation of duties
+
+Do not accuse individuals.
+
+85. IDENTIFY INVENTORY RISKS
+Where relevant consider:
+
+Stock discrepancy
+Obsolescence
+Expiry
+Damage
+Theft
+Overstock
+Stockout
+System mismatch
+
+86. IDENTIFY QUALITY RISKS
+Consider:
+
+Defect
+Wrong specification
+Process failure
+Supplier quality
+Inspection weakness
+
+87. IDENTIFY CONTRACT RISKS
+Where contracts matter assess known:
+
+Service obligations
+Renewal
+Termination
+Liability
+Payment
+Supplier dependency
+
+Do not provide legal interpretation beyond the available evidence.
+
+88. IDENTIFY REPUTATION RECOVERY
+Where relevant identify:
+
+Customer communication
+Correction
+Evidence
+Escalation
+Service recovery
+
+89. IDENTIFY DECISION RISK
+For strategic choices assess:
+
+Irreversibility
+Investment size
+Evidence quality
+Dependency
+Opportunity cost
+
+90. IDENTIFY OPPORTUNITY RISK
+Consider the risk of not acting.
+
+Example:
+
+Delayed adoption of useful technology may reduce competitiveness.
+
+Do not exaggerate.
+
+91. CREATE AN ACTION PLAN
+For priority risks provide:
+
+Risk
+Action
+Priority
+Owner
+Dependency
+Timing
+Evidence of completion
+
+92. DISTINGUISH IMPLEMENTED FROM EFFECTIVE
+A completed control is not automatically effective.
+
+Define:
+
+Implementation evidence
+Effectiveness evidence
+
+93. DEFINE SUCCESS MEASURES
+Use realistic measures tied to the risk.
+
+Avoid arbitrary targets.
+
+94. MANAGEMENT SUMMARY
+Provide:
+
+Objective
+Highest risk
+Weakest control area
+Most urgent action
+Largest assumption
+Main contingency need
+Next management decision
+
+95. EXECUTIVE VIEW
+Create a concise version suitable for senior management.
+
+Focus on:
+
+Top risks
+Exposure
+Actions
+Decisions required
+
+96. CONFIDENCE LEVEL
+Rate the analysis:
+
+High
+Medium
+Low
+
+based on evidence completeness.
+
+97. RECOMMEND NEXT STEPS
+Provide the first 3–5 actions that should happen next.
+
+98. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- risks are specific
+- causes and impacts are separated
+- issues are not mislabeled as risks
+- existing controls were not invented
+- control effectiveness was not assumed
+- probability percentages were not invented
+- financial exposure was not invented
+- major dependencies were considered
+- residual risk is visible
+- mitigation is proportionate
+- owners are role-based
+- research gaps are visible
+- high-risk areas have contingency thinking
+- recommendations are tied to real risks
+
+OUTPUT FORMAT:
+
+1. Assessment Scope
+2. Input & Evidence Review
+3. Risk Summary
+4. Detailed Risk Register
+5. Top Priority Risks
+6. Existing Controls
+7. Control Gaps
+8. Residual Risk Assessment
+9. Risk Heat View
+10. Mitigation Strategy
+11. Priority Action Plan
+12. Contingency & Recovery Needs
+13. Key Risk Indicators
+14. Dependencies
+15. Assumptions
+16. Research / Information Gaps
+17. Management Decisions Required
+18. Executive Summary
+19. Confidence Level
+20. Recommended Next Steps
+
+IMPORTANT:
+- Do not invent probabilities, financial losses, market events, laws, incident history or control effectiveness.
+- Use qualitative risk levels unless real data supports more precise analysis.
+- Distinguish risks from existing issues.
+- Distinguish causes from risk events and impacts.
+- Do not assume a control works simply because it exists.
+- Show residual risk after controls.
+- Do not treat every risk as high priority.
+- Keep mitigation proportional to exposure.
+- Include contingency planning for significant residual risks.
+- Use role-based owners rather than invented names.
+- Flag legal, compliance, cybersecurity, safety or specialist matters that may require qualified review.
+- Treat the risk analysis as decision support, not as certainty about future events.`;
+
+const steps = [
+  {
+    title: "Define the risk clearly",
+    description:
+      "Describe each risk as a specific event, then separate its cause from its potential business impact so vague labels such as 'supplier risk' do not hide the real exposure.",
+  },
+  {
+    title: "Evaluate controls realistically",
+    description:
+      "Document the controls that actually exist and avoid assuming they are effective unless there is evidence that they operate as intended.",
+  },
+  {
+    title: "Prioritize residual exposure",
+    description:
+      "Focus management attention on the risks that remain important after controls, considering impact, likelihood, urgency and control weakness rather than scoring alone.",
+  },
+  {
+    title: "Turn risk analysis into action",
+    description:
+      "Assign practical mitigation, monitoring, contingency and validation actions with clear role-based ownership and dependencies.",
+  },
+];
+
+const example = {
+  input: [
+    "Business: Small online retailer.",
+    "Known dependency: Most bestselling products come from one supplier.",
+    "Existing control: The business keeps additional stock for popular items.",
+    "Known issue: Supplier deliveries have occasionally been delayed.",
+    "Unknown: Supplier financial condition, exact historical delay frequency and availability of qualified alternative suppliers.",
+    "Objective: Reduce the risk of stock shortages affecting customer orders.",
+  ],
+
+  output: [
+    "Risk event: The primary supplier is unable to deliver bestselling products within the required lead time.",
+    "Cause: High supplier concentration combined with delivery uncertainty.",
+    "Impact: Potential stockouts, delayed customer orders and lost sales opportunities.",
+    "Existing control: Additional stock is held for popular products.",
+    "Control limitation: Buffer stock may reduce short delays but may not protect against extended supplier disruption. Its effectiveness cannot be confirmed without demand, stock-cover and lead-time data.",
+    "Residual risk: Potentially significant because the underlying single-supplier dependency remains.",
+    "Priority action: Identify and qualify alternative suppliers for the most critical products.",
+    "Research gap: Review actual supplier lead-time performance and calculate how many days of demand current buffer stock covers before setting inventory or supplier-risk thresholds.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Write the risk as an event",
+    description:
+      "Labels such as 'financial risk' or 'supplier risk' are too broad. State what could actually happen, why it could happen and what business objective would be affected.",
+  },
+  {
+    title: "A control existing doesn't mean it works",
+    description:
+      "Separate control design from control effectiveness. When there is no testing or performance evidence, mark effectiveness as unverified rather than assuming the risk is covered.",
+  },
+  {
+    title: "Focus on residual risk",
+    description:
+      "Management decisions should consider what exposure remains after current controls, not only how serious the risk would be in a completely uncontrolled situation.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Business Risk Analysis Prompt | KRIYANO"
+  description="Identify and prioritize business risks, evaluate existing controls, assess residual exposure, build mitigation actions and define practical contingency plans."
+>
+  <PromptPage
+    category="BUSINESS"
+    title="Business Risk"
+    accentTitle="Analysis."
+    description="Identify material business risks, evaluate existing controls and residual exposure, then convert the analysis into practical mitigation, monitoring and contingency actions."
+    meta={[
+      "Free prompt",
+      "Risk analysis",
+      "Business planning",
+    ]}
+    bestFor={[
+      "Small businesses",
+      "Startups",
+      "Projects",
+      "Operations",
+      "Management reviews",
+      "Business decisions",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Understand the risks that can actually affect the objective."
+    introDescription="Move beyond generic risk lists by separating causes, events and impacts, testing existing controls, assessing residual exposure and prioritizing practical actions."
+    steps={steps}
+    exampleTitle="Analyze a supplier dependency without inventing probabilities."
+    example={example}
+    tipsTitle="Make risk analysis useful for decisions."
+    tips={tips}
+    sidebarTitle="Need to understand the underlying cause?"
+    sidebarDescription="Use KRIYANO's Root Cause Analysis Prompt when the problem has already happened and you need to investigate why, rather than assessing an uncertain future risk."
+    warningTitle="Risk scores are decision aids, not predictions"
+    warningText="Likelihood and impact ratings are often based on incomplete information. Do not turn qualitative judgment into fake probability or financial precision. High-impact safety, legal, cybersecurity, financial or compliance matters may require qualified specialist review."
+  />
+</BaseLayout>

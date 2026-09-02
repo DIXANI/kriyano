@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptCategoryPage from "../../../components/PromptCategoryPage.astro";
+
+const prompts = [
+  {
+    title: "Research & Comparison Prompt",
+    description:
+      "Compare products, services, strategies or alternatives using clear criteria, evidence, trade-offs and recommendations.",
+    category: "Comparison",
+    href: "/prompts/research-comparison/",
+  },
+  {
+    title: "Research Plan Builder",
+    description:
+      "Turn a broad topic into a structured research plan with questions, scope, priorities and next steps.",
+    category: "Planning",
+    href: "/prompts/research-plan-builder/",
+  },
+  {
+    title: "Source Evaluation Prompt",
+    description:
+      "Assess the credibility, relevance, bias, authority and limitations of sources before relying on them.",
+    category: "Sources",
+    href: "/prompts/source-evaluation/",
+  },
+  {
+    title: "Fact-Checking Prompt",
+    description:
+      "Break a claim into verifiable parts, identify what needs evidence and highlight uncertainty or missing proof.",
+    category: "Verification",
+    href: "/prompts/fact-checking/",
+  },
+  {
+    title: "Market Research Prompt",
+    description:
+      "Structure research around customers, competitors, demand, pricing, market gaps and commercial opportunities.",
+    category: "Market Research",
+    href: "/prompts/market-research/",
+  },
+  {
+    title: "Competitor Research Prompt",
+    description:
+      "Research competitors systematically across positioning, products, pricing, strengths, weaknesses and market differences.",
+    category: "Competitors",
+    href: "/prompts/competitor-research/",
+    },
+  {
+    title: "Topic Deep-Dive Prompt",
+    description:
+      "Explore a topic from multiple angles, identify key concepts and build a structured understanding before reaching conclusions.",
+    category: "Exploration",
+    href: "/prompts/topic-deep-dive/",
+  },
+  {
+    title: "Research Summary Prompt",
+    description:
+      "Turn notes, findings or multiple sources into a concise summary with key conclusions, evidence and unresolved questions.",
+    category: "Summarizing",
+    href: "/prompts/research-summary/",
+  },
+];
+---
+
+<BaseLayout
+  title="Research AI Prompts | KRIYANO"
+  description="Practical AI prompts for research planning, comparisons, source evaluation, fact checking, market research and structured analysis."
+>
+  <PromptCategoryPage
+    kicker="RESEARCH"
+    title="AI prompts for"
+    accentTitle="better research."
+    description="Structured prompts for comparisons, source evaluation, fact checking, market research and deeper analysis."
+    prompts={prompts}
+  />
+</BaseLayout>

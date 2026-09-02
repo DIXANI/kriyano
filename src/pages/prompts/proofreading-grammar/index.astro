@@ -1,0 +1,737 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced professional proofreader, copy editor and grammar specialist.
+
+TASK:
+Proofread and correct the text provided below while preserving its original meaning, facts, intent and appropriate writing style.
+
+Correct genuine language problems without unnecessarily rewriting sentences that are already clear and correct.
+
+TEXT TO PROOFREAD:
+[Paste the text here.]
+
+LANGUAGE:
+[English / other.]
+
+ENGLISH VARIANT:
+[British English / American English / Australian English / other / preserve original.]
+
+DOCUMENT TYPE:
+[Email / report / article / business document / academic text / social post / instructions / other.]
+
+TARGET AUDIENCE:
+[Who will read it?]
+
+TONE TO PRESERVE:
+[Professional / formal / conversational / friendly / technical / persuasive / other.]
+
+EDITING LEVEL:
+[Light proofreading / standard editing / thorough editing.]
+
+OUTPUT PREFERENCE:
+[Corrected text only / corrected text + changes / corrected text + explanations.]
+
+WORDS OR TERMS THAT MUST REMAIN:
+[Names, technical terminology, brand terms, product names, etc.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+PROOFREADING REQUIREMENTS:
+
+1. PRESERVE THE ORIGINAL MEANING
+Do not change what the writer is trying to communicate.
+
+2. DO NOT ADD NEW INFORMATION
+Do not introduce facts, explanations, examples, arguments or claims that were not present in the original.
+
+3. DO NOT REMOVE IMPORTANT INFORMATION
+Keep details that affect meaning, action, responsibility or interpretation.
+
+4. CORRECT GRAMMAR
+Fix genuine errors involving:
+
+Subject-verb agreement
+Verb tense
+Articles
+Prepositions
+Pronouns
+Modifiers
+Sentence construction
+Word forms
+Conjunctions
+
+5. CORRECT SPELLING
+Fix spelling mistakes while respecting the selected language variant.
+
+6. CORRECT TYPOGRAPHICAL ERRORS
+Fix:
+
+Missing letters
+Duplicated words
+Accidental characters
+Incorrect spacing
+Obvious typing errors
+
+7. CORRECT PUNCTUATION
+Review:
+
+Commas
+Periods
+Colons
+Semicolons
+Apostrophes
+Quotation marks
+Parentheses
+Hyphens
+Dashes
+Question marks
+Exclamation marks
+
+8. CORRECT CAPITALIZATION
+Fix capitalization while preserving legitimate:
+
+Brand names
+Acronyms
+Product names
+Technical terms
+
+9. CORRECT SENTENCE STRUCTURE
+Fix:
+
+Fragments
+Run-on sentences
+Comma splices
+Awkward constructions
+
+only where necessary.
+
+10. PRESERVE CORRECT SENTENCES
+Do not rewrite a sentence merely to demonstrate editing.
+
+11. PRESERVE THE WRITER'S VOICE
+Keep the original level of:
+
+Formality
+Directness
+Personality
+Technicality
+Warmth
+
+unless instructed otherwise.
+
+12. DO NOT OVER-POLISH
+Avoid making ordinary human writing sound unnecessarily corporate, academic or artificial.
+
+13. PRESERVE FACTS
+Do not alter factual claims merely because they appear unusual.
+
+If a possible factual error is noticed, flag it separately rather than silently changing it.
+
+14. PRESERVE NUMBERS
+Do not change:
+
+Amounts
+Quantities
+Percentages
+Measurements
+KPIs
+Reference numbers
+
+unless correcting an obvious formatting error.
+
+15. PRESERVE DATES
+Do not change a date's factual value.
+
+Formatting may be standardized only if requested.
+
+16. PRESERVE TIMES
+Do not alter times, time zones or durations.
+
+17. PRESERVE CURRENCY
+Keep the correct currency and amount.
+
+18. PRESERVE NAMES
+Do not change:
+
+People
+Companies
+Products
+Locations
+Departments
+
+unless an obvious typo can be confidently identified.
+
+If uncertain, flag it.
+
+19. PRESERVE TECHNICAL TERMINOLOGY
+Do not replace specialist terms merely because simpler alternatives exist.
+
+20. PRESERVE ACRONYMS
+Keep established acronyms.
+
+Where appropriate, correct inconsistent capitalization.
+
+21. PRESERVE MEANING OF MODAL VERBS
+Be especially careful with:
+
+Must
+Should
+May
+Can
+Will
+Could
+
+Changing these can change obligations or certainty.
+
+22. PRESERVE NEGATION
+Never accidentally remove or alter:
+
+Not
+No
+Never
+Cannot
+Must not
+Should not
+
+23. PRESERVE CONDITIONS
+Keep phrases such as:
+
+Only if
+Unless
+Subject to
+Provided that
+Except
+Depending on
+
+because they may materially affect meaning.
+
+24. PRESERVE UNCERTAINTY
+Do not change:
+
+May
+Might
+Possibly
+Approximately
+Estimated
+Expected
+
+into stronger claims.
+
+25. PRESERVE RESPONSIBILITIES
+Do not change who is responsible for an action.
+
+26. PRESERVE DEADLINES
+Do not change dates or timing associated with actions.
+
+27. PRESERVE DECISION STATUS
+Do not turn:
+
+Proposed
+Recommended
+Discussed
+Pending
+
+into:
+
+Approved
+Agreed
+Confirmed
+Completed.
+
+28. CHECK ARTICLE USAGE
+Correct:
+
+A
+An
+The
+
+where grammatically necessary.
+
+29. CHECK PREPOSITIONS
+Correct inappropriate or missing prepositions while preserving meaning.
+
+30. CHECK VERB TENSE
+Ensure tense is grammatically correct and logically consistent.
+
+31. DO NOT NORMALIZE INTENTIONAL TENSE CHANGES
+Past, present and future may legitimately appear in the same document.
+
+32. CHECK SUBJECT-VERB AGREEMENT
+Correct singular/plural agreement.
+
+33. CHECK PRONOUN AGREEMENT
+Ensure pronouns have clear and grammatically appropriate references.
+
+34. CHECK PRONOUN AMBIGUITY
+If "it," "they," "this" or similar wording has an unclear reference, improve clarity only when the intended reference is reasonably certain.
+
+Otherwise flag it.
+
+35. CHECK MODIFIERS
+Correct misplaced or dangling modifiers.
+
+36. CHECK PARALLEL STRUCTURE
+Improve inconsistent grammatical structure in lists or coordinated phrases.
+
+37. CHECK COMPARISONS
+Ensure comparisons are grammatically logical.
+
+38. CHECK COUNTABLE / UNCOUNTABLE NOUNS
+Correct errors such as inappropriate pluralization where applicable.
+
+39. CHECK WORD FORM
+Correct noun, adjective, verb and adverb forms.
+
+40. CHECK COMMONLY CONFUSED WORDS
+Review words such as:
+
+Their / there / they're
+Your / you're
+Its / it's
+Affect / effect
+Then / than
+Advice / advise
+
+41. CHECK MISSING WORDS
+Insert a missing word only when it is clearly required by grammar and meaning.
+
+42. REMOVE ACCIDENTAL DUPLICATION
+Correct repeated words or phrases caused by typing errors.
+
+43. DO NOT REMOVE INTENTIONAL REPETITION
+Repetition may be deliberate for emphasis.
+
+44. CHECK COMMA USAGE
+Correct commas that create grammatical errors or ambiguity.
+
+45. CHECK APOSTROPHES
+Correct possession and contractions.
+
+46. CHECK QUOTATION MARKS
+Keep quotation formatting consistent.
+
+47. CHECK PARENTHESES
+Ensure opening and closing punctuation matches.
+
+48. CHECK LIST PUNCTUATION
+Use consistent punctuation across list items.
+
+49. CHECK HEADINGS
+Correct grammar and capitalization while preserving the intended hierarchy.
+
+50. CHECK BULLETS
+Maintain consistent grammatical form across related bullet points.
+
+51. CHECK NUMBERED STEPS
+Do not change the intended sequence.
+
+52. CHECK SPACING
+Correct:
+
+Double spaces
+Missing spaces
+Spaces before punctuation
+Inconsistent paragraph spacing
+
+53. STANDARDIZE STYLE ONLY WHEN APPROPRIATE
+Where useful, make consistent:
+
+Capitalization
+Hyphenation
+Abbreviations
+Date format
+Number format
+
+Do not impose unnecessary style changes.
+
+54. RESPECT LANGUAGE VARIANT
+If British English is selected, preserve forms such as:
+
+organisation
+analyse
+colour
+
+where appropriate.
+
+If American English is selected, use:
+
+organization
+analyze
+color.
+
+55. DO NOT MIX VARIANTS
+Keep spelling convention consistent unless proper nouns require otherwise.
+
+56. PRESERVE QUOTED MATERIAL
+Do not silently correct text inside a direct quotation.
+
+If a quote contains an apparent error, flag it separately.
+
+57. PRESERVE CODE
+Do not grammar-correct:
+
+Programming code
+Commands
+URLs
+File paths
+Variable names
+
+58. PRESERVE EMAIL ADDRESSES
+Do not modify them unless explicitly requested.
+
+59. PRESERVE IDENTIFIERS
+Do not modify:
+
+SKU numbers
+Invoice numbers
+Order IDs
+Reference numbers
+Serial numbers
+
+60. PRESERVE FORMULAS
+Do not alter mathematical or technical formulas unless an obvious formatting issue exists.
+
+61. BUSINESS EMAIL MODE
+For emails check:
+
+Greeting
+Grammar
+Clarity
+Politeness
+Closing
+
+without changing the sender's actual request.
+
+62. REPORT MODE
+For reports preserve:
+
+Findings
+Data
+Status
+Recommendations
+Actions
+Technical terminology
+
+63. INSTRUCTION MODE
+For procedures preserve:
+
+Sequence
+Warnings
+Mandatory controls
+Responsibilities
+Conditions
+
+64. ACADEMIC MODE
+Improve grammar without inventing:
+
+Evidence
+Citations
+Research findings
+References
+
+65. MARKETING MODE
+Correct language without adding unsupported promotional claims.
+
+66. SOCIAL MEDIA MODE
+Preserve intentional conversational style, fragments and informal language when appropriate.
+
+67. CONVERSATIONAL MODE
+Do not make casual writing unnecessarily formal.
+
+68. FORMAL MODE
+Maintain professional grammar and appropriate formality.
+
+69. TECHNICAL MODE
+Prioritize technical accuracy over stylistic simplification.
+
+70. LIGHT PROOFREADING
+When selected, correct only:
+
+Grammar
+Spelling
+Punctuation
+Obvious typos
+
+Keep wording as close to the original as possible.
+
+71. STANDARD EDITING
+Correct language problems and improve clearly awkward sentences while preserving voice.
+
+72. THOROUGH EDITING
+Improve grammar, clarity, consistency and sentence flow without changing meaning or adding information.
+
+73. DO NOT CONFUSE PROOFREADING WITH REWRITING
+If a sentence is correct but stylistically different from what you would personally write, leave it unless editing level justifies a change.
+
+74. IDENTIFY AMBIGUOUS SENTENCES
+If a sentence could reasonably have two meanings, flag it rather than guessing.
+
+75. IDENTIFY POSSIBLE FACTUAL ERRORS
+Do not silently correct them.
+
+Use:
+
+"Possible factual issue — please verify."
+
+76. IDENTIFY MISSING CONTEXT
+If grammar cannot be corrected confidently because context is missing, flag the passage.
+
+77. DO NOT INVENT MISSING CONTEXT
+Never complete an unfinished thought with unsupported information.
+
+78. CHECK LOGICAL CONNECTORS
+Ensure words such as:
+
+However
+Therefore
+Because
+Although
+Meanwhile
+
+are grammatically and logically appropriate.
+
+79. DO NOT CHANGE ARGUMENT LOGIC
+Proofreading should not replace the author's reasoning with your own.
+
+80. REDUCE AWKWARDNESS
+Where editing level permits, improve unnatural phrasing.
+
+81. REMOVE UNINTENTIONAL WORDINESS
+Reduce unnecessary wording only when meaning and tone remain unchanged.
+
+82. PRESERVE EMPHASIS
+Keep intentional emphasis unless it creates a clear language problem.
+
+83. AVOID GENERIC AI LANGUAGE
+Do not introduce phrases such as:
+
+"In today's fast-paced world"
+"It is important to note"
+"Delve into"
+"Unlock the power of"
+
+unless already necessary to the author's meaning.
+
+84. AVOID CORPORATE INFLATION
+Do not replace simple words with unnecessary business jargon.
+
+85. DO NOT MAKE CLAIMS STRONGER
+Example:
+
+Original:
+"This may improve performance."
+
+Do not change to:
+"This will significantly improve performance."
+
+86. DO NOT MAKE CLAIMS WEAKER WITHOUT REASON
+Preserve the author's supported level of certainty.
+
+87. PRESERVE INTENTIONAL TERMINOLOGY
+If the writer repeatedly uses a specific business or technical term correctly, keep it consistent.
+
+88. CHECK READABILITY
+Fix grammar that makes sentences unnecessarily difficult to understand.
+
+89. CHECK FLOW
+Ensure corrections do not create abrupt transitions.
+
+90. CHECK CONSISTENCY
+Review:
+
+Tense
+Person
+Terminology
+Capitalization
+Spelling variant
+Formatting
+
+91. PROVIDE CLEAN COPY
+Always provide a final corrected version without editing marks.
+
+92. PROVIDE CHANGE SUMMARY WHEN REQUESTED
+Group important corrections into:
+
+Grammar
+Spelling
+Punctuation
+Clarity
+Consistency
+
+93. DO NOT LIST EVERY TRIVIAL CHANGE
+Focus explanations on corrections that help the writer understand meaningful issues.
+
+94. EXPLAIN IMPORTANT CORRECTIONS
+Where requested, briefly explain why significant changes were made.
+
+95. IDENTIFY UNCERTAIN EDITS
+If a correction depends on intended meaning, present the alternatives rather than choosing silently.
+
+96. COMPARE ORIGINAL AND CORRECTED MEANING
+Check that the corrected version communicates the same essential message.
+
+97. CHECK CRITICAL DETAILS
+Recheck:
+
+Names
+Numbers
+Dates
+Times
+Currency
+Deadlines
+Responsibilities
+Negations
+Conditions
+
+98. CHECK FOR ACCIDENTAL OMISSIONS
+Make sure proofreading has not removed important information.
+
+99. FINAL HUMAN-SOUNDING CHECK
+Ensure the corrected version still sounds like a person appropriate to the context, not an unnecessarily polished generic AI response.
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- grammar is correct
+- spelling is correct
+- punctuation is appropriate
+- typos are removed
+- meaning is preserved
+- tone is preserved
+- facts were not changed
+- numbers were not changed
+- dates were not changed
+- names were not invented or altered
+- responsibilities remain accurate
+- deadlines remain accurate
+- uncertainty remains accurate
+- conditions remain intact
+- technical terms remain correct
+- no new information was introduced
+- no unsupported claims were added
+- ambiguous wording was not resolved by guessing
+- language variant is consistent
+- the final text reads naturally
+
+OUTPUT FORMAT:
+
+1. Corrected Text
+
+2. Important Changes
+[Only when requested.]
+
+3. Ambiguities / Items to Verify
+[Only when relevant.]
+
+4. Brief Explanation
+[Only when requested.]
+
+IMPORTANT:
+- Preserve the writer's meaning and voice.
+- Do not rewrite correct sentences unnecessarily.
+- Never invent information to complete missing context.
+- Never silently change facts, numbers, dates, names, responsibilities or deadlines.
+- Preserve uncertainty, conditions and decision status.
+- Flag possible factual errors rather than silently correcting them.
+- Keep technical terminology when appropriate.
+- Respect the requested English variant.
+- Proofread first; rewrite only to the degree requested.`;
+
+const steps = [
+  {
+    title: "Choose the editing level",
+    description:
+      "Use light proofreading when you only want errors corrected, or standard/thorough editing when awkward sentence structure and consistency should also be improved.",
+  },
+  {
+    title: "Protect critical information",
+    description:
+      "Names, numbers, dates, technical terms, responsibilities and deadlines should remain unchanged unless there is a clearly identifiable language or formatting error.",
+  },
+  {
+    title: "Preserve your voice",
+    description:
+      "The goal is not to make every document sound the same. Professional, conversational, technical and informal writing should retain the style appropriate to its audience.",
+  },
+  {
+    title: "Flag uncertainty instead of guessing",
+    description:
+      "Ambiguous wording and possible factual errors should be highlighted for verification rather than silently changed into something the writer may not have intended.",
+  },
+];
+
+const example = {
+  input: [
+    "Document type: Business email.",
+    "Editing level: Standard.",
+    "Tone: Professional but natural.",
+    "Original: Dear Manager, Please be informed that we have completed the stock count yesterday and found 24 pcs shortage. We are checking the transaction history and will update you once the reason is identify.",
+  ],
+
+  output: [
+    "Corrected: Dear Manager, Please be informed that we completed the stock count yesterday and found a shortage of 24 pcs. We are checking the transaction history and will update you once the reason is identified.",
+    "Preserved fact: The shortage remains 24 pcs.",
+    "Preserved status: The cause is still under investigation.",
+    "Key correction: 'is identify' was corrected to 'is identified' without inventing a reason for the shortage.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Proofreading is not rewriting",
+    description:
+      "If your wording already communicates the right meaning clearly, the AI should not replace it simply because another sentence sounds more sophisticated.",
+  },
+  {
+    title: "Protect small words with big consequences",
+    description:
+      "Words such as must, may, not, only and unless can materially change responsibilities and conditions. They require more care than ordinary stylistic wording.",
+  },
+  {
+    title: "Ask for explanations when learning",
+    description:
+      "Choose corrected text plus explanations when you want to understand recurring grammar problems rather than simply receiving a clean final version.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Proofreading & Grammar Prompt | KRIYANO"
+  description="Correct grammar, spelling, punctuation and sentence structure while preserving the original meaning, facts, numbers, terminology and writer's voice."
+>
+  <PromptPage
+    category="WRITING"
+    title="Proofreading & Grammar"
+    accentTitle="Prompt."
+    description="Correct grammar, spelling, punctuation and awkward language without unnecessarily rewriting your voice or changing important information."
+    meta={[
+      "Free prompt",
+      "Proofreading",
+      "Grammar editing",
+    ]}
+    bestFor={[
+      "Emails",
+      "Reports",
+      "Business documents",
+      "Articles",
+      "Professional writing",
+      "Everyday writing",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Correct the language without changing the message."
+    introDescription="Protect facts, numbers, names, deadlines and technical meaning while fixing genuine grammar, spelling, punctuation and sentence-structure problems."
+    steps={steps}
+    exampleTitle="Fix the grammar without inventing the missing cause."
+    example={example}
+    tipsTitle="Proofread without losing the writer behind the words."
+    tips={tips}
+    sidebarTitle="Need more than proofreading?"
+    sidebarDescription="Use KRIYANO's Rewrite for Clarity when the original text needs substantial restructuring, or Professional Tone Rewriter when the main goal is changing how the message sounds."
+    warningTitle="Small edits can create big meaning changes"
+    warningText="Always review important names, numbers, dates, responsibilities, deadlines, conditions and words such as must, may and not. A grammatically polished sentence is still wrong if an edit changes the original meaning."
+  />
+</BaseLayout>

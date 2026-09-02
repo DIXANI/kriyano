@@ -1,0 +1,863 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced warehouse performance analyst, inventory-control specialist and logistics operations manager.
+
+TASK:
+Analyze the warehouse KPI data provided below and identify performance gaps, trends, likely operational causes and practical improvement priorities.
+
+WAREHOUSE / OPERATION:
+[Describe the warehouse, distribution center, fulfillment center, 3PL operation or store.]
+
+BUSINESS TYPE:
+[Retail / E-commerce / FMCG / 3PL / Spare Parts / Manufacturing / Cold Chain / Other.]
+
+ANALYSIS PERIOD:
+[Daily / Weekly / Monthly / Quarterly / Custom.]
+
+KPI DATA:
+[Paste KPI table, dashboard figures, report data or summarized results.]
+
+TARGETS:
+[Provide KPI targets if available.]
+
+PREVIOUS PERIOD:
+[Provide comparison figures if available.]
+
+VOLUME:
+[Orders, lines, pallets, cartons, receipts, units or other relevant workload.]
+
+STAFFING:
+[Headcount, shifts, labor hours or overtime if available.]
+
+SYSTEM:
+[WMS / ERP / SAP / Spreadsheet / Other.]
+
+KNOWN OPERATIONAL ISSUES:
+[Backlogs, stockouts, congestion, absenteeism, system issues, equipment breakdowns, etc.]
+
+ANALYSIS GOAL:
+[Example: identify underperforming areas, prepare management review, improve warehouse productivity.]
+
+SPECIAL REQUIREMENTS:
+[Any other instructions.]
+
+WAREHOUSE KPI ANALYSIS REQUIREMENTS:
+
+1. VALIDATE THE KPI DATA
+Before analyzing performance, check for:
+
+- missing KPI values
+- missing targets
+- inconsistent reporting periods
+- duplicate figures
+- impossible values
+- different units
+- percentage vs absolute-value confusion
+- incomplete volume data
+- inconsistent labor-hour definitions
+- missing operational context
+
+Do not treat questionable data as reliable without flagging it.
+
+2. KPI OVERVIEW
+Create a clear summary table with:
+
+KPI:
+Actual:
+Target:
+Variance:
+Previous period:
+Trend:
+Status:
+Priority:
+
+Use:
+- On Target
+- Watch
+- Underperforming
+- Critical
+
+Only use targets that were supplied or clearly defined.
+
+3. RECEIVING KPIs
+Analyze where available:
+
+- Receiving Accuracy %
+- Dock-to-Stock Time
+- Receipts per Labor Hour
+- Pallets Received per Hour
+- Receiving Discrepancy Rate
+- Supplier Delivery Accuracy
+- Receiving Backlog
+- Vehicle Turnaround Time
+
+Consider:
+- inbound volume
+- dock capacity
+- document readiness
+- inspection delays
+- unloading
+- scanning
+- system posting
+- putaway dependency
+
+4. PUTAWAY KPIs
+Analyze where available:
+
+- Putaway Cycle Time
+- Pallets Put Away per Labor Hour
+- Putaway Backlog
+- Putaway Accuracy
+- Travel Time
+- Location Assignment Efficiency
+
+Investigate:
+- congestion
+- location availability
+- equipment
+- slotting
+- staging
+- WMS task release
+- staffing balance
+
+5. INVENTORY KPIs
+Analyze:
+
+- Inventory Accuracy %
+- Location Accuracy %
+- Cycle Count Accuracy
+- Adjustment Rate
+- Negative Stock Count
+- Stock Discrepancy Rate
+- Expired Inventory
+- Damaged Inventory
+- Blocked Inventory
+
+Identify whether poor inventory accuracy may be connected to:
+- receiving errors
+- delayed transactions
+- wrong putaway
+- picking errors
+- transfers
+- returns
+- master data
+- counting weaknesses
+
+Do not automatically assume the inventory team caused the issue.
+
+6. SPACE UTILIZATION
+Where data is available analyze:
+
+- Storage Utilization %
+- Occupancy %
+- Empty Location %
+- Pallet Position Utilization
+- Cubic Utilization
+- Congestion indicators
+
+Be careful:
+High occupancy can improve space utilization but also increase congestion and reduce productivity.
+
+Do not recommend maximizing occupancy without considering operational flow.
+
+7. REPLENISHMENT KPIs
+Analyze:
+
+- Replenishment Completion %
+- Replenishment Response Time
+- Emergency Replenishment Rate
+- Pick-Face Stockout Rate
+- Replenishments per Labor Hour
+- Replenishment Backlog
+
+Investigate relationships with:
+- picking interruptions
+- slotting
+- min/max settings
+- demand changes
+- shift timing
+- reserve stock availability
+
+8. PICKING PRODUCTIVITY
+Analyze where available:
+
+- Lines Picked per Labor Hour
+- Orders Picked per Hour
+- Units Picked per Hour
+- Picks per Labor Hour
+- Travel Time
+- Picking Cycle Time
+
+Consider:
+- order profile
+- SKU velocity
+- travel distance
+- picking method
+- batching
+- zone design
+- replenishment
+- congestion
+- scanner performance
+- pick-face design
+
+Do not compare productivity figures without considering workload and order complexity.
+
+9. PICKING ACCURACY
+Analyze:
+
+- Picking Accuracy %
+- Mis-pick Rate
+- Short-Pick Rate
+- Wrong SKU Rate
+- Wrong Quantity Rate
+- Customer Picking Complaints
+
+Investigate:
+- barcode validation
+- similar SKUs
+- location accuracy
+- training
+- pick sequence
+- replenishment
+- packing verification
+
+10. ORDER CYCLE TIME
+Analyze time from relevant start point to completion.
+
+Possible components:
+
+Order release
+→ Picking
+→ Packing
+→ Staging
+→ Dispatch
+
+Identify where delay is concentrated.
+
+Do not treat total cycle time as a single-process issue without breaking it down.
+
+11. PACKING KPIs
+Analyze:
+
+- Orders Packed per Hour
+- Packing Accuracy %
+- Packing Cycle Time
+- Rework Rate
+- Packing Backlog
+- Packaging Material Usage
+
+Investigate:
+- station layout
+- label printing
+- order verification
+- materials
+- workload balance
+- system delays
+
+12. DISPATCH KPIs
+Analyze:
+
+- On-Time Dispatch %
+- Dispatch Accuracy %
+- Loading Turnaround Time
+- Orders Pending Dispatch
+- Dock Utilization
+- Vehicle Waiting Time
+- Loading Productivity
+
+Investigate:
+- staging
+- route planning
+- vehicle readiness
+- documentation
+- loading sequence
+- picking completion
+- customer cut-off
+
+13. DAMAGE KPI
+Analyze:
+
+- Damage Rate
+- Damage Quantity
+- Damage Value
+- Damage by Process
+- Damage by Product
+- Damage by Equipment / Zone
+
+Possible areas:
+- receiving
+- storage
+- picking
+- equipment handling
+- loading
+- packaging
+- transport
+
+Do not assign cause without evidence.
+
+14. RETURNS KPI
+Where relevant analyze:
+
+- Return Rate
+- Return Processing Time
+- Return-to-Stock Time
+- Return Accuracy
+- Return Reasons
+
+Separate:
+- warehouse error
+- customer return
+- damaged product
+- commercial return
+- transport issue
+
+15. LABOR PRODUCTIVITY
+Analyze where relevant:
+
+- Units per Labor Hour
+- Lines per Labor Hour
+- Orders per Labor Hour
+- Pallets per Labor Hour
+- Cost per Labor Hour
+- Productive vs Nonproductive Hours
+
+Consider:
+- workload
+- task mix
+- staffing
+- travel
+- equipment
+- system downtime
+- indirect activities
+
+Do not assume low productivity automatically means poor employee performance.
+
+16. LABOR UTILIZATION
+Where available evaluate:
+
+Labor Utilization % =
+Productive Labor Hours / Available Labor Hours × 100
+
+Clarify what is included as productive time.
+
+High utilization is not automatically desirable if it creates:
+- fatigue
+- safety risk
+- backlog
+- insufficient flexibility
+
+17. OVERTIME
+Analyze:
+
+- Overtime Hours
+- Overtime Cost
+- Overtime %
+- Overtime by Area
+- Overtime Trend
+
+Investigate:
+- volume peaks
+- absenteeism
+- poor scheduling
+- backlog
+- system downtime
+- process inefficiency
+- late inbound activity
+- customer cut-off requirements
+
+18. ABSENTEEISM
+If data exists, evaluate whether absenteeism correlates with:
+
+- productivity
+- overtime
+- backlog
+- service failures
+- quality problems
+
+Do not infer causation solely from correlation.
+
+19. EQUIPMENT PERFORMANCE
+Analyze if available:
+
+- Equipment Availability %
+- Downtime
+- Forklift Utilization
+- Scanner Downtime
+- Conveyor Downtime
+- Maintenance Incidents
+
+Identify whether equipment issues are limiting throughput.
+
+20. SYSTEM PERFORMANCE
+Check metrics such as:
+
+- WMS downtime
+- transaction delays
+- interface failures
+- scanner failures
+- label-printing issues
+- system response time
+
+Separate system-related lost time from process-related lost time.
+
+21. SERVICE-LEVEL KPIs
+Where relevant analyze:
+
+- OTIF
+- On-Time Shipment
+- Order Fill Rate
+- Perfect Order Rate
+- Customer Complaints
+- Backorder Rate
+
+Identify warehouse KPIs that may be contributing to service-level performance.
+
+22. COST KPIs
+Where available analyze:
+
+- Cost per Order
+- Cost per Line
+- Cost per Unit
+- Cost per Pallet
+- Labor Cost
+- Overtime Cost
+- Damage Cost
+- Adjustment Cost
+- Storage Cost
+
+Explain cost movement relative to workload where possible.
+
+Do not compare cost periods without considering volume changes.
+
+23. KPI VARIANCE
+For each KPI where target exists:
+
+Variance =
+Actual - Target
+
+For percentage measures, also explain whether a higher or lower value is desirable.
+
+Examples:
+
+Higher is usually better:
+- accuracy
+- productivity
+- on-time dispatch
+
+Lower is usually better:
+- damage
+- cycle time
+- overtime
+- discrepancy rate
+
+Do not use one variance interpretation for every KPI.
+
+24. TREND ANALYSIS
+Compare performance across available periods.
+
+Classify:
+
+Improving
+Stable
+Deteriorating
+Volatile
+
+Do not claim a trend from a single observation.
+
+25. KPI RELATIONSHIPS
+Look for relationships such as:
+
+High storage occupancy
+→ increased travel / congestion
+→ reduced picking productivity
+
+Poor replenishment performance
+→ pick-face stockouts
+→ picking delays
+→ late dispatch
+
+Poor inventory accuracy
+→ short picks
+→ rework
+→ order delays
+
+High overtime
+→ possible workload / staffing / process issue
+
+High picking speed + falling accuracy
+→ potential quality trade-off
+
+Clearly state that relationships are hypotheses unless supported by evidence.
+
+26. BOTTLENECK IDENTIFICATION
+Identify the KPI most likely to be constraining warehouse performance.
+
+Consider:
+
+- backlog accumulation
+- cycle time
+- utilization
+- throughput
+- waiting
+- dependency on upstream / downstream processes
+
+Do not assume the worst KPI is automatically the main bottleneck.
+
+27. ROOT-CAUSE SIGNALS
+For underperforming KPIs identify investigation categories:
+
+People
+Process
+System
+Layout
+Equipment
+Inventory
+Demand
+Scheduling
+Supplier
+Customer Requirements
+Master Data
+Management Controls
+
+Separate:
+- KPI symptom
+- possible cause
+- evidence required
+- confirmed cause
+
+28. KPI NORMALIZATION
+Where appropriate normalize performance against workload.
+
+Examples:
+
+Per labor hour
+Per order
+Per line
+Per pallet
+Per 1,000 units
+
+This helps avoid misleading comparisons when volume changes.
+
+29. BENCHMARKING
+If external benchmarks are supplied, compare them carefully.
+
+Do not invent industry benchmarks.
+
+Explain differences in:
+- operation type
+- order profile
+- automation
+- warehouse size
+- SKU profile
+- service level
+
+30. PRIORITY MATRIX
+Prioritize KPI issues using:
+
+Performance Gap:
+High / Medium / Low
+
+Operational Impact:
+High / Medium / Low
+
+Customer Impact:
+High / Medium / Low
+
+Financial Impact:
+High / Medium / Low
+
+Ease of Improvement:
+High / Medium / Low
+
+Priority:
+P1 / P2 / P3 / P4
+
+31. QUICK WINS
+Identify low-cost / low-complexity actions.
+
+For each:
+
+KPI:
+Issue:
+Action:
+Expected impact:
+Evidence needed:
+Owner role:
+Measurement:
+
+32. MEDIUM-TERM IMPROVEMENTS
+Recommend where relevant:
+
+- slotting review
+- labor planning
+- replenishment redesign
+- process standardization
+- training
+- layout changes
+- system configuration
+- equipment maintenance
+- KPI governance
+
+33. LONG-TERM IMPROVEMENTS
+Only when justified consider:
+
+- WMS enhancement
+- automation
+- conveyor
+- sortation
+- labor-management system
+- racking redesign
+- advanced slotting
+- dock redesign
+
+Do not recommend expensive technology unless the KPI evidence supports the need.
+
+34. KPI TARGET REVIEW
+Assess whether targets appear:
+
+- realistic
+- measurable
+- clearly defined
+- aligned with business requirements
+- balanced against quality and safety
+
+If there is insufficient evidence, say that target validity requires review.
+
+35. LEADING VS LAGGING KPIs
+Identify where useful:
+
+Leading indicators:
+- replenishment backlog
+- open receiving backlog
+- equipment downtime
+
+Lagging indicators:
+- late dispatch
+- inventory discrepancy
+- customer complaint
+
+Recommend a balanced dashboard where appropriate.
+
+36. KPI DASHBOARD RECOMMENDATION
+Recommend a concise management dashboard.
+
+Possible structure:
+
+Safety
+Service
+Quality
+Cost
+Productivity
+Inventory
+
+Do not overload the dashboard with unnecessary metrics.
+
+37. KPI OWNERSHIP
+For each important KPI assign a responsible role.
+
+Examples:
+
+Receiving Supervisor
+Inventory Controller
+Picking Supervisor
+Warehouse Manager
+Operations Manager
+Maintenance
+System Support
+
+Do not invent employee names.
+
+38. REVIEW FREQUENCY
+Recommend appropriate review timing.
+
+Examples:
+
+Daily:
+- backlog
+- productivity
+- dispatch
+- safety incidents
+
+Weekly:
+- accuracy
+- overtime
+- trends
+
+Monthly:
+- cost
+- inventory accuracy
+- strategic improvement
+
+Choose frequency based on how quickly the KPI can meaningfully change.
+
+39. ACTION PLAN
+For each priority KPI provide:
+
+KPI:
+Current status:
+Target:
+Gap:
+Likely causes:
+Evidence required:
+Immediate action:
+Corrective action:
+Responsible role:
+Review date:
+Success measure:
+
+40. MANAGEMENT SUMMARY
+Summarize:
+
+Strongest KPI:
+Weakest KPI:
+Most significant deterioration:
+Main bottleneck:
+Highest customer risk:
+Highest financial risk:
+Most important root-cause investigation:
+Best quick win:
+Highest-priority improvement:
+Recommended management focus:
+
+OUTPUT FORMAT:
+
+1. Executive Summary
+2. KPI Data Quality Review
+3. KPI Scorecard
+4. Receiving Performance
+5. Putaway Performance
+6. Inventory Performance
+7. Space Utilization
+8. Replenishment Performance
+9. Picking Productivity & Accuracy
+10. Packing Performance
+11. Dispatch Performance
+12. Labor & Overtime
+13. Equipment & System Performance
+14. Service & Cost KPIs
+15. KPI Trend Analysis
+16. KPI Relationships
+17. Bottleneck Analysis
+18. Root-Cause Signals
+19. Priority Matrix
+20. Quick Wins
+21. Medium-Term Improvements
+22. Long-Term Improvements
+23. Dashboard & KPI Ownership
+24. Action Plan
+25. Management Summary
+
+IMPORTANT:
+- Do not invent KPI values, targets or benchmarks.
+- Do not compare periods without considering workload differences.
+- Do not treat correlation as proven causation.
+- Distinguish KPI symptoms from root causes.
+- Explain whether higher or lower performance is desirable for each KPI.
+- Do not optimize productivity at the expense of safety or accuracy.
+- Do not recommend additional labor before reviewing workload and process efficiency.
+- Do not recommend automation without evidence that it addresses the actual constraint.
+- Normalize metrics where workload differences could distort comparisons.
+- Clearly identify data gaps before reaching strong conclusions.`;
+
+const steps = [
+  {
+    title: "Check the numbers first",
+    description:
+      "Verify periods, targets, units, volumes and labor-hour definitions before comparing warehouse performance.",
+  },
+  {
+    title: "Find the KPI relationships",
+    description:
+      "Look beyond individual red numbers. Poor replenishment, inventory accuracy or space utilization can directly affect picking and dispatch performance.",
+  },
+  {
+    title: "Separate symptoms from causes",
+    description:
+      "Low productivity is a result, not automatically a root cause. Investigate workload, travel, congestion, systems, equipment and process design.",
+  },
+  {
+    title: "Prioritize measurable actions",
+    description:
+      "Focus improvement work on KPIs with the strongest operational, customer or financial impact and define how each action will be measured.",
+  },
+];
+
+const example = {
+  input: [
+    "Picking productivity target: 120 lines per labor hour.",
+    "Current month: 98 lines per labor hour.",
+    "Previous month: 110 lines per labor hour.",
+    "Picking accuracy: 99.7%, stable.",
+    "Emergency replenishments increased during the same month.",
+    "Warehouse occupancy is approximately 94%.",
+    "Goal: Understand why productivity dropped.",
+  ],
+
+  output: [
+    "Picking productivity is below target and has deteriorated compared with the previous period, while picking accuracy remains stable.",
+    "The increase in emergency replenishments is a potential contributor because pickers may be waiting for stock or experiencing interruptions.",
+    "High warehouse occupancy may also increase travel, congestion or replenishment difficulty, but this requires operational evidence before being treated as a root cause.",
+    "Recommended investigation: compare picker travel time, replenishment delays, pick-face stockouts, order profile and lines per order against the previous month.",
+    "Do not recommend additional picking labor until workload and delay causes are quantified.",
+    "Track picking productivity together with emergency replenishment rate and pick-face stockouts to determine whether the relationship is confirmed.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Never read KPIs in isolation",
+    description:
+      "Warehouse processes depend on each other. A receiving, inventory or replenishment problem can appear later as poor picking or dispatch performance.",
+  },
+  {
+    title: "Normalize changing workloads",
+    description:
+      "Total orders or total labor cost can be misleading when volume changes. Use per-hour, per-order or per-line measures where appropriate.",
+  },
+  {
+    title: "Protect quality and safety",
+    description:
+      "A productivity increase is not an improvement if picking accuracy, damage levels, employee safety or customer service deteriorate.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Warehouse KPI Analysis Prompt | KRIYANO"
+  description="Analyze warehouse KPIs across receiving, inventory, replenishment, picking, packing, dispatch, labor, cost and service to identify trends, bottlenecks and improvement priorities."
+>
+  <PromptPage
+    category="OPERATIONS & LOGISTICS"
+    title="Warehouse KPI"
+    accentTitle="Analysis."
+    description="Analyze warehouse performance across productivity, accuracy, service, inventory, labor and cost to identify meaningful gaps, relationships and improvement priorities."
+    meta={[
+      "Free prompt",
+      "Warehouse KPIs",
+      "Performance analysis",
+    ]}
+    bestFor={[
+      "Warehouse managers",
+      "Operations supervisors",
+      "Inventory teams",
+      "3PL operations",
+      "Performance reviews",
+      "Management reporting",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="KPIs should explain performance, not just report numbers."
+    introDescription="Compare actual performance with targets and previous periods, normalize for workload, identify relationships between processes and investigate the operational causes behind meaningful gaps."
+    steps={steps}
+    exampleTitle="Turn a KPI gap into an operational investigation."
+    example={example}
+    tipsTitle="Get more value from warehouse KPIs."
+    tips={tips}
+    sidebarTitle="Found an underperforming process?"
+    sidebarDescription="Use KRIYANO's Warehouse Process Improvement or Root Cause Analysis prompts to investigate and redesign the process behind a weak KPI."
+    warningTitle="A KPI is a signal, not automatically a cause"
+    warningText="Performance figures show what happened, but they may not explain why. Validate workload, process conditions, system performance and operational evidence before assigning causes or implementing major changes."
+  />
+</BaseLayout>

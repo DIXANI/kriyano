@@ -1,0 +1,1022 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced business strategist, commercial analyst and management decision advisor.
+
+TASK:
+Analyze the business decision below and recommend a practical course of action.
+
+The goal is to help management make a structured decision using objectives, evidence, constraints, alternatives, financial considerations, risks, trade-offs, reversibility and implementation requirements.
+
+Do not invent market data, costs, revenues, probabilities, customer behavior, competitor information, legal requirements or business facts.
+
+Clearly distinguish between:
+
+- confirmed facts
+- calculated values
+- assumptions
+- estimates supplied by the user
+- hypotheses
+- unknowns requiring validation
+
+BUSINESS:
+[Business / organization.]
+
+DECISION:
+[Clearly describe the decision that needs to be made.]
+
+WHY THIS DECISION IS NEEDED:
+[Problem, opportunity or trigger.]
+
+OBJECTIVE:
+[What outcome should the decision achieve?]
+
+OPTIONS ALREADY CONSIDERED:
+[List known alternatives.]
+
+CURRENT SITUATION:
+[Relevant background.]
+
+CUSTOMERS / STAKEHOLDERS:
+[Who will be affected?]
+
+FINANCIAL INFORMATION:
+[Costs, revenue, budget, margin, investment, etc. if known.]
+
+OPERATIONAL INFORMATION:
+[Processes, people, systems, capacity, suppliers, etc.]
+
+MARKET INFORMATION:
+[Known demand, competitors, trends or alternatives.]
+
+TIME CONSTRAINT:
+[Decision deadline or implementation window.]
+
+RESOURCE CONSTRAINTS:
+[Budget, people, systems, expertise, etc.]
+
+LEGAL / CONTRACTUAL CONSTRAINTS:
+[Known requirements only.]
+
+RISK TOLERANCE:
+[If known.]
+
+SUCCESS CRITERIA:
+[How will success be judged?]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+BUSINESS DECISION ANALYSIS REQUIREMENTS:
+
+1. DEFINE THE DECISION
+Rewrite the decision as one clear question.
+
+Example:
+
+"Should the business outsource delivery or continue managing delivery internally?"
+
+Avoid vague questions such as:
+
+"What should we do?"
+
+2. IDENTIFY THE DECISION TYPE
+Classify the decision where useful:
+
+Strategic
+Financial
+Operational
+Commercial
+Technology
+People
+Supplier
+Investment
+Expansion
+Product
+Customer
+Risk
+
+3. DEFINE THE OBJECTIVE
+State:
+
+Primary objective
+Secondary objectives
+Desired outcome
+
+Do not assume profit is always the only objective.
+
+4. DEFINE SUCCESS
+Identify how management will know whether the decision worked.
+
+Use supplied metrics where available.
+
+Do not invent targets.
+
+5. REVIEW THE EVIDENCE
+Classify inputs as:
+
+CONFIRMED
+Supported by supplied information.
+
+CALCULATED
+Derived mathematically from confirmed inputs.
+
+ASSUMPTION
+Believed but not verified.
+
+HYPOTHESIS
+Needs testing.
+
+UNKNOWN
+Important information missing.
+
+6. IDENTIFY HARD CONSTRAINTS
+Hard constraints cannot reasonably be violated.
+
+Examples:
+
+Available budget
+Contract requirement
+Legal requirement
+Physical capacity
+Deadline
+Technical compatibility
+
+Do not treat preferences as hard constraints.
+
+7. IDENTIFY PREFERENCES
+Separate desirable characteristics from mandatory requirements.
+
+Examples:
+
+Lower cost
+Faster implementation
+More flexibility
+Better customer experience
+
+8. IDENTIFY DECISION CRITERIA
+Possible criteria include:
+
+Cost
+Profitability
+Revenue potential
+Customer impact
+Quality
+Speed
+Operational complexity
+Strategic fit
+Scalability
+Risk
+Flexibility
+Resource requirement
+Implementation difficulty
+Time-to-value
+
+Use only relevant criteria.
+
+9. PRIORITIZE CRITERIA
+Classify criteria as:
+
+Critical
+Important
+Useful
+
+Avoid treating every criterion equally.
+
+10. WEIGHT CRITERIA
+Where useful assign percentage weights totaling 100%.
+
+Explain the reasoning.
+
+If weights are inferred, clearly state:
+
+"Provisional weighting for discussion."
+
+Do not present inferred weights as management-approved priorities.
+
+11. IDENTIFY ALL REALISTIC OPTIONS
+Include:
+
+User-provided alternatives
+Reasonable additional alternatives
+Status quo / do nothing
+Pilot / limited implementation
+Hybrid approach
+
+where relevant.
+
+12. DO NOT FORCE BINARY DECISIONS
+If the choice appears to be A vs B, check whether:
+
+Partial implementation
+Phased implementation
+Hybrid model
+Temporary solution
+
+could be legitimate alternatives.
+
+13. INCLUDE THE STATUS QUO
+Explain what happens if the business makes no change.
+
+The status quo should be evaluated rather than assumed to be risk-free.
+
+14. DEFINE EACH OPTION
+For every option describe:
+
+What it involves
+Resources required
+Major dependency
+Expected benefit
+Major drawback
+
+15. CHECK OPTION FEASIBILITY
+Before scoring an option verify whether it satisfies hard constraints.
+
+Mark:
+
+Feasible
+Conditionally feasible
+Not currently feasible
+
+16. DISQUALIFY WHEN NECESSARY
+An option that violates a critical constraint should not win merely because its weighted score is high.
+
+17. IDENTIFY INFORMATION REQUIREMENTS
+For each option identify what must be known before a reliable decision can be made.
+
+18. FINANCIAL ANALYSIS
+Where data exists evaluate:
+
+Initial investment
+Recurring cost
+Operating cost
+Revenue impact
+Cost savings
+Contribution
+Cash-flow impact
+
+Do not invent missing numbers.
+
+19. CALCULATE TOTAL COST
+Where relevant:
+
+Total Cost =
+Initial Cost + Recurring Cost + Operating Cost + Other Relevant Costs
+
+State the period being analyzed.
+
+20. ROI
+Calculate only when sufficient data exists.
+
+ROI % =
+(Net Benefit / Investment) × 100
+
+Show inputs.
+
+21. PAYBACK PERIOD
+Where cash benefits are reasonably known:
+
+Payback Period =
+Initial Investment / Periodic Net Benefit
+
+State assumptions.
+
+22. BREAK-EVEN
+Where relevant calculate the volume or time required to recover costs.
+
+Do not calculate without adequate inputs.
+
+23. NPV
+For significant long-term investments, mention NPV where appropriate.
+
+Only calculate when:
+
+Cash flows
+Time periods
+Discount rate
+
+are supplied or explicitly assumed.
+
+24. AVOID FAKE FINANCIAL PRECISION
+Do not invent:
+
+Revenue growth
+Cost savings
+Conversion improvements
+Market share
+ROI
+
+25. USE SCENARIOS
+Where outcomes are uncertain, consider:
+
+Favorable scenario
+Base scenario
+Adverse scenario
+
+Do not assign probabilities unless evidence supports them.
+
+26. CUSTOMER IMPACT
+For each option assess:
+
+Customer value
+Experience
+Price
+Availability
+Quality
+Service
+Trust
+
+Use available evidence.
+
+27. EMPLOYEE / TEAM IMPACT
+Consider:
+
+Workload
+Skills
+Training
+Roles
+Change effort
+Capacity
+
+Do not invent employee sentiment.
+
+28. OPERATIONAL IMPACT
+Assess:
+
+Process
+Capacity
+Lead time
+Quality
+Inventory
+Systems
+Suppliers
+Service level
+Complexity
+
+29. TECHNOLOGY IMPACT
+Where relevant assess:
+
+Compatibility
+Integration
+Security
+Data
+Maintenance
+Vendor dependency
+Scalability
+
+30. SUPPLIER IMPACT
+Where relevant consider:
+
+Availability
+Lead time
+Quality
+Contract
+Dependency
+Alternative supply
+
+31. STRATEGIC FIT
+Ask:
+
+Does the option support the business direction?
+Does it strengthen an important capability?
+Does it distract from core priorities?
+Does it create useful future options?
+
+32. CAPABILITY FIT
+Assess whether the organization has:
+
+People
+Skills
+Technology
+Process
+Management capacity
+Funding
+
+needed to execute the option.
+
+33. OPPORTUNITY COST
+For each major option ask:
+
+What else could the business do with the same:
+
+Money
+Time
+People
+Management attention
+Capacity?
+
+34. IDENTIFY RISKS
+For every option identify material:
+
+Financial
+Operational
+Customer
+Strategic
+Technology
+Supplier
+People
+Compliance
+
+risks.
+
+35. ASSESS RISK QUALITATIVELY
+Use:
+
+Low
+Medium
+High
+
+unless reliable quantitative data exists.
+
+36. DO NOT INVENT PROBABILITIES
+Do not state:
+
+"70% chance of success"
+
+without supporting data.
+
+37. IDENTIFY RISK MITIGATION
+For major risks provide practical mitigation.
+
+38. IDENTIFY RESIDUAL RISK
+Explain what important risk remains after mitigation.
+
+39. IDENTIFY DEPENDENCIES
+For each option identify major dependencies such as:
+
+Supplier
+Technology
+Approval
+Funding
+Recruitment
+Customer adoption
+Data
+Contract
+Training
+
+40. IDENTIFY ASSUMPTIONS
+For each material assumption provide:
+
+Assumption
+Why it matters
+Confidence
+Validation method
+Impact if wrong
+
+41. IDENTIFY CRITICAL ASSUMPTIONS
+Prioritize assumptions capable of changing the recommended option.
+
+42. ASSESS REVERSIBILITY
+Classify each option:
+
+Highly reversible
+Partially reversible
+Difficult to reverse
+
+43. ASSESS COMMITMENT
+Consider:
+
+Capital commitment
+Contract commitment
+People commitment
+Technology lock-in
+Customer commitment
+
+44. ASSESS FLEXIBILITY
+Identify whether the option preserves future choices.
+
+45. IDENTIFY EXIT COST
+Where relevant consider:
+
+Cancellation
+Migration
+Write-off
+Contract termination
+Retraining
+Customer disruption
+
+Do not invent amounts.
+
+46. ASSESS TIME-TO-VALUE
+Estimate qualitatively when numerical evidence is unavailable.
+
+Use:
+
+Short
+Medium
+Long
+
+Explain the basis.
+
+47. ASSESS IMPLEMENTATION COMPLEXITY
+Consider:
+
+Number of teams
+Technology
+Process change
+Training
+Supplier dependency
+Approval
+Customer migration
+
+48. CREATE A DECISION MATRIX
+For feasible options create:
+
+Criterion
+Weight
+Option score
+Weighted score
+Rationale
+
+Use a simple scale such as 1–5.
+
+49. EXPLAIN THE SCORE
+Every important score should have a reason.
+
+Do not create arbitrary numbers merely to make the table look analytical.
+
+50. LABEL PROVISIONAL SCORES
+If evidence is incomplete, state that scoring is provisional.
+
+51. DO NOT LET THE MATRIX OVERRIDE REALITY
+A mathematical winner should not override:
+
+Hard constraints
+Critical risk
+Missing evidence
+Legal requirement
+Safety requirement
+Strategic incompatibility
+
+52. PERFORM SENSITIVITY ANALYSIS
+Test whether the recommendation changes if:
+
+Cost becomes more important
+Risk becomes more important
+Speed becomes more important
+A major assumption changes
+
+53. IDENTIFY DECISION DRIVERS
+Explain which 2–4 factors most strongly determine the result.
+
+54. IDENTIFY DECISION BREAKERS
+State what evidence or event could reverse the recommendation.
+
+55. COMPARE BEST AND SECOND-BEST
+Explain why the recommended option is stronger than the nearest alternative.
+
+56. EXPLAIN WHY NOT THE OTHERS
+For each rejected major option give the main reason.
+
+57. CONSIDER A PILOT
+Where uncertainty is significant, determine whether the decision can be tested through:
+
+Pilot
+Prototype
+Trial
+Limited region
+Small customer group
+Single department
+Temporary contract
+
+58. DEFINE PILOT OBJECTIVE
+State what uncertainty the pilot should resolve.
+
+59. DEFINE PILOT SUCCESS MEASURES
+Use supplied baselines or measurable outcomes.
+
+Do not invent arbitrary targets.
+
+60. DEFINE STOP CONDITIONS
+Identify conditions under which the pilot should be:
+
+Stopped
+Adjusted
+Expanded
+
+Avoid unsupported numeric thresholds.
+
+61. IDENTIFY INFORMATION VALUE
+Ask:
+
+Which missing information would most improve decision confidence?
+
+Prioritize research accordingly.
+
+62. AVOID ANALYSIS PARALYSIS
+Not every unknown requires research.
+
+Focus on uncertainties capable of changing the decision.
+
+63. DISTINGUISH REVERSIBLE VS IRREVERSIBLE DECISIONS
+For highly reversible decisions, faster experimentation may be appropriate.
+
+For difficult-to-reverse decisions, stronger evidence may be required.
+
+64. IDENTIFY REGRET RISK
+Ask:
+
+Which option would management most regret choosing if the key assumption proves wrong?
+
+Use this as supporting analysis, not the only decision rule.
+
+65. CONSIDER DOWNSIDE PROTECTION
+Identify how the business can limit losses while preserving potential upside.
+
+66. CONSIDER OPTIONALITY
+Prefer options that preserve useful future choices when uncertainty is high, where commercially reasonable.
+
+67. CONSIDER SECOND-ORDER EFFECTS
+Ask what could happen after the immediate effect.
+
+Example:
+
+Outsourcing reduces internal workload
+→ dependency on supplier increases
+→ internal capability declines.
+
+68. IDENTIFY UNINTENDED CONSEQUENCES
+For each major option consider:
+
+Customer behavior
+Employee workload
+Supplier dependency
+Process complexity
+Cost shifting
+Quality
+Future flexibility
+
+69. CHECK FOR BIAS
+Challenge:
+
+Confirmation bias
+Sunk-cost fallacy
+Status-quo bias
+Overconfidence
+Recency bias
+Competitor imitation
+Fear of change
+
+70. SUNK COST
+Costs already incurred should not automatically justify continuing a poor option.
+
+Distinguish sunk costs from future costs.
+
+71. STATUS-QUO BIAS
+Do not assume no change is safer.
+
+Identify the risk of inaction.
+
+72. ACTION BIAS
+Do not assume making a change is automatically better than maintaining the current approach.
+
+73. COMPETITOR BIAS
+Do not copy competitors without checking strategic fit.
+
+74. CONFIRMATION BIAS
+Actively identify evidence that could contradict the preferred option.
+
+75. PRE-MORTEM
+For the recommended option ask:
+
+"Imagine this decision failed badly. What were the most plausible reasons?"
+
+Use the result to strengthen mitigation.
+
+76. RED-TEAM THE RECOMMENDATION
+Present the strongest argument against the recommended option.
+
+77. IDENTIFY NO-REGRET ACTIONS
+List actions worth doing regardless of which final option is selected.
+
+78. IDENTIFY DECISION DEADLINE
+Use the supplied deadline.
+
+If unknown state:
+
+"Decision timing to be established."
+
+79. IDENTIFY COST OF DELAY
+Where evidence exists assess whether delaying the decision creates:
+
+Lost revenue
+Higher cost
+Customer impact
+Capacity problem
+Risk exposure
+Lost opportunity
+
+Do not invent values.
+
+80. IDENTIFY APPROVAL NEEDS
+Determine which decisions may require:
+
+Management
+Finance
+Legal
+IT
+Operations
+Customer
+Supplier
+
+approval.
+
+Do not invent company authority structures.
+
+81. IDENTIFY STAKEHOLDERS
+For each major stakeholder identify:
+
+Interest
+Impact
+Input needed
+Communication need
+
+82. IDENTIFY DECISION OWNER
+Use the supplied role.
+
+If unknown state:
+
+"Decision owner to be assigned."
+
+83. IDENTIFY IMPLEMENTATION OWNER
+Decision owner and implementation owner may differ.
+
+84. DEFINE IMPLEMENTATION PHASES
+Where appropriate:
+
+Validate
+Approve
+Prepare
+Pilot
+Implement
+Monitor
+Review
+
+85. DEFINE FIRST ACTIONS
+List the first 3–5 concrete actions following the decision.
+
+86. DEFINE SUCCESS MEASURES
+For implementation provide:
+
+Metric
+Baseline
+Target
+Data source
+Review point
+
+If baseline or target is unknown, mark it as needing establishment.
+
+87. DEFINE LEADING INDICATORS
+Where useful identify early indicators that implementation is progressing.
+
+88. DEFINE LAGGING INDICATORS
+Identify final business outcomes where relevant.
+
+89. DEFINE REVIEW POINT
+Recommend a formal decision review after enough evidence becomes available.
+
+Do not invent a date when none is supplied.
+
+90. DOCUMENT THE DECISION
+Create a concise decision record containing:
+
+Decision
+Date
+Owner
+Options considered
+Key criteria
+Evidence
+Assumptions
+Risks
+Reason
+Review trigger
+
+Use placeholders for unknown date or owner.
+
+91. IDENTIFY CONDITIONS FOR REVERSAL
+State what would justify revisiting the decision.
+
+92. IDENTIFY CONDITIONS FOR EXPANSION
+For phased decisions, explain what evidence would justify scaling.
+
+93. IDENTIFY CONDITIONS FOR PAUSE
+Explain what warning signs should cause management to stop and review.
+
+94. MANAGEMENT SUMMARY
+Provide:
+
+Decision
+Recommended option
+Main reason
+Major benefit
+Major risk
+Critical assumption
+Required management action
+
+95. EXECUTIVE VERSION
+Create a concise decision brief suitable for senior management.
+
+96. CONFIDENCE LEVEL
+Rate recommendation confidence:
+
+High
+Medium
+Low
+
+based on:
+
+Evidence quality
+Assumption sensitivity
+Risk
+Option difference
+Missing information
+
+97. EXPLAIN CONFIDENCE
+Do not give a confidence label without explaining why.
+
+98. IDENTIFY NEXT RESEARCH PRIORITIES
+Rank:
+
+P1 — Could change the decision
+P2 — Important
+P3 — Useful
+
+99. FINAL RECOMMENDATION
+State clearly:
+
+Recommended option
+Why
+Conditions
+Risks
+What should happen next
+
+Avoid vague conclusions such as:
+
+"It depends."
+
+If evidence is insufficient for a final choice, recommend the specific validation action required before deciding.
+
+100. FINAL QUALITY CHECK
+Before completing verify:
+
+- the decision question is clear
+- realistic alternatives were considered
+- status quo was included where relevant
+- hard constraints were respected
+- facts and assumptions are separated
+- financial values were not invented
+- probabilities were not invented
+- risks and residual risks are visible
+- opportunity cost was considered
+- reversibility was considered
+- decision matrix scores are explained
+- sensitivity was tested
+- strongest counterargument was considered
+- recommendation is actionable
+- conditions that could change the recommendation are visible
+- implementation and review are included
+
+OUTPUT FORMAT:
+
+1. Decision Statement
+2. Objective & Success Criteria
+3. Evidence Review
+4. Constraints
+5. Decision Criteria
+6. Options Considered
+7. Feasibility Check
+8. Financial Analysis — if possible
+9. Customer / Stakeholder Impact
+10. Operational Impact
+11. Risk Analysis
+12. Assumptions & Unknowns
+13. Decision Matrix
+14. Sensitivity Analysis
+15. Option Comparison
+16. Strongest Argument Against the Recommendation
+17. Recommended Option
+18. Why the Other Options Were Not Selected
+19. Conditions That Could Change the Decision
+20. Pilot / Validation Plan — if appropriate
+21. Implementation Plan
+22. Success Measures
+23. Decision Review Triggers
+24. Decision Record
+25. Executive Summary
+26. Confidence Level
+27. Immediate Next Actions
+
+IMPORTANT:
+- Do not invent financial values, market facts, probabilities, competitor information or customer behavior.
+- Separate confirmed evidence from assumptions.
+- Include the status quo where it is a legitimate alternative.
+- Do not force a binary choice when phased or hybrid options exist.
+- Hard constraints override weighted scoring.
+- Explain all important decision-matrix scores.
+- Treat inferred weights and scores as provisional.
+- Consider opportunity cost, reversibility and the cost of inaction.
+- Identify the strongest argument against the recommendation.
+- Do not allow sunk costs or competitor behavior to determine the decision automatically.
+- Recommend validation when a critical unknown could change the outcome.
+- Make the final recommendation clear, conditional where necessary and actionable.`;
+
+const steps = [
+  {
+    title: "Frame the real decision",
+    description:
+      "Turn a vague business question into a clear choice with a defined objective, success criteria, hard constraints and realistic alternatives.",
+  },
+  {
+    title: "Compare options systematically",
+    description:
+      "Evaluate financial, customer, operational, strategic and risk implications using transparent criteria instead of choosing the option that initially feels most attractive.",
+  },
+  {
+    title: "Challenge the preferred answer",
+    description:
+      "Test assumptions, sensitivity, opportunity cost, reversibility and the strongest counterargument before treating one option as the winner.",
+  },
+  {
+    title: "Turn the decision into execution",
+    description:
+      "Define validation, implementation, success measures and review triggers so management can determine whether the decision actually produced the expected result.",
+  },
+];
+
+const example = {
+  input: [
+    "Decision: Should a small online retailer continue packing orders internally or outsource fulfillment?",
+    "Objective: Support growth without reducing customer service quality.",
+    "Known issue: Internal order volume is increasing.",
+    "Known constraint: The business has limited warehouse space.",
+    "Outsourcing information: A fulfillment provider is available, but final pricing and service performance have not yet been verified.",
+    "Unknown: Future order volume, full outsourcing cost, service-level performance and customer impact.",
+  ],
+
+  output: [
+    "Decision statement: Should the retailer retain internal fulfillment, outsource it, or test a hybrid model to support growth while maintaining service quality?",
+    "Hard constraint: Available warehouse space is limited, making continued internal growth potentially difficult without additional capacity.",
+    "Critical unknown: Outsourcing should not be selected based on assumed cost savings because complete provider pricing and service-performance evidence are not yet available.",
+    "Alternative worth testing: A limited fulfillment pilot may provide stronger evidence than immediately transferring all operations.",
+    "Decision driver: The choice depends heavily on total fulfillment economics, required capacity, service reliability and the business's expected order volume.",
+    "Recommended next action: Obtain a complete provider cost structure and service commitments, compare them against current internal fulfillment economics and test performance with a controlled order segment if commercially practical.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Don't force an A-or-B choice",
+    description:
+      "Many business decisions have a third option: pilot, hybrid, phased implementation or maintaining the status quo temporarily while gathering better evidence.",
+  },
+  {
+    title: "Hard constraints beat the score",
+    description:
+      "A decision matrix can organize judgment, but an option that violates a critical legal, financial, technical or operational constraint should not win because its weighted total is higher.",
+  },
+  {
+    title: "Ask what could reverse the decision",
+    description:
+      "A useful recommendation explains not only why one option is preferred, but also which assumption, risk or new evidence would justify changing course.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Business Decision Framework Prompt | KRIYANO"
+  description="Compare business options using objectives, evidence, constraints, financial considerations, risks, trade-offs, decision criteria and implementation requirements."
+>
+  <PromptPage
+    category="BUSINESS"
+    title="Business Decision"
+    accentTitle="Framework."
+    description="Compare important business choices systematically using evidence, constraints, economics, risks, trade-offs and clearly defined decision criteria."
+    meta={[
+      "Free prompt",
+      "Decision framework",
+      "Business strategy",
+    ]}
+    bestFor={[
+      "Business owners",
+      "Managers",
+      "Entrepreneurs",
+      "Investment decisions",
+      "Operational decisions",
+      "Strategic planning",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Make important business decisions with a clear framework."
+    introDescription="Define the real decision, compare realistic alternatives, challenge assumptions and understand what could change the recommendation before committing resources."
+    steps={steps}
+    exampleTitle="Evaluate a business decision without pretending missing evidence is known."
+    example={example}
+    tipsTitle="Make decisions that remain defensible when assumptions change."
+    tips={tips}
+    sidebarTitle="Need to analyze the risks in more depth?"
+    sidebarDescription="Use KRIYANO's Business Risk Analysis Prompt when the decision depends on a more detailed review of risk exposure, controls, mitigation and contingency planning."
+    warningTitle="A decision matrix does not make the decision for you"
+    warningText="Scores and weights organize judgment but can create false confidence when evidence is weak. Critical constraints, major risks and missing information can matter more than the mathematical winner."
+  />
+</BaseLayout>

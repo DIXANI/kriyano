@@ -1,0 +1,646 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced inventory controller, warehouse analyst and supply-chain operations specialist.
+
+TASK:
+Analyze the inventory report or inventory data provided below and identify important stock risks, exceptions, trends and required actions.
+
+INVENTORY REPORT / DATA:
+[Paste the inventory report, table, CSV data, summarized figures or relevant stock information.]
+
+BUSINESS / OPERATION:
+[Example: warehouse, retailer, distributor, e-commerce business, 3PL, spare-parts operation.]
+
+REPORT TYPE:
+[Stock on hand / Inventory ageing / Variance / Expiry / Movement / ABC / Stock valuation / Reorder / Combined report.]
+
+REPORT DATE:
+[Date.]
+
+ANALYSIS PERIOD:
+[Example: current snapshot, last 30 days, last 12 months.]
+
+LOCATION:
+[Warehouse, branch, store, zone or multiple locations.]
+
+NUMBER OF SKUs:
+[If known.]
+
+CURRENCY:
+[If financial values are included.]
+
+BUSINESS RULES:
+[Reorder levels, safety stock, expiry rules, ageing definitions, service levels or other relevant rules.]
+
+IMPORTANT KPIs:
+[List any KPIs that should receive particular attention.]
+
+ANALYSIS GOAL:
+[Example: reduce excess stock, investigate discrepancies, identify expiry risk, prepare management report.]
+
+SPECIAL REQUIREMENTS:
+[Any other instructions.]
+
+INVENTORY ANALYSIS REQUIREMENTS:
+
+1. DATA QUALITY CHECK
+Before analyzing the inventory, inspect the available data for:
+
+- missing SKU codes
+- duplicate SKUs
+- missing descriptions
+- missing quantities
+- negative quantities
+- zero quantities
+- inconsistent units of measure
+- missing dates
+- invalid dates
+- missing costs
+- unusual cost values
+- inconsistent locations
+- duplicate inventory records
+- missing batch / lot data
+- missing expiry dates where required
+
+Separate genuine inventory exceptions from possible data-quality problems.
+
+Do not silently correct uncertain data.
+
+2. REPORT OVERVIEW
+Summarize available information such as:
+
+- total SKUs
+- total units
+- total inventory value
+- active SKUs
+- zero-stock SKUs
+- negative-stock SKUs
+- number of locations
+- number of batches
+
+Only calculate metrics supported by the provided data.
+
+3. STOCK AVAILABILITY
+Identify:
+
+- out-of-stock items
+- critically low stock
+- stock below reorder level
+- stock below safety stock
+- adequate stock
+- unusually high stock
+
+Do not classify stock as excessive or insufficient without appropriate demand, reorder or policy information.
+
+4. SHORTAGE RISK
+Where demand or consumption information is available, identify SKUs at risk of shortage.
+
+Consider:
+
+- current stock
+- average demand
+- open orders
+- lead time
+- safety stock
+- reorder point
+- stock cover
+
+For each risk identify:
+
+SKU:
+Current stock:
+Demand:
+Stock cover:
+Risk:
+Recommended action:
+
+5. EXCESS STOCK
+Identify possible excess inventory using available evidence such as:
+
+- stock significantly above normal demand
+- stock above maximum level
+- unusually high stock cover
+- large quantities with little movement
+- duplicated inventory across locations
+
+Do not label inventory as excess solely because the quantity looks large.
+
+6. SLOW-MOVING STOCK
+Where movement or sales history is available, identify slow-moving SKUs.
+
+Consider:
+
+- last movement date
+- movement frequency
+- average monthly usage
+- stock on hand
+- stock cover
+- ageing
+
+Define the slow-moving rule being used.
+
+7. NON-MOVING STOCK
+Identify inventory with no movement during the relevant period.
+
+For each item show where possible:
+
+SKU:
+Description:
+Quantity:
+Value:
+Last movement:
+Days without movement:
+Recommended review:
+
+Do not assume non-moving stock is obsolete.
+
+8. OBSOLETE STOCK RISK
+Identify potential obsolescence based on evidence such as:
+
+- prolonged inactivity
+- discontinued products
+- superseded items
+- expired demand
+- damaged inventory
+- end-of-life status
+
+Classify as "potential obsolete stock" unless obsolescence is confirmed.
+
+9. INVENTORY AGEING
+Group inventory into appropriate ageing buckets.
+
+Example:
+
+0–30 days
+31–60 days
+61–90 days
+91–180 days
+181–365 days
+365+ days
+
+If business-specific ageing rules are provided, use them instead.
+
+Analyze:
+
+- quantity by age
+- value by age
+- percentage of inventory
+- high-risk ageing categories
+
+10. EXPIRY RISK
+For batch-controlled or expiry-controlled inventory identify:
+
+- expired stock
+- near-expiry stock
+- medium-term expiry risk
+- healthy remaining shelf life
+- missing expiry information
+
+Use the business's defined expiry windows where provided.
+
+Do not invent expiry thresholds if they materially affect the decision.
+
+11. FEFO REVIEW
+Where expiry-controlled inventory is involved, check whether stock movement appears consistent with FEFO.
+
+Look for situations where:
+
+- newer batches are moving before older batches
+- older batches remain in stock
+- short-dated stock is not prioritized
+- expiry dates are missing
+
+Flag potential FEFO issues for investigation.
+
+12. NEGATIVE STOCK
+Identify negative inventory balances.
+
+Possible investigation areas include:
+
+- delayed receipts
+- incorrect issues
+- transaction timing
+- wrong location
+- incorrect unit of measure
+- backdated transactions
+- system configuration
+- interface problems
+
+Do not assume the cause without investigation.
+
+13. ZERO STOCK
+Identify zero-stock SKUs and distinguish where possible between:
+
+- active item with demand
+- inactive item
+- discontinued item
+- awaiting replenishment
+- data issue
+
+Prioritize zero-stock items with active demand.
+
+14. INVENTORY VARIANCE
+If system and physical quantities are provided, calculate:
+
+Variance Quantity = Physical Quantity - System Quantity
+
+Variance Value = Variance Quantity × Unit Cost
+
+Variance % = (Variance Quantity / System Quantity) × 100
+
+Handle zero system quantity carefully rather than producing an invalid percentage.
+
+Classify:
+
+- shortage
+- overage
+- exact match
+
+Highlight high-value and repeated discrepancies.
+
+15. STOCK ACCURACY
+Where physical-count data is available, calculate relevant accuracy measures.
+
+Possible metrics:
+
+SKU Accuracy % =
+Accurate SKU Count / Total Counted SKUs × 100
+
+Quantity Accuracy % =
+1 - (Absolute Variance / Relevant Inventory Quantity)
+
+Clearly state the formula used.
+
+Do not mix different inventory-accuracy definitions without explanation.
+
+16. ABC ANALYSIS
+Where annual consumption and cost information are available, calculate:
+
+Annual Consumption Value =
+Annual Usage × Unit Cost
+
+Rank SKUs by annual consumption value.
+
+Classify into ABC groups using either:
+- business-defined thresholds
+or
+- clearly stated standard thresholds
+
+Do not assume ABC means only unit quantity.
+
+17. MOVEMENT / VELOCITY
+Where movement data is available, identify:
+
+- fast-moving
+- medium-moving
+- slow-moving
+- non-moving
+
+State the rule used for classification.
+
+Compare movement with current stock to identify unusual combinations such as:
+
+- fast-moving + low stock
+- fast-moving + excessive stock
+- slow-moving + high stock
+- non-moving + high value
+
+18. STOCK COVER
+Where consumption information is available, calculate stock cover using an appropriate formula.
+
+Example:
+
+Stock Cover (Days) =
+Stock on Hand / Average Daily Usage
+
+or
+
+Stock Cover (Months) =
+Stock on Hand / Average Monthly Usage
+
+Handle zero consumption separately.
+
+Do not describe infinite stock cover as a normal numeric result.
+
+19. REORDER REVIEW
+Where relevant data is available, evaluate whether stock is:
+
+- below reorder point
+- approaching reorder point
+- above reorder point
+- significantly above expected requirement
+
+Consider:
+
+- demand
+- lead time
+- safety stock
+- open purchase orders
+- current stock
+
+20. INVENTORY VALUE
+Where cost data is available, analyze:
+
+- total stock value
+- high-value SKUs
+- high-value slow movers
+- high-value non-movers
+- ageing inventory value
+- expiry-risk value
+- variance value
+
+Prioritize exceptions based on both quantity and financial impact.
+
+21. LOCATION ANALYSIS
+If multiple locations exist, look for:
+
+- same SKU unnecessarily spread across many locations
+- stock in unexpected locations
+- duplicate storage
+- empty pick faces while reserve stock exists
+- stock concentration
+- blocked stock
+- location imbalance
+
+Do not recommend consolidation without considering operational requirements.
+
+22. BATCH / LOT ANALYSIS
+Where batch information exists, check:
+
+- batch quantities
+- expiry
+- age
+- status
+- movement
+- duplicate records
+- unusual batch balances
+
+23. UNUSUAL INVENTORY PATTERNS
+Look for anomalies such as:
+
+- sudden stock increases
+- unexplained decreases
+- repeated adjustments
+- high stock with no demand
+- demand with zero stock
+- frequent stockouts
+- repeated negative stock
+- repeated variance
+- unusually high unit costs
+- duplicate SKU-location records
+
+Flag anomalies for investigation rather than automatically labeling them as errors.
+
+24. ROOT-CAUSE SIGNALS
+For major exceptions identify possible investigation areas.
+
+Use categories such as:
+
+PEOPLE
+Training, transaction errors, counting practices.
+
+PROCESS
+Receiving, putaway, picking, returns, adjustments.
+
+SYSTEM
+WMS / ERP timing, interfaces, configuration, master data.
+
+LOCATION
+Incorrect bin, mixed stock, wrong putaway.
+
+DOCUMENTATION
+Missing or incorrect transaction documents.
+
+PRODUCT
+UOM, barcode, batch, expiry or packaging issues.
+
+SUPPLIER / CUSTOMER
+Short shipment, over-delivery, returns or documentation issues.
+
+Clearly separate:
+- evidence
+- possible cause
+- confirmed cause
+
+25. RISK PRIORITIZATION
+Classify important exceptions by:
+
+Operational Impact:
+High / Medium / Low
+
+Financial Impact:
+High / Medium / Low
+
+Customer Risk:
+High / Medium / Low
+
+Expiry / Obsolescence Risk:
+High / Medium / Low
+
+Priority:
+P1 / P2 / P3 / P4
+
+26. ACTION PLAN
+For each important issue provide:
+
+Issue:
+Evidence:
+Possible cause:
+Immediate action:
+Investigation required:
+Preventive action:
+Owner / responsible role:
+Priority:
+KPI / follow-up measure:
+
+Do not invent employee names.
+
+27. MANAGEMENT SUMMARY
+Create a concise management-level summary covering:
+
+- most important inventory risk
+- highest-value issue
+- biggest availability risk
+- major slow / non-moving concern
+- expiry risk
+- significant data-quality issue
+- most important investigation
+- highest-priority action
+
+28. KPI RECOMMENDATIONS
+Where relevant recommend measurable KPIs such as:
+
+- Inventory Accuracy %
+- Stockout Rate
+- Inventory Turnover
+- Days / Months of Stock
+- Slow-Moving Inventory %
+- Non-Moving Inventory %
+- Expired Inventory Value
+- Near-Expiry Inventory Value
+- Adjustment Value
+- Cycle Count Accuracy
+- Negative Stock Count
+- Excess Stock Value
+
+Only recommend KPIs that can realistically be measured from available or obtainable data.
+
+29. INFORMATION GAPS
+Identify information that would improve the analysis.
+
+Examples:
+
+- sales / consumption history
+- lead time
+- safety stock
+- reorder point
+- open purchase orders
+- physical count
+- unit cost
+- expiry
+- batch
+- last movement date
+- inventory status
+
+Explain how each missing field limits the conclusions.
+
+OUTPUT FORMAT:
+
+1. Executive Summary
+2. Data Quality Findings
+3. Inventory Overview
+4. Critical Exceptions
+5. Stock Availability
+6. Shortage Risks
+7. Excess Stock
+8. Slow-Moving Stock
+9. Non-Moving / Obsolescence Risk
+10. Inventory Ageing
+11. Expiry & FEFO Risks
+12. Negative / Zero Stock
+13. Inventory Variances
+14. Stock Accuracy
+15. ABC / Movement Analysis
+16. Stock Cover & Reorder Review
+17. Inventory Value Risks
+18. Location / Batch Findings
+19. Unusual Patterns
+20. Root-Cause Signals
+21. Risk Priority Matrix
+22. Recommended Actions
+23. KPI Recommendations
+24. Information Gaps
+25. Management Summary
+
+IMPORTANT:
+- Never invent inventory data.
+- Never invent missing demand, lead time, cost, expiry or movement information.
+- State when the available data is insufficient for a conclusion.
+- Separate confirmed findings from possible causes.
+- Do not label slow-moving inventory as obsolete without evidence.
+- Do not label high stock as excess without appropriate demand or policy information.
+- Show formulas when calculating important inventory KPIs.
+- Protect against division-by-zero errors.
+- Preserve units of measure and currencies.
+- Prioritize operationally and financially significant exceptions.
+- Focus on actions that can realistically improve inventory control.`;
+
+const steps = [
+  {
+    title: "Start with data quality",
+    description:
+      "Check missing fields, duplicate records, negative balances, units of measure and dates before treating every unusual value as a genuine inventory problem.",
+  },
+  {
+    title: "Find the exceptions",
+    description:
+      "Identify stockouts, shortages, excess stock, ageing, slow movers, non-movers, expiry risks and unusual inventory balances.",
+  },
+  {
+    title: "Prioritize by impact",
+    description:
+      "A small quantity discrepancy on an expensive critical SKU may deserve more attention than a much larger low-value variance.",
+  },
+  {
+    title: "Turn findings into actions",
+    description:
+      "Separate confirmed findings from possible causes and assign practical investigation, corrective and preventive actions.",
+  },
+];
+
+const example = {
+  input: [
+    "Report: Current stock report with SKU, description, quantity, unit cost, last movement date and average monthly usage.",
+    "Operation: Distribution warehouse.",
+    "Goal: Identify inventory requiring management attention.",
+    "Analysis period: Current snapshot.",
+  ],
+
+  output: [
+    "First validate missing quantities, costs, movement dates and duplicate SKU records before calculating exceptions.",
+    "Prioritize SKUs with zero stock and active usage as potential availability risks.",
+    "Identify items with high stock but low or zero recent movement as slow/non-moving candidates, while avoiding an obsolete classification without additional evidence.",
+    "Calculate stock cover where average monthly usage is greater than zero and separately flag items with stock but zero recorded consumption.",
+    "Combine stock value with movement status to highlight high-value inventory that may require management action.",
+    "For major exceptions, recommend an investigation rather than assigning a root cause without receiving, issue, adjustment or physical-count evidence.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Quantity alone is not enough",
+    description:
+      "Inventory should be evaluated against demand, value, movement, lead time, expiry and business rules. A large quantity is not automatically excess stock.",
+  },
+  {
+    title: "Prioritize value and risk together",
+    description:
+      "Combine financial value with availability, expiry, movement and customer impact to identify the exceptions that deserve attention first.",
+  },
+  {
+    title: "Treat data problems separately",
+    description:
+      "Negative stock, duplicate records or missing dates may indicate transaction or master-data problems that require a different response from genuine inventory imbalance.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Inventory Report Analysis Prompt | KRIYANO"
+  description="Analyze inventory reports for stock shortages, excess inventory, slow and non-moving stock, ageing, expiry risk, variances, stock cover and high-priority inventory exceptions."
+>
+  <PromptPage
+    category="OPERATIONS & LOGISTICS"
+    title="Inventory Report"
+    accentTitle="Analysis."
+    description="Turn inventory data into actionable findings across availability, movement, ageing, expiry, accuracy, stock value and operational risk."
+    meta={[
+      "Free prompt",
+      "Inventory control",
+      "Report analysis",
+    ]}
+    bestFor={[
+      "Inventory controllers",
+      "Warehouse supervisors",
+      "Stock reports",
+      "Inventory ageing",
+      "Slow-moving analysis",
+      "Management reporting",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Turn stock data into operational decisions."
+    introDescription="Start by validating the report, then identify inventory exceptions, quantify their impact and separate confirmed findings from issues that still require investigation."
+    steps={steps}
+    exampleTitle="Move from a stock report to prioritized actions."
+    example={example}
+    tipsTitle="Analyze inventory more accurately."
+    tips={tips}
+    sidebarTitle="Found a physical versus system difference?"
+    sidebarDescription="Use the KRIYANO Inventory Discrepancy Investigation Prompt to investigate specific stock variances after the report analysis identifies them."
+    warningTitle="Inventory conclusions depend on the data"
+    warningText="Stock quantity alone cannot determine whether inventory is excessive, insufficient or obsolete. Demand, movement, lead time, cost, expiry and business rules may be required before making operational decisions."
+  />
+</BaseLayout>

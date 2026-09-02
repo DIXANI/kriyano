@@ -1,0 +1,686 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert short-form video strategist, vertical-video director, editor and AI video prompt specialist.
+
+TASK:
+Create a high-retention short-form video prompt optimized for:
+
+Facebook Reels
+Instagram Reels
+TikTok
+YouTube Shorts
+
+The video should be fast enough to maintain attention, but still clear, credible and visually coherent.
+
+PLATFORM:
+[Facebook Reel / Instagram Reel / TikTok / YouTube Short.]
+
+TOPIC:
+[What is the video about?]
+
+GOAL:
+[Educate / entertain / demonstrate / promote / explain / inspire / convert / other.]
+
+TARGET AUDIENCE:
+[Who is this for?]
+
+TOTAL DURATION:
+[For example: 10 sec / 15 sec / 20 sec / 30 sec / 45 sec / 60 sec.]
+
+ASPECT RATIO:
+[Default: 9:16.]
+
+MAIN HOOK:
+[What should make the viewer stop scrolling?]
+
+CORE MESSAGE:
+[What should the viewer understand or remember?]
+
+PAYOFF:
+[What does the viewer gain by watching until the end?]
+
+CTA:
+[Follow / save / comment / share / learn more / shop / none.]
+
+SUBJECT:
+[Person / food / product / process / screen / environment / other.]
+
+VISUAL STYLE:
+[Photorealistic / premium / creator-style / cinematic / educational / commercial / casual / other.]
+
+VOICE-OVER:
+[Paste script or describe tone and content.]
+
+ON-SCREEN TEXT:
+[Exact wording or none.]
+
+MUSIC:
+[Optional.]
+
+SOUND EFFECTS:
+[Optional.]
+
+BRAND:
+[Optional.]
+
+REFERENCE REQUIREMENTS:
+[Character / product / food / style details that must remain consistent.]
+
+MANDATORY MOMENTS:
+[List anything that must appear.]
+
+ELEMENTS TO AVOID:
+[Optional.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+SHORT-FORM VIDEO REQUIREMENTS:
+
+1. OPTIMIZE FOR VERTICAL VIEWING
+Default to 9:16 unless another format is specified.
+
+2. DESIGN FOR MOBILE FIRST
+Important subjects, text and actions must remain easy to understand on a phone screen.
+
+3. KEEP CRITICAL CONTENT INSIDE SAFE AREAS
+Avoid placing essential content too close to:
+Top UI
+Bottom UI
+Left edge
+Right edge
+
+4. ESTABLISH THE SUBJECT IMMEDIATELY
+The viewer should understand what the video is about within the opening moments.
+
+5. CREATE A STRONG FIRST-SECOND HOOK
+The opening should create:
+Curiosity
+Recognition
+A useful promise
+A visual surprise
+A compelling result
+A clear problem
+
+6. DO NOT USE MISLEADING HOOKS
+The opening must match the actual video.
+
+7. SHOW VALUE EARLY
+Do not spend several seconds on logos, introductions or unnecessary setup.
+
+8. AVOID SLOW INTRODUCTIONS
+Do not begin with:
+Long establishing shots
+Lengthy greetings
+Logo animations
+Generic cinematic filler
+
+unless specifically requested.
+
+9. KEEP THE OPENING VISUALLY CLEAR
+Avoid clutter that makes the hook hard to understand.
+
+10. USE ONE PRIMARY HOOK
+Do not stack multiple unrelated hooks.
+
+11. BUILD A RETENTION ARC
+A useful structure is:
+Hook
+Progression
+Value
+Payoff
+CTA
+
+12. EACH MOMENT SHOULD EARN ITS SCREEN TIME
+Remove shots that do not add:
+Information
+Emotion
+Proof
+Progress
+Entertainment
+Clarity
+
+13. KEEP SCENES SHORT
+Short-form content usually benefits from concise visual beats.
+
+14. DO NOT CUT SO FAST THAT INFORMATION BECOMES UNREADABLE
+
+15. MATCH CUT SPEED TO CONTENT
+Educational content may require more viewing time.
+Entertainment may support faster pacing.
+
+16. VARY VISUAL SCALE
+Where useful, alternate between:
+Wide
+Medium
+Close-up
+Detail
+
+17. DO NOT CHANGE SHOT SIZE RANDOMLY
+Each framing change should reveal something new.
+
+18. CREATE PATTERN CHANGES
+Use purposeful shifts in:
+Shot size
+Camera angle
+Subject action
+Visual detail
+Text
+Sound
+
+to renew attention.
+
+19. DO NOT RELY ON RANDOM EFFECTS FOR RETENTION
+
+20. USE MOTION EARLY
+When appropriate, start with visible action rather than a static setup.
+
+21. SUBJECT MOTION SHOULD BE CLEAR
+Avoid subtle actions that are difficult to notice on mobile.
+
+22. PRIORITIZE LARGE READABLE DETAILS
+Tiny objects may require close-up shots.
+
+23. HUMAN PRESENTER MODE
+Use:
+Direct eye contact
+Natural expression
+Clear gestures
+Readable body language
+
+24. DO NOT OVER-ACT EXPRESSIONS
+Keep reactions believable.
+
+25. PRESERVE CHARACTER IDENTITY
+Maintain:
+Face
+Hair
+Age
+Skin tone
+Clothing
+Accessories
+Body proportions
+
+26. DO NOT ALLOW FACE DRIFT BETWEEN SHOTS
+
+27. FOOD REEL MODE
+Prioritize:
+Finished result
+Texture
+Cut
+Pour
+Steam
+Mixing
+Serving
+Close-up detail
+
+28. FOOD HOOKS SHOULD BE APPETITE-DRIVEN
+Show the finished dish or most visually satisfying moment early when appropriate.
+
+29. PRESERVE FOOD CONTINUITY
+Do not change:
+Dish shape
+Layers
+Colour
+Toppings
+Serving vessel
+
+without reason.
+
+30. PRODUCT REEL MODE
+Show the product clearly in the opening or very early.
+
+31. PRESERVE PRODUCT IDENTITY
+Maintain:
+Shape
+Colour
+Logo
+Packaging
+Features
+Materials
+
+32. DO NOT INVENT PRODUCT FEATURES
+
+33. PROCESS / TUTORIAL MODE
+Prioritize meaningful steps.
+
+34. DO NOT SHOW EVERY MICRO-STEP
+Only show what helps understanding.
+
+35. USE STEP COMPRESSION
+Combine repetitive actions when possible.
+
+36. BEFORE / AFTER MODE
+Only use when both states are truthful and supported.
+
+37. DO NOT FABRICATE RESULTS
+
+38. EDUCATIONAL MODE
+Use:
+Question
+Explanation
+Example
+Takeaway
+
+39. TIP VIDEO MODE
+Lead with the problem or practical result.
+
+40. LIST MODE
+Keep item count manageable for the duration.
+
+41. STORY MODE
+Use:
+Immediate situation
+Progress
+Change
+Resolution
+
+42. COMMERCIAL MODE
+Show:
+Problem or desire
+Product
+Use
+Benefit
+CTA
+
+43. KEEP THE CTA SHORT
+Do not turn the ending into a long sales pitch.
+
+44. MATCH CTA TO THE GOAL
+Examples:
+Save this
+Follow for more
+Try it
+Learn more
+Shop now
+Comment below
+
+45. DO NOT USE FALSE URGENCY
+
+46. DO NOT USE FALSE SCARCITY
+
+47. DO NOT CLAIM GUARANTEED RESULTS
+
+48. DO NOT INVENT SOCIAL PROOF
+No fake:
+Views
+Likes
+Reviews
+Ratings
+Testimonials
+Follower counts
+
+49. DEFINE SCENE DURATION
+Every scene should have a realistic time allocation.
+
+50. DO NOT OVERLOAD A 2-SECOND SHOT
+Avoid placing:
+Long narration
+Multiple actions
+Large text
+Complex camera movement
+
+inside a very short moment.
+
+51. TIME VOICE-OVER REALISTICALLY
+Spoken content must fit naturally within the duration.
+
+52. SIMPLIFY WORDING FOR SHORT-FORM
+Prefer conversational language and concise sentences.
+
+53. ALIGN VOICE-OVER WITH VISUAL ACTION
+
+54. DO NOT SHOW SOMETHING UNRELATED TO THE NARRATION
+
+55. USE VISUAL PROOF WHERE POSSIBLE
+If explaining an action, show it.
+
+56. ALLOW SILENT MOMENTS
+Not every second needs narration.
+
+57. USE SOUND EFFECTS TO EMPHASIZE REAL ACTION
+Examples:
+Cut
+Pour
+Click
+Crunch
+Sizzle
+Door close
+Packaging open
+
+58. DO NOT OVERLOAD SOUND EFFECTS
+
+59. MUSIC SHOULD SUPPORT PACING
+Not compete with voice-over.
+
+60. ON-SCREEN TEXT SHOULD BE SHORT
+Keep text readable at mobile size.
+
+61. USE HIGH TEXT CONTRAST
+
+62. LIMIT TEXT PER SCREEN
+
+63. KEEP IMPORTANT TEXT LONG ENOUGH TO READ
+
+64. DO NOT GENERATE RANDOM TEXT
+
+65. USE EXACT PROVIDED WORDING
+
+66. RECOMMEND MANUAL TEXT OVERLAY WHEN ACCURACY IS CRITICAL
+
+67. CAPTION SAFE-AREA MODE
+Leave space where platform captions may appear.
+
+68. PRESERVE SUBJECT VISIBILITY BEHIND TEXT
+
+69. KEEP CTA AWAY FROM PLATFORM UI
+
+70. DEFINE FIRST FRAME
+The opening image should make sense even before motion begins.
+
+71. DEFINE FINAL FRAME
+The ending should provide:
+Payoff
+Result
+Hero image
+CTA
+Resolution
+
+72. LOOP MODE
+When useful, design the ending so it can transition naturally back into the beginning.
+
+73. DO NOT FORCE A LOOP WHEN IT DAMAGES THE STORY
+
+74. CAMERA MOVEMENT SHOULD BE SIMPLE
+Use one dominant move per short scene.
+
+75. USE STATIC CAMERA WHEN SUBJECT ACTION IS STRONG ENOUGH
+
+76. USE PUSH-IN FOR EMPHASIS
+
+77. USE TRACKING FOR ACTION
+
+78. USE CLOSE-UPS FOR DETAIL
+
+79. USE OVERHEAD FOR PROCESS CLARITY
+
+80. AVOID EXCESSIVE ORBITS
+
+81. DO NOT ADD RANDOM WHIP PANS
+
+82. TRANSITIONS SHOULD SUPPORT PACING
+Default to clean cuts.
+
+83. USE MATCH CUTS WHEN THEY IMPROVE FLOW
+
+84. USE SPEED RAMPS ONLY WHEN APPROPRIATE
+
+85. DO NOT USE TRANSITIONS AS FILLER
+
+86. PRESERVE SCREEN DIRECTION
+
+87. PRESERVE OBJECT STATE
+If something changes during the video, later shots should reflect it.
+
+88. PRESERVE PROP CONTINUITY
+
+89. PRESERVE ENVIRONMENT CONTINUITY
+When scenes occur in the same location.
+
+90. KEEP LIGHTING STYLE COHERENT
+
+91. CREATE A VISUAL PRIORITY FOR EVERY SHOT
+The viewer should know where to look.
+
+92. AVOID CLUTTERED BACKGROUNDS
+
+93. KEEP MOBILE-SIZE SUBJECT SEPARATION STRONG
+
+94. CREATE TARGETED NEGATIVE CONSTRAINTS
+Examples:
+No random text
+No face drift
+No duplicate hands
+No product redesign
+No object teleportation
+No warped food
+No background morphing
+
+95. CREATE A RETENTION CHECK
+Ask whether each scene gives the viewer a reason to continue.
+
+96. CREATE A MOBILE READABILITY CHECK
+Review the composition at small-screen scale.
+
+97. CREATE A CLAIM CHECK
+Verify any:
+Numbers
+Benefits
+Results
+Offers
+Prices
+
+before publishing.
+
+98. CREATE A PLATFORM CHECK
+Make sure the video structure fits the selected short-form platform.
+
+99. CREATE AN AUDIO TIMING CHECK
+Ensure voice-over, music and sounds fit the final duration.
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- platform is clear
+- aspect ratio is correct
+- first frame is strong
+- hook appears immediately
+- hook accurately represents the video
+- subject is mobile-readable
+- safe zones are respected
+- pacing matches the content
+- scenes are not overloaded
+- every scene adds value
+- visual variety has a purpose
+- character identity is consistent
+- product identity is consistent
+- food identity is consistent
+- object states remain logical
+- voice-over fits the runtime
+- narration matches the visuals
+- text is concise
+- text remains readable
+- no random text is generated
+- CTA is brief
+- CTA matches the video goal
+- no fake urgency is used
+- no fake scarcity is used
+- no unsupported result is shown
+- final payoff is clear
+- the video feels complete even at short duration
+
+OUTPUT FORMAT:
+
+1. SHORT-FORM STRATEGY
+Summarize:
+Platform
+Audience
+Hook
+Core message
+Payoff
+CTA
+
+2. RETENTION STRUCTURE
+Provide:
+Opening hook
+Development
+Pattern changes
+Payoff
+Ending
+
+3. TIMELINE
+
+For each scene provide:
+Scene number
+Timestamp
+Duration
+Purpose
+Subject
+Action
+Shot size
+Camera movement
+Voice-over
+Visible text
+Sound
+Transition
+
+4. FIRST-FRAME DESIGN
+Describe the exact opening composition.
+
+5. FULL SHORT-FORM VIDEO PROMPT
+Provide a polished model-ready prompt.
+
+6. VOICE-OVER TIMING
+Map each spoken line to the appropriate visual moment.
+
+7. TEXT & SAFE-ZONE PLAN
+Specify:
+Exact text
+Placement
+Reading time
+Safe-area considerations
+
+8. AUDIO PLAN
+Specify:
+Music
+Ambient sound
+Sound effects
+
+9. NEGATIVE / PROTECTION INSTRUCTIONS
+List the most relevant short-form generation failures to prevent.
+
+10. FINAL FRAME / CTA
+Describe the final visual and CTA treatment.
+
+11. MOBILE RETENTION CHECK
+Confirm:
+Hook clarity
+Small-screen readability
+Pacing
+Payoff
+CTA
+
+IMPORTANT:
+- Optimize for mobile-first vertical viewing.
+- Deliver value immediately.
+- Keep the first-second hook truthful.
+- Remove unnecessary filler.
+- Match action, narration and text to the available duration.
+- Use purposeful visual changes rather than random effects.
+- Protect character, food and product continuity.
+- Keep CTA short.
+- Do not fabricate results, social proof, urgency or scarcity.`;
+
+const steps = [
+  {
+    title: "Start with the scroll-stopping moment",
+    description:
+      "Choose the strongest truthful visual, question, result or action for the opening instead of wasting the first seconds on introductions.",
+  },
+  {
+    title: "Build a retention timeline",
+    description:
+      "Break the total runtime into short visual beats where each scene adds new information, progress, proof or payoff.",
+  },
+  {
+    title: "Design for a phone screen",
+    description:
+      "Keep the subject large, protect caption and interface safe areas, and limit on-screen wording so everything remains readable vertically.",
+  },
+  {
+    title: "End with payoff before CTA",
+    description:
+      "Give viewers the result or useful takeaway they were promised before asking them to follow, save, comment, learn more or take another action.",
+  },
+];
+
+const example = {
+  input: [
+    "Platform: Facebook Reel.",
+    "Duration: 20 seconds.",
+    "Aspect ratio: 9:16.",
+    "Topic: Homemade chocolate brownies.",
+    "Audience: Home bakers.",
+    "Goal: Show the result and summarize the preparation.",
+    "Hook: Break open a brownie to reveal the moist fudgy centre.",
+    "CTA: Save this recipe.",
+  ],
+
+  output: [
+    "0–2 SEC — HOOK: Extreme close-up of one brownie being gently broken apart to reveal the moist fudgy centre. Keep the brownie large in frame and immediately readable on mobile.",
+    "2–6 SEC — MIXTURE: Show melted chocolate mixture followed by a clean close-up of the batter being folded. Use short purposeful cuts.",
+    "6–10 SEC — PAN: Show batter spreading into the prepared baking pan, then a close detail of chocolate pieces on top.",
+    "10–14 SEC — RESULT TRANSITION: Move directly from the baked tray to neat brownie squares without unnecessary oven filler.",
+    "14–18 SEC — PAYOFF: Return to the strongest fudgy interior close-up, using a gentle push-in.",
+    "18–20 SEC — CTA: Finished brownie hero shot with the short text 'Save this recipe'. Keep the text inside the central mobile safe area.",
+  ],
+};
+
+const tips = [
+  {
+    title: "The hook should reveal, not deceive",
+    description:
+      "Strong retention does not require clickbait. Show the most interesting real moment early and then deliver the information or result it promises.",
+  },
+  {
+    title: "Shorter is not always faster",
+    description:
+      "A close-up texture reveal may need two or three seconds to register. Fast cutting only helps when viewers still have enough time to understand each shot.",
+  },
+  {
+    title: "Check the video at phone size",
+    description:
+      "A composition that looks clear on a desktop can become unreadable in a vertical feed. Review subject size, text, captions and CTA placement at realistic mobile scale.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Short-Form Reel Video Prompt | KRIYANO"
+  description="Create high-retention AI video prompts for Facebook Reels, Instagram Reels, TikTok and YouTube Shorts with better hooks, pacing, safe zones and mobile-first storytelling."
+>
+  <PromptPage
+    category="VIDEO GENERATION"
+    title="Short-Form Reel Video"
+    accentTitle="Prompt."
+    description="Create mobile-first AI video prompts for Reels, TikTok and Shorts with stronger opening hooks, pacing, visual retention, voice-over timing and payoff."
+    meta={[
+      "Free prompt",
+      "Reels & Shorts",
+      "9:16 video",
+    ]}
+    bestFor={[
+      "Facebook Reels",
+      "Instagram Reels",
+      "TikTok",
+      "YouTube Shorts",
+      "Recipe videos",
+      "Creator content",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Win the first second, then keep delivering."
+    introDescription="Start with a truthful visual hook, keep every scene useful, control pacing for mobile viewing and deliver the promised payoff before the final CTA."
+    steps={steps}
+    exampleTitle="Turn a brownie recipe into a concise vertical Reel."
+    example={example}
+    tipsTitle="Retention comes from useful progression, not random effects."
+    tips={tips}
+    sidebarTitle="Need a longer multi-scene production?"
+    sidebarDescription="Use KRIYANO's Multi-Scene Video Prompt when you need more detailed continuity, story structure, scene planning and editing across a longer sequence."
+    warningTitle="Fast pacing can hide generation mistakes"
+    warningText="Review character identity, food and product continuity, text accuracy, object states and claims frame by frame before publishing. Short-form speed should not be used to conceal inaccurate AI-generated details."
+  />
+</BaseLayout>

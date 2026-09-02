@@ -1,0 +1,407 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced business strategist and small-business planning consultant.
+
+TASK:
+Create a practical business plan based on the information below.
+
+BUSINESS IDEA:
+[Describe the business, product or service.]
+
+BUSINESS STAGE:
+[Example: idea stage, testing, newly launched, already operating.]
+
+LOCATION / MARKET:
+[Country, city, region or online market.]
+
+TARGET CUSTOMER:
+[Who is most likely to buy?]
+
+CUSTOMER PROBLEM:
+[What problem, need or inconvenience does the business solve?]
+
+PRODUCTS / SERVICES:
+[List the main products or services.]
+
+VALUE PROPOSITION:
+[Why should customers choose this business instead of alternatives?]
+
+BUSINESS MODEL:
+[Example: direct sales, service fee, subscription, e-commerce, marketplace, commission.]
+
+EXPECTED PRICING:
+[Add expected prices or pricing method if known.]
+
+STARTUP BUDGET:
+[Available startup capital.]
+
+AVAILABLE RESOURCES:
+[Skills, equipment, team, supplier access, website, audience, location, software or other resources.]
+
+SALES CHANNELS:
+[Example: physical store, website, social media, marketplace, direct sales, WhatsApp.]
+
+MARKETING CHANNELS:
+[Example: social media, SEO, referrals, paid ads, local partnerships.]
+
+KNOWN COMPETITORS:
+[List known competitors or alternatives.]
+
+BUSINESS GOAL:
+[Example: side income, full-time business, local expansion, online growth.]
+
+TIMEFRAME:
+[Example: launch within 3 months.]
+
+CONSTRAINTS:
+[List important limitations such as capital, staffing, regulations, location or available time.]
+
+BUSINESS PLAN REQUIREMENTS:
+
+1. EXECUTIVE SUMMARY
+Summarize:
+- business concept
+- target customer
+- problem solved
+- offer
+- revenue model
+- main opportunity
+- biggest challenge
+
+2. CUSTOMER PROBLEM
+Explain:
+- the main customer problem or need
+- why it matters
+- how customers may currently solve it
+- what would motivate them to choose this business
+
+Clearly label assumptions that still require validation.
+
+3. TARGET CUSTOMER
+Define practical customer segments based on:
+- needs
+- behavior
+- buying situation
+- budget sensitivity
+- location
+- business or consumer type
+
+Do not invent unnecessary demographic details.
+
+4. VALUE PROPOSITION
+Explain:
+- why the offer is useful
+- what makes it different
+- what customer benefit should be communicated most clearly
+
+5. PRODUCTS / SERVICES
+For each main offer include:
+- what it is
+- who it is for
+- customer benefit
+- likely delivery method
+- possible add-ons or upgrades
+
+6. BUSINESS MODEL
+Explain:
+- how the business makes money
+- how customers buy
+- payment structure
+- repeat-purchase potential
+- possible recurring revenue opportunities
+
+7. MARKET & COMPETITION
+Analyze:
+- direct competitors
+- indirect competitors
+- customer alternatives
+- likely competitive strengths
+- possible weaknesses
+- gaps worth validating
+
+Do not invent current competitor information.
+
+8. PRICING STRATEGY
+Evaluate:
+- proposed pricing
+- possible entry-level offer
+- standard offer
+- premium offer
+- factors affecting price
+- what should be researched before finalizing prices
+
+Do not invent market prices.
+
+9. SALES STRATEGY
+Explain:
+- where customers can be reached
+- how leads could be generated
+- how inquiries become customers
+- how repeat business could be encouraged
+
+10. MARKETING PLAN
+Recommend practical marketing based on the available budget.
+
+Include:
+- core message
+- main channels
+- content approach
+- referral opportunities
+- partnerships
+- low-cost acquisition ideas
+- trust-building methods
+
+11. OPERATIONS PLAN
+Describe:
+- daily operating process
+- suppliers
+- inventory if relevant
+- equipment
+- technology
+- staffing
+- quality control
+- delivery or fulfillment
+- customer service
+
+12. STARTUP REQUIREMENTS
+Separate requirements into:
+- Essential before launch
+- Useful but optional
+- Can be added later
+
+13. COST STRUCTURE
+Identify likely cost categories such as:
+- setup costs
+- equipment
+- inventory
+- software
+- licensing
+- marketing
+- transport
+- staffing
+- rent
+- utilities
+- payment fees
+
+Do not invent exact costs unless figures are provided.
+
+14. REVENUE DRIVERS
+Explain what most directly affects revenue, such as:
+- number of customers
+- average order value
+- pricing
+- repeat purchases
+- conversion rate
+- capacity
+
+15. SIMPLE FINANCIAL MODEL
+Using only the figures provided, structure:
+- startup investment
+- monthly fixed costs
+- variable costs
+- estimated revenue
+- gross profit
+- operating profit
+- break-even considerations
+
+If important figures are missing, show what information is needed instead of inventing numbers.
+
+16. RISKS
+Identify major:
+- market risks
+- financial risks
+- operational risks
+- supplier risks
+- customer-acquisition risks
+- regulatory risks
+- competitive risks
+
+Classify each as High, Medium or Low where possible.
+
+17. VALIDATION PLAN
+Recommend low-cost tests before major investment.
+
+Possible methods:
+- customer interviews
+- pilot service
+- pre-orders
+- small inventory test
+- landing page
+- marketplace listing
+- social media test
+- paid trial
+- sample offer
+- competitor review analysis
+
+18. 30-DAY ACTION PLAN
+Create practical first steps for the next 30 days.
+
+19. 90-DAY MILESTONES
+Define realistic milestones for:
+- validation
+- setup
+- launch
+- first customers
+- process improvement
+
+20. KEY PERFORMANCE INDICATORS
+Recommend simple KPIs appropriate for the business.
+
+Examples:
+- leads
+- conversion rate
+- average sale
+- repeat customers
+- gross margin
+- customer acquisition cost
+- order accuracy
+- delivery time
+
+Use only relevant KPIs.
+
+21. INFORMATION GAPS
+List important information that still needs to be researched or decided.
+
+22. FINAL ASSESSMENT
+Rate the current business plan as one of:
+
+- READY FOR SMALL-SCALE TEST
+- PROMISING — MORE VALIDATION NEEDED
+- NEEDS BUSINESS MODEL CHANGES
+- HIGH-RISK WITHOUT FURTHER RESEARCH
+
+Explain why.
+
+OUTPUT FORMAT:
+
+1. Executive Summary
+2. Customer Problem
+3. Target Customer
+4. Value Proposition
+5. Products / Services
+6. Business Model
+7. Market & Competition
+8. Pricing Strategy
+9. Sales Strategy
+10. Marketing Plan
+11. Operations Plan
+12. Startup Requirements
+13. Cost Structure
+14. Revenue Drivers
+15. Financial Planning
+16. Key Risks
+17. Validation Plan
+18. 30-Day Action Plan
+19. 90-Day Milestones
+20. KPIs
+21. Information Gaps
+22. Final Assessment
+
+IMPORTANT:
+- Do not invent market size, customer demand, competitor information, pricing, costs or financial projections.
+- Clearly distinguish facts from assumptions.
+- Keep the plan practical and appropriate to the size of the business.
+- Prioritize testing and evidence before major investment.
+- Avoid unnecessary corporate jargon.
+- Focus on actions that can actually help the owner launch or improve the business.`;
+
+const steps = [
+  {
+    title: "Start with the real customer",
+    description:
+      "Define who will actually pay, what problem they have and why your offer is useful before focusing on logos, websites or branding.",
+  },
+  {
+    title: "Add your real constraints",
+    description:
+      "Include budget, available time, skills and resources so the plan stays realistic instead of assuming unlimited capital.",
+  },
+  {
+    title: "Do not invent the numbers",
+    description:
+      "Use your actual costs and pricing when available. Missing financial information should become a research task, not a made-up forecast.",
+  },
+  {
+    title: "Turn the plan into tests",
+    description:
+      "A useful business plan should tell you what to validate next, not only describe what the finished business might look like.",
+  },
+];
+
+const example = {
+  input: [
+    "Business: Inventory setup and stock-control service for small businesses.",
+    "Market: Small retailers, distributors and online sellers.",
+    "Problem: Many businesses use basic spreadsheets or manual records and struggle with stock accuracy.",
+    "Services: Inventory tracker setup, stock-count process setup and monthly inventory review.",
+    "Business model: One-time setup fee with optional monthly support.",
+    "Budget: Low startup capital.",
+    "Resources: Warehouse and inventory-management experience, laptop and internet.",
+  ],
+
+  output: [
+    "Business model: Start with a clearly defined setup service rather than attempting to build full inventory software.",
+    "Entry offer: Inventory review plus a customized stock-control tracker and basic operating process.",
+    "Target customer: Small businesses with enough inventory complexity to experience stock-control problems but not enough scale for a large ERP implementation.",
+    "Validation: Interview potential customers and sell a small pilot package before investing in software development or paid advertising.",
+    "Revenue expansion: Add monthly stock reviews, reporting support, process improvement and customized templates after the initial setup.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Plan for the current stage",
+    description:
+      "An idea-stage business needs validation and first customers more than a complicated five-year corporate plan.",
+  },
+  {
+    title: "Use ranges carefully",
+    description:
+      "When costs or revenue are uncertain, research them first instead of creating precise-looking projections without evidence.",
+  },
+  {
+    title: "Keep the first offer simple",
+    description:
+      "A smaller, clearly defined product or service is usually easier to test, price and improve than launching several offers at once.",
+  },
+];
+---
+
+<BaseLayout
+  title="Business Plan Builder Prompt | KRIYANO"
+  description="Create a practical business plan covering customers, business model, operations, marketing, costs, risks, validation and launch actions."
+>
+  <PromptPage
+    category="BUSINESS"
+    title="Business Plan"
+    accentTitle="Builder."
+    description="Turn a business idea into a practical plan covering customers, offers, revenue, operations, marketing, costs, risks, validation and launch priorities."
+    meta={[
+      "Free prompt",
+      "Business planning",
+      "Action focused",
+    ]}
+    bestFor={[
+      "Small businesses",
+      "Startups",
+      "Side businesses",
+      "Service businesses",
+      "Online businesses",
+      "New business ideas",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Build a plan you can actually use."
+    introDescription="Add the business idea, customer, budget and resources you really have. The prompt focuses on practical decisions, validation and next actions rather than producing a generic corporate document."
+    steps={steps}
+    exampleTitle="From idea to practical business model."
+    example={example}
+    tipsTitle="Build a stronger business plan."
+    tips={tips}
+    sidebarTitle="Still shaping the business idea?"
+    sidebarDescription="Use the KRIYANO Business Idea Evaluator first to test the opportunity, then return here to develop the stronger ideas into an actionable plan."
+    warningTitle="Financial planning"
+    warningText="Do not treat AI-generated financial figures or market assumptions as verified data. Replace estimates with real supplier quotes, operating costs, pricing research and customer evidence before investing."
+  />
+</BaseLayout>

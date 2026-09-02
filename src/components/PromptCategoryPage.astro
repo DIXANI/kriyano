@@ -1,0 +1,352 @@
+---
+interface PromptItem {
+  title: string;
+  description: string;
+  category?: string;
+  href: string;
+}
+
+interface Props {
+  kicker?: string;
+  title: string;
+  accentTitle?: string;
+  description: string;
+  prompts: PromptItem[];
+}
+
+const {
+  kicker = "PROMPT CATEGORY",
+  title,
+  accentTitle = "",
+  description,
+  prompts,
+} = Astro.props;
+
+const availableCount = prompts.filter((prompt) => prompt.href !== "#").length;
+---
+
+<section class="category-hero">
+  <div class="container">
+    <a class="back-link" href="/prompts/">← Prompt Library</a>
+
+    <p class="section-kicker">{kicker}</p>
+
+    <h1>
+      {title}
+      {accentTitle && <span>{accentTitle}</span>}
+    </h1>
+
+    <p class="hero-description">
+      {description}
+    </p>
+
+    <div class="category-stats">
+      <div>
+        <strong>{prompts.length}</strong>
+        <span>Prompts</span>
+      </div>
+
+      <div>
+        <strong>{availableCount}</strong>
+        <span>Available</span>
+      </div>
+
+      <div>
+        <strong>Free</strong>
+        <span>Access</span>
+      </div>
+
+      <div>
+        <strong>Editable</strong>
+        <span>Format</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="prompt-directory">
+  <div class="container">
+    <div class="directory-heading">
+      <div>
+        <p class="section-kicker">PROMPT DIRECTORY</p>
+        <h2>Choose a task.</h2>
+      </div>
+
+      <p>
+        Start with a ready-to-use prompt and customize the details for your
+        actual situation.
+      </p>
+    </div>
+
+    <div class="prompt-list">
+      {
+        prompts.map((prompt, index) => (
+          <article class="prompt-row">
+            <div class="prompt-number">
+              {String(index + 1).padStart(2, "0")}
+            </div>
+
+            <div class="prompt-content">
+              {prompt.category && (
+                <span class="prompt-category">{prompt.category}</span>
+              )}
+
+              <h3>{prompt.title}</h3>
+
+              <p>{prompt.description}</p>
+            </div>
+
+            <div class="prompt-action">
+              {prompt.href !== "#" ? (
+                <a href={prompt.href}>View prompt ↗</a>
+              ) : (
+                <span>Coming soon</span>
+              )}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="category-bottom">
+  <div class="container">
+    <div class="bottom-card">
+      <div>
+        <p class="section-kicker">NEED SOMETHING DIFFERENT?</p>
+        <h2>Build your own prompt.</h2>
+
+        <p>
+          Use the KRIYANO AI Prompt Builder when you need something tailored
+          to a specific task, audience, tone or output.
+        </p>
+      </div>
+
+      <a class="button button-primary" href="/tools/prompt-builder/">
+        Open Prompt Builder ↗
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .category-hero {
+    padding: 90px 0 68px;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 38px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    color: var(--lime);
+  }
+
+  .category-hero h1 {
+    max-width: 900px;
+    margin: 10px 0 20px;
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.065em;
+  }
+
+  .category-hero h1 span {
+    color: var(--lime);
+  }
+
+  .hero-description {
+    max-width: 720px;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .category-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 52px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .category-stats div {
+    padding: 22px 20px;
+    border-right: 1px solid var(--line);
+  }
+
+  .category-stats div:first-child {
+    padding-left: 0;
+  }
+
+  .category-stats div:last-child {
+    border-right: none;
+  }
+
+  .category-stats strong,
+  .category-stats span {
+    display: block;
+  }
+
+  .category-stats strong {
+    margin-bottom: 5px;
+    color: var(--text);
+    font-size: 1rem;
+  }
+
+  .category-stats span {
+    color: var(--muted);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .prompt-directory {
+    padding: 70px 0 100px;
+  }
+
+  .directory-heading {
+    display: grid;
+    grid-template-columns: 1fr minmax(280px, 430px);
+    gap: 50px;
+    align-items: end;
+    margin-bottom: 30px;
+  }
+
+  .directory-heading h2 {
+    margin: 8px 0 0;
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    letter-spacing: -0.045em;
+  }
+
+  .directory-heading > p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .prompt-list {
+    border-top: 1px solid var(--line);
+  }
+
+  .prompt-row {
+    display: grid;
+    grid-template-columns: 65px minmax(0, 760px) 130px;
+    gap: 24px;
+    align-items: center;
+    padding: 25px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .prompt-number {
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+  }
+
+  .prompt-category {
+    display: inline-block;
+    margin-bottom: 7px;
+    color: var(--mint);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .prompt-content h3 {
+    margin: 0 0 7px;
+    font-size: 1.05rem;
+  }
+
+  .prompt-content p {
+    max-width: 680px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.84rem;
+    line-height: 1.6;
+  }
+
+  .prompt-action {
+    min-width: 120px;
+    text-align: left;
+    font-size: 0.75rem;
+  }
+
+  .prompt-action a {
+    color: var(--lime);
+    font-weight: 750;
+    text-decoration: none;
+  }
+
+  .prompt-action span {
+    color: var(--muted);
+  }
+
+  .category-bottom {
+    padding: 0 0 100px;
+  }
+
+  .bottom-card {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    align-items: center;
+    padding: 38px;
+    border: 1px solid rgba(183, 255, 74, 0.15);
+    border-radius: 22px;
+    background: #0d1d16;
+  }
+
+  .bottom-card h2 {
+    margin: 7px 0 10px;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    letter-spacing: -0.04em;
+  }
+
+  .bottom-card p:last-child {
+    max-width: 620px;
+    margin-bottom: 0;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  @media (max-width: 760px) {
+    .category-hero {
+      padding-top: 60px;
+    }
+
+    .category-stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .category-stats div {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .directory-heading {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .prompt-row {
+      grid-template-columns: 42px 1fr;
+      gap: 16px;
+    }
+
+    .prompt-action {
+      grid-column: 2;
+    }
+
+    .bottom-card {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+</style>

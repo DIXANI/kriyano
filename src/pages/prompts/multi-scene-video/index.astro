@@ -1,0 +1,684 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert AI video director, storyboard designer, cinematographer and continuity supervisor.
+
+TASK:
+Turn the supplied concept into a coherent multi-scene AI video plan with clear timing, scene purpose, visual continuity, camera progression, transitions and audio alignment.
+
+The final result should feel like one connected production rather than several unrelated clips.
+
+VIDEO GOAL:
+[What should the complete video communicate?]
+
+PLATFORM:
+[Facebook Reel / Instagram Reel / TikTok / YouTube Short / YouTube / advertisement / website / presentation / other.]
+
+TOTAL DURATION:
+[For example: 20 sec / 30 sec / 45 sec / 60 sec.]
+
+ASPECT RATIO:
+[9:16 / 16:9 / 1:1 / other.]
+
+NUMBER OF SCENES:
+[For example: 4 / 6 / 8.]
+
+TARGET AUDIENCE:
+[Who is this video for?]
+
+MAIN SUBJECT:
+[Person / product / food / service / process / environment.]
+
+CHARACTER DETAILS:
+[If applicable.]
+
+PRODUCT DETAILS:
+[If applicable.]
+
+LOCATION / ENVIRONMENT:
+[Main setting or settings.]
+
+VISUAL STYLE:
+[Photorealistic / cinematic / premium commercial / documentary / food-commercial / professional / lifestyle / other.]
+
+STORY STRUCTURE:
+[Hook → explanation → demonstration → result → CTA / other.]
+
+VOICE-OVER:
+[Paste script or describe what should be said.]
+
+DIALOGUE:
+[Optional.]
+
+MUSIC:
+[Optional.]
+
+SOUND EFFECTS:
+[Optional.]
+
+VISIBLE TEXT:
+[Exact text or no visible text.]
+
+BRAND:
+[Optional.]
+
+REFERENCE REQUIREMENTS:
+[Characters, products, locations or styles that must remain consistent.]
+
+MANDATORY SCENES:
+[List any scenes that must appear.]
+
+ELEMENTS TO AVOID:
+[Optional.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+MULTI-SCENE VIDEO REQUIREMENTS:
+
+1. DEFINE THE COMPLETE STORY ARC
+The video should have a clear beginning, middle and end.
+
+2. GIVE EVERY SCENE A PURPOSE
+Each scene should contribute something new.
+
+3. DO NOT CREATE FILLER SCENES
+Remove scenes that do not support the main message.
+
+4. OPEN WITH A STRONG HOOK
+The first scene should establish immediate relevance.
+
+5. MATCH THE HOOK TO THE REAL CONTENT
+Do not create misleading opening imagery.
+
+6. CREATE LOGICAL PROGRESSION
+Each scene should naturally lead to the next.
+
+7. AVOID RANDOM SCENE ORDER
+Arrange the sequence according to:
+
+Cause and effect
+Chronology
+Workflow
+Problem to solution
+Question to answer
+Before to process to result
+
+8. DEFINE TOTAL DURATION
+Keep the full sequence realistic for the requested runtime.
+
+9. ALLOCATE TIME PER SCENE
+Do not give every scene equal duration automatically.
+
+10. PRIORITIZE IMPORTANT SCENES
+Key moments may need more screen time.
+
+11. KEEP SIMPLE MOMENTS SHORT
+Transition or setup scenes should not consume unnecessary time.
+
+12. DEFINE SCENE START AND END
+Each scene should have a clear starting state and ending state.
+
+13. BUILD TRANSITIONS FROM THOSE STATES
+The next scene should begin in a way that feels connected.
+
+14. PRESERVE CHARACTER IDENTITY
+Across all scenes maintain:
+
+Face shape
+Skin tone
+Eyes
+Nose
+Lips
+Hair
+Age appearance
+Body proportions
+Distinctive features
+
+15. DO NOT RECAST THE CHARACTER
+The same character must not gradually become a different person.
+
+16. PRESERVE CLOTHING WHEN CONTINUITY REQUIRES IT
+Keep the same outfit during one continuous event.
+
+17. ALLOW CLOTHING CHANGE ONLY WHEN LOGICALLY JUSTIFIED
+For example, a later-day or different-location scene.
+
+18. PRESERVE ACCESSORIES
+Keep jewellery, glasses, watches and other identity details stable.
+
+19. PRESERVE PRODUCT IDENTITY
+Across scenes maintain:
+
+Shape
+Colour
+Packaging
+Logo
+Material
+Labels
+Features
+
+20. DO NOT REDESIGN THE PRODUCT BETWEEN SCENES
+
+21. PRESERVE FOOD IDENTITY
+Maintain:
+
+Dish structure
+Texture
+Colour
+Serving style
+Toppings
+Portion logic
+
+22. PRESERVE PROP CONTINUITY
+Objects used in one scene should remain logically consistent later.
+
+23. PRESERVE LOCATION CONTINUITY
+When scenes occur in the same location, maintain:
+
+Walls
+Counters
+Furniture
+Windows
+Shelves
+Lighting direction
+Key background objects
+
+24. DO NOT RANDOMLY REBUILD THE SET
+
+25. DEFINE WHEN LOCATION CHANGES
+Make scene changes intentional.
+
+26. PRESERVE TIME CONTINUITY
+Lighting and environment should reflect whether scenes happen moments apart or at different times.
+
+27. PRESERVE WEATHER CONTINUITY
+Do not change conditions randomly.
+
+28. PRESERVE OBJECT STATE
+If something changes in one scene, later scenes should reflect that change.
+
+29. EXAMPLE OF OBJECT-STATE CONTINUITY
+If a cake is cut in Scene 4, Scene 5 should not suddenly show the untouched whole cake unless intentionally using a new shot from an earlier moment.
+
+30. PRESERVE QUANTITY CONTINUITY
+Do not randomly increase or decrease product count, ingredients or props.
+
+31. PRESERVE ACTION CONTINUITY
+Hands and objects should continue from a physically logical state.
+
+32. DEFINE THE ACTION OF EACH SCENE
+Avoid vague instructions such as "show the process."
+
+33. USE ONE PRIMARY ACTION PER SHORT SCENE
+
+34. KEEP ACTION ACHIEVABLE WITHIN SCENE DURATION
+
+35. CONTROL HUMAN MOTION
+Require anatomically realistic movement.
+
+36. CONTROL HANDS
+Maintain:
+
+Correct fingers
+Natural grip
+Believable contact
+Consistent object interaction
+
+37. PREVENT DUPLICATION
+No duplicated:
+
+Characters
+Hands
+Products
+Utensils
+Props
+
+38. PREVENT TELEPORTATION
+Objects should move visibly or transition intentionally.
+
+39. APPLY REALISTIC PHYSICS
+Respect:
+
+Gravity
+Weight
+Momentum
+Liquid flow
+Fabric movement
+Steam
+Smoke
+
+40. CREATE CAMERA PROGRESSION
+The overall video should have visual variety without becoming chaotic.
+
+41. DO NOT USE THE SAME SHOT FOR EVERY SCENE
+Vary framing when useful.
+
+42. DO NOT CHANGE CAMERA RANDOMLY
+Every angle should serve the story.
+
+43. CREATE AN ESTABLISHING SHOT WHEN NEEDED
+Use wider framing to establish environment.
+
+44. USE MEDIUM SHOTS FOR HUMAN ACTION
+
+45. USE CLOSE-UPS FOR IMPORTANT DETAILS
+
+46. USE MACRO SHOTS FOR TEXTURE OR PRODUCT DETAIL
+
+47. USE OVERHEAD SHOTS WHEN THEY IMPROVE PROCESS CLARITY
+
+48. LIMIT CAMERA MOVEMENT WITHIN EACH SCENE
+Prefer one dominant movement.
+
+49. POSSIBLE CAMERA MOVEMENTS:
+Static
+Push-in
+Pull-back
+Pan
+Tilt
+Tracking
+Controlled orbit
+Subtle handheld
+
+50. CONTROL CAMERA SPEED
+
+51. AVOID IMPOSSIBLE CAMERA TRANSITIONS
+
+52. MAINTAIN SCREEN DIRECTION
+A subject moving left-to-right should not randomly reverse without visual reason.
+
+53. MAINTAIN THE 180-DEGREE LOGIC WHERE RELEVANT
+Avoid confusing spatial reversals in conversational or action scenes.
+
+54. CONTROL EYE LINE
+People should look toward the correct object or person.
+
+55. CONTROL SUBJECT POSITION
+Avoid characters jumping around the frame between connected shots.
+
+56. USE MATCH CUTS WHEN APPROPRIATE
+Link similar:
+
+Shapes
+Actions
+Positions
+Objects
+
+between scenes.
+
+57. USE ACTION MATCHING
+An action can begin in one shot and continue from another angle.
+
+58. USE SIMPLE CUTS BY DEFAULT
+Do not overuse flashy transitions.
+
+59. FADE TRANSITION MODE
+Use for:
+
+Time passage
+Ending
+Mood change
+
+60. DISSOLVE MODE
+Use sparingly for soft transitions.
+
+61. WHIP OR FAST TRANSITIONS
+Use only when the content style supports them.
+
+62. DO NOT USE RANDOM TRANSITION EFFECTS
+Avoid effects that distract from the content.
+
+63. DEFINE TRANSITION TYPE FOR EACH SCENE
+When relevant.
+
+64. BUILD AUDIO CONTINUITY
+Music and ambience should feel connected across scenes.
+
+65. ALIGN VOICE-OVER TO THE VISUAL
+What is being said should relate to what is being shown.
+
+66. DO NOT SHOW VISUALS THAT CONTRADICT THE VOICE-OVER
+
+67. TIME VOICE-OVER REALISTICALLY
+Do not place too many spoken words into a short scene.
+
+68. ALLOW VISUAL BREATHING SPACE
+Not every second requires narration.
+
+69. DIALOGUE MODE
+Keep spoken exchanges realistic for the allotted time.
+
+70. PRESERVE SPEAKER IDENTITY
+The same character should maintain the same voice role.
+
+71. SOUND EFFECTS SHOULD SUPPORT VISIBLE ACTION
+Examples:
+
+Knife cutting
+Pouring
+Door closing
+Machine starting
+Package opening
+
+72. DO NOT OVERLOAD SOUND DESIGN
+
+73. MUSIC SHOULD SUPPORT THE MOOD
+Without overpowering spoken content.
+
+74. CONTROL VISIBLE TEXT
+Use exact supplied wording.
+
+75. DO NOT GENERATE RANDOM TEXT
+
+76. KEEP ON-SCREEN TEXT SHORT
+
+77. PRESERVE BRAND NAMES EXACTLY
+
+78. DO NOT INVENT LOGOS
+
+79. DO NOT REDESIGN APPROVED LOGOS
+
+80. KEEP TEXT INSIDE SAFE AREAS
+
+81. SOCIAL VIDEO MODE
+Make Scene 1 understandable immediately.
+
+82. REEL / SHORT MODE
+Use strong vertical framing and central safe zones.
+
+83. FOOD VIDEO MODE
+Build progression around:
+
+Ingredients
+Preparation
+Cooking
+Finishing
+Serving
+Result
+
+without unnecessarily showing every minor step.
+
+84. PRODUCT VIDEO MODE
+Build progression around:
+
+Problem or context
+Product introduction
+Feature demonstration
+Benefit
+Hero finish
+CTA
+
+85. BUSINESS VIDEO MODE
+Use:
+
+Professional environments
+Clear process visuals
+Controlled motion
+Practical outcomes
+
+86. EDUCATIONAL VIDEO MODE
+Structure around:
+
+Question
+Explanation
+Example
+Key takeaway
+
+87. STORYTELLING MODE
+Create:
+
+Setup
+Development
+Change
+Resolution
+
+88. COMMERCIAL MODE
+Keep the product or offer identifiable throughout.
+
+89. DO NOT INVENT PERFORMANCE CLAIMS
+Never add unsupported:
+
+Percentages
+Savings
+Revenue
+Speed improvements
+Health results
+Customer growth
+
+90. DO NOT INVENT TESTIMONIALS OR RATINGS
+
+91. DO NOT CREATE FALSE URGENCY OR SCARCITY
+
+92. USE VISUAL CALLBACKS
+Reusing a recognizable object, colour or framing can connect scenes.
+
+93. CREATE A CONSISTENT COLOUR LANGUAGE
+Maintain grading across the video.
+
+94. PRESERVE LIGHTING STYLE
+Even when angles change.
+
+95. PRESERVE LENS CHARACTER
+Avoid one scene appearing ultra-wide and the next telephoto without reason.
+
+96. CREATE SCENE-SPECIFIC NEGATIVE CONSTRAINTS
+Use protections only where needed.
+
+97. CREATE A GLOBAL CONTINUITY LOCK
+Define details that must remain stable across every applicable scene.
+
+98. CREATE A SCENE-BY-SCENE GENERATION PLAN
+Each scene should be usable as its own generation prompt.
+
+99. CREATE AN EDITING PLAN
+Explain how the generated clips should connect.
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- complete story arc is clear
+- total duration is realistic
+- every scene has a purpose
+- hook matches the content
+- scene order is logical
+- scene timing is appropriate
+- character identity is consistent
+- product identity is consistent
+- clothing continuity is logical
+- props remain consistent
+- object states carry forward correctly
+- environment remains stable where required
+- lighting continuity is maintained
+- actions are achievable
+- camera angles serve the story
+- camera direction remains understandable
+- transitions are not distracting
+- voice-over matches visuals
+- audio timing is achievable
+- on-screen text is accurate
+- no random branding appears
+- no unsupported results are shown
+- final scene provides a satisfying ending
+
+OUTPUT FORMAT:
+
+1. VIDEO STRUCTURE
+Summarize:
+
+Hook
+Development
+Main payoff
+Ending / CTA
+
+2. GLOBAL CONTINUITY LOCK
+List all details that must remain consistent across scenes.
+
+3. SCENE PLAN
+
+For each scene provide:
+
+SCENE NUMBER
+Duration
+Purpose
+Starting frame
+Subject
+Action
+Environment
+Camera shot
+Camera angle
+Camera movement
+Lighting
+Voice-over / dialogue
+Sound
+Visible text
+Ending frame
+Transition to next scene
+Scene-specific continuity requirements
+
+4. SCENE-BY-SCENE GENERATION PROMPTS
+Provide one polished model-ready prompt for each scene.
+
+5. AUDIO & VOICE-OVER TIMELINE
+Map narration, dialogue, music and important sound effects to the scene sequence.
+
+6. EDITING PLAN
+Explain:
+
+Scene order
+Cut points
+Transition types
+Pacing
+
+7. GLOBAL NEGATIVE / PROTECTION INSTRUCTIONS
+List recurring generation failures to avoid.
+
+8. CONTINUITY CHECKLIST
+Verify:
+
+Character
+Clothing
+Product
+Food
+Props
+Location
+Lighting
+Object states
+Camera direction
+Audio
+
+9. FINAL SEQUENCE CHECK
+Confirm the complete video tells one coherent story.
+
+IMPORTANT:
+- Treat every scene as part of one production.
+- Preserve character, product, location and object-state continuity.
+- Do not create filler scenes.
+- Match scene duration to the amount of action.
+- Keep camera choices purposeful.
+- Align visuals with narration.
+- Prefer simple cuts over unnecessary transition effects.
+- Do not invent claims, results, branding or social proof.`;
+
+const steps = [
+  {
+    title: "Build the story before the shots",
+    description:
+      "Define the hook, progression, payoff and ending first so each generated scene contributes to one clear video rather than becoming an isolated clip.",
+  },
+  {
+    title: "Create a global continuity lock",
+    description:
+      "Fix character identity, clothing, products, props, locations, lighting and other recurring details before writing individual scene prompts.",
+  },
+  {
+    title: "Plan every scene independently",
+    description:
+      "Give each scene its own duration, purpose, action, camera direction, first frame and final frame so it can be generated reliably.",
+  },
+  {
+    title: "Plan the edit as well as the generation",
+    description:
+      "Define how clips connect, where cuts happen and how voice-over, sound and visual continuity carry across the complete sequence.",
+  },
+];
+
+const example = {
+  input: [
+    "Platform: Facebook Reel.",
+    "Total duration: 30 seconds.",
+    "Format: 9:16.",
+    "Topic: Simple caramel custard recipe.",
+    "Structure: Finished dessert hook → caramel → custard mixture → steaming → unmoulding → final serving.",
+    "Style: Premium photorealistic food-commercial.",
+    "Environment: Same warm home kitchen throughout.",
+  ],
+
+  output: [
+    "SCENE 1 — HOOK: Begin with the finished caramel custard in close-up as one spoon gently cuts through the smooth surface. Use this as the appetite-driving opening.",
+    "SCENE 2 — CARAMEL: Show sugar and water becoming amber caramel in the same kitchen environment, then pouring into the round pan.",
+    "SCENE 3 — CUSTARD: Show the milk mixture heating on the stove, followed by a controlled close-up of the prepared custard mixture being poured into the caramel-lined pan.",
+    "SCENE 4 — STEAMING: Show the same round pan being placed inside the steamer, preserving the kitchen, cookware and visual style.",
+    "SCENE 5 — UNMOULDING: Show the fully chilled custard being released onto a serving plate, keeping the dessert shape consistent.",
+    "SCENE 6 — FINAL: Return to a premium close-up of the finished custard with one clean slice removed and caramel sauce flowing naturally.",
+    "CONTINUITY: Same kitchen, pan style, dessert shape, colour grade and food identity across all related scenes. Do not allow the custard to change size, shape or texture unexpectedly.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Continuity includes object state",
+    description:
+      "If an ingredient is poured, a cake is cut or packaging is opened in one scene, the following scene should reflect that change instead of resetting the object.",
+  },
+  {
+    title: "Generate scenes, then edit them together",
+    description:
+      "AI video models usually perform better when each scene is generated as a focused short clip and the complete story is assembled during editing.",
+  },
+  {
+    title: "Let the camera evolve with the story",
+    description:
+      "Use wider shots for context and closer shots for important details instead of adding dramatic movement to every single scene.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Multi-Scene Video Prompt | KRIYANO"
+  description="Plan coherent multi-scene AI videos with scene timing, character continuity, camera progression, transitions, voice-over and editing guidance."
+>
+  <PromptPage
+    category="VIDEO GENERATION"
+    title="Multi-Scene Video"
+    accentTitle="Prompt."
+    description="Turn a complete idea into a connected scene-by-scene AI video plan with consistent characters, products, locations, camera language and audio."
+    meta={[
+      "Free prompt",
+      "Multi-scene video",
+      "Storyboard planning",
+    ]}
+    bestFor={[
+      "Recipe videos",
+      "Product videos",
+      "Reels & Shorts",
+      "Commercials",
+      "Educational videos",
+      "Story-driven content",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Plan one production, not a collection of unrelated clips."
+    introDescription="Lock continuity first, give every scene a clear purpose, control timing and camera progression, then generate each clip with an editing plan for the complete sequence."
+    steps={steps}
+    exampleTitle="Turn a recipe into a connected six-scene Reel."
+    example={example}
+    tipsTitle="Continuity starts before the first clip is generated."
+    tips={tips}
+    sidebarTitle="Only need one video shot?"
+    sidebarDescription="Use KRIYANO's Text-to-Video Prompt for a single scene, or Image-to-Video Prompt when you already have a reference image to animate."
+    warningTitle="Individually good clips can still create a bad sequence"
+    warningText="Review the complete edit for character drift, changing products, reset object states, inconsistent lighting, mismatched camera direction and narration timing. Continuity must be checked across scene boundaries, not only inside each generated clip."
+  />
+</BaseLayout>

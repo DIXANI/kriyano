@@ -1,0 +1,804 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced performance-review coach and professional communication specialist.
+
+TASK:
+Help me prepare for a performance review using the information below.
+
+The goal is to create an evidence-based, professional and balanced review preparation package that clearly shows:
+
+- responsibilities
+- achievements
+- measurable results
+- challenges handled
+- problems solved
+- contributions to the team or business
+- skills developed
+- areas for improvement
+- goals
+- career-development interests
+- support required
+- discussion points for the manager meeting
+
+Do not invent achievements, KPIs, praise, responsibilities or results.
+
+ROLE / JOB TITLE:
+[Your role.]
+
+DEPARTMENT:
+[Department / team.]
+
+REVIEW PERIOD:
+[Example: January–December 2026.]
+
+MAIN RESPONSIBILITIES:
+[List your main responsibilities.]
+
+GOALS / KPIs:
+[List official goals, targets or KPIs if available.]
+
+ACHIEVEMENTS:
+[List work you completed successfully.]
+
+MEASURABLE RESULTS:
+[Add numbers, percentages, savings, accuracy, productivity, service levels, completion rates, etc.]
+
+PROJECTS / IMPROVEMENTS:
+[List projects or improvements you contributed to.]
+
+PROBLEMS SOLVED:
+[List significant problems you handled.]
+
+CHALLENGES:
+[List major difficulties during the period.]
+
+CUSTOMER / STAKEHOLDER CONTRIBUTIONS:
+[List examples.]
+
+TEAM CONTRIBUTIONS:
+[List support, leadership, collaboration, training or mentoring.]
+
+POSITIVE FEEDBACK:
+[Add feedback received from managers, colleagues, customers or stakeholders.]
+
+SKILLS DEVELOPED:
+[List technical, professional or leadership skills developed.]
+
+TRAINING / CERTIFICATIONS:
+[List relevant training.]
+
+AREAS FOR IMPROVEMENT:
+[List areas you want to improve.]
+
+GOALS FOR NEXT PERIOD:
+[List future goals.]
+
+CAREER DEVELOPMENT:
+[Promotion, expanded responsibility, new skills, career direction, etc.]
+
+SUPPORT REQUIRED:
+[Training, resources, mentoring, tools, clearer responsibilities, staffing, etc.]
+
+DIFFICULT TOPICS:
+[Any issue you expect to discuss with your manager.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+PERFORMANCE REVIEW PREPARATION REQUIREMENTS:
+
+1. SUMMARIZE THE ROLE
+Create a concise overview of:
+
+Role:
+Primary responsibilities:
+Main business contribution:
+Key stakeholders:
+
+Use only the information provided.
+
+2. IDENTIFY THE MOST IMPORTANT ACHIEVEMENTS
+Separate routine responsibilities from genuine achievements.
+
+An achievement should normally show:
+
+- an important result
+- a problem solved
+- an improvement
+- a milestone
+- measurable performance
+- customer impact
+- business impact
+- leadership or contribution beyond routine execution
+
+Do not exaggerate normal daily activity.
+
+3. BUILD ACHIEVEMENT STATEMENTS
+For each strong achievement use:
+
+Situation / need:
+Action:
+Result:
+Business impact:
+
+Where possible convert vague statements into clearer professional wording.
+
+Example:
+
+Weak:
+"Handled stock counts."
+
+Stronger:
+"Coordinated scheduled stock counts and followed up variances to support inventory accuracy and timely reconciliation."
+
+Do not add results that were not supplied.
+
+4. QUANTIFY RESULTS
+Where valid data exists, highlight:
+
+- percentages
+- volume
+- time saved
+- cost saved
+- error reduction
+- productivity
+- accuracy
+- service level
+- turnaround time
+- completion rate
+- customer satisfaction
+- backlog reduction
+
+Preserve numbers exactly.
+
+Do not invent numbers to make an achievement stronger.
+
+5. KPI REVIEW
+For each supplied KPI provide:
+
+KPI:
+Target:
+Actual:
+Variance:
+Status:
+Evidence:
+Comment:
+
+Use statuses such as:
+
+Exceeded
+Achieved
+Partially achieved
+Below target
+Not enough data
+
+Do not invent targets.
+
+6. EXPLAIN KPI VARIANCE
+For KPI gaps distinguish:
+
+Employee-controlled factors
+Team factors
+Process factors
+System factors
+External factors
+
+Do not make excuses.
+
+Explain relevant context factually.
+
+7. IDENTIFY BUSINESS IMPACT
+For each important contribution consider:
+
+Customer
+Cost
+Quality
+Productivity
+Risk
+Safety
+Inventory
+Service
+Team
+Compliance
+Time
+
+Only include impacts supported by the evidence.
+
+8. PROBLEM-SOLVING CONTRIBUTIONS
+Highlight significant problems handled.
+
+For each:
+
+Problem:
+Action:
+Result:
+Lesson:
+
+Do not claim full ownership where the outcome was a team effort.
+
+9. PROCESS IMPROVEMENT CONTRIBUTIONS
+Identify improvements such as:
+
+- simplified workflow
+- reduced delay
+- reduced errors
+- improved reporting
+- better control
+- improved documentation
+- stronger communication
+- improved customer service
+- improved safety
+- improved stock accuracy
+
+Explain the user's contribution specifically.
+
+10. TEAM CONTRIBUTION
+Identify evidence of:
+
+- collaboration
+- supporting colleagues
+- knowledge sharing
+- training
+- mentoring
+- coordination
+- conflict resolution
+- helping during peak workload
+- cross-functional cooperation
+
+Avoid generic claims such as:
+
+"I am a great team player."
+
+Use actual examples.
+
+11. LEADERSHIP CONTRIBUTION
+Where relevant, identify examples of:
+
+- taking ownership
+- coordinating work
+- resolving issues
+- guiding employees
+- prioritizing tasks
+- communicating expectations
+- improving standards
+- escalation
+- decision making
+
+Do not imply formal leadership responsibility if none existed.
+
+12. CUSTOMER / STAKEHOLDER CONTRIBUTION
+Review examples involving:
+
+- customer issues
+- internal customers
+- suppliers
+- departments
+- managers
+- external stakeholders
+
+Focus on outcome and professionalism.
+
+13. CHALLENGES
+For each major challenge explain:
+
+Challenge:
+Impact:
+Response:
+Result:
+What was learned:
+
+Avoid presenting every difficult situation as an achievement.
+
+14. MISSED GOALS
+If goals were missed, prepare a balanced explanation.
+
+Use:
+
+Goal:
+Expected:
+Actual:
+Reason:
+What was within my control:
+What was outside my control:
+Corrective action:
+Future approach:
+
+Avoid blame or defensive wording.
+
+15. MISTAKES / FAILURES
+If the user provides mistakes or failures:
+
+Acknowledge them clearly.
+Explain what was learned.
+Describe corrective action.
+Explain how recurrence will be reduced.
+
+Do not hide a known issue.
+
+16. AREAS FOR IMPROVEMENT
+Recommend realistic development areas.
+
+Good development areas are:
+
+- relevant to the role
+- specific
+- improvable
+- professionally framed
+
+Avoid fake weaknesses such as:
+
+"I work too hard."
+"I care too much."
+
+17. DEVELOPMENT PLAN
+For each improvement area provide:
+
+Development area:
+Why it matters:
+Action:
+Support required:
+How progress will be measured:
+
+18. SKILLS DEVELOPED
+Organize skills into relevant groups:
+
+Technical
+Operational
+Analytical
+Communication
+Leadership
+Customer service
+Digital / system
+Planning
+Problem solving
+
+Use only supported skills.
+
+19. TRAINING
+Summarize relevant completed training.
+
+Then identify future training opportunities based on:
+
+- role requirements
+- career goals
+- skill gaps
+- future responsibilities
+
+Do not recommend unrelated courses.
+
+20. FUTURE GOALS
+Turn broad goals into clearer objectives.
+
+For each:
+
+Goal:
+Business reason:
+Key actions:
+Success measure:
+Support required:
+
+Do not invent official company targets.
+
+21. SMART GOALS
+Where appropriate structure goals as:
+
+Specific
+Measurable
+Achievable
+Relevant
+Time-bound
+
+If no deadline exists, do not invent an official one.
+
+Use:
+
+"Target date to be agreed."
+
+22. CAREER DEVELOPMENT
+Prepare discussion points around:
+
+- expanded responsibilities
+- leadership exposure
+- specialist skills
+- project ownership
+- cross-functional work
+- training
+- career progression
+- promotion readiness
+
+Keep wording professional and realistic.
+
+23. PROMOTION DISCUSSION
+If promotion is relevant, prepare evidence under:
+
+Current responsibilities:
+Responsibilities already performed above current level:
+Results:
+Leadership examples:
+Business impact:
+Skills:
+Readiness gaps:
+Development needed:
+
+Do not state that the employee deserves promotion solely based on years of service.
+
+24. SALARY / COMPENSATION DISCUSSION
+If compensation may be discussed, keep preparation evidence-based.
+
+Focus on:
+
+- expanded responsibilities
+- measurable contribution
+- performance
+- role scope
+- market information supplied by the user
+
+Do not invent market salary data.
+
+25. SUPPORT REQUIRED
+Identify reasonable requests such as:
+
+- training
+- resources
+- system access
+- staffing
+- clearer priorities
+- mentoring
+- project exposure
+- management guidance
+- equipment / tools
+
+For each explain why it would improve performance.
+
+26. MANAGER FEEDBACK REQUEST
+Prepare useful questions such as:
+
+What should I continue doing?
+Where do you see my biggest development opportunity?
+Which skills would help me progress?
+What results would demonstrate readiness for greater responsibility?
+Which priorities should I focus on next?
+
+27. DIFFICULT CONVERSATIONS
+For sensitive topics use:
+
+Fact:
+Impact:
+What I have done:
+What I need:
+Suggested next step:
+
+Avoid emotional or accusatory wording.
+
+28. DISAGREEING WITH FEEDBACK
+If the user expects to disagree with a rating or comment, prepare a professional response.
+
+Use:
+
+Acknowledge the feedback.
+Ask for specific examples.
+Present relevant evidence.
+Explain the differing perspective calmly.
+Ask what measurable improvement would change the assessment.
+
+Do not recommend confrontation.
+
+29. EVIDENCE CHECKLIST
+Identify evidence worth bringing to the review:
+
+- KPI reports
+- completed projects
+- customer feedback
+- emails
+- audit results
+- performance dashboards
+- training records
+- improvement records
+- documented responsibilities
+- recognition
+- problem-resolution examples
+
+Only recommend evidence that could realistically exist.
+
+30. ACCOMPLISHMENT BANK
+Create a compact list of the strongest examples.
+
+Format:
+
+Achievement:
+Evidence:
+Result:
+Impact:
+
+This can be reused during the discussion.
+
+31. STAR EXAMPLES
+For important achievements create concise STAR examples:
+
+Situation
+Task
+Action
+Result
+
+Do not make these sound scripted or exaggerated.
+
+32. KEY TALKING POINTS
+Prepare 5–8 concise points for the meeting.
+
+Prioritize:
+
+- strongest results
+- major contribution
+- improvement
+- challenge handled
+- development
+- future goal
+- support required
+- career direction
+
+33. OPENING STATEMENT
+Create a natural opening for the review meeting.
+
+It should sound:
+
+professional
+confident
+balanced
+not rehearsed
+not overly promotional
+
+34. SELF-REVIEW VERSION
+If useful, create a written self-review using:
+
+Performance Summary
+Key Achievements
+Goals / KPIs
+Challenges
+Development
+Future Priorities
+
+35. SHORT FORM VERSION
+Create a shorter version suitable for a performance-review form with limited text space.
+
+36. MANAGER DISCUSSION VERSION
+Create a conversational version that the user can speak naturally during the meeting.
+
+Avoid long formal sentences.
+
+37. BALANCED TONE
+The preparation should show:
+
+confidence without arrogance
+accountability without unnecessary self-criticism
+achievement without exaggeration
+development without fake weaknesses
+
+38. REMOVE WEAK CLAIMS
+Avoid unsupported phrases such as:
+
+"I always exceed expectations."
+"I am one of the best performers."
+"Everyone trusts me."
+"I greatly improved productivity."
+
+Replace them with specific evidence where available.
+
+39. HANDLE TEAM RESULTS FAIRLY
+When an achievement was shared, use wording such as:
+
+"Contributed to..."
+"Supported..."
+"Coordinated..."
+"Worked with the team to..."
+
+Do not claim sole credit without evidence.
+
+40. HANDLE EXTERNAL CONSTRAINTS FAIRLY
+When performance was affected by external factors:
+
+State the condition.
+Explain the impact.
+Show what the employee did within their control.
+Explain future mitigation.
+
+Do not use external factors as a blanket excuse.
+
+41. IDENTIFY GAPS
+If the user's information is weak, identify what could strengthen the review.
+
+Examples:
+
+Missing KPI data
+No measurable results
+No customer feedback
+No documented goals
+No examples of improvement
+No development objectives
+
+Do not invent missing evidence.
+
+42. REVIEW READINESS SCORE
+Provide a simple assessment:
+
+Achievements evidence:
+KPI evidence:
+Problem-solving examples:
+Development plan:
+Future goals:
+Manager questions:
+
+Rate each:
+
+Strong
+Adequate
+Needs more evidence
+
+Explain what is missing.
+
+43. FINAL MEETING CHECKLIST
+Before the review confirm:
+
+- top achievements selected
+- evidence ready
+- KPIs reviewed
+- challenges explained
+- development areas prepared
+- goals prepared
+- support request prepared
+- career discussion prepared
+- questions for manager prepared
+
+44. FINAL SUMMARY
+Provide:
+
+Strongest achievement:
+Strongest measurable result:
+Most important contribution:
+Main challenge handled:
+Main development area:
+Next-period priority:
+Support required:
+Career discussion point:
+Best question for manager:
+
+OUTPUT FORMAT:
+
+1. Performance Summary
+2. Key Responsibilities
+3. Strongest Achievements
+4. KPI / Results Review
+5. Business Impact
+6. Problem-Solving & Improvements
+7. Team / Leadership Contributions
+8. Challenges & Lessons
+9. Areas for Improvement
+10. Skills Developed
+11. Development Plan
+12. Goals for Next Period
+13. Support Required
+14. Career Development Discussion
+15. Evidence Checklist
+16. STAR Examples
+17. Key Meeting Talking Points
+18. Suggested Opening Statement
+19. Questions for the Manager
+20. Review Readiness Check
+21. Final Summary
+
+IMPORTANT:
+- Do not invent achievements, KPIs, results, praise or responsibilities.
+- Preserve supplied numbers accurately.
+- Distinguish routine responsibilities from genuine achievements.
+- Use evidence rather than exaggerated self-promotion.
+- Do not hide missed goals.
+- Do not blame colleagues, managers or other departments.
+- Give fair credit for team achievements.
+- Keep development areas realistic and professionally useful.
+- Do not use fake weaknesses.
+- Make career-development discussions evidence-based.
+- Identify missing evidence instead of filling gaps with assumptions.
+- Keep the language natural enough to use in a real performance-review conversation.`;
+
+const steps = [
+  {
+    title: "Collect evidence first",
+    description:
+      "Gather responsibilities, KPIs, completed projects, measurable results and specific examples before trying to write a polished self-review.",
+  },
+  {
+    title: "Turn work into outcomes",
+    description:
+      "Separate routine duties from genuine achievements and explain what changed, improved or was accomplished because of your contribution.",
+  },
+  {
+    title: "Prepare the difficult parts too",
+    description:
+      "Be ready to discuss missed goals, challenges and development areas with context, accountability and a practical improvement plan.",
+  },
+  {
+    title: "Plan the next conversation",
+    description:
+      "Finish with future goals, support needs, career-development topics and useful questions for your manager rather than focusing only on the past.",
+  },
+];
+
+const example = {
+  input: [
+    "Role: Customer service team leader.",
+    "Review period: January–December.",
+    "Achievement: Helped reduce unresolved customer cases.",
+    "Result: Backlog reduced from 185 cases to 62.",
+    "Other contribution: Introduced a simple daily ageing review with the team.",
+    "Challenge: Response-time target was missed during two peak months.",
+    "Development area: Delegation and workload planning.",
+    "Future goal: Improve first-response performance and develop stronger team leads.",
+  ],
+
+  output: [
+    "Key Achievement: Helped reduce the unresolved case backlog from 185 to 62 by introducing a daily ageing review and improving follow-up visibility.",
+    "Business Impact: Lower backlog reduced the number of long-outstanding cases and created better control over customer follow-ups.",
+    "Challenge: Response-time performance fell below target during two peak-volume months. The review should acknowledge this and identify what workload or capacity factors contributed.",
+    "Development Area: Strengthen delegation and workload planning so urgent cases can be distributed more effectively during peak periods.",
+    "Future Goal: Improve first-response performance while developing stronger delegation capability within the team.",
+    "Manager Discussion Point: Ask which measurable leadership results would demonstrate readiness for greater responsibility during the next review period.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Bring evidence, not adjectives",
+    description:
+      "A specific result, completed improvement or KPI tells your manager more than describing yourself as hardworking, dedicated or highly effective.",
+  },
+  {
+    title: "Give team credit accurately",
+    description:
+      "You can still show your contribution to a shared result by explaining what you coordinated, improved or personally delivered without claiming the entire outcome.",
+  },
+  {
+    title: "Prepare future goals before the meeting",
+    description:
+      "A strong review conversation should end with what you want to improve, what you want to contribute next and what support would help you get there.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Performance Review Preparation Prompt | KRIYANO"
+  description="Prepare for a performance review using achievements, KPIs, measurable results, challenges, development areas, goals, career plans and manager discussion points."
+>
+  <PromptPage
+    category="WORK & PRODUCTIVITY"
+    title="Performance Review"
+    accentTitle="Preparation."
+    description="Turn your responsibilities, achievements, results and development goals into an evidence-based preparation package for a professional performance-review conversation."
+    meta={[
+      "Free prompt",
+      "Performance review",
+      "Career development",
+    ]}
+    bestFor={[
+      "Employees",
+      "Supervisors",
+      "Team leaders",
+      "Managers",
+      "Self-appraisals",
+      "Career discussions",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Prepare evidence, not just talking points."
+    introDescription="Organize your strongest results, challenges, development areas and future goals so you can discuss performance confidently without exaggerating your contribution."
+    steps={steps}
+    exampleTitle="Turn everyday work into evidence-based review points."
+    example={example}
+    tipsTitle="Prepare for a stronger review conversation."
+    tips={tips}
+    sidebarTitle="Need to organize your future priorities?"
+    sidebarDescription="Use KRIYANO's Weekly Work Planner and Task Prioritization prompts to turn your next-period goals into practical actions after the review."
+    warningTitle="Never invent achievements to strengthen a review"
+    warningText="Performance discussions can affect ratings, development and career decisions. Use verifiable examples and preserve actual KPI figures rather than allowing AI to fill missing evidence with impressive-sounding claims."
+  />
+</BaseLayout>

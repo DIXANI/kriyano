@@ -1,0 +1,141 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as a professional business communication specialist.
+
+TASK:
+Write a clear, professional email based on the information I provide.
+
+CONTEXT:
+[Describe the situation, background, or reason for the email.]
+
+RECIPIENT:
+[Who is receiving the email? Example: manager, customer, supplier, recruiter, colleague.]
+
+PURPOSE:
+[Explain exactly what you want the email to achieve.]
+
+KEY INFORMATION TO INCLUDE:
+- [Point 1]
+- [Point 2]
+- [Point 3]
+
+TONE:
+[Choose a tone: professional, polite, friendly, formal, confident, apologetic, concise.]
+
+REQUIREMENTS:
+- Keep the message natural and human.
+- Avoid unnecessary corporate jargon.
+- Make the purpose of the email clear.
+- Use short, readable paragraphs.
+- Include an appropriate subject line.
+- Include a professional closing.
+- Do not invent information that I have not provided.
+
+OUTPUT FORMAT:
+
+Subject: [Email subject]
+
+[Email body]
+
+[Professional closing]
+
+Before finalizing, check that the email is clear, polite, grammatically correct, and appropriate for the recipient.`;
+
+const steps = [
+  {
+    title: "Describe the situation",
+    description:
+      "Explain why you are sending the email and any background the AI needs to understand.",
+  },
+  {
+    title: "Define the recipient",
+    description:
+      "Tell the AI whether you are writing to a manager, customer, recruiter, supplier or someone else.",
+  },
+  {
+    title: "State the outcome you want",
+    description:
+      "Be clear about whether you want a response, approval, meeting, payment, update, confirmation or another action.",
+  },
+  {
+    title: "Choose the tone",
+    description:
+      "Adjust the tone based on the relationship and situation. Professional and polite is usually a safe starting point.",
+  },
+];
+
+const example = {
+  input: [
+    "Context: I interviewed for a warehouse supervisor position three days ago.",
+    "Recipient: HR recruiter.",
+    "Purpose: Politely follow up and ask whether there is any update about the recruitment process.",
+    "Tone: Professional, polite and concise.",
+  ],
+
+  output: [
+    "Subject: Follow-Up on Warehouse Supervisor Interview",
+    "Dear [Name],",
+    "I hope you are doing well. I am writing to follow up regarding my recent interview for the Warehouse Supervisor position.",
+    "I remain very interested in the opportunity and would appreciate any update you may be able to share regarding the recruitment process.",
+    "Thank you for your time and consideration.",
+    "Best regards, [Your Name]",
+  ],
+};
+
+const tips = [
+  {
+    title: "Give real details",
+    description:
+      "Dates, previous conversations, deadlines and relevant facts help the AI produce a more accurate message.",
+  },
+  {
+    title: "Explain the relationship",
+    description:
+      "Writing to a customer requires a different tone from writing to a close colleague.",
+  },
+  {
+    title: "Specify the length",
+    description:
+      "Add instructions such as “keep it under 150 words” when you want a shorter message.",
+  },
+];
+---
+
+<BaseLayout
+  title="Professional Email Writer Prompt | KRIYANO"
+  description="Use this practical AI prompt to write clear, professional business emails for managers, customers, recruiters, suppliers and colleagues."
+>
+  <PromptPage
+    category="WORK & PRODUCTIVITY"
+    title="Professional"
+    accentTitle="Email Writer."
+    description="Turn rough notes into a clear, natural and professional email without sounding robotic or overly formal."
+    meta={[
+      "Free prompt",
+      "Beginner friendly",
+      "Works with major AI assistants",
+    ]}
+    bestFor={[
+      "Professional requests",
+      "Follow-up emails",
+      "Customer communication",
+      "Recruiter and job emails",
+      "Supplier communication",
+      "Workplace replies",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Copy it. Replace the brackets. Give it to your AI."
+    introDescription="The placeholders inside square brackets tell you what information to replace before using the prompt."
+    steps={steps}
+    exampleTitle="See how the placeholders work."
+    example={example}
+    tipsTitle="Small details make better emails."
+    tips={tips}
+    sidebarTitle="Build a custom prompt."
+    sidebarDescription="Add your exact task, audience, tone, context and requirements with the KRIYANO AI Prompt Builder."
+    warningTitle="Quick tip"
+    warningText="Never send an AI-generated business email without reading it once and checking names, dates, facts and tone."
+  />
+</BaseLayout>

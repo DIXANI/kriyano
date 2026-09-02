@@ -1,0 +1,806 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced professional writer, editor and content strategist.
+
+TASK:
+Write a high-quality article or blog post based on the information provided below.
+
+The content should be useful, accurate, well structured, natural to read and appropriate for the intended audience.
+
+Do not invent facts, statistics, research findings, customer results, expert quotes, case studies, product capabilities or sources.
+
+When important information is missing, either:
+
+- write around the uncertainty,
+- clearly label an assumption,
+- use a placeholder,
+- or identify what should be researched before publication.
+
+TOPIC:
+[What should the article be about?]
+
+PRIMARY PURPOSE:
+[Educate / explain / inform / compare / persuade / generate leads / thought leadership / SEO / other.]
+
+TARGET AUDIENCE:
+[Who will read it?]
+
+AUDIENCE KNOWLEDGE LEVEL:
+[Beginner / intermediate / advanced / mixed.]
+
+MAIN MESSAGE:
+[What should readers understand or remember?]
+
+CONTENT TYPE:
+[Blog post / article / guide / tutorial / thought-leadership article / list article / comparison / other.]
+
+DESIRED LENGTH:
+[Approximate word count or short / medium / long.]
+
+TONE:
+[Professional / conversational / authoritative / friendly / practical / technical / other.]
+
+BRAND VOICE:
+[Describe the preferred style if applicable.]
+
+PRIMARY KEYWORD:
+[Optional.]
+
+SECONDARY KEYWORDS:
+[Optional.]
+
+SEARCH INTENT:
+[Informational / commercial investigation / transactional / navigational / unknown.]
+
+FACTS / SOURCE MATERIAL:
+[Paste verified information, research, notes, product information or source material.]
+
+EXAMPLES / EXPERIENCE:
+[Real examples that may be used.]
+
+PRODUCT / SERVICE:
+[If relevant.]
+
+CALL TO ACTION:
+[What should the reader do next?]
+
+WORDS / CLAIMS TO AVOID:
+[Optional.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+ARTICLE CREATION REQUIREMENTS:
+
+1. DEFINE THE READER
+Before writing, identify:
+
+Who the article is for
+What they probably want to know
+What problem they are trying to solve
+What level of explanation they need
+
+Do not invent detailed demographic characteristics.
+
+2. DEFINE THE ARTICLE PURPOSE
+State the primary purpose in one sentence.
+
+Keep the article focused on that purpose.
+
+3. IDENTIFY SEARCH / READER INTENT
+Where relevant determine whether the reader primarily wants to:
+
+Learn
+Solve a problem
+Compare options
+Make a decision
+Complete a task
+Understand a concept
+
+4. DEFINE THE CORE PROMISE
+State what useful outcome the reader should receive from the article.
+
+5. REVIEW AVAILABLE EVIDENCE
+Separate information into:
+
+CONFIRMED FACTS
+Supported by supplied information or reliable sources.
+
+USER-PROVIDED EXPERIENCE
+Real examples or observations supplied by the user.
+
+ASSUMPTIONS
+Reasonable but unverified.
+
+UNKNOWN
+Information requiring research.
+
+6. NEVER FABRICATE EVIDENCE
+Do not invent:
+
+Statistics
+Studies
+Survey results
+Expert quotes
+Customer testimonials
+Company results
+Market size
+Dates
+Historical events
+Product features
+Scientific claims
+
+7. HANDLE MISSING FACTS SAFELY
+When factual evidence is necessary but unavailable, use a clear marker such as:
+
+[VERIFY THIS CLAIM]
+
+[ADD SOURCE]
+
+[INSERT VERIFIED STATISTIC]
+
+rather than inventing information.
+
+8. IDENTIFY THE MAIN ANGLE
+Choose a clear angle appropriate to the audience.
+
+Avoid trying to cover every possible aspect of the topic.
+
+9. CREATE A WORKING TITLE
+Generate a clear, specific title.
+
+Avoid exaggerated clickbait unless explicitly requested.
+
+10. CREATE ALTERNATIVE TITLES
+Where useful provide 3–5 alternatives emphasizing different angles.
+
+11. WRITE A STRONG INTRODUCTION
+The introduction should quickly establish:
+
+The problem
+Why it matters
+What the reader will learn
+
+Avoid long generic introductions.
+
+12. AVOID GENERIC AI OPENINGS
+Avoid repetitive openings such as:
+
+"In today's fast-paced world..."
+
+"In the ever-evolving landscape..."
+
+"In this digital age..."
+
+unless genuinely appropriate.
+
+13. GET TO THE POINT
+Deliver useful information early.
+
+Do not spend several paragraphs repeating the title.
+
+14. CREATE A LOGICAL STRUCTURE
+Use:
+
+H1 title
+H2 main sections
+H3 subsections where useful
+
+15. BUILD A CLEAR INFORMATION FLOW
+Prefer:
+
+Problem
+Explanation
+Method
+Example
+Action
+
+or another structure appropriate to the topic.
+
+16. USE DESCRIPTIVE HEADINGS
+Headings should tell readers what the section contains.
+
+Prefer:
+
+"How to Calculate Reorder Point"
+
+over:
+
+"Understanding the Process"
+
+17. MAKE EACH SECTION USEFUL
+Each section should contribute:
+
+Explanation
+Evidence
+Example
+Instruction
+Decision support
+
+Avoid filler.
+
+18. USE SHORTER PARAGRAPHS
+Keep paragraphs readable for web content.
+
+Do not turn every sentence into a separate paragraph.
+
+19. VARY SENTENCE LENGTH
+Use natural rhythm.
+
+Avoid a repetitive pattern of similarly sized sentences.
+
+20. USE PLAIN LANGUAGE
+Prefer clear language over unnecessary complexity.
+
+21. PRESERVE NECESSARY TECHNICAL TERMS
+Do not oversimplify terminology the audience needs.
+
+Explain unfamiliar terms where appropriate.
+
+22. DEFINE ACRONYMS
+On first use write the full term followed by the acronym where appropriate.
+
+23. AVOID UNNECESSARY JARGON
+Replace corporate or technical jargon when simpler wording communicates the same meaning.
+
+24. AVOID EMPTY BUSINESS LANGUAGE
+Reduce phrases such as:
+
+Leverage synergies
+Unlock potential
+Drive transformation
+Revolutionary solution
+
+unless they communicate something specific.
+
+25. USE ACTIVE VOICE WHERE NATURAL
+Prefer direct writing.
+
+Do not mechanically eliminate passive voice when it improves clarity.
+
+26. USE TRANSITIONS NATURALLY
+Connect ideas without overusing:
+
+Furthermore
+Moreover
+Additionally
+In conclusion
+
+27. AVOID REPETITION
+Do not repeat the same point using slightly different wording merely to increase length.
+
+28. USE EXAMPLES
+Include examples when they improve understanding.
+
+Only use:
+
+Supplied real examples
+Clearly labeled hypothetical examples
+
+29. LABEL HYPOTHETICAL EXAMPLES
+If creating an illustration, make clear it is hypothetical.
+
+30. USE STEP-BY-STEP INSTRUCTIONS
+For procedural content, organize actions in the correct sequence.
+
+31. DISTINGUISH INSTRUCTION FROM EXPLANATION
+Readers should be able to identify:
+
+What to do
+Why it matters
+
+32. INCLUDE FORMULAS WHEN RELEVANT
+Present formulas clearly.
+
+Define every variable.
+
+33. SHOW CALCULATIONS WHEN RELEVANT
+Use supplied values or clearly labeled hypothetical examples.
+
+34. USE TABLES WHEN THEY IMPROVE COMPARISON
+Tables may be useful for:
+
+Options
+Features
+Pros and cons
+Processes
+Calculations
+
+Do not create tables unnecessarily.
+
+35. USE BULLETS SELECTIVELY
+Use lists for genuinely list-like information.
+
+Do not convert the entire article into bullet points.
+
+36. SUPPORT IMPORTANT CLAIMS
+Identify statements that require external evidence.
+
+Do not make authoritative claims without support.
+
+37. DISTINGUISH FACT FROM OPINION
+Clearly signal recommendations, interpretations and judgment.
+
+38. HANDLE UNCERTAINTY
+Use wording such as:
+
+May
+Can
+Often
+Depends on
+Based on available information
+
+when certainty is not justified.
+
+39. DO NOT OVERSTATE BENEFITS
+Avoid claims such as:
+
+Guaranteed
+Always
+Best
+Perfect
+Eliminates all risk
+
+unless objectively supported.
+
+40. DO NOT INVENT PRODUCT BENEFITS
+When discussing a product or service, use only verified capabilities.
+
+41. ADDRESS THE READER'S MAIN QUESTIONS
+Anticipate practical questions the target reader is likely to have based on the topic.
+
+Do not fabricate audience research.
+
+42. EXPLAIN WHY
+When giving recommendations, explain the reasoning.
+
+43. IDENTIFY COMMON MISTAKES
+Where useful explain realistic mistakes readers should avoid.
+
+Do not invent statistics about how common they are.
+
+44. INCLUDE LIMITATIONS
+Explain important situations where the advice may not apply.
+
+45. PRESENT ALTERNATIVES
+If there are several legitimate approaches, explain them rather than pretending one method is universally correct.
+
+46. INCLUDE PROS AND CONS
+For decision-oriented articles, present meaningful trade-offs.
+
+47. AVOID FALSE BALANCE
+Do not create artificial advantages or disadvantages merely to make both sides appear equal.
+
+48. KEEP THE AUDIENCE LEVEL CONSISTENT
+Do not suddenly shift from beginner explanations to unexplained specialist terminology.
+
+49. MAKE THE CONTENT ACTIONABLE
+Whenever possible help the reader understand:
+
+What to do next
+What to check
+What to avoid
+What decision to make
+
+50. CREATE PRACTICAL TAKEAWAYS
+End important sections with a clear takeaway when useful.
+
+51. SEO — USE THE PRIMARY KEYWORD NATURALLY
+If a keyword is supplied, consider using it in:
+
+Title
+Introduction
+At least one heading
+Body
+Conclusion
+
+Only where natural.
+
+52. DO NOT KEYWORD STUFF
+Readability and usefulness take priority over repeating keywords.
+
+53. USE RELATED TERMS NATURALLY
+Use relevant terminology that improves topical clarity.
+
+54. MATCH SEARCH INTENT
+Do not write a sales page when the reader is looking for an educational explanation.
+
+55. ANSWER THE MAIN QUESTION EARLY
+For informational search content, provide a useful direct answer near the beginning where appropriate.
+
+56. OPTIMIZE FOR SCANNABILITY
+Use:
+
+Descriptive headings
+Short paragraphs
+Selective lists
+Tables where useful
+Bold emphasis sparingly
+
+57. CREATE A META TITLE
+Where SEO is requested, provide an SEO-friendly title.
+
+Keep it clear and accurate rather than clickbait-heavy.
+
+58. CREATE A META DESCRIPTION
+Summarize the article's value accurately.
+
+Avoid unsupported promises.
+
+59. SUGGEST A URL SLUG
+Use a concise, descriptive slug.
+
+Example:
+
+/inventory-reorder-point-guide/
+
+60. SUGGEST INTERNAL LINKS
+Where website context is supplied, identify relevant internal pages that could naturally be linked.
+
+Do not invent URLs.
+
+61. SUGGEST EXTERNAL SOURCE NEEDS
+Identify claims that should link to authoritative external evidence.
+
+Do not fabricate citations.
+
+62. FEATURED SNIPPET OPPORTUNITY
+Where appropriate provide a concise definition or answer that can stand alone.
+
+63. FAQ SECTION
+Only include FAQs when they add genuine reader value.
+
+Do not add repetitive questions just for SEO.
+
+64. USE NATURAL QUESTIONS
+FAQ questions should reflect realistic information needs.
+
+65. E-E-A-T SUPPORT
+Where relevant strengthen credibility through:
+
+Real experience
+Clear methodology
+Verified evidence
+Transparent limitations
+Author expertise
+
+Do not manufacture credentials or experience.
+
+66. USE FIRST-HAND EXPERIENCE CAREFULLY
+Only write "I tested," "we found," or similar language if the user actually supplied that experience.
+
+67. AVOID FAKE QUOTES
+Never create fictional expert or customer quotations presented as real.
+
+68. AVOID FAKE CASE STUDIES
+Hypothetical scenarios must be labeled clearly.
+
+69. DO NOT COPY SOURCE LANGUAGE
+When source material is supplied, synthesize it in original language unless a direct quotation is specifically needed.
+
+70. PRESERVE TECHNICAL ACCURACY
+Do not simplify information in a way that changes its meaning.
+
+71. HANDLE SAFETY-SENSITIVE CONTENT CAREFULLY
+For medical, legal, financial, safety or similarly high-stakes subjects, avoid presenting general writing as individualized professional advice.
+
+72. HANDLE CURRENT INFORMATION
+If the topic depends on current:
+
+Prices
+Laws
+Statistics
+Product specifications
+Software features
+Market information
+News
+
+identify where current verification is necessary.
+
+73. CREATE ORIGINAL VALUE
+Do more than summarize basic information.
+
+Where appropriate add:
+
+Frameworks
+Decision criteria
+Checklists
+Examples
+Practical explanations
+Common mistakes
+
+74. AVOID CONTENT PADDING
+Do not increase word count through repetition.
+
+If the useful answer is shorter than requested, prioritize quality.
+
+75. MAINTAIN BRAND VOICE
+If brand guidance is supplied, keep tone and terminology consistent.
+
+76. KEEP PROMOTIONAL CONTENT PROPORTIONAL
+If the article supports a business, educate first.
+
+Do not turn every section into a sales pitch.
+
+77. PLACE PRODUCT MENTIONS NATURALLY
+Mention the product or service where it genuinely helps solve the reader's problem.
+
+78. WRITE AN APPROPRIATE CTA
+The CTA should logically follow the article.
+
+Examples:
+
+Try a tool
+Download a resource
+Read a related guide
+Request information
+Compare options
+
+79. AVOID MANIPULATIVE CTAs
+Do not use unnecessary fear, false urgency or unsupported scarcity.
+
+80. WRITE A USEFUL CONCLUSION
+Summarize:
+
+Main lesson
+Important decision or action
+Logical next step
+
+Do not simply repeat the introduction.
+
+81. PROVIDE A QUICK-READ SUMMARY
+For longer articles, provide 3–5 key takeaways where useful.
+
+82. IDENTIFY CONTENT GAPS
+After drafting, identify important questions the article could not answer because evidence was unavailable.
+
+83. FACT-CHECK REVIEW
+Create a list of statements requiring verification before publication.
+
+84. SOURCE CHECK
+Identify where sources are needed.
+
+Do not invent source names.
+
+85. CLAIM REVIEW
+Flag:
+
+Numerical claims
+Comparative claims
+Scientific claims
+Legal claims
+Market claims
+Performance claims
+
+that require evidence.
+
+86. REMOVE AI-SOUNDING REPETITION
+Review for:
+
+Repeated sentence structures
+Unnecessary summaries
+Generic transitions
+Overly polished corporate wording
+Predictable three-item phrasing
+Excessive em dashes
+
+Rewrite where needed.
+
+87. HUMANIZE THE RHYTHM
+Use natural variation while preserving professionalism.
+
+88. REMOVE EMPTY INTRODUCTORY PHRASES
+Delete sentences that do not add information.
+
+89. CHECK PARAGRAPH PURPOSE
+Every paragraph should contribute something meaningful.
+
+90. CHECK HEADING LOGIC
+Ensure headings form a coherent outline even when read without the body text.
+
+91. CHECK FOR CONTRADICTIONS
+Verify that later sections do not conflict with earlier recommendations.
+
+92. CHECK TERMINOLOGY
+Use the same term consistently for the same concept.
+
+93. CHECK NUMBERS
+Ensure supplied numbers are reproduced accurately.
+
+94. CHECK UNITS
+Preserve correct:
+
+Currency
+Weight
+Distance
+Time
+Percentages
+Measurement units
+
+95. CHECK CALL TO ACTION
+Ensure the CTA matches the article's purpose.
+
+96. CREATE PUBLICATION ELEMENTS
+Where requested provide:
+
+Article title
+Meta title
+Meta description
+URL slug
+Excerpt
+Social caption
+
+97. CREATE AN EDITOR'S NOTE
+List anything that should be:
+
+Verified
+Updated
+Sourced
+Approved
+
+before publication.
+
+98. PROVIDE OPTIONAL IMPROVEMENTS
+Suggest missing evidence, examples, visuals or internal links that would materially improve the article.
+
+99. CONFIDENCE CHECK
+State whether factual confidence is:
+
+High
+Medium
+Low
+
+based on the information supplied.
+
+Do not confuse writing quality with factual confidence.
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- the article answers the reader's main need
+- the introduction gets to the point
+- structure is logical
+- headings are descriptive
+- paragraphs are readable
+- claims are supported or flagged
+- no statistics were invented
+- no quotes were invented
+- no sources were invented
+- no fake experience was added
+- hypothetical examples are labeled
+- keywords are natural
+- repetition is removed
+- tone fits the audience
+- conclusion provides a useful next step
+- factual gaps are visible
+
+OUTPUT FORMAT:
+
+1. Recommended Title
+2. Alternative Titles
+3. Article
+4. Key Takeaways — if useful
+5. FAQ — if useful
+6. Call to Action
+7. SEO Meta Title — if requested
+8. Meta Description — if requested
+9. Suggested URL Slug — if requested
+10. Internal Link Opportunities — if website context is supplied
+11. Claims / Facts Requiring Verification
+12. Recommended Source Needs
+13. Editor's Notes
+14. Confidence Level
+
+IMPORTANT:
+- Never invent facts, statistics, studies, quotes, customer results, product capabilities or citations.
+- Label hypothetical examples clearly.
+- Separate confirmed information from assumptions.
+- Match the reader's actual intent.
+- Prioritize useful information over word count.
+- Avoid generic AI-style introductions and repetitive filler.
+- Use SEO keywords naturally rather than stuffing them.
+- Do not manufacture personal experience or expertise.
+- Identify claims requiring verification before publication.
+- Keep the writing natural, specific, practical and appropriate for the intended audience.`;
+
+const steps = [
+  {
+    title: "Define the reader and purpose",
+    description:
+      "Tell the AI who the article is for, what those readers need and what the content should help them understand, decide or accomplish.",
+  },
+  {
+    title: "Provide real source material",
+    description:
+      "Add your verified facts, notes, experience, product information or research so the article can contain genuine substance instead of fabricated evidence.",
+  },
+  {
+    title: "Build for humans first",
+    description:
+      "Use clear headings, practical explanations and natural language. SEO should support the article rather than control how every sentence is written.",
+  },
+  {
+    title: "Verify before publishing",
+    description:
+      "Review statistics, comparisons, current information and other factual claims flagged by the prompt before publishing the final article.",
+  },
+];
+
+const example = {
+  input: [
+    "Topic: Why physical inventory may not match system stock.",
+    "Audience: Small warehouse supervisors and inventory controllers.",
+    "Purpose: Educational article.",
+    "Tone: Practical and professional.",
+    "Main points: Receiving errors, picking errors, incorrect system transactions, damaged stock, wrong locations and stock-count errors.",
+    "Requirement: Do not invent statistics.",
+  ],
+
+  output: [
+    "Recommended angle: Explain the most common process areas to investigate when physical stock and system stock do not agree.",
+    "Introduction: Start with the practical problem and explain that a stock variance is usually a symptom that requires transaction and process investigation.",
+    "Structure: Receiving → putaway/location → picking → system transactions → damage/adjustments → stock counting.",
+    "Practical value: Give readers a simple investigation sequence instead of only listing possible causes.",
+    "Evidence handling: Do not claim that any one cause is 'the most common' unless reliable supporting data is available.",
+    "Conclusion: Encourage correction of both the quantity discrepancy and the underlying process or control failure that caused it.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Give the AI evidence, not just a topic",
+    description:
+      "Notes, verified facts, real experience and source material make it much easier to create useful original content without relying on generic or invented claims.",
+  },
+  {
+    title: "Write for intent before keywords",
+    description:
+      "A page performs its real job when it answers what the reader came to learn. Keywords should fit naturally around that answer.",
+  },
+  {
+    title: "Treat factual confidence separately",
+    description:
+      "An article can sound excellent while containing weak claims. Always verify statistics, current facts, comparisons and specialist claims before publication.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Article & Blog Writer Prompt | KRIYANO"
+  description="Create structured, natural and useful articles or blog posts while avoiding fabricated facts, citations, statistics and unnecessary AI-style filler."
+>
+  <PromptPage
+    category="WRITING"
+    title="Article & Blog"
+    accentTitle="Writer."
+    description="Create useful, well-structured articles and blog posts for real readers while keeping facts, SEO, tone and source requirements under control."
+    meta={[
+      "Free prompt",
+      "Content writing",
+      "SEO friendly",
+    ]}
+    bestFor={[
+      "Bloggers",
+      "Businesses",
+      "Website owners",
+      "Content marketers",
+      "Professional articles",
+      "Educational content",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Create useful content instead of generic AI articles."
+    introDescription="Give the AI a real audience, purpose and evidence base, then build an article around clear explanations, practical value and claims that can actually be supported."
+    steps={steps}
+    exampleTitle="Turn professional knowledge into a useful article."
+    example={example}
+    tipsTitle="Make AI-assisted articles worth publishing."
+    tips={tips}
+    sidebarTitle="Already have a draft?"
+    sidebarDescription="Use KRIYANO's Rewrite for Clarity, Professional Tone Rewriter or Humanize AI-Written Text prompts when the content already exists and needs editing rather than a complete new article."
+    warningTitle="Good writing does not guarantee factual accuracy"
+    warningText="AI can produce convincing unsupported statements. Verify statistics, current information, comparative claims, technical facts and specialist advice before publishing, and never use fabricated citations or experience."
+  />
+</BaseLayout>

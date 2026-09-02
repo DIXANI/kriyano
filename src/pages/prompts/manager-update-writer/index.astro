@@ -1,0 +1,701 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced business communication specialist who helps professionals communicate clearly with managers and senior stakeholders.
+
+TASK:
+Turn the information below into a concise, professional management update.
+
+The update should help the manager quickly understand:
+
+- what has been completed
+- what is currently happening
+- important results
+- problems or delays
+- risks
+- actions being taken
+- decisions required
+- support required
+- what happens next
+
+Do not make the update longer or more formal than necessary.
+
+UPDATE TYPE:
+[Daily / Weekly / Project / Operational / KPI / Incident / Progress / Other.]
+
+AUDIENCE:
+[Direct manager / Department head / Senior management / Client / Other.]
+
+PERIOD:
+[Example: This week / August 2026 / Project Week 4.]
+
+PROJECT / OPERATION:
+[Describe the project, department, task or operation.]
+
+OBJECTIVES:
+[What was expected to be achieved.]
+
+COMPLETED WORK:
+[List completed activities.]
+
+WORK IN PROGRESS:
+[List ongoing activities.]
+
+RESULTS / KPIs:
+[Add figures, results or performance information if available.]
+
+ISSUES / PROBLEMS:
+[List current issues.]
+
+DELAYS:
+[List delays and explain known reasons.]
+
+RISKS:
+[List potential future problems.]
+
+CORRECTIVE ACTIONS:
+[Actions already taken.]
+
+DECISIONS REQUIRED:
+[List decisions needed from management.]
+
+SUPPORT REQUIRED:
+[List resources, approvals, information or assistance required.]
+
+NEXT STEPS:
+[List planned actions.]
+
+DEADLINES / MILESTONES:
+[List important upcoming dates.]
+
+ADDITIONAL NOTES:
+[Any other relevant information.]
+
+MANAGEMENT UPDATE REQUIREMENTS:
+
+1. IDENTIFY THE PURPOSE
+Determine what the manager actually needs from the update.
+
+Examples:
+
+Information only
+Progress visibility
+Decision
+Approval
+Escalation
+Support
+Risk awareness
+Performance review
+
+If the purpose is unclear, infer it cautiously from the supplied information.
+
+2. START WITH THE MAIN MESSAGE
+Begin with the most important overall status.
+
+The reader should understand the situation within the first few lines.
+
+Avoid starting with unnecessary background.
+
+3. EXECUTIVE SUMMARY
+Provide a short summary covering:
+
+Overall status:
+Main achievement:
+Main issue:
+Main risk:
+Immediate next step:
+
+Keep this concise.
+
+4. STATUS CLASSIFICATION
+Where useful, classify overall status as:
+
+ON TRACK
+AT RISK
+DELAYED
+BLOCKED
+COMPLETED
+
+Explain the reason briefly.
+
+Do not label work "On Track" when the supplied information indicates significant unresolved delay or risk.
+
+5. COMPLETED WORK
+Summarize meaningful completed work.
+
+Focus on:
+
+- deliverables
+- milestones
+- resolved issues
+- completed actions
+- measurable outcomes
+
+Avoid listing every small activity.
+
+6. WORK IN PROGRESS
+For each important ongoing item provide:
+
+Activity:
+Current status:
+Expected completion:
+Dependency:
+Next action:
+
+Do not invent completion dates.
+
+7. RESULTS & KPIs
+Where data is provided, present:
+
+KPI / Result:
+Target:
+Actual:
+Variance:
+Trend:
+Comment:
+
+Only calculate or discuss variance when sufficient data is available.
+
+Do not invent targets.
+
+8. PERFORMANCE INTERPRETATION
+Explain what the numbers mean.
+
+For example:
+
+- improving
+- declining
+- stable
+- above target
+- below target
+- unusual
+- insufficient data
+
+Separate factual results from interpretation.
+
+9. ACHIEVEMENTS
+Highlight significant achievements such as:
+
+- milestone completed
+- backlog reduced
+- customer issue resolved
+- productivity improved
+- discrepancy closed
+- cost reduced
+- deadline achieved
+- process stabilized
+
+Do not exaggerate routine activity as a major achievement.
+
+10. ISSUES
+For each significant issue provide:
+
+Issue:
+Impact:
+Current status:
+Action being taken:
+Owner role:
+Expected next step:
+
+If ownership is unknown, state:
+
+"Owner to be assigned."
+
+11. DELAYS
+For delays explain:
+
+Delayed item:
+Original expectation:
+Current situation:
+Reason:
+Impact:
+Recovery action:
+Revised timing:
+
+Do not invent revised dates.
+
+If timing is unknown, state:
+
+"Revised completion date to be confirmed."
+
+12. ROOT CAUSE
+Only mention root cause when supported by evidence.
+
+Distinguish:
+
+Confirmed root cause
+Likely contributing factor
+Under investigation
+
+Do not present assumptions as confirmed causes.
+
+13. RISKS
+For each important risk provide:
+
+Risk:
+Likelihood:
+Impact:
+Mitigation:
+Owner role:
+Trigger / warning sign:
+
+Use simple ratings where useful:
+
+Low
+Medium
+High
+Critical
+
+Do not exaggerate minor issues.
+
+14. BLOCKERS
+Clearly identify anything preventing progress.
+
+For each:
+
+Blocker:
+What is blocked:
+Dependency:
+Who / what is required:
+Required action:
+
+15. MANAGEMENT DECISIONS
+If a decision is required, make it obvious.
+
+Use:
+
+DECISION REQUIRED
+
+Decision:
+Why it is needed:
+Options:
+Recommended option:
+Impact of delay:
+Required timing:
+
+Do not manufacture alternatives when insufficient information exists.
+
+16. APPROVALS REQUIRED
+Separate approval requests from general information.
+
+Use:
+
+APPROVAL REQUIRED
+
+Item:
+Reason:
+Impact:
+Required by:
+
+17. SUPPORT REQUIRED
+Clearly state where management support is needed.
+
+Examples:
+
+- resources
+- manpower
+- budget
+- approval
+- escalation
+- supplier intervention
+- IT support
+- customer coordination
+- cross-functional support
+
+Explain why the support is needed.
+
+18. ESCALATION
+Escalate only matters that genuinely require management attention.
+
+Good escalation reasons include:
+
+- major deadline risk
+- customer impact
+- safety issue
+- financial exposure
+- compliance concern
+- repeated operational failure
+- unresolved dependency
+- resource constraint
+- cross-department blockage
+
+Avoid escalating routine operational matters unnecessarily.
+
+19. CORRECTIVE ACTIONS
+For active problems show:
+
+Problem:
+Immediate action:
+Corrective action:
+Status:
+Next verification:
+
+Keep correction and permanent corrective action separate where relevant.
+
+20. DEPENDENCIES
+Identify dependencies such as:
+
+- another department
+- customer
+- supplier
+- IT
+- finance
+- procurement
+- approval
+- system access
+- external authority
+
+Explain how each dependency affects progress.
+
+21. NEXT STEPS
+Create a short action-focused section.
+
+For each:
+
+Next action:
+Responsible role:
+Target:
+Dependency:
+
+Do not invent names or dates.
+
+22. UPCOMING MILESTONES
+List important upcoming milestones.
+
+Use:
+
+Milestone:
+Target date:
+Status:
+Risk:
+
+Only use dates supplied by the user.
+
+23. PRIORITIZE INFORMATION
+Order information approximately by:
+
+1. Critical issue
+2. Decision / support required
+3. Major result
+4. Progress
+5. Risk
+6. Routine activity
+
+Adjust where necessary.
+
+24. REMOVE LOW-VALUE DETAIL
+Exclude information that does not help management:
+
+- understand performance
+- make a decision
+- manage risk
+- provide support
+- track commitments
+
+Do not turn the update into a diary of everything completed.
+
+25. KEEP DETAIL PROPORTIONAL
+Use more detail for:
+
+- problems
+- exceptions
+- risks
+- decisions
+- major results
+
+Use less detail for routine work that is proceeding normally.
+
+26. USE MANAGEMENT-FRIENDLY LANGUAGE
+Prefer:
+
+"Stock count completed with 98.7% accuracy."
+
+instead of:
+
+"We worked very hard and successfully managed to finish the entire stock count."
+
+Prefer facts over promotional language.
+
+27. PROFESSIONAL TONE
+The tone should be:
+
+- clear
+- calm
+- factual
+- accountable
+- concise
+- solution-oriented
+
+Avoid:
+
+- defensive wording
+- emotional language
+- blame
+- unnecessary apologies
+- exaggerated claims
+- corporate jargon
+
+28. BAD NEWS
+Do not hide negative information.
+
+When reporting a problem:
+
+State the issue.
+Explain the impact.
+Explain what is being done.
+State what support is required.
+Give the next checkpoint.
+
+29. ACCOUNTABILITY WITHOUT BLAME
+When another person or department is involved, describe the dependency factually.
+
+Avoid:
+
+"They failed to send the documents."
+
+Prefer:
+
+"The reconciliation remains pending because the required receiving documents have not yet been received."
+
+30. UNCERTAINTY
+When information is uncertain, use wording such as:
+
+"Under investigation."
+"Not yet confirmed."
+"Pending verification."
+"Current estimate."
+"Subject to approval."
+
+Do not create false certainty.
+
+31. DATA QUALITY
+If the provided figures appear inconsistent or incomplete, flag them before using them in conclusions.
+
+Do not silently correct business data.
+
+32. TREND COMPARISON
+Where previous-period data is supplied, compare:
+
+Current:
+Previous:
+Change:
+Interpretation:
+
+Do not claim a trend from a single data point.
+
+33. EMAIL VERSION
+If appropriate, create a concise email-ready version.
+
+Structure:
+
+Subject
+Opening
+Key update
+Issues / risks
+Support required
+Next steps
+Closing
+
+34. BULLET VERSION
+Create a scan-friendly version for managers who prefer short updates.
+
+Use concise bullets.
+
+35. EXECUTIVE VERSION
+If the update contains substantial information, provide an optional executive version of approximately 5–8 key points.
+
+36. MEETING VERSION
+Where useful, create a short speaking version suitable for giving the update verbally during a management meeting.
+
+Focus on:
+
+Status
+Achievement
+Issue
+Risk
+Support
+Next step
+
+37. ACTION TRACKER
+Where several actions exist, create:
+
+Action:
+Owner role:
+Target:
+Status:
+Dependency:
+
+38. STATUS WORDING
+Use precise wording.
+
+Instead of:
+"Everything is going well."
+
+Use:
+"Activities remain on schedule with no critical blockers reported."
+
+Instead of:
+"We have some problems."
+
+Use:
+"Two receiving discrepancies remain open pending document verification."
+
+39. LENGTH CONTROL
+Keep the main management update concise.
+
+Do not repeat the same information across multiple sections unless necessary.
+
+40. FINAL QUALITY CHECK
+Before producing the final answer check:
+
+- Is the main message obvious?
+- Are critical issues visible?
+- Are decisions clearly identified?
+- Are risks separated from current issues?
+- Are facts separated from assumptions?
+- Are numbers preserved accurately?
+- Are responsibilities clear?
+- Are next steps actionable?
+- Is unnecessary detail removed?
+- Is the tone professional?
+- Is any important negative information being hidden?
+
+OUTPUT FORMAT:
+
+1. Management Summary
+2. Overall Status
+3. Key Achievements
+4. Current Progress
+5. KPI / Results Summary
+6. Issues & Delays
+7. Risks & Blockers
+8. Corrective Actions
+9. Decisions / Approvals Required
+10. Support Required
+11. Next Steps
+12. Upcoming Milestones
+13. Action Tracker
+
+Then provide:
+
+14. Concise Email Version
+
+And when useful:
+
+15. 5-Point Executive Version
+
+IMPORTANT:
+- Do not invent facts, KPIs, dates, targets, causes or commitments.
+- Preserve supplied numbers accurately.
+- Do not hide problems behind positive wording.
+- Do not blame individuals.
+- Distinguish issues from future risks.
+- Distinguish confirmed causes from assumptions.
+- Make decisions and support requests clearly visible.
+- Prioritize exceptions and business impact over routine activity.
+- Keep the final communication concise enough for a busy manager to scan quickly.
+- If important information is missing, identify the gap rather than inventing it.`;
+
+const steps = [
+  {
+    title: "Lead with what matters",
+    description:
+      "Give management the overall status, important result and biggest issue first instead of making them search through routine activity.",
+  },
+  {
+    title: "Separate progress from problems",
+    description:
+      "Show completed work, current progress, delays, risks and blockers separately so the real status is easy to understand.",
+  },
+  {
+    title: "Make requests explicit",
+    description:
+      "If you need an approval, decision, escalation or additional resource, state exactly what management needs to do and why.",
+  },
+  {
+    title: "Finish with clear next steps",
+    description:
+      "Show what happens next, who is responsible and which dependencies or milestones need management attention.",
+  },
+];
+
+const example = {
+  input: [
+    "Update type: Weekly warehouse operations update.",
+    "Completed: Monthly stock count completed.",
+    "Result: Inventory accuracy 98.7%.",
+    "Issue: Two receiving discrepancies remain open.",
+    "Reason: Required supplier documents are still pending.",
+    "Action: Receiving team has followed up with the supplier.",
+    "Risk: Delay could affect month-end reconciliation.",
+    "Support required: Escalation to procurement if documents are not received by the next review.",
+  ],
+
+  output: [
+    "Overall Status: AT RISK — Core weekly activities are progressing, but two unresolved receiving discrepancies may affect month-end reconciliation.",
+    "Key Achievement: Monthly stock count completed with 98.7% inventory accuracy.",
+    "Open Issue: Two receiving discrepancies remain pending because the required supplier documentation has not yet been received.",
+    "Current Action: Receiving has followed up with the supplier and is awaiting the outstanding documents.",
+    "Risk: Continued delay may prevent timely completion of month-end inventory reconciliation.",
+    "Management Support: Procurement escalation may be required if the documents remain outstanding at the next review point.",
+    "Next Step: Continue supplier follow-up, verify documentation once received and close the affected discrepancies before reconciliation.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Put exceptions before routine work",
+    description:
+      "Managers usually need to know what is off track, what requires a decision and what could become a problem before reading normal operational activity.",
+  },
+  {
+    title: "Use numbers when they add meaning",
+    description:
+      "A precise KPI, variance or completion figure communicates performance more clearly than phrases such as 'good progress' or 'almost completed.'",
+  },
+  {
+    title: "Don't hide the ask",
+    description:
+      "When management needs to approve, decide, escalate or provide resources, make the request clearly visible rather than burying it inside the update.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Manager Update Writer Prompt | KRIYANO"
+  description="Turn rough work notes into concise professional management updates covering progress, results, KPIs, issues, risks, decisions, support required and next steps."
+>
+  <PromptPage
+    category="WORK & PRODUCTIVITY"
+    title="Manager Update"
+    accentTitle="Writer."
+    description="Turn scattered work notes, results and problems into a concise management update that clearly communicates progress, exceptions, risks, decisions and next steps."
+    meta={[
+      "Free prompt",
+      "Management communication",
+      "Progress updates",
+    ]}
+    bestFor={[
+      "Managers",
+      "Supervisors",
+      "Team leaders",
+      "Project updates",
+      "Operations reporting",
+      "Weekly reporting",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Give management the information they actually need."
+    introDescription="Transform operational details into a clear status update that highlights results, exceptions, risks and required decisions without overwhelming the reader with routine activity."
+    steps={steps}
+    exampleTitle="Turn rough operational notes into a management-ready update."
+    example={example}
+    tipsTitle="Write updates managers can scan quickly."
+    tips={tips}
+    sidebarTitle="Planning the week ahead?"
+    sidebarDescription="Use KRIYANO's Weekly Work Planner Prompt to organize priorities, deadlines, meetings, follow-ups and workload before your next management update."
+    warningTitle="Keep facts separate from assumptions"
+    warningText="Management decisions may depend on the information in an update. Preserve supplied figures accurately, identify uncertainty clearly and never invent causes, deadlines, commitments or performance results."
+  />
+</BaseLayout>

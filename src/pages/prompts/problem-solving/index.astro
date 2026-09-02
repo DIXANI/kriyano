@@ -1,0 +1,705 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced professional problem-solving facilitator.
+
+TASK:
+Help me analyze and solve the problem described below in a structured, practical and evidence-based way.
+
+PROBLEM:
+[Describe the problem.]
+
+CONTEXT:
+[Where is this happening? Workplace, operations, business, project, customer issue, personal productivity, etc.]
+
+EXPECTED CONDITION:
+[What should be happening instead.]
+
+ACTUAL CONDITION:
+[What is happening now.]
+
+IMPACT:
+[Operational, financial, customer, quality, time, productivity, safety or other impact.]
+
+WHEN IT STARTED:
+[If known.]
+
+FREQUENCY:
+[One-time / Repeated / Intermittent / Continuous / Unknown.]
+
+PEOPLE / TEAMS INVOLVED:
+[If relevant.]
+
+AVAILABLE FACTS:
+[List confirmed facts.]
+
+AVAILABLE DATA:
+[List relevant figures, reports, KPIs, observations or evidence.]
+
+POSSIBLE CAUSES:
+[List any suspected causes, if known.]
+
+CONSTRAINTS:
+[Budget, time, resources, policy, customer requirements, system limitations, staffing, etc.]
+
+SOLUTIONS ALREADY TRIED:
+[List previous attempts and results.]
+
+DEADLINE / URGENCY:
+[If applicable.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+PROBLEM-SOLVING REQUIREMENTS:
+
+1. DEFINE THE PROBLEM
+Rewrite the issue as a clear problem statement.
+
+Use:
+
+What is happening?
+Where?
+When?
+Who / what is affected?
+What should be happening instead?
+How large is the gap?
+Why does it matter?
+
+Keep the statement factual.
+
+Do not include an assumed cause unless confirmed.
+
+2. SEPARATE FACTS FROM ASSUMPTIONS
+Create:
+
+CONFIRMED FACTS
+Information supported by evidence.
+
+UNCONFIRMED INFORMATION
+Information reported but not validated.
+
+ASSUMPTIONS
+Possible explanations requiring verification.
+
+Do not treat assumptions as facts.
+
+3. DEFINE THE GAP
+Clearly compare:
+
+Expected condition:
+Actual condition:
+Gap:
+Impact:
+
+If measurable information exists, quantify the gap.
+
+Do not invent numbers.
+
+4. ASSESS THE IMPACT
+Consider relevant areas:
+
+- customer
+- operational
+- financial
+- quality
+- productivity
+- service level
+- time
+- people
+- safety
+- compliance
+- reputation
+
+Prioritize the impacts that actually matter.
+
+5. DETERMINE URGENCY
+Classify the problem as:
+
+Critical
+High
+Medium
+Low
+
+Explain the reason.
+
+Base urgency on consequence and time sensitivity, not inconvenience alone.
+
+6. IDENTIFY IMMEDIATE CONTAINMENT
+If the problem could worsen, identify short-term actions to control the impact.
+
+Examples:
+
+- isolate affected work
+- pause a process
+- verify data
+- communicate with affected stakeholders
+- use a temporary workaround
+- check similar cases
+- preserve evidence
+
+Do not confuse temporary containment with the permanent solution.
+
+7. MAP THE PROCESS
+Where relevant, outline the process surrounding the problem.
+
+For each step identify:
+
+Step:
+Expected activity:
+Actual condition:
+Possible failure point:
+Available evidence:
+
+8. BREAK DOWN THE PROBLEM
+Divide a complex problem into smaller parts.
+
+Possible dimensions:
+
+- location
+- time
+- product
+- customer
+- employee
+- shift
+- system
+- process stage
+- supplier
+- transaction
+- equipment
+
+Identify where the issue occurs and where it does not occur.
+
+9. LOOK FOR PATTERNS
+Analyze:
+
+- when the problem happens
+- when it does not happen
+- which locations are affected
+- which products / tasks are affected
+- whether frequency is increasing
+- whether the issue is tied to a particular condition
+
+Do not claim a trend without enough data.
+
+10. IDENTIFY POSSIBLE CAUSES
+Generate plausible causes under relevant categories:
+
+People
+Process
+System
+Equipment
+Material
+Method
+Measurement
+Environment
+Management control
+Supplier / external dependency
+
+Do not force every category into the analysis.
+
+11. PRIORITIZE CAUSES
+For each possible cause provide:
+
+Cause:
+Supporting evidence:
+Contradicting evidence:
+Likelihood:
+Verification required:
+
+Use:
+
+High likelihood
+Medium likelihood
+Low likelihood
+Insufficient evidence
+
+12. ROOT-CAUSE DEPTH
+Where the issue requires deeper investigation, use techniques such as:
+
+- 5 Whys
+- cause-and-effect analysis
+- process comparison
+- before / after comparison
+- failure-point analysis
+
+Do not stop at vague causes such as:
+
+"Human error."
+"Poor communication."
+"Lack of attention."
+"System issue."
+
+Ask why that condition was possible.
+
+13. IDENTIFY INFORMATION GAPS
+List the information needed before reaching a confident conclusion.
+
+For each gap:
+
+Information required:
+Why it matters:
+How to obtain it:
+Who may have it:
+
+14. DEFINE SOLUTION CRITERIA
+Before proposing solutions, define what a good solution must achieve.
+
+Examples:
+
+- solve the actual cause
+- reduce recurrence
+- remain within budget
+- be practical
+- avoid customer disruption
+- preserve quality
+- maintain safety
+- be easy to sustain
+- be measurable
+
+15. GENERATE SOLUTION OPTIONS
+Create multiple realistic options.
+
+Do not immediately choose the first idea.
+
+For each option provide:
+
+Option:
+How it works:
+Problem addressed:
+Expected benefit:
+Resources required:
+Time to implement:
+Risks:
+Limitations:
+
+16. INCLUDE LOW-COST OPTIONS
+Where appropriate, include:
+
+- process change
+- sequencing change
+- clearer ownership
+- simple checklist
+- approval control
+- visual control
+- better information flow
+- scheduling change
+- layout change
+- exception report
+
+Do not recommend expensive technology when a simpler control could solve the problem.
+
+17. INCLUDE SYSTEM / AUTOMATION OPTIONS ONLY WHEN JUSTIFIED
+Technology may help when:
+
+- volume is high
+- manual error is recurring
+- data exists
+- control can be automated
+- business benefit justifies cost
+
+Do not recommend automation merely because it sounds advanced.
+
+18. COMPARE OPTIONS
+Evaluate each solution using criteria such as:
+
+Effectiveness
+Cost
+Implementation time
+Complexity
+Risk
+Sustainability
+User impact
+Scalability
+
+Use a simple rating:
+
+Strong
+Moderate
+Weak
+
+or
+
+High
+Medium
+Low
+
+Explain the reasoning.
+
+19. RECOMMEND THE BEST OPTION
+Choose the strongest practical solution based on available information.
+
+Explain:
+
+Why this option is preferred:
+What cause it addresses:
+Expected result:
+Main limitation:
+What must be verified first:
+
+If evidence is insufficient to choose, say so.
+
+20. CONSIDER COMBINED SOLUTIONS
+Some problems require several controls.
+
+Separate:
+
+Primary solution
+Supporting controls
+Monitoring controls
+
+Avoid creating unnecessary complexity.
+
+21. CHECK FOR UNINTENDED CONSEQUENCES
+For each major solution consider:
+
+- new delays
+- additional workload
+- customer impact
+- cost
+- safety risk
+- quality risk
+- workarounds
+- system conflicts
+- dependency shifts
+
+22. CREATE AN IMPLEMENTATION PLAN
+For the recommended solution provide:
+
+Action:
+Purpose:
+Responsible role:
+Priority:
+Dependency:
+Target:
+Evidence of completion:
+
+Do not invent employee names or official deadlines.
+
+23. PHASE THE IMPLEMENTATION
+Where useful, structure:
+
+Immediate
+Short-term
+Medium-term
+
+For complex changes:
+
+Pilot
+Review
+Adjust
+Rollout
+
+24. DEFINE OWNERSHIP
+Assign responsibility by role.
+
+Examples:
+
+Manager
+Supervisor
+Team Leader
+Operations
+Quality
+IT
+Finance
+Procurement
+Supplier
+Project Lead
+
+Do not assume organizational roles that were not provided unless clearly marked as suggestions.
+
+25. DEFINE SUCCESS MEASURES
+For each important solution define:
+
+Metric:
+Baseline:
+Target:
+Review period:
+Success criteria:
+
+If the baseline is unavailable, state:
+
+"Baseline required."
+
+Do not invent targets.
+
+26. VERIFY EFFECTIVENESS
+Explain how to check whether the solution worked.
+
+Possible methods:
+
+- KPI review
+- audit
+- sample check
+- transaction review
+- customer feedback
+- error rate
+- cycle count
+- observation
+- repeat measurement
+
+27. MONITOR RECURRENCE
+Define warning indicators.
+
+Examples:
+
+- repeated complaints
+- repeated discrepancies
+- repeated delays
+- error rate
+- backlog
+- exception frequency
+- rework
+- downtime
+
+28. CREATE A FALLBACK PLAN
+For important problems include:
+
+If the solution fails:
+Immediate fallback:
+Escalation required:
+Alternative option:
+
+29. DECISION POINTS
+Identify decisions management may need to make.
+
+For each:
+
+Decision:
+Options:
+Recommended choice:
+Impact of delay:
+
+30. CONSTRAINT REVIEW
+Check the proposed solution against:
+
+- budget
+- time
+- staffing
+- policy
+- compliance
+- customer requirements
+- technology
+- available skills
+
+Do not recommend an option that clearly violates stated constraints.
+
+31. STAKEHOLDER IMPACT
+Identify:
+
+Stakeholder:
+Impact:
+Required communication:
+Required involvement:
+
+32. COMMUNICATION PLAN
+Where relevant, define what should be communicated to:
+
+- management
+- employees
+- customers
+- suppliers
+- other departments
+
+Keep communication proportional to the problem.
+
+33. PREVENT RECURRENCE
+Ask:
+
+What control would have prevented this?
+What control should detect it earlier?
+What process change would make recurrence less likely?
+Can the solution be standardized elsewhere?
+
+34. STANDARDIZATION
+If the solution works, consider:
+
+- SOP update
+- checklist
+- training
+- template
+- system control
+- audit point
+- KPI
+- visual management
+
+Do not standardize a solution before verifying effectiveness.
+
+35. LESSONS LEARNED
+Summarize:
+
+What happened?
+Why was it difficult to detect?
+What allowed the problem?
+What solved it?
+What should change permanently?
+Could similar problems exist elsewhere?
+
+36. SIMPLE ACTION TRACKER
+Create:
+
+Action:
+Owner role:
+Priority:
+Target:
+Status:
+Verification:
+
+Use:
+
+Not Started
+In Progress
+Blocked
+Pending Verification
+Completed
+
+37. MANAGEMENT SUMMARY
+Provide a concise final summary:
+
+Problem:
+Impact:
+Most likely cause:
+Evidence confidence:
+Recommended solution:
+Immediate action:
+Main risk:
+Decision required:
+Success measure:
+Next review:
+
+OUTPUT FORMAT:
+
+1. Problem Statement
+2. Facts vs Assumptions
+3. Expected vs Actual
+4. Impact & Urgency
+5. Immediate Containment
+6. Process / Pattern Analysis
+7. Possible Causes
+8. Information Gaps
+9. Root-Cause Direction
+10. Solution Criteria
+11. Solution Options
+12. Option Comparison
+13. Recommended Solution
+14. Implementation Plan
+15. Risks & Constraints
+16. Success Measures
+17. Effectiveness Verification
+18. Recurrence Prevention
+19. Action Tracker
+20. Management Summary
+
+IMPORTANT:
+- Do not invent facts, data, causes or results.
+- Separate evidence from assumptions.
+- Do not jump directly from problem to solution.
+- Do not stop analysis at vague causes such as human error.
+- Do not recommend technology unnecessarily.
+- Consider simpler practical options first.
+- Do not present a suspected root cause as confirmed.
+- Compare multiple realistic solutions where possible.
+- Link the recommended solution to the actual problem or supported cause.
+- Define how success will be measured.
+- If critical information is missing, clearly identify what must be verified before making a final decision.`;
+
+const steps = [
+  {
+    title: "Define the real problem",
+    description:
+      "Separate what is actually happening from suspected causes so the solution is aimed at the real performance gap rather than an assumption.",
+  },
+  {
+    title: "Investigate before choosing",
+    description:
+      "Review evidence, patterns, process failures and possible causes before jumping straight to a preferred solution.",
+  },
+  {
+    title: "Compare practical options",
+    description:
+      "Evaluate several possible solutions by effectiveness, cost, effort, risk and sustainability instead of assuming the first idea is best.",
+  },
+  {
+    title: "Measure whether it worked",
+    description:
+      "Define implementation actions, success criteria and follow-up checks so the problem is not considered solved without evidence.",
+  },
+];
+
+const example = {
+  input: [
+    "Problem: Customer orders are frequently dispatched later than planned.",
+    "Expected condition: Orders received before cut-off should dispatch the same day.",
+    "Current condition: Around 15% are carrying into the following day.",
+    "Known facts: Picking usually finishes on time, but packing backlog increases late in the shift.",
+    "Constraint: No additional headcount is currently approved.",
+    "Goal: Reduce late dispatches without adding staff.",
+  ],
+
+  output: [
+    "Problem focus: The available evidence points more strongly toward a late-shift packing bottleneck than a general order-processing problem.",
+    "Information to verify: Hourly order arrival volume, packing productivity, staffing by hour, carton/material availability and whether large batches reach packing simultaneously.",
+    "Possible solutions should include workload leveling, earlier release to packing, temporary cross-utilization, batching changes and removal of packing interruptions before considering additional automation.",
+    "Compare each option against dispatch improvement, implementation effort, operational disruption and sustainability.",
+    "Recommended actions should target the confirmed bottleneck rather than simply asking employees to work faster.",
+    "Success should be measured using same-day dispatch performance plus packing backlog by time of day.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Don't solve the symptom",
+    description:
+      "A visible problem may be the result of an earlier failure in the process. Understand where the gap begins before deciding what to change.",
+  },
+  {
+    title: "Compare more than one solution",
+    description:
+      "The strongest option is not always the most expensive or technically advanced. Compare effectiveness, effort, risk and sustainability.",
+  },
+  {
+    title: "Require evidence of improvement",
+    description:
+      "Define a measurable result and review period so you can determine whether the solution genuinely worked or only appeared to help temporarily.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Problem-Solving Prompt | KRIYANO"
+  description="Analyze workplace and business problems systematically using facts, possible causes, solution options, comparison, implementation planning and measurable success criteria."
+>
+  <PromptPage
+    category="WORK & PRODUCTIVITY"
+    title="Problem-Solving"
+    accentTitle="Prompt."
+    description="Break down workplace and business problems, separate facts from assumptions, compare realistic solutions and build an actionable plan with measurable results."
+    meta={[
+      "Free prompt",
+      "Problem solving",
+      "Decision support",
+    ]}
+    bestFor={[
+      "Workplace problems",
+      "Operations issues",
+      "Business challenges",
+      "Project problems",
+      "Customer issues",
+      "Process improvement",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Understand the problem before choosing the solution."
+    introDescription="Move from a vague issue to a clear problem definition, evidence-based cause analysis, realistic solution options and an implementation plan that can actually be measured."
+    steps={steps}
+    exampleTitle="Turn an operational problem into practical solution options."
+    example={example}
+    tipsTitle="Solve problems more systematically."
+    tips={tips}
+    sidebarTitle="Need deeper cause investigation?"
+    sidebarDescription="Use KRIYANO's Root Cause Analysis Prompt when the main challenge is understanding why a recurring or complex failure is happening."
+    warningTitle="A plausible explanation is not automatically the cause"
+    warningText="Good problem solving depends on evidence. Verify important assumptions and suspected causes before committing significant time, money or operational changes to a solution."
+  />
+</BaseLayout>

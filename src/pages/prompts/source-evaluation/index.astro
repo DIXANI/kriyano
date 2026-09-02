@@ -1,0 +1,336 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced research analyst and source-quality evaluator.
+
+TASK:
+Evaluate the reliability, credibility and usefulness of the source described below.
+
+SOURCE:
+[Paste the source content, citation, link details, publication information or summary.]
+
+SOURCE TYPE:
+[Example: government report, academic paper, company website, blog post, news article, social media post, marketplace listing, research report.]
+
+AUTHOR / ORGANIZATION:
+[Who produced the source?]
+
+PUBLICATION DATE:
+[Date if known.]
+
+RESEARCH QUESTION:
+[What question are you trying to answer with this source?]
+
+CLAIM BEING EVALUATED:
+[What specific fact, statistic, conclusion or statement are you relying on?]
+
+TARGET CONTEXT:
+[Business, academic, market research, journalism, decision-making, general knowledge, etc.]
+
+OTHER SOURCES AVAILABLE:
+[List any supporting or conflicting sources.]
+
+EVALUATION REQUIREMENTS:
+
+1. SOURCE IDENTIFICATION
+Identify:
+- Source type
+- Author or organization
+- Publication or platform
+- Publication date
+- Whether it is a primary or secondary source
+
+If any information is missing, state that clearly.
+
+2. AUTHORITY
+Evaluate:
+- Author expertise
+- Organization reputation
+- Relevant qualifications
+- Institutional credibility
+- Subject-matter authority
+
+Do not assume authority based only on a professional-looking website.
+
+3. EVIDENCE QUALITY
+Check whether the source provides:
+- Data
+- Citations
+- Methodology
+- Original evidence
+- Supporting documentation
+- Named sources
+- Transparent calculations
+
+Distinguish evidence from opinion.
+
+4. METHODOLOGY
+If the source contains research, survey results, estimates or statistics, evaluate:
+- Sample size
+- Sampling method
+- Data collection method
+- Time period
+- Geographic scope
+- Definitions used
+- Limitations
+- Whether the methodology is transparent
+
+Do not treat a number as reliable just because it is precise.
+
+5. PRIMARY VS SECONDARY SOURCE
+Determine whether the source:
+- created the original information
+- reported someone else's findings
+- summarized multiple sources
+- repeated information without identifying the origin
+
+When possible, recommend locating the original source.
+
+6. RECENCY
+Evaluate whether the publication date is suitable for the research question.
+
+Classify the information as:
+- Current
+- Possibly outdated
+- Outdated
+- Date unknown
+
+Explain why recency matters for this topic.
+
+7. RELEVANCE
+Evaluate how directly the source answers the research question.
+
+Consider:
+- geography
+- industry
+- audience
+- product category
+- customer segment
+- time period
+- research scope
+
+A credible source can still be irrelevant to the specific question.
+
+8. BIAS & INCENTIVES
+Look for possible sources of bias such as:
+- commercial interest
+- political interest
+- organizational interest
+- promotional content
+- advocacy
+- selective reporting
+- sponsorship
+- affiliate incentives
+
+Do not automatically reject a source because bias is possible.
+Evaluate whether the evidence remains useful despite the incentive.
+
+9. CONFLICTS OF INTEREST
+Identify disclosed or apparent conflicts such as:
+- study funded by a company benefiting from the result
+- author selling the product being evaluated
+- sponsored research
+- undisclosed affiliate relationships
+- competitor-produced comparisons
+
+Explain how this should affect confidence.
+
+10. CLAIM SUPPORT
+For the specific claim being evaluated, classify the support as:
+
+- Strongly supported
+- Reasonably supported
+- Weakly supported
+- Unsupported
+- Cannot determine
+
+Explain the reason.
+
+11. CORROBORATION
+Identify whether the claim should be verified using additional sources.
+
+Recommend the best type of independent confirmation.
+
+Examples:
+- government statistics
+- original research
+- financial filings
+- regulator data
+- academic studies
+- multiple independent news sources
+- direct company information
+
+12. RED FLAGS
+Check for:
+- no named author
+- no publication date
+- missing methodology
+- sensational language
+- unsupported statistics
+- anonymous claims
+- circular citations
+- outdated information
+- copied content
+- vague references to "studies"
+- excessive promotional language
+- misleading charts
+- cherry-picked evidence
+
+Do not assume a red flag automatically makes the entire source unusable.
+
+13. INFORMATION GAPS
+List information needed to evaluate the source more confidently.
+
+14. USABILITY
+Explain whether the source is appropriate for:
+
+- Background understanding
+- Supporting a minor claim
+- Supporting an important factual claim
+- Business decision-making
+- Academic citation
+- High-stakes decisions
+
+15. CONFIDENCE RATING
+Give the source an overall confidence rating:
+
+- High
+- Medium
+- Low
+- Insufficient information
+
+Provide a short justification.
+
+16. FINAL VERDICT
+Summarize:
+- What can reasonably be trusted
+- What should be treated cautiously
+- What needs verification
+- Whether the source should be used
+
+OUTPUT FORMAT:
+
+1. Source Overview
+2. Authority Assessment
+3. Evidence Quality
+4. Methodology Review
+5. Primary vs Secondary Source
+6. Recency
+7. Relevance
+8. Bias & Incentives
+9. Conflicts of Interest
+10. Claim Support
+11. Corroboration Needed
+12. Red Flags
+13. Information Gaps
+14. Appropriate Uses
+15. Confidence Rating
+16. Final Verdict
+
+IMPORTANT:
+- Do not invent missing source information.
+- Do not assume credibility because a source looks professional.
+- Do not dismiss sources automatically because they are commercial, biased or secondary.
+- Evaluate the actual evidence.
+- Separate credibility from relevance.
+- Clearly state uncertainty.
+- For important claims, recommend verification from independent or primary sources when appropriate.`;
+
+const steps = [
+  {
+    title: "Evaluate the specific claim",
+    description:
+      "A source may be useful for one claim but weak for another. Identify exactly what information you intend to rely on.",
+  },
+  {
+    title: "Check where the evidence started",
+    description:
+      "Trace statistics and research back to the original report, dataset or study whenever possible instead of relying on repeated summaries.",
+  },
+  {
+    title: "Separate credibility from relevance",
+    description:
+      "A highly credible source can still be unsuitable if it covers the wrong country, customer group, industry or time period.",
+  },
+  {
+    title: "Verify important findings",
+    description:
+      "For decisions that matter, compare the claim against independent evidence rather than depending on one source.",
+  },
+];
+
+const example = {
+  input: [
+    "Source: A software company's blog article claiming that 80% of small businesses lose money because of poor inventory management.",
+    "Source type: Company blog.",
+    "Author: Software provider.",
+    "Publication date: 2025.",
+    "Research question: How common are inventory-control problems among small businesses?",
+    "Claim: 80% of small businesses lose money because of inventory problems.",
+  ],
+
+  output: [
+    "Authority: The company may have relevant industry experience, but it also has a commercial interest in highlighting inventory problems.",
+    "Evidence quality: The claim should not be treated as reliable unless the article identifies the original dataset, study or survey methodology.",
+    "Primary vs secondary: If the company is quoting another study, the original study should be located and evaluated.",
+    "Claim support: Weakly supported until the source, sample size, geography, definitions and research method behind the 80% figure can be verified.",
+    "Recommended action: Find the original research and compare the result with independent small-business or inventory-management data.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Follow statistics to the original source",
+    description:
+      "Many articles repeat the same number. Several websites quoting it does not provide independent confirmation if all of them trace back to one weak source.",
+  },
+  {
+    title: "Watch the publication date",
+    description:
+      "Older research may still be useful for stable topics, but pricing, technology, markets and customer behaviour often require recent evidence.",
+  },
+  {
+    title: "Commercial sources can still help",
+    description:
+      "Company reports and industry content can provide useful information. Treat incentives as part of the evaluation rather than automatically rejecting the source.",
+  },
+];
+---
+
+<BaseLayout
+  title="Source Evaluation Prompt | KRIYANO"
+  description="Evaluate research sources for authority, evidence quality, methodology, bias, recency, relevance and overall reliability."
+>
+  <PromptPage
+    category="RESEARCH"
+    title="Source Evaluation"
+    accentTitle="Prompt."
+    description="Assess whether a source is credible, relevant and strong enough to support a research claim or important decision."
+    meta={[
+      "Free prompt",
+      "Research",
+      "Source verification",
+    ]}
+    bestFor={[
+      "Online research",
+      "Business research",
+      "Academic research",
+      "Market reports",
+      "Statistics",
+      "Fact verification",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Not every source deserves the same level of trust."
+    introDescription="Evaluate where the information came from, how the evidence was produced, whether incentives could affect the conclusion and whether the source is actually relevant to your research question."
+    steps={steps}
+    exampleTitle="Evaluate the evidence behind a confident statistic."
+    example={example}
+    tipsTitle="Evaluate sources more carefully."
+    tips={tips}
+    sidebarTitle="Building a larger research project?"
+    sidebarDescription="Use the Research Plan Builder first to define the questions and source strategy, then evaluate important sources individually with this prompt."
+    warningTitle="Source quality is contextual"
+    warningText="A source can be credible but unsuitable for a particular claim, location or time period. Important findings should be checked against original and independent evidence whenever possible."
+  />
+</BaseLayout>

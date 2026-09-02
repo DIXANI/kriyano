@@ -1,0 +1,741 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert customer researcher, market researcher, buyer-insight analyst and marketing strategist.
+
+TASK:
+Identify and structure the most important customer pain points for the supplied market, audience, product or service.
+
+The goal is not to guess randomly.
+
+Separate:
+- known evidence
+- reasonable inference
+- assumptions
+- unknowns that require research
+
+Use the findings to help improve:
+- marketing messages
+- product positioning
+- campaign ideas
+- content topics
+- sales conversations
+- offers
+- customer experience
+
+BUSINESS / BRAND:
+[Name and description.]
+
+PRODUCT OR SERVICE:
+[What is being sold or offered?]
+
+TARGET CUSTOMER:
+[Describe the customer.]
+
+MARKET / LOCATION:
+[Country / region / industry / online/global.]
+
+CUSTOMER ROLE:
+[Owner / manager / employee / parent / student / creator / consumer / other.]
+
+USE CASE:
+[What are they trying to accomplish?]
+
+PURCHASE CONTEXT:
+[Why or when might they need this product or service?]
+
+CURRENT ALTERNATIVES:
+[What do they currently use instead?]
+
+KNOWN CUSTOMER FEEDBACK:
+[Paste reviews, comments, interview notes, support messages or other evidence.]
+
+KNOWN PROBLEMS:
+[List anything already known.]
+
+KNOWN OBJECTIONS:
+[List anything already known.]
+
+PRICE RANGE:
+[If relevant.]
+
+COMPETITORS:
+[Optional.]
+
+RESEARCH SOURCES AVAILABLE:
+[Reviews / forums / Reddit / surveys / interviews / CRM / support tickets / search data / none.]
+
+RESEARCH GOAL:
+[Messaging / product improvement / campaign / positioning / content / sales / other.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+CUSTOMER PAIN-POINT RESEARCH REQUIREMENTS:
+
+1. DEFINE THE CUSTOMER CONTEXT FIRST
+Understand:
+Who they are
+What they are trying to do
+What situation creates the need
+What success looks like
+
+2. DO NOT INVENT CUSTOMER PROBLEMS
+If evidence is missing, label the issue as:
+Hypothesis
+Possible pain point
+Research question
+
+3. SEPARATE EVIDENCE FROM ASSUMPTION
+
+4. CLASSIFY EVIDENCE STRENGTH
+Use:
+Strong
+Moderate
+Weak
+Unknown
+
+5. IDENTIFY FUNCTIONAL PAIN POINTS
+Examples:
+Too slow
+Too expensive
+Too difficult
+Too manual
+Too unreliable
+Too complex
+Too limited
+
+6. IDENTIFY EMOTIONAL PAIN POINTS
+Examples:
+Stress
+Fear
+Frustration
+Confusion
+Embarrassment
+Lack of confidence
+Overwhelm
+
+7. IDENTIFY SOCIAL PAIN POINTS
+Examples:
+Fear of looking unprofessional
+Pressure from management
+Customer expectations
+Peer comparison
+Reputation risk
+
+8. IDENTIFY FINANCIAL PAIN POINTS
+Examples:
+Waste
+Unexpected cost
+Cash-flow pressure
+Overstock
+Lost sales
+High operating cost
+
+9. IDENTIFY TIME PAIN POINTS
+Examples:
+Repeated manual work
+Waiting
+Delays
+Slow approval
+Slow learning curve
+
+10. IDENTIFY RISK PAIN POINTS
+Examples:
+Errors
+Compliance
+Safety
+Stockouts
+Data loss
+Poor decisions
+Customer complaints
+
+11. IDENTIFY KNOWLEDGE PAIN POINTS
+Examples:
+Not knowing what to do
+Too much conflicting information
+No clear process
+Lack of expertise
+
+12. IDENTIFY WORKFLOW PAIN POINTS
+Look for friction between:
+People
+Systems
+Tools
+Departments
+Steps
+Approvals
+
+13. IDENTIFY TRIGGER EVENTS
+What causes the customer to actively search for a solution?
+
+14. POSSIBLE TRIGGERS:
+Failure
+Deadline
+New responsibility
+Growth
+Cost increase
+Customer complaint
+Staff shortage
+Audit
+Technology change
+New business launch
+
+15. IDENTIFY FREQUENCY
+Estimate whether each problem occurs:
+Daily
+Weekly
+Monthly
+Occasionally
+Rarely
+
+16. LABEL ESTIMATED FREQUENCY AS AN ASSUMPTION WHEN UNSUPPORTED
+
+17. IDENTIFY PAIN SEVERITY
+Use:
+Low
+Medium
+High
+Critical
+
+18. EXPLAIN WHY SEVERITY MATTERS
+
+19. IDENTIFY BUSINESS OR PERSONAL CONSEQUENCE
+What happens if the problem remains unresolved?
+
+20. IDENTIFY DESIRED OUTCOME
+Turn each pain point into the outcome the customer actually wants.
+
+21. EXAMPLE:
+Pain: Stock records do not match physical inventory.
+Desired outcome: Reliable inventory records and faster discrepancy resolution.
+
+22. IDENTIFY JOB-TO-BE-DONE
+Express what the customer is trying to achieve.
+
+23. USE THIS FORMAT WHEN HELPFUL:
+"When [situation], I want to [motivation], so I can [desired outcome]."
+
+24. IDENTIFY CURRENT WORKAROUNDS
+What does the customer do today?
+
+25. WORKAROUNDS MAY INCLUDE:
+Spreadsheets
+Manual checks
+WhatsApp
+Email
+Paper
+Multiple apps
+Outsourcing
+Ignoring the problem
+Building an internal process
+
+26. IDENTIFY WHY CURRENT ALTERNATIVES FAIL
+
+27. DO NOT ASSUME THE EXISTING SOLUTION IS COMPLETELY BAD
+Customers may tolerate weaknesses because of:
+Price
+Habit
+Integration
+Trust
+Switching cost
+Training effort
+
+28. IDENTIFY SWITCHING BARRIERS
+
+29. POSSIBLE BARRIERS:
+Price
+Learning curve
+Migration
+Approval
+Trust
+Time
+Data transfer
+Contract
+Habit
+
+30. IDENTIFY PURCHASE OBJECTIONS
+
+31. DISTINGUISH PAIN FROM OBJECTION
+Pain = problem before purchase.
+Objection = reason not to choose the proposed solution.
+
+32. COMMON OBJECTIONS:
+Too expensive
+Not sure it works
+Too complicated
+No time to implement
+Already have a solution
+Need management approval
+Security concerns
+Not enough proof
+
+33. IDENTIFY TRUST REQUIREMENTS
+What does the customer need to believe before taking action?
+
+34. POSSIBLE TRUST SIGNALS:
+Demonstration
+Case study
+Transparent pricing
+Free trial
+Credentials
+Reviews
+Comparison
+Guarantee
+Documentation
+Human support
+
+35. DO NOT INVENT TRUST SIGNALS THAT THE BUSINESS DOES NOT HAVE
+
+36. IDENTIFY CUSTOMER LANGUAGE
+Capture how customers naturally describe the problem.
+
+37. AVOID REPLACING CUSTOMER LANGUAGE WITH CORPORATE JARGON
+
+38. BUILD A VOCABULARY LIST
+Include:
+Problem phrases
+Desired-outcome phrases
+Objection phrases
+Search phrases
+
+39. DO NOT FABRICATE DIRECT QUOTES
+Only present quotations when actual source text is supplied.
+
+40. PARAPHRASE UNSOURCED LANGUAGE AS HYPOTHETICAL
+
+41. IDENTIFY SEARCH INTENT
+What might the customer search when experiencing the problem?
+
+42. CLASSIFY SEARCH INTENT:
+Problem-aware
+Solution-aware
+Product-aware
+Comparison
+Purchase-ready
+
+43. CREATE SEARCH-STYLE PHRASES
+Do not claim actual search volume unless data is supplied.
+
+44. IDENTIFY INFORMATION GAPS
+What important questions remain unanswered?
+
+45. PRIORITIZE RESEARCH GAPS
+Which unknowns would most change the marketing decision?
+
+46. CREATE CUSTOMER INTERVIEW QUESTIONS
+
+47. INTERVIEW QUESTIONS SHOULD BE OPEN-ENDED
+
+48. AVOID LEADING QUESTIONS
+
+49. ASK ABOUT RECENT REAL EVENTS
+Example:
+"Tell me about the last time this happened."
+
+50. ASK WHAT THEY DID NEXT
+
+51. ASK WHAT THE CONSEQUENCE WAS
+
+52. ASK WHAT THEY HAVE ALREADY TRIED
+
+53. ASK WHY THEY CHOSE THAT APPROACH
+
+54. ASK WHAT WAS FRUSTRATING
+
+55. ASK WHAT AN IDEAL SOLUTION WOULD CHANGE
+
+56. ASK WHAT WOULD PREVENT THEM FROM USING A NEW SOLUTION
+
+57. CREATE SURVEY QUESTIONS WHEN APPROPRIATE
+
+58. DO NOT RELY ONLY ON SURVEYS FOR DEEP MOTIVATION
+
+59. IDENTIFY RESEARCH CHANNELS
+Possible:
+Customer interviews
+Sales calls
+Support tickets
+Product reviews
+Competitor reviews
+Forums
+Reddit
+Facebook groups
+Search suggestions
+Community discussions
+CRM notes
+
+60. PRIORITIZE FIRST-PARTY EVIDENCE WHEN AVAILABLE
+
+61. DISTINGUISH COMPETITOR PAIN FROM MARKET PAIN
+A complaint about one competitor may not apply to the whole market.
+
+62. LOOK FOR REPEATED THEMES
+
+63. DO NOT OVERWEIGHT ONE EXTREME REVIEW
+
+64. LOOK FOR CONTRADICTIONS
+Different customer segments may experience different problems.
+
+65. SEGMENT WHEN NECESSARY
+
+66. POSSIBLE SEGMENTS:
+Beginner vs expert
+Small vs large company
+Low-budget vs premium
+Manager vs user
+New customer vs existing customer
+Individual vs team
+
+67. DO NOT FORCE ALL CUSTOMERS INTO ONE PERSONA
+
+68. IDENTIFY HIGH-VALUE PAIN POINTS
+Prioritize problems that are:
+Frequent
+Severe
+Expensive
+Urgent
+Poorly solved
+
+69. CREATE A PRIORITY SCORE
+Use qualitative scoring unless reliable numbers are available.
+
+70. POSSIBLE PRIORITY FACTORS:
+Severity
+Frequency
+Urgency
+Commercial value
+Solution fit
+Evidence strength
+
+71. DO NOT CREATE FALSE NUMERICAL PRECISION
+
+72. USE HIGH / MEDIUM / LOW WHEN DATA IS LIMITED
+
+73. IDENTIFY MESSAGE OPPORTUNITIES
+For each high-priority pain point, suggest a credible message angle.
+
+74. MESSAGE SHOULD CONNECT:
+Pain
+Desired outcome
+Real solution capability
+
+75. DO NOT PROMISE MORE THAN THE PRODUCT CAN DELIVER
+
+76. IDENTIFY CONTENT OPPORTUNITIES
+Examples:
+How-to
+Checklist
+Comparison
+Mistakes
+Troubleshooting
+FAQ
+Guide
+Calculator
+Template
+Case example
+
+77. IDENTIFY CAMPAIGN ANGLES
+Examples:
+Problem recognition
+Education
+Demonstration
+Risk reduction
+Convenience
+Time saving
+Cost control
+
+78. IDENTIFY PRODUCT OPPORTUNITIES
+Where appropriate, highlight:
+Missing features
+Usability improvements
+Support needs
+Onboarding gaps
+
+79. DO NOT ASSUME EVERY CUSTOMER COMPLAINT REQUIRES A PRODUCT FEATURE
+
+80. IDENTIFY SALES-ENABLEMENT OPPORTUNITIES
+Examples:
+Objection-handling sheet
+FAQ
+Demo scenario
+ROI discussion
+Comparison guide
+
+81. CREATE A PAIN-TO-MESSAGE MAP
+
+82. FOR EACH IMPORTANT PAIN INCLUDE:
+Pain
+Desired outcome
+Evidence
+Message angle
+Proof required
+CTA idea
+
+83. CREATE A PAIN-TO-CONTENT MAP
+
+84. CREATE A PAIN-TO-PRODUCT MAP WHEN RELEVANT
+
+85. IDENTIFY CLAIM RISKS
+Flag statements that require evidence.
+
+86. EXAMPLES OF CLAIM RISKS:
+Saves 50% time
+Cuts costs
+Eliminates errors
+Best
+Fastest
+Guaranteed
+
+87. DO NOT PRESENT ASSUMPTIONS AS FINDINGS
+
+88. USE CONFIDENCE LABELS
+
+89. EXAMPLE:
+High confidence — repeated in supplied customer feedback.
+Medium confidence — consistent with multiple indirect signals.
+Low confidence — plausible but currently unverified.
+
+90. CREATE A VALIDATION PLAN
+Explain how to test the most important assumptions.
+
+91. PRIORITIZE LOW-COST VALIDATION
+
+92. EXAMPLES:
+5 customer interviews
+Review 50 support tickets
+Analyse competitor reviews
+Test two landing-page messages
+Run a small survey
+
+93. DO NOT RECOMMEND LARGE RESEARCH PROJECTS WHEN A SMALL TEST CAN ANSWER THE QUESTION
+
+94. IDENTIFY WHAT WOULD DISPROVE THE ASSUMPTION
+
+95. INCLUDE NEGATIVE EVIDENCE
+If evidence suggests a supposed pain point is not important, say so.
+
+96. AVOID CONFIRMATION BIAS
+
+97. STATE LIMITATIONS
+Explain where conclusions are uncertain.
+
+98. CREATE NEXT RESEARCH ACTIONS
+
+99. RANK THEM BY DECISION VALUE
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- customer context is clear
+- evidence and assumptions are separated
+- functional pain points are considered
+- emotional pain points are considered
+- financial pain points are considered
+- time pain points are considered
+- risk pain points are considered
+- triggers are identified
+- consequences are identified
+- desired outcomes are identified
+- workarounds are identified
+- objections are separated from pains
+- switching barriers are considered
+- customer language is practical
+- no direct quotes were fabricated
+- search phrases are not presented as volume data
+- segments are considered where relevant
+- pain points are prioritized
+- evidence strength is stated
+- message opportunities are realistic
+- product claims are not exaggerated
+- unknowns are identified
+- validation actions are practical
+- limitations are clearly stated
+
+OUTPUT FORMAT:
+
+1. CUSTOMER CONTEXT
+Summarize:
+Customer
+Situation
+Job to be done
+Desired outcome
+Current alternatives
+
+2. PAIN-POINT MAP
+
+For each pain point provide:
+Pain point
+Category
+Trigger
+Consequence
+Desired outcome
+Frequency
+Severity
+Evidence strength
+Confidence
+Current workaround
+
+3. TOP PRIORITY PAIN POINTS
+Rank the most important problems and explain why.
+
+4. CUSTOMER LANGUAGE
+Provide:
+Problem phrases
+Desired-outcome phrases
+Objection phrases
+Likely search-style phrases
+
+Clearly label unsourced wording as hypothetical.
+
+5. OBJECTIONS & SWITCHING BARRIERS
+Separate:
+Purchase objections
+Trust concerns
+Switching barriers
+
+6. PAIN-TO-MESSAGE MAP
+For each priority pain provide:
+Pain
+Message angle
+Real benefit
+Proof needed
+CTA
+
+7. CONTENT OPPORTUNITIES
+Suggest practical content based on the research.
+
+8. CAMPAIGN OPPORTUNITIES
+Suggest campaign angles based on the strongest pain points.
+
+9. PRODUCT / SERVICE OPPORTUNITIES
+Highlight improvements worth investigating.
+
+10. RESEARCH GAPS
+List what is still unknown.
+
+11. VALIDATION PLAN
+Give the lowest-cost practical way to validate the most important assumptions.
+
+12. CUSTOMER INTERVIEW QUESTIONS
+Provide concise open-ended questions.
+
+13. CLAIM-RISK CHECK
+Identify statements that should not be used without evidence.
+
+14. FINAL INSIGHT SUMMARY
+Explain:
+What appears most important
+What is well supported
+What remains uncertain
+What should be researched next
+
+IMPORTANT:
+- Do not invent customer evidence.
+- Distinguish facts, inference and hypotheses.
+- Do not fabricate quotes.
+- Do not fabricate search volume.
+- Prioritize recurring, severe and commercially relevant problems.
+- Use customer language rather than unnecessary jargon.
+- Recommend validation when evidence is weak.
+- Keep marketing conclusions proportional to the available evidence.`;
+
+const steps = [
+  {
+    title: "Start with real customer context",
+    description:
+      "Define what the customer is trying to accomplish, what triggers the problem and what they currently do before listing possible frustrations.",
+  },
+  {
+    title: "Separate evidence from assumptions",
+    description:
+      "Label whether each pain point comes from actual customer feedback, indirect evidence or a hypothesis that still needs validation.",
+  },
+  {
+    title: "Prioritize the problems that matter",
+    description:
+      "Focus on pains that combine severity, frequency, urgency, strong solution fit and credible evidence instead of treating every complaint equally.",
+  },
+  {
+    title: "Turn research into action",
+    description:
+      "Connect high-priority pain points to messaging, content, campaign angles and low-cost validation steps.",
+  },
+];
+
+const example = {
+  input: [
+    "Audience: Small warehouse and e-commerce operators.",
+    "Problem area: Inventory accuracy.",
+    "Research goal: Improve marketing messages for an inventory discrepancy tool.",
+    "Known issue: Physical quantity sometimes differs from system quantity.",
+    "Available evidence: Informal customer conversations and common operational experience.",
+  ],
+
+  output: [
+    "HIGH-PRIORITY PAIN: Staff discover stock differences but do not have a consistent investigation process. Evidence strength should remain limited until direct customer research confirms frequency.",
+    "CONSEQUENCE: Time is spent checking receiving, picking, adjustments and transaction history while customer orders or replenishment decisions may be delayed.",
+    "DESIRED OUTCOME: A clear repeatable method for identifying where the discrepancy occurred and documenting corrective action.",
+    "MESSAGE ANGLE: 'Physical stock doesn't match the system? Check the likely causes in a structured order.'",
+    "CONTENT OPPORTUNITY: Create a practical '6 areas to check first' guide rather than claiming the tool eliminates inventory errors.",
+    "VALIDATION: Interview several warehouse supervisors and ask about the most recent discrepancy they investigated, what they checked first and where the process became difficult.",
+  ],
+};
+
+const tips = [
+  {
+    title: "A plausible problem is not yet evidence",
+    description:
+      "Industry experience can generate strong hypotheses, but customer interviews, support data, reviews and real behaviour should determine whether the problem is genuinely important.",
+  },
+  {
+    title: "Ask about the last real incident",
+    description:
+      "Questions about a recent actual event usually produce more useful information than asking customers what they think they might do in a hypothetical situation.",
+  },
+  {
+    title: "Pain points should lead somewhere",
+    description:
+      "The most useful research connects customer frustration to a desired outcome, credible message, proof requirement and practical next action.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Customer Pain Point Research Prompt | KRIYANO"
+  description="Research and prioritize customer pain points, triggers, desired outcomes, objections, workarounds and marketing opportunities while separating evidence from assumptions."
+>
+  <PromptPage
+    category="MARKETING"
+    title="Customer Pain Point Research"
+    accentTitle="Prompt."
+    description="Identify and prioritize customer frustrations, triggers, desired outcomes, objections and buying language while clearly separating evidence from assumptions."
+    meta={[
+      "Free prompt",
+      "Customer research",
+      "Marketing insight",
+    ]}
+    bestFor={[
+      "Marketing strategy",
+      "Campaign planning",
+      "Customer interviews",
+      "Positioning",
+      "Content ideas",
+      "Product research",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Find the problem before writing the message."
+    introDescription="Map what customers are trying to achieve, where they struggle, what they already use and which pain points have enough evidence to influence your marketing."
+    steps={steps}
+    exampleTitle="Research inventory-accuracy pain points without inventing evidence."
+    example={example}
+    tipsTitle="Strong marketing insight needs evidence, not just plausible assumptions."
+    tips={tips}
+    sidebarTitle="Ready to build the value proposition?"
+    sidebarDescription="Use KRIYANO's Value Proposition Builder next to turn validated customer pains and desired outcomes into clearer positioning and messaging."
+    warningTitle="Customer insight can sound more certain than the evidence supports"
+    warningText="Treat AI-generated pain points as research hypotheses unless they are supported by real customer feedback, behavioural data, reviews, interviews or other reliable evidence."
+  />
+</BaseLayout>

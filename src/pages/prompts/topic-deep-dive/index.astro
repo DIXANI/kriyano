@@ -1,0 +1,454 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced research analyst and subject-matter investigator.
+
+TASK:
+Conduct a structured deep-dive analysis of the topic below.
+
+TOPIC:
+[Enter the topic.]
+
+RESEARCH GOAL:
+[What do you want to understand, decide or explain?]
+
+AUDIENCE:
+[Who will use the research?]
+
+CONTEXT:
+[Why does this topic matter?]
+
+GEOGRAPHIC SCOPE:
+[Country, region, global or not applicable.]
+
+TIME SCOPE:
+[Current, historical period, last 5 years, future outlook, etc.]
+
+KNOWN INFORMATION:
+[List anything already known.]
+
+SPECIFIC QUESTIONS:
+[List questions that must be answered.]
+
+AREAS TO INCLUDE:
+[List any required themes.]
+
+AREAS TO EXCLUDE:
+[List anything outside the scope.]
+
+RESEARCH DEPTH:
+[Standard / Deep / Expert overview]
+
+OUTPUT PURPOSE:
+[Report, article, presentation, business decision, learning, strategy, etc.]
+
+DEEP-DIVE REQUIREMENTS:
+
+1. DEFINE THE TOPIC
+Start by clearly defining:
+- what the topic is
+- important terminology
+- boundaries of the subject
+- common misunderstandings
+- related concepts that should not be confused with it
+
+2. CONTEXT & BACKGROUND
+Explain:
+- how the topic developed
+- why it matters
+- important historical or structural context
+- major events or changes that shaped it
+
+Include only background that helps explain the present topic.
+
+3. CURRENT STATE
+Describe the current situation.
+
+Where relevant include:
+- major developments
+- current practices
+- adoption
+- market conditions
+- technology
+- regulation
+- public behavior
+- operational realities
+
+Clearly identify information that requires current verification.
+
+4. KEY COMPONENTS
+Break the topic into its most important components.
+
+For each component explain:
+- what it is
+- how it works
+- why it matters
+- how it connects to the broader topic
+
+5. KEY STAKEHOLDERS
+Identify important groups such as:
+- customers
+- companies
+- governments
+- regulators
+- workers
+- researchers
+- suppliers
+- platforms
+- communities
+
+Explain their roles, interests and influence.
+
+6. MAIN DRIVERS
+Identify forces shaping the topic.
+
+Examples:
+- economics
+- technology
+- customer demand
+- demographics
+- regulation
+- competition
+- infrastructure
+- culture
+- environmental factors
+
+Distinguish strong evidence from speculation.
+
+7. DATA & EVIDENCE
+Identify the most useful quantitative and qualitative evidence.
+
+Where relevant include:
+- market data
+- adoption rates
+- statistics
+- trends
+- survey findings
+- financial indicators
+- research findings
+- operational evidence
+
+For every important number, identify the source and date where available.
+
+Do not invent statistics.
+
+8. MAJOR PERSPECTIVES
+Explain credible competing interpretations or viewpoints.
+
+For each perspective:
+- summarize the argument
+- identify supporting evidence
+- identify limitations
+- explain where disagreement exists
+
+Do not create artificial balance when evidence strongly favors one conclusion.
+
+9. BENEFITS / OPPORTUNITIES
+Identify realistic advantages or opportunities associated with the topic.
+
+Explain:
+- who benefits
+- under what conditions
+- evidence supporting the benefit
+- limitations
+
+10. RISKS / CHALLENGES
+Identify major:
+- risks
+- barriers
+- disadvantages
+- unintended consequences
+- implementation challenges
+
+Classify important risks as:
+- High
+- Medium
+- Low
+
+Explain the reasoning.
+
+11. COMMON CLAIMS
+Identify frequently repeated claims about the topic.
+
+Classify each as:
+- Well supported
+- Partially supported
+- Disputed
+- Unsupported
+- Requires current verification
+
+Explain briefly.
+
+12. MYTHS & MISCONCEPTIONS
+Identify important misconceptions.
+
+Explain:
+- why the misconception exists
+- what the evidence actually supports
+- what remains uncertain
+
+13. CASE EXAMPLES
+Where useful, include real examples or case studies.
+
+For each:
+- explain the situation
+- identify what happened
+- explain why it is relevant
+- avoid generalizing from one example
+
+14. COMPARISONS
+Compare relevant:
+- approaches
+- technologies
+- models
+- countries
+- companies
+- strategies
+- alternatives
+
+Use clear criteria rather than vague statements.
+
+15. REGULATION / POLICY
+If relevant, explain:
+- applicable rules
+- major regulatory bodies
+- current policy direction
+- compliance considerations
+- important differences by jurisdiction
+
+Do not give legal conclusions beyond the available evidence.
+
+16. ECONOMICS
+Where relevant analyze:
+- costs
+- incentives
+- revenue models
+- affordability
+- productivity
+- investment
+- economic impact
+
+Separate known figures from estimates.
+
+17. TECHNOLOGY
+Where relevant analyze:
+- technologies involved
+- level of maturity
+- limitations
+- dependencies
+- adoption barriers
+- likely developments
+
+Avoid hype.
+
+18. PRACTICAL IMPLICATIONS
+Explain what the topic means in practice for the intended audience.
+
+Focus on:
+- decisions
+- actions
+- trade-offs
+- operational impact
+- realistic constraints
+
+19. TRENDS
+Identify important trends.
+
+For each trend state:
+- direction
+- evidence
+- drivers
+- uncertainty
+- likely significance
+
+20. FUTURE OUTLOOK
+Discuss plausible future developments.
+
+Separate:
+- highly likely developments
+- reasonable possibilities
+- speculative scenarios
+
+Do not present forecasts as facts.
+
+21. KNOWLEDGE GAPS
+Identify:
+- unanswered questions
+- weak evidence areas
+- conflicting findings
+- unavailable data
+- topics needing more research
+
+22. SOURCE QUALITY
+Prioritize:
+- primary sources
+- government sources
+- regulators
+- academic research
+- original company information
+- reputable research institutions
+- established news sources
+
+Treat promotional material, social media and unsourced claims cautiously.
+
+23. CONTRADICTIONS
+If credible evidence conflicts:
+- present both findings
+- compare dates
+- compare methodology
+- compare scope
+- explain the likely reason for the disagreement
+
+24. CONFIDENCE
+For major conclusions assign:
+- High confidence
+- Medium confidence
+- Low confidence
+
+Explain significant uncertainty.
+
+25. FINAL SYNTHESIS
+Summarize:
+- what is most important
+- what is strongly established
+- what is commonly misunderstood
+- biggest opportunity
+- biggest risk
+- biggest uncertainty
+- what should be researched next
+
+OUTPUT FORMAT:
+
+1. Executive Overview
+2. Topic Definition
+3. Background
+4. Current State
+5. Key Components
+6. Stakeholders
+7. Main Drivers
+8. Evidence & Data
+9. Major Perspectives
+10. Opportunities
+11. Risks & Challenges
+12. Common Claims
+13. Myths & Misconceptions
+14. Case Examples
+15. Comparisons
+16. Regulation / Policy
+17. Economics
+18. Technology
+19. Practical Implications
+20. Trends
+21. Future Outlook
+22. Knowledge Gaps
+23. Contradictory Evidence
+24. Confidence Assessment
+25. Final Synthesis
+26. Recommended Further Research
+
+IMPORTANT:
+- Do not invent facts, statistics, sources or quotations.
+- Clearly distinguish facts, estimates, interpretations and forecasts.
+- Use current evidence when the topic changes quickly.
+- Prefer original and authoritative sources.
+- State when evidence is weak, conflicting or unavailable.
+- Do not hide uncertainty.
+- Keep the analysis focused on the stated research goal rather than producing an encyclopedia-style overview.`;
+
+const steps = [
+  {
+    title: "Define the scope first",
+    description:
+      "A deep dive can quickly become too broad. Set the geography, time period, audience and questions before starting.",
+  },
+  {
+    title: "Break the topic into systems",
+    description:
+      "Look at stakeholders, drivers, evidence, risks, trends and practical implications rather than collecting disconnected facts.",
+  },
+  {
+    title: "Compare viewpoints carefully",
+    description:
+      "Include meaningful disagreement when it exists, but do not manufacture equal weight for poorly supported positions.",
+  },
+  {
+    title: "End with uncertainty",
+    description:
+      "A strong deep dive should show what is established, what is disputed and what still needs investigation.",
+  },
+];
+
+const example = {
+  input: [
+    "Topic: AI adoption in small businesses.",
+    "Goal: Understand where AI is delivering practical value and where adoption barriers remain.",
+    "Audience: Small-business owners.",
+    "Scope: Current global overview with emphasis on practical business use.",
+    "Questions: Which use cases are most common, what benefits are supported by evidence, what risks matter most and what prevents adoption?",
+  ],
+
+  output: [
+    "The research should distinguish actual AI adoption from general awareness or experimentation.",
+    "Key areas should include customer service, content creation, administration, analytics, automation and software-assisted decision support.",
+    "The analysis should compare evidence on productivity benefits with barriers such as cost, skills, data quality, privacy concerns and workflow integration.",
+    "Future claims should be separated into established trends and speculative expectations.",
+    "The final synthesis should identify which use cases appear mature enough for practical small-business adoption and where evidence remains limited.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Use a research question, not just a topic",
+    description:
+      "A focused question such as 'How is AI changing small-business inventory management?' usually produces stronger research than simply requesting a deep dive on AI.",
+  },
+  {
+    title: "Separate current state from outlook",
+    description:
+      "What exists today and what may happen in the future require different kinds of evidence.",
+  },
+  {
+    title: "Track confidence",
+    description:
+      "Not every conclusion deserves the same certainty. Confidence labels help prevent weak evidence from appearing as established fact.",
+  },
+];
+---
+
+<BaseLayout
+  title="Topic Deep-Dive Prompt | KRIYANO"
+  description="Explore a complex topic in depth using structured research across evidence, stakeholders, drivers, risks, trends, competing perspectives and future outlook."
+>
+  <PromptPage
+    category="RESEARCH"
+    title="Topic Deep-Dive"
+    accentTitle="Prompt."
+    description="Investigate a complex subject systematically, from background and evidence to competing perspectives, risks, trends, practical implications and remaining uncertainty."
+    meta={[
+      "Free prompt",
+      "Research",
+      "Deep analysis",
+    ]}
+    bestFor={[
+      "Complex topics",
+      "Industry research",
+      "Technology research",
+      "Business learning",
+      "Long-form reports",
+      "Strategic research",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Go deeper without losing structure."
+    introDescription="Define the research boundaries first, then investigate the topic through evidence, stakeholders, drivers, competing perspectives, practical implications and uncertainty."
+    steps={steps}
+    exampleTitle="Turn a broad subject into structured investigation."
+    example={example}
+    tipsTitle="Create stronger deep-dive research."
+    tips={tips}
+    sidebarTitle="Need to plan the research first?"
+    sidebarDescription="Use the KRIYANO Research Plan Builder to define your questions and sources before starting a larger deep-dive investigation."
+    warningTitle="Depth does not guarantee accuracy"
+    warningText="A detailed answer can still contain weak or outdated information. Verify important claims using current, authoritative sources and clearly separate established evidence from interpretation and forecasts."
+  />
+</BaseLayout>

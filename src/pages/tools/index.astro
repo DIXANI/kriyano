@@ -1,0 +1,563 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const tools = [
+  {
+  title: "AI Prompt Builder",
+  description: "Build stronger prompts for general work, planning, writing and problem-solving.",
+  category: "Prompting",
+  status: "Available",
+  href: "/tools/prompt-builder/",
+    },
+  {
+    title: "Business Email Prompt Builder",
+    description: "Create structured prompts for professional emails, replies, follow-ups and requests.",
+    category: "Work",
+    status: "Coming soon",
+    href: "#",
+  },
+  {
+    title: "SOP Prompt Builder",
+    description: "Turn a process or task into a structured prompt for creating clear SOPs.",
+    category: "Operations",
+    status: "Coming soon",
+    href: "#",
+  },
+  {
+    title: "Image Prompt Builder",
+    description: "Build detailed image-generation prompts with subject, lighting, style and composition.",
+    category: "Creators",
+    status: "Coming soon",
+    href: "#",
+  },
+  {
+    title: "AI Video Prompt Builder",
+    description: "Structure better prompts for AI video generation with scenes, motion and camera direction.",
+    category: "Creators",
+    status: "Coming soon",
+    href: "#",
+  },
+  {
+    title: "Excel Prompt Builder",
+    description: "Create useful AI prompts for formulas, reports, analysis and spreadsheet automation.",
+    category: "Productivity",
+    status: "Coming soon",
+    href: "#",
+  },
+];
+---
+
+<BaseLayout
+  title="AI Tools | KRIYANO"
+  description="Explore practical AI tools from KRIYANO for prompting, work, business, productivity and content creation."
+>
+  <section class="tools-hero">
+    <div class="container">
+      <div class="tools-kicker">
+        <span></span>
+        KRIYANO TOOLKIT
+      </div>
+
+      <h1>
+        Practical AI tools
+        <strong>built for doing.</strong>
+      </h1>
+
+      <p>
+        Simple tools designed to help you structure better prompts, improve workflows
+        and get more useful results from the AI platforms you already use.
+      </p>
+    </div>
+  </section>
+
+  <section class="tool-status">
+    <div class="container status-grid">
+      <div>
+        <strong>{tools.length}</strong>
+        <span>Tools planned</span>
+      </div>
+
+      <div>
+        <strong>Free</strong>
+        <span>Core tools</span>
+      </div>
+
+      <div>
+        <strong>Browser</strong>
+        <span>Built to run online</span>
+      </div>
+
+      <div>
+        <strong>Practical</strong>
+        <span>Focused on real tasks</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tools-directory">
+    <div class="container">
+      <div class="directory-head">
+        <div>
+          <div class="section-kicker">Explore tools</div>
+          <h2>Choose what you need to get done.</h2>
+        </div>
+
+        <p>
+          KRIYANO tools are organized around tasks instead of technical AI terminology,
+          so you can quickly find something useful.
+        </p>
+      </div>
+
+      <div class="tools-grid">
+        {
+          tools.map((tool, index) => (
+            <article class="tool-card">
+              <div class="tool-top">
+                <span class="tool-number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+
+                <span class="tool-category">{tool.category}</span>
+              </div>
+
+              <div class="tool-content">
+                <h3>{tool.title}</h3>
+                <p>{tool.description}</p>
+              </div>
+
+              <div class="tool-bottom">
+                <span class="tool-status-label">{tool.status}</span>
+
+                {
+                  tool.href !== "#" ? (
+                    <a href={tool.href}>Open tool ↗</a>
+                  ) : (
+                    <span class="tool-disabled">In development</span>
+                  )
+                }
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="workflow-section">
+    <div class="container workflow-layout">
+      <div class="workflow-copy">
+        <div class="section-kicker">How it works</div>
+
+        <h2>
+          Start with your task.
+          <span>Not the technology.</span>
+        </h2>
+
+        <p>
+          You shouldn't need to become a prompt engineer just to get a useful
+          answer from AI. KRIYANO tools help you add the right context, structure
+          and instructions step by step.
+        </p>
+      </div>
+
+      <div class="process">
+        <div class="process-row">
+          <span>01</span>
+          <div>
+            <strong>Choose your task</strong>
+            <p>Select the tool that matches what you want to accomplish.</p>
+          </div>
+        </div>
+
+        <div class="process-row">
+          <span>02</span>
+          <div>
+            <strong>Add your information</strong>
+            <p>Answer a few practical questions about your goal and requirements.</p>
+          </div>
+        </div>
+
+        <div class="process-row">
+          <span>03</span>
+          <div>
+            <strong>Generate your prompt</strong>
+            <p>KRIYANO structures your information into a more useful AI instruction.</p>
+          </div>
+        </div>
+
+        <div class="process-row">
+          <span>04</span>
+          <div>
+            <strong>Use it with your AI</strong>
+            <p>Copy the result into ChatGPT, Gemini, Claude or another compatible AI.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="directory-cta">
+    <div class="container">
+      <div class="cta-box">
+        <div>
+          <div class="section-kicker">First tool coming next</div>
+
+          <h2>We're building the toolkit one useful tool at a time.</h2>
+        </div>
+
+        <a href="/" class="button button-secondary">
+          Back to KRIYANO
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .tools-hero {
+    padding: 110px 0 85px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(
+        circle at 78% 20%,
+        rgba(77, 226, 197, 0.08),
+        transparent 26%
+      );
+  }
+
+  .tools-kicker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+    color: var(--lime);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+  }
+
+  .tools-kicker span {
+    width: 24px;
+    height: 1px;
+    background: var(--lime);
+  }
+
+  .tools-hero h1 {
+    max-width: 900px;
+    font-size: clamp(3.2rem, 7vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+  }
+
+  .tools-hero h1 strong {
+    display: block;
+    color: var(--lime);
+    font-weight: inherit;
+  }
+
+  .tools-hero p {
+    max-width: 720px;
+    margin-top: 28px;
+    color: var(--muted);
+    font-size: 1.08rem;
+    line-height: 1.8;
+  }
+
+  .tool-status {
+    border-bottom: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.018);
+  }
+
+  .status-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .status-grid > div {
+    padding: 25px 20px;
+    border-right: 1px solid var(--line);
+  }
+
+  .status-grid > div:last-child {
+    border-right: 0;
+  }
+
+  .status-grid strong {
+    display: block;
+    color: var(--text);
+    font-size: 0.95rem;
+  }
+
+  .status-grid span {
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  .directory-head {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 70px;
+    align-items: end;
+    margin-bottom: 48px;
+  }
+
+  .directory-head h2 {
+    max-width: 720px;
+    margin-top: 12px;
+    font-size: clamp(2.5rem, 5vw, 4.3rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .directory-head > p {
+    color: var(--muted);
+    max-width: 470px;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .tool-card {
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    padding: 26px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.025),
+        transparent
+      ),
+      var(--surface);
+    transition:
+      transform 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .tool-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(183, 255, 74, 0.25);
+  }
+
+  .tool-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  .tool-number {
+    color: rgba(183, 255, 74, 0.6);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  .tool-category {
+    padding: 5px 9px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .tool-content {
+    margin-top: 48px;
+  }
+
+  .tool-content h3 {
+    font-size: clamp(1.5rem, 3vw, 2.15rem);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+  }
+
+  .tool-content p {
+    max-width: 520px;
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .tool-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: auto;
+    padding-top: 30px;
+  }
+
+  .tool-status-label {
+    color: var(--lime);
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .tool-disabled {
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  .tool-bottom a {
+    color: var(--lime);
+    font-size: 0.82rem;
+    font-weight: 750;
+  }
+
+  .workflow-section {
+    padding: 105px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-soft);
+  }
+
+  .workflow-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .workflow-copy h2 {
+    max-width: 600px;
+    margin-top: 14px;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+  }
+
+  .workflow-copy h2 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .workflow-copy p {
+    max-width: 570px;
+    margin-top: 23px;
+    color: var(--muted);
+  }
+
+  .process {
+    display: grid;
+  }
+
+  .process-row {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .process-row:first-child {
+    border-top: 1px solid var(--line);
+  }
+
+  .process-row > span {
+    color: var(--lime);
+    font-size: 0.74rem;
+    font-weight: 800;
+  }
+
+  .process-row strong {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .process-row p {
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  .directory-cta {
+    padding: 90px 0;
+  }
+
+  .cta-box {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 48px;
+    border: 1px solid rgba(183, 255, 74, 0.15);
+    border-radius: 24px;
+    background:
+      radial-gradient(
+        circle at 85% 50%,
+        rgba(183, 255, 74, 0.09),
+        transparent 25%
+      ),
+      var(--surface);
+  }
+
+  .cta-box h2 {
+    max-width: 730px;
+    margin-top: 12px;
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.045em;
+  }
+
+  @media (max-width: 900px) {
+    .directory-head,
+    .workflow-layout {
+      grid-template-columns: 1fr;
+      gap: 35px;
+    }
+
+    .tools-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-box {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .tools-hero {
+      padding: 75px 0 65px;
+    }
+
+    .status-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .status-grid > div:nth-child(2) {
+      border-right: 0;
+    }
+
+    .status-grid > div:nth-child(-n + 2) {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .cta-box {
+      padding: 30px 24px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .status-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .status-grid > div {
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .status-grid > div:last-child {
+      border-bottom: 0;
+    }
+  }
+</style>

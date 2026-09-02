@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptCategoryPage from "../../../components/PromptCategoryPage.astro";
+
+const prompts = [
+  {
+    title: "Product Photography Prompt",
+    description:
+      "Create detailed commercial product-image prompts with better control over composition, lighting, styling and product accuracy.",
+    category: "Product Images",
+    href: "/prompts/product-photography/",
+  },
+  {
+    title: "AI Image Prompt Builder",
+    description:
+      "Structure a strong image-generation prompt around subject, style, composition, lighting, camera direction and constraints.",
+    category: "Prompting",
+    href: "/prompts/ai-image-prompt-builder/",
+  },
+  {
+    title: "Character Consistency Prompt",
+    description:
+      "Create reusable instructions for keeping the same character identity, appearance, clothing and visual features across multiple images.",
+    category: "Characters",
+    href: "/prompts/character-consistency/",
+  },
+  {
+    title: "Social Media Visual Prompt",
+    description:
+      "Create eye-catching image prompts designed for posts, campaigns, announcements and branded social content.",
+    category: "Social Media",
+    href: "/prompts/social-media-visual/",
+  },
+  {
+    title: "Food Photography Prompt",
+    description:
+      "Build appetizing food-image prompts with controlled styling, lighting, plating, textures and realistic presentation.",
+    category: "Food",
+    href: "/prompts/food-photography/",
+  },
+  {
+    title: "Advertising Creative Prompt",
+    description:
+      "Develop polished commercial advertising visuals around a product, offer, audience and campaign objective.",
+    category: "Advertising",
+    href: "/prompts/advertising-creative/",
+  },
+  {
+    title: "Thumbnail Design Prompt",
+    description:
+      "Create high-impact thumbnail concepts with strong composition, focal hierarchy, readable text space and mobile-first framing.",
+    category: "Thumbnails",
+    href: "/prompts/thumbnail-design/",
+  },
+  {
+    title: "Infographic Image Prompt",
+    description:
+      "Turn information, steps or data into a structured visual concept designed for clear infographic-style communication.",
+    category: "Infographics",
+    href: "/prompts/infographic-image/",
+  },
+];
+---
+
+<BaseLayout
+  title="AI Image Generation Prompts | KRIYANO"
+  description="Practical AI image-generation prompts for product photography, characters, food, advertising, thumbnails, social media visuals and infographics."
+>
+  <PromptCategoryPage
+    kicker="IMAGE GENERATION"
+    title="AI prompts for"
+    accentTitle="better visuals."
+    description="Structured prompts for product photography, characters, food, advertising, thumbnails, social content and other AI-generated visuals."
+    prompts={prompts}
+  />
+</BaseLayout>

@@ -1,0 +1,776 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert social media copywriter, content strategist and brand voice editor.
+
+TASK:
+Write platform-appropriate captions for the supplied content, brand, product, service, creator or campaign.
+
+The caption should:
+- support the actual content
+- match the target audience
+- fit the platform
+- reflect the intended tone
+- encourage the desired action naturally
+- avoid misleading claims
+- avoid unnecessary filler
+- sound human rather than templated
+
+CONTENT TOPIC:
+[What is the post, video, image, carousel or campaign about?]
+
+CONTENT FORMAT:
+[Reel / Short / TikTok / image post / carousel / LinkedIn post / Facebook post / YouTube post / other.]
+
+PLATFORM:
+[Instagram / Facebook / LinkedIn / TikTok / YouTube / X / other.]
+
+TARGET AUDIENCE:
+[Who should this caption speak to?]
+
+AUDIENCE KNOWLEDGE LEVEL:
+[Beginner / intermediate / advanced / mixed.]
+
+CONTENT OBJECTIVE:
+[Education / engagement / awareness / traffic / leads / sales / community / authority / other.]
+
+CORE MESSAGE:
+[What should the audience understand?]
+
+AUDIENCE PROBLEM:
+[Optional.]
+
+AUDIENCE DESIRE:
+[Optional.]
+
+PRODUCT / SERVICE / OFFER:
+[Optional.]
+
+CTA:
+[Comment / save / share / follow / click / download / enquire / buy / watch / other.]
+
+BRAND VOICE:
+[Professional / conversational / friendly / practical / premium / educational / energetic / warm / direct / other.]
+
+CAPTION LENGTH:
+[Short / medium / long / platform-appropriate.]
+
+EMOJI STYLE:
+[None / minimal / moderate / expressive.]
+
+HASHTAG STYLE:
+[None / minimal / niche / mixed.]
+
+KEYWORDS OR TERMS TO INCLUDE:
+[Optional.]
+
+FACTS / CLAIMS:
+[Provide verified information that may be used.]
+
+WORDS / PHRASES TO AVOID:
+[Optional.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+CAPTION WRITING REQUIREMENTS:
+
+1. UNDERSTAND THE CONTENT BEFORE WRITING
+
+2. IDENTIFY:
+Topic
+Audience
+Objective
+Platform
+Core message
+CTA
+
+3. DO NOT WRITE A GENERIC CAPTION THAT COULD FIT ANY POST
+
+4. THE CAPTION SHOULD ADD CONTEXT, VALUE OR DIRECTION
+
+5. DO NOT SIMPLY REPEAT THE TEXT ALREADY VISIBLE IN THE CONTENT
+
+6. CREATE A STRONG FIRST LINE
+
+7. THE FIRST LINE SHOULD:
+Establish relevance
+Create interest
+Introduce the topic
+Or state the main benefit
+
+8. DO NOT USE MISLEADING CLICKBAIT
+
+9. AVOID OVERUSED OPENERS SUCH AS:
+"Stop scrolling"
+"You won't believe this"
+"Nobody talks about this"
+"This changes everything"
+"Here's the secret"
+
+unless clearly justified.
+
+10. PREFER SPECIFICITY OVER DRAMA
+
+11. MATCH THE PLATFORM
+
+12. INSTAGRAM:
+Can be conversational, visual and concise.
+
+13. FACEBOOK:
+Can use slightly more context and natural conversation.
+
+14. LINKEDIN:
+Should be professional, useful and credible.
+
+15. TIKTOK:
+Should feel natural, direct and suited to short-form content.
+
+16. YOUTUBE:
+Should support the video topic and next action.
+
+17. DO NOT USE THE SAME CAPTION STRUCTURE FOR EVERY PLATFORM
+
+18. MATCH THE CAPTION TO THE CONTENT FORMAT
+
+19. REEL / SHORT VIDEO:
+The caption should complement the video rather than rewrite the spoken script.
+
+20. CAROUSEL:
+The caption may introduce the problem and encourage the audience to move through the slides.
+
+21. IMAGE POST:
+Add context that the image alone cannot communicate.
+
+22. EDUCATIONAL POST:
+Summarize the key takeaway without giving unnecessary filler.
+
+23. PRODUCT POST:
+Explain relevance, benefit and next step accurately.
+
+24. CREATE A NATURAL STRUCTURE
+
+25. POSSIBLE STRUCTURE:
+Opening
+Context
+Value
+CTA
+
+26. DO NOT FORCE THIS STRUCTURE WHEN A SHORTER CAPTION IS BETTER
+
+27. CREATE SHORT CAPTIONS
+
+28. SHORT CAPTIONS SHOULD:
+Be concise
+Communicate one idea
+Use one clear CTA when needed
+
+29. CREATE MEDIUM CAPTIONS
+
+30. MEDIUM CAPTIONS MAY INCLUDE:
+Context
+Useful explanation
+Key takeaway
+CTA
+
+31. CREATE LONG CAPTIONS ONLY WHEN THE CONTENT BENEFITS FROM DEPTH
+
+32. LONG DOES NOT MEAN REPETITIVE
+
+33. REMOVE FILLER
+
+34. REMOVE SENTENCES THAT DO NOT ADD:
+Meaning
+Context
+Emotion
+Proof
+Instruction
+Action
+
+35. USE NATURAL LANGUAGE
+
+36. AVOID ROBOTIC PHRASES SUCH AS:
+"In today's fast-paced world"
+"Unlock the power of"
+"Take your journey to the next level"
+"Elevate your experience"
+
+unless the brand genuinely uses that style.
+
+37. AVOID EXCESSIVE MARKETING LANGUAGE
+
+38. USE SIMPLE LANGUAGE WHEN IT IS CLEARER
+
+39. MATCH THE BRAND VOICE
+
+40. PRESERVE TERMINOLOGY THAT MATTERS
+
+41. DO NOT TURN A PROFESSIONAL BRAND INTO A CASUAL MEME ACCOUNT
+
+42. DO NOT MAKE A FRIENDLY BRAND SOUND CORPORATE
+
+43. USE EMOJIS ONLY WHEN THEY FIT
+
+44. DO NOT ADD EMOJIS TO EVERY LINE
+
+45. DO NOT USE EMOJIS AS A SUBSTITUTE FOR CLEAR WRITING
+
+46. IF EMOJIS ARE REQUESTED
+Use them intentionally.
+
+47. CREATE CTA OPTIONS
+
+48. CTA SHOULD MATCH THE OBJECTIVE
+
+49. EDUCATIONAL:
+Save this
+Share with your team
+Try this process
+
+50. ENGAGEMENT:
+Ask a specific question
+
+51. TRAFFIC:
+Read
+Watch
+Visit
+Download
+
+52. LEAD:
+Enquire
+Book
+Request
+
+53. SALES:
+Shop
+Try
+Learn more
+
+54. DO NOT FORCE A SALES CTA ON NON-SALES CONTENT
+
+55. AVOID EMPTY ENGAGEMENT BAIT
+
+56. DO NOT WRITE:
+"Comment YES"
+"Tag 3 friends"
+"Like if you agree"
+
+unless specifically justified.
+
+57. ASK USEFUL QUESTIONS
+
+58. EXAMPLE:
+"Which step causes the most stock discrepancies in your operation?"
+
+59. CREATE SAVE CTAS ONLY WHEN THE CONTENT HAS REFERENCE VALUE
+
+60. CREATE SHARE CTAS WHEN THE CONTENT IS USEFUL TO OTHERS
+
+61. USE FOLLOW CTAS SPARINGLY
+
+62. DO NOT ADD:
+"Follow for more"
+to every caption automatically.
+
+63. CREATE PRODUCT CAPTIONS CAREFULLY
+
+64. ONLY USE FEATURES PROVIDED
+
+65. DO NOT INVENT:
+Benefits
+Materials
+Specifications
+Availability
+Pricing
+Discounts
+Guarantees
+
+66. CREATE SERVICE CAPTIONS CAREFULLY
+
+67. DO NOT INVENT:
+Experience
+Results
+Customer numbers
+Case studies
+Turnaround times
+
+68. CREATE PROMOTIONAL CAPTIONS
+
+69. PROMOTIONAL CAPTIONS SHOULD CLEARLY EXPLAIN:
+What is offered
+Who it is for
+Why it matters
+What action to take
+
+70. DO NOT USE FALSE URGENCY
+
+71. DO NOT INVENT:
+"Last chance"
+"Only today"
+"Limited spots"
+"Almost sold out"
+
+unless verified.
+
+72. DO NOT CREATE FALSE SCARCITY
+
+73. DO NOT INVENT SOCIAL PROOF
+
+74. DO NOT INVENT:
+Ratings
+Reviews
+Customer quotes
+Testimonials
+Sales numbers
+User counts
+
+75. DO NOT INVENT STATISTICS
+
+76. DO NOT INVENT RESEARCH FINDINGS
+
+77. DO NOT INVENT INDUSTRY TRENDS
+
+78. PRESERVE VERIFIED NUMBERS EXACTLY
+
+79. FLAG UNSUPPORTED CLAIMS
+
+80. CREATE EDUCATIONAL CAPTIONS
+
+81. EDUCATIONAL CAPTIONS SHOULD:
+Explain
+Clarify
+Demonstrate
+Correct misunderstanding
+
+82. DO NOT SOUND LIKE A LECTURE UNLESS APPROPRIATE
+
+83. CREATE EXPERT / AUTHORITY CAPTIONS
+
+84. AUTHORITY SHOULD COME FROM:
+Useful explanation
+Judgment
+Experience provided
+Clear methodology
+
+85. DO NOT USE SELF-PROMOTIONAL CLAIMS WITHOUT BASIS
+
+86. CREATE STORY CAPTIONS ONLY WHEN A REAL STORY IS PROVIDED
+
+87. DO NOT FABRICATE:
+Personal experiences
+Customer stories
+Behind-the-scenes events
+
+88. IF A HYPOTHETICAL EXAMPLE IS USED
+Label it clearly.
+
+89. CREATE BEFORE / AFTER CAPTIONS ONLY WHEN THE CHANGE IS REAL
+
+90. DO NOT EXAGGERATE OUTCOMES
+
+91. CREATE COMPARISON CAPTIONS CAREFULLY
+
+92. COMPARE USING ACTUAL CRITERIA
+
+93. DO NOT CREATE FALSE WINNERS
+
+94. CREATE QUESTION-LED CAPTIONS
+
+95. QUESTIONS SHOULD BE SPECIFIC
+
+96. BAD:
+"Do you want better results?"
+
+97. BETTER:
+"What do you check first when physical inventory doesn't match the system?"
+
+98. CREATE PROBLEM-LED CAPTIONS
+
+99. NAME A REALISTIC PROBLEM
+
+100. DO NOT USE FEAR UNNECESSARILY
+
+101. CREATE OUTCOME-LED CAPTIONS
+
+102. OUTCOMES MUST BE PLAUSIBLE
+
+103. DO NOT GUARANTEE SUCCESS
+
+104. CREATE MISTAKE-LED CAPTIONS
+
+105. EXPLAIN A REAL MISTAKE
+
+106. DO NOT SHAME THE AUDIENCE
+
+107. CREATE CHECKLIST CAPTIONS
+
+108. IF USING A NUMBER
+Ensure the content contains that exact number of points.
+
+109. DO NOT WRITE:
+"5 tips"
+if only 4 tips exist.
+
+110. CREATE LIST CAPTIONS WHEN THEY HELP SCANNABILITY
+
+111. DO NOT BREAK EVERY SENTENCE INTO A SEPARATE LINE
+
+112. USE PARAGRAPH SPACING NATURALLY
+
+113. CREATE HOOK VARIANTS
+
+114. GENERATE DIFFERENT ANGLES, NOT SYNONYMS
+
+115. POSSIBLE ANGLES:
+Problem
+Question
+Outcome
+Mistake
+Observation
+Checklist
+Comparison
+Insight
+
+116. CREATE PLATFORM VARIANTS
+
+117. IF MULTIPLE PLATFORMS ARE REQUESTED
+Adapt:
+Opening
+Length
+Tone
+CTA
+Formatting
+
+118. DO NOT JUST COPY THE SAME CAPTION ACROSS PLATFORMS
+
+119. CREATE HASHTAGS CAREFULLY
+
+120. ONLY INCLUDE HASHTAGS WHEN REQUESTED OR PLATFORM-APPROPRIATE
+
+121. PREFER RELEVANT HASHTAGS OVER LARGE GENERIC LISTS
+
+122. DO NOT CLAIM HASHTAGS ARE TRENDING WITHOUT CURRENT DATA
+
+123. DO NOT GENERATE 30 HASHTAGS AUTOMATICALLY
+
+124. DEFAULT TO A SMALL RELEVANT SET
+
+125. CREATE KEYWORD-AWARE CAPTIONS WHEN USEFUL
+
+126. INCORPORATE TERMS NATURALLY
+
+127. DO NOT KEYWORD-STUFF
+
+128. CREATE ACCESSIBLE LANGUAGE
+
+129. IF IMPORTANT CONTEXT IS ONLY VISUAL
+Consider mentioning it briefly in the caption.
+
+130. DO NOT ATTEMPT TO REPLACE PROPER ALT TEXT WHEN ALT TEXT IS SUPPORTED
+
+131. CREATE MULTILINGUAL CAPTIONS WHEN REQUESTED
+
+132. PRESERVE:
+Meaning
+Tone
+Product names
+Technical terms
+
+133. DO NOT TRANSLATE WORD-FOR-WORD WHEN NATURAL LOCAL LANGUAGE IS BETTER
+
+134. CREATE CAPTION LENGTH VARIANTS
+
+135. PROVIDE:
+Short
+Medium
+Long
+
+when useful.
+
+136. CREATE A "CLEAN VERSION"
+
+137. CLEAN VERSION SHOULD REMOVE:
+Unnecessary emojis
+Hashtags
+Marketing clichés
+Excessive punctuation
+
+138. CREATE A "WARM VERSION" WHEN APPROPRIATE
+
+139. CREATE A "PROFESSIONAL VERSION" WHEN APPROPRIATE
+
+140. CREATE A "CONVERSION VERSION" ONLY WHEN A CONVERSION GOAL EXISTS
+
+141. CREATE A CAPTION QUALITY CHECK
+
+142. REVIEW:
+Relevance
+Clarity
+Brand fit
+Credibility
+Platform fit
+CTA fit
+
+143. USE:
+Strong
+Good
+Needs revision
+
+144. DO NOT CREATE FALSE NUMERICAL SCORES
+
+145. IDENTIFY CLAIM RISKS
+
+146. FLAG:
+Unverified statistics
+Unsupported outcomes
+Health claims
+Financial claims
+Legal claims
+Safety claims
+Current product information
+
+147. PROVIDE SAFER WORDING WHEN NEEDED
+
+148. CREATE A/B TEST OPTIONS
+
+149. CHANGE ONE MAIN VARIABLE
+
+150. POSSIBLE TEST:
+Question opening vs statement opening
+
+151. DO NOT GUARANTEE WHICH WILL PERFORM BETTER
+
+152. CREATE COMMENT RESPONSE OPPORTUNITIES
+
+153. WHEN RELEVANT
+Suggest 3 likely audience follow-up questions the creator may need to answer.
+
+154. DO NOT INVENT ACTUAL COMMENTS
+
+155. CREATE REPURPOSING VARIANTS
+
+156. ONE CONTENT PIECE MAY NEED:
+LinkedIn caption
+Facebook caption
+Instagram caption
+Short-video caption
+
+157. ADAPT EACH VERSION NATIVELY
+
+158. CREATE SENSITIVE-TOPIC CAUTION
+
+159. FOR:
+Health
+Finance
+Legal
+Safety
+
+avoid presenting unverified advice as authoritative fact.
+
+160. CREATE FACT-CHECK FLAGS
+
+161. USE:
+[VERIFY CLAIM]
+
+where supporting evidence is required.
+
+162. CREATE FINAL PUBLISHING VERSION
+
+163. THE FINAL VERSION SHOULD:
+Be ready to copy
+Use clean formatting
+Contain no instructional placeholders
+Contain no explanations inside the caption
+
+164. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- caption matches the actual content
+- opening is relevant
+- platform fit is strong
+- audience language is appropriate
+- brand voice is preserved
+- caption adds value rather than repeating the visual
+- no facts are invented
+- no statistics are invented
+- no testimonials are invented
+- no fake urgency is used
+- no false scarcity is used
+- CTA matches the objective
+- hashtags are relevant if included
+- emojis are intentional if included
+- wording is natural
+- important claims are flagged
+- final version is ready to publish
+
+OUTPUT FORMAT:
+
+1. CAPTION STRATEGY
+Provide:
+Platform
+Audience
+Objective
+Core message
+Recommended tone
+Recommended caption length
+Best CTA direction
+
+2. OPENING OPTIONS
+Provide 5–10 first-line options using different angles.
+
+3. PRIMARY CAPTION
+Write the recommended platform-ready caption.
+
+4. SHORT VERSION
+Create a concise alternative.
+
+5. MEDIUM VERSION
+Create a balanced alternative.
+
+6. LONG VERSION
+Create only if useful.
+
+7. PROFESSIONAL VERSION
+Create when relevant.
+
+8. CONVERSATIONAL VERSION
+Create when relevant.
+
+9. ENGAGEMENT VERSION
+Create when relevant.
+
+10. CONVERSION VERSION
+Create only if the objective supports it.
+
+11. PLATFORM VARIANTS
+If multiple platforms are requested, create a native caption for each.
+
+12. CTA OPTIONS
+Provide 3–5 relevant CTA choices.
+
+13. HASHTAGS
+Provide a small, relevant set only if requested or useful.
+
+14. CLAIM REVIEW
+List:
+Claim
+Evidence status
+Safer wording if required
+
+15. A/B TEST
+Provide:
+Version A
+Version B
+Variable tested
+
+16. POSSIBLE FOLLOW-UP QUESTIONS
+Provide 3 likely audience questions when useful.
+
+17. FINAL PUBLISHING VERSION
+Provide the strongest clean caption ready to copy and post.
+
+IMPORTANT:
+- Do not fabricate facts, testimonials, trends, results or statistics.
+- Do not use false urgency or scarcity.
+- Match the actual content and platform.
+- Use human, natural language.
+- Prioritize relevance and clarity over hype.`;
+
+const steps = [
+  {
+    title: "Start with the actual content",
+    description:
+      "The caption should support the post, video or image rather than becoming a generic paragraph that could be attached to almost anything.",
+  },
+  {
+    title: "Match the platform and audience",
+    description:
+      "Adjust the opening, length, tone, formatting and CTA for the audience and platform instead of copying the same caption everywhere.",
+  },
+  {
+    title: "Add value beyond the visual",
+    description:
+      "Use the caption for context, explanation, a useful takeaway or a clear next step rather than simply repeating what viewers already see.",
+  },
+  {
+    title: "Review credibility before posting",
+    description:
+      "Remove invented claims, unsupported outcomes, false urgency and unnecessary hype, then make sure the final CTA fits the content objective.",
+  },
+];
+
+const example = {
+  input: [
+    "Platform: LinkedIn.",
+    "Topic: Physical stock does not match the inventory system.",
+    "Audience: Warehouse supervisors and inventory controllers.",
+    "Objective: Educational authority.",
+    "Tone: Practical and professional.",
+    "CTA: Encourage discussion.",
+  ],
+
+  output: [
+    "OPENING: 'An inventory adjustment can correct the number without correcting the problem.'",
+    "CAPTION: 'When physical stock does not match the system, the first response should not always be to adjust the quantity. Start by confirming the count, then review recent receipts, transfers, picks, returns and previous adjustments. The objective is not only to correct the stock balance, but to understand what caused the discrepancy so the same issue does not keep returning.'",
+    "CTA: 'Which area do you normally investigate first when a stock discrepancy appears?'",
+    "STYLE: Professional, useful and specific without exaggerated claims or unnecessary hashtags.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Do not make the caption duplicate the content",
+    description:
+      "A strong caption adds context, meaning or a next step. If the video already explains everything, the caption can stay shorter.",
+  },
+  {
+    title: "One clear CTA is usually enough",
+    description:
+      "Asking people to like, save, share, follow, comment and click at the same time weakens the main action you actually want them to take.",
+  },
+  {
+    title: "Platform adaptation matters",
+    description:
+      "The same message can be professional on LinkedIn, conversational on Facebook and much shorter on a Reel without changing the underlying facts.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Caption Writer Prompt | KRIYANO"
+  description="Write natural, platform-specific social media captions for Reels, posts, LinkedIn, Facebook, Instagram, TikTok and YouTube."
+>
+  <PromptPage
+    category="CREATORS"
+    title="Caption Writer"
+    accentTitle="Prompt."
+    description="Create natural, platform-aware captions that support the actual content, match your brand voice and encourage the right action without relying on generic filler or misleading hype."
+    meta={[
+      "Free prompt",
+      "Social captions",
+      "Multi-platform",
+    ]}
+    bestFor={[
+      "Instagram",
+      "Facebook",
+      "LinkedIn",
+      "Reels & Shorts",
+      "TikTok",
+      "YouTube",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Turn the content into a caption worth reading."
+    introDescription="Define the platform, audience, message and objective, then create a caption that adds useful context, preserves the brand voice and ends with a natural next step."
+    steps={steps}
+    exampleTitle="Write a professional caption around an inventory-control lesson."
+    example={example}
+    tipsTitle="Good captions support the content instead of competing with it."
+    tips={tips}
+    sidebarTitle="Need a stronger opening?"
+    sidebarDescription="Use KRIYANO's Hook Generator for first-line options, or Content Repurposing Prompt when the same piece of content needs native captions for several platforms."
+    warningTitle="Keep promotional claims accurate"
+    warningText="Do not invent statistics, customer results, reviews, discounts, availability, urgency or scarcity. Verify fact-sensitive claims before publishing and keep the caption consistent with what the actual content or offer can deliver."
+  />
+</BaseLayout>

@@ -1,17 +1,795 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 
+const categories = [
+  {
+    title: "AI Tools",
+    description: "Practical browser-based tools for better prompts, workflows and outputs.",
+    href: "/tools/",
+    className: "feature-large",
+    number: "01",
+  },
+  {
+    title: "Prompt Library",
+    description: "Ready-to-use prompts for work, business, creators and everyday tasks.",
+    href: "/prompts/",
+    className: "feature-small",
+    number: "02",
+  },
+  {
+    title: "AI for Work",
+    description: "Use AI for emails, reporting, operations, research and productivity.",
+    href: "/ai-for-work/",
+    className: "feature-small",
+    number: "03",
+  },
+  {
+    title: "AI for Business",
+    description: "Practical systems and ideas for entrepreneurs and small teams.",
+    href: "/ai-for-business/",
+    className: "feature-medium",
+    number: "04",
+  },
+  {
+    title: "AI for Creators",
+    description: "Prompts and workflows for images, video, social media and content.",
+    href: "/creators/",
+    className: "feature-medium",
+    number: "05",
+  },
+];
+
+const tools = [
+  "Prompt Builder",
+  "Business Email Builder",
+  "SOP Prompt Builder",
+  "Image Prompt Builder",
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="KRIYANO — Practical AI for Real Work"
+  description="KRIYANO provides practical AI tools, prompts, guides and resources for real work, business and creators."
+>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          Practical AI for real work
+        </div>
+
+        <h1>
+          AI that moves
+          <span class="accent">work forward.</span>
+        </h1>
+
+        <p class="hero-description">
+          Practical tools, prompts and systems that help you turn artificial
+          intelligence into useful action — for work, business and creation.
+        </p>
+
+        <div class="hero-actions">
+          <a href="/tools/" class="button button-primary">Explore AI Tools</a>
+          <a href="/prompts/" class="button button-secondary">Browse Prompts</a>
+        </div>
+      </div>
+
+      <div class="console">
+        <div class="console-header">
+          <div class="console-dots">
+            <span class="console-dot"></span>
+            <span class="console-dot"></span>
+            <span class="console-dot"></span>
+          </div>
+
+          <span>KRIYANO / WORKSPACE</span>
+        </div>
+
+        <div class="console-body">
+          <div class="console-label">Current task</div>
+
+          <div class="prompt-box">
+            Create a professional stock discrepancy investigation workflow
+            with clear steps, root-cause checks and escalation points.
+          </div>
+
+          <div class="workflow">
+            <div class="workflow-row">
+              <div class="workflow-number">01</div>
+              <div class="workflow-text">
+                <strong>Understand the task</strong>
+                <span>Define goal and context</span>
+              </div>
+              <div class="workflow-status">READY</div>
+            </div>
+
+            <div class="workflow-row">
+              <div class="workflow-number">02</div>
+              <div class="workflow-text">
+                <strong>Build the prompt</strong>
+                <span>Add structure and requirements</span>
+              </div>
+              <div class="workflow-status">READY</div>
+            </div>
+
+            <div class="workflow-row">
+              <div class="workflow-number">03</div>
+              <div class="workflow-text">
+                <strong>Use your AI</strong>
+                <span>ChatGPT, Gemini, Claude or others</span>
+              </div>
+              <div class="workflow-status">NEXT</div>
+            </div>
+          </div>
+
+          <div class="console-footer">
+            <span>Mode: Practical</span>
+            <span>Status: Ready to execute</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="signal-strip">
+    <div class="container signal-grid">
+      <div class="signal">
+        <strong>Tools</strong>
+        <span>Built to solve actual tasks</span>
+      </div>
+
+      <div class="signal">
+        <strong>Prompts</strong>
+        <span>Structured and ready to use</span>
+      </div>
+
+      <div class="signal">
+        <strong>Workflows</strong>
+        <span>From idea to useful output</span>
+      </div>
+
+      <div class="signal">
+        <strong>Resources</strong>
+        <span>Practical guides and downloads</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-kicker">Explore KRIYANO</div>
+
+        <h2>
+          Less AI hype.
+          More useful action.
+        </h2>
+      </div>
+
+      <div class="bento-grid">
+        {
+          categories.map((category) => (
+            <a href={category.href} class={`feature ${category.className}`}>
+              <span class="feature-number">{category.number}</span>
+
+              <h3>{category.title}</h3>
+
+              <p>{category.description}</p>
+
+              <span class="feature-arrow">↗</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section tool-section">
+    <div class="container tools-row">
+      <div class="tools-copy">
+        <div class="section-kicker">KRIYANO Tools</div>
+
+        <h2>
+          Useful tools,
+          not just another AI blog.
+        </h2>
+
+        <p>
+          KRIYANO will include practical browser-based tools that help you
+          structure ideas, build stronger prompts and get better results
+          from the AI platforms you already use.
+        </p>
+      </div>
+
+      <div class="tool-stack">
+        {
+          tools.map((tool, index) => (
+            <div class="tool-item">
+              <span>{String(index + 1).padStart(2, "0")} / {tool}</span>
+              <span>Coming soon</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section philosophy">
+    <div class="container philosophy-grid">
+      <div class="big-statement">
+        From AI
+        <span>idea</span>
+        to real
+        <span>action.</span>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">01</div>
+          <div>
+            <strong>Start with the task</strong>
+            <p>Focus on what you actually need to accomplish.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">02</div>
+          <div>
+            <strong>Use the right structure</strong>
+            <p>Choose a tool, prompt or workflow built for that task.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">03</div>
+          <div>
+            <strong>Work with your preferred AI</strong>
+            <p>Use KRIYANO alongside the AI platforms you already trust.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">04</div>
+          <div>
+            <strong>Turn the output into action</strong>
+            <p>Apply, refine and use the result in real work.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-wrap">
+    <div class="container">
+      <div class="cta">
+        <div class="section-kicker">Built for doing</div>
+
+        <h2>
+          Don't just learn about AI.
+          Put it to work.
+        </h2>
+
+        <p>
+          Explore practical AI tools, prompt systems, workflows and
+          resources designed around real-world tasks.
+        </p>
+
+        <a href="/tools/" class="button button-primary">
+          Start with KRIYANO Tools
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: 110px 0 105px;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(380px, 0.95fr);
+    gap: 70px;
+    align-items: center;
+  }
+
+  .hero-copy {
+    position: relative;
+    z-index: 2;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+    color: var(--lime);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--lime);
+    box-shadow: 0 0 12px rgba(183, 255, 74, 0.65);
+  }
+
+  .hero h1 {
+    max-width: 760px;
+    font-size: clamp(3.4rem, 7vw, 6.8rem);
+    line-height: 0.93;
+    letter-spacing: -0.065em;
+    font-weight: 800;
+  }
+
+  .hero h1 .accent {
+    color: var(--lime);
+  }
+
+  .hero-description {
+    max-width: 650px;
+    margin-top: 28px;
+    color: var(--muted);
+    font-size: 1.08rem;
+    line-height: 1.8;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 34px;
+  }
+
+  .console {
+    position: relative;
+    min-height: 500px;
+    border: 1px solid rgba(183, 255, 74, 0.14);
+    border-radius: 24px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+      rgba(13, 27, 21, 0.82);
+    box-shadow:
+      0 30px 80px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    overflow: hidden;
+  }
+
+  .console::before {
+    content: "";
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    top: -100px;
+    right: -70px;
+    background: rgba(77, 226, 197, 0.12);
+    filter: blur(55px);
+  }
+
+  .console-header {
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.75rem;
+  }
+
+  .console-dots {
+    display: flex;
+    gap: 7px;
+  }
+
+  .console-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .console-body {
+    padding: 24px;
+  }
+
+  .console-label {
+    margin-bottom: 12px;
+    color: var(--mint);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .prompt-box {
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: rgba(0, 0, 0, 0.16);
+    color: #d7e0db;
+    font-size: 0.9rem;
+  }
+
+  .workflow {
+    display: grid;
+    gap: 11px;
+    margin-top: 22px;
+  }
+
+  .workflow-row {
+    display: grid;
+    grid-template-columns: 34px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 13px 14px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  .workflow-number {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: rgba(183, 255, 74, 0.08);
+    color: var(--lime);
+    font-size: 0.72rem;
+    font-weight: 800;
+  }
+
+  .workflow-text strong {
+    display: block;
+    color: var(--text);
+    font-size: 0.84rem;
+  }
+
+  .workflow-text span {
+    color: var(--muted);
+    font-size: 0.73rem;
+  }
+
+  .workflow-status {
+    color: var(--lime);
+    font-size: 0.7rem;
+    font-weight: 800;
+  }
+
+  .console-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.72rem;
+  }
+
+  .signal-strip {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.018);
+  }
+
+  .signal-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .signal {
+    padding: 24px 20px;
+    border-right: 1px solid var(--line);
+  }
+
+  .signal:last-child {
+    border-right: 0;
+  }
+
+  .signal strong {
+    display: block;
+    margin-bottom: 3px;
+    color: var(--text);
+    font-size: 0.95rem;
+  }
+
+  .signal span {
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 0.7fr 1.3fr;
+    gap: 70px;
+    align-items: end;
+    margin-bottom: 50px;
+  }
+
+  .section-head h2 {
+    max-width: 800px;
+    font-size: clamp(2.5rem, 5vw, 4.4rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+  }
+
+  .feature {
+    position: relative;
+    min-height: 240px;
+    padding: 26px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.026), transparent),
+      var(--surface);
+    overflow: hidden;
+    transition:
+      transform 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .feature:hover {
+    transform: translateY(-4px);
+    border-color: rgba(183, 255, 74, 0.26);
+  }
+
+  .feature-large {
+    grid-column: span 7;
+    min-height: 390px;
+  }
+
+  .feature-small {
+    grid-column: span 5;
+  }
+
+  .feature-medium {
+    grid-column: span 6;
+    min-height: 275px;
+  }
+
+  .feature-number {
+    color: rgba(183, 255, 74, 0.6);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  .feature h3 {
+    max-width: 500px;
+    margin-top: 38px;
+    font-size: clamp(1.7rem, 3vw, 2.6rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+  }
+
+  .feature p {
+    max-width: 520px;
+    margin-top: 14px;
+    color: var(--muted);
+  }
+
+  .feature-arrow {
+    position: absolute;
+    right: 24px;
+    bottom: 22px;
+    color: var(--lime);
+    font-size: 1.2rem;
+  }
+
+  .tool-section {
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .tools-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: center;
+  }
+
+  .tools-copy h2 {
+    max-width: 600px;
+    margin-top: 14px;
+    font-size: clamp(2.5rem, 5vw, 4.4rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .tools-copy p {
+    max-width: 550px;
+    margin-top: 22px;
+    color: var(--muted);
+  }
+
+  .tool-stack {
+    display: grid;
+    gap: 11px;
+  }
+
+  .tool-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 18px 20px;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  .tool-item span:first-child {
+    font-weight: 700;
+  }
+
+  .tool-item span:last-child {
+    color: var(--lime);
+    font-size: 0.74rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: center;
+  }
+
+  .big-statement {
+    font-size: clamp(3rem, 6vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+  }
+
+  .big-statement span {
+    color: var(--lime);
+  }
+
+  .steps {
+    display: grid;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 20px;
+    padding: 23px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .step:first-child {
+    border-top: 1px solid var(--line);
+  }
+
+  .step-number {
+    color: var(--lime);
+    font-size: 0.76rem;
+    font-weight: 800;
+  }
+
+  .step strong {
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .step p {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .cta-wrap {
+    padding-bottom: 100px;
+  }
+
+  .cta {
+    padding: 70px;
+    border: 1px solid rgba(183, 255, 74, 0.17);
+    border-radius: 28px;
+    background:
+      radial-gradient(
+        circle at 80% 40%,
+        rgba(183, 255, 74, 0.13),
+        transparent 28%
+      ),
+      var(--surface);
+  }
+
+  .cta h2 {
+    max-width: 780px;
+    font-size: clamp(2.6rem, 5vw, 5rem);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+  }
+
+  .cta p {
+    max-width: 610px;
+    margin-top: 20px;
+    color: var(--muted);
+  }
+
+  .cta .button {
+    margin-top: 28px;
+  }
+
+  @media (max-width: 960px) {
+    .hero-grid,
+    .tools-row,
+    .philosophy-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-grid {
+      gap: 55px;
+    }
+
+    .section-head {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .feature-large,
+    .feature-small,
+    .feature-medium {
+      grid-column: span 12;
+    }
+
+    .signal-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 760px) {
+    .hero {
+      padding: 75px 0;
+    }
+
+    .console {
+      min-height: auto;
+    }
+
+    .cta {
+      padding: 42px 26px;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .signal-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .signal {
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .signal:last-child {
+      border-bottom: 0;
+    }
+
+    .workflow-row {
+      grid-template-columns: 30px 1fr;
+    }
+
+    .workflow-status {
+      grid-column: 2;
+    }
+  }
+</style>

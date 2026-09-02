@@ -1,0 +1,180 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced professional editor who specializes in making AI-written text sound natural, clear and genuinely human.
+
+TASK:
+Rewrite the text below so it sounds natural, fluent and human while preserving the original meaning.
+
+ORIGINAL TEXT:
+[Paste the AI-written text here.]
+
+TARGET AUDIENCE:
+[Who will read this?]
+
+PURPOSE:
+[Example: email, LinkedIn post, article, report, website copy, social media caption, application, proposal.]
+
+DESIRED TONE:
+[Example: professional, warm, conversational, confident, friendly, direct.]
+
+LANGUAGE:
+[Specify the language or write "keep the original language".]
+
+STYLE REQUIREMENTS:
+[Add any specific preferences.]
+
+REWRITE REQUIREMENTS:
+
+1. PRESERVE MEANING
+- Keep the original facts, message and intent.
+- Do not remove important information.
+- Do not invent new facts.
+
+2. MAKE IT SOUND NATURAL
+- Replace robotic, stiff or overly formal wording.
+- Use natural sentence patterns.
+- Improve the rhythm and flow.
+- Make transitions feel less mechanical.
+
+3. REDUCE AI-LIKE PATTERNS
+Avoid unnecessary:
+- repetitive sentence structures
+- excessive headings
+- repeated conclusions
+- generic filler
+- exaggerated adjectives
+- obvious template language
+- overly polished corporate phrases
+- repeated words or ideas
+
+4. IMPROVE CLARITY
+- Simplify complicated sentences where appropriate.
+- Remove unnecessary repetition.
+- Use clear and direct wording.
+- Keep important detail where it adds value.
+
+5. MATCH THE AUDIENCE
+Adjust vocabulary, tone and level of formality for the intended reader.
+
+6. KEEP A HUMAN VOICE
+- Use natural variation in sentence length.
+- Allow normal conversational phrasing where appropriate.
+- Avoid making every sentence sound perfectly symmetrical or formulaic.
+- Do not intentionally add grammar mistakes or awkward wording just to appear human.
+
+7. PRESERVE PERSONALITY
+If the original text contains a clear personal style or opinion, retain it instead of replacing it with generic language.
+
+8. FORMAT APPROPRIATELY
+Keep paragraphs, bullets, headings or other formatting only when they improve readability.
+
+OUTPUT FORMAT:
+
+1. Humanized Version
+
+2. Key Improvements
+Briefly explain the main changes made, such as:
+- clearer wording
+- more natural tone
+- reduced repetition
+- improved flow
+
+Do not mention AI detection scores or claim that the rewritten text can bypass AI-detection systems.
+
+The final version should sound like something a real person would naturally write for the stated purpose and audience.`;
+
+const steps = [
+  {
+    title: "Paste the original text",
+    description:
+      "Use the full AI-generated draft so the rewrite can preserve the complete meaning and important details.",
+  },
+  {
+    title: "Define the real audience",
+    description:
+      "A natural LinkedIn post should sound different from a business email, report or casual social media caption.",
+  },
+  {
+    title: "Choose the tone",
+    description:
+      "Specify whether you want professional, conversational, warm, concise, confident or another style.",
+  },
+  {
+    title: "Review the final meaning",
+    description:
+      "Check names, figures, commitments and technical details after rewriting to make sure nothing important changed.",
+  },
+];
+
+const example = {
+  input: [
+    "Purpose: LinkedIn post.",
+    "Audience: Warehouse and logistics professionals.",
+    "Tone: Professional but conversational.",
+    "Original: Inventory accuracy is a critical component of warehouse operations. Organizations must implement robust processes in order to ensure that system quantities accurately reflect physical inventory quantities.",
+  ],
+
+  output: [
+    "Inventory accuracy sounds simple, but it affects almost every part of warehouse operations.",
+    "When the physical stock does not match the system, the problem can quickly spread into picking, replenishment, customer orders and reporting.",
+    "Strong inventory control is not only about counting stock. It is about having clear receiving, movement, picking and adjustment processes that keep the system aligned with what is actually on the warehouse floor.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Tell it where the text will be used",
+    description:
+      "Adding the real purpose helps produce a more appropriate voice than simply asking to make the text human.",
+  },
+  {
+    title: "Keep facts locked",
+    description:
+      "For business, technical or professional writing, explicitly tell the model not to change figures, names, dates or commitments.",
+  },
+  {
+    title: "Do not over-humanize",
+    description:
+      "Natural writing does not require slang, errors or unnecessary casual language. The goal is believable, clear communication.",
+  },
+];
+---
+
+<BaseLayout
+  title="Humanize AI-Written Text Prompt | KRIYANO"
+  description="Rewrite AI-generated text into clearer, more natural and human-sounding writing while preserving the original meaning."
+>
+  <PromptPage
+    category="WRITING"
+    title="Humanize AI-Written"
+    accentTitle="Text."
+    description="Turn stiff, repetitive or overly generic AI-generated writing into natural, clear language without changing the original message."
+    meta={[
+      "Free prompt",
+      "Writing",
+      "Editing focused",
+    ]}
+    bestFor={[
+      "Emails",
+      "LinkedIn posts",
+      "Articles",
+      "Reports",
+      "Website copy",
+      "Social media",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Keep the meaning. Improve the voice."
+    introDescription="Paste your draft, explain who will read it and select the tone you want. The prompt focuses on natural communication rather than simply replacing words."
+    steps={steps}
+    exampleTitle="From robotic to natural."
+    example={example}
+    tipsTitle="Get a better rewrite."
+    tips={tips}
+    sidebarTitle="Need a custom writing prompt?"
+    sidebarDescription="Use the KRIYANO Prompt Builder to create a prompt around your exact audience, purpose, tone and writing requirements."
+    warningTitle="Important"
+    warningText="Always review important facts, figures, names and commitments after rewriting. Humanizing text should improve the language without changing the underlying information."
+  />
+</BaseLayout>

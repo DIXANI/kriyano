@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kriyano.com/sitemap-index.xml

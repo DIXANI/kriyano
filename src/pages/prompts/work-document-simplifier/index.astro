@@ -1,0 +1,751 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced business writing, document simplification and workplace communication specialist.
+
+TASK:
+Simplify the work document below while preserving its meaning, important facts, requirements, responsibilities, deadlines, controls and professional intent.
+
+The goal is to make the document easier to read, understand and act on without making it inaccurate, childish, overly casual or incomplete.
+
+DOCUMENT TYPE:
+[Email / SOP / Policy / Report / Memo / Instruction / Procedure / Announcement / Meeting note / Other.]
+
+TARGET AUDIENCE:
+[Employees / Managers / Customers / Suppliers / General staff / Technical team / Other.]
+
+PURPOSE:
+[What should the reader understand or do after reading?]
+
+ORIGINAL DOCUMENT:
+[Paste the document here.]
+
+REQUIRED TONE:
+[Professional / Plain language / Friendly / Formal / Direct / Other.]
+
+TARGET LENGTH:
+[Shorter / Much shorter / Keep similar length / Specific word count.]
+
+READING LEVEL:
+[General workplace audience / Non-technical staff / Experienced professionals / Other.]
+
+WORDS / TERMS THAT MUST REMAIN:
+[List important terminology if applicable.]
+
+INFORMATION THAT MUST NOT CHANGE:
+[List critical facts, numbers, deadlines, responsibilities, policy wording, etc.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+DOCUMENT SIMPLIFICATION REQUIREMENTS:
+
+1. IDENTIFY THE DOCUMENT PURPOSE
+Before rewriting, determine:
+
+Primary purpose:
+Main message:
+Required reader action:
+Critical information:
+Supporting information:
+
+Do not change the purpose.
+
+2. PRESERVE FACTS
+Keep all important factual information accurate.
+
+Preserve supplied:
+
+- names
+- dates
+- times
+- quantities
+- percentages
+- prices
+- deadlines
+- responsibilities
+- approvals
+- technical requirements
+- policy conditions
+- references
+
+Do not invent or modify facts.
+
+3. IDENTIFY CRITICAL CONTENT
+Classify information as:
+
+CRITICAL
+Must remain.
+
+USEFUL
+Supports understanding.
+
+OPTIONAL
+Can potentially be shortened or removed.
+
+Do not remove critical content just to make the document shorter.
+
+4. REMOVE UNNECESSARY COMPLEXITY
+Simplify:
+
+- long sentences
+- repeated ideas
+- unnecessary introductions
+- excessive formality
+- wordy phrases
+- complicated sentence structure
+- unnecessary jargon
+
+Preserve technical terms when they are genuinely required.
+
+5. USE PLAIN LANGUAGE
+Prefer familiar workplace wording.
+
+Examples:
+
+"Utilize" → "Use"
+"At this point in time" → "Now"
+"Due to the fact that" → "Because"
+"In order to" → "To"
+
+Do not replace established technical terms with inaccurate simpler words.
+
+6. SHORTEN LONG SENTENCES
+Where practical:
+
+Use one main idea per sentence.
+Break very long sentences into shorter ones.
+Keep relationships between ideas clear.
+
+Do not create choppy writing.
+
+7. SIMPLIFY PARAGRAPHS
+Keep paragraphs focused on one topic.
+
+Break large blocks where that improves readability.
+
+8. REMOVE REPETITION
+Identify repeated:
+
+- explanations
+- instructions
+- warnings
+- background
+- conclusions
+
+Keep the clearest version.
+
+Do not remove repetition that is deliberately required for safety or compliance.
+
+9. IMPROVE STRUCTURE
+Where useful organize information into:
+
+Introduction
+Main points
+Actions
+Responsibilities
+Deadlines
+Important notes
+Next steps
+
+Use headings only where they genuinely improve navigation.
+
+10. PRIORITIZE ACTIONABLE INFORMATION
+If the reader must do something, make clear:
+
+What:
+Who:
+When:
+How:
+Where:
+Required output:
+
+Do not bury actions inside long paragraphs.
+
+11. CLARIFY RESPONSIBILITY
+Make responsibilities easy to identify.
+
+Use role-based wording where appropriate.
+
+Example:
+
+"The supervisor must verify the count before submission."
+
+Avoid unclear wording such as:
+
+"It should be checked before sending."
+
+12. CLARIFY DEADLINES
+Preserve all supplied dates and time requirements exactly.
+
+Where wording is unclear, make the relationship explicit.
+
+Do not invent deadlines.
+
+13. CLARIFY CONDITIONS
+For conditional requirements use clear structures such as:
+
+If X happens, do Y.
+
+When X is completed, proceed to Y.
+
+Do not change the condition itself.
+
+14. CLARIFY SEQUENCE
+For procedures and instructions, make the order obvious.
+
+Use numbered steps where appropriate.
+
+Do not reorder steps unless the existing sequence is clearly non-essential and the change improves understanding.
+
+If sequence appears operationally important, preserve it.
+
+15. SIMPLIFY TECHNICAL CONTENT
+For technical documents:
+
+Keep required technical terminology.
+Explain difficult terms briefly where useful.
+Do not oversimplify technical requirements.
+
+16. HANDLE ACRONYMS
+Where useful:
+
+First use:
+Full term (ACRONYM)
+
+Later:
+ACRONYM
+
+Do not expand acronyms if the supplied expansion is unknown.
+
+17. REMOVE CORPORATE JARGON
+Where it adds little meaning, simplify phrases such as:
+
+"circle back"
+"move the needle"
+"leverage synergies"
+"at your earliest convenience"
+"going forward"
+
+But preserve terminology that is standard and meaningful in the user's workplace.
+
+18. REMOVE FILLER
+Look for phrases that add length without useful meaning.
+
+Examples:
+
+"It is important to note that..."
+"Please be advised that..."
+"As previously mentioned..."
+"In relation to the above..."
+
+Keep them only when they serve a real communication purpose.
+
+19. REDUCE PASSIVE VOICE
+Where responsibility matters, prefer active wording.
+
+Passive:
+"The report must be submitted."
+
+Clearer where owner is known:
+"The supervisor must submit the report."
+
+Do not invent an owner if one is not supplied.
+
+20. IMPROVE VERB CHOICE
+Prefer direct verbs.
+
+Instead of:
+
+"make an assessment of"
+
+use:
+
+"assess"
+
+Instead of:
+
+"carry out a review of"
+
+use:
+
+"review"
+
+21. REMOVE DOUBLE MEANING
+Identify wording that could reasonably be interpreted in more than one way.
+
+Rewrite for clarity without adding unsupported meaning.
+
+22. PRESERVE POLICY MEANING
+For policies, rules and procedures:
+
+Do not weaken requirements.
+Do not convert mandatory language into optional language.
+
+Preserve distinctions such as:
+
+Must
+Should
+May
+Must not
+
+Do not change authority.
+
+23. PRESERVE SAFETY MEANING
+For safety-related instructions:
+
+Do not remove warnings.
+Do not simplify away conditions.
+Do not change PPE, isolation, operating or emergency requirements.
+
+If wording appears unsafe or ambiguous, flag it rather than silently changing the requirement.
+
+24. PRESERVE LEGAL / COMPLIANCE MEANING
+Do not reinterpret legal, contractual or compliance wording as legal advice.
+
+Where simplification could alter the formal meaning, state:
+
+"This section may require review by the appropriate qualified owner before replacing the original wording."
+
+25. PRESERVE FINANCIAL CONTROLS
+For approval, payment, purchasing or financial procedures:
+
+Do not remove approval levels, evidence requirements or control steps solely for simplicity.
+
+26. PRESERVE QUALITY CONTROLS
+Do not remove:
+
+Checks
+Reviews
+Sign-offs
+Testing
+Verification
+Acceptance criteria
+
+unless the user explicitly requests process redesign rather than document simplification.
+
+27. DISTINGUISH SIMPLIFICATION FROM PROCESS IMPROVEMENT
+Do not redesign the underlying process unless asked.
+
+Simplify the document first.
+
+If the document reveals a process problem, flag it separately as:
+
+"Process issue to consider."
+
+28. IDENTIFY MISSING INFORMATION
+If the document refers to unclear information such as:
+
+"the required form"
+"the responsible person"
+"the approved timeline"
+"the system"
+
+without defining it, flag:
+
+"Clarification required."
+
+Do not invent the missing detail.
+
+29. HANDLE CONTRADICTIONS
+If two sections conflict:
+
+Do not silently choose one.
+
+Identify:
+
+Statement A:
+Statement B:
+Conflict:
+Clarification required:
+
+30. HANDLE OUTDATED REFERENCES
+If something appears potentially outdated but cannot be verified from the supplied text, mark:
+
+"Reference should be verified."
+
+Do not assume it is outdated.
+
+31. KEEP NUMBERS VISIBLE
+Important numerical requirements should remain easy to find.
+
+Examples:
+
+Deadlines
+Thresholds
+Limits
+Quantities
+KPIs
+Temperatures
+Time periods
+
+Do not bury them in long prose.
+
+32. IMPROVE LISTS
+Use bullet points where several parallel items appear.
+
+Use numbered lists where order matters.
+
+Do not over-format every sentence.
+
+33. IMPROVE HEADINGS
+Where useful, replace vague headings such as:
+
+"General"
+
+with clearer headings such as:
+
+"Responsibilities"
+"Submission Requirements"
+"Approval Process"
+
+Only when supported by the content.
+
+34. IMPROVE EMAILS
+For emails, structure where relevant:
+
+Purpose
+Essential context
+Required action
+Deadline
+Closing
+
+Avoid unnecessary formality.
+
+35. IMPROVE MEMOS / ANNOUNCEMENTS
+Highlight:
+
+What is changing
+Who is affected
+When it starts
+What employees must do
+Where to get help
+
+36. IMPROVE REPORTS
+For reports, simplify:
+
+Background
+Finding
+Evidence
+Impact
+Recommendation
+Action
+
+Do not remove important evidence.
+
+37. IMPROVE SOPs
+For SOPs, keep:
+
+Purpose
+Scope
+Responsibility
+Procedure
+Controls
+Records
+Escalation
+
+where relevant.
+
+Make procedural steps action-oriented.
+
+38. IMPROVE POLICIES
+For policies, preserve:
+
+Requirement
+Applicability
+Responsibility
+Exception
+Approval
+Consequence
+
+Do not weaken mandatory rules.
+
+39. IMPROVE MEETING NOTES
+Convert unclear notes into:
+
+Decision
+Action
+Owner
+Deadline
+Open issue
+
+Use "Owner to be confirmed" or "Date to be confirmed" when missing.
+
+40. IMPROVE INSTRUCTIONS
+For instructions:
+
+Start each step with a clear action.
+Keep one major action per step.
+Put warnings before the action they affect where possible.
+
+41. ADAPT TO THE AUDIENCE
+For general employees:
+Use clearer explanations and less jargon.
+
+For managers:
+Keep concise, decision-focused wording.
+
+For technical professionals:
+Preserve necessary detail and terminology.
+
+For customers:
+Avoid internal jargon.
+
+42. PRESERVE PROFESSIONAL TONE
+Simplified does not mean casual.
+
+Avoid slang unless explicitly requested.
+
+43. HUMANIZE THE WRITING
+Avoid robotic structures such as repeated:
+
+"Furthermore"
+"Moreover"
+"Additionally"
+
+Use natural transitions.
+
+Do not artificially add personality to formal documents.
+
+44. REMOVE AI-LIKE WORDINESS
+Watch for:
+
+Excessive qualifiers
+Long introductions
+Repeated summaries
+Generic conclusions
+Unnecessary headings
+Overuse of em dashes
+Overly polished corporate phrases
+
+Keep the writing natural.
+
+45. IMPROVE SCANNABILITY
+Where appropriate use:
+
+Short paragraphs
+Meaningful headings
+Bullets
+Whitespace
+Clear action statements
+
+46. PRESERVE IMPORTANT EMPHASIS
+If the original document clearly emphasizes a critical warning or deadline, maintain appropriate emphasis.
+
+Do not exaggerate minor information.
+
+47. PROVIDE A CLEAN VERSION
+Produce the final simplified document without editing notes inside it.
+
+48. PROVIDE A CHANGE SUMMARY
+After the clean version, briefly explain major changes such as:
+
+Shortened repeated sections
+Simplified sentence structure
+Clarified actions
+Improved headings
+Preserved technical terminology
+
+Do not provide a word-by-word change log unless requested.
+
+49. FLAG CONTENT RISKS
+Separately list any:
+
+Contradictions
+Missing ownership
+Missing dates
+Ambiguous requirements
+Potentially sensitive wording
+Technical meaning requiring verification
+
+Do not mix these warnings into the final rewritten document unless necessary.
+
+50. PROVIDE TWO LENGTH OPTIONS
+Where useful provide:
+
+STANDARD VERSION
+Clear, complete simplified document.
+
+SHORT VERSION
+More concise version retaining essential information.
+
+Do not produce a short version if shortening would remove necessary detail.
+
+51. PROVIDE A QUICK-READ SUMMARY
+For longer documents, optionally provide:
+
+Purpose:
+Key requirements:
+Main actions:
+Important deadlines:
+Owner / responsibility:
+
+Use only information contained in the document.
+
+52. READABILITY CHECK
+Review the simplified version for:
+
+Sentence length
+Paragraph length
+Jargon
+Unclear pronouns
+Repeated ideas
+Buried actions
+Undefined terminology
+
+53. ACCURACY CHECK
+Compare the simplified version against the original.
+
+Verify:
+
+No number changed
+No deadline changed
+No responsibility changed
+No control removed
+No technical meaning changed
+No new fact added
+No important requirement lost
+
+54. ACTIONABILITY CHECK
+Ask:
+
+Can the reader tell what they need to do?
+Can they tell when?
+Can they tell who is responsible?
+Can they identify important conditions?
+Can they find critical requirements quickly?
+
+55. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- meaning is preserved
+- facts are unchanged
+- language is simpler
+- unnecessary words are removed
+- structure is clearer
+- actions are visible
+- important terms remain
+- requirements have not been weakened
+- ambiguity has been flagged
+- no missing information was invented
+
+OUTPUT FORMAT:
+
+1. Document Purpose
+2. Simplified Version
+3. Short Version — if appropriate
+4. Quick-Read Summary — if useful
+5. Important Information Preserved
+6. Clarifications Needed
+7. Potential Contradictions / Risks
+8. Summary of Improvements
+
+IMPORTANT:
+- Do not invent or change facts.
+- Preserve all supplied dates, numbers, responsibilities and requirements.
+- Do not weaken mandatory wording.
+- Do not remove safety, financial, quality, legal or compliance controls for simplicity.
+- Do not redesign the underlying process unless specifically requested.
+- Flag missing or contradictory information instead of guessing.
+- Preserve necessary technical terminology.
+- Keep the final writing professional and natural.
+- Remove unnecessary complexity without removing necessary detail.
+- Make actions, ownership and deadlines easier to find.
+- Compare the final simplified version with the original before completing the response.`;
+
+const steps = [
+  {
+    title: "Identify what must stay",
+    description:
+      "Separate the document's purpose, critical facts, responsibilities, controls and required actions from background wording that can safely be simplified.",
+  },
+  {
+    title: "Reduce unnecessary complexity",
+    description:
+      "Shorten long sentences, remove repetition and replace unnecessary jargon while preserving technical and mandatory wording where it matters.",
+  },
+  {
+    title: "Make actions easier to find",
+    description:
+      "Improve headings, lists, sequence and responsibility wording so readers can quickly understand what they need to do and when.",
+  },
+  {
+    title: "Verify against the original",
+    description:
+      "Check that simplification has not changed facts, numbers, deadlines, ownership, controls or the intended meaning of the document.",
+  },
+];
+
+const example = {
+  input: [
+    "Document type: Internal email.",
+    "Audience: Department employees.",
+    "Original: 'Please be advised that, effective from Monday, it will be necessary for all members of the department to ensure that completed weekly reports are forwarded to the undersigned no later than 2:00 PM each Thursday in order to facilitate the timely preparation of the consolidated management report.'",
+    "Required information: Effective Monday, all employees must submit completed weekly reports to the manager by 2:00 PM every Thursday.",
+    "Tone: Professional and clear.",
+  ],
+
+  output: [
+    "Simplified version: 'Starting Monday, please submit your completed weekly report to the manager by 2:00 PM every Thursday. This allows the consolidated management report to be prepared on time.'",
+    "The simplified version preserves the effective date, responsibility, weekly requirement, 2:00 PM deadline and reason for the request.",
+    "Unnecessary phrases such as 'please be advised that,' 'it will be necessary' and 'in order to facilitate' were removed without changing the instruction.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Simpler doesn't mean less accurate",
+    description:
+      "Keep every fact, deadline, responsibility and critical requirement intact while removing only the complexity that makes the document harder to understand.",
+  },
+  {
+    title: "Don't hide actions in paragraphs",
+    description:
+      "If someone needs to do something, make the action, owner and timing easy to locate instead of expecting the reader to extract them from dense text.",
+  },
+  {
+    title: "Flag uncertainty instead of guessing",
+    description:
+      "When a document contains unclear ownership, conflicting instructions or undefined terms, identify the problem rather than allowing AI to silently invent the missing meaning.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Work Document Simplifier Prompt | KRIYANO"
+  description="Simplify emails, SOPs, reports, policies, instructions and other workplace documents while preserving important facts, responsibilities, deadlines and controls."
+>
+  <PromptPage
+    category="WORK & PRODUCTIVITY"
+    title="Work Document"
+    accentTitle="Simplifier."
+    description="Turn dense workplace documents into clearer, easier-to-read versions while preserving the facts, responsibilities, requirements and controls that actually matter."
+    meta={[
+      "Free prompt",
+      "Document simplification",
+      "Plain language",
+    ]}
+    bestFor={[
+      "Emails",
+      "SOPs",
+      "Reports",
+      "Policies",
+      "Work instructions",
+      "Internal communication",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Make documents easier to understand without changing what they mean."
+    introDescription="Remove unnecessary complexity, improve structure and surface important actions while protecting the facts, deadlines, responsibilities and mandatory requirements in the original document."
+    steps={steps}
+    exampleTitle="Turn formal workplace wording into clear communication."
+    example={example}
+    tipsTitle="Simplify without losing meaning."
+    tips={tips}
+    sidebarTitle="Need a completely new document instead?"
+    sidebarDescription="Use KRIYANO's Professional Email Writer or SOP Creation Prompt when you need to create new workplace content rather than simplify an existing document."
+    warningTitle="Always verify critical documents against the original"
+    warningText="Simplification can accidentally alter responsibilities, deadlines, technical requirements or mandatory wording. Documents involving safety, legal, financial, compliance or formal policy requirements should be checked carefully before the simplified version replaces the original."
+  />
+</BaseLayout>

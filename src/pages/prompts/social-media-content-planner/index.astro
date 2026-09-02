@@ -1,0 +1,185 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced social media content strategist and content planner.
+
+TASK:
+Create a practical social media content plan based on the information below.
+
+BRAND / BUSINESS / CREATOR:
+[Describe the business, brand, professional profile or creator.]
+
+INDUSTRY / NICHE:
+[Example: restaurant, logistics, fitness, finance, beauty, education, technology.]
+
+TARGET AUDIENCE:
+[Describe the people you want to reach.]
+
+PRIMARY GOAL:
+[Example: build awareness, educate the audience, generate leads, increase engagement, promote products, grow followers.]
+
+PLATFORMS:
+[Example: LinkedIn, Facebook, Instagram, TikTok, YouTube.]
+
+CONTENT PERIOD:
+[Example: 7 days, 14 days, 30 days.]
+
+POSTING FREQUENCY:
+[Example: 3 posts per week, 5 posts per week, daily.]
+
+BRAND VOICE:
+[Example: professional, friendly, educational, authoritative, conversational, humorous.]
+
+MAIN TOPICS / CONTENT PILLARS:
+- [Topic 1]
+- [Topic 2]
+- [Topic 3]
+- [Topic 4]
+
+PRODUCTS / SERVICES / OFFERS:
+[Describe anything that should be promoted.]
+
+IMPORTANT DATES / EVENTS:
+[Launches, promotions, holidays, industry events or deadlines.]
+
+CONTENT TYPES TO USE:
+[Example: educational posts, short videos, carousels, infographics, stories, polls, case studies.]
+
+SPECIAL REQUIREMENTS:
+[List anything else the plan should consider.]
+
+RESPONSE REQUIREMENTS:
+- Create content around the audience's real interests, questions and problems.
+- Balance educational, engaging, trust-building and promotional content.
+- Avoid making every post a sales post.
+- Avoid repeating the same idea with slightly different wording.
+- Adapt ideas to the selected social media platforms.
+- Use clear, practical content ideas rather than vague topics.
+- Include a strong hook or angle for each post.
+- Suggest an appropriate call to action where relevant.
+- Do not invent facts, testimonials, statistics or business achievements.
+- Keep the plan realistic for the stated posting frequency.
+
+OUTPUT FORMAT:
+
+Create a content calendar with:
+
+1. Day / Date
+2. Platform
+3. Content Pillar
+4. Post Topic
+5. Hook / Opening Angle
+6. Content Format
+7. Key Points to Cover
+8. Call to Action
+9. Content Goal
+
+After the calendar, also provide:
+
+10. Recommended Content Mix
+11. Reusable Content Ideas
+12. Engagement Opportunities
+13. Topics to Avoid Repeating
+14. Suggestions for Repurposing Strong Posts
+
+Before finalizing, check that the content plan is varied, useful to the target audience and aligned with the stated business or creator goal.`;
+
+const steps = [
+  {
+    title: "Define your audience",
+    description:
+      "Describe who you want to reach, what they care about and the problems or interests your content should address.",
+  },
+  {
+    title: "Choose a clear goal",
+    description:
+      "Decide whether the plan should primarily build awareness, educate, generate leads, increase engagement or support sales.",
+  },
+  {
+    title: "Set content pillars",
+    description:
+      "Choose a few recurring topics that represent what your brand or profile should become known for.",
+  },
+  {
+    title: "Set a realistic schedule",
+    description:
+      "Choose platforms and a posting frequency you can actually maintain instead of creating an unnecessarily large calendar.",
+  },
+];
+
+const example = {
+  input: [
+    "Brand: Small inventory-management consultancy.",
+    "Audience: Small-business owners, warehouse supervisors and inventory professionals.",
+    "Goal: Build professional authority and generate enquiries.",
+    "Platform: LinkedIn.",
+    "Frequency: 3 posts per week for 4 weeks.",
+    "Content pillars: Inventory control, warehouse operations, practical Excel tips and common stock-management mistakes.",
+  ],
+
+  output: [
+    "Post Topic: Five reasons physical stock may not match the system quantity.",
+    "Hook: Before adjusting a stock discrepancy, check these five areas first.",
+    "Format: Educational carousel or infographic.",
+    "Key Points: Receiving errors, picking transactions, transfers, wrong locations and pending system transactions.",
+    "CTA: Ask readers which cause they encounter most often.",
+    "Goal: Education, authority and professional engagement.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Start with audience problems",
+    description:
+      "Useful content usually performs better when it answers a real question or solves a recognizable problem.",
+  },
+  {
+    title: "Mix your content",
+    description:
+      "Combine education, engagement, authority, storytelling and promotion instead of repeatedly publishing direct sales messages.",
+  },
+  {
+    title: "Plan for repurposing",
+    description:
+      "A strong article, video or educational post can often become a carousel, short video, infographic or follow-up post.",
+  },
+];
+---
+
+<BaseLayout
+  title="Social Media Content Planner Prompt | KRIYANO"
+  description="Create practical social media content calendars with this structured AI prompt for businesses, professionals and creators."
+>
+  <PromptPage
+    category="CREATORS & MARKETING"
+    title="Social Media"
+    accentTitle="Content Planner."
+    description="Turn your audience, goals and content pillars into a structured social media plan with useful post ideas, hooks and calls to action."
+    meta={[
+      "Free prompt",
+      "Content planning",
+      "Multi-platform",
+    ]}
+    bestFor={[
+      "Small businesses",
+      "Professional brands",
+      "LinkedIn content",
+      "Facebook and Instagram",
+      "Content creators",
+      "Marketing teams",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Define the audience. Build the calendar."
+    introDescription="Replace the bracketed sections with your brand, audience, platforms and goals. The more specific your content pillars are, the more useful the plan becomes."
+    steps={steps}
+    exampleTitle="Turn a business goal into useful content."
+    example={example}
+    tipsTitle="Build a stronger content plan."
+    tips={tips}
+    sidebarTitle="Need a custom content prompt?"
+    sidebarDescription="Use the KRIYANO Prompt Builder to create a prompt around your exact platform, audience, tone, content format and objective."
+    warningTitle="Publishing tip"
+    warningText="Review AI-generated content before publishing. Verify factual claims, statistics, dates, product information and anything specific to your brand."
+  />
+</BaseLayout>

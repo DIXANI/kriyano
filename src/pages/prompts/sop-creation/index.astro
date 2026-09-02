@@ -1,0 +1,155 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced operations and process-improvement specialist.
+
+TASK:
+Create a clear, practical Standard Operating Procedure (SOP) for the process described below.
+
+PROCESS / TASK:
+[Describe the process, activity or task.]
+
+OBJECTIVE:
+[Explain what the SOP should achieve.]
+
+SCOPE:
+[Define where, when and to whom this SOP applies.]
+
+RESPONSIBLE ROLES:
+[List the roles or departments involved.]
+
+INPUTS / REQUIREMENTS:
+[List any documents, tools, systems, materials or information required.]
+
+PROCESS STEPS:
+[Provide any known process steps, even if incomplete.]
+
+RISKS / CONTROL POINTS:
+[List important risks, quality checks, safety requirements, approvals or control points.]
+
+EXCEPTIONS:
+[Describe known exceptions, unusual cases or escalation requirements.]
+
+OUTPUT / COMPLETION CRITERIA:
+[Explain what should be completed or verified at the end.]
+
+RESPONSE REQUIREMENTS:
+- Use clear and practical language.
+- Write for employees who may be unfamiliar with the process.
+- Organize the SOP in a professional structure.
+- Use numbered steps for the main procedure.
+- Separate responsibilities, controls and escalation points.
+- Highlight critical warnings or checks where relevant.
+- Do not invent company-specific policies that were not provided.
+- Clearly identify missing information that should be confirmed.
+
+OUTPUT FORMAT:
+
+1. SOP Title
+2. Purpose
+3. Scope
+4. Roles and Responsibilities
+5. Required Tools / Documents / Inputs
+6. Procedure
+7. Quality / Control Checks
+8. Exceptions and Escalation
+9. Records / Documentation
+10. Completion Criteria
+11. Missing Information / Assumptions
+
+Before finalizing, review the SOP for clarity, logical sequence, operational practicality and consistency.`;
+
+const steps = [
+  {
+    title: "Describe the task",
+    description:
+      "Explain what employees actually do, rather than only giving the process name.",
+  },
+  {
+    title: "Define responsibility",
+    description:
+      "Identify who performs the activity, who verifies it and who handles exceptions or approvals.",
+  },
+  {
+    title: "Add controls and risks",
+    description:
+      "Include important checks, documentation requirements, safety controls and error-prevention points.",
+  },
+  {
+    title: "Review before implementation",
+    description:
+      "AI can structure the procedure, but the final SOP should be reviewed against your actual workplace process and policies.",
+  },
+];
+
+const example = {
+  input: [
+    "Process: Receiving supplier deliveries into a warehouse.",
+    "Objective: Ensure received goods match the purchase order and are entered correctly into the system.",
+    "Roles: Receiving clerk, warehouse supervisor and inventory controller.",
+    "Controls: Check quantity, SKU, visible damage, documentation and system receipt before put-away.",
+  ],
+
+  output: [
+    "Purpose: Ensure all incoming supplier deliveries are accurately checked, documented and received into inventory.",
+    "Responsibility: Receiving Clerk — physical verification and system receipt. Supervisor — exception approval. Inventory Controller — discrepancy investigation.",
+    "Procedure: Verify delivery documents → inspect goods → count quantities → compare with PO → record discrepancies → complete system receipt → release goods for put-away.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Use real workflow details",
+    description:
+      "Include actual roles, systems, documents and approval steps instead of keeping the description generic.",
+  },
+  {
+    title: "Include exceptions",
+    description:
+      "Good SOPs explain what happens when something goes wrong, not only the normal process.",
+  },
+  {
+    title: "Validate every control",
+    description:
+      "Confirm that safety, legal, quality and company-specific requirements match your real organization.",
+  },
+];
+---
+
+<BaseLayout
+  title="SOP Creation Prompt | KRIYANO"
+  description="Create clear, practical Standard Operating Procedures with this structured AI prompt for operations, business and workplace processes."
+>
+  <PromptPage
+    category="OPERATIONS & BUSINESS"
+    title="SOP Creation"
+    accentTitle="Prompt."
+    description="Turn a rough process, workflow or task into a structured, practical Standard Operating Procedure."
+    meta={[
+      "Free prompt",
+      "Operations focused",
+      "Works with major AI assistants",
+    ]}
+    bestFor={[
+      "Warehouse procedures",
+      "Inventory processes",
+      "Office workflows",
+      "Customer-service procedures",
+      "Quality-control processes",
+      "Small-business operations",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Give AI the process. Get a structured SOP."
+    introDescription="Replace the bracketed sections with information about your process. Even incomplete notes can be used as a starting point."
+    steps={steps}
+    exampleTitle="From rough notes to an SOP."
+    example={example}
+    tipsTitle="Better input creates better procedures."
+    tips={tips}
+    sidebarTitle="Build a custom prompt."
+    sidebarDescription="Use the KRIYANO Prompt Builder to structure a prompt around your exact workflow, audience, context and requirements."
+    warningTitle="Important"
+    warningText="Treat AI-generated SOPs as drafts. Verify them against actual company policy, regulations, safety requirements and operational practice before implementation."
+  />
+</BaseLayout>

@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptCategoryPage from "../../../components/PromptCategoryPage.astro";
+
+const prompts = [
+  {
+    title: "SOP Creation Prompt",
+    description:
+      "Turn a warehouse, logistics or operational process into a clear and structured Standard Operating Procedure.",
+    category: "Procedures",
+    href: "/prompts/sop-creation/",
+  },
+  {
+    title: "Inventory Discrepancy Investigation",
+    description:
+      "Investigate physical-versus-system stock differences using a structured warehouse and inventory-control workflow.",
+    category: "Inventory",
+    href: "/prompts/inventory-discrepancy-investigation/",
+  },
+  {
+    title: "Root Cause Analysis Prompt",
+    description:
+      "Investigate an operational problem systematically and identify likely causes, evidence, corrective actions and prevention measures.",
+    category: "Problem Solving",
+    href: "/prompts/root-cause-analysis/",
+  },
+  {
+    title: "Warehouse Process Improvement",
+    description:
+      "Review a warehouse workflow for delays, unnecessary movement, errors, control gaps and practical improvement opportunities.",
+    category: "Improvement",
+    href: "/prompts/warehouse-process-improvement/",
+  },
+  {
+    title: "Inventory Report Analysis",
+    description:
+      "Analyze inventory data, trends, variances and exceptions and turn them into practical findings and recommended actions.",
+    category: "Reporting",
+    href: "/prompts/inventory-report-analysis/",
+  },
+  {
+    title: "Receiving Discrepancy Investigation",
+    description:
+      "Investigate quantity, SKU, damage, documentation and system-posting issues found during inbound receiving.",
+    category: "Receiving",
+    href: "/prompts/receiving-discrepancy-investigation/",
+  },
+  {
+    title: "Stock Count Planning Prompt",
+    description:
+      "Create a structured plan for cycle counts or physical inventory covering scope, responsibilities, controls and reconciliation.",
+    category: "Stock Control",
+    href: "/prompts/stock-count-planning/",
+  },
+  {
+    title: "Warehouse KPI Analysis Prompt",
+    description:
+      "Review warehouse KPIs, identify performance gaps and convert operational data into practical improvement priorities.",
+    category: "Performance",
+    href: "/prompts/warehouse-kpi-analysis/",
+  },
+  {
+    title: "Warehouse Safety Review Prompt",
+    description:
+      "Review warehouse activities for operational hazards, control gaps, unsafe practices and areas requiring further assessment.",
+    category: "Safety",
+    href: "/prompts/warehouse-safety-review/",
+  },
+  {
+    title: "Corrective Action Plan Prompt",
+    description:
+      "Turn an operational finding, audit issue or repeated problem into clear corrective actions, responsibilities and follow-up checks.",
+    category: "Corrective Action",
+   href: "/prompts/corrective-action-plan/",
+  },
+];
+---
+
+<BaseLayout
+  title="Operations & Logistics AI Prompts | KRIYANO"
+  description="Practical AI prompts for warehouse operations, logistics, inventory control, SOPs, discrepancy investigations, KPIs and process improvement."
+>
+  <PromptCategoryPage
+    kicker="OPERATIONS & LOGISTICS"
+    title="AI prompts for"
+    accentTitle="real operations."
+    description="Practical prompts for warehouse operations, inventory control, logistics, process improvement, investigations and operational reporting."
+    prompts={prompts}
+  />
+</BaseLayout>

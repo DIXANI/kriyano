@@ -1,0 +1,148 @@
+    ---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as a structured research and comparison specialist.
+
+TASK:
+Research and compare the following options, products, services, strategies or alternatives.
+
+TOPIC:
+[What are you comparing?]
+
+OPTIONS TO COMPARE:
+- [Option 1]
+- [Option 2]
+- [Option 3]
+
+PURPOSE:
+[Explain why you are comparing them and what decision you need to make.]
+
+TARGET USER / SITUATION:
+[Who is this comparison for? Describe the user, business, project or use case.]
+
+COMPARISON CRITERIA:
+- [Criterion 1]
+- [Criterion 2]
+- [Criterion 3]
+- [Criterion 4]
+
+IMPORTANT CONSTRAINTS:
+[Budget, location, deadlines, technical requirements, availability, compatibility or other limits.]
+
+RESEARCH REQUIREMENTS:
+- Separate verified facts from assumptions.
+- Identify where information may be outdated, uncertain or incomplete.
+- Do not invent specifications, prices, statistics or claims.
+- When current information is required, clearly indicate what should be verified from reliable sources.
+- Consider both advantages and disadvantages.
+- Avoid recommending an option only because it is the most popular.
+- Evaluate each option against the actual criteria and use case.
+
+OUTPUT FORMAT:
+
+1. Executive Summary
+2. Comparison Table
+3. Option-by-Option Analysis
+4. Advantages and Disadvantages
+5. Key Differences
+6. Risks / Limitations
+7. Best Choice by Use Case
+8. Final Recommendation
+9. Information That Should Be Verified
+
+For the final recommendation, explain WHY the recommended option is the strongest fit based on the stated requirements.`;
+
+const steps = [
+  {
+    title: "Define the decision",
+    description:
+      "Explain what you are trying to choose and why the comparison matters. This keeps the research focused on the real decision.",
+  },
+  {
+    title: "Set clear criteria",
+    description:
+      "List the factors that actually matter, such as price, ease of use, features, reliability, compatibility or long-term cost.",
+  },
+  {
+    title: "Add your constraints",
+    description:
+      "Include budget, location, deadlines, technical requirements or anything else that could rule out an otherwise good option.",
+  },
+  {
+    title: "Verify important claims",
+    description:
+      "For prices, availability, regulations and other changing information, check reliable current sources before making a final decision.",
+  },
+];
+
+const example = {
+  input: [
+    "Topic: Compare three website hosting options for a small content and tools website.",
+    "Options: Cloudflare Pages, GitHub Pages, Netlify.",
+    "Purpose: Choose a free-first hosting platform that can support future growth.",
+    "Criteria: Cost, deployment workflow, custom domains, performance and future serverless capabilities.",
+  ],
+
+  output: [
+    "Executive Summary: Compare the three platforms against the stated requirements rather than ranking them generically.",
+    "Comparison Table: Show cost, deployment method, custom-domain support, performance considerations and expansion options side by side.",
+    "Recommendation: Identify the strongest fit for the stated use case and explain the trade-offs that influenced the decision.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Compare against a use case",
+    description:
+      "A product or service is not simply 'best'. It is best for a particular situation, budget and set of requirements.",
+  },
+  {
+    title: "Ask for uncertainty",
+    description:
+      "Tell the AI to flag missing, outdated or uncertain information instead of filling gaps with confident-sounding guesses.",
+  },
+  {
+    title: "Weight important criteria",
+    description:
+      "If one factor matters more than the others, state that clearly so the final recommendation reflects your real priorities.",
+  },
+];
+---
+
+<BaseLayout
+  title="Research & Comparison Prompt | KRIYANO"
+  description="Use this structured AI prompt to research, compare and evaluate products, services, strategies and alternatives using clear criteria."
+>
+  <PromptPage
+    category="RESEARCH & ANALYSIS"
+    title="Research & Comparison"
+    accentTitle="Prompt."
+    description="Compare options using clear criteria, evidence, trade-offs and a recommendation built around your actual use case."
+    meta={[
+      "Free prompt",
+      "Research focused",
+      "Decision support",
+    ]}
+    bestFor={[
+      "Product comparisons",
+      "Software evaluation",
+      "Business decisions",
+      "Service comparisons",
+      "Strategy evaluation",
+      "Purchase research",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Define the options. Compare what matters."
+    introDescription="Replace the bracketed sections with the alternatives, criteria and constraints relevant to your decision."
+    steps={steps}
+    exampleTitle="Turn a broad comparison into structured research."
+    example={example}
+    tipsTitle="Make comparisons more useful."
+    tips={tips}
+    sidebarTitle="Need a different research structure?"
+    sidebarDescription="Use the KRIYANO Prompt Builder to create a research prompt around your exact topic, criteria, audience and required output."
+    warningTitle="Research note"
+    warningText="AI can organize and analyze information, but time-sensitive facts such as prices, availability, laws and product specifications should be verified using current reliable sources."
+  />
+</BaseLayout>

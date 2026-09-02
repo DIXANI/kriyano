@@ -1,0 +1,787 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert YouTube content strategist, video planner and audience-retention editor.
+
+TASK:
+Create a clear, engaging and practical YouTube video outline for the supplied topic.
+
+The outline should help the creator:
+- deliver the promised value clearly
+- keep the video structured
+- avoid unnecessary filler
+- maintain audience interest
+- explain ideas in a logical order
+- include useful examples, visuals and transitions
+- end with a relevant next step
+
+Do NOT fabricate facts, statistics, stories, case studies, quotes, results or trends.
+
+VIDEO TOPIC:
+[What is the video about?]
+
+TARGET AUDIENCE:
+[Who is the video for?]
+
+AUDIENCE KNOWLEDGE LEVEL:
+[Beginner / intermediate / advanced / mixed.]
+
+VIDEO OBJECTIVE:
+[Educate / demonstrate / compare / explain / review / persuade / build authority / generate leads / other.]
+
+PRIMARY VIEWER PROBLEM:
+[What problem or question brings them to this video?]
+
+DESIRED VIEWER OUTCOME:
+[What should they understand or be able to do after watching?]
+
+VIDEO TYPE:
+[Tutorial / explainer / list / comparison / review / case study / documentary-style / commentary / demonstration / other.]
+
+APPROXIMATE VIDEO LENGTH:
+[For example: 5 minutes / 10 minutes / 15 minutes / flexible.]
+
+PLATFORM:
+YouTube
+
+CREATOR / BRAND:
+[Optional.]
+
+CREATOR EXPERTISE:
+[What can the creator genuinely speak about?]
+
+CORE MESSAGE:
+[Main point the video should communicate.]
+
+KEY POINTS TO INCLUDE:
+[List.]
+
+FACTS / EVIDENCE:
+[Provide verified facts, examples, data or source notes if available.]
+
+PRODUCT / SERVICE:
+[Optional.]
+
+CTA:
+[Subscribe / comment / visit website / download / buy / watch another video / other.]
+
+TONE:
+[Professional / conversational / practical / educational / energetic / calm / premium / other.]
+
+VISUAL RESOURCES:
+[Talking head / screen recording / B-roll / product demo / slides / diagrams / stock footage / other.]
+
+LIMITATIONS:
+[Time / equipment / no face / no B-roll / solo creator / other.]
+
+TOPICS OR CLAIMS TO AVOID:
+[Optional.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+OUTLINE REQUIREMENTS:
+
+1. IDENTIFY THE VIEWER PROMISE
+
+2. WRITE ONE CLEAR SENTENCE THAT DEFINES:
+What the viewer will get
+Why it matters
+
+3. DO NOT CREATE A PROMISE THE VIDEO CANNOT DELIVER
+
+4. IDENTIFY THE VIEWER'S STARTING POINT
+
+5. CONSIDER:
+Current knowledge
+Likely confusion
+Main question
+Urgency
+Decision stage
+
+6. CREATE A STRONG VIDEO STRUCTURE
+
+7. DEFAULT STRUCTURE:
+Opening
+Context
+Main sections
+Practical example
+Summary
+CTA
+
+8. ADAPT THE STRUCTURE TO THE VIDEO TYPE
+
+9. DO NOT FORCE A LIST FORMAT WHEN THE TOPIC NEEDS A PROCESS OR EXPLANATION
+
+10. CREATE AN OPENING HOOK
+
+11. THE HOOK SHOULD:
+Establish relevance quickly
+Make the subject clear
+Create a reason to continue
+
+12. DO NOT USE MISLEADING CLICKBAIT
+
+13. AVOID EMPTY OPENINGS SUCH AS:
+"Hey guys, welcome back..."
+"Before we start, make sure you subscribe..."
+
+unless specifically requested.
+
+14. GET TO THE SUBJECT QUICKLY
+
+15. CREATE A PROMISE / PAYOFF STATEMENT
+
+16. EXAMPLE:
+"By the end of this video, you'll know where to investigate before making a stock adjustment."
+
+17. DO NOT OVERPROMISE
+
+18. CREATE CONTEXT ONLY WHEN NEEDED
+
+19. KEEP BACKGROUND SHORT
+
+20. DO NOT DELAY THE MAIN VALUE WITH A LONG INTRODUCTION
+
+21. BREAK THE VIDEO INTO LOGICAL SECTIONS
+
+22. EACH SECTION SHOULD HAVE:
+Purpose
+Main point
+Supporting explanation
+Example or evidence when useful
+Transition
+
+23. ORDER SECTIONS LOGICALLY
+
+24. POSSIBLE STRUCTURES:
+Problem → cause → solution
+Beginner → advanced
+Before → during → after
+Mistake → consequence → correction
+Question → evidence → answer
+Option A → option B → recommendation
+Step 1 → Step 2 → Step 3
+
+25. CHOOSE THE STRUCTURE THAT BEST FITS THE TOPIC
+
+26. CREATE SECTION TITLES
+
+27. SECTION TITLES SHOULD BE CLEAR, NOT OVERLY CLEVER
+
+28. CREATE TALKING POINTS
+
+29. TALKING POINTS SHOULD GUIDE THE CREATOR
+
+30. DO NOT WRITE A FULL SCRIPT UNLESS REQUESTED
+
+31. KEEP OUTLINE POINTS SPEAKABLE
+
+32. IDENTIFY IMPORTANT EXPLANATIONS
+
+33. EXPLAIN TERMS THAT BEGINNERS MAY NOT KNOW
+
+34. DO NOT OVEREXPLAIN BASIC TERMS TO ADVANCED AUDIENCES
+
+35. CREATE EXAMPLES
+
+36. EXAMPLES SHOULD MAKE THE IDEA PRACTICAL
+
+37. DO NOT INVENT REAL-WORLD RESULTS OR CUSTOMER STORIES
+
+38. USE HYPOTHETICAL EXAMPLES WHEN NECESSARY
+
+39. CLEARLY LABEL HYPOTHETICAL EXAMPLES
+
+40. CREATE DEMONSTRATION MOMENTS
+
+41. WHEN RELEVANT SHOW:
+Screen
+Product
+Process
+Before/after
+Calculation
+Checklist
+Workflow
+
+42. BEFORE/AFTER CLAIMS MUST BE REAL IF PRESENTED AS RESULTS
+
+43. CREATE VISUAL SUGGESTIONS
+
+44. FOR EACH MAIN SECTION RECOMMEND:
+Talking head
+B-roll
+Screen recording
+Graphic
+Diagram
+Text overlay
+Close-up
+Other
+
+45. VISUALS SHOULD SUPPORT THE MESSAGE
+
+46. DO NOT ADD RANDOM B-ROLL JUST TO FILL SPACE
+
+47. CREATE ON-SCREEN TEXT OPPORTUNITIES
+
+48. USE FOR:
+Key terms
+Numbers
+Steps
+Warnings
+Definitions
+Summary points
+
+49. DO NOT COVER THE SCREEN WITH TOO MUCH TEXT
+
+50. CREATE PATTERN INTERRUPTS CAREFULLY
+
+51. POSSIBLE:
+Camera change
+Visual demonstration
+Question
+Example
+Graphic
+Short recap
+
+52. PATTERN INTERRUPTS SHOULD SERVE THE CONTENT
+
+53. DO NOT ADD RANDOM EFFECTS FOR RETENTION
+
+54. CREATE TRANSITIONS
+
+55. TRANSITIONS SHOULD EXPLAIN WHY THE NEXT SECTION MATTERS
+
+56. EXAMPLE:
+"Now that we've confirmed the transaction history, the next place to check is receiving."
+
+57. AVOID REPETITIVE TRANSITIONS
+
+58. CREATE CURIOSITY BETWEEN SECTIONS
+
+59. CURIOSITY SHOULD COME FROM THE LOGICAL NEXT QUESTION
+
+60. DO NOT MANUFACTURE FALSE SUSPENSE
+
+61. MAINTAIN INFORMATION PROGRESSION
+
+62. DO NOT REPEAT THE SAME POINT IN MULTIPLE SECTIONS WITHOUT ADDING VALUE
+
+63. REMOVE FILLER
+
+64. FLAG SECTIONS THAT COULD BE SHORTENED
+
+65. CREATE RETENTION CHECKPOINTS
+
+66. ASK:
+At this point, what question is the viewer likely asking next?
+
+67. MAKE THE NEXT SECTION ANSWER IT
+
+68. CREATE AUDIENCE-SPECIFIC LANGUAGE
+
+69. MATCH:
+Vocabulary
+Examples
+Complexity
+Tone
+
+to the intended viewer.
+
+70. CREATE A PRACTICAL PAYOFF
+
+71. THE VIDEO SHOULD RESULT IN:
+Understanding
+Decision
+Action
+Skill
+Checklist
+Framework
+Next step
+
+when appropriate.
+
+72. CREATE A SUMMARY
+
+73. SUMMARY SHOULD:
+Reinforce the most important points
+Not repeat the whole video word-for-word
+
+74. CREATE A CTA
+
+75. CTA SHOULD MATCH THE VIDEO INTENT
+
+76. EDUCATIONAL VIDEO:
+Watch next
+Download
+Save
+Subscribe
+
+77. PRODUCT VIDEO:
+Learn more
+Try
+Compare
+Visit
+
+78. COMMUNITY VIDEO:
+Comment
+Share experience
+Answer a question
+
+79. DO NOT FORCE MULTIPLE CTAS
+
+80. DEFAULT TO ONE PRIMARY CTA
+
+81. CREATE A NEXT-VIDEO OPPORTUNITY
+
+82. IDENTIFY A NATURAL FOLLOW-UP TOPIC
+
+83. EXAMPLE:
+Current video: stock discrepancy investigation
+Next video: cycle count process
+
+84. CREATE TITLE DIRECTION
+
+85. PROVIDE TITLE OPTIONS THAT ACCURATELY REFLECT THE VIDEO
+
+86. DO NOT USE FALSE URGENCY OR EXAGGERATED CLAIMS
+
+87. CREATE THUMBNAIL DIRECTION
+
+88. THUMBNAIL IDEA SHOULD:
+Communicate topic visually
+Be understandable quickly
+Complement the title
+
+89. DO NOT SIMPLY REPEAT THE FULL TITLE ON THE THUMBNAIL
+
+90. DO NOT INVENT VISUAL PROOF
+
+91. CREATE DESCRIPTION SUMMARY
+
+92. WRITE A SHORT YOUTUBE DESCRIPTION INTRO
+
+93. DO NOT KEYWORD-STUFF
+
+94. CREATE CHAPTER IDEAS
+
+95. FOR LONGER VIDEOS PROVIDE LOGICAL CHAPTERS
+
+96. DO NOT INVENT EXACT TIMESTAMPS UNLESS VIDEO LENGTH AND timing are known.
+
+97. IF APPROXIMATE TIMESTAMPS ARE REQUESTED
+Label them as planning estimates.
+
+98. CREATE SHORTS / CLIP OPPORTUNITIES
+
+99. IDENTIFY SECTIONS THAT COULD BECOME SHORT-FORM CONTENT
+
+100. EACH CLIP SHOULD HAVE ONE COMPLETE IDEA
+
+101. DO NOT CUT A CLIP WHERE CONTEXT IS REQUIRED FOR ACCURACY
+
+102. CREATE COMMENT PROMPTS
+
+103. USE SPECIFIC QUESTIONS
+
+104. EXAMPLE:
+"Which area causes the most inventory discrepancies in your operation?"
+
+105. AVOID EMPTY:
+"What do you think?"
+
+106. CREATE FACT-CHECK FLAGS
+
+107. FLAG:
+Statistics
+Regulations
+Product specifications
+Current prices
+Platform features
+Health claims
+Financial claims
+Legal claims
+Safety claims
+
+108. DO NOT INVENT SOURCES
+
+109. IDENTIFY CLAIMS THAT REQUIRE EVIDENCE
+
+110. CREATE SOURCE PLACEHOLDERS
+
+111. USE:
+[VERIFY SOURCE]
+
+when a claim requires verification.
+
+112. CREATE ALTERNATIVES IF EVIDENCE IS MISSING
+
+113. EXAMPLE:
+Instead of:
+"80% of stock errors happen during receiving"
+
+use:
+"Receiving is one area worth checking when investigating stock discrepancies"
+
+unless verified evidence supports the percentage.
+
+114. CREATE LENGTH CONTROL
+
+115. ESTIMATE RELATIVE TIME BY SECTION
+
+116. USE PERCENTAGES OR APPROXIMATE MINUTES
+
+117. DO NOT PRETEND THE ESTIMATE IS EXACT
+
+118. PRIORITIZE THE HIGHEST-VALUE INFORMATION
+
+119. IF VIDEO LENGTH IS SHORT
+Remove secondary detail.
+
+120. IF VIDEO LENGTH IS LONG
+Add examples, context, demonstrations and deeper analysis.
+
+121. CREATE BEGINNER VERSION WHEN NEEDED
+
+122. DEFINE TERMS
+
+123. REDUCE ASSUMED KNOWLEDGE
+
+124. CREATE ADVANCED VERSION WHEN NEEDED
+
+125. EMPHASIZE:
+Trade-offs
+Exceptions
+Decision criteria
+Optimization
+
+126. CREATE TUTORIAL STRUCTURE WHEN RELEVANT
+
+127. INCLUDE:
+Prerequisites
+Setup
+Steps
+Checkpoints
+Common mistakes
+Verification
+Next step
+
+128. CREATE COMPARISON STRUCTURE WHEN RELEVANT
+
+129. INCLUDE:
+Decision criteria
+Option A
+Option B
+Trade-offs
+Who each option suits
+Recommendation conditions
+
+130. DO NOT DECLARE A WINNER WITHOUT CONTEXT
+
+131. CREATE REVIEW STRUCTURE WHEN RELEVANT
+
+132. INCLUDE:
+Use case
+Testing criteria
+Strengths
+Weaknesses
+Limitations
+Who it suits
+
+133. DO NOT INVENT PRODUCT EXPERIENCE
+
+134. CREATE CASE-STUDY STRUCTURE ONLY WHEN REAL CASE INFORMATION EXISTS
+
+135. IF CASE DATA IS MISSING
+Use a hypothetical example instead.
+
+136. CREATE COMMENTARY STRUCTURE WHEN RELEVANT
+
+137. SEPARATE:
+Facts
+Interpretation
+Opinion
+
+138. DO NOT PRESENT OPINION AS VERIFIED FACT
+
+139. CREATE STORY STRUCTURE WHEN RELEVANT
+
+140. USE:
+Setup
+Problem
+Decision
+Action
+Outcome
+Lesson
+
+141. DO NOT INVENT PERSONAL STORIES
+
+142. CREATE A PRODUCTION NOTES SECTION
+
+143. INCLUDE:
+Important visuals
+Screen recordings
+Props
+Graphics
+B-roll
+On-screen text
+Source checks
+
+144. CREATE A PRE-RECORDING CHECKLIST
+
+145. CHECK:
+Hook
+Promise
+Facts
+Examples
+Visuals
+CTA
+Length
+Flow
+
+146. CREATE AN EDITING CHECKLIST
+
+147. CHECK:
+Dead space
+Repeated points
+Unnecessary intro
+Audio clarity
+Text readability
+Visual relevance
+Pacing
+CTA placement
+
+148. CREATE A RETENTION REVIEW
+
+149. IDENTIFY:
+Potential slow sections
+Information overload
+Weak transitions
+Delayed payoff
+Repetition
+
+150. SUGGEST SPECIFIC FIXES
+
+151. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- title direction matches the actual content
+- hook is truthful
+- viewer promise can be delivered
+- main sections are logically ordered
+- important questions are answered
+- examples are accurate or clearly hypothetical
+- unsupported facts are flagged
+- visual suggestions support the topic
+- filler is minimized
+- transitions are useful
+- CTA fits the video goal
+- video length is realistic
+- summary reinforces the key takeaway
+- next-video opportunity is relevant
+- outline is detailed enough to record from
+- outline is not unnecessarily scripted
+
+OUTPUT FORMAT:
+
+1. VIDEO STRATEGY SNAPSHOT
+Provide:
+Audience
+Viewer problem
+Desired outcome
+Video objective
+Recommended structure
+Core promise
+
+2. TITLE DIRECTIONS
+Provide 5–10 accurate title options.
+
+3. OPENING HOOK OPTIONS
+Provide 5 hook options.
+
+4. RECOMMENDED OPENING
+Provide:
+Spoken opening
+Visual
+On-screen text
+Viewer promise
+
+5. VIDEO OUTLINE
+
+For each section provide:
+Section title
+Purpose
+Key talking points
+Example / demonstration
+Visual suggestions
+Transition
+Approximate share of video length
+
+6. PRACTICAL EXAMPLE
+Develop the strongest useful example if relevant.
+
+7. RETENTION CHECKPOINTS
+Explain what question should pull the viewer into each next section.
+
+8. VISUAL PLAN
+List:
+Talking-head sections
+B-roll
+Screen recordings
+Graphics
+Text overlays
+Demonstrations
+
+9. FACT / CLAIM REVIEW
+List:
+Claim
+Evidence status
+Action needed
+
+10. SUMMARY
+Provide a concise ending summary.
+
+11. CTA
+Provide one primary CTA and an optional secondary CTA only if useful.
+
+12. NEXT VIDEO
+Recommend a natural follow-up video.
+
+13. THUMBNAIL DIRECTIONS
+Provide 3–5 visual concepts.
+
+14. DESCRIPTION INTRO
+Write a short accurate YouTube description introduction.
+
+15. CHAPTER STRUCTURE
+Provide logical chapter names.
+
+16. SHORT-FORM CLIP OPPORTUNITIES
+Identify 3–5 complete ideas that could become Shorts or Reels.
+
+17. COMMENT PROMPT
+Provide one specific audience question.
+
+18. PRODUCTION CHECKLIST
+
+19. EDITING CHECKLIST
+
+20. RETENTION RISKS
+Identify possible weak points and suggested fixes.
+
+21. FINAL RECOMMENDATION
+Summarize:
+Best title direction
+Best hook
+Most important section
+Best visual moment
+Best CTA
+
+IMPORTANT:
+- Do not fabricate facts, statistics, stories, trends or results.
+- Keep the hook aligned with the actual payoff.
+- Do not turn the outline into a full script unless requested.
+- Prioritize useful information over filler.
+- Make the outline practical enough for a creator to record from.`;
+
+const steps = [
+  {
+    title: "Define the viewer promise",
+    description:
+      "Start with the exact problem the viewer wants solved and the useful outcome the video can realistically deliver.",
+  },
+  {
+    title: "Build a logical information flow",
+    description:
+      "Arrange sections so each one answers the next natural viewer question instead of creating a collection of disconnected talking points.",
+  },
+  {
+    title: "Plan visuals with the message",
+    description:
+      "Match demonstrations, screen recordings, graphics and B-roll to specific explanations instead of adding visual changes purely for decoration.",
+  },
+  {
+    title: "Review retention and credibility",
+    description:
+      "Remove filler, strengthen weak transitions and flag any claims that require evidence before recording or publishing.",
+  },
+];
+
+const example = {
+  input: [
+    "Topic: What to do when physical stock does not match system stock.",
+    "Audience: Warehouse supervisors and inventory controllers.",
+    "Objective: Practical education.",
+    "Length: Around 8 minutes.",
+    "Format: Talking head with simple warehouse visuals and screen examples.",
+    "CTA: Visit an inventory variance tool.",
+  ],
+
+  output: [
+    "HOOK: 'Your count is short by 12 units. Before adjusting the stock, there are several places you should investigate.'",
+    "SECTION 1 — Confirm the count: Explain recounting, unit-of-measure checks and location verification.",
+    "SECTION 2 — Review transactions: Check receipts, transfers, picks, returns and adjustments around the discrepancy period.",
+    "SECTION 3 — Trace the process: Look for receiving, putaway, picking or dispatch errors that could explain the difference.",
+    "SECTION 4 — Decide on the correction: Explain why the cause should be documented before the final system adjustment.",
+    "VISUAL: Show a simple system quantity vs physical quantity example while explaining the investigation flow.",
+    "NEXT VIDEO: 'How to build a practical cycle count process for your warehouse.'",
+  ],
+};
+
+const tips = [
+  {
+    title: "The outline should answer the next question",
+    description:
+      "Good retention often comes from logical progression. When one section creates the viewer's next question, the following section should answer it.",
+  },
+  {
+    title: "Visuals need a reason",
+    description:
+      "Use screen recordings, graphics and B-roll where they make an explanation easier to understand, not simply because the video needs constant movement.",
+  },
+  {
+    title: "Keep the title, hook and payoff aligned",
+    description:
+      "If the title promises a process, comparison or answer, the outline should deliver that value clearly without delaying it behind unnecessary introduction.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="YouTube Video Outline Prompt | KRIYANO"
+  description="Create structured YouTube video outlines with strong hooks, logical sections, visual planning, retention checkpoints, fact checks and practical CTAs."
+>
+  <PromptPage
+    category="CREATORS"
+    title="YouTube Video Outline"
+    accentTitle="Prompt."
+    description="Plan clear, engaging YouTube videos with a truthful hook, logical section flow, useful visuals, retention checkpoints and a practical viewer payoff."
+    meta={[
+      "Free prompt",
+      "YouTube",
+      "Video planning",
+    ]}
+    bestFor={[
+      "YouTube creators",
+      "Tutorials",
+      "Explainer videos",
+      "Educational content",
+      "Reviews & comparisons",
+      "Professional channels",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Turn a video idea into a recordable structure."
+    introDescription="Define the viewer problem and payoff first, then build a logical sequence of talking points, examples, visuals and transitions without turning the outline into an unnecessarily rigid script."
+    steps={steps}
+    exampleTitle="Outline an educational warehouse video from hook to CTA."
+    example={example}
+    tipsTitle="Structure supports retention better than filler."
+    tips={tips}
+    sidebarTitle="Build the opening first"
+    sidebarDescription="Use KRIYANO's Hook Generator to test multiple YouTube opening angles, then use the Short-Form Video Script Prompt when you want to turn individual sections into shorter videos."
+    warningTitle="Keep the video promise accurate"
+    warningText="Titles and hooks should accurately represent what the video delivers. Verify statistics, current information, product claims and other fact-sensitive material before recording or publishing."
+  />
+</BaseLayout>

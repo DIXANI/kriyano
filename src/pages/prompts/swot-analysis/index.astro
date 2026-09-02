@@ -1,0 +1,920 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced business strategist and evidence-based SWOT analysis specialist.
+
+TASK:
+Create a practical SWOT analysis for the business, product, project or decision below.
+
+The goal is not to produce a generic four-box list. The analysis should distinguish internal factors from external factors, show what evidence supports each point, prioritize what matters most, connect the findings to strategy and identify what still needs validation.
+
+Do not invent market facts, competitor behavior, customer preferences, financial results, capabilities, risks or opportunities.
+
+Clearly separate:
+
+- confirmed facts
+- reasonable hypotheses
+- assumptions
+- unknowns requiring research
+
+BUSINESS / SUBJECT:
+[Business, product, project, department, idea or decision.]
+
+OBJECTIVE:
+[What decision or strategic question should the SWOT support?]
+
+MARKET:
+[Country / region / industry if relevant.]
+
+CUSTOMER:
+[Target customer or audience.]
+
+PRODUCT / SERVICE:
+[What is being offered.]
+
+CURRENT POSITION:
+[Describe current situation.]
+
+KNOWN STRENGTHS:
+[Internal advantages already known.]
+
+KNOWN WEAKNESSES:
+[Internal limitations already known.]
+
+KNOWN OPPORTUNITIES:
+[External opportunities already known.]
+
+KNOWN THREATS:
+[External threats already known.]
+
+COMPETITOR INFORMATION:
+[Known competitors or alternatives.]
+
+CUSTOMER INFORMATION:
+[Known customer needs, behavior, feedback or pain points.]
+
+FINANCIAL INFORMATION:
+[Revenue, cost, margin, budget or other known data if relevant.]
+
+OPERATIONAL INFORMATION:
+[People, systems, processes, capacity, suppliers, quality, etc.]
+
+MARKETING / SALES INFORMATION:
+[Channels, conversion, brand, sales performance, etc.]
+
+RESOURCES / CAPABILITIES:
+[Skills, assets, technology, relationships, experience, intellectual property, etc.]
+
+CONSTRAINTS:
+[Budget, time, regulation, capacity, geography, dependencies, etc.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+SWOT ANALYSIS REQUIREMENTS:
+
+1. DEFINE THE PURPOSE
+Before creating the SWOT, clearly state:
+
+Decision / objective:
+Scope:
+Time horizon:
+Business unit / product / market covered:
+
+Avoid analyzing areas outside the stated scope.
+
+2. APPLY THE INTERNAL VS EXTERNAL RULE
+Classify:
+
+STRENGTHS = Internal positive factors.
+WEAKNESSES = Internal negative factors.
+OPPORTUNITIES = External favorable factors.
+THREATS = External unfavorable factors.
+
+Do not place the same factor in several categories without explaining why.
+
+3. DISTINGUISH CONTROL
+For every factor identify whether it is:
+
+Directly controllable
+Partially controllable
+Not controllable
+
+This helps prevent external conditions from being mislabeled as internal weaknesses.
+
+4. ASSESS EVIDENCE
+For each factor provide:
+
+Factor:
+Category:
+Evidence:
+Evidence status:
+Strategic relevance:
+
+Evidence status should be:
+
+Confirmed
+Supported but incomplete
+Hypothesis
+Unknown
+
+Do not present a hypothesis as fact.
+
+5. IDENTIFY STRENGTHS
+Consider internal areas such as:
+
+Skills
+Experience
+Brand
+Customer relationships
+Processes
+Technology
+Cost position
+Quality
+Location
+Distribution
+Data
+Speed
+Service
+Intellectual property
+Team
+Supplier relationships
+Cash position
+Operational capability
+
+Only include factors that create a meaningful advantage.
+
+6. AVOID GENERIC STRENGTHS
+Do not automatically list:
+
+Good customer service
+Experienced team
+High quality
+Strong brand
+
+unless there is evidence or a clear basis.
+
+7. TEST EACH STRENGTH
+Ask:
+
+Does this actually create customer or business value?
+Is it difficult for competitors to match?
+Is it still relevant?
+Can it support the stated objective?
+
+Remove weak or meaningless strengths.
+
+8. IDENTIFY WEAKNESSES
+Consider internal limitations such as:
+
+Skill gaps
+Capacity
+High cost
+Poor process
+Dependency
+Low awareness
+Weak data
+Low conversion
+Slow service
+Limited funding
+Technology limitation
+Poor documentation
+Single supplier dependency
+
+Do not invent weaknesses simply to balance the matrix.
+
+9. DISTINGUISH ROOT WEAKNESS FROM SYMPTOM
+Example:
+
+Symptom:
+Late deliveries.
+
+Possible weakness:
+Poor order planning.
+
+Do not claim the root cause unless evidence supports it.
+
+10. IDENTIFY OPPORTUNITIES
+Consider external changes such as:
+
+Customer demand
+Market growth
+New segment
+Technology
+Regulation
+Distribution
+Partnership
+Competitor weakness
+Changing behavior
+New channel
+Geographic expansion
+Supplier development
+
+Do not describe an internal action as an opportunity.
+
+Incorrect:
+"Improve our website."
+
+Better external opportunity:
+"Growing customer use of online purchasing."
+
+Internal response:
+"Improve the website to capture the opportunity."
+
+11. TEST OPPORTUNITY REALITY
+For each opportunity ask:
+
+What evidence suggests it exists?
+Which customer or market does it affect?
+How large or important could it be?
+What capability is required to capture it?
+How quickly could it change?
+
+Do not invent market size.
+
+12. IDENTIFY THREATS
+Consider external factors such as:
+
+Competitor entry
+Price pressure
+Regulation
+Supply disruption
+Customer behavior change
+Technology change
+Economic pressure
+Substitution
+Labor shortage
+Currency movement
+Platform dependency
+Supplier concentration
+
+13. AVOID OVERSTATING THREATS
+Do not label every uncertainty as a threat.
+
+Separate:
+
+Actual threat
+Emerging threat
+Potential risk
+Unknown requiring monitoring
+
+14. IDENTIFY STATUS-QUO RISK
+Consider whether doing nothing creates risk.
+
+Examples:
+
+Customer expectations changing
+Cost increasing
+Technology becoming outdated
+Competitors improving
+
+15. REMOVE DUPLICATES
+Combine overlapping factors.
+
+Example:
+
+"Low brand awareness"
+and
+"Customers do not know us"
+
+may represent the same weakness.
+
+16. MAKE EACH FACTOR SPECIFIC
+Avoid:
+
+"Competition"
+
+Prefer:
+
+"Several established competitors already have stronger distribution relationships."
+
+Only if supported by evidence.
+
+17. EXPLAIN BUSINESS IMPACT
+For every major factor explain:
+
+Why it matters
+What it affects
+Potential consequence
+
+18. PRIORITIZE FACTORS
+Score each important factor using:
+
+Impact: 1–5
+Confidence: 1–5
+Urgency: 1–5
+
+If these scores are inferred, label them as provisional.
+
+19. CALCULATE PRIORITY SCORE
+Where useful:
+
+Priority Score = Impact × Confidence × Urgency
+
+Explain that this is a prioritization aid, not objective truth.
+
+20. DO NOT USE FALSE PRECISION
+Avoid decimal-heavy or overly precise scoring without evidence.
+
+21. IDENTIFY TOP FACTORS
+Select approximately:
+
+Top 3 strengths
+Top 3 weaknesses
+Top 3 opportunities
+Top 3 threats
+
+Use strategic importance, not list order.
+
+22. IDENTIFY CRITICAL ASSUMPTIONS
+For each major unverified factor provide:
+
+Assumption:
+Why it matters:
+How to validate:
+What changes if wrong:
+
+23. BUILD THE SWOT MATRIX
+Create four sections:
+
+STRENGTHS
+WEAKNESSES
+OPPORTUNITIES
+THREATS
+
+Each entry should include a short explanation.
+
+24. BUILD SO STRATEGIES
+Strength + Opportunity.
+
+Ask:
+
+How can existing strengths be used to capture external opportunities?
+
+For each strategy provide:
+
+Strength used
+Opportunity targeted
+Strategic action
+Expected benefit
+
+25. BUILD ST STRATEGIES
+Strength + Threat.
+
+Ask:
+
+How can strengths reduce exposure to external threats?
+
+26. BUILD WO STRATEGIES
+Weakness + Opportunity.
+
+Ask:
+
+What weakness must be improved to capture an opportunity?
+
+27. BUILD WT STRATEGIES
+Weakness + Threat.
+
+Ask:
+
+Where could an internal weakness increase exposure to an external threat?
+
+Identify defensive or risk-reduction actions.
+
+28. AVOID FORCED COMBINATIONS
+Do not create SO/ST/WO/WT strategies that have no logical connection.
+
+29. IDENTIFY STRATEGIC THEMES
+Group related findings into themes such as:
+
+Growth
+Cost
+Customer
+Operations
+Technology
+Capability
+Risk
+Market access
+
+30. IDENTIFY COMPETITIVE ADVANTAGE
+Where evidence supports it, identify strengths that may create meaningful differentiation.
+
+Do not automatically call every strength a competitive advantage.
+
+31. TEST SUSTAINABILITY
+Ask:
+
+Can competitors copy it?
+How quickly?
+Does it rely on one person or supplier?
+Does customer value support it?
+
+32. IDENTIFY CAPABILITY GAPS
+For opportunities, identify required:
+
+Skills
+People
+Technology
+Funding
+Partners
+Processes
+Capacity
+Data
+
+33. IDENTIFY DEPENDENCIES
+For each strategic action identify major dependencies.
+
+Examples:
+
+Approval
+Funding
+Technology
+Supplier
+Recruitment
+Data
+Customer research
+
+34. IDENTIFY CONSTRAINTS
+Consider:
+
+Budget
+Time
+Capacity
+Regulation
+Contract
+Technology
+Skill
+
+Do not recommend strategies that ignore known constraints.
+
+35. IDENTIFY RISK
+For each major strategic option provide:
+
+Risk:
+Likelihood:
+Impact:
+Mitigation:
+
+Use qualitative levels unless real probability data exists.
+
+36. DISTINGUISH SWOT FROM RISK REGISTER
+SWOT should identify strategic threats and weaknesses.
+
+Detailed operational risks can be listed separately if useful.
+
+37. CUSTOMER PERSPECTIVE
+Ask:
+
+Which strengths does the customer actually value?
+Which weaknesses affect customer experience?
+Which opportunities reflect changing customer needs?
+Which threats could change customer choice?
+
+38. FINANCIAL PERSPECTIVE
+Where data exists assess impact on:
+
+Revenue
+Margin
+Cost
+Cash flow
+Investment
+Profitability
+
+Do not invent financial impact.
+
+39. OPERATIONAL PERSPECTIVE
+Assess:
+
+Capacity
+Process
+Quality
+People
+Systems
+Suppliers
+Lead time
+Reliability
+
+40. MARKET PERSPECTIVE
+Assess:
+
+Demand
+Competition
+Substitution
+Channel
+Pricing
+Entry barriers
+
+41. TECHNOLOGY PERSPECTIVE
+Assess:
+
+Automation
+Digital adoption
+Cyber risk
+Platform dependency
+Obsolescence
+AI adoption
+
+Only where relevant.
+
+42. REGULATORY PERSPECTIVE
+Identify regulatory factors only from supplied or reliable evidence.
+
+Do not invent laws or compliance requirements.
+
+43. SUPPLIER PERSPECTIVE
+Where relevant assess:
+
+Supplier concentration
+Lead time
+Cost
+Quality
+Alternative supply
+Dependency
+
+44. PEOPLE PERSPECTIVE
+Assess internal:
+
+Skills
+Leadership
+Capacity
+Retention
+Training
+Succession
+
+Do not make unsupported claims about employee morale.
+
+45. SHORT-TERM VS LONG-TERM
+Classify important factors as:
+
+Immediate
+Near-term
+Long-term
+
+46. REVERSIBILITY
+For major strategic actions identify:
+
+Easy to reverse
+Moderately reversible
+Hard to reverse
+
+47. QUICK WINS
+Identify actions that:
+
+Use existing strengths
+Require relatively low effort
+Address a meaningful issue
+
+Do not label trivial work as strategic quick wins.
+
+48. BIG BETS
+Identify potentially high-impact actions requiring greater commitment.
+
+Explain evidence and risk requirements.
+
+49. NO-REGRET ACTIONS
+Where possible identify actions that are useful under several plausible future scenarios.
+
+50. AVOID ACTION OVERLOAD
+Do not turn every SWOT item into a separate project.
+
+Prioritize.
+
+51. CREATE AN IMPACT-EFFORT VIEW
+For recommended actions classify:
+
+High impact / Low effort
+High impact / High effort
+Low impact / Low effort
+Low impact / High effort
+
+Use provisional classification where evidence is incomplete.
+
+52. RECOMMEND PRIORITY ACTIONS
+For each priority action provide:
+
+Action
+Reason
+SWOT link
+Priority
+Owner role
+Timeframe
+Dependency
+Success measure
+
+Do not invent names.
+
+If dates are unknown use:
+
+"Timing to be agreed."
+
+53. DEFINE OWNER ROLES
+Use roles such as:
+
+Marketing Manager
+Operations Lead
+Founder
+Finance Manager
+Sales Lead
+
+Only when the role logically exists from context.
+
+Otherwise use:
+
+"Owner to be assigned."
+
+54. DEFINE SUCCESS MEASURES
+Use measurable outcomes where data exists.
+
+Do not create arbitrary KPI targets.
+
+55. IDENTIFY VALIDATION TASKS
+Some SWOT factors require research before action.
+
+Examples:
+
+Customer interviews
+Competitor review
+Cost analysis
+Capacity analysis
+Supplier review
+Market research
+
+56. PRIORITIZE VALIDATION
+Use:
+
+P1 — Could change strategy significantly.
+P2 — Important.
+P3 — Useful.
+
+57. IDENTIFY BLIND SPOTS
+Ask what may be missing because the analysis relies only on internal information.
+
+Potential gaps:
+
+Customer evidence
+Competitor data
+Market trends
+Financial analysis
+Supplier data
+Operational data
+
+58. CHALLENGE MANAGEMENT ASSUMPTIONS
+Where statements are unsupported, do not automatically accept them.
+
+Example:
+
+"We have the best quality."
+
+Ask:
+
+What evidence demonstrates this?
+
+59. IDENTIFY CONTRADICTIONS
+If supplied information conflicts, list the conflict rather than choosing one version.
+
+60. CONSIDER SCENARIOS
+Where uncertainty is high, consider:
+
+Favorable scenario
+Base scenario
+Adverse scenario
+
+Do not invent probabilities.
+
+61. TEST STRATEGY ROBUSTNESS
+Ask:
+
+Would the recommended strategy still make sense if a major assumption changes?
+
+62. IDENTIFY EARLY WARNING SIGNALS
+For significant threats identify indicators to monitor.
+
+Examples:
+
+Supplier lead time
+Competitor price movement
+Customer churn
+Cost increase
+Regulatory announcement
+
+63. STRATEGIC FIT
+Evaluate whether proposed actions align with:
+
+Objective
+Capabilities
+Resources
+Positioning
+Customer value
+
+64. AVOID COPYING COMPETITORS
+A competitor action is not automatically the correct strategy.
+
+Assess fit.
+
+65. AVOID SWOT BIAS
+Watch for:
+
+Overconfidence
+Confirmation bias
+Wishful thinking
+Competitor fixation
+Internal blind spots
+
+66. EVIDENCE STRENGTH
+For each critical factor assign:
+
+Strong
+Moderate
+Weak
+
+Explain briefly.
+
+67. CONFIDENCE LEVEL
+Rate the overall SWOT:
+
+High
+Medium
+Low
+
+based on evidence completeness.
+
+68. MANAGEMENT SUMMARY
+Provide:
+
+Objective
+Most important strength
+Most important weakness
+Best opportunity
+Largest threat
+Recommended strategic priority
+Biggest assumption
+Immediate next action
+
+69. ONE-PAGE SWOT
+Provide a concise four-quadrant version after the detailed analysis.
+
+70. DECISION IMPLICATION
+Explain what the SWOT means for the original objective.
+
+Do not finish with only descriptive observations.
+
+71. ACTION PLAN
+Convert the strongest findings into a short prioritized action plan.
+
+72. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- strengths and weaknesses are internal
+- opportunities and threats are external
+- unsupported factors are labeled
+- generic statements were removed
+- duplicate factors were merged
+- factors are prioritized
+- strategy links to SWOT evidence
+- constraints were considered
+- actions are realistic
+- no market data was invented
+- no competitor information was invented
+- no financial results were invented
+- important research gaps are visible
+
+OUTPUT FORMAT:
+
+1. Objective & Scope
+2. Evidence Review
+3. SWOT Matrix
+4. Detailed Strengths
+5. Detailed Weaknesses
+6. Detailed Opportunities
+7. Detailed Threats
+8. Priority SWOT Factors
+9. SO Strategies
+10. ST Strategies
+11. WO Strategies
+12. WT Strategies
+13. Strategic Themes
+14. Priority Actions
+15. Risks & Dependencies
+16. Assumptions
+17. Research / Validation Gaps
+18. Early Warning Signals
+19. One-Page SWOT
+20. Management Summary
+21. Confidence Level
+22. Final Strategic Recommendation
+
+IMPORTANT:
+- Strengths and weaknesses must be internal.
+- Opportunities and threats must be external.
+- Do not invent business, customer, market, competitor or financial facts.
+- Label hypotheses and assumptions clearly.
+- Do not create generic SWOT filler just to balance all four quadrants.
+- Prioritize strategic importance over the number of items.
+- Connect SWOT findings to actual decisions and actions.
+- Do not assume every strength is a competitive advantage.
+- Do not assume every external change is an opportunity or threat.
+- Challenge unsupported management assumptions.
+- Recommend validation before acting on weak evidence.
+- Treat SWOT as a decision-support tool, not as a decorative four-box exercise.`;
+
+const steps = [
+  {
+    title: "Separate internal from external",
+    description:
+      "Keep strengths and weaknesses focused on internal capabilities while opportunities and threats describe external conditions the business must respond to.",
+  },
+  {
+    title: "Test the evidence",
+    description:
+      "Challenge generic statements and clearly label assumptions so the SWOT does not turn management opinions into apparently proven facts.",
+  },
+  {
+    title: "Prioritize what actually matters",
+    description:
+      "Rank factors by strategic impact, urgency and confidence instead of creating long four-quadrant lists with equal weight.",
+  },
+  {
+    title: "Turn analysis into strategy",
+    description:
+      "Use SO, ST, WO and WT combinations to identify realistic actions, risks, dependencies and validation work linked directly to the SWOT findings.",
+  },
+];
+
+const example = {
+  input: [
+    "Business: Small warehouse-management consultancy.",
+    "Objective: Decide how to grow over the next 12–24 months.",
+    "Known strength: Founder has extensive warehouse and inventory operations experience.",
+    "Known weakness: Limited brand awareness and small marketing budget.",
+    "Known opportunity: Some small businesses still rely heavily on manual inventory processes.",
+    "Known threat: Established software vendors and consultants already serve the market.",
+    "Unknown: Exact market size, customer willingness-to-pay and competitor pricing.",
+  ],
+
+  output: [
+    "Strength: Practical warehouse and inventory experience is an internal capability and may support credibility, process diagnosis and implementation.",
+    "Weakness: Limited brand awareness may reduce customer acquisition efficiency, although its actual impact should be validated through lead and conversion data.",
+    "Opportunity: Businesses still using manual inventory methods may represent a potential target segment, but the size and willingness-to-pay of this segment require market validation.",
+    "Threat: Established vendors may have stronger recognition, customer bases and distribution. Their actual positioning and pricing should be researched rather than assumed.",
+    "WO Strategy: Use low-cost educational content, practical tools and case-based examples to build visibility while testing demand from manual-process businesses.",
+    "Priority Research Gap: Interview target businesses to determine their current inventory method, operational pain points, buying triggers and willingness to pay for external help.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Internal and external matters",
+    description:
+      "A common SWOT mistake is putting actions such as 'improve marketing' under Opportunities. The opportunity should be the external condition; improving marketing is the response.",
+  },
+  {
+    title: "Don't fill every box with guesses",
+    description:
+      "Four strong evidence-backed factors can be more useful than twenty generic ones. Keep weak assumptions visible and validate them before making major strategic decisions.",
+  },
+  {
+    title: "Finish with decisions, not four lists",
+    description:
+      "The real value of SWOT comes from connecting strengths, weaknesses, opportunities and threats to priorities, actions, risks and research needs.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="SWOT Analysis Prompt | KRIYANO"
+  description="Create an evidence-based SWOT analysis with prioritized strengths, weaknesses, opportunities, threats, strategic combinations, actions and validation gaps."
+>
+  <PromptPage
+    category="BUSINESS"
+    title="SWOT Analysis"
+    accentTitle="Prompt."
+    description="Build an evidence-based SWOT that separates internal and external factors, prioritizes what matters and turns the findings into practical strategic actions."
+    meta={[
+      "Free prompt",
+      "SWOT analysis",
+      "Business strategy",
+    ]}
+    bestFor={[
+      "Businesses",
+      "Startups",
+      "Products",
+      "Projects",
+      "Strategic planning",
+      "Management decisions",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Turn SWOT from a four-box exercise into a decision tool."
+    introDescription="Separate internal capabilities from external conditions, challenge unsupported assumptions and connect the strongest findings to strategic priorities, risks and actions."
+    steps={steps}
+    exampleTitle="Build a SWOT without turning assumptions into facts."
+    example={example}
+    tipsTitle="Make the SWOT strategically useful."
+    tips={tips}
+    sidebarTitle="Need broader market evidence?"
+    sidebarDescription="Use KRIYANO's Market Research or Competitor Analysis prompts when major opportunities and threats still depend on external information you have not validated."
+    warningTitle="A SWOT is only as reliable as the evidence behind it"
+    warningText="Generic strengths, assumed customer demand and imagined competitor weaknesses can create false confidence. Clearly separate facts from hypotheses and validate strategically important assumptions before committing major resources."
+  />
+</BaseLayout>

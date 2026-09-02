@@ -1,0 +1,721 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert AI video prompt designer, cinematographer, visual storyteller and text-to-video generation specialist.
+
+TASK:
+Turn the supplied idea into a clear, model-ready text-to-video prompt with strong scene control, camera direction, subject consistency, realistic motion and visual continuity.
+
+The final result should describe what the video should actually show, not just the theme or mood.
+
+VIDEO GOAL:
+[What should this video communicate or achieve?]
+
+PLATFORM:
+[Facebook Reel / Instagram Reel / TikTok / YouTube Short / YouTube / website / advertisement / presentation / other.]
+
+VIDEO TYPE:
+[Product video / food video / cinematic scene / business visual / educational clip / lifestyle / commercial / social content / other.]
+
+DURATION:
+[For example: 5 sec / 8 sec / 10 sec / 15 sec / other.]
+
+ASPECT RATIO:
+[9:16 / 16:9 / 1:1 / other.]
+
+MAIN SUBJECT:
+[Person / product / food / object / environment / process.]
+
+SUBJECT DETAILS:
+[Appearance, clothing, product characteristics, food appearance, materials, colours, etc.]
+
+ACTION:
+[What exactly happens during the clip?]
+
+STARTING FRAME:
+[Describe what is visible at the beginning.]
+
+ENDING FRAME:
+[Describe the desired final state.]
+
+ENVIRONMENT:
+[Location, set, room, outdoor scene, background.]
+
+TIME OF DAY:
+[Optional.]
+
+VISUAL STYLE:
+[Photorealistic / cinematic / premium commercial / documentary / lifestyle / food-commercial / editorial / other.]
+
+CAMERA SHOT:
+[Close-up / medium / wide / macro / overhead / tracking / other.]
+
+CAMERA ANGLE:
+[Eye level / low angle / high angle / top-down / three-quarter / other.]
+
+CAMERA MOVEMENT:
+[Static / slow push-in / dolly / pan / tilt / orbit / tracking / handheld / other.]
+
+LIGHTING:
+[Natural / studio / warm / dramatic / soft / high-key / moody / other.]
+
+DEPTH OF FIELD:
+[Shallow / moderate / deep / optional.]
+
+FRAME RATE / MOTION FEEL:
+[Real-time / smooth / slow motion / cinematic / natural handheld / other.]
+
+COLOUR / MOOD:
+[Optional.]
+
+REFERENCE REQUIREMENTS:
+[Describe any reference image, character or product that must remain consistent.]
+
+AUDIO:
+[No audio / ambient sound / dialogue / voice-over / music cue / optional.]
+
+VISIBLE TEXT:
+[Exact text or "No visible text".]
+
+ELEMENTS TO AVOID:
+[Optional.]
+
+SPECIAL REQUIREMENTS:
+[Any other constraints.]
+
+TEXT-TO-VIDEO REQUIREMENTS:
+
+1. DEFINE ONE CLEAR VIDEO ACTION
+The clip should communicate one primary visual event.
+
+2. AVOID OVERLOADING SHORT CLIPS
+Do not attempt to show too many actions within a few seconds.
+
+3. MATCH ACTION TO DURATION
+A 5-second clip should contain less action than a 15-second clip.
+
+4. DEFINE THE STARTING STATE
+Describe what already exists in the first frame.
+
+5. DEFINE THE ENDING STATE
+Describe what should be true by the final frame.
+
+6. CREATE A LOGICAL MOTION PATH
+The movement between the first and last frame should be physically understandable.
+
+7. PRESERVE SUBJECT IDENTITY
+If a person, product or object is central, keep its defining characteristics consistent throughout the clip.
+
+8. DO NOT MORPH THE SUBJECT
+Avoid uncontrolled:
+
+Face changes
+Body changes
+Product redesign
+Colour shifts
+Material changes
+Object replacement
+
+9. CHARACTER CONSISTENCY
+For a person, preserve:
+
+Face shape
+Skin tone
+Hair
+Age appearance
+Clothing
+Accessories
+Body proportions
+
+10. PRODUCT CONSISTENCY
+For a product, preserve:
+
+Shape
+Packaging
+Logo
+Colour
+Material
+Labels
+Key physical features
+
+11. FOOD CONSISTENCY
+For food, preserve:
+
+Dish type
+Shape
+Layers
+Texture
+Toppings
+Colour
+Serving vessel
+
+12. DO NOT INVENT PRODUCT FEATURES
+No imaginary buttons, accessories, screens, functions or packaging.
+
+13. CONTROL OBJECT COUNT
+State how many important objects are present where necessary.
+
+14. PREVENT DUPLICATION
+Avoid duplicated:
+
+Hands
+People
+Products
+Utensils
+Food items
+Props
+
+15. CONTROL HAND INTERACTION
+When hands interact with something, require:
+
+Correct anatomy
+Natural finger placement
+Believable grip
+Proper contact
+Consistent hand position
+
+16. CONTROL BODY MOTION
+Human movement should be anatomically plausible.
+
+17. AVOID TELEPORTATION
+Objects should not suddenly appear, disappear or move between unrelated positions.
+
+18. AVOID UNEXPLAINED TRANSFORMATIONS
+Do not let objects change shape unless transformation is explicitly part of the scene.
+
+19. CONTROL CLOTHING
+Clothing should not randomly change during the clip.
+
+20. CONTROL ACCESSORIES
+Jewellery, glasses, watches and similar elements should remain stable.
+
+21. CONTROL HAIR
+Hair movement may react naturally to motion or wind, but hairstyle and length should remain consistent.
+
+22. CONTROL BACKGROUND CONTINUITY
+The environment should not randomly rearrange itself.
+
+23. CONTROL PROP CONTINUITY
+Props should remain in consistent positions unless intentionally moved.
+
+24. USE PHYSICALLY PLAUSIBLE MOTION
+Respect:
+
+Gravity
+Weight
+Momentum
+Object contact
+Liquid behaviour
+Fabric movement
+Steam
+Smoke
+
+25. LIQUID MOTION
+Pouring should have:
+
+Continuous flow
+Correct source
+Correct destination
+Natural gravity
+
+26. FOOD MOTION
+Cutting, stirring, pouring, lifting or serving should preserve realistic texture and physical behaviour.
+
+27. STEAM / SMOKE
+Use subtle realistic movement rather than excessive artificial clouds.
+
+28. CAMERA MOVEMENT MUST HAVE PURPOSE
+Do not add motion simply to make the scene feel cinematic.
+
+29. STATIC CAMERA MODE
+Use when subject action itself is sufficient.
+
+30. PUSH-IN MODE
+Use a slow camera move toward the subject to emphasize detail.
+
+31. TRACKING MODE
+Use when following moving subjects.
+
+32. ORBIT MODE
+Use only when the environment and subject geometry can remain stable.
+
+33. PAN MODE
+Use for controlled horizontal reveal.
+
+34. TILT MODE
+Use for vertical reveal.
+
+35. HANDHELD MODE
+Use subtle realistic movement, not uncontrolled shaking.
+
+36. AVOID IMPOSSIBLE CAMERA MOVES
+Do not describe multiple conflicting movements at once.
+
+37. LIMIT CAMERA DIRECTIONS
+Prefer one dominant camera movement per short clip.
+
+38. DEFINE CAMERA SPEED
+Use terms such as:
+
+Very slow
+Gentle
+Smooth
+Controlled
+Fast
+
+only when needed.
+
+39. MAINTAIN CAMERA AXIS
+Do not unintentionally jump between opposite angles.
+
+40. PRESERVE SCREEN DIRECTION
+Moving subjects should not randomly reverse direction.
+
+41. CONTROL FRAMING
+Specify whether the subject remains:
+
+Centered
+Left weighted
+Right weighted
+Tracked
+Foreground dominant
+
+42. KEEP IMPORTANT DETAILS IN FRAME
+Do not accidentally crop:
+
+Face
+Hands
+Product
+Food hero
+Important action
+
+43. VERTICAL VIDEO MODE
+Keep important subjects inside the central safe area.
+
+44. HORIZONTAL VIDEO MODE
+Use wider environmental composition when appropriate.
+
+45. CLOSE-UP MODE
+Prioritize detail and reduce unnecessary background movement.
+
+46. MACRO MODE
+Use for textures, food, products and small details.
+
+47. WIDE MODE
+Use only when environment is relevant.
+
+48. DEPTH OF FIELD
+Use shallow focus when isolating a subject, but keep critical action readable.
+
+49. CONTROL FOCUS
+Avoid random focus hunting.
+
+50. USE FOCUS PULL PURPOSEFULLY
+Only when shifting attention from one subject to another.
+
+51. LIGHTING MUST REMAIN CONSISTENT
+Do not allow random changes in:
+
+Light direction
+Brightness
+Colour temperature
+Shadow direction
+
+52. NATURAL LIGHT MODE
+Use believable daylight behaviour.
+
+53. STUDIO MODE
+Use controlled, repeatable lighting.
+
+54. FOOD-COMMERCIAL MODE
+Use:
+
+Soft highlights
+Texture-rich lighting
+Natural gloss
+Warm appetizing colour
+Controlled steam
+
+55. PRODUCT-COMMERCIAL MODE
+Use:
+
+Clean reflections
+Controlled highlights
+Premium surface detail
+Strong product separation
+
+56. CINEMATIC MODE
+Use cinematic lighting and composition without making the scene unrealistically dark.
+
+57. REALISTIC SKIN
+Avoid plastic or waxy skin.
+
+58. REALISTIC EYES
+Avoid flicker, asymmetry or unnatural eye motion.
+
+59. REALISTIC MOUTH
+Avoid deformation when no speech is required.
+
+60. DIALOGUE MODE
+If dialogue is required, keep spoken content appropriate to the clip duration.
+
+61. DO NOT ADD DIALOGUE WHEN NOT REQUESTED
+Silent visual clips should remain visually focused.
+
+62. LIP MOVEMENT
+Only request visible speech when necessary.
+
+63. AUDIO AND VISUAL TIMING
+If an audio cue is included, align it to visible action.
+
+64. NO RANDOM TEXT
+Do not generate unintended captions, signs, logos or interface text.
+
+65. EXACT TEXT
+If visible text is necessary, specify the exact wording.
+
+66. KEEP TEXT SHORT
+AI video models may struggle with long text.
+
+67. DO NOT INVENT LOGOS
+Use only supplied branding.
+
+68. DO NOT REDESIGN LOGOS
+Preserve logo proportions and colours.
+
+69. AVOID RANDOM WATERMARKS
+Explicitly prohibit them.
+
+70. REALISTIC MATERIALS
+Maintain believable behaviour for:
+
+Glass
+Metal
+Plastic
+Wood
+Fabric
+Paper
+Ceramic
+Food
+Liquid
+
+71. REFLECTIONS
+Ensure reflections match object position and lighting.
+
+72. SHADOWS
+Shadows should remain attached and directionally consistent.
+
+73. CONTACT SHADOWS
+Objects should feel physically grounded.
+
+74. PERSPECTIVE
+Maintain consistent object scale and perspective as the camera moves.
+
+75. DO NOT WARP STRAIGHT EDGES
+Protect packaging, furniture, screens and architecture.
+
+76. ARCHITECTURAL CONTINUITY
+Walls, counters, shelves and doors should remain structurally stable.
+
+77. NATURAL SPEED
+Human and object motion should not feel unintentionally sped up or slowed down.
+
+78. SLOW MOTION
+Only use when explicitly requested and visually suitable.
+
+79. MICRO-MOTION
+Subtle motion can include:
+
+Breathing
+Steam
+Hair movement
+Fabric movement
+Small hand adjustments
+
+80. DO NOT MAKE EVERYTHING MOVE
+Stable elements improve realism.
+
+81. CREATE VISUAL PRIORITY
+The viewer should immediately know what to watch.
+
+82. REDUCE BACKGROUND DISTRACTION
+Background activity should not compete with the subject.
+
+83. USE NEGATIVE SPACE WHEN USEFUL
+Allow room around the hero subject.
+
+84. AVOID GENERIC AI EFFECTS
+Do not automatically add:
+
+Holograms
+Glowing circuits
+Floating particles
+Neon interfaces
+Sci-fi effects
+
+85. USE EFFECTS ONLY WHEN STORY-RELEVANT
+Visual effects should support the requested concept.
+
+86. SOCIAL VIDEO MODE
+Create immediate readability in the first second.
+
+87. COMMERCIAL MODE
+Make the product or benefit visually obvious.
+
+88. EDUCATIONAL MODE
+Show the concept or process clearly rather than prioritizing cinematic complexity.
+
+89. LIFESTYLE MODE
+Use natural human behaviour and believable environments.
+
+90. FOOD VIDEO MODE
+Prioritize appetite appeal, texture and realistic handling.
+
+91. BUSINESS VIDEO MODE
+Use professional environments and restrained visual language.
+
+92. DO NOT INVENT RESULTS
+Never visualize unsupported:
+
+Revenue
+Growth
+Weight loss
+Performance improvement
+Before/after outcomes
+
+93. DO NOT INVENT SOCIAL PROOF
+No fake:
+
+Ratings
+Testimonials
+Followers
+Awards
+Customer numbers
+
+94. DO NOT CREATE FALSE URGENCY
+Avoid unsupported countdowns or scarcity cues.
+
+95. KEEP PROMPT LANGUAGE VISUAL
+Describe what the model should see and animate.
+
+96. AVOID ABSTRACT MARKETING LANGUAGE
+Replace words like:
+
+Innovative
+Amazing
+Powerful
+Next-generation
+
+with visible scene details.
+
+97. CREATE POSITIVE INSTRUCTIONS FIRST
+Clearly define what should happen before listing exclusions.
+
+98. CREATE TARGETED NEGATIVE CONSTRAINTS
+Use only relevant protections such as:
+
+No face morphing
+No extra fingers
+No duplicate objects
+No random text
+No product redesign
+No camera jump
+No background warping
+No watermark
+
+99. CREATE A CONTINUITY CHECK
+Verify:
+
+Subject
+Clothing
+Props
+Lighting
+Background
+Camera direction
+Object position
+
+remain coherent.
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- platform is defined
+- duration is realistic
+- aspect ratio is correct
+- one primary action is clear
+- starting frame is defined
+- ending frame is defined
+- subject identity is stable
+- product or food identity is stable
+- hands are plausible
+- props remain consistent
+- background remains stable
+- camera movement is achievable
+- focus behaviour is controlled
+- lighting is consistent
+- object motion follows physics
+- no random text appears
+- no fake branding appears
+- no unsupported results are shown
+- no unnecessary AI effects are added
+- video remains understandable without excessive complexity
+
+OUTPUT FORMAT:
+
+1. VIDEO INTENT
+Summarize the purpose and primary action.
+
+2. FIRST FRAME
+Describe exactly what should be visible at the start.
+
+3. ACTION TIMELINE
+Break the clip into simple time-based movement.
+
+Example:
+0–2 sec
+2–5 sec
+5–8 sec
+
+Adapt timing to the requested duration.
+
+4. CAMERA PLAN
+Specify:
+
+Shot size
+Angle
+Movement
+Speed
+Focus behaviour
+
+5. SUBJECT & CONTINUITY LOCK
+List characteristics that must remain unchanged.
+
+6. FULL TEXT-TO-VIDEO PROMPT
+Provide one polished model-ready prompt written as a coherent visual description.
+
+7. NEGATIVE / PROTECTION INSTRUCTIONS
+List only likely generation failures.
+
+8. FINAL FRAME
+Describe the desired ending composition.
+
+9. CONTINUITY CHECK
+Confirm:
+
+Subject
+Objects
+Hands
+Background
+Lighting
+Camera
+Motion
+
+IMPORTANT:
+- Keep the requested action achievable within the duration.
+- Use one dominant camera movement.
+- Preserve subject identity and physical continuity.
+- Describe visible actions rather than abstract concepts.
+- Do not invent product features, results or branding.
+- Avoid random text, duplicated objects, morphing and impossible physics.
+- Optimize specifically for the selected platform and aspect ratio.`;
+
+const steps = [
+  {
+    title: "Define one achievable action",
+    description:
+      "Start with a simple event the viewer can understand within the requested clip duration instead of packing several unrelated actions into one generation.",
+  },
+  {
+    title: "Lock the subject and environment",
+    description:
+      "Describe the person's identity, product, food, clothing, props and background details that must remain stable while the action occurs.",
+  },
+  {
+    title: "Control the camera",
+    description:
+      "Choose one clear shot, angle and dominant camera movement so the model is not trying to execute several conflicting cinematic directions.",
+  },
+  {
+    title: "Describe the ending",
+    description:
+      "Specify the final composition so the model has a clear destination for the motion instead of allowing the scene to drift unpredictably.",
+  },
+];
+
+const example = {
+  input: [
+    "Platform: Facebook Reel.",
+    "Duration: 8 seconds.",
+    "Aspect ratio: 9:16.",
+    "Subject: Freshly baked chocolate cake on a wooden countertop.",
+    "Action: A hand slowly cuts one slice and gently pulls it forward to reveal the moist interior.",
+    "Camera: Fixed close-up with a very subtle push-in.",
+    "Style: Premium photorealistic food-commercial.",
+  ],
+
+  output: [
+    "FIRST FRAME: Whole chocolate cake centered on a wooden countertop, knife already positioned above the cutting line, warm kitchen background softly blurred.",
+    "ACTION: The hand makes one clean downward cut, completes the slice, then gently pulls the piece forward to reveal the moist crumb.",
+    "CAMERA: Close-up, front three-quarter angle, fixed framing with only a very subtle controlled push-in.",
+    "CONTINUITY: Same cake, plate, hand, knife, countertop, lighting and background throughout; no extra slices or utensils appear.",
+    "PROTECTION: No distorted fingers, no melting cake structure, no duplicated knife, no camera jump, no random text or excessive steam.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Short clips need simple choreography",
+    description:
+      "A single well-described action usually generates more reliably than asking the model to perform several cuts, camera changes and scene transitions in a few seconds.",
+  },
+  {
+    title: "Describe what moves and what stays still",
+    description:
+      "Separating the moving subject from stable objects, background and camera elements gives the model a clearer continuity target.",
+  },
+  {
+    title: "The last frame matters",
+    description:
+      "Defining the final visual state can significantly reduce drifting, unwanted object changes and unfinished-looking motion.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Text-to-Video Prompt | KRIYANO"
+  description="Create structured AI text-to-video prompts with realistic motion, camera control, subject consistency and stronger scene continuity."
+>
+  <PromptPage
+    category="VIDEO GENERATION"
+    title="Text-to-Video"
+    accentTitle="Prompt."
+    description="Turn an idea into a controlled AI video prompt with clear action, camera direction, realistic motion and stronger subject continuity."
+    meta={[
+      "Free prompt",
+      "Text-to-video",
+      "Video prompting",
+    ]}
+    bestFor={[
+      "Social video clips",
+      "Product videos",
+      "Food videos",
+      "Cinematic scenes",
+      "Business visuals",
+      "Short-form content",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Tell the video model exactly what should move."
+    introDescription="Define the first frame, one achievable action, camera behaviour, continuity locks and final frame so the generated clip has a clear visual path."
+    steps={steps}
+    exampleTitle="Turn one simple food action into an 8-second video prompt."
+    example={example}
+    tipsTitle="Reduce generation errors before adding more cinematic detail."
+    tips={tips}
+    sidebarTitle="Starting from an existing image?"
+    sidebarDescription="Use KRIYANO's Image-to-Video Prompt when the first frame already exists and the main task is animating that reference image without losing its identity."
+    warningTitle="More instructions do not always create better motion"
+    warningText="Text-to-video models can become unstable when a short clip contains too many actions, camera moves or transformations. Keep the choreography achievable and verify identity, anatomy, object continuity and visible claims before publishing."
+  />
+</BaseLayout>

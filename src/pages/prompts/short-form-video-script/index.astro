@@ -1,0 +1,239 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced short-form video strategist, scriptwriter and content director.
+
+TASK:
+Create a short-form video script designed to hold attention quickly and communicate the main idea clearly.
+
+PLATFORM:
+[Example: Facebook Reels, Instagram Reels, TikTok, YouTube Shorts.]
+
+VIDEO GOAL:
+[What should the video achieve?]
+
+TOPIC:
+[What is the video about?]
+
+TARGET AUDIENCE:
+[Who should this video speak to?]
+
+VIDEO LENGTH:
+[Example: 15 seconds, 30 seconds, 45 seconds, 60 seconds.]
+
+CONTENT STYLE:
+[Example: educational, entertaining, promotional, storytelling, tutorial, problem-solution, list-based.]
+
+PRESENTATION STYLE:
+[Example: talking head, voice-over, hands-only, product demo, screen recording, mixed visuals.]
+
+TONE:
+[Example: conversational, professional, energetic, warm, persuasive, informative.]
+
+KEY MESSAGE:
+[What is the single most important idea viewers should remember?]
+
+KEY POINTS:
+[List the main points that must be included.]
+
+CALL TO ACTION:
+[What should the viewer do next?]
+
+LANGUAGE:
+[Specify the language.]
+
+VISUAL REQUIREMENTS:
+[Describe any important products, locations, shots, demonstrations, text or visual details.]
+
+BRAND / CREATOR REQUIREMENTS:
+[Add any brand voice, style or identity requirements.]
+
+WORDS / CLAIMS TO AVOID:
+[List anything that should not be said.]
+
+SCRIPT REQUIREMENTS:
+
+1. HOOK
+- Start immediately with a strong reason to keep watching.
+- Avoid long introductions or greetings unless specifically requested.
+- Make the hook relevant to the actual content.
+- Do not use misleading clickbait.
+
+2. PACING
+- Keep the amount of spoken content realistic for the requested duration.
+- Remove unnecessary filler.
+- Use short, natural sentences where appropriate.
+
+3. STRUCTURE
+Build the video around:
+- Hook
+- Main value / story / explanation
+- Proof, example or demonstration if relevant
+- Clear ending
+- Call to action
+
+4. SPOKEN SCRIPT
+- Write natural language that sounds comfortable when spoken aloud.
+- Avoid stiff article-style writing.
+- Match the requested audience and tone.
+
+5. SCENE BREAKDOWN
+Divide the video into logical scenes or beats.
+For each scene include:
+- Approximate timing
+- Visual
+- Spoken line / voice-over
+- On-screen text if useful
+
+6. VISUAL DIRECTION
+- Make visuals directly support what is being said.
+- Avoid generic footage when a more specific demonstration would communicate the idea better.
+- Keep scene changes realistic for the requested duration.
+
+7. ON-SCREEN TEXT
+- Keep text short and mobile-friendly.
+- Do not simply repeat every spoken sentence.
+- Highlight only the most useful words, numbers or key points.
+
+8. RETENTION
+Where appropriate, use:
+- unanswered question
+- quick contrast
+- visual change
+- demonstration
+- progression
+- result reveal
+to maintain interest without creating artificial clickbait.
+
+9. CALL TO ACTION
+- Keep the CTA appropriate to the goal.
+- Do not overload the ending with multiple unrelated actions.
+
+10. ACCURACY
+- Do not invent facts, statistics, testimonials or product claims.
+- Clearly preserve any figures or details provided.
+
+OUTPUT FORMAT:
+
+1. Video Concept
+2. Hook
+3. Scene-by-Scene Script
+
+For each scene use:
+
+Scene:
+Timing:
+Visual:
+Spoken Script / Voice-Over:
+On-Screen Text:
+
+4. Full Spoken Script
+5. CTA
+6. Editing & Pacing Notes
+7. Optional Caption
+8. Optional Thumbnail / Cover Text
+
+IMPORTANT:
+The final script must fit naturally within the requested video length.
+Prioritize clarity, retention and natural spoken language over trying to include too much information.`;
+
+const steps = [
+  {
+    title: "Choose one clear goal",
+    description:
+      "Decide whether the video should teach, promote, entertain, explain or drive an action. Trying to do everything in one short clip usually weakens it.",
+  },
+  {
+    title: "Give it one main message",
+    description:
+      "Short-form content works better when viewers can understand the core takeaway quickly.",
+  },
+  {
+    title: "Match the script to the duration",
+    description:
+      "A 15-second Reel needs a much tighter script than a 60-second educational Short.",
+  },
+  {
+    title: "Plan visuals with the dialogue",
+    description:
+      "Strong short-form videos use visual changes, demonstrations and supporting shots instead of relying only on spoken words.",
+  },
+];
+
+const example = {
+  input: [
+    "Platform: LinkedIn and Instagram Reels.",
+    "Goal: Educate warehouse professionals.",
+    "Topic: What to check when physical stock does not match the system.",
+    "Audience: Warehouse supervisors and inventory staff.",
+    "Length: 30 seconds.",
+    "Style: Educational problem-solution.",
+    "Presentation: Voice-over with warehouse visuals.",
+    "CTA: Save the video for the next stock discrepancy.",
+  ],
+
+  output: [
+    "Hook: Physical stock doesn't match the system? Don't adjust it immediately.",
+    "Scene 1 — 0–4 sec: Show system quantity beside a physical count. Voice-over explains the discrepancy.",
+    "Scene 2 — 4–18 sec: Quickly check receiving, picking, transfers, returns and nearby locations.",
+    "Scene 3 — 18–25 sec: Review the transaction history and identify when the difference first appeared.",
+    "Scene 4 — 25–30 sec: Explain that the adjustment should come after the cause is understood, then finish with the save CTA.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Write for speech, not reading",
+    description:
+      "Read the finished script aloud. If a sentence feels difficult to say naturally, shorten or simplify it.",
+  },
+  {
+    title: "Use visuals to carry information",
+    description:
+      "Not every detail needs to be spoken. A label, demonstration or close-up can communicate information faster.",
+  },
+  {
+    title: "Make the first seconds useful",
+    description:
+      "The opening should immediately tell the viewer why the video matters instead of spending valuable time introducing the creator.",
+  },
+];
+---
+
+<BaseLayout
+  title="Short-Form Video Script Prompt | KRIYANO"
+  description="Create structured short-form video scripts with hooks, scenes, spoken dialogue, visual direction, timing and calls to action."
+>
+  <PromptPage
+    category="CREATORS"
+    title="Short-Form Video"
+    accentTitle="Script."
+    description="Turn a content idea into a structured Reel, TikTok or Short with a strong hook, realistic timing, scene direction, spoken script and CTA."
+    meta={[
+      "Free prompt",
+      "Creators",
+      "Short-form video",
+    ]}
+    bestFor={[
+      "Facebook Reels",
+      "Instagram Reels",
+      "TikTok",
+      "YouTube Shorts",
+      "Educational videos",
+      "Product content",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Build the video around attention and clarity."
+    introDescription="Start with the platform, goal, audience and duration. The prompt then turns your idea into a scene-by-scene structure rather than giving you only a block of dialogue."
+    steps={steps}
+    exampleTitle="From topic to a 30-second Reel."
+    example={example}
+    tipsTitle="Make short videos work harder."
+    tips={tips}
+    sidebarTitle="Need a custom creator prompt?"
+    sidebarDescription="Use the KRIYANO Prompt Builder to create instructions around your exact content format, audience, platform, tone and output."
+    warningTitle="Timing matters"
+    warningText="Generated scripts can still be too long when spoken naturally. Read the final script aloud and trim it if necessary before recording or generating the video."
+  />
+</BaseLayout>

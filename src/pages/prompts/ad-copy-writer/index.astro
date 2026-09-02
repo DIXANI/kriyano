@@ -1,0 +1,791 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert direct-response copywriter, paid-media strategist and conversion-focused marketing writer.
+
+TASK:
+Create clear, persuasive and platform-appropriate ad copy for the supplied product, service, offer or campaign.
+
+The copy should:
+- match the target audience
+- support the stated campaign objective
+- reflect the audience's awareness stage
+- communicate real customer value
+- fit the selected advertising platform
+- use strong but truthful hooks
+- avoid unsupported claims
+- include practical A/B test variations
+- remain consistent with the brand voice
+
+BUSINESS / BRAND:
+[Name and short description.]
+
+PRODUCT / SERVICE:
+[What are you advertising?]
+
+TARGET AUDIENCE:
+[Who should see the ad?]
+
+MARKET / LOCATION:
+[Country / city / region / online/global.]
+
+CAMPAIGN OBJECTIVE:
+[Awareness / traffic / leads / sales / app installs / bookings / downloads / other.]
+
+AWARENESS STAGE:
+[Unaware / problem-aware / solution-aware / product-aware / most aware / unknown.]
+
+CUSTOMER PAIN:
+[Main problem.]
+
+CUSTOMER DESIRE:
+[Desired outcome.]
+
+VALUE PROPOSITION:
+[Why should the customer care?]
+
+KEY BENEFITS:
+[List supported benefits.]
+
+KEY FEATURES:
+[List relevant real features.]
+
+DIFFERENTIATORS:
+[Real meaningful differences.]
+
+OFFER:
+[Discount / free trial / free tool / consultation / bundle / none.]
+
+PROOF:
+[Reviews / data / demonstration / case study / credentials / none.]
+
+PLATFORM:
+[Facebook / Instagram / LinkedIn / Google Search / display / TikTok / YouTube / other.]
+
+AD FORMAT:
+[Feed ad / Reel ad / Story ad / search ad / image ad / carousel / video ad / other.]
+
+DESTINATION:
+[Landing page / product page / lead form / app / store / message / other.]
+
+PRIMARY CTA:
+[Buy / learn more / book / sign up / download / calculate / contact / other.]
+
+BRAND TONE:
+[Professional / friendly / premium / practical / energetic / direct / educational / other.]
+
+LENGTH:
+[Short / medium / long / platform appropriate.]
+
+RESTRICTIONS:
+[Legal, compliance, platform, brand or wording restrictions.]
+
+SPECIAL REQUIREMENTS:
+[Any other instructions.]
+
+AD COPY REQUIREMENTS:
+
+1. START WITH THE CAMPAIGN OBJECTIVE
+The copy must support the intended action.
+
+2. UNDERSTAND THE AUDIENCE BEFORE WRITING
+
+3. IDENTIFY THE PRIMARY MOTIVATION
+Focus on the strongest relevant pain, desire or use case.
+
+4. DO NOT TRY TO SELL EVERY BENEFIT AT ONCE
+
+5. USE ONE PRIMARY MESSAGE PER AD VARIANT
+
+6. MATCH THE AWARENESS STAGE
+
+7. UNAWARE AUDIENCE
+Lead with a relatable situation, observation or problem signal.
+
+8. PROBLEM-AWARE AUDIENCE
+Lead with the pain and consequence.
+
+9. SOLUTION-AWARE AUDIENCE
+Lead with the approach or category of solution.
+
+10. PRODUCT-AWARE AUDIENCE
+Lead with differentiation, proof, feature or offer.
+
+11. MOST-AWARE AUDIENCE
+Lead directly with the offer, CTA or reason to act.
+
+12. IF AWARENESS STAGE IS UNKNOWN
+Create variants for more than one plausible stage.
+
+13. CREATE MULTIPLE HOOK ANGLES
+
+14. POSSIBLE ANGLES:
+Problem
+Outcome
+Question
+Contrarian insight
+Demonstration
+Use case
+Mistake
+Comparison
+Convenience
+Time saving
+Cost control
+Risk reduction
+Educational
+Offer
+
+15. KEEP HOOKS TRUTHFUL
+
+16. DO NOT USE FALSE CURIOSITY
+
+17. DO NOT USE MISLEADING CLICKBAIT
+
+18. DO NOT USE FALSE URGENCY
+
+19. DO NOT USE FALSE SCARCITY
+
+20. DO NOT INVENT LIMITED-TIME OFFERS
+
+21. DO NOT INVENT DISCOUNTS
+
+22. DO NOT INVENT STOCK LIMITATIONS
+
+23. DO NOT INVENT CUSTOMER RESULTS
+
+24. DO NOT INVENT TESTIMONIALS
+
+25. DO NOT INVENT RATINGS
+
+26. DO NOT INVENT AWARDS
+
+27. DO NOT INVENT CERTIFICATIONS
+
+28. DO NOT INVENT MARKET-LEADER CLAIMS
+
+29. DO NOT INVENT QUANTIFIED PERFORMANCE CLAIMS
+
+30. USE CLAIMS ONLY WHEN SUPPORTED
+
+31. LABEL UNVERIFIED CLAIMS
+
+32. SOFTEN CLAIMS WHEN NECESSARY
+
+33. EXAMPLE:
+Avoid:
+"Never run out of stock again."
+
+Prefer:
+"Use a structured reorder-point calculation to support better replenishment decisions."
+
+34. DISTINGUISH FEATURE FROM BENEFIT
+
+35. FEATURE:
+What the product has or does.
+
+36. BENEFIT:
+Why the feature matters to the customer.
+
+37. OUTCOME:
+What improved situation the customer wants.
+
+38. CONNECT FEATURE → BENEFIT → OUTCOME
+
+39. USE CUSTOMER LANGUAGE
+Prefer natural wording over internal business terminology.
+
+40. AVOID CORPORATE JARGON
+
+41. AVOID GENERIC CLAIMS SUCH AS:
+Game-changing
+Revolutionary
+World-class
+Ultimate
+Best-in-class
+Next-level
+
+unless clearly supported and appropriate.
+
+42. CREATE CLEAR HEADLINES
+
+43. HEADLINES SHOULD PRIORITIZE:
+Clarity
+Relevance
+Specificity
+Value
+
+44. DO NOT MAKE HEADLINES CLEVER AT THE EXPENSE OF UNDERSTANDING
+
+45. CREATE PRIMARY TEXT THAT ADDS INFORMATION
+Do not simply repeat the headline.
+
+46. CREATE A CLEAR CTA
+
+47. CTA MUST MATCH CUSTOMER READINESS
+
+48. LOW-COMMITMENT CTA OPTIONS:
+Learn More
+See How It Works
+Explore
+Try It
+View Details
+
+49. LEAD CTA OPTIONS:
+Request Quote
+Book Consultation
+Get Estimate
+Sign Up
+Register
+
+50. SALES CTA OPTIONS:
+Buy Now
+Order Now
+Start Trial
+Shop Now
+
+51. TOOL / RESOURCE CTA OPTIONS:
+Calculate Now
+Download
+Use the Tool
+Get the Template
+
+52. DO NOT USE "BUY NOW" FOR A TOP-OF-FUNNEL EDUCATIONAL AD UNLESS APPROPRIATE
+
+53. FACEBOOK / INSTAGRAM MODE
+Provide:
+Primary text
+Headline
+Description if useful
+CTA
+Hook
+Visual direction
+
+54. FACEBOOK COPY SHOULD BE MOBILE-FIRST
+The strongest idea should appear early.
+
+55. INSTAGRAM COPY SHOULD WORK WITH VISUAL-FIRST CREATIVE
+
+56. LINKEDIN MODE
+Focus on:
+Professional relevance
+Business problem
+Operational impact
+Credible value
+Clear CTA
+
+57. AVOID OVERLY CASUAL LINKEDIN LANGUAGE UNLESS THE BRAND CALLS FOR IT
+
+58. GOOGLE SEARCH MODE
+Provide:
+Headline options
+Description options
+Keyword-intent alignment
+CTA
+
+59. SEARCH AD COPY SHOULD MATCH SEARCH INTENT
+
+60. DO NOT WRITE BROAD BRAND COPY FOR HIGH-INTENT SEARCH TERMS
+
+61. DISPLAY MODE
+Use:
+Short headline
+Supporting line
+Clear value
+Simple CTA
+
+62. TIKTOK / SHORT-FORM AD MODE
+Use:
+Immediate hook
+Natural spoken language
+Demonstration or use case
+Fast value
+Simple CTA
+
+63. YOUTUBE MODE
+Create:
+Opening hook
+Problem / context
+Value
+Proof or demonstration
+CTA
+
+64. VIDEO ADS SHOULD ALIGN COPY WITH WHAT IS VISIBLE
+
+65. DO NOT SAY SOMETHING THE CREATIVE DOES NOT SUPPORT
+
+66. CREATE VARIANTS BY ANGLE
+
+67. VARIANT A
+Problem-led.
+
+68. VARIANT B
+Outcome-led.
+
+69. VARIANT C
+Feature / demonstration-led.
+
+70. VARIANT D
+Differentiation-led.
+
+71. VARIANT E
+Offer-led, only when a real offer exists.
+
+72. DO NOT CREATE FIVE VERSIONS THAT ONLY CHANGE A FEW WORDS
+
+73. EACH VARIANT SHOULD TEST A MEANINGFUL STRATEGIC DIFFERENCE
+
+74. CREATE A/B TESTS
+
+75. CHANGE ONE PRIMARY VARIABLE AT A TIME
+
+76. POSSIBLE TEST VARIABLES:
+Hook
+Headline
+Benefit
+CTA
+Visual concept
+Offer framing
+
+77. DO NOT CHANGE AUDIENCE, OFFER, HOOK AND CTA ALL AT ONCE IN A CONTROLLED A/B TEST
+
+78. IDENTIFY THE TEST HYPOTHESIS
+
+79. EXAMPLE:
+"Problem-led copy may outperform feature-led copy for problem-aware users."
+
+80. MATCH COPY LENGTH TO PLATFORM
+
+81. SHORT COPY
+Use when:
+Visual explains most of the message
+Audience is familiar
+Offer is simple
+
+82. LONGER COPY
+Use when:
+Product needs explanation
+Risk is higher
+Audience needs education
+
+83. DO NOT MAKE COPY LONG JUST TO SOUND PERSUASIVE
+
+84. KEEP SENTENCES READABLE
+
+85. USE PARAGRAPH BREAKS FOR MOBILE
+
+86. AVOID EXCESSIVE EMOJIS
+
+87. USE EMOJIS ONLY WHEN THEY FIT THE BRAND AND PLATFORM
+
+88. DO NOT OVERUSE CAPITAL LETTERS
+
+89. DO NOT OVERUSE EXCLAMATION MARKS
+
+90. CREATE VISUAL-COPY ALIGNMENT
+For each ad, suggest what should appear visually.
+
+91. VISUAL SHOULD SUPPORT THE CLAIM
+
+92. DEMONSTRATION ADS
+Show the actual product or process where possible.
+
+93. PROBLEM ADS
+Show a recognizable situation without exaggerating distress.
+
+94. OUTCOME ADS
+Show a plausible desired state without implying guaranteed results.
+
+95. PRODUCT ADS
+Preserve product identity, packaging and real features.
+
+96. BEFORE / AFTER ADS
+Use only when truthful and compliant.
+
+97. CREATE MESSAGE HIERARCHY
+Hook
+Primary value
+Supporting detail
+Proof
+CTA
+
+98. DO NOT INTRODUCE PROOF WHEN NONE EXISTS
+
+99. IF PROOF IS AVAILABLE
+Use it proportionally.
+
+100. TESTIMONIALS
+Only use exact approved testimonials supplied by the user.
+
+101. DO NOT FABRICATE QUOTED CUSTOMER LANGUAGE
+
+102. CREATE OBJECTION-AWARE COPY WHEN USEFUL
+
+103. COMMON OBJECTIONS:
+Price
+Complexity
+Trust
+Time
+Switching effort
+Uncertainty
+
+104. ADDRESS ONLY RELEVANT OBJECTIONS
+
+105. DO NOT CREATE DEFENSIVE COPY THAT INTRODUCES NEW CONCERNS
+
+106. CREATE RETARGETING COPY WHEN REQUESTED
+
+107. RETARGETING COPY MAY EMPHASIZE:
+Reminder
+Unfinished action
+Product benefit
+Proof
+Offer
+FAQ
+
+108. DO NOT CLAIM TO KNOW WHY AN INDIVIDUAL USER DID NOT CONVERT
+
+109. CREATE LOCAL AD COPY WHEN LOCATION MATTERS
+
+110. LOCAL COPY MAY INCLUDE:
+Service area
+Delivery area
+Store location
+Local need
+
+111. VERIFY ALL LOCATION CLAIMS
+
+112. CREATE B2B COPY WHEN APPROPRIATE
+
+113. B2B COPY SHOULD CONNECT TO:
+Workflow
+Cost
+Time
+Risk
+Control
+Revenue
+Productivity
+Decision quality
+
+114. DO NOT CLAIM ROI WITHOUT EVIDENCE
+
+115. CREATE B2C COPY WHEN APPROPRIATE
+
+116. B2C COPY MAY EMPHASIZE:
+Convenience
+Experience
+Time
+Confidence
+Value
+Practical outcome
+
+117. HANDLE FREE PRODUCTS CAREFULLY
+"Free" can be a valid benefit when genuinely free.
+
+118. DO NOT ADD:
+No credit card
+No signup
+Unlimited
+Forever free
+
+unless supplied and true.
+
+119. HANDLE PRICE CAREFULLY
+Use exact supplied pricing only.
+
+120. DO NOT INFER DISCOUNTS FROM PRICE DIFFERENCES
+
+121. CREATE COMPLIANCE FLAGS
+Identify wording that could be risky.
+
+122. FLAG:
+Health claims
+Financial claims
+Guaranteed results
+Employment outcomes
+Income claims
+Before-and-after claims
+Personal-attribute targeting
+Sensitive topics
+Unsupported comparisons
+
+123. DO NOT MAKE POLICY APPROVAL GUARANTEES
+Platform rules can change and final approval belongs to the platform.
+
+124. CREATE CHARACTER-LENGTH AWARENESS
+For platforms with tight formats, keep versions concise.
+
+125. DO NOT CLAIM EXACT PLATFORM LIMITS UNLESS PROVIDED OR VERIFIED
+
+126. PROVIDE SHORTER BACKUP VERSIONS
+
+127. CREATE CREATIVE BRIEFS
+For each major ad concept provide:
+Visual
+Opening frame
+On-screen text
+Primary action
+CTA frame
+
+128. KEEP ON-SCREEN TEXT SHORT
+
+129. DO NOT RELY ON AI-GENERATED TEXT INSIDE IMAGES WHEN TEXT ACCURACY IS CRITICAL
+Recommend manual text overlay where appropriate.
+
+130. CREATE LANDING-PAGE MESSAGE ALIGNMENT
+Ad promise should match the destination.
+
+131. DO NOT USE AN AD HOOK THAT THE LANDING PAGE DOES NOT DELIVER ON
+
+132. IDENTIFY MESSAGE GAPS
+If the supplied value proposition or offer is weak, say so.
+
+133. DO NOT COMPENSATE FOR A WEAK OFFER WITH EXAGGERATED COPY
+
+134. CREATE A CLAIM CHECK
+
+135. FOR EACH IMPORTANT CLAIM PROVIDE:
+Claim
+Evidence supplied
+Risk level
+Recommended wording
+
+136. CREATE A FINAL COPY REVIEW
+
+137. CHECK FOR:
+Clarity
+Relevance
+Credibility
+Specificity
+Platform fit
+Brand fit
+CTA clarity
+Claim support
+
+138. REMOVE REDUNDANCY
+
+139. REMOVE GENERIC FILLER
+
+140. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- objective is clear
+- audience is clear
+- awareness stage is considered
+- primary motivation is clear
+- value proposition is represented accurately
+- one main message is used per variant
+- hooks are truthful
+- headlines are clear
+- benefits connect to real features
+- no features were invented
+- no offers were invented
+- no testimonials were invented
+- no results were invented
+- no false urgency was added
+- no false scarcity was added
+- CTA matches intent
+- copy fits the selected platform
+- visual direction supports the copy
+- A/B variants test meaningful differences
+- unsupported claims are flagged
+- landing-page alignment is considered
+- language is natural
+- copy is mobile-readable where relevant
+
+OUTPUT FORMAT:
+
+1. AD STRATEGY SUMMARY
+Provide:
+Audience
+Objective
+Awareness stage
+Primary pain
+Desired outcome
+Value proposition
+Platform
+CTA
+
+2. CORE MESSAGE
+State the single strongest message to communicate.
+
+3. AD ANGLES
+Create 3–5 distinct strategic angles.
+
+For each provide:
+Angle name
+Customer insight
+Main message
+Hook
+Why it may work
+
+4. PRIMARY AD COPY
+Provide:
+Hook
+Primary text
+Headline
+Description if relevant
+CTA
+
+5. COPY VARIATIONS
+Create distinct versions such as:
+Problem-led
+Outcome-led
+Demonstration-led
+Differentiation-led
+Offer-led if applicable
+
+6. SHORT COPY VERSIONS
+Create concise backup versions.
+
+7. PLATFORM-SPECIFIC VERSION
+Adapt the strongest concept to the selected platform and format.
+
+8. VISUAL DIRECTION
+Provide:
+Opening visual
+Main subject
+Action
+On-screen text
+CTA frame
+
+9. A/B TEST PLAN
+Provide:
+Control
+Variant
+Variable being tested
+Hypothesis
+Primary metric
+
+10. OBJECTION VERSION
+Create one version that addresses the most important relevant objection.
+
+11. RETARGETING VERSION
+Create one retargeting ad if appropriate.
+
+12. CLAIM & COMPLIANCE CHECK
+List:
+Potentially risky claim
+Why it needs attention
+Safer wording or required proof
+
+13. LANDING-PAGE ALIGNMENT CHECK
+State what the destination page should immediately confirm.
+
+14. FINAL RECOMMENDED AD
+Provide the strongest polished version ready for human review.
+
+IMPORTANT:
+- Do not invent product facts.
+- Do not invent proof.
+- Do not invent offers.
+- Do not fabricate testimonials.
+- Do not manufacture urgency or scarcity.
+- Do not promise guaranteed results.
+- Match the copy to the audience's awareness stage.
+- Keep each ad focused on one primary message.
+- Prefer specific customer value over generic persuasion.
+- Flag claims that need validation before publication.`;
+
+const steps = [
+  {
+    title: "Choose one message",
+    description:
+      "Start with the strongest customer pain, desire or use case and give each ad one clear job instead of trying to communicate every feature at once.",
+  },
+  {
+    title: "Match the awareness stage",
+    description:
+      "A person discovering the problem needs different copy from someone already comparing products or ready to buy.",
+  },
+  {
+    title: "Adapt to the platform",
+    description:
+      "Use shorter visual-first copy for social formats, professional relevance for LinkedIn and stronger intent matching for search advertising.",
+  },
+  {
+    title: "Test meaningful differences",
+    description:
+      "Compare strategic angles such as problem-led versus outcome-led copy rather than changing several unrelated elements at the same time.",
+  },
+];
+
+const example = {
+  input: [
+    "Product: Free online Reorder Point Calculator.",
+    "Audience: Small-business owners and inventory professionals.",
+    "Objective: Website traffic and tool usage.",
+    "Platform: LinkedIn.",
+    "Pain: Reordering too late or relying on guesswork.",
+    "Value: Calculates reorder point from demand, lead time and safety stock.",
+    "CTA: Calculate now.",
+  ],
+
+  output: [
+    "CORE MESSAGE: Use your own inventory inputs to calculate a clearer reorder trigger instead of relying only on guesswork.",
+    "PROBLEM-LED HOOK: Still deciding when to reorder stock by instinct?",
+    "PRIMARY TEXT: Reordering too late can create avoidable stock pressure, while ordering without a consistent method makes planning harder. Enter your demand, lead time and safety stock into the free calculator to estimate a practical reorder point.",
+    "HEADLINE: Know When It's Time to Reorder",
+    "CTA: Calculate Now",
+    "VISUAL: Show the calculator interface with the three inputs being entered and the reorder-point result appearing clearly.",
+    "A/B TEST: Compare the problem-led hook against an outcome-led version while keeping the visual and CTA unchanged.",
+    "CLAIM CHECK: Avoid saying the tool prevents stockouts, because actual inventory outcomes also depend on forecast accuracy, supplier reliability and operating conditions.",
+  ],
+};
+
+const tips = [
+  {
+    title: "One ad should make one main argument",
+    description:
+      "Trying to include every feature, benefit and objection usually weakens the message. Build separate variants around different customer motivations instead.",
+  },
+  {
+    title: "A stronger hook does not need exaggeration",
+    description:
+      "Specific problems, useful questions and visible demonstrations can create attention without unsupported promises or artificial urgency.",
+  },
+  {
+    title: "Test the angle, not random wording",
+    description:
+      "A useful A/B test compares a meaningful variable such as problem-led versus outcome-led messaging while keeping the rest of the ad reasonably consistent.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Ad Copy Writer Prompt | KRIYANO"
+  description="Create platform-appropriate ad copy with stronger hooks, headlines, CTAs, messaging angles, A/B variants and claim checks."
+>
+  <PromptPage
+    category="MARKETING"
+    title="Ad Copy Writer"
+    accentTitle="Prompt."
+    description="Create focused advertising copy for social, search, display and professional campaigns using real customer value, platform-aware messaging and testable variations."
+    meta={[
+      "Free prompt",
+      "Ad copy",
+      "Paid marketing",
+    ]}
+    bestFor={[
+      "Facebook ads",
+      "Instagram ads",
+      "LinkedIn ads",
+      "Search ads",
+      "Video ads",
+      "A/B testing",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Write ads around one clear reason to act."
+    introDescription="Define the audience, awareness stage, objective and value proposition, then build truthful hooks, headlines, primary text, CTAs and testable variations for the selected platform."
+    steps={steps}
+    exampleTitle="Promote a practical inventory calculator without exaggerated claims."
+    example={example}
+    tipsTitle="Good ad copy is focused, credible and easy to test."
+    tips={tips}
+    sidebarTitle="Need stronger positioning first?"
+    sidebarDescription="Use KRIYANO's Value Proposition Builder before writing ads when the customer benefit, differentiation or core message is still unclear."
+    warningTitle="Persuasive advertising still needs factual support"
+    warningText="Verify prices, offers, benefits, testimonials, performance results, comparative statements and other material claims before publishing. Advertising-platform policies and legal requirements may also apply."
+  />
+</BaseLayout>

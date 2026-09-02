@@ -1,0 +1,329 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced market research analyst and business strategist.
+
+TASK:
+Conduct a structured market research analysis for the business, product, service or opportunity described below.
+
+BUSINESS / IDEA:
+[Describe the business, product or service.]
+
+TARGET MARKET:
+[Country, city, region or online market.]
+
+TARGET CUSTOMER:
+[Describe the expected customer.]
+
+PROBLEM / NEED:
+[What customer problem or need does this address?]
+
+BUSINESS MODEL:
+[Example: service business, e-commerce, subscription, marketplace, physical retail, digital product.]
+
+EXPECTED PRICE RANGE:
+[Add expected pricing if known.]
+
+AVAILABLE BUDGET:
+[Optional.]
+
+KNOWN COMPETITORS:
+[List competitors if known.]
+
+RESEARCH GOAL:
+[Example: validate demand, understand customers, analyze competition, explore pricing, identify opportunities.]
+
+AVAILABLE INFORMATION:
+[Paste any existing research, survey results, market data, competitor information or observations.]
+
+CONSTRAINTS:
+[List important limitations such as budget, location, regulations, resources or time.]
+
+RESEARCH REQUIREMENTS:
+
+1. MARKET DEFINITION
+- Clearly define the relevant market.
+- Separate the broad market from the specific addressable segment.
+- Explain which customer group should be researched first.
+
+2. CUSTOMER PROBLEM
+Analyze:
+- What problem or need exists?
+- How important is it?
+- How frequently might customers experience it?
+- What alternatives are they currently using?
+- What could motivate them to switch?
+
+3. TARGET CUSTOMER
+Build practical customer segments based on relevant factors such as:
+- Customer type
+- Needs
+- Buying behavior
+- Budget sensitivity
+- Location
+- Usage situation
+- Decision criteria
+
+Avoid creating fictional demographic details without evidence.
+
+4. DEMAND SIGNALS
+Identify evidence that could indicate real demand, including:
+- Search behavior
+- Existing competitors
+- Customer discussions
+- Reviews
+- Marketplace activity
+- Industry reports
+- Social media discussions
+- Requests for solutions
+- Existing spending behavior
+
+Clearly separate verified demand evidence from assumptions.
+
+5. COMPETITIVE LANDSCAPE
+Analyze:
+- Direct competitors
+- Indirect competitors
+- Alternative solutions
+- Typical positioning
+- Customer strengths and complaints
+- Possible gaps in the market
+
+Do not invent competitor details.
+
+6. CUSTOMER PAIN POINTS
+Identify likely pain points and classify them as:
+- Functional
+- Financial
+- Time-related
+- Convenience
+- Trust
+- Quality
+- Service
+- Knowledge / skill
+
+Label assumptions clearly when customer evidence is unavailable.
+
+7. PRICING RESEARCH
+Evaluate:
+- Competitor pricing where reliable information is available
+- Customer price sensitivity
+- Possible pricing models
+- Entry-level versus premium positioning
+- Factors that could justify a higher price
+
+Do not invent current market prices.
+
+8. MARKET TRENDS
+Identify relevant:
+- Customer behavior changes
+- Technology changes
+- Industry developments
+- Regulatory changes
+- Distribution changes
+- Emerging opportunities
+
+Separate established trends from speculation.
+
+9. MARKET GAPS
+Look for gaps such as:
+- Underserved customer groups
+- Poor customer experience
+- Complicated existing solutions
+- High prices
+- Limited availability
+- Missing features
+- Slow service
+- Lack of specialization
+- Weak local solutions
+
+Explain what evidence would be needed to confirm each gap.
+
+10. BARRIERS TO ENTRY
+Consider:
+- Startup cost
+- Skills
+- Technology
+- Supplier access
+- Customer acquisition
+- Regulations
+- Trust
+- Existing competition
+- Operational complexity
+
+11. RISKS
+Identify major risks and classify them as:
+- High
+- Medium
+- Low
+
+Explain why each risk matters.
+
+12. OPPORTUNITY ASSESSMENT
+Evaluate:
+- Strength of customer problem
+- Evidence of demand
+- Competitive pressure
+- Differentiation potential
+- Pricing potential
+- Ease of reaching customers
+- Startup difficulty
+- Scalability
+
+13. VALIDATION PLAN
+Recommend low-cost ways to test the opportunity before making a major investment.
+
+Include possible methods such as:
+- Customer interviews
+- Surveys
+- Landing page tests
+- Small pilot service
+- Marketplace listing
+- Pre-orders
+- Social media tests
+- Competitor review analysis
+- Search-demand research
+
+14. RESEARCH GAPS
+List important information that still needs to be verified.
+
+15. FINAL ASSESSMENT
+Give a balanced conclusion based on the available evidence.
+
+Use one of these ratings:
+
+- STRONG MARKET SIGNAL
+- PROMISING — NEEDS VALIDATION
+- UNCERTAIN — MORE RESEARCH NEEDED
+- DIFFICULT MARKET
+- WEAK MARKET SIGNAL
+
+Explain the reasoning behind the rating.
+
+OUTPUT FORMAT:
+
+1. Executive Summary
+2. Market Definition
+3. Target Customer
+4. Customer Problem
+5. Demand Signals
+6. Competitive Landscape
+7. Customer Pain Points
+8. Pricing Considerations
+9. Market Trends
+10. Market Gaps
+11. Barriers to Entry
+12. Key Risks
+13. Opportunity Assessment
+14. Low-Cost Validation Plan
+15. Research Gaps
+16. Final Market Assessment
+
+IMPORTANT:
+- Do not invent statistics, market size, prices, competitors, customer behavior or trends.
+- Clearly distinguish verified facts from assumptions.
+- If current market information is required but unavailable, identify exactly what should be researched.
+- When web research is available, prioritize recent and credible sources.
+- State when information may be outdated.
+- Avoid presenting estimates as confirmed facts.
+- Focus on evidence that can help make an actual business decision.`;
+
+const steps = [
+  {
+    title: "Define the market narrowly",
+    description:
+      "A specific customer, location and problem usually produces more useful research than asking about a very broad industry.",
+  },
+  {
+    title: "Add what you already know",
+    description:
+      "Include competitors, customer comments, prices, observations or previous research so the analysis can build from real evidence.",
+  },
+  {
+    title: "Separate evidence from assumptions",
+    description:
+      "Market research becomes more useful when confirmed demand signals are clearly distinguished from ideas that still need validation.",
+  },
+  {
+    title: "Validate before investing",
+    description:
+      "Use the research to design small, inexpensive tests before committing significant money, inventory or development time.",
+  },
+];
+
+const example = {
+  input: [
+    "Idea: Inventory management setup service for small businesses.",
+    "Market: Colombo, Sri Lanka.",
+    "Customers: Small retailers, distributors and e-commerce sellers.",
+    "Problem: Businesses using spreadsheets or manual records struggle with stock accuracy and reorder planning.",
+    "Business model: One-time setup fee plus optional monthly support.",
+    "Budget: Low startup budget.",
+    "Goal: Determine whether the service is worth testing.",
+  ],
+
+  output: [
+    "Market focus: Start with small businesses that already hold meaningful inventory but are not ready for a large ERP implementation.",
+    "Core hypothesis: Some businesses may need better stock control but lack the budget, knowledge or complexity required for enterprise software.",
+    "Demand validation: Interview business owners and review local discussions before assuming the problem is widespread enough to support a paid service.",
+    "Competitive research: Compare accounting software providers, inventory apps, ERP implementers, freelance Excel services and manual alternatives.",
+    "Low-cost test: Offer a clearly defined inventory audit and tracker setup package to a small number of businesses before developing a larger service.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Research a decision",
+    description:
+      "Instead of asking for everything about a market, explain what decision the research needs to help you make.",
+  },
+  {
+    title: "Current data matters",
+    description:
+      "Competitors, prices, regulations and customer behavior can change. Verify time-sensitive findings using recent reliable sources.",
+  },
+  {
+    title: "Look for behavior, not enthusiasm",
+    description:
+      "Customers saying an idea sounds useful is weaker evidence than customers already searching, paying or actively trying to solve the problem.",
+  },
+];
+---
+
+<BaseLayout
+  title="Market Research Prompt | KRIYANO"
+  description="Research a market systematically with customer, demand, competitor, pricing, opportunity, risk and validation analysis."
+>
+  <PromptPage
+    category="RESEARCH"
+    title="Market Research"
+    accentTitle="Prompt."
+    description="Turn a business idea or market question into structured research covering customers, demand signals, competitors, pricing, gaps, risks and low-cost validation."
+    meta={[
+      "Free prompt",
+      "Research",
+      "Business validation",
+    ]}
+    bestFor={[
+      "Business ideas",
+      "New markets",
+      "Customer research",
+      "Competitor analysis",
+      "Pricing research",
+      "Opportunity validation",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Research the market before making the decision."
+    introDescription="Define the opportunity, customer and location as specifically as possible. The prompt is designed to separate real evidence from assumptions and identify what still needs to be validated."
+    steps={steps}
+    exampleTitle="From business idea to research plan."
+    example={example}
+    tipsTitle="Get stronger market evidence."
+    tips={tips}
+    sidebarTitle="Need a different research structure?"
+    sidebarDescription="Use the KRIYANO Prompt Builder to create custom research instructions around your exact market, customer, competitors and decision."
+    warningTitle="Market data changes"
+    warningText="AI knowledge alone should not be treated as current market research. Verify time-sensitive information such as prices, competitors, regulations, market size and trends using recent reliable sources."
+  />
+</BaseLayout>

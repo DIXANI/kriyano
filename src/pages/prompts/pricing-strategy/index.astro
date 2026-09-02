@@ -1,0 +1,1140 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced pricing strategist, commercial analyst and business decision advisor.
+
+TASK:
+Develop a practical pricing strategy for the product or service below.
+
+The goal is to identify a pricing approach that balances customer value, business economics, market positioning, competitiveness and long-term sustainability.
+
+Do not invent competitor prices, customer willingness-to-pay, market averages, margins, costs, conversion rates or demand elasticity.
+
+Clearly distinguish between:
+
+- confirmed inputs
+- calculated values
+- assumptions
+- hypotheses
+- information that still requires validation
+
+BUSINESS:
+[Business / brand name.]
+
+PRODUCT / SERVICE:
+[Describe what is being sold.]
+
+CUSTOMER:
+[Target customer or segment.]
+
+MARKET:
+[Country / region / industry.]
+
+BUSINESS MODEL:
+[One-time sale / subscription / service / project / usage-based / marketplace / other.]
+
+CURRENT PRICE:
+[If applicable.]
+
+CURRENT PRICING MODEL:
+[Flat rate / tiered / per user / per unit / hourly / project-based / other.]
+
+CURRENCY:
+[Currency.]
+
+DIRECT COST PER UNIT / SALE:
+[If known.]
+
+FIXED COSTS:
+[Monthly or annual if relevant.]
+
+VARIABLE COSTS:
+[Payment fees, delivery, support, hosting, commission, labor, etc.]
+
+TARGET MARGIN:
+[If known.]
+
+SALES VOLUME:
+[Current or expected, only if known.]
+
+COMPETITOR INFORMATION:
+[Known prices, plans, positioning or alternatives.]
+
+CUSTOMER VALUE:
+[What outcome or benefit does the customer receive?]
+
+CUSTOMER PAIN POINTS:
+[What problem is being solved?]
+
+BUYING CRITERIA:
+[Price, quality, convenience, speed, support, etc.]
+
+KNOWN PRICE OBJECTIONS:
+[If any.]
+
+DISCOUNTS CURRENTLY USED:
+[If any.]
+
+SALES CHANNEL:
+[Website / marketplace / direct sales / retail / distributor / other.]
+
+POSITIONING:
+[Budget / value / mid-market / premium / specialist / other.]
+
+BUSINESS GOAL:
+[Growth / profit / adoption / market entry / retention / upsell / other.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+PRICING ANALYSIS REQUIREMENTS:
+
+1. REVIEW THE INPUT QUALITY
+Classify the information into:
+
+CONFIRMED
+Directly provided or supported.
+
+CALCULATED
+Derived mathematically from confirmed inputs.
+
+ASSUMED
+Required for analysis but not verified.
+
+UNKNOWN
+Important information that is missing.
+
+Do not hide missing information behind confident recommendations.
+
+2. DEFINE THE PRICING OBJECTIVE
+Determine the main objective.
+
+Possible objectives include:
+
+- maximize contribution margin
+- increase adoption
+- improve profitability
+- support premium positioning
+- gain market entry
+- improve retention
+- increase average order value
+- improve upsell
+- simplify purchasing
+
+If several objectives conflict, identify the trade-off.
+
+3. UNDERSTAND THE CUSTOMER VALUE
+Identify:
+
+Functional value
+Time savings
+Cost savings
+Risk reduction
+Revenue improvement
+Convenience
+Quality improvement
+Professional value
+
+Only include benefits supported by the supplied information.
+
+4. DEFINE THE UNIT OF VALUE
+Determine what the customer is actually paying for.
+
+Examples:
+
+Per unit
+Per order
+Per user
+Per location
+Per project
+Per month
+Per transaction
+Per usage level
+Per outcome
+
+Recommend the unit that most closely aligns price with customer value where practical.
+
+5. ANALYZE COST STRUCTURE
+Separate:
+
+Fixed costs
+Variable costs
+Direct costs
+Transaction costs
+Support costs
+Fulfillment costs
+Sales commissions
+
+Do not invent missing costs.
+
+6. CALCULATE UNIT ECONOMICS
+Where data allows, calculate:
+
+Selling price
+Variable cost
+Contribution per sale
+Contribution margin %
+Gross margin where appropriate
+
+Use:
+
+Contribution = Price - Variable Cost
+
+Contribution Margin % =
+Contribution / Price × 100
+
+Show formulas and inputs.
+
+7. BREAK-EVEN ANALYSIS
+If fixed and variable costs are supplied, calculate:
+
+Break-even units =
+Fixed Costs / Contribution per Unit
+
+Clearly state assumptions.
+
+Do not calculate break-even if the required inputs are missing.
+
+8. IDENTIFY THE PRICE FLOOR
+Estimate a commercial price floor based on known economics.
+
+Distinguish:
+
+Absolute cost floor
+Sustainable commercial floor
+Strategic promotional price
+
+A price above variable cost is not automatically sustainable.
+
+9. ANALYZE POSITIONING
+Assess whether the intended position is:
+
+Budget
+Value
+Mid-market
+Premium
+Specialist
+
+Explain what the pricing must communicate to support that position.
+
+10. ANALYZE ALTERNATIVES
+Customers may compare the offer against:
+
+Direct competitor
+Manual process
+Internal employee
+Freelancer
+Spreadsheet
+Free tool
+Existing supplier
+Doing nothing
+
+Do not assume only direct competitors matter.
+
+11. COMPETITOR PRICING
+Use competitor information only when supplied or verifiable.
+
+Do not invent competitor prices.
+
+If data is missing, specify exactly what should be researched.
+
+12. COMPETITOR PRICE COMPARISON
+Where data exists, compare:
+
+Entry price
+Core plan
+Premium plan
+Pricing unit
+Contract requirement
+Included features
+Limits
+Add-ons
+Discount structure
+
+Focus on meaningful differences, not price alone.
+
+13. AVOID AUTOMATIC UNDERCUTTING
+Do not recommend a lower price simply because competitors are cheaper.
+
+Evaluate:
+
+Value difference
+Service level
+Quality
+Risk
+Convenience
+Brand position
+Support
+Features
+Switching costs
+
+14. CUSTOMER PRICE SENSITIVITY
+Assess only from available evidence.
+
+Possible signals:
+
+Frequent discount requests
+High comparison behavior
+Price objections
+Low switching cost
+Commodity-like offer
+High differentiation
+High urgency
+High business impact
+
+Do not invent elasticity.
+
+15. WILLINGNESS TO PAY
+Do not fabricate a willingness-to-pay number.
+
+If unknown, propose methods to test it.
+
+16. IDENTIFY VALUE METRICS
+For recurring or scalable products, determine whether pricing could align with:
+
+Users
+Usage
+Transactions
+Locations
+Revenue
+Storage
+Volume
+Projects
+Features
+
+Explain pros and cons.
+
+17. REVIEW CURRENT PRICING MODEL
+Assess whether the current model is:
+
+Easy to understand
+Easy to compare
+Aligned with value
+Predictable
+Scalable
+Profitable
+Operationally manageable
+
+18. FLAT-RATE PRICING
+Evaluate flat pricing when:
+
+Customer needs are similar
+Usage variation is low
+Simplicity is important
+
+Highlight risks where high-usage customers create disproportionate cost.
+
+19. TIERED PRICING
+If relevant, propose:
+
+Entry
+Core
+Premium
+
+Each tier should have a clear customer type and value difference.
+
+Do not create arbitrary feature limits.
+
+20. GOOD-BETTER-BEST STRUCTURE
+Where appropriate:
+
+Good:
+Basic need.
+
+Better:
+Most common use case.
+
+Best:
+Higher-value or advanced need.
+
+Avoid creating a weak entry tier solely to manipulate customers upward.
+
+21. FEATURE-BASED PRICING
+Use only when features genuinely represent different levels of value.
+
+Do not unnecessarily hide essential functionality behind expensive tiers.
+
+22. USAGE-BASED PRICING
+Assess:
+
+Customer predictability
+Revenue predictability
+Usage measurement
+Cost alignment
+Billing complexity
+
+23. PER-USER PRICING
+Assess whether additional users create additional value.
+
+Consider whether per-user pricing could discourage adoption.
+
+24. PROJECT PRICING
+For services consider:
+
+Scope
+Complexity
+Time
+Risk
+Expertise
+Deliverables
+Revision requirements
+Customer value
+
+Do not base price only on hours if value and risk materially differ.
+
+25. HOURLY PRICING
+Explain when hourly pricing is appropriate and when it may create misaligned incentives.
+
+26. VALUE-BASED PRICING
+Where sufficient evidence exists, assess the economic value created.
+
+Do not automatically charge a fixed percentage of claimed value.
+
+Use value as one pricing input, not fabricated certainty.
+
+27. SUBSCRIPTION PRICING
+For subscriptions evaluate:
+
+Monthly
+Annual
+Minimum commitment
+Cancellation flexibility
+Onboarding cost
+Ongoing service cost
+
+28. ANNUAL DISCOUNTS
+If recommending an annual discount, calculate the economic effect.
+
+Example:
+
+Monthly price × 12 = annual list value.
+
+Compare proposed annual price against that value.
+
+Do not select a discount percentage without explaining the reason.
+
+29. DISCOUNT STRATEGY
+Classify discounts by purpose:
+
+Acquisition
+Volume
+Commitment
+Seasonal
+Retention
+Channel
+Promotional
+
+Avoid permanent discounting without a strategic reason.
+
+30. DISCOUNT RISK
+Evaluate:
+
+Margin erosion
+Customer conditioning
+Brand dilution
+Channel conflict
+Existing customer fairness
+Price anchoring
+
+31. VOLUME DISCOUNTS
+Only recommend volume discounts where increased volume creates economic or strategic benefit.
+
+Calculate the margin effect.
+
+32. BUNDLING
+Assess whether bundling:
+
+Increases customer value
+Improves adoption
+Reduces sales friction
+Moves low-use products
+Creates confusion
+
+33. ADD-ONS
+Identify features or services that may be better sold separately.
+
+Examples:
+
+Premium support
+Setup
+Training
+Customization
+Delivery
+Priority service
+
+34. FREE TIER
+If relevant, analyze:
+
+Acquisition benefit
+Conversion path
+Support cost
+Abuse risk
+Feature boundary
+Customer value
+
+Do not recommend free simply because competitors offer it.
+
+35. FREE TRIAL
+Assess:
+
+Trial length
+Time-to-value
+Activation requirements
+Conversion point
+
+Do not invent an ideal duration without product context.
+
+36. FREEMIUM VS TRIAL
+Explain which may fit better based on:
+
+Usage frequency
+Time-to-value
+Cost to serve
+Product complexity
+Network effect
+Customer urgency
+
+37. INTRODUCTORY PRICING
+If entering a market, assess temporary launch pricing separately from long-term pricing.
+
+Define:
+
+Start price
+Duration
+Exit condition
+Target permanent price
+
+Avoid an unclear "temporary" discount with no exit plan.
+
+38. PRICE ANCHORING
+Where appropriate, structure pricing so customers understand relative value.
+
+Do not create deceptive anchors.
+
+39. DECOY PRICING
+Do not recommend manipulative or deliberately poor-value plans merely to push customers toward another option.
+
+40. ODD / CHARM PRICING
+Assess whether prices such as 9.99 suit the market and brand.
+
+Premium or B2B offers may benefit more from simpler pricing.
+
+41. ROUND PRICING
+Consider round pricing where clarity and professionalism matter.
+
+42. PSYCHOLOGICAL PRICING
+Use cautiously.
+
+Customer trust and transparency should take priority over gimmicks.
+
+43. PRICE TRANSPARENCY
+Assess whether prices should be:
+
+Public
+Starting from
+Quote-based
+Configured
+
+Explain the sales implications.
+
+44. QUOTE-BASED PRICING
+Use where scope or customer requirements vary significantly.
+
+Avoid quote-only pricing when customers need a simple standardized purchase.
+
+45. MINIMUM ORDER / MINIMUM FEE
+Where fixed transaction or setup costs are significant, evaluate a minimum charge.
+
+46. SETUP FEES
+Assess whether onboarding or implementation creates real one-time cost.
+
+Do not add fees without customer value or cost justification.
+
+47. SHIPPING / DELIVERY
+For physical products, determine whether delivery should be:
+
+Included
+Separate
+Free above threshold
+
+Model the economics where data exists.
+
+48. TAXES AND FEES
+Clearly separate prices before and after tax where relevant.
+
+Do not provide jurisdiction-specific tax advice without reliable information.
+
+49. SALES CHANNEL EFFECT
+Analyze whether pricing must account for:
+
+Marketplace commission
+Distributor margin
+Reseller margin
+Affiliate fee
+Payment processing
+Retail markup
+
+50. CHANNEL CONFLICT
+Identify risks where direct and partner prices differ.
+
+51. CUSTOMER ACQUISITION ECONOMICS
+If acquisition cost is known, consider:
+
+CAC
+Gross contribution
+Payback period
+
+Do not invent CAC.
+
+52. CUSTOMER LIFETIME VALUE
+Calculate only when retention, purchase frequency and margin inputs are available.
+
+Do not fabricate LTV.
+
+53. PROFITABILITY SCENARIOS
+Where data allows, model:
+
+Lower-price scenario
+Base scenario
+Higher-price scenario
+
+For each show:
+
+Price
+Volume assumption
+Revenue
+Variable cost
+Contribution
+
+Clearly mark volume changes as assumptions.
+
+54. DO NOT ASSUME LOWER PRICE = HIGHER SALES
+State explicitly when demand response is unknown.
+
+Do not use fabricated conversion improvements.
+
+55. PRICE INCREASE ANALYSIS
+If considering a price increase, assess:
+
+Margin improvement
+Potential churn
+Customer communication
+Existing customer treatment
+Contract restrictions
+Competitor context
+
+56. GRANDFATHERING
+Consider whether current customers should retain old pricing temporarily.
+
+Explain benefits and risks.
+
+57. PRICE DECREASE ANALYSIS
+Evaluate whether a lower price:
+
+Improves accessibility
+Damages positioning
+Requires unrealistic volume
+Reduces contribution
+Triggers competitor response
+
+58. BREAK-EVEN VOLUME AFTER PRICE CHANGE
+When possible calculate how much sales volume must change to maintain total contribution.
+
+For current:
+
+Contribution_old = Price_old - VariableCost
+
+For new:
+
+Contribution_new = Price_new - VariableCost
+
+Required new volume =
+Old total contribution / Contribution_new
+
+59. CANNIBALIZATION
+For tiers or bundles, assess whether customers may downgrade from higher-value offers.
+
+60. UPSELL PATH
+Design a logical path based on increasing customer need.
+
+Do not restrict ordinary use merely to force upgrades.
+
+61. CROSS-SELL OPPORTUNITY
+Where appropriate, identify complementary products or services separately from core pricing.
+
+62. CONTRACT LENGTH
+For B2B or subscriptions assess:
+
+Monthly
+Annual
+Multi-year
+
+Consider price certainty, customer risk and business predictability.
+
+63. PAYMENT TERMS
+Where relevant assess:
+
+Upfront
+Deposit
+Milestone
+Net terms
+Recurring billing
+
+Consider cash-flow implications.
+
+64. REFUNDS / GUARANTEES
+Assess how refund or guarantee policies influence perceived purchase risk.
+
+Do not recommend guarantees the business cannot honor.
+
+65. PREMIUM POSITIONING
+If pricing above alternatives, explain the proof required.
+
+Examples:
+
+Better outcome
+Service
+Quality
+Speed
+Expertise
+Convenience
+Reliability
+
+66. BUDGET POSITIONING
+If pricing lower, explain how the business will preserve margin and customer trust.
+
+Avoid appearing low-quality by accident.
+
+67. PRICE COMMUNICATION
+Create a simple explanation of:
+
+What the customer pays
+What is included
+What is excluded
+Billing frequency
+Optional charges
+
+68. VALUE COMMUNICATION
+Explain price alongside outcomes, not just features.
+
+Do not exaggerate ROI.
+
+69. PRICE OBJECTION HANDLING
+For common objections provide:
+
+Objection
+Likely concern
+Clarifying question
+Relevant evidence
+Professional response
+
+Do not pressure or manipulate customers.
+
+70. "TOO EXPENSIVE"
+Do not automatically discount.
+
+First determine whether the issue is:
+
+Budget
+Value perception
+Comparison
+Timing
+Authority
+Cash flow
+Poor fit
+
+71. NEGOTIATION GUIDELINES
+If relevant establish:
+
+Target price
+Preferred terms
+Minimum acceptable economics
+Items that can be traded
+Items that should not be discounted
+
+Do not invent limits.
+
+72. DISCOUNT APPROVAL
+For teams, recommend clear authority and approval rules where frequent negotiation exists.
+
+73. PRICING GOVERNANCE
+For growing businesses identify:
+
+Who owns pricing
+Who approves changes
+How often it is reviewed
+How exceptions are recorded
+
+74. TESTING PRICE
+Suggest ethical testing approaches such as:
+
+Customer interviews
+Sales conversations
+Offer testing
+Landing-page testing
+Quote analysis
+Cohort comparison
+
+Ensure actual customers are treated fairly.
+
+75. VAN WESTENDORP
+Where appropriate explain the four pricing questions:
+
+Too cheap
+Cheap / good value
+Expensive
+Too expensive
+
+Treat results as research input, not a definitive price.
+
+76. GABOR-GRANGER
+Where appropriate suggest testing purchase likelihood at multiple prices.
+
+Do not create fake responses.
+
+77. CONJOINT ANALYSIS
+Mention only when product features and pricing trade-offs justify more advanced research.
+
+78. SALES DATA ANALYSIS
+If historical transaction data exists, review:
+
+Price paid
+Discount
+Volume
+Segment
+Conversion
+Renewal
+Churn
+
+79. WIN / LOSS ANALYSIS
+Where available examine whether price was genuinely the reason deals were won or lost.
+
+Do not assume every lost sale was due to price.
+
+80. REVIEW CUSTOMER FEEDBACK
+Separate comments about:
+
+Absolute price
+Value
+Affordability
+Competitor comparison
+Pricing complexity
+
+81. SEGMENT PRICING
+If different customer segments receive different pricing, ensure differences relate to legitimate value, cost or commercial structure.
+
+Avoid unfair or discriminatory practices.
+
+82. GEOGRAPHIC PRICING
+Where relevant assess:
+
+Currency
+Purchasing context
+Local competition
+Taxes
+Distribution cost
+
+Do not invent local market prices.
+
+83. CURRENCY RISK
+For international sales, identify exposure to exchange-rate changes where relevant.
+
+84. INFLATION / COST INCREASES
+If costs change over time, identify a pricing review mechanism.
+
+85. PRICE REVIEW TRIGGERS
+Examples:
+
+Cost increase
+Product improvement
+Competitor change
+Demand change
+Capacity constraint
+New segment
+Margin decline
+
+86. KPI FRAMEWORK
+Possible pricing KPIs:
+
+Average selling price
+Discount rate
+Contribution margin
+Gross margin
+Conversion rate
+ARPU
+Upgrade rate
+Churn
+Revenue per customer
+
+Only select metrics relevant to the model.
+
+87. BASELINE
+Use current KPI values where provided.
+
+Do not invent baselines.
+
+88. TARGETS
+Do not create arbitrary targets.
+
+If targets are unknown, state:
+
+"Target to be established after baseline review."
+
+89. IMPLEMENTATION PLAN
+For a pricing change specify:
+
+Decision
+Configuration
+Website / sales material update
+Sales training
+Customer communication
+Existing customer policy
+Launch
+Monitoring
+Review
+
+90. PILOT
+Where risk is significant, recommend testing with a limited:
+
+Segment
+Region
+Channel
+Offer
+New-customer cohort
+
+before wider rollout.
+
+91. CUSTOMER COMMUNICATION
+For price increases, explain:
+
+What is changing
+When
+Why
+What value is included
+What customers need to do
+
+Avoid defensive wording.
+
+92. SALES TEAM COMMUNICATION
+Prepare:
+
+Pricing logic
+Value explanation
+Discount rules
+FAQ
+Objection responses
+Escalation rules
+
+93. MONITOR AFTER LAUNCH
+Track:
+
+Sales volume
+Conversion
+Discount requests
+Margin
+Customer feedback
+Churn
+Plan mix
+
+Use metrics appropriate to the model.
+
+94. DEFINE REVIEW PERIOD
+If no review date is supplied, recommend establishing one rather than inventing a calendar date.
+
+95. STOP / ADJUST CRITERIA
+Define what signals would justify reconsidering the pricing approach.
+
+Avoid arbitrary numeric thresholds unless evidence supports them.
+
+96. RECOMMENDATION
+Provide:
+
+Recommended pricing model
+Reason
+Main economic logic
+Customer-value logic
+Positioning logic
+Key assumptions
+Key risks
+
+97. ALTERNATIVES
+Provide 1–2 realistic alternatives and explain:
+
+Advantages
+Disadvantages
+Best use case
+
+98. CONFIDENCE LEVEL
+Rate:
+
+High
+Medium
+Low
+
+based on input quality.
+
+Explain what evidence would increase confidence.
+
+99. NEXT RESEARCH PRIORITIES
+Rank:
+
+P1
+P2
+P3
+
+based on how much the missing information could change the pricing decision.
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- no competitor price was invented
+- no customer willingness-to-pay was invented
+- no demand elasticity was invented
+- no costs were invented
+- calculations use visible inputs
+- assumptions are clearly labeled
+- recommendations match positioning
+- discounts have an economic reason
+- risks are visible
+- alternatives were considered
+- validation needs are clear
+
+OUTPUT FORMAT:
+
+1. Pricing Objective
+2. Input & Evidence Review
+3. Customer Value Analysis
+4. Cost & Unit Economics
+5. Market / Alternative Context
+6. Current Pricing Assessment
+7. Recommended Pricing Model
+8. Recommended Price Structure
+9. Tier / Package Design — if applicable
+10. Discount Strategy
+11. Pricing Scenarios
+12. Break-Even Analysis — if possible
+13. Customer Communication
+14. Sales Guidance
+15. Risks & Trade-offs
+16. Alternatives Considered
+17. Testing & Validation Plan
+18. KPIs to Monitor
+19. Implementation Plan
+20. Research Gaps
+21. Confidence Level
+22. Final Recommendation
+
+IMPORTANT:
+- Do not invent market prices, costs, willingness-to-pay, conversion rates, volume response or customer behavior.
+- Show formulas for calculations.
+- Label assumptions clearly.
+- Do not recommend undercutting competitors automatically.
+- Do not assume a lower price will increase demand.
+- Treat doing nothing and existing alternatives as part of the competitive context.
+- Protect sustainable unit economics.
+- Use value, cost, competition and positioning together rather than relying on one method.
+- Do not use manipulative pricing tactics.
+- Explain the risks and trade-offs of every major recommendation.
+- Treat the recommended price as a decision hypothesis when evidence is incomplete, not as guaranteed market truth.`;
+
+const steps = [
+  {
+    title: "Start with economics",
+    description:
+      "Understand direct costs, variable costs, contribution and break-even requirements before recommending a price that may look attractive but cannot support the business.",
+  },
+  {
+    title: "Connect price to customer value",
+    description:
+      "Assess what outcome customers receive, how they currently solve the problem and which buying criteria matter instead of pricing only from cost or competitor comparison.",
+  },
+  {
+    title: "Choose the right pricing structure",
+    description:
+      "Evaluate flat, tiered, subscription, usage, project, bundle or add-on models based on how customers receive value and how the business incurs cost.",
+  },
+  {
+    title: "Test before treating it as final",
+    description:
+      "Use real sales, customer research and pricing experiments to validate assumptions instead of allowing AI to invent demand response or willingness-to-pay.",
+  },
+];
+
+const example = {
+  input: [
+    "Business: Online inventory management template.",
+    "Product: Excel-based inventory tracker for small businesses.",
+    "Target customer: Small retailers and online sellers.",
+    "Direct delivery cost: Very low because it is a digital product.",
+    "Current price: None — new product.",
+    "Known alternatives: Free spreadsheets and paid inventory software.",
+    "Positioning: Affordable practical solution between a basic spreadsheet and full software.",
+    "Unknown: Customer willingness-to-pay, competitor template prices and expected sales volume.",
+  ],
+
+  output: [
+    "Recommended model: One-time purchase is a logical starting structure because the product is a downloadable digital asset with no confirmed recurring service requirement.",
+    "Pricing position: The offer should be evaluated as a practical middle option between free generic spreadsheets and more complex inventory software rather than automatically competing on the lowest possible price.",
+    "Critical unknown: A specific selling price should not be presented as market-validated until competitor research and customer willingness-to-pay evidence are collected.",
+    "Validation plan: Compare relevant paid template alternatives, interview target users about current solutions and test a small number of price points using real offer data.",
+    "Business risk: A very low launch price could increase perceived affordability but may also make future price increases difficult and weaken the perceived value of a professionally designed inventory tool.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Don't let AI invent the market price",
+    description:
+      "A plausible-looking price is not evidence. Use real competitor research, customer feedback and transaction data before treating a number as market validated.",
+  },
+  {
+    title: "Protect contribution, not just revenue",
+    description:
+      "A lower price may increase sales yet still produce a worse business result. Check contribution per sale and the volume required to offset any price reduction.",
+  },
+  {
+    title: "Price the value model, not only the feature list",
+    description:
+      "The strongest pricing structures usually connect what customers pay to how they receive value while remaining simple enough to understand and manage.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Pricing Strategy Prompt | KRIYANO"
+  description="Build a practical pricing strategy using customer value, cost structure, unit economics, positioning, competitive context, pricing models and validation."
+>
+  <PromptPage
+    category="BUSINESS"
+    title="Pricing Strategy"
+    accentTitle="Prompt."
+    description="Develop a structured pricing strategy using business economics, customer value, positioning and real market evidence instead of guessing what customers will pay."
+    meta={[
+      "Free prompt",
+      "Pricing strategy",
+      "Business analysis",
+    ]}
+    bestFor={[
+      "Entrepreneurs",
+      "Small businesses",
+      "Digital products",
+      "Services",
+      "Subscriptions",
+      "New product launches",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Build pricing around value and sustainable economics."
+    introDescription="Evaluate costs, customer value, alternatives, positioning and pricing structure while keeping assumptions and unvalidated market claims clearly separated from evidence."
+    steps={steps}
+    exampleTitle="Price a new offer without inventing willingness-to-pay."
+    example={example}
+    tipsTitle="Make pricing decisions that can be tested."
+    tips={tips}
+    sidebarTitle="Still evaluating the business itself?"
+    sidebarDescription="Use KRIYANO's Business Idea Evaluator before pricing when the product, customer problem or commercial model still needs validation."
+    warningTitle="A calculated price is not automatically a market-validated price"
+    warningText="Cost and margin calculations can establish economic boundaries, but they do not prove what customers will pay. Validate important pricing decisions using real customer, competitor and transaction evidence."
+  />
+</BaseLayout>

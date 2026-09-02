@@ -1,0 +1,394 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced marketing strategist and growth consultant.
+
+TASK:
+Create a practical marketing strategy for the business, product, service or campaign described below.
+
+BUSINESS / BRAND:
+[Describe the business or brand.]
+
+PRODUCT / SERVICE:
+[What are you selling?]
+
+TARGET MARKET:
+[Country, city, region or online market.]
+
+TARGET CUSTOMER:
+[Describe the ideal customer.]
+
+CUSTOMER PROBLEM:
+[What problem, need or desire does the offer address?]
+
+VALUE PROPOSITION:
+[Why should customers choose this offer?]
+
+PRICE / OFFER:
+[Describe pricing, packages, discounts or promotions if known.]
+
+BUSINESS STAGE:
+[Example: idea stage, launch, early growth, established.]
+
+MARKETING GOAL:
+[Example: awareness, leads, sales, website traffic, repeat customers, launch.]
+
+AVAILABLE BUDGET:
+[Add monthly or campaign budget if known.]
+
+AVAILABLE CHANNELS:
+[Example: website, Facebook, Instagram, LinkedIn, TikTok, YouTube, email, WhatsApp, marketplace.]
+
+CURRENT MARKETING:
+[Describe what is already being done.]
+
+KNOWN COMPETITORS:
+[List competitors or alternatives if known.]
+
+BRAND VOICE:
+[Example: professional, friendly, premium, practical, educational.]
+
+AVAILABLE RESOURCES:
+[Team, content skills, website, email list, customer base, photography, video capability, etc.]
+
+TIMEFRAME:
+[Example: 30 days, 3 months, 6 months.]
+
+CONSTRAINTS:
+[List important limitations.]
+
+STRATEGY REQUIREMENTS:
+
+1. MARKETING OBJECTIVE
+- Define the primary objective clearly.
+- Separate the main objective from secondary goals.
+- Make the objective realistic for the available budget and stage.
+
+2. TARGET CUSTOMER
+Identify:
+- primary customer segment
+- secondary segment if relevant
+- main needs
+- pain points
+- buying triggers
+- objections
+- decision factors
+
+Do not invent demographic details without evidence.
+
+3. POSITIONING
+Explain:
+- what the offer should be known for
+- who it is for
+- why it is different
+- what should not be emphasized
+
+4. CORE MESSAGE
+Develop:
+- main marketing message
+- customer benefit
+- supporting proof points
+- possible headline direction
+
+Do not invent testimonials, certifications or performance claims.
+
+5. OFFER STRATEGY
+Evaluate:
+- core offer
+- entry offer
+- premium option
+- bundle possibilities
+- trial or low-risk offer
+- urgency only where genuinely justified
+
+6. CUSTOMER JOURNEY
+Map the likely stages:
+- Awareness
+- Interest
+- Consideration
+- Conversion
+- Retention
+- Referral
+
+Explain what content or action should support each stage.
+
+7. CHANNEL STRATEGY
+Evaluate relevant channels based on:
+- customer presence
+- cost
+- content requirements
+- speed of results
+- trust-building ability
+- measurement
+
+Recommend:
+- Primary channels
+- Secondary channels
+- Channels to avoid or delay
+
+Do not recommend every platform.
+
+8. CONTENT STRATEGY
+Define practical content pillars.
+
+For each pillar include:
+- purpose
+- audience need
+- example topics
+- suitable format
+- likely CTA
+
+9. CONTENT MIX
+Recommend a balanced mix of:
+- educational content
+- problem-solving content
+- proof / credibility
+- product or service content
+- customer-focused content
+- promotional content
+
+10. LEAD GENERATION
+Recommend realistic ways to create inquiries or leads.
+
+Examples:
+- lead magnet
+- consultation
+- quote request
+- free assessment
+- sample
+- demo
+- email signup
+- WhatsApp inquiry
+- landing page
+
+Use only methods appropriate to the business.
+
+11. CONVERSION STRATEGY
+Explain how to improve the path from interest to purchase.
+
+Consider:
+- trust
+- clarity
+- proof
+- pricing presentation
+- response speed
+- CTA
+- checkout / inquiry friction
+- follow-up
+
+12. CUSTOMER RETENTION
+Recommend ways to encourage:
+- repeat purchases
+- renewals
+- cross-selling
+- referrals
+- customer loyalty
+
+13. ORGANIC MARKETING
+Create a low-cost organic approach using the most suitable channels.
+
+14. PAID MARKETING
+If budget is available:
+- recommend where paid advertising may be useful
+- suggest what should be tested first
+- explain what should be measured
+
+If the budget is too limited, say so.
+
+15. PARTNERSHIPS
+Identify practical partnership or referral opportunities if relevant.
+
+16. 30-DAY ACTION PLAN
+Create a realistic marketing action plan for the first 30 days.
+
+17. CONTENT CALENDAR DIRECTION
+Recommend:
+- posting frequency
+- content types
+- weekly themes
+- promotional balance
+
+Do not create an unnecessarily heavy schedule.
+
+18. KPIs
+Recommend relevant metrics such as:
+- reach
+- engagement
+- inquiries
+- leads
+- conversion rate
+- cost per lead
+- customer acquisition cost
+- average order value
+- repeat purchase rate
+- website conversion rate
+
+Use only metrics relevant to the goal.
+
+19. TESTING PLAN
+Identify what should be tested first.
+
+Possible tests:
+- message
+- audience
+- offer
+- headline
+- landing page
+- CTA
+- content format
+- pricing presentation
+- advertising creative
+
+20. RISKS
+Identify major marketing risks, including:
+- weak differentiation
+- unclear audience
+- excessive platform spread
+- poor measurement
+- overreliance on discounts
+- low trust
+- high acquisition cost
+
+21. INFORMATION GAPS
+List missing information that could materially change the strategy.
+
+22. FINAL PRIORITIES
+End with:
+- Top 3 marketing priorities
+- What to do first
+- What to delay
+- What to measure
+
+OUTPUT FORMAT:
+
+1. Strategy Summary
+2. Marketing Objective
+3. Target Customer
+4. Positioning
+5. Core Message
+6. Offer Strategy
+7. Customer Journey
+8. Channel Strategy
+9. Content Strategy
+10. Lead Generation
+11. Conversion Strategy
+12. Retention Strategy
+13. Organic Marketing
+14. Paid Marketing
+15. Partnerships
+16. 30-Day Action Plan
+17. Content Direction
+18. KPIs
+19. Testing Plan
+20. Risks
+21. Information Gaps
+22. Final Priorities
+
+IMPORTANT:
+- Do not invent customer demand, competitor data, market statistics or advertising results.
+- Clearly label assumptions.
+- Keep recommendations realistic for the available budget and resources.
+- Do not recommend using every marketing channel.
+- Prioritize a small number of actions that can be executed and measured.
+- Focus on customer value and business results rather than vanity metrics.`;
+
+const steps = [
+  {
+    title: "Start with one business goal",
+    description:
+      "Choose the main outcome you need most, such as leads, sales, awareness or repeat customers, instead of trying to optimize everything at once.",
+  },
+  {
+    title: "Define the customer clearly",
+    description:
+      "A focused strategy becomes much stronger when the customer problem, buying trigger and objections are specific.",
+  },
+  {
+    title: "Use fewer channels better",
+    description:
+      "Select the channels where your customers are realistically reachable instead of spreading limited time and budget across every platform.",
+  },
+  {
+    title: "Measure real outcomes",
+    description:
+      "Track inquiries, leads, sales and conversions alongside reach and engagement so marketing activity connects back to business results.",
+  },
+];
+
+const example = {
+  input: [
+    "Business: Inventory-control consulting for small businesses.",
+    "Target customer: Small retailers, distributors and e-commerce sellers.",
+    "Goal: Generate qualified inquiries.",
+    "Budget: Very limited.",
+    "Channels available: LinkedIn, Facebook, website and WhatsApp.",
+    "Resources: Industry experience and ability to create practical educational content.",
+    "Timeframe: 30 days.",
+  ],
+
+  output: [
+    "Primary strategy: Build authority around practical inventory problems rather than promoting consulting services in every post.",
+    "Core message: Better stock control does not always require expensive ERP software; many small businesses first need cleaner processes, accurate data and a practical system.",
+    "Primary channels: LinkedIn for professional credibility and Facebook for broader small-business reach.",
+    "Lead offer: Free short inventory-control checklist or initial stock-process review.",
+    "Content pillars: Stock accuracy, receiving controls, stock-count methods, reorder planning and common inventory mistakes.",
+    "Main KPI: Qualified inquiries generated from content and the lead offer, rather than follower growth alone.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Strategy is about choices",
+    description:
+      "A useful marketing strategy should tell you what not to focus on as clearly as it tells you what to do.",
+  },
+  {
+    title: "Match channels to customers",
+    description:
+      "Choose platforms based on where customers research, compare and buy instead of selecting channels only because they are popular.",
+  },
+  {
+    title: "Test the message early",
+    description:
+      "Before spending heavily on advertising, test different customer problems, offers and messages through smaller organic or low-cost experiments.",
+  },
+];
+---
+
+<BaseLayout
+  title="Marketing Strategy Prompt | KRIYANO"
+  description="Create a practical marketing strategy covering customers, positioning, channels, content, offers, lead generation, KPIs and a 30-day action plan."
+>
+  <PromptPage
+    category="MARKETING"
+    title="Marketing Strategy"
+    accentTitle="Prompt."
+    description="Build a focused marketing strategy around the right customer, message, channels, content, offer, lead generation and measurable business outcomes."
+    meta={[
+      "Free prompt",
+      "Marketing",
+      "Strategy focused",
+    ]}
+    bestFor={[
+      "Small businesses",
+      "Startups",
+      "Service businesses",
+      "Product launches",
+      "Marketing planning",
+      "Low-budget campaigns",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Turn marketing activity into a focused strategy."
+    introDescription="Add your customer, offer, goal, budget and available channels. The prompt helps prioritize the few marketing activities most likely to support the business objective."
+    steps={steps}
+    exampleTitle="From limited budget to focused marketing plan."
+    example={example}
+    tipsTitle="Build a more practical strategy."
+    tips={tips}
+    sidebarTitle="Need the content plan next?"
+    sidebarDescription="Use the KRIYANO Social Media Content Planner after defining the strategy to turn your positioning and content pillars into an actionable publishing plan."
+    warningTitle="Verify market assumptions"
+    warningText="Marketing recommendations depend on real customer behavior. Validate audience assumptions, competitor claims, advertising costs and channel performance with current data before making significant spending decisions."
+  />
+</BaseLayout>

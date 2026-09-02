@@ -1,0 +1,390 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced research analyst and executive-summary writer.
+
+TASK:
+Turn the research material provided below into a clear, accurate and decision-useful research summary.
+
+RESEARCH MATERIAL:
+[Paste research notes, reports, articles, interview findings, data, source summaries or other research material.]
+
+RESEARCH TOPIC:
+[What is the research about?]
+
+RESEARCH OBJECTIVE:
+[What question or decision was the research intended to support?]
+
+AUDIENCE:
+[Who will read the summary?]
+
+OUTPUT PURPOSE:
+[Example: management decision, business plan, presentation, report, article, project update.]
+
+DESIRED LENGTH:
+[Brief / Standard / Detailed]
+
+IMPORTANT QUESTIONS:
+[List questions the summary must answer.]
+
+IMPORTANT SOURCES:
+[List any sources that should receive particular attention.]
+
+DATE / TIME SCOPE:
+[Current, specific period, historical, etc.]
+
+GEOGRAPHIC SCOPE:
+[Country, region, global or not applicable.]
+
+SPECIAL REQUIREMENTS:
+[Anything else the summary must include.]
+
+SUMMARY REQUIREMENTS:
+
+1. RESEARCH OBJECTIVE
+Begin by identifying:
+- the research topic
+- primary objective
+- main question
+- relevant scope
+
+Do not broaden the research beyond the supplied material.
+
+2. EXECUTIVE SUMMARY
+Provide a concise overview covering:
+- most important findings
+- major conclusion
+- significant risks or uncertainties
+- most important implication
+
+A reader should understand the central outcome without reading the entire report.
+
+3. KEY FINDINGS
+Extract the most important findings.
+
+For each finding include:
+- Finding
+- Evidence
+- Why it matters
+- Confidence level
+
+Prioritize findings according to their relevance to the research objective.
+
+4. EVIDENCE
+Distinguish between:
+- verified facts
+- reported findings
+- estimates
+- interpretations
+- assumptions
+- opinions
+
+Do not convert estimates or opinions into facts.
+
+5. NUMERICAL FINDINGS
+Preserve important:
+- statistics
+- percentages
+- prices
+- dates
+- quantities
+- market figures
+- financial figures
+
+Do not alter numbers during summarization.
+
+Where relevant include:
+- units
+- currency
+- geographic scope
+- time period
+
+6. SOURCE ATTRIBUTION
+Preserve source attribution for important findings when available.
+
+Do not remove attribution in a way that makes:
+"Company X estimates..."
+
+appear as:
+"It is proven that..."
+
+7. SOURCE QUALITY
+Where sufficient information is available, distinguish between:
+- strong primary evidence
+- credible secondary evidence
+- limited evidence
+- anecdotal evidence
+- unverified claims
+
+Do not automatically treat all supplied sources as equally reliable.
+
+8. AGREEMENT BETWEEN SOURCES
+Identify findings supported by multiple credible sources.
+
+Explain where evidence appears consistent.
+
+9. CONFLICTING EVIDENCE
+If sources disagree:
+- identify the disagreement
+- show the different findings
+- compare dates and scope
+- compare source quality
+- explain possible reasons for the difference
+
+Do not hide contradictory evidence simply to create a cleaner summary.
+
+10. TRENDS
+Identify important patterns or trends.
+
+For each trend explain:
+- direction
+- supporting evidence
+- time period
+- significance
+- uncertainty
+
+11. CUSTOMER / STAKEHOLDER INSIGHTS
+Where relevant summarize:
+- customer needs
+- behaviors
+- pain points
+- preferences
+- objections
+- stakeholder concerns
+
+Separate recurring patterns from isolated comments.
+
+12. COMPETITIVE FINDINGS
+Where relevant summarize:
+- important competitors
+- alternatives
+- positioning
+- pricing
+- strengths
+- weaknesses
+- market gaps
+
+Include only information supported by the research material.
+
+13. OPPORTUNITIES
+Identify opportunities supported by the research.
+
+For each opportunity explain:
+- evidence
+- potential value
+- uncertainty
+- what still requires validation
+
+Do not invent opportunities merely to make the summary more positive.
+
+14. RISKS
+Identify significant:
+- market risks
+- operational risks
+- financial risks
+- competitive risks
+- regulatory risks
+- evidence-quality risks
+
+Prioritize risks according to relevance.
+
+15. INFORMATION GAPS
+Identify questions the research did not answer.
+
+Include:
+- missing data
+- weak evidence
+- outdated information
+- conflicting findings
+- assumptions requiring validation
+
+16. IMPLICATIONS
+Explain what the findings mean for the research objective.
+
+Focus on:
+- decisions
+- trade-offs
+- actions
+- priorities
+- potential consequences
+
+Do not make recommendations that are unsupported by the evidence.
+
+17. RECOMMENDATIONS
+If recommendations are appropriate, base each recommendation on a research finding.
+
+Use:
+
+Recommendation:
+Evidence:
+Reason:
+Priority:
+Confidence:
+
+If the evidence is insufficient for a recommendation, say so.
+
+18. NEXT RESEARCH
+Recommend additional research only where it could materially improve the decision.
+
+Prioritize:
+- highest-value information gaps
+- uncertain assumptions
+- conflicting evidence
+- missing current data
+
+Avoid recommending research merely for completeness.
+
+19. CONFIDENCE ASSESSMENT
+For major conclusions use:
+
+HIGH CONFIDENCE
+Supported by strong and consistent evidence.
+
+MEDIUM CONFIDENCE
+Reasonably supported but with limitations.
+
+LOW CONFIDENCE
+Evidence is limited, indirect or conflicting.
+
+INSUFFICIENT EVIDENCE
+A responsible conclusion cannot yet be reached.
+
+20. FINAL CONCLUSION
+End with a concise answer to the original research question.
+
+State:
+- what the evidence supports
+- what it does not establish
+- biggest uncertainty
+- most important implication
+
+OUTPUT FORMAT:
+
+1. Research Objective
+2. Executive Summary
+3. Key Findings
+4. Evidence Overview
+5. Important Data & Statistics
+6. Areas of Agreement
+7. Conflicting Evidence
+8. Key Trends
+9. Customer / Stakeholder Insights
+10. Competitive Findings
+11. Opportunities
+12. Risks
+13. Information Gaps
+14. Implications
+15. Recommendations
+16. Further Research
+17. Confidence Assessment
+18. Final Conclusion
+
+IMPORTANT:
+- Use only the research material provided or evidence actually retrieved during the research task.
+- Do not invent missing facts, sources, quotations or statistics.
+- Preserve important numerical values accurately.
+- Clearly separate facts, estimates, interpretations and assumptions.
+- Do not hide conflicting evidence.
+- Do not exaggerate the strength of a conclusion.
+- If the available evidence cannot answer the research question, state that clearly.
+- Prioritize useful findings instead of reproducing every research note.
+- Keep the summary aligned with the stated audience and decision.`;
+
+const steps = [
+  {
+    title: "Add the research material",
+    description:
+      "Paste your notes, source summaries, findings or report content. The prompt should summarize evidence you actually have rather than generate missing research.",
+  },
+  {
+    title: "State the original question",
+    description:
+      "Tell the AI what the research was intended to answer so it can prioritize findings that matter to that decision.",
+  },
+  {
+    title: "Preserve evidence and uncertainty",
+    description:
+      "Important numbers, source attribution, conflicting findings and evidence limitations should survive the summarization process.",
+  },
+  {
+    title: "Finish with implications",
+    description:
+      "A useful research summary should explain what the findings mean without making recommendations that go beyond the evidence.",
+  },
+];
+
+const example = {
+  input: [
+    "Topic: Demand for inventory-control services among small retailers.",
+    "Objective: Decide whether to test a paid inventory setup service.",
+    "Research material: Interviews with 12 retailers, competitor pricing notes and secondary research on small-business digital adoption.",
+    "Audience: Business owner.",
+    "Length: Brief.",
+  ],
+
+  output: [
+    "Executive summary: The research indicates recurring stock-control difficulties among the interviewed retailers, but the small interview sample is not sufficient to estimate market-wide demand.",
+    "Key finding: Several businesses reported relying heavily on spreadsheets or manual records and described recurring problems with stock accuracy.",
+    "Commercial uncertainty: Evidence that businesses experience the problem is stronger than evidence that they are willing to pay for an external setup service.",
+    "Recommendation: Conduct a small paid-service test or pricing experiment before investing significantly in service development.",
+    "Confidence: Medium confidence regarding the existence of the operational problem; low confidence regarding market-wide willingness to pay.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Summarize around the question",
+    description:
+      "A strong research summary prioritizes evidence that helps answer the original question instead of shortening every section equally.",
+  },
+  {
+    title: "Keep uncertainty visible",
+    description:
+      "Removing limitations can make weak research look stronger than it really is. Preserve sample sizes, conflicting evidence and important information gaps.",
+  },
+  {
+    title: "Do not lose source attribution",
+    description:
+      "There is an important difference between an independent finding and a claim made by a company, participant or industry organization.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Research Summary Prompt | KRIYANO"
+  description="Turn research notes, reports and evidence into a structured summary with key findings, source context, risks, information gaps and decision-focused conclusions."
+>
+  <PromptPage
+    category="RESEARCH"
+    title="Research Summary"
+    accentTitle="Prompt."
+    description="Turn detailed research into a concise, evidence-aware summary that preserves key findings, important data, uncertainty and decision-relevant conclusions."
+    meta={[
+      "Free prompt",
+      "Research",
+      "Summarization",
+    ]}
+    bestFor={[
+      "Research reports",
+      "Market research",
+      "Business research",
+      "Source collections",
+      "Management briefs",
+      "Decision summaries",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Reduce the length, not the evidence."
+    introDescription="Summarize research around the original question while preserving important statistics, source context, contradictory findings, limitations and uncertainty."
+    steps={steps}
+    exampleTitle="Turn research findings into a decision-ready summary."
+    example={example}
+    tipsTitle="Create stronger research summaries."
+    tips={tips}
+    sidebarTitle="Still collecting evidence?"
+    sidebarDescription="Use the KRIYANO Research Plan Builder, Source Evaluation and Fact-Checking prompts before summarizing when the underlying research is not yet complete."
+    warningTitle="A summary inherits the limits of the research"
+    warningText="Summarization cannot fix weak, incomplete or outdated evidence. Verify important findings before relying on the final summary for significant decisions."
+  />
+</BaseLayout>

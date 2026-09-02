@@ -1,0 +1,1005 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced customer research, market segmentation and buyer-persona strategist.
+
+TASK:
+Build a practical, evidence-based customer persona from the information below.
+
+The goal is to understand who the customer is, what they are trying to achieve, what problems they experience, how they make decisions, what prevents them from buying and how the business can communicate with them more effectively.
+
+Do not invent demographic details, income, behavior, preferences, statistics, motivations or market facts.
+
+Clearly distinguish between:
+
+- confirmed customer information
+- reasonable hypotheses
+- assumptions
+- information that still requires research
+
+BUSINESS:
+[Business / brand name.]
+
+PRODUCT / SERVICE:
+[What do you sell?]
+
+MARKET:
+[Country / region / industry if relevant.]
+
+CUSTOMER TYPE:
+[B2C / B2B / Both.]
+
+CURRENT CUSTOMER DESCRIPTION:
+[Describe the customers you currently serve.]
+
+TARGET CUSTOMER:
+[Who are you trying to reach?]
+
+KNOWN DEMOGRAPHICS:
+[Age, location, occupation, company size, industry, etc. — only if known.]
+
+KNOWN CUSTOMER BEHAVIOR:
+[How customers currently discover, evaluate or buy.]
+
+CUSTOMER NEEDS:
+[What do they need?]
+
+CUSTOMER PROBLEMS:
+[What problems do they experience?]
+
+CUSTOMER GOALS:
+[What are they trying to achieve?]
+
+BUYING TRIGGERS:
+[What causes them to start looking for a solution?]
+
+COMMON OBJECTIONS:
+[Price, trust, complexity, timing, switching, etc.]
+
+CUSTOMER QUESTIONS:
+[Questions customers frequently ask.]
+
+PURCHASE CRITERIA:
+[What factors appear important when choosing?]
+
+COMPETITORS / ALTERNATIVES:
+[What else could the customer choose?]
+
+SALES / SUPPORT FEEDBACK:
+[Insights from employees who interact with customers.]
+
+CUSTOMER FEEDBACK:
+[Reviews, surveys, interviews, complaints, testimonials, etc.]
+
+AVAILABLE DATA:
+[Analytics, CRM, sales records, research, etc.]
+
+MARKETING CHANNELS:
+[Where customers currently find or interact with the business.]
+
+PRICE / PURCHASE MODEL:
+[One-time, subscription, contract, low-cost, high-value, etc.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+CUSTOMER PERSONA REQUIREMENTS:
+
+1. ASSESS THE EVIDENCE FIRST
+Before creating the persona, classify the supplied information into:
+
+CONFIRMED
+Directly supported by data or supplied facts.
+
+LIKELY / HYPOTHESIS
+Reasonable but not yet verified.
+
+UNKNOWN
+Important information that has not been supplied.
+
+Do not turn assumptions into customer facts.
+
+2. DEFINE THE CUSTOMER SEGMENT
+Identify the specific customer group being represented.
+
+Provide:
+
+Segment:
+Customer type:
+Market:
+Primary need:
+Main use case:
+
+Avoid making one persona represent several fundamentally different customer groups.
+
+3. DETERMINE WHETHER MULTIPLE PERSONAS ARE NEEDED
+If the supplied customers have significantly different:
+
+needs
+use cases
+budgets
+decision processes
+industries
+roles
+buying triggers
+
+state that separate personas may be more useful.
+
+Do not combine incompatible segments simply to produce one persona.
+
+4. CREATE A PERSONA LABEL
+Create a useful descriptive label based on behavior or need.
+
+Examples:
+
+"Time-Pressed Small Business Owner"
+"Cost-Conscious Operations Manager"
+"First-Time Online Seller"
+
+Avoid unnecessary fictional names unless the user specifically wants them.
+
+5. DEMOGRAPHICS
+Use demographic information only when supplied or supported.
+
+Possible fields:
+
+Age range
+Location
+Occupation
+Role
+Income range
+Education
+Family status
+
+For B2B:
+
+Job title
+Department
+Seniority
+Industry
+Company size
+Location
+
+Mark unknown demographic information:
+
+"Not established."
+
+6. AVOID DEMOGRAPHIC STEREOTYPES
+Do not infer behavior solely from:
+
+age
+gender
+nationality
+ethnicity
+religion
+marital status
+education
+income
+
+Behavior and needs should be based on evidence.
+
+7. DEFINE THE CUSTOMER'S JOB TO BE DONE
+Identify what the customer is actually trying to accomplish.
+
+Use:
+
+"When [situation], I want to [motivation], so I can [desired outcome]."
+
+Do not force this structure if the information is insufficient.
+
+8. IDENTIFY FUNCTIONAL NEEDS
+What practical result does the customer need?
+
+Examples:
+
+Save time
+Reduce cost
+Improve quality
+Increase sales
+Simplify work
+Reduce errors
+Meet requirements
+
+Use only relevant needs.
+
+9. IDENTIFY EMOTIONAL NEEDS
+Where supported, consider:
+
+confidence
+reassurance
+control
+reduced frustration
+reduced uncertainty
+professional credibility
+
+Do not invent emotional motivations.
+
+10. IDENTIFY SOCIAL / PROFESSIONAL NEEDS
+Where relevant consider:
+
+appearing competent
+meeting management expectations
+serving customers better
+building reputation
+supporting team performance
+
+Label unsupported possibilities as hypotheses.
+
+11. IDENTIFY CUSTOMER GOALS
+Separate:
+
+Immediate goal
+Short-term goal
+Long-term goal
+
+Only include goals supported by the supplied information.
+
+12. IDENTIFY PAIN POINTS
+For each pain point provide:
+
+Pain point:
+Situation:
+Impact:
+Current workaround:
+Evidence:
+Severity:
+
+Use:
+
+Low
+Medium
+High
+
+only when enough information exists.
+
+13. DISTINGUISH PROBLEM FROM SYMPTOM
+Example:
+
+Symptom:
+"Reports take too long."
+
+Possible underlying problem:
+"Data must be collected manually from several systems."
+
+Do not assume the root cause without evidence.
+
+14. IDENTIFY FRUSTRATIONS
+Where supported, identify recurring sources of friction such as:
+
+complexity
+waiting
+manual work
+unclear information
+poor support
+high cost
+unreliable service
+difficult setup
+
+15. IDENTIFY BUYING TRIGGERS
+Determine what events may cause the customer to actively seek a solution.
+
+Examples:
+
+Current solution fails
+Business grows
+Costs increase
+New requirement
+Customer complaint
+New project
+Deadline
+Management request
+Competitor pressure
+
+Only include supported triggers or clearly label hypotheses.
+
+16. IDENTIFY URGENCY
+Determine whether the need is:
+
+Immediate
+Near-term
+Ongoing
+Low urgency
+Unknown
+
+Explain why.
+
+17. IDENTIFY CURRENT ALTERNATIVES
+Customers may solve the problem using:
+
+Competitor
+Spreadsheet
+Manual process
+Freelancer
+Internal employee
+Existing software
+Free tool
+Doing nothing
+
+Do not assume buying a product is their only option.
+
+18. ANALYZE THE STATUS QUO
+Explain why the customer may continue with the current solution.
+
+Possible reasons:
+
+Familiarity
+Switching effort
+Cost
+Risk
+Lack of urgency
+Existing contract
+Training requirement
+Uncertainty
+
+Use only supported reasons or label them hypotheses.
+
+19. IDENTIFY DECISION CRITERIA
+Determine what matters when comparing solutions.
+
+Possible criteria:
+
+Price
+Quality
+Ease of use
+Speed
+Reliability
+Support
+Features
+Integration
+Reputation
+Security
+Customization
+Implementation effort
+ROI
+Flexibility
+
+Prioritize only where evidence exists.
+
+20. IDENTIFY MUST-HAVES
+Separate:
+
+Must-have requirements
+Important preferences
+Nice-to-have features
+
+Do not treat every desired feature as essential.
+
+21. IDENTIFY OBJECTIONS
+For each objection provide:
+
+Objection:
+Underlying concern:
+Evidence:
+Information needed:
+Potential response:
+
+Do not manipulate the customer.
+
+Address legitimate concerns with relevant information.
+
+22. PRICE SENSITIVITY
+If pricing information exists, assess:
+
+Budget awareness
+Value expectations
+Cost concern
+Comparison behavior
+Purchase authority
+
+Do not invent willingness-to-pay figures.
+
+23. TRUST REQUIREMENTS
+Identify what may increase confidence:
+
+Reviews
+Testimonials
+Case studies
+Demonstrations
+Trial
+Guarantee
+Clear pricing
+Credentials
+Support
+Transparent policies
+
+Only recommend trust mechanisms relevant to the offering.
+
+24. PURCHASE RISK
+Identify what the customer may fear losing:
+
+Money
+Time
+Productivity
+Reputation
+Data
+Customers
+Operational continuity
+Opportunity
+
+Do not exaggerate fear.
+
+25. DECISION-MAKING PROCESS
+For B2C consider:
+
+Discover
+Research
+Compare
+Decide
+Purchase
+
+For B2B consider:
+
+User
+Influencer
+Technical evaluator
+Budget owner
+Approver
+Decision maker
+Procurement
+
+Use only roles supported by available information.
+
+26. IDENTIFY BUYER VS USER
+Determine whether:
+
+Buyer = User
+
+or whether they are different.
+
+If different, explain the implications.
+
+27. IDENTIFY INFLUENCERS
+Where relevant consider:
+
+Manager
+Colleague
+Family
+Industry peer
+Consultant
+Reviewer
+Creator
+Professional community
+
+Do not invent influencers.
+
+28. INFORMATION NEEDS
+Determine what information the customer needs before deciding.
+
+Examples:
+
+Price
+Specifications
+Examples
+Comparison
+Implementation
+Compatibility
+Delivery
+Support
+Results
+Policies
+
+29. CUSTOMER QUESTIONS
+Organize likely questions by stage:
+
+Awareness
+Consideration
+Decision
+Purchase
+Post-purchase
+
+Use supplied customer questions first.
+
+30. CUSTOMER JOURNEY
+Map:
+
+Stage:
+Customer objective:
+Question:
+Pain point:
+Touchpoint:
+Business opportunity:
+
+Suggested stages:
+
+Awareness
+Research
+Evaluation
+Decision
+Purchase
+Onboarding
+Usage
+Retention
+
+Adapt to the actual business.
+
+31. DISCOVERY CHANNELS
+Identify known channels where customers discover solutions.
+
+Examples:
+
+Google
+YouTube
+LinkedIn
+Facebook
+Instagram
+TikTok
+Marketplace
+Referral
+Sales outreach
+Industry events
+
+Do not invent channel usage.
+
+32. RESEARCH CHANNELS
+Identify where customers may compare or learn about solutions.
+
+Separate confirmed behavior from recommended research hypotheses.
+
+33. COMMUNICATION PREFERENCE
+Do not assume customers prefer email, WhatsApp, phone or another channel without evidence.
+
+State:
+
+"Communication preference requires validation."
+
+when unknown.
+
+34. CONTENT NEEDS
+Based on known customer questions, identify useful content such as:
+
+How-to guide
+Comparison
+Calculator
+Checklist
+Case study
+FAQ
+Demo
+Template
+Video
+Pricing guide
+
+Connect each recommendation to a customer need.
+
+35. VALUE PROPOSITION
+Create a persona-specific value proposition.
+
+Use:
+
+For [customer]
+who needs [need],
+the offering helps [outcome]
+by [mechanism / benefit].
+
+Do not make unsupported claims.
+
+36. MESSAGE PRIORITIES
+Identify 3–5 messages most likely to matter.
+
+Base them on:
+
+Goal
+Pain point
+Decision criterion
+Objection
+Desired outcome
+
+37. AVOID GENERIC MARKETING LANGUAGE
+Avoid unsupported phrases such as:
+
+"Best in class"
+"Revolutionary"
+"Perfect solution"
+"Guaranteed results"
+"Game-changing"
+
+Prefer specific value.
+
+38. CUSTOMER LANGUAGE
+Extract useful phrases from supplied:
+
+reviews
+questions
+complaints
+sales conversations
+interviews
+
+Preserve natural customer wording where useful.
+
+Do not fabricate customer quotes.
+
+39. MARKETING ANGLES
+Suggest practical messaging angles based on evidence.
+
+For each:
+
+Angle:
+Customer need:
+Supporting evidence:
+Best use:
+
+40. PRODUCT / SERVICE IMPLICATIONS
+Identify what the persona suggests about:
+
+Features
+Service
+Support
+Pricing
+Onboarding
+Documentation
+Delivery
+User experience
+
+Do not redesign the product based on weak assumptions.
+
+41. SALES IMPLICATIONS
+Identify:
+
+Questions sales should ask
+Information to provide
+Objections to prepare for
+Decision criteria to clarify
+Signals of strong fit
+
+42. CUSTOMER-SERVICE IMPLICATIONS
+Where relevant identify:
+
+Common confusion
+Support expectations
+Onboarding needs
+Recurring problems
+Retention risks
+
+43. PERSONA ANTI-GOALS
+Identify what the customer wants to avoid.
+
+Examples:
+
+Complex implementation
+Unexpected cost
+Long setup
+Poor support
+Manual work
+Risk
+
+Use only supported information.
+
+44. NOT-A-FIT CUSTOMER
+Where useful define customers who may not be a strong fit.
+
+Base this on:
+
+Requirements
+Budget model
+Use case
+Capabilities
+Constraints
+
+Do not exclude customers based on protected personal characteristics.
+
+45. SEGMENT ATTRACTIVENESS
+Where business data supports it, consider:
+
+Need intensity
+Market access
+Revenue potential
+Retention
+Cost to serve
+Competitive pressure
+
+Do not invent market-size or revenue data.
+
+46. ASSUMPTION REGISTER
+Create:
+
+Assumption:
+Why it matters:
+Confidence:
+How to validate:
+What changes if wrong:
+
+Prioritize assumptions that could materially change the persona.
+
+47. RESEARCH GAPS
+Identify missing information such as:
+
+Actual purchase criteria
+Budget
+Decision process
+Customer language
+Channel behavior
+Competitor usage
+Switching barriers
+Retention reasons
+
+48. CUSTOMER INTERVIEW QUESTIONS
+Create 8–12 neutral questions.
+
+Focus on past behavior rather than hypothetical answers.
+
+Prefer:
+
+"Tell me about the last time you..."
+
+over:
+
+"Would you buy a product that...?"
+
+49. AVOID LEADING QUESTIONS
+Do not use:
+
+"Wouldn't this save you time?"
+
+Prefer:
+
+"How do you currently handle this task?"
+
+50. SURVEY QUESTIONS
+Where useful create concise questions for validating:
+
+Pain points
+Frequency
+Current solution
+Decision criteria
+Satisfaction
+Alternatives
+
+Avoid overly long surveys.
+
+51. DATA VALIDATION PLAN
+Suggest sources such as:
+
+CRM
+Sales records
+Support tickets
+Website analytics
+Search data
+Customer interviews
+Surveys
+Reviews
+Sales calls
+
+Explain what each could validate.
+
+52. PRIORITIZE RESEARCH
+Rank research gaps:
+
+P1 — Could significantly change strategy
+P2 — Important
+P3 — Useful
+P4 — Nice to know
+
+53. PERSONA CONFIDENCE
+Rate the overall persona:
+
+High confidence
+Medium confidence
+Low confidence
+
+Base confidence on evidence quality and completeness.
+
+Explain the rating.
+
+54. AVOID FALSE PRECISION
+Do not create statements such as:
+
+"73% of customers prefer..."
+"Average income is..."
+"Customer spends 4.2 hours..."
+
+unless supported by actual data.
+
+55. PERSONA SNAPSHOT
+Create a concise summary:
+
+Persona:
+Customer type:
+Primary goal:
+Main pain point:
+Main trigger:
+Top decision criterion:
+Main objection:
+Current alternative:
+Desired outcome:
+
+56. DETAILED PERSONA
+Create sections for:
+
+Profile
+Situation
+Goals
+Needs
+Pain points
+Behavior
+Triggers
+Alternatives
+Decision criteria
+Objections
+Journey
+Messaging
+Research gaps
+
+57. MARKETING SUMMARY
+Provide:
+
+Best message:
+Best content opportunity:
+Main objection to address:
+Best evidence to show:
+Primary CTA approach:
+
+Do not invent the best channel when channel evidence is unavailable.
+
+58. SALES SUMMARY
+Provide:
+
+Main need:
+Qualification question:
+Decision criterion:
+Objection:
+Proof required:
+Potential next step:
+
+59. PRODUCT SUMMARY
+Provide:
+
+Most important customer requirement:
+Main friction:
+Feature / service implication:
+Onboarding consideration:
+Research required:
+
+60. FINAL EVIDENCE CHECK
+Before completing the persona verify:
+
+- demographics were not invented
+- motivations were not invented
+- statistics were not invented
+- customer quotes were not invented
+- known information is separated from hypotheses
+- pain points connect to evidence
+- decision criteria are realistic
+- objections are not manipulated
+- research gaps are visible
+- persona is specific enough to be useful
+
+OUTPUT FORMAT:
+
+1. Persona Snapshot
+2. Evidence Quality
+3. Customer Profile
+4. Job to Be Done
+5. Goals & Desired Outcomes
+6. Needs
+7. Pain Points & Frustrations
+8. Buying Triggers
+9. Current Alternatives
+10. Decision Criteria
+11. Objections & Purchase Risks
+12. Buyer / Decision Process
+13. Customer Journey
+14. Information & Content Needs
+15. Value Proposition
+16. Messaging Priorities
+17. Marketing Implications
+18. Sales Implications
+19. Product / Service Implications
+20. Assumptions
+21. Research Gaps
+22. Customer Interview Questions
+23. Validation Plan
+24. Persona Confidence
+
+IMPORTANT:
+- Do not invent customer demographics, behaviors, statistics, income, motivations or preferences.
+- Clearly label assumptions and hypotheses.
+- Base the persona on behavior, needs and evidence rather than stereotypes.
+- Do not create fictional customer quotes.
+- Do not assume the customer wants to buy instead of using an alternative.
+- Distinguish the buyer from the user where relevant.
+- Identify the status quo as a genuine competitor.
+- Do not manipulate customer fears or objections.
+- Do not create false precision.
+- Prioritize research gaps that could materially change business decisions.
+- Treat the persona as a research-backed working model, not a fictional biography.`;
+
+const steps = [
+  {
+    title: "Start with evidence",
+    description:
+      "Separate what you genuinely know about customers from assumptions before AI turns plausible-sounding ideas into fictional customer facts.",
+  },
+  {
+    title: "Understand the customer's situation",
+    description:
+      "Focus on goals, problems, current alternatives, triggers and decision criteria rather than building the persona mainly around demographics.",
+  },
+  {
+    title: "Map how decisions happen",
+    description:
+      "Identify how customers discover, evaluate and choose solutions, including objections, information needs and other people involved in the decision.",
+  },
+  {
+    title: "Validate what you don't know",
+    description:
+      "Finish with research gaps, interview questions and a validation plan so the persona improves as real customer evidence becomes available.",
+  },
+];
+
+const example = {
+  input: [
+    "Business: Online inventory tools for small businesses.",
+    "Known customers: Small retailers and online sellers managing stock themselves.",
+    "Known problem: Stock records frequently become inaccurate because inventory is maintained manually.",
+    "Known behavior: Some customers currently use spreadsheets.",
+    "Customer questions: How can I know when to reorder? How can I find why physical stock doesn't match my records?",
+    "Unknown: Budget, preferred software, age, exact business size and buying process.",
+  ],
+
+  output: [
+    "Persona: Hands-On Small Business Inventory Manager.",
+    "Primary Goal: Maintain reliable stock information without creating an overly complicated inventory process.",
+    "Main Pain Point: Manual inventory records can become difficult to maintain accurately as transactions and product volume increase.",
+    "Current Alternative: Spreadsheet-based stock tracking is confirmed for some customers and should be treated as a genuine alternative rather than assuming they immediately need new software.",
+    "Information Need: Practical guidance around reorder decisions, stock discrepancies and maintaining accurate records.",
+    "Important Unknowns: Business size, transaction volume, willingness to pay, software preferences and purchase authority should remain research gaps rather than being invented as persona characteristics.",
+    "Validation Priority: Interview customers about the last time they discovered an inventory discrepancy, how they investigated it and what they found difficult about their current method.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Don't invent a fictional biography",
+    description:
+      "A useful persona explains customer behavior, needs and decision context. An invented age, salary, family situation or favorite social network rarely improves the strategy without evidence.",
+  },
+  {
+    title: "Treat doing nothing as competition",
+    description:
+      "Your customer may continue using a spreadsheet, manual process or existing supplier instead of buying. Understanding why is often more useful than only studying direct competitors.",
+  },
+  {
+    title: "Research the assumptions that matter",
+    description:
+      "Prioritize unknowns that could change your product, pricing, messaging or sales strategy instead of collecting customer details simply because they are easy to ask.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Customer Persona Builder Prompt | KRIYANO"
+  description="Build evidence-based customer personas using real needs, pain points, buying triggers, decision criteria, objections, customer journeys and clearly identified research gaps."
+>
+  <PromptPage
+    category="BUSINESS"
+    title="Customer Persona"
+    accentTitle="Builder."
+    description="Build a practical customer persona around real needs, behaviors, pain points and buying decisions while keeping assumptions clearly separated from evidence."
+    meta={[
+      "Free prompt",
+      "Customer research",
+      "Buyer persona",
+    ]}
+    bestFor={[
+      "Small businesses",
+      "Entrepreneurs",
+      "Marketing teams",
+      "Product teams",
+      "Sales teams",
+      "Customer research",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Build personas from evidence, not imagination."
+    introDescription="Understand what customers are trying to achieve, what prevents them from succeeding and how they evaluate solutions—without filling research gaps with fictional demographics or AI-generated assumptions."
+    steps={steps}
+    exampleTitle="Turn limited customer information into a useful research-backed persona."
+    example={example}
+    tipsTitle="Build personas that improve real decisions."
+    tips={tips}
+    sidebarTitle="Need broader market evidence first?"
+    sidebarDescription="Use KRIYANO's Market Research Prompt when you still need to understand the market, customer segments, competitors and demand before developing a detailed persona."
+    warningTitle="A persona is a hypothesis until customer evidence supports it"
+    warningText="AI can make invented customer characteristics sound convincing. Keep confirmed information, hypotheses and unknowns visibly separated, and validate important assumptions through customer behavior, interviews, analytics, sales records or other reliable evidence."
+  />
+</BaseLayout>

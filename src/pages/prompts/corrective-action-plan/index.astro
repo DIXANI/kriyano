@@ -1,0 +1,892 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced operations, quality, warehouse and continuous-improvement specialist.
+
+TASK:
+Create a practical Corrective Action Plan for the problem, incident, audit finding, discrepancy or process failure described below.
+
+PROBLEM / FINDING:
+[Describe exactly what happened or what was found.]
+
+OPERATION / DEPARTMENT:
+[Warehouse / Inventory / Receiving / Picking / Logistics / Quality / Business Operations / Other.]
+
+LOCATION:
+[If relevant.]
+
+DATE / PERIOD:
+[When the problem occurred or was identified.]
+
+HOW IT WAS IDENTIFIED:
+[Audit / KPI / Customer complaint / Stock count / Incident / Inspection / Employee report / System report / Other.]
+
+EXPECTED CONDITION:
+[What should have happened.]
+
+ACTUAL CONDITION:
+[What actually happened.]
+
+IMPACT:
+[Operational, customer, financial, inventory, quality, safety or compliance impact.]
+
+AFFECTED QUANTITY / VALUE:
+[If known.]
+
+IMMEDIATE ACTION ALREADY TAKEN:
+[Containment, quarantine, correction, communication, recount, system block, etc.]
+
+EVIDENCE AVAILABLE:
+[Photos, transaction logs, CCTV, reports, emails, count sheets, SOP, system records, interviews, etc.]
+
+KNOWN / SUSPECTED CAUSES:
+[If any.]
+
+RECURRING ISSUE:
+[Yes / No / Unknown.]
+
+EXISTING PROCEDURE / SOP:
+[Describe or paste relevant requirement if available.]
+
+RESPONSIBLE DEPARTMENT:
+[If known.]
+
+TARGET COMPLETION:
+[If defined.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+CORRECTIVE ACTION ANALYSIS REQUIREMENTS:
+
+1. DEFINE THE PROBLEM
+Create a clear problem statement.
+
+Use:
+
+What happened?
+Where?
+When?
+How was it detected?
+What should have happened?
+What actually happened?
+What was affected?
+How significant was the impact?
+
+Keep the problem statement factual.
+
+Do not include an assumed root cause inside the problem statement.
+
+2. SEPARATE FACTS FROM ASSUMPTIONS
+Create three sections:
+
+CONFIRMED FACTS
+Information supported by evidence.
+
+UNCONFIRMED INFORMATION
+Information reported but not yet validated.
+
+ASSUMPTIONS / HYPOTHESES
+Possible explanations requiring investigation.
+
+Do not present assumptions as facts.
+
+3. DEFINE THE IMPACT
+Assess relevant impact categories:
+
+- Customer
+- Inventory
+- Financial
+- Operational
+- Quality
+- Safety
+- Compliance
+- Productivity
+- Service level
+- Reputation
+
+Use only impacts supported by available information.
+
+4. IMMEDIATE CONTAINMENT
+Identify actions required to prevent the problem from getting worse before the root cause is confirmed.
+
+Examples:
+
+- stop affected process
+- isolate stock
+- quarantine product
+- block inventory
+- recount
+- verify transactions
+- suspend affected equipment
+- notify relevant departments
+- preserve evidence
+- inspect related stock
+- check similar transactions
+- temporarily increase verification
+
+Containment should control immediate risk without being mistaken for the permanent corrective action.
+
+5. CONTAINMENT VERIFICATION
+For each containment action state:
+
+Action:
+Responsible role:
+When required:
+Evidence of completion:
+How effectiveness will be checked:
+
+6. EVIDENCE REVIEW
+List available evidence.
+
+For each item provide:
+
+Evidence:
+What it supports:
+Reliability:
+Limitations:
+Additional evidence required:
+
+Possible evidence:
+
+- WMS / ERP transactions
+- physical count
+- CCTV
+- photographs
+- emails
+- documents
+- system logs
+- scan records
+- audit findings
+- SOP
+- training records
+- equipment logs
+- employee interviews
+- customer complaint
+- supplier documentation
+
+7. PROCESS REVIEW
+Map the relevant process.
+
+For each step identify:
+
+Step:
+Expected activity:
+Actual activity:
+Control:
+Failure observed:
+Evidence:
+
+Identify where the process first deviated from the expected condition.
+
+8. ROOT-CAUSE CATEGORIES
+Investigate potential causes under relevant categories:
+
+PEOPLE
+Training, workload, communication, authorization, supervision.
+
+PROCESS
+Missing steps, unclear procedures, weak controls, poor sequencing.
+
+SYSTEM
+WMS, ERP, interface, configuration, access, transaction design.
+
+EQUIPMENT
+Failure, availability, maintenance, suitability.
+
+MATERIAL / PRODUCT
+Packaging, labeling, barcode, UOM, product characteristics.
+
+METHOD
+Work method, standardization, inspection method.
+
+MEASUREMENT
+Incorrect data, poor KPI, inaccurate counting, missing verification.
+
+ENVIRONMENT
+Layout, congestion, lighting, temperature, workspace conditions.
+
+MANAGEMENT CONTROL
+Ownership, monitoring, escalation, review, resource planning.
+
+SUPPLIER / EXTERNAL
+Supplier, transporter, contractor or customer-controlled factors.
+
+Do not force every category into the analysis.
+
+9. 5 WHYS ANALYSIS
+Where appropriate, perform a 5 Whys investigation.
+
+Structure:
+
+Problem:
+Why 1:
+Evidence:
+Why 2:
+Evidence:
+Why 3:
+Evidence:
+Why 4:
+Evidence:
+Why 5:
+Evidence:
+
+Do not continue asking "why" when evidence no longer supports the chain.
+
+If the investigation reaches an assumption, mark it as:
+
+"Requires verification."
+
+10. DISTINGUISH CAUSE LEVELS
+Separate:
+
+SYMPTOM
+What was observed.
+
+IMMEDIATE CAUSE
+What directly allowed the event.
+
+CONTRIBUTING FACTORS
+Conditions that increased the likelihood.
+
+ROOT CAUSE
+Underlying system/process condition that allowed the problem to occur or recur.
+
+Do not label employee error as the root cause without asking why the error was possible.
+
+11. HUMAN ERROR REVIEW
+If human error is involved, investigate:
+
+- Was the procedure clear?
+- Was training adequate?
+- Was the task realistically designed?
+- Was workload reasonable?
+- Was verification required?
+- Did the system prevent or allow the error?
+- Were similar errors previously reported?
+- Was supervision adequate?
+- Were labels / instructions clear?
+
+Avoid stopping the investigation at "operator error."
+
+12. PROCEDURE / SOP REVIEW
+Check:
+
+- SOP exists
+- SOP matches actual operation
+- responsibility is clear
+- required controls exist
+- exceptions are covered
+- escalation is defined
+- employees have access
+- training is current
+- document version is controlled
+
+Do not recommend rewriting the SOP unless the procedure itself contributes to the problem or needs clarification.
+
+13. CONTROL FAILURE
+Identify which control should have:
+
+PREVENTED
+the issue,
+
+DETECTED
+the issue,
+
+or
+
+CORRECTED
+the issue.
+
+For each failed control explain:
+
+Expected control:
+Actual condition:
+Why it failed:
+Evidence:
+Required improvement:
+
+14. ROOT-CAUSE CONFIDENCE
+Classify each proposed cause as:
+
+CONFIRMED
+Supported by sufficient evidence.
+
+LIKELY
+Strong evidence exists but additional verification is desirable.
+
+POSSIBLE
+Plausible but evidence is insufficient.
+
+UNSUPPORTED
+Available evidence does not support it.
+
+15. ROOT-CAUSE STATEMENT
+Write a concise root-cause statement.
+
+A strong root-cause statement should explain:
+
+- the underlying condition
+- how it allowed the problem
+- why existing controls did not prevent or detect it
+
+Avoid vague statements such as:
+
+"Staff mistake."
+"Carelessness."
+"Communication problem."
+"System issue."
+
+unless supported by deeper analysis.
+
+16. CORRECTION VS CORRECTIVE ACTION
+Separate:
+
+CORRECTION
+Fixes the current problem.
+
+Example:
+Correct the incorrect inventory balance.
+
+CORRECTIVE ACTION
+Removes or controls the cause of the problem.
+
+Example:
+Add transaction validation that prevents the same incorrect posting.
+
+Do not confuse the two.
+
+17. CORRECTIVE ACTION DEVELOPMENT
+For each confirmed or sufficiently supported root cause provide:
+
+Root cause:
+Corrective action:
+Why this action addresses the cause:
+Responsible role:
+Resources required:
+Dependency:
+Target date:
+Evidence of completion:
+Verification method:
+
+Do not invent names or dates.
+
+18. PREVENTIVE ACTION
+Where broader recurrence risk exists, consider:
+
+- system validation
+- process redesign
+- SOP improvement
+- training
+- automated control
+- barcode validation
+- approval control
+- exception report
+- audit
+- preventive maintenance
+- supplier control
+- master-data validation
+- workload planning
+- physical segregation
+
+Preventive actions should address realistic recurrence risk.
+
+19. HIERARCHY OF CONTROLS
+Where safety is involved, prefer:
+
+1. Elimination
+2. Substitution
+3. Engineering controls
+4. Administrative controls
+5. PPE
+
+Do not rely solely on retraining when a stronger control is practical.
+
+20. ACTION QUALITY TEST
+Evaluate each proposed action.
+
+Ask:
+
+Does it address the root cause?
+Is it specific?
+Is it measurable?
+Is responsibility clear?
+Can completion be verified?
+Can effectiveness be measured?
+Could it create another problem?
+Is it sustainable?
+
+Reject weak actions such as:
+
+"Be more careful."
+"Monitor closely."
+"Tell staff not to repeat."
+"Improve communication."
+
+unless converted into specific measurable controls.
+
+21. ACTION PRIORITIZATION
+Classify actions:
+
+P1 — Immediate / Critical
+P2 — High
+P3 — Medium
+P4 — Low
+
+Consider:
+
+- safety
+- customer impact
+- financial impact
+- recurrence probability
+- inventory impact
+- compliance
+- operational disruption
+
+22. ACTION PLAN
+Create a table:
+
+No.:
+Finding:
+Root cause:
+Action:
+Action type:
+Responsible role:
+Priority:
+Target:
+Evidence required:
+Status:
+
+Action type should identify:
+
+Correction
+Containment
+Corrective Action
+Preventive Action
+
+23. RESPONSIBILITY
+Assign responsibility by role.
+
+Examples:
+
+Warehouse Supervisor
+Inventory Controller
+Operations Manager
+Quality Manager
+IT / WMS Support
+Maintenance
+Procurement
+Supplier
+Transport Coordinator
+
+Do not invent employee names.
+
+24. DUE-DATE LOGIC
+If target dates are not provided, do not invent official deadlines.
+
+Instead classify:
+
+Immediate
+Short-term
+Medium-term
+Long-term
+
+Management can assign exact dates.
+
+25. IMPLEMENTATION RISKS
+For major actions identify:
+
+- operational disruption
+- cost
+- system dependency
+- employee adoption
+- customer impact
+- training requirement
+- implementation complexity
+- unintended consequences
+
+Recommend controls for significant risks.
+
+26. PILOT / TEST
+Where appropriate, recommend testing the corrective action before full rollout.
+
+Define:
+
+Pilot scope:
+Success measure:
+Test period:
+Evidence:
+Decision criteria:
+
+27. EFFECTIVENESS VERIFICATION
+Do not close an action simply because it was implemented.
+
+Define how effectiveness will be verified.
+
+Possible methods:
+
+- repeat audit
+- cycle count
+- KPI trend
+- transaction review
+- observation
+- error-rate comparison
+- customer complaint trend
+- incident trend
+- sample inspection
+- system report
+
+28. BASELINE
+Where measurable data exists, record:
+
+Before:
+[Baseline performance.]
+
+After:
+[Post-action result.]
+
+Target:
+[Expected performance.]
+
+If no baseline exists, state:
+
+"Baseline measurement required."
+
+29. EFFECTIVENESS PERIOD
+Recommend an appropriate observation period based on how often the process occurs.
+
+Do not automatically use the same review period for every action.
+
+30. SUCCESS CRITERIA
+Define measurable closure criteria.
+
+Examples:
+
+- no recurrence during defined sample
+- KPI reaches approved target
+- audit confirms control is followed
+- transaction error eliminated
+- inventory accuracy improves
+- repeated variance decreases
+- required inspection completion reaches target
+
+Do not claim success without evidence.
+
+31. RECURRENCE CHECK
+Check whether the same or similar issue exists in:
+
+- other SKUs
+- other locations
+- other shifts
+- other customers
+- other warehouses
+- other suppliers
+- similar processes
+
+Avoid fixing only one occurrence when the cause may be systemic.
+
+32. HISTORICAL REVIEW
+Where historical information exists, check:
+
+- previous incidents
+- previous CAPAs
+- repeated audit findings
+- recurring discrepancies
+- previous corrective actions
+- actions previously closed
+
+If a previous action failed, investigate why.
+
+33. CHANGE MANAGEMENT
+For process changes consider:
+
+- communication
+- training
+- SOP update
+- system update
+- employee feedback
+- supervision
+- go-live support
+- follow-up review
+
+34. TRAINING ACTIONS
+If training is recommended, specify:
+
+Who:
+Topic:
+Reason:
+Method:
+Competency check:
+Record required:
+Follow-up:
+
+Training should not be used as the default solution to every process failure.
+
+35. SYSTEM ACTIONS
+If a system change is recommended, define:
+
+Current weakness:
+Required control:
+Expected behavior:
+Test requirement:
+User acceptance:
+Implementation dependency:
+Post-implementation verification:
+
+36. DOCUMENT CONTROL
+Where procedures change, identify:
+
+- document requiring revision
+- revision reason
+- approval
+- version control
+- communication
+- training
+- effective date
+
+Do not invent document numbers.
+
+37. MANAGEMENT ESCALATION
+Escalate appropriately where issues involve:
+
+- serious safety risk
+- significant financial loss
+- major customer impact
+- repeated failure
+- compliance issue
+- systemic control failure
+- unresolved root cause
+- overdue critical action
+
+38. ACTION STATUS
+Use clear status categories:
+
+Open
+In Progress
+Pending Verification
+Closed
+Overdue
+On Hold
+
+Do not mark an action closed before effectiveness is verified.
+
+39. CAPA TRACKER
+Create a management tracker:
+
+CAPA ID:
+Problem:
+Root cause:
+Action:
+Owner role:
+Priority:
+Target:
+Status:
+Completion evidence:
+Effectiveness review:
+Final closure:
+
+If no CAPA ID exists, leave it as:
+
+"To be assigned."
+
+40. KPI / TREND MONITORING
+Recommend relevant follow-up measures.
+
+Examples:
+
+Inventory Accuracy %
+Receiving Discrepancy Rate
+Picking Accuracy %
+Damage Rate
+Customer Complaints
+Repeat Incident Rate
+Audit Finding Recurrence
+Corrective Action Closure %
+Overdue CAPA %
+Near-Miss Trend
+
+Only recommend KPIs relevant to the issue.
+
+41. CLOSURE REVIEW
+Before closing confirm:
+
+- problem contained
+- root cause adequately investigated
+- correction completed
+- corrective action implemented
+- preventive action considered
+- documentation updated
+- training completed if required
+- effectiveness verified
+- recurrence checked
+- evidence retained
+- management approval obtained where required
+
+42. LESSONS LEARNED
+Summarize:
+
+What failed?
+Why did existing controls fail?
+What changed?
+What should other areas learn?
+Could this issue occur elsewhere?
+What monitoring should continue?
+
+43. FINAL MANAGEMENT SUMMARY
+Provide:
+
+Problem:
+Impact:
+Containment:
+Confirmed facts:
+Root cause:
+Root-cause confidence:
+Correction:
+Corrective action:
+Preventive action:
+Responsible role:
+Priority:
+Verification method:
+Current status:
+Remaining risk:
+Recommended closure decision:
+
+OUTPUT FORMAT:
+
+1. Executive Summary
+2. Problem Statement
+3. Facts vs Assumptions
+4. Impact Assessment
+5. Immediate Containment
+6. Evidence Review
+7. Process / Control Failure
+8. Root-Cause Analysis
+9. 5 Whys
+10. Root-Cause Statement
+11. Correction
+12. Corrective Actions
+13. Preventive Actions
+14. Priority Matrix
+15. CAPA Action Plan
+16. Implementation Risks
+17. Effectiveness Verification
+18. Recurrence Review
+19. KPI / Trend Monitoring
+20. Closure Checklist
+21. Lessons Learned
+22. Management Summary
+
+IMPORTANT:
+- Do not invent evidence, causes, dates, owners or company policies.
+- Separate facts, hypotheses and confirmed causes.
+- Do not stop root-cause analysis at "human error."
+- Do not confuse containment, correction, corrective action and preventive action.
+- Do not recommend training as the automatic solution.
+- Every major corrective action should connect directly to a supported root cause.
+- Every major action should have a measurable verification method.
+- Do not close an action merely because implementation is complete.
+- Verify effectiveness before final closure.
+- Check whether the same root cause could affect other areas.
+- Preserve an evidence-based audit trail.
+- Escalate safety, compliance or specialist technical issues to appropriately qualified personnel.`;
+
+const steps = [
+  {
+    title: "Define the failure accurately",
+    description:
+      "Separate the expected condition, actual condition, impact and confirmed evidence before deciding why the problem occurred.",
+  },
+  {
+    title: "Contain before solving",
+    description:
+      "Control the immediate risk first, but keep containment separate from the permanent action needed to prevent recurrence.",
+  },
+  {
+    title: "Find the underlying cause",
+    description:
+      "Use evidence, process review and 5 Whys where appropriate instead of stopping at symptoms such as employee error or poor communication.",
+  },
+  {
+    title: "Verify the action worked",
+    description:
+      "Do not close corrective actions simply because they were completed. Define measurable effectiveness criteria and check for recurrence.",
+  },
+];
+
+const example = {
+  input: [
+    "Problem: Repeated physical versus system inventory discrepancies for the same fast-moving SKU.",
+    "Expected condition: WMS quantity should match physical stock.",
+    "Current finding: Shortages have appeared during three cycle counts.",
+    "Immediate action: Latest variance was recounted and confirmed.",
+    "Evidence available: Cycle-count history, WMS transactions and location movement history.",
+    "Goal: Prevent the discrepancy from recurring.",
+  ],
+
+  output: [
+    "Containment: Verify current physical stock, control any necessary adjustment through the approved process and review nearby locations for misplaced inventory.",
+    "Do not treat the inventory adjustment itself as the corrective action because it only corrects the current balance.",
+    "Root-cause investigation should trace receiving, replenishment, picking, transfers and adjustments for the affected SKU and compare transaction timing with physical movements.",
+    "If evidence confirms that replenishment stock is physically moved before the WMS transaction is completed, the corrective action should target that process/control weakness rather than simply retraining staff.",
+    "Possible stronger controls could include scan confirmation, transaction sequencing or exception monitoring, depending on the confirmed cause.",
+    "Effectiveness should be verified through subsequent cycle counts and transaction reviews before the CAPA is closed.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Correction is not corrective action",
+    description:
+      "Fixing today's incorrect stock, document or transaction solves the immediate problem. Corrective action addresses why it happened and prevents recurrence.",
+  },
+  {
+    title: "Avoid stopping at human error",
+    description:
+      "When someone made a mistake, investigate why the process, system or control allowed that mistake to create the failure.",
+  },
+  {
+    title: "Close on effectiveness, not completion",
+    description:
+      "Installing a control or updating an SOP proves implementation. Follow-up evidence is still needed to demonstrate that the problem is actually controlled.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Corrective Action Plan Prompt | KRIYANO"
+  description="Build an evidence-based corrective action plan with containment, root-cause analysis, 5 Whys, CAPA tracking, preventive actions and effectiveness verification."
+>
+  <PromptPage
+    category="OPERATIONS & LOGISTICS"
+    title="Corrective Action"
+    accentTitle="Plan."
+    description="Turn operational problems, audit findings and recurring failures into structured containment, root-cause analysis, corrective actions and measurable recurrence prevention."
+    meta={[
+      "Free prompt",
+      "CAPA",
+      "Root cause & corrective action",
+    ]}
+    bestFor={[
+      "Warehouse operations",
+      "Inventory control",
+      "Audit findings",
+      "Quality issues",
+      "Recurring problems",
+      "Process failures",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Fix the cause, not only the current problem."
+    introDescription="Separate containment and correction from true corrective action, investigate the underlying control failure and verify that the implemented solution actually prevents recurrence."
+    steps={steps}
+    exampleTitle="Turn a recurring inventory problem into a real corrective action."
+    example={example}
+    tipsTitle="Build stronger corrective actions."
+    tips={tips}
+    sidebarTitle="Need deeper root-cause analysis?"
+    sidebarDescription="Use KRIYANO's Root Cause Analysis Prompt when the underlying cause is still unclear before finalizing the corrective action plan."
+    warningTitle="Evidence should drive the action"
+    warningText="A corrective action is only as strong as the root-cause investigation behind it. Avoid assigning blame, changing procedures or closing actions without sufficient evidence that the identified cause and proposed control are valid."
+  />
+</BaseLayout>

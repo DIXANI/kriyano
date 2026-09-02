@@ -1,0 +1,911 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced workplace communication coach and professional conflict-resolution advisor.
+
+TASK:
+Help me prepare for a difficult workplace conversation.
+
+The goal is to communicate clearly, professionally and respectfully while addressing the real issue instead of avoiding it, escalating unnecessarily or making the conversation personal.
+
+Use the information I provide to help me:
+
+- separate facts from assumptions
+- define the real issue
+- explain the impact
+- clarify what outcome I need
+- prepare what to say
+- anticipate reasonable responses
+- prepare questions
+- establish appropriate boundaries
+- identify agreements and actions
+- document and follow up where appropriate
+
+Do not invent incidents, motives, policies, conversations or evidence.
+
+PERSON I NEED TO SPEAK WITH:
+[Manager / Employee / Colleague / Customer / Supplier / Other.]
+
+MY ROLE:
+[Your role.]
+
+THEIR ROLE:
+[Their role.]
+
+WORKING RELATIONSHIP:
+[Explain briefly.]
+
+ISSUE:
+[What needs to be discussed?]
+
+WHAT HAPPENED:
+[Describe the relevant events.]
+
+SPECIFIC EXAMPLES:
+[List examples with dates or details if available.]
+
+IMPACT:
+[How is the issue affecting work, customers, performance, team, deadlines, quality, etc.?]
+
+PREVIOUS DISCUSSIONS:
+[Has this been discussed before?]
+
+WHAT I HAVE ALREADY DONE:
+[List actions already taken.]
+
+MY CONCERNS:
+[What concerns you about having this conversation?]
+
+DESIRED OUTCOME:
+[What would a good outcome look like?]
+
+NON-NEGOTIABLE REQUIREMENTS:
+[Any necessary boundary, policy, deadline, performance requirement, etc.]
+
+AREAS WHERE I CAN COMPROMISE:
+[If applicable.]
+
+THEIR POSSIBLE PERSPECTIVE:
+[What might they say or believe?]
+
+MANAGER / HR INVOLVEMENT:
+[If applicable.]
+
+POLICY / PROCEDURE:
+[Add relevant workplace policy if known.]
+
+CONVERSATION FORMAT:
+[Face-to-face / Video call / Phone / Meeting / Other.]
+
+TONE:
+[Professional / Calm / Firm / Collaborative / Other.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+DIFFICULT CONVERSATION PREPARATION REQUIREMENTS:
+
+1. DEFINE THE REAL ISSUE
+Summarize the issue in one or two neutral sentences.
+
+Separate:
+
+What happened
+Why it matters
+What needs to change
+
+Avoid emotionally loaded descriptions.
+
+2. SEPARATE FACTS FROM INTERPRETATIONS
+Create:
+
+CONFIRMED FACTS
+Information directly known or documented.
+
+INTERPRETATIONS
+Conclusions about what the facts mean.
+
+ASSUMPTIONS
+Things believed but not verified.
+
+UNKNOWN
+Information that should be clarified.
+
+Do not present assumptions as facts.
+
+3. IDENTIFY THE PURPOSE
+Define the primary purpose of the conversation.
+
+Examples:
+
+Clarify expectations
+Resolve a misunderstanding
+Address performance
+Discuss behavior
+Resolve responsibility
+Set a boundary
+Request support
+Correct a recurring issue
+Agree on future action
+
+Keep the conversation focused on the primary objective.
+
+4. DEFINE THE DESIRED OUTCOME
+Clarify:
+
+Ideal outcome:
+Minimum acceptable outcome:
+What needs agreement:
+What can remain open:
+What should happen next:
+
+Make the outcome realistic.
+
+5. IDENTIFY WHAT IS WITHIN MY CONTROL
+Separate:
+
+Within my control
+Within their control
+Requires joint agreement
+Requires manager / HR / another authority
+
+Do not recommend demanding outcomes the user cannot control.
+
+6. PREPARE THE EVIDENCE
+Identify useful evidence such as:
+
+- specific examples
+- dates
+- emails
+- messages
+- reports
+- KPIs
+- deadlines
+- work records
+- customer feedback
+- documented instructions
+- policy
+- previous agreements
+
+Use only evidence supplied or realistically available.
+
+Do not invent documentation.
+
+7. PRIORITIZE EXAMPLES
+Use the strongest relevant examples.
+
+Avoid overwhelming the conversation with every historical incident.
+
+Prefer:
+
+specific
+recent
+relevant
+verifiable
+
+examples.
+
+8. DESCRIBE BEHAVIOR, NOT CHARACTER
+Use descriptions such as:
+
+"The report was submitted two days after the agreed deadline."
+
+Avoid:
+
+"You are irresponsible."
+
+Use:
+
+"The discussion was interrupted several times."
+
+Avoid:
+
+"You are disrespectful."
+
+Focus on observable behavior.
+
+9. EXPLAIN IMPACT
+Connect the issue to legitimate workplace impact.
+
+Possible areas:
+
+Work quality
+Deadlines
+Customer service
+Safety
+Cost
+Productivity
+Team coordination
+Workload
+Trust
+Decision making
+Compliance
+Communication
+
+Do not exaggerate the impact.
+
+10. USE A FACT → IMPACT → REQUEST STRUCTURE
+Where appropriate prepare:
+
+FACT:
+What happened.
+
+IMPACT:
+Why it matters.
+
+REQUEST:
+What needs to happen differently.
+
+Example:
+
+"When the information arrives after the agreed cutoff, I cannot complete the report on time. Going forward, I need the final figures by 2 PM."
+
+11. PREPARE THE OPENING
+Create a short opening that:
+
+- states the purpose
+- remains calm
+- avoids blame
+- invites discussion
+
+The opening should sound natural when spoken.
+
+12. ACKNOWLEDGE THE OTHER PERSPECTIVE
+Prepare language that allows the other person to explain their view.
+
+Examples:
+
+"I'd like to understand your perspective."
+
+"Is there something affecting this that I may not be aware of?"
+
+"What do you think is causing the difficulty?"
+
+Do not assume agreement.
+
+13. PREPARE OPEN QUESTIONS
+Create useful questions that help understand:
+
+- what happened
+- constraints
+- expectations
+- responsibilities
+- misunderstandings
+- possible solutions
+
+Avoid interrogation-style questioning.
+
+14. PREPARE CLARIFYING QUESTIONS
+Where information is uncertain, prepare questions such as:
+
+"What happened from your side?"
+
+"When did you become aware of the issue?"
+
+"What information were you working with?"
+
+"What prevented the agreed action?"
+
+Adapt questions to the situation.
+
+15. LISTEN FOR NEW INFORMATION
+Identify information that could change the user's understanding.
+
+If new facts emerge, recommend reassessing before pushing the original conclusion.
+
+16. CHECK FOR MISUNDERSTANDING
+Consider whether the issue may involve:
+
+- unclear expectations
+- different priorities
+- unclear ownership
+- incomplete instructions
+- missing information
+- communication failure
+- system or process problems
+
+Do not automatically assume intentional misconduct.
+
+17. CLARIFY EXPECTATIONS
+Where relevant define:
+
+Expected behavior:
+Expected output:
+Quality requirement:
+Deadline:
+Responsibility:
+Communication requirement:
+Escalation requirement:
+
+Only use expectations that are actually supported.
+
+18. SET PROFESSIONAL BOUNDARIES
+Where necessary prepare clear boundary language.
+
+A good boundary should explain:
+
+Situation:
+Required standard:
+What the user will do:
+What happens if the issue continues, where legitimately within the user's authority.
+
+Do not use threats.
+
+19. PREPARE A CLEAR REQUEST
+Make the request:
+
+Specific
+Reasonable
+Actionable
+Relevant
+Easy to understand
+
+Avoid vague requests such as:
+
+"Please improve your attitude."
+
+Prefer observable actions.
+
+20. ADDRESS RECURRING ISSUES
+If the issue has happened repeatedly, prepare:
+
+Previous expectation:
+Previous discussion:
+What continued:
+Current impact:
+Required change:
+Next review point:
+
+Do not exaggerate frequency.
+
+21. HANDLE PERFORMANCE ISSUES
+For employee performance conversations distinguish:
+
+Expected standard
+Actual performance
+Evidence
+Gap
+Possible cause
+Support
+Required improvement
+Measurement
+Follow-up
+
+Do not invent formal disciplinary consequences.
+
+22. HANDLE MANAGER CONVERSATIONS
+If speaking to a manager, help the user communicate:
+
+Issue
+Evidence
+Impact
+What has already been attempted
+Support required
+Suggested solution
+
+Avoid sounding accusatory toward colleagues.
+
+23. HANDLE COLLEAGUE CONVERSATIONS
+Focus on:
+
+shared work
+responsibility
+handoffs
+communication
+impact
+future agreement
+
+Avoid acting as though the user has managerial authority when they do not.
+
+24. HANDLE EMPLOYEE CONVERSATIONS
+Where the user manages the other person:
+
+Be clear about expectations.
+Allow explanation.
+Discuss support.
+Agree actions.
+Define follow-up.
+
+Do not create company disciplinary procedures that were not supplied.
+
+25. HANDLE CUSTOMER / SUPPLIER CONVERSATIONS
+Where relevant focus on:
+
+commitments
+service
+deliverables
+quality
+commercial relationship
+corrective action
+future expectations
+
+Remain professional while protecting legitimate business requirements.
+
+26. PREPARE FOR DISAGREEMENT
+If the other person disagrees, prepare responses that:
+
+acknowledge their view
+return to facts
+ask for evidence
+clarify the required outcome
+avoid argument
+
+Example structure:
+
+"I understand your point. My concern is [specific fact/impact]. How can we address that going forward?"
+
+27. PREPARE FOR DEFENSIVENESS
+If the person becomes defensive:
+
+Do not match the emotional intensity.
+
+Recommend:
+
+Lowering the pace
+Returning to examples
+Acknowledging legitimate context
+Restating the purpose
+Asking a question
+
+Do not diagnose their emotions or motives.
+
+28. PREPARE FOR BLAME SHIFTING
+If responsibility is redirected:
+
+Acknowledge relevant external factors.
+Separate shared issues from individual responsibilities.
+Return to what needs to happen next.
+
+Avoid turning the conversation into a debate over blame.
+
+29. PREPARE FOR DENIAL
+If facts are disputed:
+
+Ask what they believe happened.
+Compare available evidence.
+Identify what can be verified.
+Avoid arguing over uncertain details.
+
+Where necessary:
+
+"Let's verify that before drawing a conclusion."
+
+30. PREPARE FOR SILENCE
+If the person gives very little response, prepare neutral prompts such as:
+
+"What are your thoughts?"
+
+"Is there anything you see differently?"
+
+"What would help resolve this?"
+
+Do not fill every silence immediately.
+
+31. PREPARE FOR EMOTIONAL REACTION
+If emotions rise:
+
+Remain respectful.
+Allow reasonable time.
+Keep the conversation focused.
+Avoid personal attacks.
+Pause or reschedule where continuing productively is not possible.
+
+Do not attempt to provide psychological diagnosis.
+
+32. PREPARE FOR AGGRESSIVE OR DISRESPECTFUL BEHAVIOR
+If the conversation becomes threatening, abusive or unsafe:
+
+Prioritize safety.
+End or pause the interaction where appropriate.
+Follow workplace procedures.
+Seek appropriate manager, HR, security or other organizational support where relevant.
+
+Do not recommend escalating conflict.
+
+33. KNOW WHEN NOT TO HANDLE IT ALONE
+Flag situations that may require appropriate organizational support, including serious allegations involving:
+
+- harassment
+- discrimination
+- threats
+- violence
+- retaliation
+- serious safety concerns
+- fraud
+- serious misconduct
+- significant legal or regulatory issues
+
+Do not make legal conclusions.
+
+Recommend following applicable workplace procedures and seeking qualified HR/legal/safety guidance where appropriate.
+
+34. AVOID UNNECESSARY ESCALATION
+For ordinary workplace disagreements, first consider whether direct professional discussion is reasonable.
+
+Do not recommend HR involvement for every interpersonal difficulty.
+
+35. PREPARE COMPROMISE OPTIONS
+Where compromise is appropriate identify:
+
+What can change:
+What cannot change:
+Possible middle ground:
+Temporary solution:
+Trial arrangement:
+
+Do not compromise mandatory safety, legal, ethical or policy requirements.
+
+36. PREPARE SOLUTION OPTIONS
+Create 2–4 realistic ways forward where appropriate.
+
+For each:
+
+Option:
+Benefit:
+Concern:
+Responsibility:
+
+Keep solutions practical.
+
+37. AGREE ACTIONS
+At the end of the conversation aim to clarify:
+
+Action:
+Owner:
+Expected result:
+Deadline:
+Support:
+Follow-up:
+
+Do not invent deadlines if none are agreed.
+
+Use:
+
+"Date to be agreed."
+
+38. CONFIRM UNDERSTANDING
+Prepare a natural closing question such as:
+
+"Are we aligned on what happens next?"
+
+or
+
+"Is there anything in the agreed action that is unclear?"
+
+39. PREPARE THE CLOSING
+Create a concise closing that:
+
+summarizes agreement
+confirms actions
+keeps the relationship professional
+states follow-up if needed
+
+40. FOLLOW-UP DOCUMENTATION
+Where appropriate draft a short factual follow-up message.
+
+Include:
+
+Purpose of discussion
+Main agreement
+Actions
+Owners
+Dates if agreed
+Next review
+
+Avoid emotional commentary.
+
+41. DOCUMENT SENSITIVE ISSUES CAREFULLY
+For important workplace matters:
+
+Record facts.
+Preserve relevant documentation.
+Avoid speculation.
+Follow applicable organizational procedures.
+
+Do not advise secretly recording conversations where legality or company policy is unknown.
+
+42. PREPARE A CONVERSATION PLAN
+Create:
+
+Opening
+Facts
+Impact
+Questions
+Their perspective
+Request
+Possible responses
+Agreement
+Closing
+
+Keep it concise enough to use during the real conversation.
+
+43. CREATE A SHORT SPEAKING VERSION
+Produce a natural version the user can actually say.
+
+Avoid corporate jargon and long paragraphs.
+
+It should sound like a professional person speaking, not reading an AI-generated script.
+
+44. CREATE A FIRMER VERSION
+Where appropriate provide a firmer alternative that remains respectful.
+
+Use this when:
+
+the issue is recurring
+expectations were previously clear
+a legitimate boundary needs reinforcement
+
+Do not make it threatening.
+
+45. CREATE A COLLABORATIVE VERSION
+Where appropriate provide a softer collaborative version for situations involving:
+
+misunderstanding
+shared responsibility
+uncertain cause
+new working relationships
+
+46. CHECK THE USER'S WORDING
+Identify phrases that could sound:
+
+accusatory
+emotional
+personal
+threatening
+sarcastic
+defensive
+unclear
+
+Rewrite them professionally without weakening the legitimate concern.
+
+47. REMOVE ABSOLUTES
+Avoid unsupported phrases such as:
+
+"You always..."
+"You never..."
+"Everyone thinks..."
+"You don't care..."
+"You deliberately..."
+
+Use specific evidence instead.
+
+48. AVOID MIND-READING
+Do not state motives without evidence.
+
+Avoid:
+
+"You ignored me because..."
+"You are trying to..."
+"You don't respect..."
+
+Instead describe behavior and ask for perspective.
+
+49. POWER-DIFFERENCE CHECK
+Consider whether the conversation involves:
+
+manager → employee
+employee → manager
+peer → peer
+customer → employee
+supplier → customer
+
+Adjust wording to the user's actual authority.
+
+Do not imply authority they do not have.
+
+50. CULTURAL / COMMUNICATION DIFFERENCES
+Where relevant, recognize that communication styles may differ.
+
+Do not stereotype based on nationality, culture, gender, age or other personal characteristics.
+
+Focus on the specific behavior and workplace expectation.
+
+51. RISK CHECK
+Before the conversation identify:
+
+Relationship risk:
+Operational risk:
+Escalation risk:
+Evidence risk:
+Safety / policy concern:
+
+Rate only where useful:
+
+Low
+Medium
+High
+
+Explain the reason.
+
+52. CONVERSATION SUCCESS CRITERIA
+Define success realistically.
+
+Success may mean:
+
+Issue clearly discussed
+Perspective understood
+Expectation clarified
+Action agreed
+Boundary communicated
+Support identified
+Follow-up scheduled
+
+Success does not necessarily require immediate agreement.
+
+53. PRE-CONVERSATION CHECKLIST
+Before the meeting confirm:
+
+- issue is clearly defined
+- facts are separated from assumptions
+- strongest examples are ready
+- desired outcome is realistic
+- questions are prepared
+- request is specific
+- possible responses considered
+- escalation route is understood if necessary
+- emotional language has been removed
+
+54. POST-CONVERSATION REVIEW
+Afterward evaluate:
+
+What was agreed?
+What remains unresolved?
+What new information emerged?
+What actions are required?
+Is documentation needed?
+Is follow-up required?
+Does anything require appropriate escalation?
+
+55. FINAL QUALITY CHECK
+Before producing the response verify:
+
+- no motives were invented
+- no incidents were invented
+- facts and assumptions are separated
+- wording is respectful
+- legitimate concerns are not minimized
+- request is clear
+- authority is correctly understood
+- escalation is proportionate
+- serious safety / misconduct issues are flagged appropriately
+- conversation sounds natural
+
+OUTPUT FORMAT:
+
+1. Situation Summary
+2. Facts vs Assumptions
+3. Main Issue
+4. Desired Outcome
+5. Evidence to Prepare
+6. Key Impact
+7. Other Person's Possible Perspective
+8. Questions to Ask
+9. Main Request / Boundary
+10. Recommended Conversation Structure
+11. Suggested Opening
+12. Main Talking Points
+13. Possible Responses & How to Handle Them
+14. Solution / Compromise Options
+15. Actions to Agree
+16. Suggested Closing
+17. Follow-Up Message
+18. Firmer Version
+19. Collaborative Version
+20. Risk / Escalation Considerations
+21. Pre-Conversation Checklist
+
+IMPORTANT:
+- Do not invent facts, incidents, motives, policies or evidence.
+- Separate observable behavior from judgments about character.
+- Focus on the issue and its workplace impact.
+- Do not encourage confrontation, retaliation or humiliation.
+- Do not automatically recommend escalation to HR or management.
+- Do not minimize serious safety, harassment, discrimination, threat or misconduct concerns.
+- Do not make legal conclusions.
+- Respect the user's actual level of authority.
+- Make requests specific and actionable.
+- Preserve necessary professional boundaries.
+- Use calm, natural language that could realistically be spoken.
+- Give the other person a reasonable opportunity to explain their perspective.
+- Focus the conversation on what should happen next.`;
+
+const steps = [
+  {
+    title: "Separate facts from assumptions",
+    description:
+      "Start with what actually happened, what can be verified and what you may only be assuming about the other person's intentions.",
+  },
+  {
+    title: "Define what needs to change",
+    description:
+      "Identify the workplace impact and turn the concern into a specific, reasonable request instead of simply expressing frustration.",
+  },
+  {
+    title: "Prepare for their perspective",
+    description:
+      "Plan questions and possible responses so the conversation remains productive even when the other person disagrees or provides new information.",
+  },
+  {
+    title: "Finish with clear next steps",
+    description:
+      "Confirm actions, ownership and follow-up so both sides leave the conversation understanding what happens next.",
+  },
+];
+
+const example = {
+  input: [
+    "Person: Colleague from another department.",
+    "Issue: Information required for my weekly report is repeatedly arriving late.",
+    "Impact: I cannot complete the report by the agreed submission time.",
+    "Previous action: I have sent reminder messages several times.",
+    "Concern: I don't want the discussion to sound like I am blaming them.",
+    "Desired outcome: Agree on a reliable time for receiving the information and understand whether something is preventing them from providing it.",
+  ],
+
+  output: [
+    "Main issue: The information needed for the weekly report has not consistently arrived before the reporting cutoff, creating a delay in completing the report.",
+    "Avoid assuming the colleague is careless or deliberately ignoring the request. First clarify whether workload, data availability or an unclear deadline is contributing.",
+    "Suggested opening: 'I wanted to discuss the timing of the information for the weekly report. We've had a few occasions where it arrived after I needed to start finalizing the report, so I'd like to understand what's causing the delay and see if we can agree on a workable timing.'",
+    "Useful question: 'Is there anything in your process that makes the current timing difficult to meet?'",
+    "Request: Agree on a clear handoff time that allows the report to be completed by its required deadline.",
+    "If the current timing is genuinely difficult, discuss whether the upstream process, cutoff time or responsibility can be adjusted rather than repeatedly relying on reminder messages.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Describe behavior, not personality",
+    description:
+      "Specific examples such as a missed deadline or incomplete handoff are easier to discuss constructively than labels such as careless, difficult or unprofessional.",
+  },
+  {
+    title: "Know what you actually want",
+    description:
+      "A difficult conversation is easier to manage when you can clearly explain what needs to happen differently instead of only describing what went wrong.",
+  },
+  {
+    title: "Leave room for new information",
+    description:
+      "The other person may know something you do not. A strong conversation can be firm about the issue while still allowing the facts and solution to change.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Difficult Workplace Conversation Prompt | KRIYANO"
+  description="Prepare for difficult workplace conversations using facts, impact, clear requests, professional boundaries, questions, possible responses and practical follow-up actions."
+>
+  <PromptPage
+    category="WORK & PRODUCTIVITY"
+    title="Difficult Workplace"
+    accentTitle="Conversation."
+    description="Prepare for sensitive conversations with managers, employees or colleagues using clear facts, professional language, practical requests and proportionate follow-up."
+    meta={[
+      "Free prompt",
+      "Workplace communication",
+      "Conflict preparation",
+    ]}
+    bestFor={[
+      "Managers",
+      "Employees",
+      "Team leaders",
+      "Colleague discussions",
+      "Performance conversations",
+      "Workplace disagreements",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Address the issue without making it personal."
+    introDescription="Prepare the facts, understand the workplace impact and plan a clear request while leaving enough room to hear the other person's perspective and reach a workable outcome."
+    steps={steps}
+    exampleTitle="Turn frustration into a professional conversation."
+    example={example}
+    tipsTitle="Keep difficult conversations productive."
+    tips={tips}
+    sidebarTitle="Need to define the issue first?"
+    sidebarDescription="Use KRIYANO's Problem-Solving Prompt when the underlying problem is still unclear, or the Process Improvement Prompt when the conflict may actually be caused by a broken workflow."
+    warningTitle="Serious workplace issues may need formal support"
+    warningText="Ordinary disagreements can often be handled through direct professional communication. Serious concerns involving threats, harassment, discrimination, retaliation, safety or significant misconduct may require appropriate workplace procedures and qualified HR, legal, safety or management support."
+  />
+</BaseLayout>

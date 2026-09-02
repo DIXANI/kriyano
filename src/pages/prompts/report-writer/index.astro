@@ -1,0 +1,963 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced professional report writer, business analyst and management communication specialist.
+
+TASK:
+Create a clear, structured and evidence-based professional report using the information provided below.
+
+The report must distinguish facts, observations, findings, analysis, assumptions, conclusions, recommendations and actions.
+
+Do not invent data, incidents, causes, dates, financial figures, KPIs, quotations, evidence, decisions, responsibilities or outcomes.
+
+If important information is missing, identify the gap rather than filling it with fabricated details.
+
+REPORT TOPIC:
+[What is the report about?]
+
+REPORT TYPE:
+[Management / operational / performance / investigation / incident / inventory / project / progress / audit follow-up / business / other.]
+
+REPORT PURPOSE:
+[Why is the report being prepared?]
+
+TARGET AUDIENCE:
+[Management / client / department / project team / other.]
+
+REPORTING PERIOD:
+[Date or period if applicable.]
+
+BACKGROUND:
+[Relevant context.]
+
+SOURCE INFORMATION:
+[Paste notes, records, observations, data, findings or other verified information.]
+
+KEY DATA / KPIs:
+[Provide actual figures if available.]
+
+KNOWN ISSUES:
+[Problems already identified.]
+
+KNOWN RISKS:
+[Potential future events or uncertainties.]
+
+ACTIONS ALREADY TAKEN:
+[List confirmed actions.]
+
+RECOMMENDATIONS ALREADY PROPOSED:
+[List if applicable.]
+
+REQUIRED DECISIONS:
+[Management decisions needed.]
+
+DESIRED LENGTH:
+[Short / medium / detailed / approximate word count.]
+
+TONE:
+[Professional / executive / technical / neutral / concise.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+REPORT WRITING REQUIREMENTS:
+
+1. DEFINE THE REPORT PURPOSE
+State clearly:
+
+Why the report exists
+What it covers
+Who it is for
+What decision or understanding it should support
+
+2. DEFINE THE SCOPE
+Identify:
+
+Included areas
+Excluded areas
+Reporting period
+Locations
+Departments
+Processes
+
+where relevant.
+
+Do not silently expand the scope.
+
+3. REVIEW THE AVAILABLE INFORMATION
+Classify information as:
+
+CONFIRMED FACT
+Supported by supplied evidence.
+
+OBSERVATION
+Something directly observed or recorded.
+
+FINDING
+A conclusion supported by reviewed evidence.
+
+ASSUMPTION
+Something used provisionally but not verified.
+
+UNKNOWN
+Information not available.
+
+4. DO NOT INVENT MISSING INFORMATION
+Never fabricate:
+
+Dates
+Quantities
+Costs
+Names
+Causes
+KPIs
+Incidents
+Customer feedback
+Management decisions
+Corrective actions
+Evidence
+
+5. IDENTIFY INFORMATION GAPS
+When information needed for the report is unavailable, state:
+
+"Information not provided."
+
+or:
+
+"Requires verification."
+
+6. SEPARATE FACT FROM ANALYSIS
+FACT:
+What the evidence shows.
+
+ANALYSIS:
+What the evidence may mean.
+
+Do not present interpretation as established fact.
+
+7. SEPARATE FINDINGS FROM RECOMMENDATIONS
+A finding explains what was identified.
+
+A recommendation explains what should be considered or done.
+
+8. SEPARATE RECOMMENDATIONS FROM DECISIONS
+Do not state that management approved something merely because the report recommends it.
+
+9. SEPARATE ACTIONS FROM RECOMMENDATIONS
+An action is something actually assigned or completed.
+
+A recommendation is a proposed course of action.
+
+10. SEPARATE RISK FROM ISSUE
+ISSUE:
+A problem already occurring.
+
+RISK:
+An uncertain future event that may affect objectives.
+
+11. CREATE A PROFESSIONAL TITLE
+The title should clearly identify the report subject.
+
+12. CREATE AN EXECUTIVE SUMMARY
+For management reports summarize:
+
+Purpose
+Main findings
+Business impact
+Major issue or risk
+Key recommendation
+Decision required
+
+Keep it concise.
+
+13. DO NOT INTRODUCE NEW FACTS IN THE EXECUTIVE SUMMARY
+Everything stated there must be supported elsewhere in the report.
+
+14. WRITE THE BACKGROUND
+Explain only the context needed to understand the report.
+
+Avoid unnecessary history.
+
+15. DESCRIBE THE METHODOLOGY
+Where relevant explain:
+
+Data reviewed
+Documents reviewed
+Interviews
+Observations
+System records
+Physical checks
+Calculations
+
+Only include methods actually used.
+
+16. DO NOT INVENT METHODOLOGY
+Never claim:
+
+"We interviewed..."
+"We inspected..."
+"We reviewed system records..."
+
+unless supplied.
+
+17. PRESENT DATA ACCURATELY
+Preserve:
+
+Values
+Dates
+Units
+Currency
+Percentages
+Quantities
+
+exactly as supplied.
+
+18. VERIFY CALCULATIONS
+Where calculations are required:
+
+Show formula
+Show inputs
+Show result
+
+19. DO NOT INVENT BASELINES
+If a target or baseline is unavailable, say so.
+
+20. KPI REPORTING
+Where applicable show:
+
+KPI
+Target
+Actual
+Variance
+Status
+Comment
+
+Only use real values.
+
+21. VARIANCE ANALYSIS
+Calculate where data permits:
+
+Variance = Actual - Target
+
+or another relevant formula.
+
+Explain the convention used.
+
+22. DO NOT ASSUME THE CAUSE OF A VARIANCE
+A variance identifies a difference, not automatically its cause.
+
+23. PRESENT FINDINGS CLEARLY
+Each important finding should contain:
+
+What was found
+Evidence
+Impact
+Significance
+
+24. PRIORITIZE FINDINGS
+Where useful classify:
+
+Critical
+High
+Medium
+Low
+
+Explain the basis.
+
+If no formal scale exists, label the ranking provisional.
+
+25. IDENTIFY POSITIVE FINDINGS
+Reports should not automatically focus only on failures.
+
+Include meaningful positive performance when evidence supports it.
+
+26. IDENTIFY ISSUES
+For each material issue state:
+
+Issue
+Evidence
+Current impact
+Status
+
+27. IDENTIFY ROOT CAUSES CAREFULLY
+Only call something a root cause when sufficient analysis supports it.
+
+Otherwise use:
+
+Possible cause
+Contributing factor
+Requires investigation
+
+28. DISTINGUISH SYMPTOM FROM CAUSE
+Example:
+
+Stock discrepancy = symptom / issue.
+
+Incorrect receiving transaction = possible cause.
+
+29. IDENTIFY CONTRIBUTING FACTORS
+Where evidence supports them, identify conditions that increased the likelihood or impact of the problem.
+
+30. DO NOT ASSIGN BLAME WITHOUT EVIDENCE
+Focus on:
+
+Process
+Control
+System
+Training
+Communication
+Workload
+Procedure
+
+when supported.
+
+Do not accuse individuals.
+
+31. IDENTIFY BUSINESS IMPACT
+Where relevant consider:
+
+Cost
+Time
+Customer
+Quality
+Safety
+Compliance
+Productivity
+Inventory
+Service
+Reputation
+
+Do not invent financial impact.
+
+32. QUANTIFY IMPACT ONLY WHEN DATA EXISTS
+If exact financial or operational impact is unknown, describe it qualitatively.
+
+33. IDENTIFY RISKS
+For unresolved issues identify material future risks.
+
+34. DO NOT EXAGGERATE RISKS
+Keep risk language proportional to available evidence.
+
+35. IDENTIFY EXISTING CONTROLS
+Document only controls actually supplied.
+
+36. ASSESS CONTROL GAPS
+Where relevant identify:
+
+Missing control
+Weak control
+Manual dependency
+Unclear ownership
+No monitoring
+No evidence
+No escalation
+
+37. DO NOT ASSUME A CONTROL IS EFFECTIVE
+If testing evidence is unavailable, state:
+
+"Control effectiveness not verified."
+
+38. DESCRIBE ACTIONS ALREADY TAKEN
+Separate:
+
+Completed
+In progress
+Planned
+
+only when status is supplied.
+
+39. DO NOT INVENT ACTION STATUS
+If status is unclear, say:
+
+"Status not confirmed."
+
+40. WRITE PRACTICAL RECOMMENDATIONS
+Each recommendation should respond directly to a finding, issue, risk or control gap.
+
+41. AVOID GENERIC RECOMMENDATIONS
+Instead of:
+
+"Improve communication."
+
+Prefer:
+
+"Define the escalation route for receiving discrepancies and document who must review unresolved variances."
+
+42. EXPLAIN WHY
+For significant recommendations explain:
+
+Problem addressed
+Expected benefit
+Important dependency
+
+43. PRIORITIZE RECOMMENDATIONS
+Use where useful:
+
+P1 — Immediate / critical
+P2 — High
+P3 — Medium
+P4 — Low
+
+Explain the basis.
+
+44. KEEP RECOMMENDATIONS PROPORTIONATE
+Do not recommend complex controls for minor issues without justification.
+
+45. IDENTIFY QUICK WINS
+Highlight low-complexity improvements that can address meaningful issues.
+
+46. IDENTIFY STRUCTURAL IMPROVEMENTS
+Separate quick fixes from longer-term changes such as:
+
+Process redesign
+System changes
+Supplier changes
+Policy revision
+Automation
+Training programs
+
+47. DO NOT DEFAULT TO TRAINING
+Training is appropriate when a genuine knowledge or skill gap exists.
+
+Do not use "provide training" as the automatic solution to every problem.
+
+48. DO NOT DEFAULT TO AUTOMATION
+First determine whether the underlying process is sound.
+
+Automating a weak process can scale the problem.
+
+49. CREATE AN ACTION PLAN
+Where appropriate include:
+
+Action
+Priority
+Owner
+Timing
+Dependency
+Status
+Evidence of completion
+
+50. USE ROLE-BASED OWNERS
+If names are unavailable use roles such as:
+
+Operations Manager
+Warehouse Supervisor
+Finance Manager
+IT Lead
+
+Do not invent names.
+
+51. DO NOT INVENT DEADLINES
+If timing is unknown use:
+
+"Timing to be agreed."
+
+52. IDENTIFY DECISIONS REQUIRED
+Separate actions the team can perform from decisions requiring management approval.
+
+53. IDENTIFY ESCALATIONS
+Where appropriate explain what requires:
+
+Management
+Finance
+Legal
+Safety
+IT
+Customer
+Supplier
+
+review.
+
+Do not invent organizational authority.
+
+54. IDENTIFY DEPENDENCIES
+For recommendations consider:
+
+Budget
+People
+Systems
+Supplier
+Approval
+Data
+Training
+Contract
+
+55. IDENTIFY BLOCKERS
+Clearly distinguish blockers from ordinary dependencies.
+
+56. IDENTIFY OPEN ITEMS
+List matters still requiring:
+
+Investigation
+Confirmation
+Approval
+Data
+Decision
+
+57. IDENTIFY EVIDENCE NEEDED
+For unresolved findings specify what evidence would help close the gap.
+
+58. HANDLE INCIDENT REPORTS CAREFULLY
+For incident-related reports separate:
+
+What happened
+When
+Where
+Known sequence
+Immediate response
+Impact
+Evidence
+Possible contributing factors
+Follow-up
+
+Do not invent cause.
+
+59. HANDLE INVESTIGATION REPORTS CAREFULLY
+Separate:
+
+Allegation / issue
+Evidence reviewed
+Finding
+Supporting evidence
+Contradictory evidence
+Limitation
+Conclusion
+
+60. HANDLE INVENTORY REPORTS
+Where relevant include:
+
+System quantity
+Physical quantity
+Variance
+Value
+Location
+SKU
+Transaction history
+Possible cause
+Action
+
+only when data exists.
+
+61. HANDLE PERFORMANCE REPORTS
+Where relevant include:
+
+Objective
+KPI
+Target
+Actual
+Variance
+Trend
+Reason
+Action
+
+Do not invent targets.
+
+62. HANDLE PROJECT REPORTS
+Where relevant include:
+
+Objective
+Scope
+Progress
+Milestones
+Budget
+Issues
+Risks
+Dependencies
+Decisions
+Next actions
+
+63. HANDLE PROGRESS REPORTS
+Focus on:
+
+Completed
+In progress
+Upcoming
+Delayed
+Blocked
+Decision needed
+
+Only use statuses supported by the source.
+
+64. HANDLE MANAGEMENT REPORTS
+Prioritize:
+
+What changed
+Why it matters
+Performance
+Risks
+Actions
+Decisions needed
+
+65. HANDLE AUDIT FOLLOW-UP REPORTS
+Where relevant include:
+
+Finding
+Agreed action
+Owner
+Target date
+Status
+Evidence
+Remaining gap
+
+Do not mark a finding closed without evidence.
+
+66. DISTINGUISH IMPLEMENTATION FROM EFFECTIVENESS
+An action may be completed but still fail to solve the original problem.
+
+67. DEFINE EFFECTIVENESS CHECKS
+Where useful identify how management can verify whether the corrective action worked.
+
+68. IDENTIFY TREND
+If multiple periods are supplied, compare performance over time.
+
+69. DO NOT CLAIM A TREND FROM ONE DATA POINT
+A single observation does not establish a trend.
+
+70. COMPARE PERIODS FAIRLY
+Check whether periods are comparable before drawing conclusions.
+
+71. IDENTIFY EXCEPTIONS
+Highlight unusual events that materially affect interpretation.
+
+72. PRESERVE LIMITATIONS
+State important limitations such as:
+
+Incomplete data
+Short observation period
+Missing documents
+Unverified explanation
+Small sample
+
+73. DO NOT HIDE WEAK EVIDENCE
+Professional reporting should make evidence limitations visible.
+
+74. USE TABLES WHEN USEFUL
+Tables are suitable for:
+
+KPIs
+Findings
+Actions
+Risks
+Variances
+Comparisons
+
+75. DO NOT OVERUSE TABLES
+Use narrative explanation where reasoning or context is required.
+
+76. USE BULLETS SELECTIVELY
+Lists should improve scanability, not replace all professional prose.
+
+77. USE CLEAR HEADINGS
+Readers should understand the report structure from headings alone.
+
+78. USE PROFESSIONAL LANGUAGE
+Keep wording:
+
+Objective
+Specific
+Concise
+Neutral
+
+79. AVOID EMOTIONAL LANGUAGE
+Replace:
+
+"Terrible failure"
+
+with evidence-based wording describing the actual issue and impact.
+
+80. AVOID VAGUE LANGUAGE
+Replace:
+
+"Several problems occurred"
+
+with specific supported findings.
+
+81. AVOID CORPORATE FILLER
+Remove phrases that add no useful meaning.
+
+82. AVOID OVERSTATEMENT
+Do not use:
+
+Always
+Never
+Completely
+Guaranteed
+Major failure
+
+unless evidence supports the wording.
+
+83. USE CONSISTENT TERMINOLOGY
+Use the same term for the same process, system, KPI or issue throughout.
+
+84. DEFINE TECHNICAL TERMS
+Explain specialist terminology when the audience may not know it.
+
+85. PRESERVE FORMAL REQUIREMENTS
+If the source includes mandatory:
+
+Safety
+Quality
+Legal
+Compliance
+Financial
+Contractual
+
+requirements, do not weaken them during rewriting.
+
+86. HANDLE LEGAL OR COMPLIANCE CONTENT CAUTIOUSLY
+Do not invent legal obligations.
+
+Flag where qualified review may be necessary.
+
+87. HANDLE SAFETY CONTENT CAUTIOUSLY
+Do not minimize significant safety issues.
+
+88. HANDLE CONFIDENTIAL INFORMATION APPROPRIATELY
+Do not unnecessarily repeat sensitive details throughout the report.
+
+89. CREATE A MANAGEMENT VIEW
+For longer reports provide a concise section showing:
+
+Top finding
+Main impact
+Highest risk
+Priority action
+Decision needed
+
+90. CREATE A FINDINGS TABLE
+Where useful include:
+
+ID
+Finding
+Evidence
+Impact
+Priority
+
+91. CREATE A RECOMMENDATIONS TABLE
+Where useful include:
+
+ID
+Related finding
+Recommendation
+Priority
+Owner
+Timing
+
+92. LINK RECOMMENDATIONS TO FINDINGS
+Avoid recommendations that cannot be traced to a documented issue or objective.
+
+93. CREATE AN ACTION TRACKER
+Where requested include:
+
+Action
+Owner
+Due date
+Status
+Evidence
+Comment
+
+Use "Not specified" for unsupported fields.
+
+94. IDENTIFY SUCCESS MEASURES
+For major recommendations identify how effectiveness could be evaluated.
+
+Do not invent arbitrary targets.
+
+95. WRITE A CLEAR CONCLUSION
+The conclusion should answer:
+
+What does the evidence show?
+Why does it matter?
+What should happen next?
+
+96. DO NOT INTRODUCE NEW FINDINGS IN THE CONCLUSION
+All conclusions must trace back to the report body.
+
+97. CREATE AN EXECUTIVE VERSION
+Where requested produce a shorter management-ready version after the full report.
+
+98. CREATE EDITOR / VERIFICATION NOTES
+List information that should be:
+
+Confirmed
+Updated
+Sourced
+Approved
+
+before final distribution.
+
+99. CONFIDENCE ASSESSMENT
+Where useful rate the report's analytical confidence:
+
+High
+Medium
+Low
+
+based on evidence completeness.
+
+Explain the rating.
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- purpose and scope are clear
+- facts and analysis are separated
+- findings are supported
+- assumptions are visible
+- issues and risks are distinguished
+- recommendations are not presented as approved decisions
+- actions are not invented
+- owners are not invented
+- deadlines are not invented
+- numbers match supplied data
+- causes are not claimed without evidence
+- limitations are visible
+- recommendations address actual findings
+- management decisions are clear
+- language is professional and neutral
+- no unsupported conclusions were added
+
+OUTPUT FORMAT:
+
+1. Report Title
+2. Executive Summary
+3. Purpose
+4. Scope
+5. Background
+6. Methodology — if applicable
+7. Evidence / Data Reviewed
+8. Key Findings
+9. Analysis
+10. Performance / KPI Review — if applicable
+11. Issues
+12. Risks
+13. Existing Controls — if applicable
+14. Actions Already Taken
+15. Recommendations
+16. Priority Action Plan
+17. Decisions Required
+18. Open Items / Information Gaps
+19. Limitations
+20. Conclusion
+21. Management Summary
+22. Verification Notes
+
+Adapt the structure to the report type.
+
+Do not include empty sections merely because they appear in this template.
+
+IMPORTANT:
+- Never invent facts, data, incidents, evidence, causes, decisions, actions, owners or deadlines.
+- Separate confirmed facts from analysis and assumptions.
+- Separate findings from recommendations.
+- Separate recommendations from approved decisions.
+- Separate existing issues from future risks.
+- Preserve important numbers, dates, units and conditions.
+- Do not claim root cause without adequate evidence.
+- Do not mark actions or audit findings complete without supporting evidence.
+- Keep recommendations specific, proportionate and traceable to the report findings.
+- Make limitations and information gaps visible.
+- Write for the intended audience rather than producing a generic report template.`;
+
+const steps = [
+  {
+    title: "Define the report purpose",
+    description:
+      "Specify what the report is about, who will read it and what understanding, action or management decision it needs to support.",
+  },
+  {
+    title: "Provide evidence, not conclusions",
+    description:
+      "Add the real notes, data, observations, KPIs and records available so findings can be built from evidence rather than fabricated details.",
+  },
+  {
+    title: "Separate reporting from judgment",
+    description:
+      "Keep confirmed facts, findings, analysis, risks, recommendations and approved actions distinct so readers can see what the evidence actually supports.",
+  },
+  {
+    title: "Finish with action",
+    description:
+      "Connect recommendations to findings and clearly identify priorities, dependencies, unresolved information and decisions management still needs to make.",
+  },
+];
+
+const example = {
+  input: [
+    "Report type: Inventory variance investigation report.",
+    "SKU: ABC-102.",
+    "System quantity: 520 units.",
+    "Physical quantity: 486 units.",
+    "Confirmed variance: 34 units shortage.",
+    "Review found: One outbound transaction for 20 units was physically dispatched but remained unconfirmed in the system.",
+    "Remaining difference: 14 units.",
+    "No confirmed explanation is available yet for the remaining 14 units.",
+  ],
+
+  output: [
+    "Finding 1: Physical stock is 34 units lower than the recorded system quantity.",
+    "Finding 2: A 20-unit outbound transaction was physically completed but was not confirmed in the system.",
+    "Analysis: Correcting the identified transaction would explain 20 of the 34 units, but it would not explain the full variance.",
+    "Open variance: 14 units remain unexplained and require further investigation.",
+    "Recommendation: Correct the verified transaction according to the approved inventory-adjustment process and continue reviewing transaction history and physical movement evidence for the remaining 14 units.",
+    "Important limitation: The available evidence does not support assigning a cause to the remaining shortage.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Don't turn assumptions into findings",
+    description:
+      "If the evidence only suggests a possible cause, describe it as a hypothesis or contributing factor until the investigation supports a stronger conclusion.",
+  },
+  {
+    title: "Keep recommendations traceable",
+    description:
+      "A strong report lets management see exactly which finding, issue or risk each recommendation is intended to address.",
+  },
+  {
+    title: "Show what remains unknown",
+    description:
+      "An unresolved information gap is more useful than a confident but fabricated explanation. Make missing evidence visible so it can be investigated.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Report Writer Prompt | KRIYANO"
+  description="Create structured professional reports with clear findings, evidence, analysis, recommendations, actions, risks and management decisions."
+>
+  <PromptPage
+    category="WRITING"
+    title="Professional Report"
+    accentTitle="Writer."
+    description="Turn real notes, evidence and data into a structured professional report with clear findings, analysis, recommendations and management actions."
+    meta={[
+      "Free prompt",
+      "Professional reports",
+      "Management writing",
+    ]}
+    bestFor={[
+      "Management reports",
+      "Operational reports",
+      "Performance reports",
+      "Investigation reports",
+      "Inventory reports",
+      "Project reports",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Build reports from evidence instead of filling the gaps."
+    introDescription="Structure real information into findings, analysis, risks and recommendations while keeping assumptions, unresolved questions and management decisions clearly visible."
+    steps={steps}
+    exampleTitle="Report an inventory variance without inventing the missing cause."
+    example={example}
+    tipsTitle="Make professional reports easier to trust and act on."
+    tips={tips}
+    sidebarTitle="Need to investigate why something happened?"
+    sidebarDescription="Use KRIYANO's Root Cause Analysis Prompt when the main objective is to investigate the underlying cause of an operational problem before writing the final report."
+    warningTitle="Professional wording cannot replace evidence"
+    warningText="A polished report can still be misleading if assumptions are presented as findings. Verify important facts, numbers, causes, decisions and action status before distributing the final report."
+  />
+</BaseLayout>

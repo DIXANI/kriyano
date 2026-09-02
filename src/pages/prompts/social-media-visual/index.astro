@@ -1,0 +1,729 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert AI visual director, social media designer and image-generation prompt specialist.
+
+TASK:
+Create a detailed AI image-generation prompt for a social media visual that is designed specifically for the selected platform, audience and communication goal.
+
+The final visual must be visually strong, mobile-friendly, compositionally clear and suitable for real social media publishing.
+
+SOCIAL PLATFORM:
+[Facebook / Instagram / LinkedIn / TikTok / YouTube / Pinterest / X / other.]
+
+CONTENT TYPE:
+[Feed post / Reel cover / Story / carousel cover / promotional graphic / announcement / educational visual / quote graphic / other.]
+
+PRIMARY GOAL:
+[Awareness / engagement / traffic / promotion / education / lead generation / announcement / branding / other.]
+
+TOPIC:
+[What is the post about?]
+
+TARGET AUDIENCE:
+[Who should notice and understand this post?]
+
+MAIN MESSAGE:
+[The single most important thing the viewer should understand.]
+
+HEADLINE TEXT:
+[Exact text to include, or "No visible text".]
+
+SECONDARY TEXT:
+[Optional.]
+
+CTA TEXT:
+[Optional.]
+
+BRAND NAME:
+[Optional.]
+
+BRAND COLOURS:
+[Hex codes or colour descriptions.]
+
+LOGO:
+[Describe logo placement if required.]
+
+VISUAL STYLE:
+[Professional / premium / editorial / SaaS / cinematic / lifestyle / minimal / bold / luxury / food-commercial / other.]
+
+MAIN SUBJECT:
+[Person / product / object / workspace / food / illustration / abstract visual / other.]
+
+SUBJECT DESCRIPTION:
+[Describe the subject accurately.]
+
+SCENE:
+[Describe the environment.]
+
+COMPOSITION:
+[Subject left / right / centred / split layout / asymmetric / other.]
+
+ASPECT RATIO:
+[1:1 / 4:5 / 9:16 / 16:9 / platform-specific.]
+
+CAMERA / VIEW:
+[Close-up / chest-up / wide / top-down / product hero / other.]
+
+LIGHTING:
+[Soft studio / natural daylight / dramatic / warm / clean commercial / other.]
+
+BACKGROUND:
+[Describe.]
+
+TEXT POSITION:
+[Top / left / right / lower third / centre / no text.]
+
+NEGATIVE SPACE:
+[Where clean space should remain.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+SOCIAL MEDIA VISUAL REQUIREMENTS:
+
+1. START WITH THE PLATFORM
+The design should reflect where the image will actually appear.
+
+2. OPTIMIZE FOR MOBILE
+Most important elements must remain readable at small feed size.
+
+3. CREATE ONE CLEAR VISUAL PRIORITY
+The viewer should immediately know where to look first.
+
+4. DEFINE THE PRIMARY SUBJECT
+Use one dominant visual subject unless the concept genuinely requires multiple elements.
+
+5. DO NOT OVERCROWD
+Avoid excessive:
+
+Text
+Icons
+Objects
+Badges
+Decorative graphics
+Background details
+
+6. CREATE STRONG VISUAL HIERARCHY
+Priority should usually be:
+
+Primary subject
+Headline
+Supporting message
+CTA
+Brand
+
+7. KEEP THE MAIN MESSAGE SIMPLE
+A social visual should communicate one central idea quickly.
+
+8. MATCH THE PLATFORM CONTEXT
+Examples:
+
+LinkedIn:
+Professional, credible, clean, business-oriented.
+
+Instagram:
+Strong visual appeal, polished composition, lifestyle or brand quality.
+
+Facebook:
+Clear message, strong thumbnail readability, broad audience accessibility.
+
+TikTok / Reels:
+Vertical, high-impact, immediate focal point.
+
+YouTube:
+Thumbnail-focused, strong subject separation, expressive visual storytelling.
+
+9. USE THE CORRECT ASPECT RATIO
+Follow the user-specified ratio.
+
+If not specified, recommend an appropriate ratio rather than silently choosing.
+
+10. RESPECT SAFE AREAS
+Keep essential text, faces, products and logos away from edges.
+
+11. FOR VERTICAL VIDEO COVERS
+Keep important information within the central mobile-safe area.
+
+12. DESIGN FOR THUMBNAIL SIZE
+The concept must remain understandable when viewed small.
+
+13. USE LARGE, READABLE TEXT
+If visible text is requested, make the headline short and high contrast.
+
+14. DO NOT GENERATE LONG PARAGRAPHS INSIDE THE IMAGE
+Complex copy should remain in the post caption rather than the artwork.
+
+15. LIMIT TEXT
+Prefer:
+
+Headline
+Short supporting phrase
+CTA
+
+16. PRESERVE EXACT TEXT
+When exact text is supplied, reproduce it without rewriting.
+
+17. DO NOT INVENT TEXT
+Do not add random slogans, labels or marketing claims.
+
+18. DO NOT ADD RANDOM LETTERING
+Avoid meaningless AI-generated text in the environment.
+
+19. CONTROL TYPOGRAPHIC HIERARCHY
+Headline should dominate supporting copy.
+
+20. USE PROFESSIONAL TYPOGRAPHY
+Prefer clean, modern, readable font treatment appropriate to the brand.
+
+21. KEEP FONT STYLES LIMITED
+Avoid mixing many unrelated typefaces.
+
+22. ENSURE CONTRAST
+Text must remain readable against the background.
+
+23. USE NEGATIVE SPACE
+Reserve intentional clean space for headline or CTA.
+
+24. DO NOT PLACE TEXT OVER BUSY AREAS
+Avoid detailed hair, faces, product labels or clutter behind typography.
+
+25. KEEP THE SUBJECT CLEAR
+The subject should not compete with decorative effects.
+
+26. APPLY RULE-OF-THIRDS WHEN USEFUL
+Use balanced placement rather than default centring.
+
+27. USE ASYMMETRY WHEN APPROPRIATE
+For professional or editorial visuals, asymmetry can create stronger hierarchy.
+
+28. USE CENTRED COMPOSITION WHEN APPROPRIATE
+Centred layouts work well for:
+
+Products
+Announcements
+Hero objects
+Simple promotional graphics
+
+29. CONTROL SUBJECT SCALE
+The main subject should be large enough to remain recognizable on mobile.
+
+30. AVOID TINY HUMAN FIGURES
+Unless the environment itself is the story.
+
+31. USE CLOSE-UP HUMAN EXPRESSIONS CAREFULLY
+Expression should match the content goal.
+
+32. KEEP PEOPLE NATURAL
+Avoid:
+
+Plastic skin
+Unrealistic teeth
+Exaggerated expressions
+Over-beautification
+
+33. USE REALISTIC HAND ANATOMY
+If hands are visible:
+
+Natural fingers
+Correct grip
+Believable interaction
+
+34. PRESERVE CHARACTER IDENTITY
+If a reference character is used, do not redesign the face.
+
+35. PRESERVE PRODUCT IDENTITY
+If a real product reference is supplied, preserve:
+
+Shape
+Colour
+Packaging
+Proportions
+Key physical details
+
+36. DO NOT INVENT PRODUCT FEATURES
+Keep advertised visual features accurate.
+
+37. USE STRONG SUBJECT-BACKGROUND SEPARATION
+Achieve this through:
+
+Lighting
+Depth
+Contrast
+Focus
+Negative space
+
+38. USE DEPTH INTENTIONALLY
+Background blur can help focus attention but should not feel artificial.
+
+39. LIGHT THE MAIN SUBJECT FIRST
+Lighting should support the intended focal point.
+
+40. MATCH LIGHTING TO BRAND MOOD
+Examples:
+
+Clean white light = professional / technical.
+Warm light = lifestyle / food / hospitality.
+Dramatic contrast = entertainment / cinematic.
+Soft daylight = approachable / natural.
+
+41. AVOID EXCESSIVE GLOW
+Do not use neon effects unless they support the requested style.
+
+42. AVOID GENERIC FUTURISTIC AI VISUALS
+Do not automatically use:
+
+Blue holograms
+Glowing brains
+Robot heads
+Floating circuits
+
+unless specifically relevant.
+
+43. USE MEANINGFUL VISUAL METAPHORS
+Any metaphor should directly support the message.
+
+44. BUSINESS VISUAL MODE
+For business and professional content use:
+
+Clean geometry
+Structured composition
+Subtle depth
+Realistic workplace elements
+Controlled colour palette
+
+45. SAAS VISUAL MODE
+Use:
+
+Modern UI-inspired panels
+Data elements
+Clean diagrams
+Soft gradients
+Minimal graphic accents
+
+without turning the image into a fake software screenshot unless requested.
+
+46. EDUCATIONAL VISUAL MODE
+Prioritize:
+
+Clarity
+Structure
+Visual explanation
+Readable labels
+
+47. PROMOTIONAL VISUAL MODE
+Prioritize:
+
+Offer
+Product
+Benefit
+CTA
+
+Do not invent discounts or urgency.
+
+48. ANNOUNCEMENT MODE
+Make the announcement itself the clear visual priority.
+
+49. PERSONAL BRAND MODE
+Use the creator or professional as the primary visual anchor.
+
+50. FOOD CONTENT MODE
+Prioritize:
+
+Appetite appeal
+Texture
+Freshness
+Natural food styling
+Realistic colour
+
+51. PRODUCT CONTENT MODE
+Prioritize:
+
+Product shape
+Material
+Lighting
+Surface texture
+Commercial cleanliness
+
+52. CREATOR CONTENT MODE
+Use authentic, expressive, platform-native composition.
+
+53. PROFESSIONAL LINKEDIN MODE
+Prefer:
+
+Premium business visual style
+Clean layout
+Strong headline
+Credible imagery
+Minimal clutter
+
+54. INSTAGRAM MODE
+Favor strong aesthetics while preserving message clarity.
+
+55. FACEBOOK MODE
+Use strong mobile readability and clear visual storytelling.
+
+56. REEL COVER MODE
+The image must work as a vertical thumbnail.
+
+57. STORY MODE
+Keep top and bottom interface zones clear where possible.
+
+58. CAROUSEL COVER MODE
+Make the first-slide promise obvious and visually strong.
+
+59. THUMBNAIL MODE
+Prioritize instant comprehension.
+
+60. CONTROL COLOUR PALETTE
+Use the requested brand colours intentionally.
+
+61. USE ACCENT COLOURS SPARINGLY
+Reserve them for:
+
+CTA
+Highlight
+Result
+Warning
+Key data
+
+62. DO NOT LET BRAND COLOURS OVERPOWER LEGIBILITY
+Readability has priority.
+
+63. PRESERVE BRAND CONSISTENCY
+If brand identity is supplied, keep:
+
+Colours
+Logo style
+Typography mood
+Visual language
+
+64. LOGO PLACEMENT
+Keep logos visible but secondary to the content message.
+
+65. DO NOT REDESIGN THE LOGO
+If a logo reference is supplied, preserve it accurately.
+
+66. DO NOT INVENT LOGOS
+Do not create fake company marks.
+
+67. CONTROL VISUAL DENSITY
+Leave breathing room.
+
+68. USE DECORATIVE ELEMENTS PURPOSEFULLY
+Lines, gradients, shapes and icons should help hierarchy or meaning.
+
+69. AVOID RANDOM DECORATION
+Do not add unrelated icons or graphics merely to fill space.
+
+70. USE ICONS CAREFULLY
+Keep icon style consistent.
+
+71. KEEP VISUAL STYLE COHERENT
+Do not mix:
+
+Photorealism
+Cartoon
+3D
+Flat icons
+Sketching
+
+without an intentional design concept.
+
+72. CONTROL REALISM
+If photorealistic, maintain believable:
+
+Lighting
+Materials
+Shadows
+Reflections
+Perspective
+
+73. CONTROL SHADOWS
+Keep shadows soft or strong according to the light source.
+
+74. CONTROL REFLECTIONS
+Use realistic reflections on:
+
+Glass
+Metal
+Glossy packaging
+Screens
+
+75. KEEP PERSPECTIVE CONSISTENT
+All objects should belong to the same scene geometry.
+
+76. AVOID FLOATING OBJECTS
+Unless intentionally designed as a graphic composition.
+
+77. USE MOTION ONLY WHEN RELEVANT
+Motion elements should support energy, not introduce visual chaos.
+
+78. CONTROL BACKGROUND COMPLEXITY
+Background should support, not compete with, the subject.
+
+79. USE BLUR PURPOSEFULLY
+Do not rely on excessive blur to hide poor composition.
+
+80. KEEP TEXT AWAY FROM FACES
+Unless intentionally designed and still readable.
+
+81. KEEP CTA DISTINCT
+CTA should be visible but not overpower the headline.
+
+82. DO NOT CREATE FAKE BUTTONS
+Unless the visual intentionally represents interface design.
+
+83. DO NOT CREATE MISLEADING UI
+Avoid interface elements that appear interactive when they are not.
+
+84. DO NOT INVENT METRICS
+If data is shown, use only supplied values.
+
+85. DO NOT INVENT CUSTOMER RESULTS
+Avoid fake:
+
+Revenue
+Growth
+Ratings
+Testimonials
+Statistics
+
+86. DO NOT CREATE FALSE SCARCITY
+Avoid:
+
+Only today
+Last chance
+Limited stock
+
+unless supplied.
+
+87. DO NOT CREATE FALSE URGENCY
+Do not add countdowns or urgent claims unless requested.
+
+88. DO NOT USE MISLEADING BEFORE/AFTER VISUALS
+Unless supported by real source material.
+
+89. KEEP ETHICAL REPRESENTATION
+Do not create deceptive representations of products, results or people.
+
+90. CREATE PLATFORM-SPECIFIC PROMPT LANGUAGE
+Describe:
+
+Aspect ratio
+Subject size
+Safe margins
+Text hierarchy
+Mobile readability
+
+explicitly.
+
+91. CREATE A COMPOSITION MAP
+Before the final prompt define:
+
+Top zone
+Primary subject zone
+Headline zone
+Supporting-text zone
+CTA zone
+Brand zone
+
+when relevant.
+
+92. CREATE THE FINAL GENERATION PROMPT
+Write one cohesive prompt that can be pasted into an image generator.
+
+93. INCLUDE TEXT INSTRUCTIONS
+If visible text is required, specify:
+
+Exact wording
+Position
+Relative size
+Hierarchy
+Contrast
+
+94. INCLUDE NEGATIVE CONSTRAINTS
+Use only relevant protections such as:
+
+No extra text
+No random logo
+No watermark
+No distorted hands
+No duplicated people
+No clutter
+No illegible typography
+
+95. KEEP NEGATIVE PROMPTS TARGETED
+Do not create an unrelated keyword dump.
+
+96. CREATE ALTERNATIVE COMPOSITION
+Where useful, provide one alternate layout without changing the campaign idea.
+
+97. PROVIDE CAPTION ALIGNMENT NOTES
+Optionally explain what type of caption would complement the visual without writing unsupported claims.
+
+98. CHECK MOBILE READABILITY
+Imagine the artwork at small screen size.
+
+99. CHECK BRAND FIT
+Confirm that colour, typography, image style and composition feel coherent.
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- platform is defined
+- aspect ratio is correct
+- main subject is obvious
+- headline hierarchy is strong
+- visual remains readable on mobile
+- safe margins are preserved
+- unnecessary clutter is removed
+- text is limited
+- exact text is preserved
+- random AI text is prevented
+- brand colours are controlled
+- logo is not redesigned
+- composition has intentional negative space
+- lighting supports the focal point
+- background does not compete
+- no unsupported claims are introduced
+- no false urgency or scarcity is added
+- people and hands are anatomically plausible
+- product identity is preserved where relevant
+- visual style is consistent
+- CTA is clear where required
+
+OUTPUT FORMAT:
+
+1. VISUAL STRATEGY
+Briefly explain the visual concept.
+
+2. COMPOSITION MAP
+Describe where the main elements should appear.
+
+3. FULL IMAGE GENERATION PROMPT
+Provide one polished, model-ready generation prompt.
+
+4. TEXT & TYPOGRAPHY INSTRUCTIONS
+Include exact text, hierarchy, placement and readability guidance.
+
+5. NEGATIVE / PROTECTION INSTRUCTIONS
+Include only relevant constraints.
+
+6. ALTERNATIVE COMPOSITION
+Provide one optional alternative when useful.
+
+7. FINAL PLATFORM CHECK
+Confirm aspect ratio, safe area, mobile readability and main focal point.
+
+IMPORTANT:
+- Design for the actual social platform, not for a generic image.
+- Keep one clear focal point.
+- Optimize for mobile and thumbnail viewing.
+- Preserve exact supplied text.
+- Do not invent claims, offers, statistics, logos or urgency.
+- Keep important elements inside safe margins.
+- Use brand colours intentionally.
+- Avoid visual clutter and generic AI imagery.
+- Make the final prompt specific enough for a high-quality image-generation model to follow.`;
+
+const steps = [
+  {
+    title: "Define the platform first",
+    description:
+      "A LinkedIn graphic, Instagram post and Reel cover need different framing, hierarchy and safe-area decisions even when they communicate the same message.",
+  },
+  {
+    title: "Choose one main message",
+    description:
+      "Decide what the viewer must understand first, then build the subject, headline and supporting elements around that single priority.",
+  },
+  {
+    title: "Design for small screens",
+    description:
+      "Use large subjects, limited text, strong contrast and generous safe margins so the visual remains understandable when seen quickly in a mobile feed.",
+  },
+  {
+    title: "Protect the brand",
+    description:
+      "Provide exact colours, wording and logo requirements so the generation prompt does not introduce random branding or inconsistent visual elements.",
+  },
+];
+
+const example = {
+  input: [
+    "Platform: LinkedIn.",
+    "Content type: Promotional graphic.",
+    "Topic: Economic Order Quantity calculator.",
+    "Main message: Ordering too much or too frequently increases inventory-related cost.",
+    "Style: Premium professional SaaS.",
+    "Brand colours: Blue, deep navy and white.",
+    "Composition: Calculator result as the central business insight with supporting inventory visuals.",
+    "Aspect ratio: 1:1.",
+  ],
+
+  output: [
+    "VISUAL STRATEGY: Create a clean business-software visual explaining the balance between ordering cost and holding cost, with the recommended EOQ positioned as the visual solution.",
+    "COMPOSITION: Use a strong central result area, supporting cost indicators around it, a concise headline in a clean safe zone and subtle warehouse/inventory context.",
+    "MOBILE PRIORITY: Keep the headline short, the EOQ result large and all secondary detail visually subordinate.",
+    "PROTECTION: No random logos, no invented financial figures, no tiny unreadable interface text and no generic futuristic AI imagery.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Start with the thumbnail",
+    description:
+      "If the main idea disappears when the visual becomes small, the composition is too complex for a social feed.",
+  },
+  {
+    title: "Keep most explanation in the caption",
+    description:
+      "The artwork should attract attention and communicate the core point. Detailed explanations usually belong in the post text rather than inside the image.",
+  },
+  {
+    title: "Use platform-specific layouts",
+    description:
+      "A vertical Reel cover needs central safe-area discipline, while a LinkedIn square can use more structured business-style spacing and information hierarchy.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Social Media Visual Prompt | KRIYANO"
+  description="Create platform-specific AI image prompts for professional social media graphics, posts, Reel covers, promotional visuals and branded content."
+>
+  <PromptPage
+    category="IMAGE GENERATION"
+    title="Social Media Visual"
+    accentTitle="Prompt."
+    description="Create platform-ready AI visuals with stronger composition, mobile readability, safe zones, branding and message hierarchy."
+    meta={[
+      "Free prompt",
+      "Social media",
+      "AI image design",
+    ]}
+    bestFor={[
+      "LinkedIn graphics",
+      "Facebook posts",
+      "Instagram content",
+      "Reel covers",
+      "Promotional visuals",
+      "Branded content",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Design for the feed, not just the image generator."
+    introDescription="Turn your message into a platform-specific visual concept with intentional composition, safe margins, text hierarchy and mobile-first readability."
+    steps={steps}
+    exampleTitle="Turn a business tool into a LinkedIn-ready promotional visual."
+    example={example}
+    tipsTitle="Create social visuals people can understand at a glance."
+    tips={tips}
+    sidebarTitle="Need more control over the full image?"
+    sidebarDescription="Use KRIYANO's AI Image Prompt Builder when you need broader control over subject, camera, lighting, environment and visual style without focusing specifically on social media layout."
+    warningTitle="Good artwork can still fail in the feed"
+    warningText="A visually impressive image may perform poorly if the subject is too small, the text is unreadable or important elements are cropped by the platform interface. Always review the final image at realistic mobile size before publishing."
+  />
+</BaseLayout>

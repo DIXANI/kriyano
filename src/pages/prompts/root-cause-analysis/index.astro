@@ -1,0 +1,235 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced operations, warehouse and process-improvement specialist.
+
+TASK:
+Analyze the operational problem below and identify the most likely root cause or root causes.
+
+PROBLEM:
+[Describe the issue clearly.]
+
+PROCESS / AREA:
+[Example: receiving, putaway, picking, packing, inventory control, dispatch, transport, returns, production, administration.]
+
+WHAT HAPPENED:
+[Explain what was observed.]
+
+EXPECTED RESULT:
+[What should normally have happened?]
+
+ACTUAL RESULT:
+[What happened instead?]
+
+WHEN DID IT HAPPEN:
+[Date, shift, period or frequency if known.]
+
+WHERE DID IT HAPPEN:
+[Warehouse, location, process step, department, system or work area.]
+
+WHO WAS INVOLVED:
+[List roles or teams if relevant. Do not include unnecessary personal information.]
+
+IMPACT:
+[Example: stock variance, customer delay, damage, financial loss, rework, safety concern, productivity loss.]
+
+AVAILABLE EVIDENCE:
+[List system records, documents, CCTV findings, counts, reports, timestamps, emails, scans or observations.]
+
+RECENT CHANGES:
+[List any recent changes to staff, process, layout, system, workload, equipment or suppliers.]
+
+KNOWN CONSTRAINTS:
+[List any important limitations.]
+
+ANALYSIS REQUIREMENTS:
+
+1. PROBLEM DEFINITION
+- Restate the problem clearly and objectively.
+- Separate facts from assumptions.
+- Identify any missing or unclear information.
+
+2. IMMEDIATE CAUSE
+- Identify what directly caused the failure or problem if the evidence supports it.
+
+3. ROOT CAUSE ANALYSIS
+Investigate possible causes across:
+- People
+- Process
+- System
+- Equipment
+- Materials / inventory
+- Environment
+- Communication
+- Training
+- Documentation
+- Workload / capacity
+- Control checks
+
+4. 5 WHYS
+Use the 5 Whys method where appropriate.
+Do not force five levels if the evidence does not support them.
+
+5. CONTRIBUTING FACTORS
+Identify factors that may not be the primary root cause but increased the likelihood or impact of the problem.
+
+6. EVIDENCE CHECK
+For each major suspected cause, identify:
+- Evidence supporting it
+- Evidence still required
+- Whether it is Confirmed, Likely, Possible or Unverified
+
+7. CORRECTIVE ACTION
+Recommend immediate actions to correct the current problem.
+
+8. PREVENTIVE ACTION
+Recommend realistic controls that could reduce the chance of recurrence.
+
+9. RESPONSIBILITY
+Identify which role or function should normally own each action.
+Do not invent a person's name.
+
+10. PRIORITY
+Classify actions as:
+- Critical
+- High
+- Medium
+- Low
+
+11. EFFECTIVENESS CHECK
+Explain how to verify whether the corrective action actually solved the problem.
+
+12. ESCALATION
+Highlight issues that may require management, quality, safety, IT, finance or customer escalation.
+
+OUTPUT FORMAT:
+
+1. Problem Summary
+2. Known Facts
+3. Information Gaps
+4. Immediate Cause
+5. Root Cause Analysis
+6. 5 Whys
+7. Contributing Factors
+8. Evidence Assessment
+9. Corrective Actions
+10. Preventive Actions
+11. Responsibility & Priority
+12. Effectiveness Check
+13. Escalation Requirements
+14. Final Root Cause Conclusion
+
+For each corrective or preventive action, use:
+
+Action:
+Owner / Function:
+Priority:
+Target:
+Verification:
+
+IMPORTANT:
+- Do not blame individuals without evidence.
+- Do not assume operator error is the root cause simply because a person made the final mistake.
+- Look for process and control weaknesses behind the event.
+- Do not invent evidence.
+- Clearly label assumptions and unverified possibilities.
+- If the available information is insufficient to confirm a root cause, say so and explain what should be checked next.`;
+
+const steps = [
+  {
+    title: "Describe the failure precisely",
+    description:
+      "State what should have happened, what actually happened and where the difference occurred.",
+  },
+  {
+    title: "Add real evidence",
+    description:
+      "Include transaction history, documents, timestamps, counts, scans, system logs or observations whenever available.",
+  },
+  {
+    title: "Separate cause from blame",
+    description:
+      "Look beyond the final human error and check whether process, training, system or control weaknesses made the problem possible.",
+  },
+  {
+    title: "Close the loop",
+    description:
+      "Use corrective actions for the current issue and preventive actions to reduce the chance of the same problem happening again.",
+  },
+];
+
+const example = {
+  input: [
+    "Problem: Repeated picking errors for one fast-moving SKU.",
+    "Expected: Correct SKU and quantity should be picked against every order.",
+    "Actual: Three orders contained the wrong but visually similar SKU during the same week.",
+    "Location: Two adjacent picking bins.",
+    "Evidence: Pick confirmations were completed correctly in the system, but the physical products were mixed between the two bins.",
+    "Recent change: Picking locations were rearranged two weeks ago.",
+  ],
+
+  output: [
+    "Immediate cause: The wrong physical SKU was selected from a mixed or incorrectly maintained picking location.",
+    "Likely root cause: Weak location-control practices following the recent layout change, combined with insufficient verification of similar-looking SKUs.",
+    "Contributing factors: Adjacent locations, similar packaging and lack of a post-relocation location validation check.",
+    "Corrective action: Separate and recount both SKUs, correct bin contents and confirm system-to-location accuracy.",
+    "Preventive action: Introduce relocation verification, clearer location identification and an additional SKU scan or visual verification for similar products.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Use evidence before conclusions",
+    description:
+      "A good root cause analysis should distinguish between what is known, what is likely and what still needs verification.",
+  },
+  {
+    title: "Do not stop at 'human error'",
+    description:
+      "Ask why the error was possible and whether process design, training, workload, controls or system configuration contributed.",
+  },
+  {
+    title: "Make actions measurable",
+    description:
+      "Corrective actions are stronger when they have an owner, priority, target and a clear method for verifying effectiveness.",
+  },
+];
+---
+
+<BaseLayout
+  title="Root Cause Analysis Prompt | KRIYANO"
+  description="Analyze warehouse and operational problems systematically, identify likely root causes, and build corrective and preventive actions."
+>
+  <PromptPage
+    category="OPERATIONS & LOGISTICS"
+    title="Root Cause"
+    accentTitle="Analysis."
+    description="Investigate operational problems systematically, separate symptoms from causes, and turn findings into corrective and preventive actions."
+    meta={[
+      "Free prompt",
+      "Operations",
+      "Problem solving",
+    ]}
+    bestFor={[
+      "Warehouse errors",
+      "Inventory problems",
+      "Receiving issues",
+      "Picking mistakes",
+      "Process failures",
+      "Recurring operational problems",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Find the cause behind the problem."
+    introDescription="Describe the issue, add the evidence you already have and let the prompt structure the investigation around facts, possible causes, corrective actions and prevention."
+    steps={steps}
+    exampleTitle="From repeated error to root cause."
+    example={example}
+    tipsTitle="Build a stronger investigation."
+    tips={tips}
+    sidebarTitle="Need a custom investigation prompt?"
+    sidebarDescription="Use the KRIYANO Prompt Builder to create structured instructions around your exact process, evidence, risks and operational problem."
+    warningTitle="Investigation principle"
+    warningText="Do not treat the first explanation as the root cause. Verify suspected causes with evidence and distinguish confirmed findings from assumptions before taking major corrective action."
+  />
+</BaseLayout>

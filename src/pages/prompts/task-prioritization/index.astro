@@ -1,0 +1,269 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced productivity strategist and operations planner.
+
+TASK:
+Analyze the task list below and create a practical priority plan based on urgency, importance, impact, deadlines, dependencies, effort and available time.
+
+TASK LIST:
+[Paste all tasks here.]
+
+CURRENT DATE / TIME:
+[Add if relevant.]
+
+AVAILABLE WORKING TIME:
+[Example: 4 hours today, 2 days this week, full workday.]
+
+GOALS:
+[What are you trying to achieve?]
+
+DEADLINES:
+[List important deadlines.]
+
+FIXED COMMITMENTS:
+[Meetings, appointments, shifts or other non-movable commitments.]
+
+DEPENDENCIES:
+[List tasks that depend on other tasks or people.]
+
+HIGH-RISK ITEMS:
+[List anything that could cause financial, customer, safety, operational or reputational problems if delayed.]
+
+TASK CONTEXT:
+[Add any useful details about workload, team, project or situation.]
+
+PRIORITIZATION REQUIREMENTS:
+
+1. REVIEW EVERY TASK
+For each task, assess:
+- Urgency
+- Importance
+- Deadline
+- Business / personal impact
+- Risk of delay
+- Dependency
+- Estimated effort
+- Whether it blocks other work
+
+2. PRIORITY LEVEL
+Classify each task as:
+
+- P1 — Critical
+- P2 — High
+- P3 — Medium
+- P4 — Low
+
+Do not classify everything as urgent.
+
+3. URGENCY VS IMPORTANCE
+Distinguish between:
+- urgent and important
+- important but not urgent
+- urgent but lower impact
+- neither urgent nor important
+
+4. DEADLINE CHECK
+Identify:
+- hard deadlines
+- soft deadlines
+- overdue tasks
+- tasks with no clear deadline
+
+Do not invent deadlines.
+
+5. DEPENDENCY CHECK
+Identify:
+- tasks that must happen first
+- tasks blocked by another task
+- tasks waiting on another person
+- tasks that unlock several other activities
+
+6. IMPACT CHECK
+Consider the likely impact on:
+- customers
+- revenue
+- operations
+- compliance
+- safety
+- management commitments
+- project progress
+- other team members
+
+Use only relevant categories.
+
+7. EFFORT CHECK
+Estimate whether each task is:
+- Quick
+- Moderate
+- Significant
+
+If effort cannot be estimated from the information provided, mark it as "Unknown."
+
+8. QUICK WINS
+Identify useful tasks that can be completed quickly without delaying higher-impact work.
+
+9. DELEGATION
+Identify tasks that may reasonably be delegated.
+
+Do not assume a specific person unless one is provided.
+
+10. DEFER / REMOVE
+Identify tasks that can:
+- wait
+- be reduced
+- be combined
+- be removed if they add little value
+
+11. TODAY'S PRIORITY PLAN
+Create a realistic sequence for the available working time.
+
+Do not schedule more work than can reasonably fit.
+
+12. NEXT ACTION
+For every important task, convert vague wording into a concrete next action where possible.
+
+Example:
+"Work on report"
+becomes
+"Collect missing inventory figures and complete sections 1–3 of the report."
+
+13. RISKS
+Highlight anything that could become urgent soon if ignored.
+
+14. INFORMATION GAPS
+Identify missing information that could change the priority order.
+
+OUTPUT FORMAT:
+
+1. Priority Summary
+2. Prioritized Task List
+
+For each task use:
+
+Task:
+Priority:
+Reason:
+Deadline:
+Impact:
+Dependency:
+Effort:
+Next Action:
+
+3. Do First
+4. Do Next
+5. Schedule Later
+6. Delegate
+7. Defer / Remove
+8. Quick Wins
+9. Risks to Watch
+10. Suggested Work Sequence
+11. Information Gaps
+
+IMPORTANT:
+- Do not treat the longest or most difficult task as automatically most important.
+- Do not prioritize only by deadline.
+- Give higher attention to tasks that prevent serious consequences or unblock important work.
+- Keep the plan realistic for the available time.
+- Do not invent deadlines, responsibilities or business impact.
+- Clearly state assumptions.
+- If two tasks have similar priority, explain the trade-off.`;
+
+const steps = [
+  {
+    title: "Add the full task list",
+    description:
+      "Include small tasks as well as major ones so the priority order reflects the real workload instead of only the obvious projects.",
+  },
+  {
+    title: "Include deadlines and constraints",
+    description:
+      "Add fixed meetings, due dates and available working time so the plan stays realistic.",
+  },
+  {
+    title: "Explain what carries risk",
+    description:
+      "Mention tasks affecting customers, operations, money, compliance or other people because delay risk can change the priority significantly.",
+  },
+  {
+    title: "Work from the next action",
+    description:
+      "Turn broad tasks into a specific first step so the final plan is immediately actionable.",
+  },
+];
+
+const example = {
+  input: [
+    "Available time: 5 hours today.",
+    "Task 1: Send customer stock discrepancy report before 2 PM.",
+    "Task 2: Prepare next week's warehouse shift plan.",
+    "Task 3: Reply to routine internal emails.",
+    "Task 4: Investigate a repeated picking error affecting current orders.",
+    "Task 5: Update a presentation due next week.",
+  ],
+
+  output: [
+    "P1 — Investigate repeated picking error: High operational and customer impact, and the issue is affecting current orders.",
+    "P1 — Complete and send stock discrepancy report: Hard deadline before 2 PM.",
+    "P2 — Prepare warehouse shift plan: Important for upcoming operations but can follow today's critical issues.",
+    "P3 — Reply to routine internal emails: Batch these into a short time block.",
+    "P4 — Update next week's presentation: Schedule later because the deadline is not immediate.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Do not confuse urgency with noise",
+    description:
+      "A new message or request may feel urgent while a quieter task carries much higher financial, operational or customer impact.",
+  },
+  {
+    title: "Include dependencies",
+    description:
+      "A medium-sized task may deserve higher priority when several other activities cannot begin until it is completed.",
+  },
+  {
+    title: "Protect realistic capacity",
+    description:
+      "Prioritization works only when the final plan fits the actual time available. Move lower-value work instead of overloading the day.",
+  },
+];
+---
+
+<BaseLayout
+  title="Task Prioritization Prompt | KRIYANO"
+  description="Prioritize tasks using urgency, importance, deadlines, impact, dependencies, risk and effort, then create a realistic action plan."
+>
+  <PromptPage
+    category="WORK & PRODUCTIVITY"
+    title="Task"
+    accentTitle="Prioritization."
+    description="Turn an overloaded task list into a realistic priority order using urgency, impact, deadlines, dependencies, effort and risk."
+    meta={[
+      "Free prompt",
+      "Productivity",
+      "Planning",
+    ]}
+    bestFor={[
+      "Busy workdays",
+      "Project tasks",
+      "Management workload",
+      "Operations planning",
+      "Weekly priorities",
+      "Overloaded task lists",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Decide what actually deserves attention first."
+    introDescription="Add your tasks, deadlines and available time. The prompt evaluates more than urgency and turns the result into a realistic sequence of next actions."
+    steps={steps}
+    exampleTitle="From overloaded list to clear priorities."
+    example={example}
+    tipsTitle="Prioritize with better context."
+    tips={tips}
+    sidebarTitle="Need a custom productivity prompt?"
+    sidebarDescription="Use the KRIYANO Prompt Builder to create instructions around your exact workload, deadlines, responsibilities and available time."
+    warningTitle="Priority changes with context"
+    warningText="A priority list is only as accurate as the information provided. Update the plan when deadlines, risks, dependencies or available time change."
+  />
+</BaseLayout>

@@ -1,0 +1,810 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert content strategist, content repurposing specialist, social media strategist and editorial planner.
+
+TASK:
+Transform one existing piece of content into multiple useful content assets for different platforms, formats, audiences and stages of the customer journey.
+
+The goal is NOT to simply shorten or copy the original content.
+
+Each repurposed asset should:
+- preserve the original meaning
+- extract the strongest ideas
+- adapt naturally to the selected platform
+- provide value independently
+- match the target audience
+- support the stated marketing or creator objective
+- avoid unnecessary repetition
+- avoid inventing facts that are not present in the source
+
+ORIGINAL CONTENT:
+[Paste the article, video transcript, podcast transcript, newsletter, guide, report, social post, webinar notes or other source content.]
+
+CONTENT TYPE:
+[Article / video / podcast / guide / report / newsletter / social post / webinar / other.]
+
+ORIGINAL PURPOSE:
+[Education / awareness / lead generation / sales / engagement / authority / other.]
+
+TARGET AUDIENCE:
+[Who should the repurposed content reach?]
+
+PRIMARY OBJECTIVE:
+[Reach / engagement / traffic / leads / sales / education / authority / community / other.]
+
+PLATFORMS:
+[Facebook / Instagram / LinkedIn / TikTok / YouTube / X / email / blog / other.]
+
+FORMATS NEEDED:
+[Reels / Shorts / posts / carousels / threads / emails / articles / captions / scripts / other.]
+
+BRAND / CREATOR VOICE:
+[Professional / practical / friendly / educational / conversational / premium / energetic / other.]
+
+CTA:
+[Follow / comment / save / share / visit / download / subscribe / buy / enquire / other.]
+
+CONTENT PILLARS:
+[Optional.]
+
+KEY MESSAGE THAT MUST BE PRESERVED:
+[Optional.]
+
+FACTS / CLAIMS THAT MUST NOT CHANGE:
+[Optional.]
+
+WORDS / TOPICS TO AVOID:
+[Optional.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+CONTENT REPURPOSING REQUIREMENTS:
+
+1. ANALYZE THE ORIGINAL CONTENT FIRST
+
+2. IDENTIFY THE CORE MESSAGE
+
+3. IDENTIFY THE MAIN SUPPORTING IDEAS
+
+4. IDENTIFY USEFUL FACTS
+
+5. IDENTIFY EXAMPLES
+
+6. IDENTIFY STORIES OR EXPERIENCES
+
+7. IDENTIFY ACTIONABLE STEPS
+
+8. IDENTIFY QUESTIONS ANSWERED BY THE CONTENT
+
+9. IDENTIFY STRONG OPINIONS OR INSIGHTS
+
+10. IDENTIFY QUOTABLE IDEAS
+Do not create fabricated quotations.
+
+11. DISTINGUISH SOURCE FACTS FROM INTERPRETATION
+
+12. DO NOT INVENT NEW FACTS
+
+13. DO NOT INVENT STATISTICS
+
+14. DO NOT INVENT RESEARCH
+
+15. DO NOT INVENT CUSTOMER RESULTS
+
+16. DO NOT INVENT TESTIMONIALS
+
+17. DO NOT INVENT EXPERT QUOTES
+
+18. DO NOT CHANGE IMPORTANT NUMBERS
+
+19. DO NOT ALTER TECHNICAL MEANING FOR A BETTER HOOK
+
+20. PRESERVE IMPORTANT QUALIFIERS
+
+21. IDENTIFY CONTENT ATOMS
+Break the source into reusable units such as:
+Insight
+Tip
+Mistake
+Question
+Example
+Step
+Statistic
+Story
+Comparison
+Checklist
+Definition
+Warning
+Myth
+Framework
+
+22. DO NOT TREAT EVERY SENTENCE AS A SEPARATE CONTENT IDEA
+
+23. PRIORITIZE IDEAS THAT CAN STAND ALONE
+
+24. CREATE MULTIPLE CONTENT ANGLES
+
+25. POSSIBLE ANGLES:
+Educational
+Problem-led
+Mistake-led
+How-to
+Checklist
+Question
+Myth versus reality
+Behind the scenes
+Opinion
+Story
+Comparison
+Quick tip
+Common misconception
+Step-by-step
+FAQ
+
+26. EACH ANGLE SHOULD ADD A DIFFERENT REASON TO ENGAGE
+
+27. DO NOT CREATE TEN POSTS THAT SAY THE SAME THING
+
+28. ADAPT CONTENT TO PLATFORM BEHAVIOUR
+
+29. FACEBOOK MODE
+Consider:
+Useful feed posts
+Short videos
+Reels
+Discussion questions
+Shareable tips
+Community-oriented content
+
+30. INSTAGRAM MODE
+Consider:
+Reels
+Carousels
+Stories
+Visual tips
+Saveable educational content
+
+31. LINKEDIN MODE
+Consider:
+Professional insights
+Operational lessons
+Frameworks
+Case-style examples
+Business observations
+Educational posts
+
+32. TIKTOK MODE
+Consider:
+Immediate hooks
+Short explanations
+Demonstrations
+Fast tips
+Problem-first videos
+Natural spoken language
+
+33. YOUTUBE SHORTS MODE
+Create:
+Hook
+Fast value
+Clear progression
+Payoff
+Simple CTA
+
+34. YOUTUBE LONG-FORM MODE
+Expand only when the source contains enough substance.
+
+35. EMAIL MODE
+Create:
+Subject
+Preview text
+Opening
+Main value
+CTA
+
+36. BLOG MODE
+Create a useful article structure rather than simply expanding a short social post with filler.
+
+37. ADAPT LENGTH TO PLATFORM
+
+38. DO NOT USE IDENTICAL COPY ACROSS EVERY PLATFORM
+
+39. PRESERVE BRAND VOICE ACROSS FORMATS
+
+40. ADAPT DELIVERY WITHOUT CHANGING IDENTITY
+
+41. CREATE PLATFORM-NATIVE HOOKS
+
+42. HOOKS SHOULD BE TRUTHFUL
+
+43. DO NOT CREATE CLICKBAIT THAT THE CONTENT DOES NOT DELIVER
+
+44. POSSIBLE HOOK STRUCTURES:
+Question
+Problem
+Mistake
+Unexpected insight
+Useful result
+Specific situation
+Direct promise of information
+
+45. DO NOT USE FALSE URGENCY
+
+46. DO NOT USE FALSE SCARCITY
+
+47. CREATE SHORT-FORM VIDEO AS AN ACTUAL SCRIPT
+
+48. SHORT-FORM SCRIPT SHOULD INCLUDE:
+Opening hook
+Visual direction
+Voice-over or spoken line
+Main value
+Payoff
+CTA
+
+49. KEEP SHORT-FORM VIDEOS FOCUSED ON ONE MAIN IDEA
+
+50. DO NOT FORCE AN ENTIRE ARTICLE INTO ONE REEL
+
+51. CREATE CAROUSELS AS A SEQUENCE
+
+52. CAROUSEL STRUCTURE MAY INCLUDE:
+Slide 1 — Hook
+Slide 2 — Context
+Slides 3–6 — Main value
+Final slide — Summary / CTA
+
+53. KEEP EACH SLIDE FOCUSED
+
+54. DO NOT PUT PARAGRAPHS OF TEXT ON EACH SLIDE
+
+55. CREATE SOCIAL POSTS THAT WORK WITHOUT REQUIRING THE ORIGINAL CONTENT
+
+56. PROVIDE ENOUGH CONTEXT FOR A NEW VIEWER
+
+57. CREATE CAPTIONS THAT COMPLEMENT THE VISUAL
+
+58. DO NOT SIMPLY TRANSCRIBE THE VIDEO INTO THE CAPTION
+
+59. CREATE EMAIL CONTENT THAT HAS A CLEAR PURPOSE
+
+60. DO NOT TURN EVERY SOURCE INTO A SALES EMAIL
+
+61. CREATE CONTENT FOR DIFFERENT FUNNEL STAGES WHEN RELEVANT
+
+62. AWARENESS CONTENT:
+Problem
+Insight
+Education
+Question
+
+63. CONSIDERATION CONTENT:
+How-to
+Comparison
+Framework
+Demonstration
+
+64. CONVERSION CONTENT:
+Use case
+Proof
+Offer
+Product explanation
+
+65. RETENTION CONTENT:
+Tips
+Advanced usage
+FAQ
+New use case
+
+66. ONLY USE CONVERSION CONTENT WHEN THE SOURCE AND BUSINESS CONTEXT SUPPORT IT
+
+67. CREATE CONTENT FOR DIFFERENT AUDIENCE KNOWLEDGE LEVELS
+
+68. BEGINNER VERSION
+Explain simply.
+
+69. INTERMEDIATE VERSION
+Add process and practical detail.
+
+70. ADVANCED VERSION
+Focus on nuance, trade-offs and deeper application.
+
+71. DO NOT DUMB DOWN TECHNICAL CONTENT UNTIL IT BECOMES INCORRECT
+
+72. CREATE CONTENT SERIES WHEN THE SOURCE HAS ENOUGH DEPTH
+
+73. SERIES SHOULD HAVE A LOGICAL THEME
+
+74. DO NOT CREATE A SERIES FROM THIN CONTENT JUST TO INCREASE POST COUNT
+
+75. CREATE EVERGREEN ASSETS
+
+76. IDENTIFY CONTENT THAT CAN REMAIN USEFUL OVER TIME
+
+77. IDENTIFY TIME-SENSITIVE CONTENT
+
+78. FLAG INFORMATION THAT MAY NEED UPDATING BEFORE REUSE
+
+79. IDENTIFY HIGH-VALUE REPURPOSING OPPORTUNITIES
+
+80. PRIORITIZE BASED ON:
+Audience relevance
+Platform fit
+Information value
+Production effort
+Reuse potential
+
+81. CREATE LOW-EFFORT OPTIONS
+
+82. EXAMPLES:
+Text post
+Quote-style insight
+FAQ
+Checklist
+Short email
+Caption
+
+83. CREATE MEDIUM-EFFORT OPTIONS
+
+84. EXAMPLES:
+Carousel
+Short-form video
+Visual guide
+Newsletter
+
+85. CREATE HIGHER-EFFORT OPTIONS ONLY WHEN JUSTIFIED
+
+86. EXAMPLES:
+Long-form video
+Detailed article
+Webinar
+Downloadable guide
+
+87. CREATE A CONTENT REUSE CHAIN
+
+88. EXAMPLE:
+Long article
+→ LinkedIn post
+→ Carousel
+→ Reel
+→ Email
+→ FAQ
+→ Short tip
+
+89. DO NOT CREATE A CHAIN THAT LOSES THE ORIGINAL MESSAGE
+
+90. CREATE INTERNAL LINKING OPPORTUNITIES WHEN RELEVANT
+
+91. EXAMPLE:
+Social post → full guide
+Email → tool
+Short video → article
+Article → template
+
+92. ALIGN CTA WITH CONTENT INTENT
+
+93. EDUCATIONAL CONTENT SHOULD NOT ALWAYS END WITH A HARD SALES CTA
+
+94. POSSIBLE LOW-FRICTION CTAS:
+Save this
+Share this
+Follow for more
+Read the full guide
+Try the tool
+
+95. HIGHER-INTENT CTAS:
+Download
+Request quote
+Book
+Buy
+Start trial
+
+96. USE ONLY CTAS THAT ACTUALLY EXIST
+
+97. CREATE CONTENT VARIATION
+
+98. VARY:
+Hook
+Format
+Depth
+Perspective
+Audience stage
+Visual treatment
+
+99. DO NOT VARY FACTS
+
+100. CREATE VISUAL DIRECTIONS
+
+101. POSSIBLE VISUALS:
+Talking head
+Screen recording
+Product demonstration
+Process footage
+Diagram
+Infographic
+Carousel
+Before/after when legitimate
+B-roll
+Static graphic
+
+102. DO NOT INVENT VISUAL PROOF
+
+103. CREATE B-ROLL IDEAS WHEN USEFUL
+
+104. B-ROLL SHOULD SUPPORT THE MESSAGE
+
+105. CREATE ON-SCREEN TEXT
+
+106. KEEP ON-SCREEN TEXT SHORT
+
+107. PRESERVE EXACT NUMBERS AND IMPORTANT TERMS
+
+108. RECOMMEND MANUAL TEXT OVERLAY WHEN AI-GENERATED IMAGE TEXT ACCURACY IS CRITICAL
+
+109. CREATE CONTENT TITLES
+
+110. TITLES SHOULD BE SPECIFIC
+
+111. AVOID GENERIC TITLES SUCH AS:
+Top Tips
+Amazing Advice
+You Need to Know This
+
+when a more informative title is possible.
+
+112. CREATE SEO OPPORTUNITIES WHEN BLOG OR YOUTUBE CONTENT IS REQUESTED
+
+113. IDENTIFY NATURAL SEARCH QUESTIONS
+
+114. DO NOT INVENT SEARCH VOLUME
+
+115. DO NOT KEYWORD STUFF
+
+116. CREATE CONTENT CALENDAR OPTIONS
+
+117. GROUP REPURPOSED ASSETS LOGICALLY
+
+118. DO NOT PUBLISH NEAR-IDENTICAL CONTENT BACK-TO-BACK
+
+119. SPACE RELATED IDEAS WHEN APPROPRIATE
+
+120. CREATE CROSS-PLATFORM DISTRIBUTION ORDER
+
+121. IDENTIFY THE BEST "SOURCE" ASSET
+
+122. IDENTIFY THE BEST "DISCOVERY" ASSETS
+
+123. IDENTIFY THE BEST "DEPTH" ASSETS
+
+124. IDENTIFY THE BEST "CONVERSION" ASSETS
+
+125. CREATE A PRODUCTION WORKFLOW
+
+126. POSSIBLE WORKFLOW:
+Extract
+Select
+Adapt
+Produce
+Review
+Schedule
+Measure
+Reuse
+
+127. REDUCE DUPLICATE PRODUCTION
+
+128. REUSE RECORDINGS, VISUALS AND RESEARCH WHEN APPROPRIATE
+
+129. CREATE A FACT-PRESERVATION CHECK
+
+130. VERIFY:
+Numbers
+Names
+Dates
+Technical details
+Claims
+Quotes
+Instructions
+
+131. FLAG OUTDATED INFORMATION
+
+132. FLAG CLAIMS THAT REQUIRE REVALIDATION
+
+133. CREATE A BRAND-CONSISTENCY CHECK
+
+134. VERIFY:
+Tone
+Terminology
+Positioning
+CTA
+Visual direction
+
+135. CREATE A PLATFORM-FIT CHECK
+
+136. ASK:
+Does this feel native to the platform?
+Is the hook appropriate?
+Is the length appropriate?
+Does the format match user behaviour?
+
+137. CREATE A DUPLICATION CHECK
+
+138. IDENTIFY ASSETS THAT ARE TOO SIMILAR
+
+139. MERGE OR DIFFERENTIATE THEM
+
+140. CREATE PERFORMANCE LEARNING
+
+141. IF HISTORICAL DATA IS PROVIDED
+Use it to prioritize:
+Topics
+Hooks
+Formats
+Platforms
+
+142. DO NOT INVENT PERFORMANCE DATA
+
+143. CREATE TEST IDEAS
+
+144. TEST ONE MEANINGFUL VARIABLE AT A TIME
+
+145. POSSIBLE TESTS:
+Hook
+Format
+Length
+CTA
+Opening visual
+
+146. DO NOT GUARANTEE PERFORMANCE
+
+147. CREATE A REPURPOSING PRIORITY
+
+148. RANK ASSETS BY:
+Expected relevance
+Production effort
+Strategic value
+
+149. CREATE A MINIMUM-VIABLE REPURPOSING PLAN
+For limited time or resources, identify the smallest useful set of assets.
+
+150. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- original message is preserved
+- important facts are unchanged
+- no statistics were invented
+- no quotes were fabricated
+- content is adapted rather than merely copied
+- each asset has a clear purpose
+- formats fit their platforms
+- hooks accurately represent the content
+- short-form assets focus on one main idea
+- carousels have logical progression
+- captions complement visuals
+- CTAs match content intent
+- content is not unnecessarily repetitive
+- evergreen and time-sensitive material are distinguished
+- production effort is considered
+- content can be reused efficiently
+- platform-native differences are present
+- brand voice remains consistent
+- claims are proportionate to evidence
+- the final plan is practical to execute
+
+OUTPUT FORMAT:
+
+1. SOURCE CONTENT ANALYSIS
+Provide:
+Core message
+Main ideas
+Useful facts
+Examples
+Actionable steps
+Important claims
+Potentially outdated information
+
+2. CONTENT ATOM LIBRARY
+Extract reusable:
+Insights
+Tips
+Questions
+Mistakes
+Steps
+Examples
+Frameworks
+Definitions
+Warnings
+
+3. REPURPOSING STRATEGY
+Provide:
+Primary objective
+Audience
+Best platforms
+Recommended formats
+Content priorities
+
+4. REPURPOSED CONTENT MATRIX
+
+For each asset provide:
+Asset title
+Platform
+Format
+Content angle
+Audience stage
+Hook
+Core message
+CTA
+Production effort
+
+5. SHORT-FORM VIDEO CONTENT
+For each recommended Reel / Short provide:
+Hook
+Visual
+Script
+On-screen text
+CTA
+
+6. SOCIAL POSTS
+Write platform-appropriate posts.
+
+7. CAROUSEL CONTENT
+Provide:
+Slide-by-slide structure
+Caption
+CTA
+
+8. EMAIL CONTENT
+When relevant provide:
+Subject
+Preview text
+Body
+CTA
+
+9. LONG-FORM OPPORTUNITIES
+Recommend:
+Article
+Newsletter
+YouTube video
+Guide
+
+only when the source has enough depth.
+
+10. CONTENT SERIES
+Create a logical series if appropriate.
+
+11. VISUAL & B-ROLL PLAN
+Recommend practical supporting visuals.
+
+12. CONTENT REUSE CHAIN
+Show how major assets can feed smaller assets.
+
+13. DISTRIBUTION PLAN
+Recommend the order in which content should be published or distributed.
+
+14. MINIMUM-VIABLE PLAN
+If resources are limited, provide the 3–5 highest-value assets to create first.
+
+15. FACT & CLAIM CHECK
+List:
+Fact / claim
+Source status
+Whether it can be reused safely
+Anything requiring verification
+
+16. DUPLICATION CHECK
+Identify assets that are too similar and explain how to differentiate them.
+
+17. TEST PLAN
+Suggest useful content tests without guaranteeing performance.
+
+18. FINAL PRODUCTION CHECKLIST
+Provide the practical steps required to turn the plan into publishable content.
+
+IMPORTANT:
+- Preserve the original meaning.
+- Do not invent facts, research, statistics, quotes, testimonials or results.
+- Adapt content to each platform instead of copying identical text everywhere.
+- Prioritize quality and usefulness over producing the largest possible number of assets.
+- Keep short-form content focused.
+- Match CTA to audience intent.
+- Flag outdated or uncertain information before reuse.`;
+
+const steps = [
+  {
+    title: "Extract before rewriting",
+    description:
+      "Break the source into useful ideas, examples, questions, steps and insights before deciding which formats to create.",
+  },
+  {
+    title: "Give each asset a purpose",
+    description:
+      "Use different pieces for discovery, education, engagement, consideration or conversion instead of publishing the same message repeatedly.",
+  },
+  {
+    title: "Adapt to the platform",
+    description:
+      "Turn the same underlying insight into a native Reel, LinkedIn post, carousel, email or article rather than copying identical wording everywhere.",
+  },
+  {
+    title: "Protect the original facts",
+    description:
+      "Keep numbers, claims, quotations and technical meaning consistent with the source and flag anything that needs updating or verification.",
+  },
+];
+
+const example = {
+  input: [
+    "Source: An article explaining six areas to investigate when physical stock does not match system stock.",
+    "Audience: Warehouse supervisors, inventory controllers and small-business operators.",
+    "Objective: Educational reach and traffic to the full guide.",
+    "Platforms: LinkedIn, Facebook and short-form video.",
+    "CTA: Read the full guide.",
+  ],
+
+  output: [
+    "LINKEDIN POST: Use the professional problem as the opening — 'Physical stock doesn't match the system. Where do you check first?' Then summarize the investigation sequence and link to the detailed guide.",
+    "CAROUSEL: Slide 1 introduces the discrepancy problem. Slides 2–7 cover one investigation area each. Final slide directs readers to the complete checklist.",
+    "SHORT VIDEO: Open with a stock-count discrepancy on screen, then quickly show receiving, picking, adjustments, transfers, damages and transaction history as investigation checkpoints.",
+    "FACEBOOK POST: Use a practical checklist format designed for saving and sharing rather than copying the LinkedIn post word for word.",
+    "FAQ ASSET: Turn common investigation questions into individual educational posts that can be published later.",
+    "FACT CHECK: Preserve the original investigation steps and avoid claiming that checking these six areas will identify every possible inventory discrepancy.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Repurposing is not copying",
+    description:
+      "The underlying idea can stay consistent while the hook, depth, format, pacing and presentation change to suit each platform.",
+  },
+  {
+    title: "One strong source can become a content system",
+    description:
+      "A useful guide, video or article can supply short videos, posts, carousels, FAQs and emails without requiring a completely new topic every time.",
+  },
+  {
+    title: "More assets are not automatically better",
+    description:
+      "Prioritize the formats with the strongest audience and platform fit instead of stretching thin source material into unnecessary posts.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Content Repurposing Prompt | KRIYANO"
+  description="Turn articles, videos, guides and other source content into platform-native posts, Reels, carousels, emails and reusable content assets."
+>
+  <PromptPage
+    category="MARKETING & CREATORS"
+    title="Content Repurposing"
+    accentTitle="Prompt."
+    description="Turn one strong piece of content into a practical multi-platform content system while preserving the original facts, message and brand voice."
+    meta={[
+      "Free prompt",
+      "Content repurposing",
+      "Multi-platform",
+    ]}
+    bestFor={[
+      "Content creators",
+      "Small businesses",
+      "Social media",
+      "Blog content",
+      "Reels & Shorts",
+      "Content marketing",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Create more useful content without starting from zero."
+    introDescription="Extract the strongest ideas from an existing article, video, guide or other source and adapt them into platform-native assets with different purposes, formats and levels of depth."
+    steps={steps}
+    exampleTitle="Turn one inventory guide into a multi-platform content package."
+    example={example}
+    tipsTitle="Reuse the insight, not necessarily the exact content."
+    tips={tips}
+    sidebarTitle="One prompt, two KRIYANO categories"
+    sidebarDescription="Content Repurposing supports both Marketing and Creators because the same workflow can help businesses distribute campaigns and creators build more content from their strongest source material."
+    warningTitle="Repurposing should not distort the source"
+    warningText="Recheck dates, statistics, quotations, product claims and technical information before republishing older content. Do not allow a stronger hook or shorter format to change the original meaning."
+  />
+</BaseLayout>

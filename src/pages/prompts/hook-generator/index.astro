@@ -1,0 +1,712 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert content strategist, direct-response copywriter, social media strategist and hook specialist.
+
+TASK:
+Generate strong, truthful hooks for the supplied topic, offer, content idea, product, service or message.
+
+The hooks may be used for:
+- Instagram Reels
+- Facebook Reels
+- TikTok
+- YouTube Shorts
+- LinkedIn posts
+- Facebook posts
+- advertisements
+- email subject lines
+- articles
+- landing-page openings
+- creator content
+
+The goal is to earn attention without misleading the audience.
+
+TOPIC / CONTENT:
+[What is the content about?]
+
+TARGET AUDIENCE:
+[Who should care?]
+
+AUDIENCE AWARENESS STAGE:
+[Unaware / problem-aware / solution-aware / product-aware / most-aware / mixed.]
+
+PLATFORM:
+[Instagram / Facebook / TikTok / YouTube / LinkedIn / email / blog / ads / other.]
+
+FORMAT:
+[Short video / social post / carousel / email / article / ad / other.]
+
+PRIMARY OBJECTIVE:
+[Stop scroll / education / engagement / traffic / leads / sales / authority / other.]
+
+AUDIENCE PROBLEM:
+[Main frustration or challenge.]
+
+AUDIENCE DESIRE:
+[Desired result.]
+
+CORE MESSAGE:
+[What should the audience understand?]
+
+KEY FACTS:
+[Important facts that must remain accurate.]
+
+PRODUCT / SERVICE:
+[Optional.]
+
+VALUE PROPOSITION:
+[Optional.]
+
+CTA:
+[Optional.]
+
+TONE:
+[Professional / practical / conversational / curious / bold / educational / premium / friendly / other.]
+
+HOOK STYLE:
+[Question / problem / mistake / outcome / curiosity / comparison / warning / demonstration / story / myth / mixed.]
+
+NUMBER OF HOOKS:
+[For example: 20.]
+
+WORDS / CLAIMS TO AVOID:
+[Optional.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+HOOK GENERATION REQUIREMENTS:
+
+1. UNDERSTAND THE MESSAGE BEFORE WRITING HOOKS
+
+2. IDENTIFY:
+Audience
+Problem
+Desired outcome
+Main insight
+Reason to care
+
+3. DO NOT GENERATE RANDOM ATTENTION-GRABBING LINES
+
+4. EVERY HOOK MUST CONNECT DIRECTLY TO THE CONTENT THAT FOLLOWS
+
+5. DO NOT PROMISE A PAYOFF THE CONTENT CANNOT DELIVER
+
+6. CREATE MULTIPLE HOOK ANGLES
+
+7. POSSIBLE ANGLES:
+Problem
+Question
+Mistake
+Outcome
+Observation
+Comparison
+Demonstration
+Checklist
+Warning
+Story
+Myth
+Contrarian insight
+Specific situation
+
+8. DO NOT FORCE ALL ANGLES
+
+9. CHOOSE ANGLES THAT NATURALLY FIT THE SUBJECT
+
+10. CREATE PROBLEM-LED HOOKS
+
+11. PROBLEM HOOKS SHOULD:
+Name a recognizable situation
+Create relevance
+Avoid unnecessary fear
+
+12. EXAMPLE STRUCTURE:
+"If your physical stock doesn't match the system, check these areas before adjusting anything."
+
+13. CREATE QUESTION-LED HOOKS
+
+14. QUESTIONS SHOULD BE SPECIFIC
+
+15. AVOID GENERIC QUESTIONS SUCH AS:
+"Do you want to succeed?"
+"Want better results?"
+
+16. CREATE MISTAKE-LED HOOKS
+
+17. EXPLAIN A REAL MISTAKE
+
+18. DO NOT SHAME THE AUDIENCE
+
+19. CREATE OUTCOME-LED HOOKS
+
+20. OUTCOME HOOKS MUST BE PLAUSIBLE
+
+21. DO NOT GUARANTEE RESULTS
+
+22. CREATE CURIOSITY HOOKS
+
+23. CURIOSITY MUST COME FROM A REAL INFORMATION GAP
+
+24. DO NOT USE EMPTY CLICKBAIT
+
+25. AVOID:
+"You won't believe..."
+"This will shock you..."
+"Nobody wants you to know..."
+
+unless clearly justified and truthful.
+
+26. CREATE COMPARISON HOOKS
+
+27. USE COMPARISONS ONLY WHEN BOTH SIDES CAN BE SUPPORTED
+
+28. DO NOT CREATE FALSE WINNERS
+
+29. CREATE WARNING HOOKS CAREFULLY
+
+30. WARN ABOUT A REAL RISK
+
+31. DO NOT EXAGGERATE CONSEQUENCES
+
+32. CREATE DEMONSTRATION HOOKS
+
+33. SHOW WHAT THE VIEWER WILL SEE
+
+34. EXAMPLE:
+"Watch what happens when this receiving quantity is posted incorrectly."
+
+35. CREATE CHECKLIST HOOKS
+
+36. USE SPECIFIC NUMBERS ONLY WHEN THE CONTENT ACTUALLY CONTAINS THAT NUMBER
+
+37. DO NOT INVENT:
+"5 secrets"
+"7 mistakes"
+"3 proven methods"
+
+unless those items actually exist.
+
+38. CREATE STORY HOOKS ONLY WHEN A REAL STORY EXISTS
+
+39. DO NOT FABRICATE PERSONAL EXPERIENCES
+
+40. DO NOT INVENT CUSTOMER STORIES
+
+41. CREATE MYTH-BASED HOOKS ONLY WHEN THE CLAIM CAN BE CORRECTED RESPONSIBLY
+
+42. DO NOT LABEL SOMETHING A MYTH JUST TO CREATE drama.
+
+43. CREATE CONTRARIAN HOOKS CAREFULLY
+
+44. THE CONTRARIAN POSITION MUST BE DEFENSIBLE
+
+45. DO NOT DISAGREE WITH COMMON ADVICE ONLY TO ATTRACT ATTENTION
+
+46. MATCH THE HOOK TO AUDIENCE AWARENESS
+
+47. UNAWARE:
+Use relatable situation, observation or broad problem.
+
+48. PROBLEM-AWARE:
+Name the problem more directly.
+
+49. SOLUTION-AWARE:
+Compare approaches or explain solution criteria.
+
+50. PRODUCT-AWARE:
+Highlight relevant differentiator or use case.
+
+51. MOST-AWARE:
+Use offer, reminder, proof or clear action when appropriate.
+
+52. MATCH HOOK TO PLATFORM
+
+53. SHORT VIDEO HOOKS:
+Should work in the first spoken line or on-screen text.
+
+54. LINKEDIN HOOKS:
+Should create professional relevance without sounding artificially dramatic.
+
+55. FACEBOOK HOOKS:
+Can be conversational and practical.
+
+56. TIKTOK HOOKS:
+Should establish context quickly and naturally.
+
+57. YOUTUBE SHORTS HOOKS:
+Should make the topic and payoff clear early.
+
+58. EMAIL SUBJECT HOOKS:
+Should be truthful, concise and relevant.
+
+59. AD HOOKS:
+Should connect strongly to the audience problem, value proposition or offer.
+
+60. BLOG / ARTICLE HOOKS:
+Should establish why the topic matters while allowing more context than short-form content.
+
+61. DO NOT USE THE SAME HOOK STYLE FOR EVERY PLATFORM
+
+62. CREATE SPOKEN HOOKS
+
+63. SPOKEN HOOKS SHOULD SOUND NATURAL OUT LOUD
+
+64. AVOID WRITTEN-ONLY PHRASES THAT SOUND AWKWARD IN SPEECH
+
+65. CREATE ON-SCREEN TEXT HOOKS
+
+66. KEEP THEM SHORTER THAN SPOKEN HOOKS WHEN POSSIBLE
+
+67. CREATE CAPTION / POST OPENINGS
+
+68. THESE MAY HAVE SLIGHTLY MORE CONTEXT
+
+69. CREATE EMAIL SUBJECT OPTIONS WHEN REQUESTED
+
+70. DO NOT USE FALSE:
+RE:
+FWD:
+Account alert
+Payment warning
+Personal reply
+
+71. DO NOT CREATE DECEPTIVE URGENCY
+
+72. DO NOT CREATE FALSE SCARCITY
+
+73. DO NOT INVENT:
+Deadlines
+Limited quantities
+Offers
+Discounts
+Waiting lists
+Customer demand
+
+74. DO NOT INVENT STATISTICS
+
+75. DO NOT INVENT RESEARCH
+
+76. DO NOT INVENT TESTIMONIALS
+
+77. DO NOT INVENT AWARDS
+
+78. DO NOT INVENT REVIEWS
+
+79. DO NOT INVENT PERFORMANCE RESULTS
+
+80. DO NOT CLAIM:
+Guaranteed
+Proven
+Best
+No.1
+Fastest
+Cheapest
+
+unless supported by supplied evidence.
+
+81. PRESERVE NUMBERS EXACTLY
+
+82. PRESERVE TECHNICAL MEANING
+
+83. DO NOT OVERSIMPLIFY UNTIL THE CLAIM BECOMES WRONG
+
+84. CREATE SPECIFICITY
+
+85. PREFER:
+Specific situation
+Specific task
+Specific pain
+Specific question
+
+over generic motivational language.
+
+86. CREATE HUMAN-SOUNDING LANGUAGE
+
+87. AVOID EXCESSIVE MARKETING JARGON
+
+88. AVOID EXCESSIVE:
+Game-changing
+Revolutionary
+Ultimate
+Amazing
+Powerful
+Secret
+
+89. CREATE HOOKS AT DIFFERENT INTENSITY LEVELS
+
+90. LOW INTENSITY:
+Clear
+Educational
+Professional
+
+91. MEDIUM INTENSITY:
+Curiosity
+Problem
+Comparison
+
+92. HIGHER INTENSITY:
+Warning
+Contrarian
+Strong outcome
+
+93. HIGHER INTENSITY MUST STILL BE TRUTHFUL
+
+94. CREATE SHORT HOOKS
+
+95. CREATE MEDIUM-LENGTH HOOKS
+
+96. CREATE LONGER OPENINGS WHEN THE PLATFORM ALLOWS IT
+
+97. DO NOT MAKE EVERY HOOK EXTREMELY SHORT
+
+98. CREATE VISUAL HOOK PAIRINGS FOR VIDEO
+
+99. FOR EACH STRONG VIDEO HOOK, SUGGEST:
+First visual
+Spoken line
+On-screen text
+
+100. VISUAL SHOULD REINFORCE THE HOOK
+
+101. DO NOT ADD RANDOM B-ROLL
+
+102. CREATE OPEN-LOOP HOOKS RESPONSIBLY
+
+103. OPEN LOOP SHOULD BE CLOSED IN THE CONTENT
+
+104. DO NOT WITHHOLD THE ANSWER UNNECESSARILY
+
+105. CREATE "BEFORE YOU..." HOOKS WHEN USEFUL
+
+106. EXAMPLE:
+"Before you adjust that stock difference, check the last transfer."
+
+107. DO NOT TURN EVERY HOOK INTO A WARNING
+
+108. CREATE "IF YOU..." HOOKS
+
+109. EXAMPLE:
+"If you manage inventory manually, this one calculation can make reorder planning clearer."
+
+110. KEEP CLAIM PROPORTIONATE TO REAL VALUE
+
+111. CREATE "WHY..." HOOKS
+
+112. USE WHEN THE CONTENT EXPLAINS CAUSE OR reasoning.
+
+113. CREATE "HOW..." HOOKS
+
+114. USE WHEN THE content actually teaches a process.
+
+115. CREATE "WHAT..." HOOKS
+
+116. USE FOR definitions, examples and demonstrations.
+
+117. CREATE "WHEN..." HOOKS
+
+118. USE for timing, conditions and decision points.
+
+119. CREATE "MOST PEOPLE..." HOOKS CAREFULLY
+
+120. DO NOT CLAIM MOST PEOPLE DO SOMETHING WITHOUT evidence.
+
+121. REWRITE SUCH HOOKS AS:
+"A common mistake is..."
+if no prevalence data exists.
+
+122. CREATE AUTHORITY-BUILDING HOOKS
+
+123. AUTHORITY SHOULD COME FROM USEFUL KNOWLEDGE
+
+124. DO NOT CREATE SELF-PROMOTIONAL EXPERT CLAIMS WITHOUT BASIS
+
+125. CREATE SAVE-ORIENTED HOOKS
+
+126. EXAMPLE:
+"Save this stock-count checklist for your next inventory check."
+
+127. USE ONLY IF CONTENT IS ACTUALLY SAVE-WORTHY
+
+128. CREATE SHARE-ORIENTED HOOKS
+
+129. DO NOT USE EMPTY ENGAGEMENT BAIT
+
+130. CREATE COMMENT-ORIENTED HOOKS
+
+131. ASK REAL QUESTIONS THAT INVITE EXPERIENCE OR opinion.
+
+132. CREATE CONVERSION HOOKS
+
+133. CONVERSION HOOKS SHOULD CONNECT:
+Problem → value → action
+
+134. DO NOT FORCE SALES HOOKS ON PURE EDUCATIONAL CONTENT
+
+135. CREATE HOOK VARIATIONS WITHOUT DUPLICATION
+
+136. DO NOT SIMPLY CHANGE ONE WORD AND CALL IT A NEW HOOK
+
+137. VARY:
+Angle
+Sentence structure
+Intensity
+Perspective
+Specificity
+
+138. CREATE A HOOK QUALITY SCORECARD
+
+139. EVALUATE EACH STRONG HOOK FOR:
+Relevance
+Clarity
+Specificity
+Credibility
+Curiosity
+Platform fit
+
+140. USE:
+Strong
+Good
+Needs revision
+
+141. DO NOT CREATE FALSE NUMERICAL SCORES
+
+142. IDENTIFY RISKY HOOKS
+
+143. FLAG hooks that may:
+Overpromise
+Need evidence
+Sound misleading
+Depend on current information
+Need legal / health / financial review
+
+144. CREATE SAFE ALTERNATIVES FOR RISKY HOOKS
+
+145. CREATE A/B TEST OPTIONS
+
+146. TEST ONE MAIN DIFFERENCE
+
+147. EXAMPLE:
+Problem-led vs outcome-led
+
+148. DO NOT GUARANTEE WHICH VERSION WILL WIN
+
+149. CREATE TOP PICKS
+
+150. SELECT:
+Best overall
+Best for curiosity
+Best for education
+Best for engagement
+Best for conversion
+Best professional hook
+
+151. EXPLAIN BRIEFLY WHY EACH WAS SELECTED
+
+152. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- hook matches the actual content
+- hook is relevant to the target audience
+- hook fits the awareness stage
+- hook fits the platform
+- hook does not invent facts
+- hook does not invent numbers
+- hook does not invent trends
+- hook does not fabricate customer stories
+- hook does not use false urgency
+- hook does not use false scarcity
+- hook does not overpromise
+- hook payoff can actually be delivered
+- different hooks use meaningfully different angles
+- spoken hooks sound natural
+- video hooks have a useful visual option
+- promotional hooks use only real offers
+- risky claims are flagged
+- strongest hooks are prioritized
+
+OUTPUT FORMAT:
+
+1. HOOK STRATEGY
+Provide:
+Audience
+Awareness stage
+Core message
+Audience problem
+Desired outcome
+Recommended hook angles
+
+2. HOOK BANK
+Generate the requested number of hooks.
+
+For each hook provide:
+Hook
+Angle
+Platform fit
+Intensity
+Best use
+
+3. SHORT-FORM VIDEO HOOKS
+For the strongest video hooks provide:
+Spoken hook
+Opening visual
+On-screen text
+Payoff direction
+
+4. SOCIAL POST OPENINGS
+Provide platform-appropriate opening lines.
+
+5. EMAIL SUBJECT HOOKS
+Provide subject options when relevant.
+
+6. AD HOOKS
+Provide promotional hook options when relevant.
+
+7. EDUCATIONAL HOOKS
+Provide useful low-hype options.
+
+8. CURIOSITY HOOKS
+Provide truthful curiosity-driven options.
+
+9. PROBLEM / MISTAKE HOOKS
+Provide relevant options.
+
+10. OUTCOME HOOKS
+Provide realistic outcome-led options.
+
+11. QUESTION HOOKS
+Provide specific audience-relevant questions.
+
+12. PROFESSIONAL HOOKS
+Provide options suitable for LinkedIn or business audiences.
+
+13. A/B TEST PAIRS
+Provide:
+Version A
+Version B
+Variable being tested
+
+14. RISK REVIEW
+Identify:
+Hook
+Potential issue
+Safer alternative
+
+15. TOP PICKS
+Select:
+Best overall
+Best curiosity hook
+Best educational hook
+Best engagement hook
+Best conversion hook
+Best professional hook
+
+16. FINAL RECOMMENDATION
+Explain which 3–5 hooks should be tested first and why.
+
+IMPORTANT:
+- Attention should come from relevance, clarity and curiosity, not deception.
+- Never fabricate statistics, stories, trends, offers or results.
+- Never use false urgency or scarcity.
+- Do not promise a payoff the content cannot deliver.
+- Keep hooks appropriate for the platform and audience stage.`;
+
+const steps = [
+  {
+    title: "Define what follows the hook",
+    description:
+      "A hook should be built around the actual information, demonstration or offer that comes next—not written as an isolated attention-grabbing sentence.",
+  },
+  {
+    title: "Choose a meaningful angle",
+    description:
+      "Test problem, question, mistake, outcome, comparison and demonstration angles instead of creating minor wording variations of the same opening.",
+  },
+  {
+    title: "Match the platform",
+    description:
+      "A spoken Reel opening, LinkedIn first line, email subject and paid-ad hook should express the same core message differently.",
+  },
+  {
+    title: "Protect credibility",
+    description:
+      "Remove fabricated numbers, fake urgency and exaggerated outcomes so the content can deliver exactly what the hook promises.",
+  },
+];
+
+const example = {
+  input: [
+    "Topic: Physical inventory does not match system quantity.",
+    "Audience: Warehouse supervisors and inventory controllers.",
+    "Platform: LinkedIn and short-form video.",
+    "Objective: Education and authority.",
+    "Core message: Investigate transaction and process causes before making an adjustment.",
+    "Tone: Practical and professional.",
+  ],
+
+  output: [
+    "PROBLEM HOOK: 'Physical stock doesn't match the system. Don't start with the adjustment.'",
+    "QUESTION HOOK: 'Your stock count is short by 12 units—what should you check first?'",
+    "MISTAKE HOOK: 'One of the worst ways to handle an inventory difference is adjusting it before finding the cause.'",
+    "PROCESS HOOK: 'Before correcting a stock discrepancy, check these transaction points first.'",
+    "VIDEO HOOK + VISUAL: Show the system quantity beside the physical count while saying, 'These two numbers don't match—but the adjustment isn't the first step.'",
+    "PROFESSIONAL LINKEDIN OPENING: 'An inventory adjustment can correct the number without correcting the process that caused it.'",
+  ],
+};
+
+const tips = [
+  {
+    title: "Specific beats dramatic",
+    description:
+      "A recognizable problem or precise question often earns stronger attention than generic phrases such as 'You need to see this.'",
+  },
+  {
+    title: "Write the payoff before exaggerating the hook",
+    description:
+      "If the content cannot fully answer or demonstrate what the opening promises, rewrite the hook rather than stretching the content.",
+  },
+  {
+    title: "Test angles, not synonyms",
+    description:
+      "A useful A/B comparison changes the reason someone pays attention—such as problem versus outcome—not just one adjective.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Hook Generator Prompt | KRIYANO"
+  description="Generate truthful hooks for Reels, Shorts, TikTok, LinkedIn, social posts, ads, emails and other content using audience, platform and awareness-stage context."
+>
+  <PromptPage
+    category="CREATORS"
+    title="Hook Generator"
+    accentTitle="Prompt."
+    description="Generate platform-aware hooks that earn attention through relevance, specificity and useful curiosity without relying on misleading clickbait or unsupported claims."
+    meta={[
+      "Free prompt",
+      "Hooks",
+      "Content creation",
+    ]}
+    bestFor={[
+      "Reels & Shorts",
+      "Social posts",
+      "YouTube",
+      "LinkedIn",
+      "Email subject lines",
+      "Ads",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Create hooks that the content can actually deliver."
+    introDescription="Choose the audience, awareness stage, platform and message, then generate multiple meaningful hook angles with platform-specific variations and credibility checks."
+    steps={steps}
+    exampleTitle="Create several hook angles from one inventory problem."
+    example={example}
+    tipsTitle="The strongest hook is not always the loudest."
+    tips={tips}
+    sidebarTitle="Need the full video after the hook?"
+    sidebarDescription="Use KRIYANO's Short-Form Video Idea Generator to develop the concept, then the Short-Form Video Script Prompt to build the complete scene flow and CTA."
+    warningTitle="Avoid attention at the expense of trust"
+    warningText="Do not use fabricated numbers, false urgency, fake scarcity, unsupported outcomes or misleading curiosity simply to increase clicks or watch time. The content should clearly deliver the promise made by the hook."
+  />
+</BaseLayout>

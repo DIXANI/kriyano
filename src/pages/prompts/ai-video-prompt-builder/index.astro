@@ -1,0 +1,201 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced AI video director, cinematographer and prompt engineer.
+
+TASK:
+Create a production-ready AI video-generation prompt based on the information below.
+
+VIDEO GOAL:
+[What should the video communicate, show or achieve?]
+
+VIDEO TYPE:
+[Example: product commercial, cinematic scene, social media Reel, explainer, food video, character scene, brand video.]
+
+SUBJECT:
+[Describe the main person, product, object, animal or environment.]
+
+SUBJECT DETAILS TO PRESERVE:
+[Appearance, clothing, product design, colours, proportions, packaging, identity or other important visual details.]
+
+SCENE / ENVIRONMENT:
+[Describe the location, background, time of day, weather, atmosphere and surrounding elements.]
+
+ACTION:
+[Describe exactly what happens during the clip.]
+
+SHOT DURATION:
+[Example: 5 seconds, 8 seconds, 10 seconds.]
+
+CAMERA ANGLE:
+[Example: eye level, low angle, overhead, close-up, medium shot, wide shot.]
+
+CAMERA MOVEMENT:
+[Example: static, slow push-in, dolly, pan, tilt, tracking shot, orbit, handheld.]
+
+LENS / VISUAL FEEL:
+[Example: cinematic 35mm, portrait 85mm feel, macro detail, commercial product look.]
+
+SUBJECT MOTION:
+[Describe how the subject moves.]
+
+ENVIRONMENTAL MOTION:
+[Describe background movement such as steam, fabric, traffic, leaves, water, smoke or lighting changes.]
+
+LIGHTING:
+[Example: soft daylight, warm kitchen light, dramatic side lighting, premium studio lighting.]
+
+VISUAL STYLE:
+[Example: photorealistic, cinematic, premium commercial, documentary, editorial, natural lifestyle.]
+
+COLOUR DIRECTION:
+[Describe the desired colour palette or grading.]
+
+ASPECT RATIO:
+[Example: 9:16 vertical, 16:9 horizontal, 1:1 square.]
+
+FRAME RATE / MOTION FEEL:
+[Example: natural real-time movement, smooth cinematic motion, subtle slow motion.]
+
+AUDIO / VOICE-OVER:
+[Describe dialogue, narration, ambient sound, music or state "no audio requirements".]
+
+CONTINUITY REQUIREMENTS:
+[Describe anything that must remain identical to previous or future clips.]
+
+TEXT / LOGO REQUIREMENTS:
+[Specify whether visible text or logos are allowed, required or should be avoided.]
+
+SPECIAL REQUIREMENTS:
+[List any other instructions.]
+
+NEGATIVE CONSTRAINTS:
+[List visual errors, unwanted objects, movements or styles to avoid.]
+
+RESPONSE REQUIREMENTS:
+- Write the final result as a clear production-ready video prompt.
+- Keep the subject identity and important details consistent.
+- Describe one coherent shot unless multiple scenes are explicitly requested.
+- Make the action physically clear and easy for a video model to interpret.
+- Describe camera movement separately from subject movement.
+- Avoid contradictory camera directions.
+- Keep movement realistic for the requested clip duration.
+- Include relevant lighting, environment and motion details.
+- Prevent unnecessary changes to clothing, products, props or scene layout.
+- Avoid random objects appearing or disappearing.
+- Avoid unrealistic body motion, distorted hands, warped products or unstable backgrounds.
+- Do not invent logos, text, dialogue or brand details that were not provided.
+- If a reference image is used, explicitly preserve its important visual characteristics.
+
+OUTPUT FORMAT:
+
+1. Final AI Video Prompt
+2. Camera Direction
+3. Subject Motion
+4. Environmental Motion
+5. Lighting & Visual Style
+6. Continuity Requirements
+7. Audio / Voice-Over Direction
+8. Negative Constraints
+
+The Final AI Video Prompt should be written as one polished block that can be copied directly into an AI video-generation model.`;
+
+const steps = [
+  {
+    title: "Define one clear action",
+    description:
+      "For short AI clips, describe exactly what happens instead of combining too many actions into a few seconds.",
+  },
+  {
+    title: "Separate camera and subject motion",
+    description:
+      "Explain what the camera does and what the subject does independently. This reduces confusing or unstable movement.",
+  },
+  {
+    title: "Lock continuity",
+    description:
+      "State which character, wardrobe, product, props and scene details must remain unchanged across clips.",
+  },
+  {
+    title: "Control what should not happen",
+    description:
+      "Negative constraints help reduce common issues such as warped hands, changing products, disappearing objects and unwanted text.",
+  },
+];
+
+const example = {
+  input: [
+    "Video type: Premium coffee commercial.",
+    "Subject: Matte-black coffee bag standing upright beside a ceramic cup.",
+    "Scene: Dark wooden café counter with soft morning atmosphere.",
+    "Duration: 8 seconds.",
+    "Action: Steam rises from the cup while a few coffee beans gently roll into the foreground.",
+    "Camera: Slow controlled push-in from a front three-quarter angle.",
+    "Lighting: Warm directional commercial lighting.",
+    "Aspect ratio: 9:16 vertical.",
+  ],
+
+  output: [
+    "Final Prompt: Create an 8-second photorealistic premium coffee commercial in vertical 9:16 format. A matte-black coffee bag stands upright beside a ceramic coffee cup on a dark wooden café counter. Preserve the coffee bag shape, colour and packaging throughout the entire shot.",
+    "Camera: Begin with a medium front three-quarter composition and perform a very slow, smooth push-in toward the product.",
+    "Motion: Steam rises naturally from the coffee while several roasted beans gently roll into the foreground. The product itself remains stationary.",
+    "Style: Warm directional studio lighting, realistic shadows, subtle café ambience and shallow depth of field. Avoid packaging distortion, camera shake, random text and changing props.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Keep short clips simple",
+    description:
+      "One strong action usually generates more reliably than several unrelated actions packed into a 5–10 second clip.",
+  },
+  {
+    title: "Specify motion precisely",
+    description:
+      "Words such as 'cinematic movement' are vague. Explain whether the camera pushes in, tracks, pans, tilts or remains fixed.",
+  },
+  {
+    title: "Protect continuity",
+    description:
+      "When creating multiple clips, repeat the critical character, product, wardrobe, prop and environment details in every prompt.",
+  },
+];
+---
+
+<BaseLayout
+  title="AI Video Prompt Builder Prompt | KRIYANO"
+  description="Create structured AI video prompts with clear camera direction, motion, scene, continuity, timing, audio and negative constraints."
+>
+  <PromptPage
+    category="VIDEO GENERATION"
+    title="AI Video"
+    accentTitle="Prompt Builder."
+    description="Turn a rough video idea into production-ready instructions for scene, action, camera movement, continuity, timing and visual control."
+    meta={[
+      "Free prompt",
+      "Video generation",
+      "Production focused",
+    ]}
+    bestFor={[
+      "Text-to-video",
+      "Image-to-video",
+      "Product commercials",
+      "Short-form videos",
+      "Cinematic scenes",
+      "Multi-clip workflows",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Direct the shot, not just the idea."
+    introDescription="Replace the bracketed sections with your scene, action, camera and continuity requirements. For short clips, keep the main action focused and realistic."
+    steps={steps}
+    exampleTitle="Turn a simple idea into a directed shot."
+    example={example}
+    tipsTitle="Get more controlled AI video."
+    tips={tips}
+    sidebarTitle="Need a different video structure?"
+    sidebarDescription="Use the KRIYANO Prompt Builder to create custom instructions around your exact subject, scene, duration, camera, motion and output."
+    warningTitle="Generation tip"
+    warningText="AI video models vary in how they interpret camera language and continuity. Test short clips first and adjust movement, timing and constraints based on the model you are using."
+  />
+</BaseLayout>

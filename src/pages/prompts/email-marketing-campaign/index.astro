@@ -1,0 +1,781 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert email marketing strategist, lifecycle marketer, conversion copywriter and campaign planner.
+
+TASK:
+Create a complete email marketing campaign for the supplied product, service, offer, content asset or business objective.
+
+The campaign should:
+- match the audience and customer stage
+- use a clear campaign objective
+- sequence emails logically
+- provide value before pushing for action where appropriate
+- use truthful subject lines and claims
+- avoid spammy language
+- maintain consistent brand voice
+- include practical testing and measurement guidance
+
+BUSINESS / BRAND:
+[Name and short description.]
+
+PRODUCT / SERVICE / OFFER:
+[What is being promoted?]
+
+TARGET AUDIENCE:
+[Who will receive the campaign?]
+
+AUDIENCE STAGE:
+[New subscriber / lead / prospect / customer / inactive customer / trial user / other.]
+
+CAMPAIGN OBJECTIVE:
+[Welcome / nurture / educate / launch / generate leads / sell / reactivate / onboard / retain / other.]
+
+PRIMARY CUSTOMER PROBLEM:
+[What problem matters most?]
+
+DESIRED OUTCOME:
+[What does the customer want?]
+
+VALUE PROPOSITION:
+[Why should they care?]
+
+KEY BENEFITS:
+[List supported benefits.]
+
+KEY FEATURES:
+[List relevant real features.]
+
+OFFER:
+[Discount / free trial / download / consultation / bundle / no offer / other.]
+
+PROOF AVAILABLE:
+[Testimonials / reviews / data / case study / demonstration / credentials / none.]
+
+PRIMARY CTA:
+[Buy / book / download / visit / try / reply / sign up / other.]
+
+EMAIL LIST SOURCE:
+[Newsletter signup / lead magnet / customer list / event / product signup / other.]
+
+CAMPAIGN LENGTH:
+[Number of emails or let AI recommend.]
+
+CAMPAIGN PERIOD:
+[For example: 5 days / 2 weeks / 30 days.]
+
+BRAND TONE:
+[Professional / practical / friendly / educational / premium / conversational / other.]
+
+PERSONALIZATION AVAILABLE:
+[Name / company / product interest / purchase history / none.]
+
+RESTRICTIONS:
+[Legal / compliance / brand / product / timing restrictions.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+EMAIL CAMPAIGN REQUIREMENTS:
+
+1. START WITH THE CAMPAIGN GOAL
+
+2. DEFINE THE AUDIENCE STAGE
+
+3. DO NOT SEND THE SAME MESSAGE TO EVERY TYPE OF SUBSCRIBER
+
+4. IDENTIFY THE PRIMARY CUSTOMER MOTIVATION
+
+5. IDENTIFY THE MAIN OBJECTION
+
+6. IDENTIFY THE NEXT LOGICAL ACTION
+
+7. BUILD A SEQUENCE RATHER THAN A COLLECTION OF RANDOM EMAILS
+
+8. EACH EMAIL SHOULD HAVE ONE PRIMARY PURPOSE
+
+9. POSSIBLE EMAIL PURPOSES:
+Welcome
+Education
+Problem recognition
+Value explanation
+Demonstration
+Use case
+Trust
+Objection handling
+Offer
+Reminder
+Follow-up
+Reactivation
+
+10. CREATE A LOGICAL FLOW
+
+11. DEFAULT FLOW WHEN APPROPRIATE:
+Email 1 — Context / value
+Email 2 — Problem / education
+Email 3 — Solution / use case
+Email 4 — Proof / objection
+Email 5 — CTA / offer
+
+12. DO NOT FORCE FIVE EMAILS IF FEWER ARE BETTER
+
+13. DO NOT CREATE AN OVERLONG SEQUENCE FOR A SIMPLE OFFER
+
+14. MATCH SEQUENCE LENGTH TO:
+Offer complexity
+Customer risk
+Purchase cycle
+Audience familiarity
+Campaign goal
+
+15. CREATE A STRONG SUBJECT LINE FOR EACH EMAIL
+
+16. SUBJECT LINES SHOULD BE:
+Clear
+Relevant
+Specific
+Truthful
+
+17. DO NOT USE DECEPTIVE SUBJECT LINES
+
+18. DO NOT IMPLY A PERSONAL REPLY WHEN IT IS A MASS EMAIL
+
+19. DO NOT USE FALSE RE:
+or
+FWD:
+unless it is genuinely part of an existing conversation.
+
+20. DO NOT USE FALSE URGENCY
+
+21. DO NOT USE FALSE SCARCITY
+
+22. DO NOT INVENT DEADLINES
+
+23. DO NOT INVENT DISCOUNTS
+
+24. DO NOT INVENT AVAILABILITY LIMITS
+
+25. DO NOT INVENT CUSTOMER RESULTS
+
+26. DO NOT INVENT TESTIMONIALS
+
+27. DO NOT INVENT RATINGS
+
+28. DO NOT INVENT AWARDS
+
+29. DO NOT INVENT PERFORMANCE CLAIMS
+
+30. DO NOT CLAIM GUARANTEED RESULTS
+
+31. CREATE PREVIEW TEXT
+
+32. PREVIEW TEXT SHOULD ADD TO THE SUBJECT LINE
+Do not simply repeat it.
+
+33. CREATE A CLEAR OPENING
+
+34. OPENING SHOULD QUICKLY ESTABLISH RELEVANCE
+
+35. AVOID LONG BRAND INTRODUCTIONS
+
+36. USE CUSTOMER-CENTRIC LANGUAGE
+
+37. DO NOT START EVERY EMAIL WITH:
+"We are excited to announce..."
+
+38. CREATE A CLEAR MESSAGE HIERARCHY
+
+39. EMAIL STRUCTURE MAY INCLUDE:
+Opening
+Problem / context
+Value
+Supporting explanation
+Proof
+CTA
+
+40. DO NOT INCLUDE EVERY SECTION IN EVERY EMAIL
+
+41. KEEP ONE PRIMARY CTA
+
+42. SECONDARY LINKS MAY BE USED CAREFULLY
+
+43. DO NOT CREATE MULTIPLE COMPETING ACTIONS
+
+44. MATCH CTA TO CUSTOMER STAGE
+
+45. EARLY-STAGE CTA EXAMPLES:
+Read the guide
+See how it works
+Try the tool
+Learn more
+Reply
+
+46. HIGH-INTENT CTA EXAMPLES:
+Start trial
+Buy now
+Request quote
+Book consultation
+
+47. RETENTION CTA EXAMPLES:
+Explore feature
+Complete setup
+Reorder
+Upgrade
+Refer
+
+48. CREATE NATURAL EMAIL LENGTH
+
+49. SHORT EMAILS
+Use for:
+Reminders
+Simple offers
+Updates
+High-awareness audiences
+
+50. LONGER EMAILS
+Use for:
+Education
+Complex products
+Story
+Objection handling
+
+51. DO NOT ADD LENGTH FOR ITS OWN SAKE
+
+52. CREATE SCANNABLE EMAILS
+
+53. USE:
+Short paragraphs
+Simple sentences
+Useful bullets
+Clear CTA
+
+54. AVOID WALLS OF TEXT
+
+55. CREATE WELCOME CAMPAIGNS WHEN REQUESTED
+
+56. WELCOME SEQUENCE SHOULD:
+Set expectations
+Deliver promised value
+Introduce useful resources
+Build trust
+Guide next step
+
+57. DO NOT IMMEDIATELY HARD-SELL EVERY NEW SUBSCRIBER
+
+58. CREATE NURTURE CAMPAIGNS WHEN REQUESTED
+
+59. NURTURE SHOULD:
+Educate
+Clarify problem
+Demonstrate value
+Handle objections
+Move toward action
+
+60. CREATE PRODUCT-LAUNCH CAMPAIGNS WHEN REQUESTED
+
+61. LAUNCH EMAILS MAY INCLUDE:
+Problem
+New solution
+Use case
+Demo
+Offer
+Reminder
+
+62. DO NOT CREATE FAKE LAUNCH EXCITEMENT
+
+63. CREATE ONBOARDING CAMPAIGNS WHEN REQUESTED
+
+64. ONBOARDING SHOULD HELP THE USER REACH VALUE QUICKLY
+
+65. POSSIBLE ONBOARDING FLOW:
+Welcome
+First action
+Key feature
+Common mistake
+Advanced use
+Support
+
+66. CREATE REACTIVATION CAMPAIGNS WHEN REQUESTED
+
+67. REACTIVATION SHOULD:
+Acknowledge inactivity carefully
+Remind of value
+Offer useful content
+Invite return
+
+68. DO NOT CLAIM TO KNOW WHY THE USER BECAME INACTIVE
+
+69. CREATE ABANDONMENT CAMPAIGNS ONLY WHEN RELEVANT
+
+70. DO NOT INVENT CART OR USER ACTIVITY DATA
+
+71. CREATE SEGMENTATION IDEAS
+
+72. POSSIBLE SEGMENTS:
+New subscribers
+High-intent leads
+Customers
+Inactive customers
+Product interest
+Industry
+Role
+Purchase stage
+
+73. DO NOT CREATE SENSITIVE OR INAPPROPRIATE SEGMENTATION
+
+74. USE PERSONALIZATION ONLY WHEN DATA EXISTS
+
+75. DO NOT FABRICATE:
+First name
+Company
+Purchase
+Location
+Behaviour
+
+76. CREATE VALUE BEFORE REPETITION
+
+77. DO NOT SEND THE SAME SALES MESSAGE REPEATEDLY
+
+78. VARY THE REASON TO ENGAGE
+
+79. POSSIBLE CONTENT TYPES:
+Tip
+Guide
+Case example
+FAQ
+Demo
+Checklist
+Comparison
+Story
+Offer
+
+80. CREATE OBJECTION HANDLING
+
+81. COMMON OBJECTIONS:
+Price
+Trust
+Complexity
+Time
+Fit
+Switching
+Need for approval
+
+82. ADDRESS OBJECTIONS WITH FACTS
+
+83. DO NOT INVENT GUARANTEES
+
+84. DO NOT INVENT REFUND POLICIES
+
+85. CREATE TRUST ELEMENTS
+
+86. POSSIBLE TRUST:
+Real testimonial
+Demo
+Case study
+Methodology
+Transparent pricing
+Credentials
+Support information
+
+87. IF NO PROOF EXISTS
+Do not fabricate it.
+
+88. CREATE CTA REINFORCEMENT
+
+89. CTA COPY SHOULD BE SPECIFIC
+
+90. AVOID VAGUE CTA TEXT WHEN A CLEAR ACTION IS AVAILABLE
+
+91. CREATE PLAIN-TEXT-FRIENDLY COPY
+
+92. DO NOT RELY ON HEAVY DESIGN FOR MEANING
+
+93. IMPORTANT INFORMATION SHOULD STILL WORK IN SIMPLE EMAIL FORMAT
+
+94. CREATE MOBILE-FRIENDLY COPY
+
+95. KEEP SUBJECT LINES AND OPENINGS CONCISE
+
+96. KEEP PARAGRAPHS SHORT
+
+97. CREATE A/B TEST IDEAS
+
+98. TEST ONE IMPORTANT VARIABLE AT A TIME
+
+99. POSSIBLE TESTS:
+Subject line
+Opening
+CTA
+Offer framing
+Email length
+Send timing
+
+100. DO NOT TEST EVERYTHING AT ONCE
+
+101. CREATE A TEST HYPOTHESIS
+
+102. DO NOT GUARANTEE RESULTS
+
+103. CREATE PERFORMANCE METRICS
+
+104. MATCH METRIC TO OBJECTIVE
+
+105. POSSIBLE METRICS:
+Delivery rate
+Open rate
+Click-through rate
+Reply rate
+Conversion rate
+Unsubscribe rate
+Revenue
+Activation rate
+
+106. DO NOT CLAIM UNIVERSAL BENCHMARKS WITHOUT VERIFIED DATA
+
+107. USE THE BUSINESS'S OWN BASELINE WHEN POSSIBLE
+
+108. DO NOT OVERFOCUS ON OPEN RATE
+Privacy protections can affect open tracking.
+
+109. PRIORITIZE DOWNSTREAM ACTIONS WHEN POSSIBLE
+
+110. CREATE SEND-TIMING GUIDANCE
+
+111. IF NO DATA EXISTS
+Recommend testing rather than claiming a universal best time.
+
+112. DO NOT CLAIM A SPECIFIC BEST DAY OR HOUR WITHOUT evidence.
+
+113. CREATE FREQUENCY GUIDANCE
+
+114. AVOID EXCESSIVE SENDING
+
+115. MATCH FREQUENCY TO:
+Campaign urgency
+Customer expectation
+Content value
+Offer lifecycle
+
+116. CREATE UNSUBSCRIBE-AWARE COPY
+
+117. DO NOT USE MANIPULATIVE LANGUAGE TO PREVENT UNSUBSCRIBES
+
+118. CREATE COMPLIANCE CHECKS
+
+119. FLAG:
+Misleading subject lines
+Missing sender identity
+Unsupported claims
+Sensitive targeting
+Unclear promotional terms
+Missing unsubscribe process
+
+120. DO NOT CLAIM LEGAL COMPLIANCE AUTOMATICALLY
+
+121. REMIND USER TO REVIEW APPLICABLE EMAIL AND PRIVACY RULES
+
+122. CREATE SPAM-RISK REVIEW
+
+123. AVOID EXCESSIVE:
+ALL CAPS
+Exclamation marks
+Misleading urgency
+Suspicious claims
+
+124. DO NOT TREAT SPECIFIC WORDS AS GUARANTEED SPAM TRIGGERS
+
+125. CREATE LINK STRATEGY
+
+126. USE FEW PURPOSEFUL LINKS
+
+127. PRIMARY CTA SHOULD BE OBVIOUS
+
+128. CREATE DESTINATION ALIGNMENT
+
+129. EMAIL PROMISE SHOULD MATCH THE LANDING PAGE OR RESOURCE
+
+130. DO NOT SEND USERS TO AN UNRELATED PAGE
+
+131. CREATE FOLLOW-UP LOGIC
+
+132. IF USER CLICKS:
+Suggest appropriate next-stage follow-up.
+
+133. IF USER DOES NOT CLICK:
+Suggest a different value angle rather than repeating the same email.
+
+134. DO NOT ASSUME PERSONAL BEHAVIOUR WITHOUT DATA
+
+135. CREATE CAMPAIGN CALENDAR
+
+136. INCLUDE:
+Email number
+Purpose
+Suggested spacing
+CTA
+Primary metric
+
+137. USE RELATIVE SPACING WHEN EXACT TIMING IS UNKNOWN
+
+138. EXAMPLE:
+Day 0
+2 days later
+3 days later
+
+139. CREATE CONTENT REUSE OPPORTUNITIES
+
+140. REPURPOSE:
+Blog
+Guide
+Video
+FAQ
+Case study
+Social post
+
+into email content where appropriate.
+
+141. DO NOT DUPLICATE THE FULL SOURCE VERBATIM
+
+142. CREATE FINAL EDITING CHECK
+
+143. REMOVE:
+Filler
+Repetition
+Generic hype
+Unnecessary adjectives
+
+144. CHECK BRAND VOICE
+
+145. CHECK CLAIM SUPPORT
+
+146. CHECK CTA CLARITY
+
+147. CHECK SEQUENCE LOGIC
+
+148. CREATE INFORMATION GAPS
+
+149. IDENTIFY FACTS NEEDED BEFORE SEND
+
+150. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- campaign objective is clear
+- audience stage is clear
+- sequence has logical progression
+- each email has one primary purpose
+- subject lines are truthful
+- preview text adds value
+- openings establish relevance quickly
+- emails are customer-focused
+- CTA matches stage
+- copy is mobile-readable
+- no false urgency is used
+- no false scarcity is used
+- no offer is invented
+- no proof is invented
+- no result is invented
+- personalization uses only available data
+- objections are handled factually
+- landing-page message matches the email
+- tests change meaningful variables
+- metrics match campaign objectives
+- unsupported claims are flagged
+- email frequency is reasonable
+- compliance review is recommended
+- final sequence is practical to execute
+
+OUTPUT FORMAT:
+
+1. CAMPAIGN STRATEGY
+Provide:
+Audience
+Audience stage
+Objective
+Primary problem
+Desired outcome
+Value proposition
+Primary CTA
+
+2. CAMPAIGN SEQUENCE
+Create the recommended email sequence.
+
+For each email provide:
+Email number
+Purpose
+Recommended timing
+Primary message
+CTA
+
+3. SUBJECT LINE OPTIONS
+Create 3–5 truthful subject options for each email.
+
+4. PREVIEW TEXT
+Provide matching preview text.
+
+5. FULL EMAIL COPY
+Write each email with:
+Subject
+Preview text
+Opening
+Body
+CTA
+
+6. SEGMENTATION OPTIONS
+Recommend useful segments when appropriate.
+
+7. PERSONALIZATION OPTIONS
+List safe personalization fields based only on available data.
+
+8. OBJECTION EMAIL
+Create one email focused on the most important objection if needed.
+
+9. REACTIVATION / FOLLOW-UP LOGIC
+Explain how to follow up based on campaign response where relevant.
+
+10. A/B TEST PLAN
+Provide:
+Element
+Control
+Variant
+Hypothesis
+Metric
+
+11. CAMPAIGN CALENDAR
+Provide:
+Email
+Timing
+Purpose
+CTA
+Primary metric
+
+12. METRICS PLAN
+Provide:
+Primary metric
+Secondary metrics
+What each metric indicates
+
+13. CLAIM CHECK
+List:
+Claim
+Support status
+Risk
+Recommended wording
+
+14. DELIVERABILITY & COMPLIANCE CHECK
+Identify issues requiring human review.
+
+15. INFORMATION REQUIRED
+List any missing information needed before sending.
+
+16. FINAL RECOMMENDATION
+Summarize the strongest campaign structure and first action.
+
+IMPORTANT:
+- Do not invent offers, discounts, deadlines or scarcity.
+- Do not fabricate testimonials, ratings or results.
+- Do not use deceptive subject lines.
+- Keep each email focused.
+- Match the sequence to the audience stage.
+- Use personalization only when the data actually exists.
+- Review applicable email marketing and privacy requirements before sending.`;
+
+const steps = [
+  {
+    title: "Give the sequence one objective",
+    description:
+      "Define whether the campaign is meant to welcome, nurture, educate, launch, sell, onboard or reactivate before deciding what each email should do.",
+  },
+  {
+    title: "Give each email a role",
+    description:
+      "Build a progression where every message contributes something new instead of sending repeated versions of the same promotional email.",
+  },
+  {
+    title: "Match the CTA to customer readiness",
+    description:
+      "Early-stage subscribers may need education or a low-friction next step, while higher-intent users can receive a stronger conversion CTA.",
+  },
+  {
+    title: "Test without manufacturing urgency",
+    description:
+      "Improve subject lines, hooks, CTA wording and sequence timing through controlled tests rather than relying on exaggerated deadlines or scarcity.",
+  },
+];
+
+const example = {
+  input: [
+    "Business: Practical inventory tools website.",
+    "Audience: Small-business owners and warehouse professionals who downloaded an inventory checklist.",
+    "Objective: Nurture subscribers toward using a free Reorder Point Calculator.",
+    "Customer problem: Unclear replenishment timing.",
+    "Value: Calculator uses demand, lead time and safety stock.",
+    "CTA: Use the calculator.",
+  ],
+
+  output: [
+    "EMAIL 1 — Deliver value: Thank the subscriber for downloading the checklist and give one practical inventory-control tip. CTA: View another useful resource.",
+    "EMAIL 2 — Problem education: Explain why reorder timing becomes difficult when demand, supplier lead time and safety stock are considered separately. CTA: See how reorder point works.",
+    "EMAIL 3 — Practical solution: Introduce the free calculator and show the three inputs required. CTA: Calculate Your Reorder Point.",
+    "EMAIL 4 — Objection support: Explain that the calculator is a planning aid and that real replenishment decisions still depend on data quality and operating conditions. CTA: Try the calculator with one SKU.",
+    "SUBJECT TEST: Compare a problem-led subject such as 'When should you reorder this item?' against a task-led subject such as 'Calculate a reorder point from 3 inputs.'",
+    "PRIMARY METRIC: Qualified calculator visits or completed calculator use rather than opens alone.",
+  ],
+};
+
+const tips = [
+  {
+    title: "A sequence should move the conversation forward",
+    description:
+      "Each email should add new value, context, proof or decision support rather than repeating the same sales argument several times.",
+  },
+  {
+    title: "Subject lines should earn attention honestly",
+    description:
+      "Specific relevance and useful curiosity are stronger long-term choices than misleading replies, fake urgency or exaggerated promises.",
+  },
+  {
+    title: "Measure the action that matters",
+    description:
+      "Clicks, replies, product activation or conversions usually tell you more about business value than open rate by itself.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Email Marketing Campaign Prompt | KRIYANO"
+  description="Build structured email marketing campaigns with sequences, subject lines, full email copy, CTAs, segmentation, testing and measurement."
+>
+  <PromptPage
+    category="MARKETING"
+    title="Email Marketing Campaign"
+    accentTitle="Prompt."
+    description="Plan and write complete email sequences for nurture, launch, onboarding, reactivation, education and conversion without relying on spammy or unsupported claims."
+    meta={[
+      "Free prompt",
+      "Email marketing",
+      "Campaign sequences",
+    ]}
+    bestFor={[
+      "Lead nurturing",
+      "Product launches",
+      "Welcome sequences",
+      "Customer onboarding",
+      "Reactivation",
+      "Small businesses",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Build an email sequence that moves the customer forward."
+    introDescription="Define the audience stage and campaign objective, then give each email a clear role with truthful subject lines, useful content, focused CTAs and measurable next steps."
+    steps={steps}
+    exampleTitle="Turn a checklist download into a practical nurture sequence."
+    example={example}
+    tipsTitle="Good email campaigns earn the next click instead of forcing it."
+    tips={tips}
+    sidebarTitle="Need a landing page for the campaign?"
+    sidebarDescription="Use KRIYANO's Landing Page Messaging Prompt to make sure the destination page continues the same promise, audience message and CTA used in the email."
+    warningTitle="Email marketing needs factual and compliance review"
+    warningText="Verify offers, deadlines, claims, personalization data and promotional terms before sending. Review applicable email-marketing, privacy and unsubscribe requirements for the locations where you operate."
+  />
+</BaseLayout>

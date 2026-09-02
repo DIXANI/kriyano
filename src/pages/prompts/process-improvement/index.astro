@@ -1,0 +1,848 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced process-improvement, operations and continuous-improvement specialist.
+
+TASK:
+Analyze the business process described below and recommend practical improvements.
+
+The goal is to improve the process without making it unnecessarily complex.
+
+PROCESS NAME:
+[Name of the process.]
+
+BUSINESS / DEPARTMENT:
+[Office / Finance / HR / Sales / Customer Service / Administration / Operations / Other.]
+
+PROCESS PURPOSE:
+[What should this process achieve?]
+
+CUSTOMER / END USER:
+[Who receives the output?]
+
+PROCESS START:
+[What triggers the process?]
+
+PROCESS END:
+[What marks completion?]
+
+CURRENT PROCESS STEPS:
+[List the current steps in order.]
+
+PEOPLE / TEAMS INVOLVED:
+[List roles or departments.]
+
+SYSTEMS / TOOLS USED:
+[Email, ERP, CRM, spreadsheets, forms, shared drives, software, etc.]
+
+APPROVALS:
+[List approval stages.]
+
+HANDOFFS:
+[List where work moves between people or teams.]
+
+CURRENT PROBLEMS:
+[Delays, errors, rework, duplication, complaints, backlog, missed deadlines, etc.]
+
+AVAILABLE DATA:
+[Cycle time, error rate, backlog, volume, cost, SLA, complaints, etc.]
+
+BUSINESS CONSTRAINTS:
+[Budget, staffing, policy, system limits, legal requirements, customer requirements, etc.]
+
+IMPROVEMENT GOAL:
+[Reduce time / reduce errors / improve service / lower cost / improve control / simplify process / other.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+PROCESS IMPROVEMENT REQUIREMENTS:
+
+1. DEFINE THE PROCESS
+Summarize:
+
+Process:
+Purpose:
+Customer:
+Start point:
+End point:
+Main output:
+
+Do not change the intended business objective.
+
+2. MAP THE CURRENT STATE
+Convert the supplied information into a simple process map.
+
+For each step provide:
+
+Step:
+Activity:
+Responsible role:
+Input:
+Output:
+System / tool:
+Decision point:
+Handoff:
+
+Do not invent missing steps.
+
+If a step is unclear, mark it:
+
+"Requires clarification."
+
+3. IDENTIFY CUSTOMER VALUE
+For each major step classify whether it:
+
+Adds direct customer / business value
+Supports necessary control
+Is required by policy / regulation
+Creates little or no value
+
+Do not recommend removing necessary control simply because it does not directly create customer value.
+
+4. IDENTIFY BOTTLENECKS
+Look for:
+
+- queues
+- backlogs
+- slow approvals
+- limited resources
+- overloaded roles
+- system delays
+- dependency on one individual
+- batch processing
+- waiting for information
+- repeated review
+
+For each bottleneck provide:
+
+Location:
+Cause:
+Impact:
+Evidence:
+Information required:
+
+5. IDENTIFY WAITING TIME
+Check where work waits for:
+
+- approval
+- information
+- response
+- system access
+- another department
+- customer
+- supplier
+- manager
+- scheduled batch
+
+Distinguish:
+
+Processing time
+Waiting time
+
+6. IDENTIFY UNNECESSARY HANDOFFS
+Review transfers between:
+
+- departments
+- employees
+- systems
+- email inboxes
+- shared folders
+- approval levels
+
+For each handoff ask:
+
+Is it necessary?
+Does ownership become unclear?
+Does information get re-entered?
+Does it create delay?
+Can responsibility remain with one role longer?
+
+7. IDENTIFY DUPLICATION
+Look for:
+
+- repeated data entry
+- repeated approvals
+- duplicate reports
+- multiple trackers
+- repeated verification
+- duplicate communication
+- information stored in several places
+
+Explain why duplication occurs before recommending removal.
+
+8. IDENTIFY REWORK
+Identify activities repeated because of:
+
+- errors
+- incomplete information
+- unclear requirements
+- incorrect approval
+- missing documents
+- poor-quality input
+- system limitations
+- inconsistent standards
+
+Estimate impact only when data is supplied.
+
+9. IDENTIFY PROCESS WASTE
+Review common waste types:
+
+WAITING
+Work sits idle.
+
+OVERPROCESSING
+More review or work than necessary.
+
+DEFECTS
+Errors requiring correction.
+
+REWORK
+Tasks repeated.
+
+MOTION
+Unnecessary movement or navigation.
+
+TRANSPORT
+Information or work moved unnecessarily.
+
+INVENTORY / BACKLOG
+Work accumulates before completion.
+
+UNDERUSED SKILLS
+People perform work below or outside the most effective use of their expertise.
+
+Apply only where relevant.
+
+10. REVIEW DECISION POINTS
+For each decision ask:
+
+- Is the rule clear?
+- Is the authority clear?
+- Is the required information available?
+- Is escalation defined?
+- Is judgment being used where a rule could be standardized?
+
+Do not eliminate necessary professional judgment.
+
+11. REVIEW APPROVALS
+For each approval stage provide:
+
+Approval:
+Purpose:
+Risk controlled:
+Approver role:
+Typical delay:
+Can it be simplified?
+Can approval thresholds be used?
+Can low-risk cases bypass senior approval?
+
+Do not remove controls that manage significant financial, safety, legal or business risk.
+
+12. REVIEW OWNERSHIP
+Identify whether responsibility is clear at each stage.
+
+Flag:
+
+- no clear owner
+- multiple owners
+- responsibility transfer
+- unclear escalation
+- shared inbox dependency
+- work waiting without ownership
+
+13. REVIEW INPUT QUALITY
+Check whether problems begin because the process receives:
+
+- incomplete information
+- incorrect data
+- missing documents
+- inconsistent formats
+- unclear requests
+- incorrect master data
+
+Consider preventing errors at the input stage instead of correcting them later.
+
+14. REVIEW STANDARDIZATION
+Check whether the process varies unnecessarily between:
+
+- employees
+- departments
+- customers
+- locations
+- shifts
+- cases
+
+Identify where standardization would improve consistency.
+
+Do not remove justified exceptions.
+
+15. REVIEW EXCEPTION HANDLING
+Identify:
+
+Normal process:
+Common exception:
+Unusual exception:
+Escalation path:
+
+A strong process should define how exceptions are handled without allowing every case to become an exception.
+
+16. REVIEW COMMUNICATION
+Check:
+
+- who needs information
+- when they need it
+- how information is sent
+- repeated status requests
+- missing updates
+- unnecessary CCs
+- communication outside the system
+
+Recommend simpler communication where practical.
+
+17. REVIEW EMAIL DEPENDENCY
+Where email drives the workflow, analyze:
+
+- lost requests
+- unclear ownership
+- repeated follow-ups
+- version-control problems
+- approval delays
+- attachments
+- manual status tracking
+
+Consider structured alternatives only when justified.
+
+18. REVIEW SPREADSHEET DEPENDENCY
+If spreadsheets are used, check:
+
+- manual entry
+- multiple versions
+- formulas
+- access control
+- duplicate trackers
+- data consistency
+- reporting effort
+
+Do not automatically recommend replacing spreadsheets if they are suitable for the scale and risk.
+
+19. REVIEW SYSTEM USE
+Check whether current systems are:
+
+- underused
+- duplicated
+- poorly configured
+- disconnected
+- requiring manual re-entry
+- generating unnecessary workarounds
+
+Distinguish process problems from system problems.
+
+20. AUTOMATION OPPORTUNITIES
+Only recommend automation where:
+
+- the task is repetitive
+- rules are clear
+- volume justifies it
+- input quality is reliable
+- automation reduces meaningful effort or risk
+
+Examples:
+
+- notifications
+- reminders
+- data transfer
+- report generation
+- approval routing
+- validation
+- status tracking
+
+Do not recommend automation simply because it is possible.
+
+21. REMOVE / REDUCE / SIMPLIFY / AUTOMATE
+For each improvement opportunity classify:
+
+REMOVE
+Activity can be eliminated.
+
+REDUCE
+Frequency or effort can be lowered.
+
+SIMPLIFY
+Process can be made easier.
+
+STANDARDIZE
+Variation can be reduced.
+
+AUTOMATE
+Repetitive rule-based activity can be automated.
+
+CONTROL
+A stronger preventive or detective control is required.
+
+22. ROOT-CAUSE ANALYSIS
+For significant process problems identify:
+
+Symptom:
+Immediate cause:
+Contributing factors:
+Likely root cause:
+Evidence:
+Verification required:
+
+Do not stop at:
+
+"People are slow."
+"Poor communication."
+"Human error."
+
+Investigate why the process allows the condition.
+
+23. IDENTIFY QUICK WINS
+Recommend improvements that are:
+
+- low cost
+- low risk
+- fast to implement
+- easy to test
+- likely to produce visible benefit
+
+For each:
+
+Quick win:
+Problem addressed:
+Expected benefit:
+Effort:
+Owner role:
+
+24. IDENTIFY MEDIUM-TERM IMPROVEMENTS
+Include changes requiring:
+
+- procedure revision
+- reporting changes
+- workflow redesign
+- role clarification
+- training
+- configuration changes
+
+25. IDENTIFY LONG-TERM IMPROVEMENTS
+Only where justified include:
+
+- system integration
+- major automation
+- organizational redesign
+- new technology
+- major policy changes
+
+26. DESIGN THE FUTURE-STATE PROCESS
+Create an improved process.
+
+For each future step provide:
+
+Step:
+Activity:
+Responsible role:
+Input:
+Output:
+Control:
+System / tool:
+
+Keep the future state as simple as practical.
+
+27. COMPARE CURRENT VS FUTURE STATE
+Create:
+
+Current issue:
+Current method:
+Future-state change:
+Expected benefit:
+Risk:
+Measurement:
+
+28. REDUCE CYCLE TIME
+Where cycle time is a problem identify ways to reduce:
+
+- waiting
+- batching
+- approval delay
+- unnecessary review
+- handoff time
+- repeated correction
+
+Do not reduce necessary quality or risk controls simply to improve speed.
+
+29. REDUCE ERROR
+Consider controls such as:
+
+- validation
+- standard templates
+- checklists
+- required fields
+- dropdown selections
+- system rules
+- peer review
+- exception reports
+
+Prefer preventive controls when practical.
+
+30. REDUCE BACKLOG
+Analyze:
+
+Arrival rate:
+Processing capacity:
+Current queue:
+Priority rules:
+Ageing:
+Bottleneck:
+
+Where sufficient information exists.
+
+Do not assume overtime is the best solution.
+
+31. DEFINE PRIORITIES
+Classify improvements:
+
+P1 — Immediate / Critical
+P2 — High
+P3 — Medium
+P4 — Low
+
+Consider:
+
+Impact
+Cost
+Effort
+Risk
+Urgency
+Dependency
+
+32. IMPACT / EFFORT MATRIX
+Classify opportunities:
+
+High Impact / Low Effort
+High Impact / High Effort
+Low Impact / Low Effort
+Low Impact / High Effort
+
+Prioritize high-impact, low-effort improvements where practical.
+
+33. IMPLEMENTATION PLAN
+For each selected improvement provide:
+
+Action:
+Purpose:
+Responsible role:
+Priority:
+Dependency:
+Target:
+Evidence of completion:
+
+Do not invent names or official dates.
+
+34. PILOT PLAN
+For major changes consider a pilot.
+
+Define:
+
+Scope:
+Duration:
+Users:
+Process:
+Success measure:
+Risks:
+Decision after pilot:
+
+35. CHANGE MANAGEMENT
+Consider:
+
+- communication
+- training
+- stakeholder involvement
+- resistance
+- process ownership
+- support
+- transition period
+
+Do not assume employees resist change without evidence.
+
+36. TRAINING NEEDS
+Only recommend training where knowledge or skill gaps genuinely contribute.
+
+For each:
+
+Role:
+Training:
+Reason:
+Competency check:
+
+Do not use training as the default fix for poor process design.
+
+37. SOP / DOCUMENTATION
+Identify whether improvement requires changes to:
+
+- SOP
+- work instruction
+- checklist
+- form
+- approval matrix
+- template
+- policy
+
+Do not create unnecessary documentation.
+
+38. CONTROL PLAN
+For important future-state controls provide:
+
+Control:
+Purpose:
+Owner:
+Frequency:
+Evidence:
+Escalation:
+
+39. KPI DESIGN
+Recommend relevant measures such as:
+
+Cycle Time
+Processing Time
+First-Time-Right %
+Error Rate
+Rework Rate
+Backlog
+Ageing
+On-Time Completion %
+SLA Achievement %
+Cost per Transaction
+Customer Satisfaction
+Approval Time
+Automation Rate
+
+Only recommend KPIs relevant to the process.
+
+40. BASELINE
+For each KPI define:
+
+Current:
+Target:
+Data source:
+Review frequency:
+
+If the current value is unknown, state:
+
+"Baseline required."
+
+Do not invent targets.
+
+41. LEADING & LAGGING MEASURES
+Where useful distinguish:
+
+Leading indicator
+Predicts future process performance.
+
+Lagging indicator
+Shows the final result.
+
+42. SUCCESS CRITERIA
+Define how improvement will be judged.
+
+Examples:
+
+- cycle time reduced
+- backlog reduced
+- fewer errors
+- fewer handoffs
+- improved SLA
+- reduced rework
+- fewer customer complaints
+
+Use measurable criteria where data exists.
+
+43. VERIFY EFFECTIVENESS
+After implementation recommend:
+
+- process observation
+- KPI review
+- sample audit
+- employee feedback
+- customer feedback
+- error review
+- backlog review
+
+Do not declare success immediately after implementation.
+
+44. CHECK FOR UNINTENDED CONSEQUENCES
+Ask whether the new process could create:
+
+- new bottleneck
+- control weakness
+- extra workload
+- customer impact
+- system dependency
+- quality risk
+- hidden manual work
+
+45. STANDARDIZE AFTER VALIDATION
+Once improvement is proven, consider:
+
+- updating SOP
+- training
+- templates
+- process map
+- KPI ownership
+- routine audit
+- wider rollout
+
+46. MANAGEMENT SUMMARY
+Provide:
+
+Process:
+Main problem:
+Largest bottleneck:
+Largest source of waste:
+Most important root cause:
+Best quick win:
+Best structural improvement:
+Main automation opportunity:
+Main implementation risk:
+Primary KPI:
+Recommended next action:
+
+OUTPUT FORMAT:
+
+1. Executive Summary
+2. Current-State Process
+3. Customer / Business Value Review
+4. Bottlenecks & Waiting
+5. Handoffs & Ownership
+6. Duplication & Rework
+7. Waste Analysis
+8. Approval & Decision Review
+9. Input / Communication / System Review
+10. Root-Cause Findings
+11. Improvement Opportunities
+12. Quick Wins
+13. Medium-Term Improvements
+14. Long-Term Improvements
+15. Future-State Process
+16. Current vs Future Comparison
+17. Impact / Effort Matrix
+18. Implementation Plan
+19. Change & Training Requirements
+20. Control Plan
+21. KPI & Success Measures
+22. Effectiveness Verification
+23. Management Summary
+
+IMPORTANT:
+- Do not invent process steps, data, performance or causes.
+- Separate confirmed facts from assumptions.
+- Do not remove controls without considering the risk they manage.
+- Do not automatically recommend automation.
+- Prefer simpler process design before adding technology.
+- Do not treat training as the default solution.
+- Identify waiting time separately from actual processing time.
+- Reduce unnecessary handoffs and duplication where evidence supports it.
+- Preserve necessary quality, financial, safety and compliance controls.
+- Design improvements around the stated business objective.
+- Define how improvement will be measured after implementation.`;
+
+const steps = [
+  {
+    title: "Map the current process",
+    description:
+      "Understand the actual workflow, responsibilities, handoffs, approvals and waiting points before deciding what should change.",
+  },
+  {
+    title: "Find where work gets stuck",
+    description:
+      "Look for bottlenecks, duplication, rework, unclear ownership, unnecessary approvals and information that repeatedly waits between steps.",
+  },
+  {
+    title: "Simplify before automating",
+    description:
+      "Remove or redesign unnecessary work first, then consider automation where repetitive rule-based activity genuinely benefits from it.",
+  },
+  {
+    title: "Measure the future state",
+    description:
+      "Define KPIs, controls and success criteria so improvements can be verified rather than judged only by whether the new process feels better.",
+  },
+];
+
+const example = {
+  input: [
+    "Process: Customer refund approval.",
+    "Current flow: Customer service completes a spreadsheet, emails it to a supervisor, supervisor checks it, finance reviews it, manager approves it, and finance processes the refund.",
+    "Problem: Average completion takes five working days.",
+    "Main complaint: Requests frequently wait in email inboxes.",
+    "Constraint: Existing financial approval controls must remain.",
+    "Goal: Reduce turnaround time without weakening control.",
+  ],
+
+  output: [
+    "The main improvement opportunity appears to be waiting and ownership between approval stages rather than the refund-processing activity itself.",
+    "Do not remove financial approval solely to reduce cycle time. First verify what risk each approval controls and whether approval thresholds can simplify low-value cases.",
+    "Potential quick wins include standardized request information, clear ownership, a shared status view and defined escalation for ageing requests.",
+    "If email routing is creating significant volume-related delays, structured workflow or automated approval notifications may be justified after the process is simplified.",
+    "Future-state design should preserve required financial controls while reducing inbox dependency and repeated status follow-ups.",
+    "Track total cycle time, waiting time by approval stage, first-time-right submission rate and overdue requests to verify improvement.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Measure waiting, not only working time",
+    description:
+      "Many business processes are slow because work spends more time sitting between steps than being actively processed.",
+  },
+  {
+    title: "Don't automate waste",
+    description:
+      "Automating an unnecessary approval, duplicate entry or poorly designed workflow can make the wrong process faster rather than making it better.",
+  },
+  {
+    title: "Protect necessary controls",
+    description:
+      "A faster process is not an improvement if it creates unacceptable financial, quality, customer, safety or compliance risk.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Process Improvement Prompt | KRIYANO"
+  description="Analyze business processes, bottlenecks, delays, handoffs, duplication and rework, then design a simpler future-state workflow with KPIs and implementation actions."
+>
+  <PromptPage
+    category="WORK & PRODUCTIVITY"
+    title="Process Improvement"
+    accentTitle="Prompt."
+    description="Analyze how work flows today, uncover delays and unnecessary complexity, and redesign the process around simpler handoffs, stronger controls and measurable outcomes."
+    meta={[
+      "Free prompt",
+      "Process improvement",
+      "Workflow analysis",
+    ]}
+    bestFor={[
+      "Office processes",
+      "Business workflows",
+      "Administration",
+      "Customer service",
+      "Finance & approvals",
+      "Cross-functional processes",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Improve the flow before adding more tools."
+    introDescription="Map the current process, identify waiting, duplication, rework and ownership gaps, then design a simpler future state that preserves the controls the business actually needs."
+    steps={steps}
+    exampleTitle="Turn a slow approval workflow into a better process."
+    example={example}
+    tipsTitle="Improve processes without adding unnecessary complexity."
+    tips={tips}
+    sidebarTitle="Need to solve one specific problem first?"
+    sidebarDescription="Use KRIYANO's Problem-Solving Prompt when the issue is still unclear or you need to compare several possible solutions before redesigning the wider process."
+    warningTitle="Faster does not always mean better"
+    warningText="Process improvement should reduce unnecessary work while preserving the controls needed for quality, financial integrity, customer requirements, safety and compliance."
+  />
+</BaseLayout>

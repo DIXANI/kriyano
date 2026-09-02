@@ -1,0 +1,674 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert marketing strategist, campaign planner, creative director and customer-insight specialist.
+
+TASK:
+Generate practical marketing campaign ideas for the supplied product, service, business or brand.
+
+The campaign ideas should be:
+- relevant to the target audience
+- aligned with the business goal
+- realistic for the available budget and channels
+- differentiated from generic marketing ideas
+- easy to turn into actual content, ads or promotions
+- measurable
+
+BUSINESS / BRAND:
+[Name and short description.]
+
+PRODUCT OR SERVICE:
+[What are you promoting?]
+
+CAMPAIGN GOAL:
+[Awareness / leads / sales / launch / traffic / engagement / retention / reactivation / other.]
+
+TARGET AUDIENCE:
+[Who should the campaign reach?]
+
+LOCATION:
+[Country / city / region / online/global.]
+
+CUSTOMER PROBLEM:
+[What problem does the audience currently have?]
+
+CUSTOMER DESIRE:
+[What outcome do they want?]
+
+VALUE PROPOSITION:
+[Why should they choose this product or service?]
+
+KEY FEATURES:
+[List the most relevant real features.]
+
+KEY BENEFITS:
+[List supported benefits.]
+
+DIFFERENTIATOR:
+[What makes this offer meaningfully different?]
+
+OFFER:
+[Discount / free trial / bundle / consultation / no offer / other.]
+
+BUDGET LEVEL:
+[Very low / low / medium / high.]
+
+CAMPAIGN DURATION:
+[For example: 7 days / 30 days / 3 months.]
+
+CHANNELS:
+[Facebook / Instagram / TikTok / LinkedIn / YouTube / email / website / search / offline / other.]
+
+CONTENT RESOURCES:
+[Photos / videos / testimonials / product demos / staff / user-generated content / none.]
+
+BRAND TONE:
+[Professional / friendly / premium / practical / energetic / educational / other.]
+
+CTA:
+[Buy / enquire / book / sign up / download / visit / follow / other.]
+
+RESTRICTIONS:
+[Any claims, legal limitations, platform restrictions or brand rules.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+CAMPAIGN IDEA REQUIREMENTS:
+
+1. START WITH THE CAMPAIGN OBJECTIVE
+Every idea must support the stated business goal.
+
+2. DO NOT GENERATE RANDOM CREATIVE IDEAS
+Each concept should connect to:
+Audience
+Problem
+Desire
+Value proposition
+Channel
+CTA
+
+3. IDENTIFY THE PRIMARY CUSTOMER MOTIVATION
+Determine what matters most to the audience.
+
+4. DISTINGUISH CUSTOMER PROBLEM FROM CUSTOMER DESIRE
+Problem = what they want to avoid or fix.
+Desire = what they want to achieve.
+
+5. BUILD IDEAS AROUND REAL CUSTOMER VALUE
+Avoid generic slogans without substance.
+
+6. DO NOT INVENT PRODUCT FEATURES
+
+7. DO NOT INVENT BENEFITS
+
+8. DO NOT INVENT OFFERS
+
+9. DO NOT INVENT TESTIMONIALS
+
+10. DO NOT INVENT CUSTOMER RESULTS
+
+11. DO NOT INVENT RATINGS OR AWARDS
+
+12. DO NOT INVENT MARKET LEADERSHIP CLAIMS
+
+13. CREATE MULTIPLE CAMPAIGN ANGLES
+Examples:
+Problem-solution
+Educational
+Demonstration
+Comparison
+Behind the scenes
+Social proof
+Use case
+Transformation
+Convenience
+Cost control
+Time saving
+Risk reduction
+Lifestyle
+Community
+Expertise
+
+14. ONLY USE SOCIAL PROOF WHEN REAL PROOF IS AVAILABLE
+
+15. IDENTIFY THE CORE MESSAGE FOR EACH IDEA
+
+16. KEEP ONE PRIMARY MESSAGE PER CAMPAIGN CONCEPT
+
+17. DO NOT TRY TO COMMUNICATE EVERY BENEFIT AT ONCE
+
+18. CREATE A STRONG HOOK
+The opening should make the target audience recognize relevance quickly.
+
+19. KEEP HOOKS TRUTHFUL
+
+20. AVOID CLICKBAIT
+
+21. AVOID FALSE URGENCY
+
+22. AVOID FALSE SCARCITY
+
+23. USE CUSTOMER LANGUAGE
+Prefer wording that matches how the audience naturally describes the problem.
+
+24. AVOID EMPTY MARKETING LANGUAGE
+Avoid vague phrases such as:
+Game-changing
+Revolutionary
+Best ever
+Ultimate solution
+Next-level
+
+unless properly supported and contextually appropriate.
+
+25. DEFINE THE CAMPAIGN ANGLE
+Explain the psychological or practical reason the idea may resonate.
+
+26. DEFINE THE MAIN MESSAGE
+
+27. DEFINE THE HOOK
+
+28. DEFINE THE CTA
+
+29. DEFINE THE BEST CHANNEL
+
+30. MATCH THE IDEA TO CHANNEL BEHAVIOUR
+
+31. FACEBOOK MODE
+Consider:
+Feed posts
+Reels
+Community discussion
+Lead generation
+Retargeting
+
+32. INSTAGRAM MODE
+Consider:
+Reels
+Carousels
+Stories
+Visual product demonstration
+Creator-style content
+
+33. TIKTOK MODE
+Consider:
+Fast hooks
+Authentic demonstrations
+Problem-first content
+Short storytelling
+Native-style content
+
+34. LINKEDIN MODE
+Consider:
+Professional problems
+Operational outcomes
+Case examples
+Educational content
+Thought leadership
+
+35. YOUTUBE MODE
+Consider:
+Demonstrations
+Explainers
+Reviews
+Shorts
+Long-form education
+
+36. EMAIL MODE
+Consider:
+Segmentation
+Subject line
+Single CTA
+Offer relevance
+Follow-up sequence
+
+37. WEBSITE MODE
+Consider:
+Landing pages
+Lead magnets
+Conversion messaging
+Retargeting support
+
+38. SEARCH MODE
+Focus on high-intent problems and needs.
+
+39. OFFLINE MODE
+Use when location, foot traffic or local trust matter.
+
+40. CREATE BUDGET-APPROPRIATE IDEAS
+
+41. VERY-LOW-BUDGET MODE
+Prioritize:
+Organic content
+Existing customers
+Community groups
+Email
+Partnerships
+Referral
+Founder-led content
+
+42. LOW-BUDGET MODE
+Prioritize repeatable content and selective promotion.
+
+43. MEDIUM-BUDGET MODE
+Allow:
+Paid testing
+Creator partnerships
+Retargeting
+Content production
+
+44. HIGH-BUDGET MODE
+May include:
+Multi-channel production
+Influencers
+Large-scale media
+Brand campaigns
+
+45. DO NOT RECOMMEND EXPENSIVE TACTICS FOR A VERY LOW BUDGET
+
+46. CREATE CONTENT THAT CAN BE EXECUTED
+Every concept should include concrete content pieces.
+
+47. PROVIDE A HERO CONTENT IDEA
+
+48. PROVIDE SUPPORTING CONTENT
+
+49. PROVIDE REUSABLE CONTENT OPTIONS
+Where possible, show how one asset can become:
+Reel
+Post
+Carousel
+Email
+Story
+Short
+
+50. USE CONTENT REPURPOSING TO REDUCE COST
+
+51. DEFINE CAMPAIGN PHASES
+When appropriate:
+Tease
+Launch
+Educate
+Convert
+Retarget
+Follow up
+
+52. DO NOT CREATE UNNECESSARY PHASES FOR SIMPLE CAMPAIGNS
+
+53. CREATE A SIMPLE CUSTOMER JOURNEY
+
+54. DEFINE WHAT THE AUDIENCE SEES FIRST
+
+55. DEFINE WHAT THEY LEARN NEXT
+
+56. DEFINE WHAT BUILDS TRUST
+
+57. DEFINE WHAT TRIGGERS ACTION
+
+58. DEFINE THE NEXT STEP AFTER CLICKING
+
+59. DO NOT SEND TRAFFIC TO AN IRRELEVANT DESTINATION
+
+60. ALIGN CTA WITH FUNNEL STAGE
+
+61. AWARENESS CTA
+Examples:
+Watch
+Learn
+Follow
+Discover
+
+62. CONSIDERATION CTA
+Examples:
+Compare
+Download
+View details
+See how it works
+
+63. CONVERSION CTA
+Examples:
+Buy
+Book
+Start trial
+Request quote
+
+64. LEAD GENERATION CTA
+Examples:
+Download
+Register
+Request consultation
+Get estimate
+
+65. RETENTION CTA
+Examples:
+Try another feature
+Reorder
+Upgrade
+Refer
+
+66. CREATE A CAMPAIGN CONTENT MIX
+
+67. INCLUDE EDUCATIONAL CONTENT WHEN THE CUSTOMER NEEDS EXPLANATION
+
+68. INCLUDE DEMONSTRATION CONTENT WHEN PROOF IS VISUAL
+
+69. INCLUDE TRUST CONTENT WHEN RISK IS HIGH
+
+70. INCLUDE OFFER CONTENT WHEN A REAL OFFER EXISTS
+
+71. DO NOT MAKE EVERY POST A SALES POST
+
+72. CREATE VARIATION IN CONTENT PURPOSE
+
+73. USE SHORT-FORM VIDEO WHEN THE PRODUCT BENEFITS FROM DEMONSTRATION
+
+74. USE CAROUSELS FOR STRUCTURED EDUCATION
+
+75. USE STATIC POSTS FOR SIMPLE MESSAGES
+
+76. USE EMAIL FOR FOLLOW-UP
+
+77. USE LANDING PAGES FOR FOCUSED CONVERSION
+
+78. CREATE TESTABLE VARIATIONS
+
+79. CHANGE ONE MAJOR VARIABLE AT A TIME
+Examples:
+Hook
+Angle
+Visual
+CTA
+Offer framing
+
+80. DO NOT CREATE COMPLETELY DIFFERENT VARIANTS THAT CANNOT BE COMPARED
+
+81. DEFINE A PRIMARY KPI
+
+82. DEFINE SECONDARY KPIS
+
+83. MATCH KPI TO OBJECTIVE
+
+84. AWARENESS KPIS MAY INCLUDE:
+Reach
+Video views
+View-through rate
+Brand search
+
+85. ENGAGEMENT KPIS MAY INCLUDE:
+Saves
+Shares
+Comments
+Engagement rate
+
+86. LEAD KPIS MAY INCLUDE:
+Leads
+Cost per lead
+Lead conversion rate
+
+87. SALES KPIS MAY INCLUDE:
+Purchases
+Conversion rate
+Cost per acquisition
+Revenue
+
+88. DO NOT CLAIM A KPI TARGET WITHOUT SUPPORTING DATA
+
+89. RECOMMEND BASELINE COMPARISON WHEN TARGET DATA IS UNKNOWN
+
+90. DEFINE WHAT SHOULD BE TESTED FIRST
+
+91. DEFINE WHAT SUCCESS WOULD LOOK LIKE
+Use directional criteria if numerical targets are unavailable.
+
+92. INCLUDE A LOW-RISK TEST
+Provide a small version of the campaign that can be validated before scaling.
+
+93. INCLUDE A SCALE-UP OPTION
+Explain how to expand the best-performing idea.
+
+94. CREATE FAILURE SIGNALS
+Explain what may indicate the campaign angle is not resonating.
+
+95. CREATE OPTIMIZATION ACTIONS
+Examples:
+Change hook
+Improve targeting
+Simplify CTA
+Strengthen landing page
+Improve offer clarity
+
+96. DO NOT ASSUME POOR PERFORMANCE IS ALWAYS A CREATIVE PROBLEM
+
+97. CONSIDER:
+Audience
+Offer
+Creative
+Channel
+Landing page
+Pricing
+Timing
+Trust
+
+98. CREATE A CLAIM-SAFETY CHECK
+
+99. CREATE A FEASIBILITY CHECK
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- campaign objective is clear
+- audience is specific enough
+- customer problem is understood
+- customer desire is understood
+- value proposition is reflected
+- each idea has one clear angle
+- hooks are truthful
+- benefits are supported
+- no features were invented
+- no offers were invented
+- no social proof was invented
+- channel choice makes sense
+- budget level is respected
+- content can realistically be produced
+- CTA matches funnel stage
+- campaign journey is coherent
+- KPI matches objective
+- testing plan is practical
+- low-risk test is included
+- scale-up path is included
+- ideas are sufficiently different
+- ideas are not generic
+- campaign can be turned into real actions
+
+OUTPUT FORMAT:
+
+1. CAMPAIGN SUMMARY
+Summarize:
+Business
+Audience
+Goal
+Customer problem
+Customer desire
+Value proposition
+Budget
+Primary channel
+
+2. CAMPAIGN IDEA TABLE
+
+Create 5–10 ideas.
+
+For each idea provide:
+Campaign name
+Angle
+Audience insight
+Core message
+Hook
+Hero content
+Supporting content
+Best channel
+CTA
+Why it may work
+Effort level
+
+3. TOP 3 RECOMMENDATIONS
+Rank the strongest ideas and explain why.
+
+4. HERO CAMPAIGN
+Develop the best idea in more detail.
+
+Provide:
+Campaign concept
+Main message
+Hook
+Visual concept
+Content sequence
+CTA
+Landing destination
+
+5. CONTENT PLAN
+Provide practical content pieces for the hero campaign.
+
+6. CUSTOMER JOURNEY
+Map:
+First exposure
+Engagement
+Trust
+Conversion
+Follow-up
+
+7. TEST PLAN
+Provide:
+What to test
+Variant A
+Variant B
+Primary KPI
+Evaluation logic
+
+8. LOW-BUDGET VERSION
+Show how to execute the campaign with minimal resources.
+
+9. SCALE-UP VERSION
+Show how to expand it if early results are positive.
+
+10. KPI PLAN
+Provide:
+Primary KPI
+Secondary KPIs
+What each KPI indicates
+
+11. CLAIM & FACT CHECK
+List anything that must be verified before publishing.
+
+12. FINAL ACTION PLAN
+Give the first practical actions in priority order.
+
+IMPORTANT:
+- Create executable ideas, not vague inspiration.
+- Align every concept with audience, objective and channel.
+- Respect the stated budget.
+- Do not invent features, offers, testimonials, ratings, results or claims.
+- Prefer testable campaign ideas.
+- Keep the customer journey and CTA practical.`;
+
+const steps = [
+  {
+    title: "Start with the customer problem",
+    description:
+      "Define what the audience is trying to fix or achieve before generating campaign concepts so the ideas are built around real relevance.",
+  },
+  {
+    title: "Create different campaign angles",
+    description:
+      "Explore genuinely different approaches such as education, demonstration, problem-solution, use case or trust instead of producing several versions of the same idea.",
+  },
+  {
+    title: "Match ideas to budget and channel",
+    description:
+      "A good campaign should be practical to execute with the available resources and should fit how people actually consume content on the selected platform.",
+  },
+  {
+    title: "Test before scaling",
+    description:
+      "Use a smaller campaign version to compare hooks, creative or messaging before investing more heavily in the strongest approach.",
+  },
+];
+
+const example = {
+  input: [
+    "Business: Online inventory tools website.",
+    "Product: Free Reorder Point Calculator.",
+    "Audience: Small-business owners and warehouse professionals.",
+    "Goal: Increase qualified website traffic.",
+    "Budget: Very low.",
+    "Channels: LinkedIn and Facebook.",
+    "Value: Helps users calculate when stock should be reordered.",
+  ],
+
+  output: [
+    "CAMPAIGN IDEA — 'Running Out or Ordering Too Early?': Use a practical stock-planning problem as the hook and demonstrate the calculator using a simple inventory example.",
+    "HERO CONTENT: Short screen-recording Reel showing annual demand, lead time and safety stock being entered, followed by the calculated reorder point.",
+    "SUPPORTING CONTENT: LinkedIn educational post explaining the difference between reorder point and reorder quantity, plus a simple visual example.",
+    "CTA: Calculate your reorder point.",
+    "LOW-BUDGET EXECUTION: Use screen recordings, simple branded graphics and organic professional posts rather than paid production.",
+    "KPI: Qualified calculator visits and completed calculator sessions rather than raw post impressions alone.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Different ideas need different reasons to work",
+    description:
+      "Changing only the headline does not create a new campaign concept. Test meaningful differences such as education versus demonstration or cost control versus convenience.",
+  },
+  {
+    title: "Match ambition to resources",
+    description:
+      "A simple campaign that can be published consistently is often more useful than a complex concept that requires production resources the business does not have.",
+  },
+  {
+    title: "Traffic is not always the final goal",
+    description:
+      "Choose KPIs based on the actual objective. For example, a useful-tool campaign may care more about completed tool usage or qualified visits than total impressions.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Campaign Idea Generator Prompt | KRIYANO"
+  description="Generate practical marketing campaign ideas based on audience, goals, budget, channels, customer needs and measurable outcomes."
+>
+  <PromptPage
+    category="MARKETING"
+    title="Campaign Idea Generator"
+    accentTitle="Prompt."
+    description="Generate practical, differentiated marketing campaign ideas built around your audience, business objective, available channels, budget and real customer value."
+    meta={[
+      "Free prompt",
+      "Marketing campaigns",
+      "Campaign planning",
+    ]}
+    bestFor={[
+      "Small businesses",
+      "Product launches",
+      "Social campaigns",
+      "Lead generation",
+      "Content marketing",
+      "Low-budget marketing",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Turn a marketing goal into campaign ideas you can actually execute."
+    introDescription="Define the audience, customer problem, value proposition and available resources, then generate campaign angles with hooks, content, CTAs, testing and measurement."
+    steps={steps}
+    exampleTitle="Build a low-budget campaign for a practical online tool."
+    example={example}
+    tipsTitle="Campaign ideas become useful when they connect to execution."
+    tips={tips}
+    sidebarTitle="Need the overall strategy first?"
+    sidebarDescription="Use KRIYANO's Marketing Strategy Prompt when you need broader positioning, audience, channel and marketing-direction planning before creating individual campaigns."
+    warningTitle="Creative ideas should not create fictional proof"
+    warningText="Verify all product features, benefits, prices, offers, statistics, testimonials, ratings and performance claims before publishing campaign content."
+  />
+</BaseLayout>

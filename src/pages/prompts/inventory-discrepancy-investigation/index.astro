@@ -1,0 +1,235 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced inventory control and warehouse operations specialist.
+
+TASK:
+Investigate an inventory discrepancy between the physical stock quantity and the system quantity.
+
+ITEM / SKU:
+[Enter the item code, SKU or product description.]
+
+SYSTEM QUANTITY:
+[Enter the quantity shown in the inventory system.]
+
+PHYSICAL QUANTITY:
+[Enter the physically counted quantity.]
+
+UNIT OF MEASURE:
+[Example: each, carton, case, pallet, kg.]
+
+WAREHOUSE / LOCATION:
+[Enter warehouse, zone, aisle, rack, bin or storage location.]
+
+DISCREPANCY TYPE:
+[Shortage, excess, unknown or mixed.]
+
+VALUE / IMPORTANCE:
+[Enter approximate stock value, criticality or business impact if relevant.]
+
+RECENT ACTIVITY:
+[Describe recent receipts, picks, transfers, returns, adjustments, damages or other known transactions.]
+
+KNOWN INFORMATION:
+[Add any facts already discovered.]
+
+INVESTIGATION REQUIREMENTS:
+
+Investigate the discrepancy systematically before recommending any stock adjustment.
+
+Check the following areas:
+
+1. PHYSICAL VERIFICATION
+- Recount the stock independently.
+- Confirm the correct SKU, item description, batch, lot, serial number or variant.
+- Confirm the unit of measure.
+- Check for mixed stock, hidden stock, loose units or partially opened cartons.
+- Verify that stock has not been counted twice.
+
+2. LOCATION CHECK
+- Check the assigned system location.
+- Check nearby bins, racks and overflow locations.
+- Check staging, receiving, dispatch, returns, quarantine and damaged-stock areas.
+- Check whether stock may have been placed in the wrong location.
+
+3. RECEIVING TRANSACTIONS
+- Review recent inbound receipts.
+- Compare purchase order, delivery note and goods receipt quantities.
+- Check short receipts, over receipts, duplicate receipts or incomplete system posting.
+- Check whether received stock was physically stored before the system transaction was completed.
+
+4. OUTBOUND / PICKING TRANSACTIONS
+- Review recent picks, dispatches and sales orders.
+- Check for unconfirmed picks or shipments.
+- Check incorrect picked quantities.
+- Check whether stock physically left the warehouse without the corresponding system transaction.
+
+5. INTERNAL TRANSFERS
+- Review location-to-location and warehouse-to-warehouse transfers.
+- Check pending, incomplete or duplicate transfers.
+- Confirm both issuing and receiving locations.
+
+6. RETURNS
+- Review customer returns and supplier returns.
+- Check whether returned stock was physically received but not posted.
+- Check whether returned stock was posted to the wrong location or status.
+
+7. DAMAGED / QUARANTINE / BLOCKED STOCK
+- Check damaged, expired, rejected, quality-hold or quarantine areas.
+- Confirm whether the inventory system correctly reflects the stock status.
+
+8. SYSTEM TRANSACTIONS
+- Review adjustments, cancellations, reversals and manual entries.
+- Check transaction dates, quantities, users and reference numbers.
+- Identify duplicate, missing or incorrect transactions.
+
+9. DOCUMENTATION
+- Compare system records with physical documents where available.
+- Check purchase orders, delivery notes, picking lists, transfer documents, return notes and adjustment records.
+- Identify documentation errors or missing approvals.
+
+10. TIMING / CUT-OFF ISSUES
+- Check whether the physical count occurred while transactions were still in progress.
+- Identify receipts, picks, transfers or adjustments posted before or after the stock count.
+
+11. ROOT CAUSE
+Classify the most likely root cause, such as:
+- Receiving error
+- Picking error
+- Transfer error
+- Wrong location
+- Unit-of-measure error
+- Duplicate transaction
+- Missing transaction
+- Damage / write-off issue
+- Documentation error
+- Counting error
+- Process-control weakness
+- System / integration issue
+- Unknown pending further investigation
+
+12. CORRECTIVE ACTION
+Recommend practical corrective actions to prevent recurrence.
+
+13. STOCK ADJUSTMENT
+Do not recommend a stock adjustment until reasonable investigation steps have been completed.
+
+If an adjustment is necessary:
+- Explain why.
+- State the quantity to adjust.
+- Identify whether it is an increase or decrease.
+- State what evidence or approval should support the adjustment.
+- Recommend management escalation for significant discrepancies.
+
+OUTPUT FORMAT:
+
+1. Discrepancy Summary
+2. Immediate Verification
+3. Investigation Checklist
+4. Transaction Review
+5. Findings
+6. Most Likely Root Cause
+7. Recommended Corrective Action
+8. Stock Adjustment Recommendation
+9. Escalation Requirement
+10. Missing Information / Further Checks
+
+Be practical and evidence-based. Do not invent transaction history or assume a root cause without supporting information.`;
+
+const steps = [
+  {
+    title: "Verify the physical stock",
+    description:
+      "Recount the item, confirm the SKU and unit of measure, and check nearby, overflow and special-status locations before reviewing system transactions.",
+  },
+  {
+    title: "Trace recent transactions",
+    description:
+      "Review receipts, picks, transfers, returns, adjustments and pending transactions that could explain the difference.",
+  },
+  {
+    title: "Identify the root cause",
+    description:
+      "Separate the immediate quantity difference from the process failure that created it, such as a receiving, picking, transfer or documentation error.",
+  },
+  {
+    title: "Adjust only with evidence",
+    description:
+      "A stock adjustment should be the final control step, supported by investigation findings, documentation and the required approval.",
+  },
+];
+
+const example = {
+  input: [
+    "SKU: ABC-125",
+    "System quantity: 120 units.",
+    "Physical quantity: 114 units.",
+    "Location: WH01 / Aisle 04 / Rack B / Bin 02.",
+    "Known information: The item had one receipt and several outbound picks during the past week.",
+  ],
+
+  output: [
+    "Discrepancy Summary: Physical stock is 6 units lower than the system quantity.",
+    "Immediate Verification: Perform an independent recount and confirm SKU, UOM, adjacent locations, staging and damaged-stock areas.",
+    "Transaction Review: Compare the recent receipt quantity with supporting documents and review outbound pick confirmations for possible under-posted or unconfirmed quantities.",
+    "Root Cause: Do not assign a final cause until transaction and location checks are completed.",
+    "Adjustment Recommendation: Hold the adjustment until the investigation provides sufficient evidence and approval.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Recount before investigating",
+    description:
+      "A second independent physical count can quickly eliminate counting mistakes before time is spent reviewing transactions.",
+  },
+  {
+    title: "Follow the stock movement",
+    description:
+      "Think chronologically: how did the stock enter, where was it stored, how was it moved and how could it leave the location?",
+  },
+  {
+    title: "Fix the cause, not only the quantity",
+    description:
+      "Correcting the system balance solves today's discrepancy. Correcting the process prevents the same discrepancy from returning.",
+  },
+];
+---
+
+<BaseLayout
+  title="Inventory Discrepancy Investigation Prompt | KRIYANO"
+  description="Use this structured AI prompt to investigate physical versus system inventory discrepancies before making stock adjustments."
+>
+  <PromptPage
+    category="OPERATIONS & LOGISTICS"
+    title="Inventory Discrepancy"
+    accentTitle="Investigation."
+    description="Investigate physical-versus-system stock differences systematically before making an adjustment."
+    meta={[
+      "Free prompt",
+      "Inventory control",
+      "Warehouse operations",
+    ]}
+    bestFor={[
+      "Physical vs system variances",
+      "Cycle count discrepancies",
+      "Stock shortages",
+      "Stock excesses",
+      "Warehouse investigations",
+      "Inventory adjustments",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Don't adjust first. Investigate first."
+    introDescription="Enter the stock difference and any information you already have. The prompt guides the investigation through physical checks, locations, transactions, documentation and root cause."
+    steps={steps}
+    exampleTitle="Investigate a six-unit shortage."
+    example={example}
+    tipsTitle="Make discrepancy investigations stronger."
+    tips={tips}
+    sidebarTitle="Need a custom inventory prompt?"
+    sidebarDescription="Use the KRIYANO Prompt Builder to create a prompt around your exact warehouse process, stock issue, system and reporting requirements."
+    warningTitle="Control note"
+    warningText="AI can help structure an investigation, but stock adjustments should follow your organization's approval controls, documented evidence and inventory-management procedures."
+  />
+</BaseLayout>

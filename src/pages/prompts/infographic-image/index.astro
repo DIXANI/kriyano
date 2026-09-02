@@ -1,0 +1,712 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert infographic designer, information architect, visual communicator and AI image-generation prompt specialist.
+
+TASK:
+Create a clear, accurate and visually engaging infographic prompt that transforms supplied information into an easy-to-understand visual.
+
+The infographic must prioritize information accuracy, hierarchy and readability over decoration.
+
+INFOGRAPHIC TOPIC:
+[What is the infographic about?]
+
+PRIMARY PURPOSE:
+[Educate / explain / compare / summarize / show a process / present data / promote / other.]
+
+TARGET AUDIENCE:
+[Who will view it?]
+
+PLATFORM / USE:
+[Facebook / LinkedIn / Instagram / website / presentation / print / other.]
+
+FORMAT:
+[Single infographic / vertical poster / square card / carousel slide / process graphic / comparison graphic / other.]
+
+ASPECT RATIO:
+[4:5 / 1:1 / 9:16 / A4 / 16:9 / other.]
+
+TITLE:
+[Exact title.]
+
+SUBTITLE:
+[Optional.]
+
+SOURCE INFORMATION:
+[Paste the facts, numbers, steps, categories, ingredients, KPIs or other information to visualize.]
+
+KEY TAKEAWAY:
+[What should the viewer understand after seeing the infographic?]
+
+BRAND:
+[Optional.]
+
+BRAND COLOURS:
+[Hex codes or descriptions.]
+
+LOGO:
+[Optional.]
+
+VISUAL STYLE:
+[Professional / editorial / modern business / educational / cookbook / minimal / premium SaaS / other.]
+
+LANGUAGE:
+[English / Sinhala / Tamil / other.]
+
+MANDATORY TEXT:
+[Any wording that must remain exact.]
+
+MANDATORY NUMBERS:
+[Any figures that must remain exact.]
+
+ELEMENTS TO AVOID:
+[Optional.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+INFOGRAPHIC DESIGN REQUIREMENTS:
+
+1. IDENTIFY THE INFORMATION TYPE
+Determine whether the content is primarily:
+
+Process
+Timeline
+Comparison
+Checklist
+Statistics
+KPI summary
+Hierarchy
+Recipe
+How-to
+Cause and effect
+Category breakdown
+Decision guide
+Educational explainer
+
+2. CHOOSE THE CORRECT VISUAL STRUCTURE
+Do not force every topic into the same layout.
+
+3. DEFINE ONE MAIN TAKEAWAY
+The viewer should understand the central message quickly.
+
+4. CREATE INFORMATION HIERARCHY
+Organize content into:
+
+Title
+Primary takeaway
+Major sections
+Supporting details
+Footer / source note
+
+5. PRIORITIZE INFORMATION OVER DECORATION
+Every major visual element should help explain the content.
+
+6. DO NOT INVENT FACTS
+Use only supplied or clearly supported information.
+
+7. DO NOT INVENT NUMBERS
+Never create percentages, quantities, dates, prices or metrics not provided.
+
+8. PRESERVE NUMBERS EXACTLY
+Do not silently round, convert or modify values.
+
+9. PRESERVE UNITS
+Keep units such as:
+
+kg
+g
+ml
+%
+QAR
+USD
+days
+hours
+°C
+
+accurate.
+
+10. PRESERVE NAMES
+Keep supplied:
+
+People
+Products
+Companies
+Locations
+Categories
+Processes
+
+correct.
+
+11. PRESERVE SEQUENCE
+For step-by-step content, keep the original logical order unless correction is explicitly requested.
+
+12. DO NOT CREATE MISSING STEPS
+If information is incomplete, flag the gap rather than fabricate it.
+
+13. DISTINGUISH FACT FROM EXAMPLE
+Hypothetical examples must be clearly identifiable.
+
+14. DISTINGUISH TARGET FROM ACTUAL
+For KPI content, do not confuse:
+
+Target
+Actual
+Variance
+Status
+
+15. DISTINGUISH CAUSE FROM OBSERVATION
+Do not visually present an unproven cause as a confirmed fact.
+
+16. DISTINGUISH RECOMMENDATION FROM REQUIREMENT
+Do not make optional guidance appear mandatory.
+
+17. DISTINGUISH PROPOSAL FROM DECISION
+Status must remain accurate.
+
+18. HANDLE UNCERTAINTY VISIBLY
+If something is:
+
+Estimated
+Approximate
+Pending
+Unknown
+Unverified
+
+preserve that status.
+
+19. CREATE SHORT SECTION HEADINGS
+Use concise labels that work visually.
+
+20. SIMPLIFY WITHOUT CHANGING MEANING
+Reduce unnecessary wording while preserving factual meaning.
+
+21. DO NOT OVER-SUMMARIZE CRITICAL DETAILS
+Keep important conditions, exceptions and warnings.
+
+22. CONTROL TEXT DENSITY
+Avoid turning the infographic into a document screenshot.
+
+23. KEEP PARAGRAPHS OUT
+Use:
+
+Short phrases
+Bullets
+Labels
+Numbers
+Callouts
+
+24. LIMIT TEXT PER SECTION
+Keep each information block visually digestible.
+
+25. CREATE SCANNABLE GROUPS
+Related information should appear together.
+
+26. USE SPACING AS STRUCTURE
+Separate sections clearly.
+
+27. USE CONSISTENT ALIGNMENT
+Avoid random placement.
+
+28. USE A CLEAR READING ORDER
+Common patterns include:
+
+Top to bottom
+Left to right
+Numbered flow
+Central hub
+Two-column comparison
+
+29. DO NOT CREATE CONFUSING FLOW
+Arrows and connectors must have a clear purpose.
+
+30. PROCESS INFOGRAPHIC MODE
+Use numbered stages with clear sequence.
+
+31. CHECKLIST MODE
+Use distinct checklist items with short labels.
+
+32. COMPARISON MODE
+Use balanced columns or rows.
+
+33. DO NOT CREATE FALSE EQUIVALENCE
+Only compare attributes that genuinely correspond.
+
+34. TIMELINE MODE
+Keep dates or phases in correct chronological order.
+
+35. DATA SUMMARY MODE
+Prioritize the most important metrics.
+
+36. KPI MODE
+Where data exists, show:
+
+Metric
+Target
+Actual
+Variance
+Status
+
+37. DO NOT INVENT CHART DATA
+Charts must use supplied values only.
+
+38. DO NOT DRAW FAKE TRENDS
+A rising or falling chart implies change over time and must be supported by data.
+
+39. DO NOT USE DECORATIVE CHARTS WITH RANDOM VALUES
+If no real data exists, use icons or conceptual diagrams instead.
+
+40. USE THE RIGHT CHART TYPE
+When justified:
+
+Bar chart for category comparison
+Line chart for time series
+Donut only for meaningful part-to-whole
+Table for precise values
+Progress bar for target comparison
+
+41. AVOID 3D CHART DISTORTION
+Do not sacrifice accuracy for visual effect.
+
+42. KEEP CHART SCALES HONEST
+Do not visually exaggerate small differences.
+
+43. LABEL VALUES CLEARLY
+Important values should not depend solely on visual estimation.
+
+44. RECIPE INFOGRAPHIC MODE
+Organize into:
+
+Title
+Ingredients
+Method
+Temperature / time
+Tips
+
+45. PRESERVE RECIPE QUANTITIES EXACTLY
+Do not change measurements without instruction.
+
+46. KEEP INGREDIENT AND METHOD INFORMATION SEPARATE
+Avoid mixing quantities into unrelated steps.
+
+47. PROCESS / SOP MODE
+Use:
+
+Stage
+Action
+Decision
+Control point
+
+when relevant.
+
+48. BUSINESS INFOGRAPHIC MODE
+Use a structured professional hierarchy.
+
+49. EDUCATIONAL MODE
+Explain concepts using simple visual relationships.
+
+50. SOCIAL MEDIA INFOGRAPHIC MODE
+Keep the central message readable within a few seconds.
+
+51. LINKEDIN MODE
+Prefer professional, clean and data-led presentation.
+
+52. FACEBOOK MODE
+Prioritize large text and feed readability.
+
+53. INSTAGRAM MODE
+Use stronger visual rhythm while preserving clarity.
+
+54. VERTICAL 9:16 MODE
+Keep important information in the central safe area.
+
+55. SQUARE MODE
+Use compact balanced blocks.
+
+56. PRINT MODE
+Prioritize detail readability and sufficient margins.
+
+57. USE MOBILE-FIRST TYPOGRAPHY
+Assume many viewers will see the visual on a phone.
+
+58. CREATE A TYPE HIERARCHY
+Use clear differences between:
+
+Title
+Section heading
+Main number
+Body label
+Footer note
+
+59. KEEP BODY TEXT LARGE ENOUGH
+Do not rely on tiny captions.
+
+60. LIMIT FONT VARIETY
+Prefer one or two complementary typefaces.
+
+61. USE BOLD WEIGHT FOR EMPHASIS
+Not every line should be bold.
+
+62. CONTROL LINE LENGTH
+Avoid long narrow text blocks.
+
+63. USE COLOUR TO CATEGORIZE
+Apply colour consistently to related sections.
+
+64. DO NOT USE TOO MANY COLOURS
+A controlled palette improves comprehension.
+
+65. USE ACCENT COLOUR FOR PRIORITY
+Highlight only the most important values or actions.
+
+66. DO NOT USE RED OR GREEN WITHOUT MEANING
+If colours imply status, apply them consistently.
+
+67. SUPPORT COLOUR WITH TEXT OR SYMBOLS
+Do not rely only on colour to communicate critical meaning.
+
+68. MAINTAIN CONTRAST
+Ensure text remains readable against backgrounds.
+
+69. USE ICONS PURPOSEFULLY
+Icons should reinforce meaning, not merely decorate.
+
+70. KEEP ICON STYLE CONSISTENT
+Avoid mixing:
+
+Outline
+3D
+Photorealistic
+Cartoon
+Flat
+
+without intention.
+
+71. DO NOT USE AMBIGUOUS ICONS
+If an icon could be misunderstood, add a label.
+
+72. DO NOT REPLACE CRITICAL TEXT WITH ICONS
+Important facts should remain explicit.
+
+73. USE ILLUSTRATIONS ONLY WHEN THEY HELP
+Illustration should clarify the topic.
+
+74. USE REALISTIC PRODUCT OR FOOD VISUALS WHEN APPROPRIATE
+Preserve reference identity.
+
+75. PRESERVE BRAND COLOURS
+Use provided brand colours accurately.
+
+76. DO NOT REDESIGN LOGOS
+Keep supplied logos intact.
+
+77. KEEP BRANDING SECONDARY
+The information itself should remain dominant.
+
+78. DO NOT INVENT BRAND LOGOS
+Avoid random marks.
+
+79. HANDLE AI-GENERATED TEXT CAREFULLY
+Image models often distort text.
+
+80. SEPARATE VISUAL GENERATION FROM FINAL TYPOGRAPHY WHEN NEEDED
+For text-heavy infographics, recommend generating the visual structure and adding final exact typography manually in Canva, Figma or another design tool.
+
+81. DO NOT TRUST AI IMAGE TEXT FOR CRITICAL INFORMATION
+Especially for:
+
+Numbers
+Names
+Measurements
+Instructions
+Legal wording
+
+82. IDENTIFY TEXT THAT MUST BE ADDED MANUALLY
+Flag any high-accuracy text elements.
+
+83. CREATE A LAYOUT MAP
+Specify:
+
+Header
+Main takeaway
+Section blocks
+Visual elements
+Footer
+
+84. CREATE SECTION PRIORITY
+Not every section should have equal visual weight.
+
+85. CREATE GOOD VISUAL RHYTHM
+Alternate:
+
+Text
+Numbers
+Icons
+Whitespace
+Illustrations
+
+appropriately.
+
+86. USE WHITE SPACE
+Avoid filling every available area.
+
+87. CONTROL BORDERS AND DIVIDERS
+Use subtle separation rather than excessive boxes.
+
+88. AVOID GENERIC TEMPLATE FEEL
+The structure should respond to the actual information.
+
+89. AVOID GENERIC AI VISUALS
+Do not automatically add:
+
+Robots
+Neon circuits
+Holograms
+Glowing brains
+
+90. USE DOMAIN-RELEVANT VISUALS
+For example:
+
+Warehouse → racks, cartons, pallets, inventory
+Finance → clean numbers and charts
+Food → ingredients and dish imagery
+Business → workflows and metrics
+
+91. KEEP REALISM CONSISTENT
+Do not combine random photographic and cartoon elements.
+
+92. CREATE A SOURCE / NOTE AREA WHEN NEEDED
+Useful for:
+
+Data source
+Date
+Method
+Disclaimer
+Assumptions
+
+93. DO NOT INVENT SOURCES
+Only display sources actually supplied.
+
+94. PRESERVE DISCLAIMERS
+Do not shorten away critical cautionary wording.
+
+95. CREATE NEGATIVE CONSTRAINTS
+Include relevant protections such as:
+
+No random text
+No invented numbers
+No fake logos
+No distorted icons
+No unreadable typography
+No watermark
+No decorative fake charts
+
+96. KEEP NEGATIVE INSTRUCTIONS RELEVANT
+Avoid giant unrelated exclusion lists.
+
+97. CREATE A MODEL-READY IMAGE PROMPT
+Describe:
+
+Layout
+Visual hierarchy
+Sections
+Illustration style
+Colours
+Spacing
+Icon treatment
+Typography areas
+Aspect ratio
+Quality constraints
+
+98. CREATE A TEXT CONTENT PLAN
+Provide the exact copy that belongs in each section.
+
+99. CREATE A DATA ACCURACY CHECK
+List every important number, date or quantitative claim that should be verified.
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- topic is clear
+- audience is clear
+- main takeaway is clear
+- correct infographic structure was chosen
+- information hierarchy is logical
+- source information was not changed
+- no facts were invented
+- no numbers were invented
+- units are correct
+- sequence is correct
+- uncertainty is preserved
+- critical conditions remain visible
+- text density is controlled
+- typography hierarchy is clear
+- mobile readability is adequate
+- chart type is appropriate
+- no fake trend is shown
+- no misleading scale is used
+- icons are consistent
+- colours have clear purpose
+- brand identity is preserved
+- exact mandatory text is preserved
+- important AI-generated text is flagged for manual placement
+- platform and aspect ratio are correct
+
+OUTPUT FORMAT:
+
+1. INFOGRAPHIC STRATEGY
+Summarize:
+
+Purpose
+Audience
+Main takeaway
+Recommended infographic type
+
+2. INFORMATION HIERARCHY
+List the sections from highest to lowest priority.
+
+3. LAYOUT MAP
+Describe where each major section should appear.
+
+4. VISUAL SYSTEM
+Define:
+
+Colour use
+Typography hierarchy
+Icons
+Charts / illustrations
+Spacing
+Background
+
+5. FULL IMAGE GENERATION PROMPT
+Provide one polished model-ready visual prompt.
+
+6. EXACT TEXT PLAN
+List all visible headings, labels, numbers and body text by section.
+
+7. DATA / FACT VERIFICATION
+List all important facts, numbers, units, dates or claims requiring verification.
+
+8. MANUAL TYPOGRAPHY NOTES
+Identify text that should preferably be added manually after image generation.
+
+9. NEGATIVE / PROTECTION INSTRUCTIONS
+List only relevant constraints.
+
+10. FINAL READABILITY CHECK
+Confirm:
+
+Mobile readability
+Visual hierarchy
+Data accuracy
+Platform suitability
+Brand consistency
+
+IMPORTANT:
+- Information accuracy is more important than decoration.
+- Do not invent facts, statistics, charts, sources or trends.
+- Preserve exact numbers, units, dates and mandatory wording.
+- Keep the design scannable and mobile-readable.
+- Use visuals only when they genuinely improve understanding.
+- For text-heavy designs, treat AI image generation as the visual-layout stage and add critical text manually for accuracy.`;
+
+const steps = [
+  {
+    title: "Start with the information, not the decoration",
+    description:
+      "Identify the main takeaway, the type of information and the logical reading order before choosing icons, colours or visual effects.",
+  },
+  {
+    title: "Choose the right infographic structure",
+    description:
+      "Use process, comparison, timeline, KPI, checklist, recipe or educational layouts according to the information rather than forcing every topic into one template.",
+  },
+  {
+    title: "Protect facts and numbers",
+    description:
+      "Keep quantities, percentages, dates, units, targets, actuals and sequence exactly aligned with the source information.",
+  },
+  {
+    title: "Separate visual generation from critical text",
+    description:
+      "For text-heavy infographics, use AI to create the visual composition and then add exact final wording manually in a design tool for better accuracy.",
+  },
+];
+
+const example = {
+  input: [
+    "Topic: Inventory discrepancy investigation.",
+    "Purpose: Educational infographic.",
+    "Audience: Warehouse supervisors and inventory controllers.",
+    "Format: LinkedIn vertical infographic.",
+    "Key sections: System transaction check, receiving check, picking and dispatch check, location check, physical recount, escalation.",
+    "Style: Clean professional business infographic.",
+    "Brand colours: Deep navy, blue, white.",
+  ],
+
+  output: [
+    "INFOGRAPHIC TYPE: Six-step process infographic with a clear top-to-bottom investigation flow.",
+    "HIERARCHY: Title → short explanation → six numbered investigation areas → escalation reminder.",
+    "VISUAL SYSTEM: Use consistent warehouse-related line icons, strong numbered markers and generous spacing instead of decorative charts.",
+    "ACCURACY PROTECTION: Do not invent discrepancy quantities, causes, KPI values or investigation results.",
+    "TYPOGRAPHY NOTE: Add the final six step labels manually if the image model cannot reproduce them accurately.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Charts are not decoration",
+    description:
+      "Only use a graph when real data supports it. Random bars or rising lines can accidentally communicate claims that were never provided.",
+  },
+  {
+    title: "More information is not always more useful",
+    description:
+      "A strong infographic selects and groups the information that supports the main takeaway rather than shrinking an entire report onto one image.",
+  },
+  {
+    title: "Use AI for layout, then verify the words",
+    description:
+      "Image generators can still make spelling and numerical errors. Critical labels, measurements and instructions should be checked or added manually.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Infographic Image Prompt | KRIYANO"
+  description="Create accurate AI infographic prompts for business, education, data, processes, recipes and social media with stronger hierarchy and information accuracy."
+>
+  <PromptPage
+    category="IMAGE GENERATION"
+    title="Infographic Image"
+    accentTitle="Prompt."
+    description="Turn facts, processes, data and educational content into structured infographic visuals without inventing numbers, charts or unsupported information."
+    meta={[
+      "Free prompt",
+      "Infographics",
+      "Visual communication",
+    ]}
+    bestFor={[
+      "Business infographics",
+      "Process guides",
+      "KPI visuals",
+      "Educational graphics",
+      "Recipe infographics",
+      "Social media cards",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Make complex information easier to understand, not just prettier."
+    introDescription="Choose the right visual structure, control text density, protect facts and numbers, and create a layout that remains useful at realistic viewing size."
+    steps={steps}
+    exampleTitle="Turn an inventory investigation process into a professional infographic."
+    example={example}
+    tipsTitle="Design for understanding first."
+    tips={tips}
+    sidebarTitle="Need a social promotional graphic?"
+    sidebarDescription="Use KRIYANO's Social Media Visual Prompt for branded feed graphics, or Advertising Creative Prompt when the visual is specifically intended to support a paid campaign."
+    warningTitle="AI-generated text and numbers still need verification"
+    warningText="For any infographic containing important names, measurements, statistics, dates, instructions or technical wording, verify every visible detail before publishing. Adding final typography manually is often the safest workflow."
+  />
+</BaseLayout>

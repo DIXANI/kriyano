@@ -1,0 +1,916 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced action-planning, project coordination and execution specialist.
+
+TASK:
+Turn the information below into a clear, practical and realistic action plan.
+
+The goal is to convert a goal, problem, project, improvement idea, audit finding, management decision or corrective requirement into specific actions with ownership, priority, sequence, dependencies, timing, risks and measurable follow-up.
+
+Do not invent facts, deadlines, owners, budgets, approvals, resources or targets.
+
+OBJECTIVE / GOAL:
+[What needs to be achieved?]
+
+BACKGROUND:
+[Brief context.]
+
+PROBLEM / OPPORTUNITY:
+[What issue, requirement or opportunity triggered the plan?]
+
+EXPECTED OUTCOME:
+[What should be different when the plan is complete?]
+
+SCOPE:
+[What is included?]
+
+OUT OF SCOPE:
+[What is not included?]
+
+CURRENT STATUS:
+[What has already been completed?]
+
+KEY REQUIREMENTS:
+[List important requirements.]
+
+CONSTRAINTS:
+[Budget, time, staffing, systems, policy, compliance, customer requirements, etc.]
+
+AVAILABLE RESOURCES:
+[People, tools, budget, systems, external support.]
+
+STAKEHOLDERS:
+[List relevant stakeholders.]
+
+KNOWN DEADLINES:
+[List real deadlines only.]
+
+KNOWN RISKS:
+[List known risks.]
+
+DEPENDENCIES:
+[List known dependencies.]
+
+MEASURES / KPIs:
+[List available measures.]
+
+DECISION / APPROVAL NEEDED:
+[List approvals or decisions required.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+ACTION PLAN REQUIREMENTS:
+
+1. DEFINE THE OBJECTIVE
+Rewrite the objective clearly.
+
+Provide:
+
+Objective:
+Reason:
+Expected outcome:
+Scope:
+Key constraint:
+
+Do not change the user's intended goal.
+
+2. DEFINE SUCCESS
+Explain what successful completion should look like.
+
+Use measurable criteria where the user supplied measurable information.
+
+Do not invent targets.
+
+If no measure is available, state:
+
+"Success measure to be defined."
+
+3. IDENTIFY REQUIRED WORKSTREAMS
+Break the objective into logical areas of work.
+
+Examples:
+
+- investigation
+- preparation
+- design
+- approval
+- implementation
+- communication
+- training
+- testing
+- verification
+- documentation
+- closure
+
+Use only relevant workstreams.
+
+4. BREAK WORK INTO ACTIONS
+Turn each workstream into specific actions.
+
+Each action should begin with a clear verb.
+
+Prefer:
+
+Review
+Confirm
+Prepare
+Update
+Implement
+Test
+Train
+Verify
+Approve
+Communicate
+Monitor
+
+Avoid vague actions such as:
+
+"Improve process"
+"Handle issue"
+"Work on problem"
+
+5. MAKE ACTIONS SPECIFIC
+For each action provide:
+
+Action:
+Purpose:
+Expected output:
+Owner role:
+Priority:
+Dependency:
+Target date:
+Status:
+Evidence of completion:
+
+If owner is unknown, use:
+
+"Owner to be assigned."
+
+If date is unknown, use:
+
+"Date to be agreed."
+
+6. DISTINGUISH ACTION FROM OUTCOME
+An action explains what someone will do.
+
+An outcome explains what should result.
+
+Do not write outcomes as though they are actions.
+
+7. PRIORITIZE ACTIONS
+Use:
+
+P1 — Immediate / Critical
+P2 — High
+P3 — Medium
+P4 — Low
+
+Consider:
+
+Impact
+Urgency
+Risk
+Dependency
+Customer effect
+Business effect
+Compliance
+Safety
+Cost of delay
+
+Explain P1 items.
+
+8. IDENTIFY QUICK WINS
+Flag actions that are:
+
+Low effort
+Low risk
+Fast to complete
+Likely to create visible benefit
+
+Do not prioritize quick wins over critical mandatory actions.
+
+9. IDENTIFY CRITICAL ACTIONS
+Highlight actions that block major progress or manage serious risk.
+
+Use:
+
+Critical action:
+Reason:
+What depends on it:
+
+10. SEQUENCE THE PLAN
+Place actions in a logical order.
+
+Use phases such as:
+
+Phase 1 — Understand / Prepare
+Phase 2 — Decide / Design
+Phase 3 — Implement
+Phase 4 — Verify
+Phase 5 — Standardize / Close
+
+Only use phases that fit the situation.
+
+11. MAP DEPENDENCIES
+For each dependency provide:
+
+Dependency:
+Related action:
+What must happen first:
+Risk if delayed:
+Mitigation:
+
+Do not invent dependencies without basis.
+
+12. IDENTIFY PARALLEL ACTIONS
+Show actions that can happen at the same time.
+
+This helps reduce unnecessary delay.
+
+Do not create parallel work where one action genuinely depends on another.
+
+13. DEFINE MILESTONES
+Where useful create milestone points.
+
+For each:
+
+Milestone:
+What must be complete:
+Evidence:
+Decision required:
+
+Do not invent milestone dates.
+
+14. DEFINE OWNERSHIP
+Assign actions to roles where possible.
+
+Examples:
+
+Project Manager
+Department Manager
+Supervisor
+Finance
+HR
+IT
+Operations
+Quality
+Procurement
+External Supplier
+
+Do not invent employee names.
+
+15. USE RACI WHERE USEFUL
+For complex plans, identify:
+
+R — Responsible
+A — Accountable
+C — Consulted
+I — Informed
+
+Do not force RACI onto a simple plan.
+
+16. CHECK OWNER CAPACITY
+Consider whether one role owns too many actions.
+
+Flag possible overload.
+
+Do not assume resource availability.
+
+17. DEFINE DEADLINES
+Use only supplied dates where they exist.
+
+If dates are not provided:
+
+Use sequence or relative timing such as:
+
+Before implementation
+After approval
+Within agreed period
+Date to be agreed
+
+Do not invent calendar dates.
+
+18. IDENTIFY APPROVALS
+For each required approval provide:
+
+Approval:
+Approver role:
+Required information:
+Related action:
+Risk if delayed:
+
+19. IDENTIFY DECISIONS
+Separate actions from decisions.
+
+For each decision:
+
+Decision required:
+Decision owner:
+Information required:
+Deadline:
+Impact if unresolved:
+
+20. IDENTIFY RESOURCE REQUIREMENTS
+For each relevant action identify:
+
+People:
+Time:
+Budget:
+System / tool:
+External support:
+
+Mark unknown resources clearly.
+
+21. IDENTIFY INFORMATION GAPS
+List missing information that affects execution.
+
+For each:
+
+Information required:
+Why it matters:
+Who could provide it:
+Which action depends on it:
+
+22. IDENTIFY RISKS
+For each major risk provide:
+
+Risk:
+Likelihood:
+Impact:
+Affected action:
+Mitigation:
+Contingency:
+Owner role:
+
+Use qualitative ratings where appropriate:
+
+Low
+Medium
+High
+Critical
+
+Do not invent probabilities.
+
+23. IDENTIFY BLOCKERS
+Separate current blockers from future risks.
+
+For each blocker:
+
+Blocker:
+Affected action:
+Immediate impact:
+Required resolution:
+Escalation required:
+
+24. DEFINE CONTINGENCIES
+For important risks, define realistic fallback actions.
+
+Avoid creating unnecessary contingency plans for minor issues.
+
+25. IDENTIFY ASSUMPTIONS
+List assumptions being used to build the plan.
+
+For each:
+
+Assumption:
+Why it matters:
+How to verify:
+Impact if wrong:
+
+26. INCLUDE CORRECTIVE ACTIONS
+If the plan responds to a problem, incident, audit finding or non-conformance, distinguish:
+
+Immediate correction
+Containment
+Corrective action
+Preventive action
+
+Do not confuse temporary fixes with permanent corrective actions.
+
+27. INCLUDE IMPLEMENTATION ACTIONS
+Where relevant include:
+
+Preparation
+Configuration
+Communication
+Training
+Documentation
+Testing
+Go-live
+Monitoring
+
+28. INCLUDE CHANGE MANAGEMENT
+For changes affecting people, consider:
+
+Who is affected?
+What changes?
+What communication is required?
+What training is required?
+What support is required?
+How will adoption be monitored?
+
+29. INCLUDE COMMUNICATION ACTIONS
+Where relevant define:
+
+Audience:
+Message:
+Owner:
+Timing:
+Channel:
+Purpose:
+
+Avoid excessive communication.
+
+30. INCLUDE TRAINING ACTIONS
+Only recommend training when skills or knowledge are genuinely required.
+
+For each:
+
+Role:
+Training:
+Reason:
+Completion evidence:
+
+Do not use training as the default solution for a weak process.
+
+31. INCLUDE DOCUMENTATION ACTIONS
+Where relevant update:
+
+SOP
+Policy
+Work instruction
+Checklist
+Form
+Template
+Process map
+Approval matrix
+Tracker
+
+Only include documentation necessary to sustain the action.
+
+32. INCLUDE SYSTEM / TECHNOLOGY ACTIONS
+Where relevant consider:
+
+Configuration
+Access
+Integration
+Automation
+Testing
+Data migration
+Validation
+Backup
+User acceptance
+
+Do not automatically recommend new software.
+
+33. INCLUDE TESTING
+Before full implementation where appropriate define:
+
+Test:
+Scope:
+Expected result:
+Pass criteria:
+Owner:
+Evidence:
+
+34. USE PILOTS WHERE APPROPRIATE
+For uncertain or high-impact changes, consider a pilot.
+
+Define:
+
+Pilot scope:
+Users / area:
+What is being tested:
+Success measure:
+Review point:
+Decision after pilot:
+
+35. DEFINE KPIs
+Recommend relevant KPIs only.
+
+Examples:
+
+Completion %
+Overdue actions
+Cycle time
+Error rate
+Backlog
+Cost
+Quality
+SLA
+Customer complaints
+Productivity
+Compliance
+Training completion
+Audit closure
+
+Do not invent KPI targets.
+
+36. DEFINE BASELINE
+For each KPI provide:
+
+KPI:
+Current baseline:
+Target:
+Data source:
+Frequency:
+
+If unknown, state:
+
+"Baseline required."
+
+37. DEFINE PROGRESS TRACKING
+Create a simple status system:
+
+Not Started
+In Progress
+Blocked
+Completed
+On Hold
+
+Optionally add:
+
+At Risk
+
+38. DEFINE ACTION HEALTH
+For larger plans use:
+
+Green — On track
+Amber — Risk to target
+Red — Off track / blocked
+
+Explain why any action is Amber or Red.
+
+39. DEFINE REVIEW CADENCE
+Where useful recommend:
+
+Daily
+Weekly
+Biweekly
+Monthly
+Milestone-based
+
+Choose based on urgency and complexity.
+
+Do not impose daily reviews on low-priority plans.
+
+40. PREPARE A TRACKER
+Create a structured action tracker with columns:
+
+ID
+Action
+Owner
+Priority
+Status
+Dependency
+Target
+Risk
+Evidence / Notes
+
+41. DEFINE COMPLETION EVIDENCE
+An action should not be marked complete only because someone says it is done.
+
+Where appropriate use evidence such as:
+
+Approved document
+System screenshot
+Completed test
+Signed checklist
+Report
+Training record
+Updated SOP
+Data showing result
+Manager confirmation
+
+Use only realistic evidence.
+
+42. VERIFY EFFECTIVENESS
+For improvement or corrective plans distinguish:
+
+IMPLEMENTED
+Action has been completed.
+
+EFFECTIVE
+The action achieved the intended result.
+
+For each important action define:
+
+Effectiveness check:
+Measure:
+Review point:
+Expected evidence:
+
+43. DEFINE CLOSURE CRITERIA
+Explain when the overall plan can be closed.
+
+Possible requirements:
+
+All critical actions completed
+Evidence verified
+KPIs reviewed
+Major risks controlled
+Documentation updated
+Effectiveness confirmed
+Approvals completed
+
+Use only relevant criteria.
+
+44. HANDLE OVERDUE ACTIONS
+For overdue actions recommend:
+
+Confirm reason
+Assess impact
+Define recovery action
+Agree revised timing
+Escalate where necessary
+
+Do not repeatedly change dates without explaining the cause.
+
+45. HANDLE BLOCKED ACTIONS
+For blocked actions define:
+
+Blocker
+Owner
+Resolution required
+Escalation
+Temporary workaround
+Impact on plan
+
+46. HANDLE SCOPE CHANGE
+If new work appears, determine whether it is:
+
+Required to achieve objective
+Useful but optional
+Separate project
+
+Avoid uncontrolled scope growth.
+
+47. IDENTIFY OUT-OF-SCOPE ITEMS
+List tasks that should not distract from the current objective.
+
+48. IDENTIFY LOW-VALUE ACTIONS
+Challenge actions that:
+
+Have no clear output
+Do not support the objective
+Duplicate another action
+Do not manage meaningful risk
+Cannot be verified
+
+Recommend removing or combining them.
+
+49. REVIEW PLAN FEASIBILITY
+Check:
+
+Does the plan fit the constraints?
+Are owners realistic?
+Are dependencies visible?
+Are critical approvals included?
+Is the sequence logical?
+Are resources available?
+Are there too many simultaneous actions?
+
+Flag unrealistic assumptions.
+
+50. REVIEW WORKLOAD
+Identify:
+
+Actions requiring high effort
+Actions competing for the same resources
+Peak workload points
+
+Recommend sequencing where appropriate.
+
+51. OPTIMIZE FOR EXECUTION
+Prefer:
+
+Fewer clear actions
+Visible priorities
+Clear ownership
+Simple tracking
+Useful milestones
+Meaningful review
+
+Avoid creating an unnecessarily large plan.
+
+52. PREPARE MANAGEMENT VIEW
+Create a concise management summary containing:
+
+Objective
+Current status
+P1 actions
+Major blocker
+Major risk
+Key decision
+Next milestone
+Overall status
+
+53. PREPARE TEAM VIEW
+Create a practical team version containing:
+
+What needs to be done
+Who owns it
+What happens first
+Dependencies
+Deadlines
+Status
+What needs escalation
+
+54. PREPARE EXECUTIVE VIEW
+For senior leaders provide:
+
+Why the plan exists
+Current risk / opportunity
+Top actions
+Expected outcome
+Major decision
+Resource issue
+Confidence / concern
+
+Keep it concise.
+
+55. IDENTIFY FIRST 3 ACTIONS
+Clearly state the three actions that should happen first.
+
+Do not simply choose the first three items in the list.
+
+Prioritize based on:
+
+criticality
+dependency
+information needed
+risk
+ability to unlock progress
+
+56. IDENTIFY NEXT DECISION
+State the next important decision needed to move the plan forward.
+
+If none exists, say so.
+
+57. IDENTIFY ESCALATIONS
+Escalate only when required because of:
+
+Authority
+Major delay
+Safety
+Compliance
+Customer impact
+Financial exposure
+Resource conflict
+Unresolved dependency
+
+Do not escalate routine actions unnecessarily.
+
+58. FINAL QUALITY CHECK
+Before finalizing the plan verify:
+
+- objective is clear
+- actions are specific
+- owners are roles, not invented people
+- priorities are logical
+- deadlines are not invented
+- dependencies are visible
+- risks are separated from blockers
+- approvals and decisions are included
+- success can be measured
+- completion evidence is defined
+- plan is realistic
+- unnecessary actions are removed
+
+OUTPUT FORMAT:
+
+1. Objective & Expected Outcome
+2. Scope & Constraints
+3. Key Information Gaps
+4. Workstreams
+5. Prioritized Action Plan
+6. First 3 Actions
+7. Dependencies
+8. Decisions & Approvals
+9. Resources Required
+10. Risks & Blockers
+11. Milestones
+12. Implementation / Change Actions
+13. KPI & Success Measures
+14. Action Tracker
+15. Effectiveness Verification
+16. Closure Criteria
+17. Management Summary
+
+IMPORTANT:
+- Do not invent facts, owners, dates, budgets, resources, approvals or targets.
+- Use "Owner to be assigned" where ownership is unknown.
+- Use "Date to be agreed" where timing is unknown.
+- Separate actions, outcomes, decisions, risks and blockers.
+- Make every important action specific and verifiable.
+- Prioritize execution instead of creating an unnecessarily long task list.
+- Do not automatically recommend automation or new systems.
+- Include dependencies before committing to sequence.
+- Preserve necessary safety, financial, quality, customer and compliance controls.
+- Distinguish implementation from effectiveness.
+- Define evidence before marking important actions complete.
+- Keep the final plan practical enough to use as a real working tracker.`;
+
+const steps = [
+  {
+    title: "Define the outcome",
+    description:
+      "Start with what the plan must achieve, what is in scope and how successful completion will be recognized.",
+  },
+  {
+    title: "Turn the goal into actions",
+    description:
+      "Break broad objectives into specific, verifiable actions with ownership, priority, dependencies and expected outputs.",
+  },
+  {
+    title: "Sequence what matters",
+    description:
+      "Identify critical actions, blockers, approvals and dependencies so the plan reflects how the work can actually be executed.",
+  },
+  {
+    title: "Track completion and effectiveness",
+    description:
+      "Use status, evidence, KPIs and review points to confirm not only that actions were completed, but that they produced the intended result.",
+  },
+];
+
+const example = {
+  input: [
+    "Objective: Reduce overdue customer complaints.",
+    "Current situation: 96 complaints are open, and several have been outstanding for more than 30 days.",
+    "Known problem: Ownership is unclear after complaints are transferred to technical teams.",
+    "Constraint: No additional staff are currently approved.",
+    "Requirement: Existing customer escalation rules must remain.",
+    "Available data: Open complaint list, complaint age, assigned department and current status.",
+  ],
+
+  output: [
+    "P1 — Confirm ownership for every complaint currently older than 30 days and identify cases without an accountable owner.",
+    "P1 — Review the oldest and highest-risk complaints first, while preserving required customer escalation rules.",
+    "P2 — Define a clear ownership rule for complaints transferred between customer service and technical teams.",
+    "P2 — Create a simple ageing review showing owner, status, next action and overdue duration.",
+    "P3 — Review whether recurring complaint causes require separate corrective actions rather than only closing the current backlog.",
+    "Primary KPIs: Total open complaints, complaints over 30 days, average age and percentage with a confirmed next action.",
+    "Effectiveness should be verified by sustained reduction in aged complaints and clearer ownership, not merely by closing cases during a one-time backlog exercise.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Use actions that can actually be closed",
+    description:
+      "A strong action has an observable output. Replace vague items like 'improve communication' with a specific change someone can implement and verify.",
+  },
+  {
+    title: "Don't invent deadlines",
+    description:
+      "When a real due date is unknown, use 'Date to be agreed' rather than creating artificial urgency that may make the plan misleading.",
+  },
+  {
+    title: "Completion is not always effectiveness",
+    description:
+      "Updating a procedure or delivering training may complete an action, but the plan should still verify whether the original problem actually improved.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Action Plan Generator Prompt | KRIYANO"
+  description="Turn goals, problems, projects, audit findings and improvement requirements into prioritized actions with owners, dependencies, risks, milestones, KPIs and follow-up."
+>
+  <PromptPage
+    category="WORK & PRODUCTIVITY"
+    title="Action Plan"
+    accentTitle="Generator."
+    description="Turn a goal, problem or management decision into a practical execution plan with clear actions, priorities, ownership, dependencies, risks and measurable follow-up."
+    meta={[
+      "Free prompt",
+      "Action planning",
+      "Execution",
+    ]}
+    bestFor={[
+      "Managers",
+      "Team leaders",
+      "Projects",
+      "Business improvements",
+      "Corrective actions",
+      "Workplace planning",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Turn decisions into work that can actually be executed."
+    introDescription="Break broad objectives into specific actions, sequence the dependencies and define ownership, evidence and progress measures so the plan becomes a working management tool instead of a list of intentions."
+    steps={steps}
+    exampleTitle="Turn a backlog problem into an executable plan."
+    example={example}
+    tipsTitle="Build action plans people can actually use."
+    tips={tips}
+    sidebarTitle="Need to determine the right solution first?"
+    sidebarDescription="Use KRIYANO's Problem-Solving or Decision-Making prompts first when you still need to understand the problem or choose between competing options before building the action plan."
+    warningTitle="A long task list is not an action plan"
+    warningText="Good action plans make priorities, ownership, dependencies and evidence visible. Avoid filling the plan with vague activities or invented dates simply to make it look complete."
+  />
+</BaseLayout>

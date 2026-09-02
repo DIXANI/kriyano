@@ -1,0 +1,619 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced warehouse operations and continuous-improvement specialist.
+
+TASK:
+Analyze the warehouse process described below and develop a practical process-improvement plan.
+
+WAREHOUSE / OPERATION:
+[Describe the warehouse, distribution center or storage operation.]
+
+BUSINESS TYPE:
+[Example: 3PL, retail distribution, e-commerce, FMCG, spare parts, manufacturing, cold storage.]
+
+PROCESS TO ANALYZE:
+[Receiving / Putaway / Storage / Replenishment / Picking / Packing / Dispatch / Returns / Inventory Control / End-to-End.]
+
+CURRENT PROCESS:
+[Describe how the process currently works step by step.]
+
+CURRENT PROBLEM:
+[What is going wrong or what needs improvement?]
+
+VOLUME:
+[Orders, pallets, cartons, SKUs, lines, receipts or other relevant workload.]
+
+WAREHOUSE LAYOUT:
+[Describe zones, racks, staging areas, docks, picking locations and other relevant areas.]
+
+SYSTEMS:
+[WMS, ERP, SAP, barcode system, spreadsheets, manual records, etc.]
+
+STAFFING:
+[Number of employees, shifts, roles or other relevant details.]
+
+EQUIPMENT:
+[Forklifts, reach trucks, pallet jacks, conveyors, scanners, printers, etc.]
+
+CURRENT KPIs:
+[Productivity, accuracy, turnaround time, utilization, damages, overtime, etc.]
+
+TARGET:
+[What improvement do you want to achieve?]
+
+CONSTRAINTS:
+[Budget, staffing, space, system limitations, safety rules, customer requirements, etc.]
+
+PROCESS IMPROVEMENT REQUIREMENTS:
+
+1. PROCESS MAP
+Convert the current process into a clear sequence:
+
+Step:
+Input:
+Activity:
+Responsible role:
+System / equipment:
+Output:
+Control point:
+
+Identify unclear or missing steps.
+
+2. PROBLEM DEFINITION
+Define the operational problem clearly.
+
+Separate:
+- symptoms
+- immediate problems
+- potential underlying causes
+- business impact
+
+Do not assume the first visible problem is the root cause.
+
+3. BOTTLENECK ANALYSIS
+Identify possible bottlenecks such as:
+- dock congestion
+- receiving delays
+- inspection delays
+- putaway backlog
+- replenishment delays
+- picking congestion
+- packing queues
+- dispatch staging delays
+- system transactions
+- approval delays
+- equipment shortages
+
+For each bottleneck explain:
+- location
+- cause
+- operational impact
+- evidence required
+
+4. WASTE IDENTIFICATION
+Look for operational waste including:
+
+WAITING
+Employees, vehicles, stock or orders waiting unnecessarily.
+
+MOVEMENT
+Unnecessary employee walking or equipment travel.
+
+TRANSPORTATION
+Unnecessary movement of inventory.
+
+OVERPROCESSING
+Duplicate checking, paperwork or transactions.
+
+INVENTORY
+Excessive staging, buffer stock or work-in-progress.
+
+DEFECTS
+Picking errors, damages, incorrect labels or transaction errors.
+
+REWORK
+Repeating activities because the first process failed.
+
+UNDERUSED CAPABILITY
+Staff knowledge or system functionality not being used effectively.
+
+Do not force every waste category if it is not relevant.
+
+5. RECEIVING
+If relevant, evaluate:
+- vehicle scheduling
+- dock allocation
+- document preparation
+- unloading
+- quantity verification
+- quality inspection
+- barcode scanning
+- discrepancy handling
+- system receipt
+- staging
+- receiving turnaround time
+
+6. PUTAWAY
+If relevant, evaluate:
+- location assignment
+- travel distance
+- available capacity
+- SKU compatibility
+- FIFO / FEFO requirements
+- equipment availability
+- scanning
+- system confirmation
+- putaway backlog
+
+7. STORAGE
+If relevant, evaluate:
+- space utilization
+- slotting
+- SKU velocity
+- accessibility
+- rack utilization
+- floor storage
+- segregation
+- product compatibility
+- damaged / blocked locations
+- inventory visibility
+
+8. REPLENISHMENT
+If relevant, evaluate:
+- minimum picking stock
+- replenishment triggers
+- timing
+- priority
+- travel
+- replenishment conflicts
+- emergency replenishment
+- stock availability
+
+9. PICKING
+If relevant, evaluate:
+- picking method
+- travel distance
+- pick path
+- order batching
+- zone picking
+- SKU slotting
+- scanning
+- pick-face design
+- replenishment dependency
+- picking accuracy
+- productivity
+
+10. PACKING
+If relevant, evaluate:
+- packing station layout
+- order verification
+- materials
+- labeling
+- weighing
+- documentation
+- quality checks
+- packing capacity
+- queue time
+
+11. DISPATCH
+If relevant, evaluate:
+- staging
+- route segregation
+- loading sequence
+- documentation
+- final verification
+- vehicle readiness
+- dock planning
+- loading turnaround time
+
+12. INVENTORY CONTROL
+Evaluate controls around:
+- location accuracy
+- quantity accuracy
+- lot / batch
+- expiry
+- serial numbers
+- stock status
+- cycle counting
+- discrepancy investigation
+- damaged inventory
+- blocked stock
+- transaction timing
+
+13. LAYOUT & FLOW
+Evaluate whether the physical layout supports efficient flow.
+
+Check:
+- receiving-to-storage travel
+- storage-to-picking travel
+- fast-moving SKU locations
+- cross-traffic
+- pedestrian routes
+- equipment routes
+- staging capacity
+- congestion points
+- dock utilization
+
+Do not recommend physical layout changes without considering safety and operational constraints.
+
+14. SYSTEM & DATA
+Identify system-related issues such as:
+- delayed transactions
+- manual entries
+- duplicate data entry
+- incorrect master data
+- poor location setup
+- barcode problems
+- missing system controls
+- WMS / ERP workflow limitations
+
+Separate process problems from system problems.
+
+15. STAFFING & WORKLOAD
+Evaluate:
+- workload by hour / shift
+- staffing levels
+- skill distribution
+- workload imbalance
+- overtime
+- cross-training
+- supervision
+- task allocation
+
+Do not assume additional staff is the best solution before examining process efficiency.
+
+16. STANDARD WORK
+Check whether:
+- SOP exists
+- responsibilities are clear
+- sequence is standardized
+- exceptions are defined
+- escalation process exists
+- staff follow the same method
+- training is adequate
+
+17. SAFETY
+Identify improvement ideas that could affect:
+- pedestrians
+- forklifts
+- racks
+- loading docks
+- manual handling
+- stacking
+- emergency access
+- hazardous products
+- housekeeping
+
+Never recommend productivity improvements that compromise safety.
+
+18. ROOT CAUSE
+For major problems analyze potential causes using categories such as:
+- People
+- Process
+- System
+- Equipment
+- Layout
+- Inventory
+- Information
+- Management / control
+
+Use 5 Whys where appropriate.
+
+Clearly separate:
+- confirmed cause
+- likely cause
+- possible cause
+- evidence needed
+
+19. KPI ANALYSIS
+Recommend relevant KPIs.
+
+Examples:
+
+Receiving:
+- Dock-to-stock time
+- Receiving accuracy
+- Receipts per labor hour
+
+Putaway:
+- Putaway cycle time
+- Putaway productivity
+- Putaway backlog
+
+Picking:
+- Lines picked per labor hour
+- Order picking accuracy
+- Order cycle time
+
+Inventory:
+- Inventory accuracy
+- Location accuracy
+- Cycle count accuracy
+
+Dispatch:
+- On-time dispatch
+- Loading turnaround time
+- Dispatch accuracy
+
+Warehouse:
+- Space utilization
+- Labor utilization
+- Damage rate
+- Overtime
+- Cost per order / line
+
+Do not recommend KPIs that cannot realistically be measured.
+
+20. BASELINE
+Before recommending targets, identify the current baseline.
+
+If baseline data is unavailable, state:
+"Baseline measurement required."
+
+Do not invent performance figures.
+
+21. QUICK WINS
+Identify improvements that are:
+- low cost
+- low complexity
+- relatively fast to implement
+- measurable
+
+For each quick win provide:
+
+Action:
+Problem addressed:
+Expected benefit:
+Effort:
+Risk:
+Measurement:
+
+22. MEDIUM-TERM IMPROVEMENTS
+Identify improvements requiring:
+- process redesign
+- layout changes
+- training
+- system configuration
+- equipment
+- coordination across departments
+
+23. LONG-TERM IMPROVEMENTS
+Where justified, identify larger opportunities such as:
+- WMS improvements
+- automation
+- racking redesign
+- conveyor systems
+- advanced slotting
+- dock redesign
+- labor-management systems
+
+Do not recommend expensive technology unless the operational problem and likely benefit justify it.
+
+24. PRIORITIZATION
+Prioritize each improvement using:
+
+Impact:
+High / Medium / Low
+
+Effort:
+High / Medium / Low
+
+Cost:
+High / Medium / Low
+
+Risk:
+High / Medium / Low
+
+Priority:
+P1 / P2 / P3 / P4
+
+25. IMPLEMENTATION PLAN
+Create a practical sequence:
+
+Phase 1 — Measure
+Phase 2 — Stabilize
+Phase 3 — Improve
+Phase 4 — Standardize
+Phase 5 — Monitor
+
+For each action identify:
+- owner
+- resources
+- dependencies
+- success measure
+
+If names are unknown, use responsible roles rather than inventing people.
+
+26. CONTROL PLAN
+Explain how improvements should be maintained.
+
+Include where relevant:
+- SOP update
+- training
+- daily checks
+- supervisor review
+- KPI monitoring
+- audits
+- exception reporting
+- toolbox meetings
+- continuous-improvement reviews
+
+27. MEASUREMENT
+For each major improvement define:
+
+Before:
+[Baseline.]
+
+After:
+[Result.]
+
+Metric:
+[How improvement is measured.]
+
+Target:
+[Use user-provided target or recommend establishing one from baseline.]
+
+Review period:
+[When performance should be reviewed.]
+
+28. RISKS
+Identify implementation risks such as:
+- operational disruption
+- employee resistance
+- incorrect master data
+- insufficient training
+- system limitations
+- safety risk
+- customer impact
+- cost overruns
+
+Recommend practical controls.
+
+29. FINAL RECOMMENDATION
+Summarize:
+- biggest operational problem
+- likely root cause
+- highest-priority improvement
+- strongest quick win
+- important KPI
+- major implementation risk
+- next action
+
+OUTPUT FORMAT:
+
+1. Executive Summary
+2. Current Process Map
+3. Problem Definition
+4. Bottlenecks
+5. Waste Analysis
+6. Process-Specific Findings
+7. Layout & Flow
+8. System & Data Issues
+9. Staffing & Workload
+10. Standard Work
+11. Safety Considerations
+12. Root Cause Analysis
+13. Current / Recommended KPIs
+14. Baseline Requirements
+15. Quick Wins
+16. Medium-Term Improvements
+17. Long-Term Improvements
+18. Priority Matrix
+19. Implementation Plan
+20. Control Plan
+21. Measurement Plan
+22. Risks
+23. Final Recommendation
+
+IMPORTANT:
+- Do not invent warehouse data.
+- Do not assume the problem is caused by employees.
+- Separate symptoms from root causes.
+- Distinguish process, system, layout, equipment and staffing issues.
+- Do not recommend automation simply because it sounds advanced.
+- Do not recommend additional labor before checking process efficiency and workload evidence.
+- Do not compromise safety for productivity.
+- Use measurable improvements wherever possible.
+- Clearly identify where observation, time studies or operational data are required before reaching a conclusion.`;
+
+const steps = [
+  {
+    title: "Describe the real workflow",
+    description:
+      "Explain how work actually moves through the warehouse, including manual steps, system transactions, staging and exceptions—not only what the SOP says should happen.",
+  },
+  {
+    title: "Measure before changing",
+    description:
+      "Collect baseline information such as cycle time, travel, backlog, productivity and errors before deciding which improvement will have the greatest effect.",
+  },
+  {
+    title: "Separate the root causes",
+    description:
+      "A delay that looks like a staffing problem may actually come from poor slotting, replenishment, system transactions, equipment availability or workload imbalance.",
+  },
+  {
+    title: "Improve and control",
+    description:
+      "Turn improvements into standard work with clear ownership, KPIs, training and follow-up so the operation does not return to the previous process.",
+  },
+];
+
+const example = {
+  input: [
+    "Operation: Distribution warehouse.",
+    "Process: Order picking.",
+    "Problem: Picking productivity is low and orders are frequently waiting for replenishment.",
+    "Current method: Pickers receive orders through WMS and use RF scanners.",
+    "Observation: Fast-moving SKUs are spread across several aisles and pick locations frequently run out during the shift.",
+    "Target: Improve productivity without adding permanent labor.",
+  ],
+
+  output: [
+    "Problem definition: Low picking productivity appears to be associated with excessive travel and interruptions caused by unavailable stock at pick faces.",
+    "Evidence required: Measure picker travel, lines picked per labor hour, replenishment frequency, emergency replenishments and pick-location stockouts by SKU.",
+    "Likely improvement areas: ABC/velocity-based slotting, review of pick-face quantities, replenishment triggers and planned replenishment before peak picking periods.",
+    "Quick win: Identify the highest-volume SKUs and test relocating a small group closer to the main picking and dispatch flow.",
+    "KPI: Compare lines picked per labor hour, emergency replenishments and order cycle time before and after the pilot.",
+    "Do not expand the change warehouse-wide until the pilot demonstrates measurable improvement.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Observe the process on the floor",
+    description:
+      "System data shows what happened, but direct observation can reveal walking, waiting, congestion, rework and unofficial workarounds that the system does not record.",
+  },
+  {
+    title: "Measure the bottleneck first",
+    description:
+      "Improving a process that is not constraining the operation may simply move waiting time somewhere else.",
+  },
+  {
+    title: "Pilot before full rollout",
+    description:
+      "Test slotting, replenishment, layout or workflow changes in a controlled area first and compare the results with the baseline.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Warehouse Process Improvement Prompt | KRIYANO"
+  description="Analyze warehouse receiving, putaway, storage, replenishment, picking, packing and dispatch processes to identify bottlenecks, waste, root causes and measurable improvements."
+>
+  <PromptPage
+    category="OPERATIONS & LOGISTICS"
+    title="Warehouse Process"
+    accentTitle="Improvement."
+    description="Analyze warehouse workflows systematically to identify bottlenecks, unnecessary movement, process waste, root causes and practical measurable improvements."
+    meta={[
+      "Free prompt",
+      "Warehouse operations",
+      "Process improvement",
+    ]}
+    bestFor={[
+      "Warehouse supervisors",
+      "Operations managers",
+      "3PL operations",
+      "Distribution centers",
+      "Inventory teams",
+      "Continuous improvement",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Improve the process, not just the symptom."
+    introDescription="Map how work actually flows through the warehouse, measure the bottlenecks and separate process, system, layout, equipment and staffing causes before deciding what should change."
+    steps={steps}
+    exampleTitle="Turn a productivity problem into a measurable improvement."
+    example={example}
+    tipsTitle="Make warehouse improvements sustainable."
+    tips={tips}
+    sidebarTitle="Need to investigate a specific failure?"
+    sidebarDescription="Use KRIYANO's Root Cause Analysis or Inventory Discrepancy Investigation prompts when the problem requires a deeper investigation before redesigning the process."
+    warningTitle="Safety comes before productivity"
+    warningText="Warehouse process changes can affect pedestrian routes, forklift movements, racking, loading docks and manual handling. Operational improvements should be reviewed against applicable safety procedures and site requirements before implementation."
+  />
+</BaseLayout>

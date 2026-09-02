@@ -1,0 +1,366 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced research strategist and analytical planner.
+
+TASK:
+Create a clear, practical research plan for the topic, question or decision described below.
+
+RESEARCH TOPIC:
+[What do you want to research?]
+
+RESEARCH GOAL:
+[What decision, understanding or outcome should the research support?]
+
+KEY QUESTION:
+[What is the main question you need answered?]
+
+SECONDARY QUESTIONS:
+[List any supporting questions.]
+
+TARGET MARKET / LOCATION:
+[Country, city, industry, customer group or online market if relevant.]
+
+TARGET AUDIENCE:
+[Who is affected by the research or who will use the findings?]
+
+TIME PERIOD:
+[Current, historical, last 12 months, next 3 years, etc.]
+
+AVAILABLE INFORMATION:
+[List what you already know.]
+
+KNOWN SOURCES:
+[List any websites, reports, databases, documents or internal sources already available.]
+
+CONSTRAINTS:
+[Budget, time, access, language, geography, data availability or other limits.]
+
+RESEARCH DEPTH:
+[Quick / Standard / Deep]
+
+OUTPUT PURPOSE:
+[Example: business decision, report, presentation, article, investment decision, comparison, strategy.]
+
+RESEARCH PLAN REQUIREMENTS:
+
+1. DEFINE THE RESEARCH PROBLEM
+Rewrite the research goal into:
+- Primary research objective
+- Main research question
+- Supporting questions
+- Decision the research should support
+
+2. SCOPE
+Define:
+- What is included
+- What is excluded
+- Geographic scope
+- Time scope
+- Customer / industry scope
+- Important assumptions
+
+Avoid allowing the research to become unnecessarily broad.
+
+3. INFORMATION NEEDED
+Identify the specific information required to answer each research question.
+
+Examples:
+- market size
+- demand
+- customer needs
+- pricing
+- competitor information
+- regulations
+- costs
+- trends
+- operational requirements
+- risks
+
+4. SOURCE STRATEGY
+Recommend the best source types.
+
+Prioritize where relevant:
+- Official government sources
+- Regulators
+- Company websites
+- Financial reports
+- Industry associations
+- Academic research
+- Reputable research organizations
+- Established news organizations
+- Marketplace data
+- Customer reviews
+- Interviews
+- Surveys
+- Internal business records
+
+Explain which sources should be used for which questions.
+
+5. PRIMARY VS SECONDARY RESEARCH
+Separate the plan into:
+
+Secondary research:
+[Existing information to collect.]
+
+Primary research:
+[New information to collect directly.]
+
+Recommend primary research only when it would meaningfully improve the answer.
+
+6. SEARCH STRATEGY
+Create useful research search themes and search queries.
+
+Group them by:
+- Market
+- Customers
+- Competitors
+- Pricing
+- Trends
+- Risks
+- Regulations
+- Operations
+
+Do not generate dozens of repetitive searches.
+
+7. SOURCE QUALITY CHECK
+For every important source, evaluate:
+- Authority
+- Publication date
+- Relevance
+- Methodology
+- Possible bias
+- Primary vs secondary source
+
+Prefer original sources where possible.
+
+8. FACT VERIFICATION
+For important facts:
+- Look for confirmation from multiple independent sources where appropriate.
+- Distinguish reported facts from estimates.
+- Record the source date.
+- Flag conflicting figures.
+
+Do not average conflicting numbers unless there is a valid methodological reason.
+
+9. DATA COLLECTION STRUCTURE
+Recommend a simple format for recording research findings.
+
+Include fields such as:
+- Research question
+- Finding
+- Source
+- Publication date
+- Evidence type
+- Confidence level
+- Notes
+- Follow-up needed
+
+10. GAP ANALYSIS
+Identify:
+- Missing information
+- Difficult-to-verify information
+- Assumptions
+- Contradictory evidence
+- Areas requiring primary research
+
+11. ANALYSIS METHOD
+Explain how the collected evidence should be analyzed.
+
+Use methods appropriate to the topic, such as:
+- comparison
+- trend analysis
+- segmentation
+- SWOT
+- cost comparison
+- competitor benchmarking
+- thematic analysis
+- risk analysis
+
+Do not use a framework simply because it is popular.
+
+12. RESEARCH SEQUENCE
+Arrange the work in the most efficient order.
+
+Start with research that could quickly invalidate the idea or answer the key question.
+
+13. TIME PLAN
+Create a realistic sequence for:
+- initial research
+- source verification
+- data collection
+- analysis
+- gap filling
+- final synthesis
+
+If no deadline is provided, give a practical relative sequence rather than inventing dates.
+
+14. DECISION CRITERIA
+Define what evidence would support:
+- Proceed
+- Proceed with changes
+- Conduct more research
+- Stop / reject
+
+Use criteria relevant to the actual decision.
+
+15. FINAL RESEARCH OUTPUT
+Recommend the final structure of the research deliverable.
+
+Example:
+- Executive summary
+- Research objective
+- Method
+- Key findings
+- Evidence
+- Analysis
+- Risks
+- Information gaps
+- Conclusions
+- Recommendations
+
+16. RESEARCH RISKS
+Identify possible issues such as:
+- outdated information
+- biased samples
+- weak sources
+- insufficient data
+- regional differences
+- selection bias
+- survivorship bias
+- misleading market estimates
+
+17. FINAL CHECK
+Before concluding, verify:
+- Did the research answer the main question?
+- Is the evidence strong enough?
+- Are important claims sourced?
+- Are facts separated from assumptions?
+- Are uncertainties clearly stated?
+- Is further research actually necessary?
+
+OUTPUT FORMAT:
+
+1. Research Objective
+2. Key Research Questions
+3. Scope
+4. Information Required
+5. Source Strategy
+6. Primary Research Plan
+7. Secondary Research Plan
+8. Search Strategy
+9. Source Evaluation Criteria
+10. Data Collection Structure
+11. Analysis Method
+12. Research Sequence
+13. Research Timeline
+14. Decision Criteria
+15. Research Risks
+16. Information Gaps
+17. Recommended Final Report Structure
+
+IMPORTANT:
+- Do not invent facts or research findings.
+- This task is to build the research plan, not pretend the research has already been completed.
+- Clearly separate known information from information that still needs to be researched.
+- Prefer authoritative and original sources.
+- Flag areas where current information will be required.
+- Avoid unnecessary research that does not contribute to the decision.`;
+
+const steps = [
+  {
+    title: "Start with the decision",
+    description:
+      "Explain what the research needs to help you decide. This keeps the plan focused on useful evidence instead of collecting information without a clear purpose.",
+  },
+  {
+    title: "Break the problem into questions",
+    description:
+      "Separate the main research question into smaller questions about customers, market conditions, competitors, pricing, risks or operations.",
+  },
+  {
+    title: "Choose sources deliberately",
+    description:
+      "Use official and primary sources for important facts, then add secondary sources and customer evidence where they provide additional context.",
+  },
+  {
+    title: "Define when research is enough",
+    description:
+      "Set decision criteria before collecting data so you know when the evidence is strong enough to act.",
+  },
+];
+
+const example = {
+  input: [
+    "Topic: Whether to launch an online inventory setup service for small businesses.",
+    "Goal: Decide whether the idea should be tested commercially.",
+    "Market: Sri Lanka.",
+    "Customers: Small retailers, distributors and online sellers.",
+    "Main questions: Is there a real inventory-control problem, what solutions are already used and what might businesses pay for help?",
+    "Research depth: Standard.",
+  ],
+
+  output: [
+    "Primary objective: Determine whether a commercially meaningful group of small businesses experiences inventory-control problems that are not adequately solved by their current processes or software.",
+    "Secondary research should examine the number and characteristics of target businesses, existing inventory software and consulting alternatives, visible pricing, digital adoption and relevant small-business trends.",
+    "Primary research should focus on interviews with business owners or operations staff to understand current stock-control problems, existing workarounds, willingness to change and willingness to pay.",
+    "Early validation should test the customer problem before investing heavily in detailed market sizing or service development.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Research questions are more useful than topics",
+    description:
+      "A broad topic such as 'small-business AI' can expand endlessly. A decision-focused question gives the research a clear stopping point.",
+  },
+  {
+    title: "Use primary sources for critical facts",
+    description:
+      "Government statistics, regulators, original company information and first-party reports are usually stronger foundations than summaries repeating other sources.",
+  },
+  {
+    title: "Research uncertainty explicitly",
+    description:
+      "A useful plan should show what cannot yet be verified instead of hiding uncertainty behind confident-looking conclusions.",
+  },
+];
+---
+
+<BaseLayout
+  title="Research Plan Builder Prompt | KRIYANO"
+  description="Build a structured research plan with clear questions, scope, source strategy, verification methods, analysis steps and decision criteria."
+>
+  <PromptPage
+    category="RESEARCH"
+    title="Research Plan"
+    accentTitle="Builder."
+    description="Turn a broad research topic into a focused investigation with clear questions, reliable sources, evidence checks and practical decision criteria."
+    meta={[
+      "Free prompt",
+      "Research",
+      "Planning",
+    ]}
+    bestFor={[
+      "Business research",
+      "Market studies",
+      "Academic planning",
+      "Decision research",
+      "Competitor research",
+      "Deep-dive investigations",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Plan the research before collecting information."
+    introDescription="Define the decision, break it into answerable questions and decide which evidence is actually needed. This helps prevent unfocused research and makes the final findings easier to verify."
+    steps={steps}
+    exampleTitle="Turn a business question into a research plan."
+    example={example}
+    tipsTitle="Build more reliable research."
+    tips={tips}
+    sidebarTitle="Ready to compare the evidence?"
+    sidebarDescription="Use the KRIYANO Research & Comparison Prompt after collecting the information to compare findings, trade-offs and alternatives systematically."
+    warningTitle="A plan is not evidence"
+    warningText="This prompt organizes how research should be conducted. Findings still need to be collected and verified from appropriate current sources before making important decisions."
+  />
+</BaseLayout>

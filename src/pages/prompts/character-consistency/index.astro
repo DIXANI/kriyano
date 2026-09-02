@@ -1,0 +1,785 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert AI image prompt designer specializing in character consistency across multiple generated images.
+
+TASK:
+Create a high-quality image-generation prompt that preserves the same character identity across different scenes, poses, outfits, expressions, camera angles and environments.
+
+The most important goal is CHARACTER CONSISTENCY.
+
+CHARACTER REFERENCE:
+[Describe the character in detail or provide the reference-image characteristics.]
+
+CHARACTER ROLE:
+[Creator / employee / customer / fictional character / presenter / chef / athlete / other.]
+
+AGE APPEARANCE:
+[Approximate visual age range.]
+
+GENDER PRESENTATION:
+[If relevant.]
+
+ETHNIC / REGIONAL APPEARANCE:
+[Only if relevant to the requested visual identity.]
+
+FACE SHAPE:
+[Oval / round / heart-shaped / square / other.]
+
+SKIN TONE:
+[Describe accurately and neutrally.]
+
+EYES:
+[Shape, colour, size, expression.]
+
+EYEBROWS:
+[Shape, thickness, colour.]
+
+NOSE:
+[Shape and proportions.]
+
+LIPS:
+[Shape, fullness, natural colour.]
+
+HAIR:
+[Colour, length, texture, hairstyle, parting.]
+
+DISTINCTIVE FEATURES:
+[Freckles / beauty mark / facial structure / glasses / facial hair / other.]
+
+BODY TYPE:
+[General build and proportions if relevant.]
+
+HEIGHT IMPRESSION:
+[Short / average / tall / unspecified.]
+
+DEFAULT EXPRESSION:
+[Warm smile / neutral / confident / serious / other.]
+
+DEFAULT OUTFIT:
+[Describe clothing precisely.]
+
+ACCESSORIES:
+[Jewellery, watch, glasses, hat, etc.]
+
+BRAND / VISUAL ELEMENTS:
+[Any colours, props or visual details that must remain consistent.]
+
+CURRENT SCENE:
+[Describe the new scene.]
+
+POSE / ACTION:
+[What the character is doing.]
+
+EXPRESSION:
+[Desired expression for this scene.]
+
+CAMERA ANGLE:
+[Front / three-quarter / side / over-the-shoulder / low angle / high angle / other.]
+
+SHOT TYPE:
+[Close-up / chest-up / waist-up / full body / wide shot.]
+
+LENS / CAMERA FEEL:
+[Portrait lens / cinematic / documentary / smartphone / commercial / other.]
+
+LIGHTING:
+[Soft daylight / studio / golden hour / dramatic / diffused / other.]
+
+BACKGROUND:
+[Describe location and environment.]
+
+IMAGE STYLE:
+[Photorealistic / commercial photography / cinematic / editorial / illustration / other.]
+
+ASPECT RATIO:
+[1:1 / 4:5 / 9:16 / 16:9 / other.]
+
+QUALITY LEVEL:
+[High realism / premium commercial / natural / other.]
+
+CHARACTER CONSISTENCY REQUIREMENTS:
+
+1. LOCK THE CHARACTER IDENTITY
+The character must remain recognizably the same person across every image.
+
+2. PRESERVE FACIAL PROPORTIONS
+Keep consistent:
+
+Face width
+Face length
+Jawline
+Cheekbone structure
+Forehead proportions
+Chin shape
+
+3. PRESERVE EYE IDENTITY
+Maintain:
+
+Eye shape
+Eye spacing
+Eye size
+Eye colour
+Eyelid structure
+
+Do not randomly enlarge or stylize the eyes.
+
+4. PRESERVE EYEBROWS
+Keep:
+
+Shape
+Thickness
+Arch
+Spacing
+Colour
+
+5. PRESERVE NOSE STRUCTURE
+Do not significantly change:
+
+Bridge
+Width
+Tip
+Overall proportion
+
+6. PRESERVE LIP SHAPE
+Keep:
+
+Upper-lip shape
+Lower-lip fullness
+Mouth width
+Natural proportions
+
+7. PRESERVE SKIN TONE
+Do not lighten, darken or recolour skin unless specifically requested by lighting conditions.
+
+8. PRESERVE NATURAL FACIAL FEATURES
+Do not remove distinctive features that help identify the character.
+
+9. PRESERVE HAIR IDENTITY
+Unless a hairstyle change is requested, maintain:
+
+Hair colour
+Length
+Texture
+Curl pattern
+Hairline
+Parting
+
+10. PRESERVE AGE APPEARANCE
+Do not make the character noticeably younger or older between scenes unless requested.
+
+11. PRESERVE BODY PROPORTIONS
+Maintain consistent:
+
+Shoulder width
+Torso proportions
+Overall build
+
+12. DO NOT RANDOMLY BEAUTIFY
+Do not:
+
+Reshape the face
+Enlarge eyes
+Shrink the nose
+Sharpen the jaw excessively
+Change body proportions
+Apply unrealistic beauty filtering
+
+13. DO NOT GENERATE A LOOKALIKE
+The goal is the same character, not merely someone with similar demographic traits.
+
+14. IDENTITY HAS PRIORITY OVER STYLE
+If visual style conflicts with identity preservation, preserve identity first.
+
+15. IDENTITY HAS PRIORITY OVER POSE
+Changing the pose should not change facial structure.
+
+16. IDENTITY HAS PRIORITY OVER CAMERA ANGLE
+Three-quarter and side views must still logically match the established facial anatomy.
+
+17. MAINTAIN SIDE-PROFILE LOGIC
+When showing the character from the side, preserve believable:
+
+Nose projection
+Chin
+Forehead
+Lip profile
+Jaw shape
+
+18. MAINTAIN THREE-QUARTER LOGIC
+Do not create a different-looking face simply because the angle changes.
+
+19. CONTROL EXPRESSION CHANGES
+Expressions may change:
+
+Smile
+Seriousness
+Surprise
+Concentration
+
+but facial anatomy should remain stable.
+
+20. AVOID EXPRESSION DISTORTION
+Do not let smiling significantly alter:
+
+Jaw shape
+Eye size
+Nose shape
+Face width
+
+21. LOCK KEY IDENTITY ANCHORS
+Prioritize the most distinctive combination of:
+
+Face shape
+Eyes
+Nose
+Lips
+Hair
+Skin tone
+Distinctive features
+
+22. REPEAT IMPORTANT IDENTITY DETAILS
+Restate the most important character features in the scene prompt rather than assuming the model will remember them.
+
+23. DO NOT OVERLOAD THE IDENTITY DESCRIPTION
+Focus on features that materially affect recognizability.
+
+24. DISTINGUISH FIXED FROM VARIABLE CHARACTERISTICS
+
+FIXED:
+Identity-defining traits that must not change.
+
+VARIABLE:
+Pose
+Expression
+Clothing
+Background
+Lighting
+Props
+
+25. CREATE A CHARACTER LOCK SECTION
+Include a dedicated section such as:
+
+CHARACTER IDENTITY — LOCKED
+
+followed by the fixed identity features.
+
+26. CREATE A SCENE SECTION
+Separate identity information from the current scene description.
+
+27. PRESERVE CLOTHING WHEN REQUIRED
+If an outfit is part of the character's recognizable brand identity, keep:
+
+Colour
+Cut
+Style
+Accessories
+
+consistent.
+
+28. ALLOW CONTROLLED OUTFIT CHANGES
+When the outfit may change, preserve the person while changing only the requested clothing.
+
+29. DO NOT LET OUTFIT CHANGE ALTER THE PERSON
+A new outfit must not result in a different face or body.
+
+30. PRESERVE ACCESSORIES
+If jewellery, glasses or other accessories are identity anchors, keep them consistent unless explicitly removed.
+
+31. CONTROL MAKEUP
+Maintain similar makeup style and intensity unless a change is specifically requested.
+
+32. DO NOT RANDOMLY ADD MAKEUP
+Avoid unexpected:
+
+Heavy contouring
+Different lipstick
+Eye makeup
+Beauty filters
+
+33. CONTROL FACIAL HAIR
+For characters with facial hair, preserve:
+
+Style
+Density
+Colour
+Shape
+
+34. CONTROL AGE DETAILS
+Keep realistic continuity in:
+
+Skin texture
+Fine lines
+Facial maturity
+
+35. PRESERVE NATURAL ASYMMETRY
+Human faces are not perfectly symmetrical.
+
+Do not over-correct facial features into artificial symmetry.
+
+36. KEEP HUMAN SKIN NATURAL
+Avoid:
+
+Plastic skin
+Wax-like skin
+Excessive smoothing
+Artificial pores
+Over-sharpening
+
+37. PRESERVE REALISTIC TEETH
+For smiling characters, avoid:
+
+Oversized teeth
+Perfectly identical teeth
+Unnatural whiteness
+
+38. PRESERVE REALISTIC EYES
+Avoid:
+
+Glass-like eyes
+Overly reflective irises
+Artificial glow
+Unrealistic symmetry
+
+39. CONTROL HAND QUALITY
+If hands are visible:
+
+Use natural anatomy
+Correct finger count
+Natural grip
+Realistic interaction with objects
+
+40. KEEP HAND SIZE PROPORTIONAL
+Hands should remain anatomically consistent with the character.
+
+41. PRESERVE BODY ANATOMY
+Avoid distorted:
+
+Arms
+Shoulders
+Torso
+Neck
+Legs
+
+42. KEEP NECK LENGTH NATURAL
+Image generators may unintentionally alter neck proportions between scenes.
+
+43. PRESERVE HEAD-TO-BODY RATIO
+Do not let different shot types create inconsistent proportions.
+
+44. CONTROL PERSPECTIVE
+Forced perspective may enlarge foreground objects, but should not distort identity.
+
+45. DISTINGUISH CAMERA EFFECT FROM ANATOMY
+Wide-angle distortion should not be interpreted as a permanent change to facial structure.
+
+46. USE CONSISTENT PHOTOGRAPHIC REALISM
+For photorealistic series, maintain similar realism level across images.
+
+47. PRESERVE SKIN UNDERTONE UNDER DIFFERENT LIGHTING
+Lighting may influence visible colour, but the character's actual complexion should remain consistent.
+
+48. MAINTAIN LIGHTING LOGIC
+Ensure shadows follow:
+
+Light direction
+Face geometry
+Scene environment
+
+49. DO NOT LET DRAMATIC LIGHTING HIDE IDENTITY
+Key facial features should remain readable unless intentional silhouette is requested.
+
+50. MAINTAIN HAIR PHYSICS
+Hair should respond naturally to:
+
+Wind
+Movement
+Gravity
+Pose
+
+without changing its fundamental texture or identity.
+
+51. CONTROL HAIR LENGTH
+Do not allow hair to become noticeably shorter or longer unintentionally.
+
+52. CONTROL CURL PATTERN
+For curly or wavy hair, preserve the general curl structure.
+
+53. CONTROL PARTING
+Maintain recognizable hair parting where important.
+
+54. CONTROL HAIRLINE
+Do not randomly change forehead or hairline shape.
+
+55. SCENE CONTINUITY
+For sequential scenes, preserve logical continuity in:
+
+Character
+Outfit
+Props
+Environment
+Time of day
+
+unless a transition is explicitly requested.
+
+56. PROP CONTINUITY
+If the character carries or uses a specific object across scenes, preserve:
+
+Colour
+Shape
+Size
+Brand-neutral details
+
+57. ENVIRONMENT CONTINUITY
+When scenes occur in the same location, maintain key environmental anchors.
+
+58. TIME CONTINUITY
+Keep lighting and styling consistent when images are meant to represent moments close together.
+
+59. DO NOT RANDOMLY CHANGE JEWELLERY
+Preserve visible:
+
+Necklaces
+Earrings
+Bracelets
+Rings
+
+when part of continuity.
+
+60. DO NOT RANDOMLY CHANGE GLASSES
+Maintain frame:
+
+Shape
+Colour
+Size
+
+61. KEEP WARDROBE LOGIC
+If creating multiple views of the same moment, clothing must match exactly.
+
+62. KEEP FABRIC DETAILS CONSISTENT
+Preserve:
+
+Colour
+Pattern
+Neckline
+Sleeve style
+Buttons
+Textures
+
+63. LOGO CONTROL
+Do not invent visible logos or brand marks.
+
+64. TEXT CONTROL
+Avoid random text on:
+
+Clothes
+Backgrounds
+Packaging
+Props
+
+unless specifically requested.
+
+65. CHARACTER COUNT
+Generate only the requested number of people.
+
+66. DO NOT CREATE DUPLICATE CHARACTERS
+Avoid accidentally showing multiple copies of the same character.
+
+67. SECONDARY PEOPLE
+If other people appear, they must remain visually secondary unless otherwise requested.
+
+68. FOCUS CONTROL
+Keep the main character as the clear visual subject.
+
+69. CAMERA POSITION
+Specify camera position clearly where consistency matters.
+
+70. EYE DIRECTION
+Control where the character is looking:
+
+Camera
+Object
+Another person
+Off-camera
+
+71. POSE NATURALNESS
+Use anatomically realistic poses.
+
+72. AVOID MANNEQUIN POSTURES
+The character should appear naturally balanced.
+
+73. INTERACTION WITH OBJECTS
+Ensure realistic hand placement and physical contact.
+
+74. OCCLUSION
+Do not allow props to unnecessarily obscure major identity features.
+
+75. PROFILE SCENES
+When a full profile is needed, reinforce identity anchors that remain visible.
+
+76. BACK-VIEW SCENES
+If the face is not visible, preserve:
+
+Hair
+Body proportions
+Outfit
+Accessories
+
+for continuity.
+
+77. EXTREME CLOSE-UP
+Preserve realistic skin texture and identity without beauty distortion.
+
+78. FULL-BODY SHOTS
+Maintain the same facial identity even when the face occupies fewer pixels.
+
+79. WIDE SCENES
+Do not allow reduced subject size to produce a generic substitute character.
+
+80. ACTION SCENES
+Movement should not distort face or anatomy.
+
+81. MOTION
+If motion blur is used, keep identity-critical facial areas sufficiently clear unless deliberately cinematic.
+
+82. COMMERCIAL PHOTOGRAPHY
+For premium commercial imagery use:
+
+Controlled lighting
+Natural textures
+Clean composition
+Realistic materials
+
+without making the person look synthetic.
+
+83. CINEMATIC STYLE
+Cinematic grading should affect mood, not facial anatomy.
+
+84. EDITORIAL STYLE
+Maintain natural human realism rather than excessive commercial retouching.
+
+85. ILLUSTRATED CHARACTER MODE
+For illustration, lock:
+
+Face proportions
+Hair silhouette
+Colour palette
+Costume
+Distinctive marks
+
+86. 3D CHARACTER MODE
+Maintain consistent:
+
+Head shape
+Eye placement
+Materials
+Hair model
+Costume model
+
+87. ANIME / STYLIZED MODE
+Preserve the same stylized identity anchors across scenes rather than generating generic characters.
+
+88. REFERENCE IMAGE PRIORITY
+When a character reference image is supplied, treat it as the primary identity source.
+
+89. DO NOT REDESIGN THE REFERENCE
+Do not reinterpret or "improve" the person's identity unless requested.
+
+90. EXPLICITLY STATE:
+"Use the provided character reference as the exact identity reference."
+
+when reference-image workflows support it.
+
+91. IDENTITY NEGATIVE CONSTRAINTS
+Where supported, include:
+
+Do not change face shape.
+Do not change skin tone.
+Do not change eye shape.
+Do not change nose structure.
+Do not change hairstyle.
+Do not change age appearance.
+Do not replace the character.
+
+92. SCENE NEGATIVE CONSTRAINTS
+Include only relevant restrictions such as:
+
+No duplicate person
+No extra fingers
+No distorted hands
+No random text
+No unwanted logo
+
+93. AVOID EXCESSIVE NEGATIVE PROMPTING
+Use negative constraints to protect important failures, not as a giant unrelated keyword list.
+
+94. CREATE A REUSABLE CHARACTER PROFILE
+For a series, produce a compact "Character Identity Block" that can be reused in every prompt.
+
+95. CREATE A SCENE-SPECIFIC PROMPT
+After the reusable identity block, write the full prompt for the requested scene.
+
+96. CREATE A CONSISTENCY CHECKLIST
+After the prompt, provide a short checklist of identity details to verify in the generated result.
+
+97. IDENTIFY HIGH-RISK FEATURES
+Highlight the 3–5 features most likely to affect recognizability.
+
+98. PRIORITIZE RECOGNIZABILITY OVER NOVELTY
+The character should look consistently like the same person before introducing creative variation.
+
+99. KEEP THE PROMPT MODEL-FRIENDLY
+Use clear visual descriptions rather than abstract personality traits that cannot be directly rendered.
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- character identity is explicitly locked
+- face shape is consistent
+- eye shape and spacing are preserved
+- nose structure is preserved
+- lips are preserved
+- skin tone is preserved
+- hair identity is preserved
+- age appearance is preserved
+- body proportions are stable
+- key accessories are preserved
+- outfit continuity matches the request
+- pose is natural
+- camera angle is clear
+- lighting is coherent
+- hands are anatomically plausible
+- random text and logos are prevented
+- scene details do not override identity
+- no duplicate character is introduced
+- the prompt distinguishes fixed identity traits from variable scene traits
+
+OUTPUT FORMAT:
+
+1. CHARACTER IDENTITY — LOCKED
+Create a concise reusable identity block.
+
+2. CURRENT SCENE
+Describe the requested scene, pose, expression and interaction.
+
+3. CAMERA & COMPOSITION
+Specify shot type, angle, lens feel, framing and eye direction.
+
+4. LIGHTING & ENVIRONMENT
+Describe lighting, setting and atmosphere.
+
+5. FULL GENERATION PROMPT
+Combine the identity and scene requirements into one model-ready prompt.
+
+6. NEGATIVE / PROTECTION INSTRUCTIONS
+List only the most important consistency constraints.
+
+7. CONSISTENCY CHECKLIST
+List 5–10 features to compare against the reference after generation.
+
+IMPORTANT:
+- The same character must remain immediately recognizable across images.
+- Do not create a similar-looking replacement.
+- Do not redesign the character.
+- Preserve identity-defining facial anatomy before changing style, pose or environment.
+- Distinguish fixed identity traits from variable scene traits.
+- When a reference image is available, use it as the primary identity source.
+- Keep appearance changes intentional, never accidental.`;
+
+const steps = [
+  {
+    title: "Create the identity lock",
+    description:
+      "Define the facial structure, eyes, nose, lips, skin tone, hair and distinctive features that must remain unchanged across every image.",
+  },
+  {
+    title: "Separate identity from scene",
+    description:
+      "Treat pose, expression, clothing, environment and lighting as variable scene elements rather than letting them redefine the character.",
+  },
+  {
+    title: "Repeat the important anchors",
+    description:
+      "Include the strongest identity features in every new scene prompt instead of assuming the image model will remember a previous generation.",
+  },
+  {
+    title: "Check the result against the reference",
+    description:
+      "Compare face shape, eyes, nose, lips, hair, age appearance and other identity anchors before accepting a new image into the series.",
+  },
+];
+
+const example = {
+  input: [
+    "Character: Female food creator with an oval face, warm medium skin tone, dark brown almond-shaped eyes, long defined black curly hair and a natural smile.",
+    "Identity accessories: Small gold hoop earrings and layered gold necklaces.",
+    "Scene: Standing in a modern kitchen and presenting a freshly baked cake.",
+    "Shot: Chest-up, three-quarter angle.",
+    "Style: Premium photorealistic food-commercial photography.",
+  ],
+
+  output: [
+    "CHARACTER IDENTITY — LOCKED: Preserve the same oval facial structure, warm medium skin tone, dark brown almond-shaped eyes, natural nose and lip proportions, long defined black curly hairstyle, gold hoop earrings and layered gold necklaces.",
+    "SCENE: The same character stands in a modern kitchen, smiling naturally while presenting the cake toward the viewer.",
+    "CONSISTENCY PROTECTION: Do not redesign the face, change skin tone, alter eye shape, shorten or straighten the hair, change age appearance or replace the character with a similar-looking person.",
+    "CHECK: Compare face shape, eye spacing, nose, lips, curl pattern, jewellery and overall age appearance with the original reference.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Lock anatomy, not just adjectives",
+    description:
+      "Descriptions such as 'beautiful woman' are too generic for consistency. Face shape, eye structure, nose, lips, hair and distinctive features are much stronger identity anchors.",
+  },
+  {
+    title: "Keep fixed and variable details separate",
+    description:
+      "Identity should remain fixed while pose, expression, camera angle, environment and sometimes wardrobe can change deliberately.",
+  },
+  {
+    title: "Consistency still needs visual checking",
+    description:
+      "Even a strong prompt cannot guarantee perfect identity matching. Compare each generated image with the reference before using it in a continuous character series.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Character Consistency Prompt | KRIYANO"
+  description="Create AI image prompts that preserve the same character identity across different scenes, poses, outfits, expressions and camera angles."
+>
+  <PromptPage
+    category="IMAGE GENERATION"
+    title="Character Consistency"
+    accentTitle="Prompt."
+    description="Keep the same AI character recognizable across multiple images while changing scenes, poses, expressions, outfits and camera angles."
+    meta={[
+      "Free prompt",
+      "AI characters",
+      "Image consistency",
+    ]}
+    bestFor={[
+      "AI creators",
+      "Brand characters",
+      "Social media series",
+      "Recipe creators",
+      "Marketing campaigns",
+      "Sequential images",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Change the scene without accidentally changing the person."
+    introDescription="Lock the character's identity-defining features separately from pose, expression, clothing and environment so each new generation stays visually connected to the original."
+    steps={steps}
+    exampleTitle="Keep the same creator recognizable in a new food scene."
+    example={example}
+    tipsTitle="Build stronger identity continuity across generations."
+    tips={tips}
+    sidebarTitle="Building the full image prompt?"
+    sidebarDescription="Use KRIYANO's AI Image Prompt Builder when you need to design the complete composition, lighting, camera, subject and visual style rather than focusing primarily on character identity."
+    warningTitle="Prompting alone cannot guarantee identical faces"
+    warningText="Image models can still introduce identity drift between generations. For important character series, use the same reference image whenever the platform supports it and visually verify facial features before publishing."
+  />
+</BaseLayout>

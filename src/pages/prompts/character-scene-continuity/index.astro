@@ -1,0 +1,756 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert AI video continuity supervisor, character consistency specialist, storyboard director and scene-matching prompt designer.
+
+TASK:
+Create a continuity-controlled AI video prompt that keeps the same character, environment, props, wardrobe, lighting, products and object states visually consistent across multiple scenes or generated clips.
+
+The goal is to reduce:
+- face drift
+- hairstyle changes
+- clothing changes
+- accessory changes
+- body-proportion changes
+- product redesign
+- food inconsistency
+- location rebuilding
+- prop relocation
+- lighting shifts
+- object-state resets
+- camera-direction confusion
+- time-of-day inconsistencies
+
+PROJECT:
+[Describe the video or sequence.]
+
+TOTAL SCENES:
+[Number of scenes.]
+
+PLATFORM:
+[Facebook Reel / Instagram Reel / TikTok / YouTube / commercial / film / other.]
+
+ASPECT RATIO:
+[9:16 / 16:9 / 1:1 / other.]
+
+CHARACTER:
+[Describe the main character.]
+
+REFERENCE IMAGE:
+[If available, treat it as the primary identity source.]
+
+FACE DETAILS:
+[Face shape, skin tone, eyes, eyebrows, nose, lips, distinctive features.]
+
+HAIR:
+[Colour, length, texture, style, parting.]
+
+AGE APPEARANCE:
+[Approximate visual age.]
+
+BODY / BUILD:
+[Relevant body proportions or build.]
+
+WARDROBE:
+[Exact clothing.]
+
+ACCESSORIES:
+[Jewellery, glasses, watch, hat, etc.]
+
+MAKEUP / FACIAL HAIR:
+[If relevant.]
+
+PRODUCT:
+[If applicable.]
+
+FOOD / DISH:
+[If applicable.]
+
+MAIN LOCATION:
+[Describe environment.]
+
+KEY ENVIRONMENT DETAILS:
+[List fixed visual elements.]
+
+PROPS:
+[List important props.]
+
+LIGHTING:
+[Direction, colour temperature, mood, time of day.]
+
+COLOUR PALETTE:
+[Optional.]
+
+CAMERA STYLE:
+[Optional.]
+
+SCENE LIST:
+[Briefly describe each scene.]
+
+TIMELINE:
+[Continuous event / same day / different times / different locations.]
+
+ELEMENTS ALLOWED TO CHANGE:
+[List what may intentionally change.]
+
+ELEMENTS THAT MUST NEVER CHANGE:
+[List critical continuity locks.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+CHARACTER & SCENE CONTINUITY REQUIREMENTS:
+
+1. CREATE A MASTER CONTINUITY BIBLE
+Before writing individual scene prompts, define all persistent visual details.
+
+2. DIVIDE DETAILS INTO:
+A. LOCKED ELEMENTS
+B. CONTROLLED VARIABLES
+C. SCENE-SPECIFIC ELEMENTS
+
+3. LOCK CHARACTER IDENTITY
+Maintain the same:
+Face shape
+Skin tone
+Eye shape
+Eye colour
+Eyebrows
+Nose
+Lips
+Jawline
+Distinctive features
+Age appearance
+
+4. DO NOT RECAST THE CHARACTER
+The character must not gradually become a similar-looking but different person.
+
+5. TREAT THE REFERENCE IMAGE AS PRIMARY IDENTITY TRUTH
+When supplied, visual identity should follow it closely.
+
+6. DO NOT RANDOMLY BEAUTIFY THE CHARACTER
+Avoid:
+Changing face proportions
+Changing skin tone
+Changing eye shape
+Changing nose
+Changing lips
+Changing age
+
+7. PRESERVE HAIR
+Maintain:
+Colour
+Length
+Texture
+Curl pattern
+Parting
+Volume
+Hairline
+Style
+
+8. ALLOW HAIR MOVEMENT
+Hair may move naturally with:
+Wind
+Walking
+Head movement
+
+but should not redesign itself.
+
+9. PRESERVE BODY PROPORTIONS
+Avoid unexplained changes in:
+Height
+Build
+Shoulder width
+Face-to-body ratio
+Hand size
+
+10. PRESERVE WARDROBE
+When scenes are part of the same continuous event, maintain:
+Top
+Bottom
+Shoes
+Colours
+Patterns
+Fabric
+Sleeve length
+
+11. DO NOT RANDOMLY CHANGE CLOTHING
+
+12. CONTROL WARDROBE CHANGES
+Only change clothing when explicitly required by the timeline.
+
+13. PRESERVE ACCESSORIES
+Maintain:
+Earrings
+Necklaces
+Glasses
+Watch
+Rings
+Hair accessories
+
+14. DO NOT RANDOMLY ADD ACCESSORIES
+
+15. DO NOT RANDOMLY REMOVE ACCESSORIES
+
+16. PRESERVE MAKEUP
+Maintain general makeup style and intensity.
+
+17. PRESERVE FACIAL HAIR
+Maintain:
+Beard length
+Moustache
+Stubble
+Colour
+
+18. PRESERVE CHARACTER VOICE ROLE
+If audio is involved, the same character should retain the same speaker identity.
+
+19. PRESERVE CHARACTER BEHAVIOUR
+Maintain consistent:
+Personality
+Energy
+Gesture style
+Professional / casual tone
+
+20. CONTROL EXPRESSION CHANGES
+Expressions may change naturally without altering facial identity.
+
+21. LOCK PRODUCT IDENTITY
+Maintain:
+Shape
+Colour
+Size
+Materials
+Packaging
+Label
+Logo
+Distinctive features
+
+22. DO NOT REDESIGN PRODUCTS BETWEEN SCENES
+
+23. DO NOT RANDOMLY CHANGE PACKAGING
+
+24. PRESERVE PRODUCT ORIENTATION WHEN CONTINUOUS
+If the product is held or placed, maintain believable orientation.
+
+25. PRESERVE FOOD IDENTITY
+Maintain:
+Dish shape
+Colour
+Texture
+Layers
+Toppings
+Portion size
+Serving vessel
+
+26. CONTROL FOOD STATE CHANGES
+Changes must follow the actual process.
+
+27. EXAMPLE:
+Raw batter may become baked cake.
+A baked cake should not later return to raw batter unless showing an earlier timeline.
+
+28. PRESERVE OBJECT STATE
+Every important object should carry its state forward.
+
+29. OBJECT-STATE EXAMPLES:
+Closed → opened
+Whole → cut
+Full → partially used
+Clean → dirty
+Empty → filled
+Uncooked → cooked
+
+30. DO NOT RESET OBJECTS BETWEEN SCENES
+
+31. KEEP OBJECT QUANTITY CONSISTENT
+Avoid random duplication or disappearance.
+
+32. PRESERVE PROP IDENTITY
+Maintain:
+Shape
+Colour
+Material
+Position where relevant
+
+33. CREATE A PROP MAP
+Track which props appear in which scenes.
+
+34. PRESERVE LOCATION IDENTITY
+Maintain:
+Room dimensions
+Walls
+Doors
+Windows
+Counters
+Furniture
+Shelves
+Floor
+Ceiling
+Key decorative elements
+
+35. DO NOT RANDOMLY REBUILD THE ENVIRONMENT
+
+36. CREATE AN ENVIRONMENT ANCHOR LIST
+Identify 3–8 details that make the location recognizable.
+
+37. EXAMPLE:
+Dark wooden counter
+Cream tiled backsplash
+Brass pendant light
+Window on left
+White cabinet on rear wall
+
+38. PRESERVE ENVIRONMENT LAYOUT
+Objects should not randomly change sides of the room.
+
+39. PRESERVE SCREEN GEOGRAPHY
+If a door is on the left side in one shot, it should remain logically positioned.
+
+40. PRESERVE CHARACTER POSITION LOGIC
+Do not teleport the character across the location.
+
+41. PRESERVE PROP POSITION LOGIC
+Objects should move only when an action explains it.
+
+42. CREATE SCENE HANDOFF STATES
+For every scene define:
+End position
+Character state
+Object state
+Lighting state
+Camera direction
+
+43. NEXT SCENE MUST INHERIT THE RELEVANT HANDOFF STATE
+
+44. PRESERVE TIME CONTINUITY
+If scenes occur moments apart:
+Lighting
+Wardrobe
+Environment
+Object states
+Weather
+should remain compatible.
+
+45. DEFINE TIME JUMPS
+If time changes, state it explicitly.
+
+46. CONTROL DAY / NIGHT CHANGES
+Do not change time of day without story justification.
+
+47. PRESERVE WEATHER
+If scenes are part of the same outdoor sequence, maintain:
+Cloud level
+Rain
+Sun
+Wind
+Wet surfaces
+
+48. CONTROL WEATHER CHANGES
+Only change when timeline requires it.
+
+49. PRESERVE LIGHTING DIRECTION
+Maintain the key-light direction when scenes occur in the same space and time.
+
+50. PRESERVE COLOUR TEMPERATURE
+Do not randomly switch from warm to cool lighting.
+
+51. PRESERVE SHADOW LOGIC
+Shadows must correspond to the established light direction.
+
+52. PRESERVE REFLECTION LOGIC
+Reflective surfaces should match the surrounding environment.
+
+53. CREATE A LIGHTING LOCK
+Define:
+Key direction
+Fill level
+Backlight
+Colour temperature
+Contrast
+Time-of-day feel
+
+54. PRESERVE COLOUR GRADE
+Maintain overall visual treatment across connected scenes.
+
+55. CONTROL CAMERA CONTINUITY
+Maintain coherent:
+Screen direction
+Eye line
+Subject position
+Movement direction
+
+56. APPLY 180-DEGREE LOGIC WHEN RELEVANT
+
+57. PRESERVE MOVEMENT DIRECTION
+If a character exits frame right, the next connected shot should not imply contradictory movement.
+
+58. PRESERVE GAZE DIRECTION
+Characters should look toward the correct person, object or direction.
+
+59. PRESERVE HAND DOMINANCE
+If relevant, keep the same hand performing recurring actions.
+
+60. PRESERVE GRIP CONTINUITY
+Objects should not jump between hands without explanation.
+
+61. PRESERVE HAND-OBJECT CONTACT
+Maintain believable contact and finger placement.
+
+62. PREVENT EXTRA LIMBS
+
+63. PREVENT DUPLICATE CHARACTERS
+
+64. PREVENT FACE MERGING
+
+65. PREVENT PROP DUPLICATION
+
+66. PREVENT OBJECT TELEPORTATION
+
+67. PRESERVE PHYSICAL CAUSE AND EFFECT
+Actions in one scene should produce consequences in later scenes.
+
+68. EXAMPLE:
+If water is spilled, the surface should remain wet until cleaned.
+
+69. PRESERVE DAMAGE / CHANGE STATES
+If an object becomes:
+Broken
+Opened
+Cut
+Used
+Dirty
+Wet
+Burned
+
+carry that state forward.
+
+70. CREATE CONTINUITY PRIORITY LEVELS
+Label important details:
+CRITICAL
+HIGH
+MEDIUM
+
+71. CRITICAL DETAILS
+Identity-defining elements that must not change.
+
+72. HIGH DETAILS
+Important environmental, wardrobe or product continuity.
+
+73. MEDIUM DETAILS
+Elements that can vary slightly without breaking continuity.
+
+74. DO NOT OVER-LOCK IRRELEVANT DETAILS
+Allow natural variation where it does not affect continuity.
+
+75. ALLOW NATURAL MICRO-VARIATION
+Examples:
+Small fabric movement
+Natural hair movement
+Subtle posture changes
+Minor background motion
+
+76. DO NOT CONFUSE VARIATION WITH REDESIGN
+
+77. CREATE A CHARACTER IDENTITY BLOCK
+This should be reusable in every character scene prompt.
+
+78. CREATE A LOCATION IDENTITY BLOCK
+Reusable for every scene in the same environment.
+
+79. CREATE A PRODUCT IDENTITY BLOCK
+When applicable.
+
+80. CREATE A FOOD IDENTITY BLOCK
+When applicable.
+
+81. CREATE A WARDROBE LOCK
+When applicable.
+
+82. CREATE A LIGHTING LOCK
+
+83. CREATE AN OBJECT-STATE TRACKER
+Track the state of important items after every scene.
+
+84. CREATE A CONTINUITY HANDOFF
+At the end of every scene describe what the next scene inherits.
+
+85. CREATE SCENE-SPECIFIC PROMPTS
+Each scene prompt should repeat only the critical continuity information needed.
+
+86. DO NOT REMOVE ESSENTIAL IDENTITY LOCKS FROM LATER SCENES
+
+87. USE REFERENCE IMAGES CONSISTENTLY
+Where the video model supports references, reuse the same verified identity references.
+
+88. DO NOT SUBSTITUTE LOOKALIKE REFERENCES
+
+89. CHARACTER CLOSE-UP MODE
+Increase protection of facial identity.
+
+90. WIDE-SHOT MODE
+Protect body proportions, wardrobe and environment identity.
+
+91. PRODUCT CLOSE-UP MODE
+Protect packaging, logo and label geometry.
+
+92. FOOD CLOSE-UP MODE
+Protect texture, toppings, colour and portion structure.
+
+93. LOCATION-WIDE MODE
+Protect architecture and anchor elements.
+
+94. CREATE TARGETED NEGATIVE CONSTRAINTS
+Examples:
+No face drift
+No hairstyle change
+No wardrobe change
+No accessory change
+No product redesign
+No room redesign
+No prop duplication
+No object reset
+No lighting direction change
+No random weather change
+
+95. DO NOT USE GENERIC NEGATIVES ONLY
+Tailor protection to the actual continuity risks.
+
+96. CREATE A CROSS-SCENE COMPARISON CHECK
+After generation, compare every new scene against the previous verified scene.
+
+97. CHECK THE FIRST AND LAST FRAME
+Continuity failures often become visible at clip boundaries.
+
+98. RECOMMEND REGENERATION WHEN CRITICAL IDENTITY DRIFTS
+Do not attempt to hide major continuity errors during editing.
+
+99. DISTINGUISH FIXABLE AND NON-FIXABLE ERRORS
+Minor timing errors may be editable.
+Face changes or product redesign usually require regeneration.
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- character face is consistent
+- skin tone is consistent
+- hair is consistent
+- age appearance is consistent
+- body proportions are consistent
+- clothing is consistent
+- accessories are consistent
+- product identity is consistent
+- food identity is consistent
+- props remain logical
+- object quantities are consistent
+- object states carry forward
+- environment remains recognizable
+- architecture remains stable
+- lighting direction is consistent
+- colour temperature is consistent
+- time of day is logical
+- weather is logical
+- screen direction is coherent
+- gaze direction is coherent
+- hand-object interaction is logical
+- no teleportation occurs
+- no unexplained reset occurs
+- each scene inherits the correct previous state
+- final sequence feels like the same world, characters and event
+
+OUTPUT FORMAT:
+
+1. CONTINUITY BIBLE
+
+CHARACTER LOCK:
+[Identity details.]
+
+WARDROBE LOCK:
+[Clothing.]
+
+ACCESSORY LOCK:
+[Accessories.]
+
+PRODUCT LOCK:
+[If applicable.]
+
+FOOD LOCK:
+[If applicable.]
+
+LOCATION LOCK:
+[Environment anchors.]
+
+LIGHTING LOCK:
+[Lighting details.]
+
+COLOUR / STYLE LOCK:
+[Visual treatment.]
+
+2. CONTINUITY PRIORITIES
+Separate into:
+CRITICAL
+HIGH
+MEDIUM
+
+3. ALLOWED CHANGES
+List what may change naturally.
+
+4. FORBIDDEN CHANGES
+List what must not change.
+
+5. OBJECT-STATE TRACKER
+
+For each important object provide:
+Starting state
+Scene changes
+Final state
+
+6. SCENE-BY-SCENE CONTINUITY PLAN
+
+For every scene provide:
+Scene number
+Starting state
+Character state
+Wardrobe
+Props
+Product / food state
+Location
+Lighting
+Character position
+Camera direction
+Action
+Ending state
+Continuity handoff
+
+7. CHARACTER IDENTITY BLOCK
+Provide a reusable identity paragraph for every applicable prompt.
+
+8. LOCATION IDENTITY BLOCK
+Provide a reusable environment paragraph.
+
+9. PRODUCT / FOOD IDENTITY BLOCK
+Provide when relevant.
+
+10. FULL SCENE PROMPTS
+Create a polished generation prompt for every scene with the appropriate continuity locks.
+
+11. NEGATIVE / PROTECTION INSTRUCTIONS
+Create targeted continuity constraints.
+
+12. CROSS-SCENE REVIEW CHECKLIST
+Explain what should be visually compared after each clip is generated.
+
+13. REGENERATION TRIGGERS
+List continuity failures that should cause the scene to be regenerated.
+
+IMPORTANT:
+- Treat identity and reference information as source of truth.
+- Preserve character identity across every applicable shot.
+- Track object state from scene to scene.
+- Do not randomly redesign locations, products, food, clothing or props.
+- Preserve lighting and spatial logic.
+- Repeat critical continuity locks in individual scene prompts.
+- Allow natural motion without allowing visual identity drift.
+- Check continuity at every scene boundary, not only inside individual clips.`;
+
+const steps = [
+  {
+    title: "Build the continuity bible first",
+    description:
+      "Lock character identity, wardrobe, products, location anchors, lighting and recurring props before writing individual scene prompts.",
+  },
+  {
+    title: "Track what changes",
+    description:
+      "Continuity is not about freezing the scene. Record meaningful changes such as a cake being cut, a box being opened or a character moving to another position.",
+  },
+  {
+    title: "Create scene handoffs",
+    description:
+      "Define the exact ending state of one scene and make the next scene inherit that state so objects, positions and actions do not reset.",
+  },
+  {
+    title: "Compare every new clip",
+    description:
+      "Check the new generation against the last verified scene and regenerate critical identity failures instead of trying to hide them during editing.",
+  },
+];
+
+const example = {
+  input: [
+    "Project: Six-scene cooking Reel.",
+    "Character: Same female food creator throughout.",
+    "Hair: Long defined black curls.",
+    "Wardrobe: Blush-pink V-neck top with gold hoop earrings and layered gold necklaces.",
+    "Location: Same warm cream-and-wood home kitchen.",
+    "Food: One round chocolate cake.",
+    "Timeline: Continuous cooking and serving sequence.",
+  ],
+
+  output: [
+    "CHARACTER LOCK: Preserve the same facial proportions, skin tone, eyes, nose, lips, black curly hairstyle, age appearance and body proportions in all scenes.",
+    "WARDROBE LOCK: Same blush-pink V-neck top, gold hoop earrings and layered gold necklaces throughout the continuous sequence.",
+    "LOCATION LOCK: Preserve the same cream wall treatment, wooden counter, cabinet arrangement, lighting direction and visible kitchen anchors.",
+    "OBJECT STATE: Once the cake is cut, all later scenes must show the same cake in its cut state unless the timeline intentionally returns to an earlier moment.",
+    "SCENE HANDOFF: End each generation with a clearly defined character position, food state, prop position and camera direction that the following scene can inherit.",
+    "PROTECTION: No face drift, no hairstyle redesign, no jewellery disappearance, no wardrobe change, no duplicate cake, no kitchen redesign and no reset of already-completed actions.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Continuity is mostly about remembering state",
+    description:
+      "The model needs to know not only what a character looks like, but also what has already happened to every important object and where things were left.",
+  },
+  {
+    title: "Repeat critical identity details",
+    description:
+      "Do not assume a later scene will remember the first prompt. Reuse the essential character, wardrobe, product and location locks in every relevant generation.",
+  },
+  {
+    title: "Regenerate major drift early",
+    description:
+      "A changed face, redesigned product or completely different room usually becomes harder to repair as more scenes are built on top of the incorrect version.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Character & Scene Continuity Prompt | KRIYANO"
+  description="Keep characters, clothing, locations, products, props, lighting and object states consistent across AI-generated video scenes."
+>
+  <PromptPage
+    category="VIDEO GENERATION"
+    title="Character & Scene Continuity"
+    accentTitle="Prompt."
+    description="Create stronger continuity locks for AI video so the same characters, wardrobe, products, environments, lighting, props and object states survive from scene to scene."
+    meta={[
+      "Free prompt",
+      "Video continuity",
+      "Character consistency",
+    ]}
+    bestFor={[
+      "Multi-scene AI video",
+      "Recurring characters",
+      "Recipe videos",
+      "Product videos",
+      "Story sequences",
+      "Commercial production",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Make every new scene inherit the last one."
+    introDescription="Build a continuity bible, lock identity and environment details, track object-state changes and create explicit scene handoffs before generating the complete sequence."
+    steps={steps}
+    exampleTitle="Keep one creator, kitchen and cake consistent across a Reel."
+    example={example}
+    tipsTitle="The strongest continuity workflow happens between generations."
+    tips={tips}
+    sidebarTitle="Need the complete storyboard too?"
+    sidebarDescription="Use KRIYANO's Multi-Scene Video Prompt when you also need story structure, scene timing, transitions, camera progression and audio planning."
+    warningTitle="Prompt consistency cannot guarantee perfect visual continuity"
+    warningText="AI video systems can still drift between generations. Compare faces, wardrobe, props, products, lighting, object states and environment geometry after every clip, and regenerate scenes when critical identity details change."
+  />
+</BaseLayout>

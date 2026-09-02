@@ -1,0 +1,1012 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const workAreas = [
+  {
+    number: "01",
+    title: "Communication",
+    description:
+      "Write clearer emails, manager updates, difficult messages and professional workplace communication.",
+    links: [
+      {
+        label: "Professional Email Writer",
+        href: "/prompts/professional-email-writer/",
+      },
+      {
+        label: "Manager Update Writer",
+        href: "/prompts/manager-update-writer/",
+      },
+      {
+        label: "Difficult Workplace Conversation",
+        href: "/prompts/difficult-workplace-conversation/",
+      },
+      {
+        label: "Professional Tone Rewriter",
+        href: "/prompts/professional-tone-rewriter/",
+      },
+    ],
+  },
+  {
+    number: "02",
+    title: "Planning & Productivity",
+    description:
+      "Prioritize tasks, structure your week and turn goals into practical actions.",
+    links: [
+      {
+        label: "Task Prioritization",
+        href: "/prompts/task-prioritization/",
+      },
+      {
+        label: "Weekly Work Planner",
+        href: "/prompts/weekly-work-planner/",
+      },
+      {
+        label: "Action Plan Generator",
+        href: "/prompts/action-plan-generator/",
+      },
+      {
+        label: "Meeting Summary",
+        href: "/prompts/meeting-summary/",
+      },
+    ],
+  },
+  {
+    number: "03",
+    title: "Problem Solving & Decisions",
+    description:
+      "Structure workplace problems, compare options and move from uncertainty to action.",
+    links: [
+      {
+        label: "Problem Solving",
+        href: "/prompts/problem-solving/",
+      },
+      {
+        label: "Decision Making",
+        href: "/prompts/decision-making/",
+      },
+      {
+        label: "Root Cause Analysis",
+        href: "/prompts/root-cause-analysis/",
+      },
+      {
+        label: "Research & Comparison",
+        href: "/prompts/research-comparison/",
+      },
+    ],
+  },
+  {
+    number: "04",
+    title: "Documents & Reporting",
+    description:
+      "Turn rough information into useful reports, summaries and clearer workplace documents.",
+    links: [
+      {
+        label: "Report Writer",
+        href: "/prompts/report-writer/",
+      },
+      {
+        label: "Text Summarizer",
+        href: "/prompts/text-summarizer/",
+      },
+      {
+        label: "Work Document Simplifier",
+        href: "/prompts/work-document-simplifier/",
+      },
+      {
+        label: "Rewrite for Clarity",
+        href: "/prompts/rewrite-for-clarity/",
+      },
+    ],
+  },
+  {
+    number: "05",
+    title: "Process Improvement",
+    description:
+      "Use AI to review processes, identify bottlenecks and create more structured ways of working.",
+    links: [
+      {
+        label: "Process Improvement",
+        href: "/prompts/process-improvement/",
+      },
+      {
+        label: "SOP Creation",
+        href: "/prompts/sop-creation/",
+      },
+      {
+        label: "Corrective Action Plan",
+        href: "/prompts/corrective-action-plan/",
+      },
+      {
+        label: "Performance Review Preparation",
+        href: "/prompts/performance-review-preparation/",
+      },
+    ],
+  },
+  {
+    number: "06",
+    title: "AI at Work",
+    description:
+      "Use AI more effectively for everyday professional tasks without giving up judgment, accuracy or control.",
+    links: [
+      {
+        label: "AI Prompt Builder",
+        href: "/tools/prompt-builder/",
+      },
+      {
+        label: "Humanize AI-Written Text",
+        href: "/prompts/humanize-ai-written-text/",
+      },
+      {
+        label: "Source Evaluation",
+        href: "/prompts/source-evaluation/",
+      },
+      {
+        label: "Fact Checking",
+        href: "/prompts/fact-checking/",
+      },
+    ],
+  },
+];
+
+const principles = [
+  {
+    title: "Start with the task",
+    description:
+      "Describe the real work you need done before deciding how AI should help.",
+  },
+  {
+    title: "Give useful context",
+    description:
+      "Include the audience, objective, constraints and relevant background instead of using vague one-line prompts.",
+  },
+  {
+    title: "Review important outputs",
+    description:
+      "Check facts, calculations, decisions and sensitive workplace communication before using AI-generated output.",
+  },
+  {
+    title: "Build repeatable workflows",
+    description:
+      "When a prompt works well, turn it into a reusable process rather than starting from zero every time.",
+  },
+];
+---
+
+<BaseLayout
+  title="AI for Work | KRIYANO"
+  description="Practical AI resources for communication, productivity, problem-solving, reporting and everyday professional work."
+>
+  <section class="work-hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="section-kicker">AI FOR WORK</div>
+
+        <h1>
+          Use AI to do
+          <span>better work.</span>
+        </h1>
+
+        <p>
+          Practical AI prompts, tools and workflows for communication,
+          planning, reporting, problem-solving and everyday professional work.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#work-areas" class="button button-primary">
+            Explore work resources
+          </a>
+
+          <a href="/tools/prompt-builder/" class="hero-secondary-link">
+            Build a custom prompt ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="work-console">
+        <div class="console-top">
+          <span>WORKFLOW</span>
+          <span class="console-status">READY</span>
+        </div>
+
+        <div class="console-body">
+          <div class="console-line">
+            <span class="console-label">TASK</span>
+            <strong>Prepare a manager update</strong>
+          </div>
+
+          <div class="console-line">
+            <span class="console-label">INPUT</span>
+            <span>
+              Progress, issues, risks and next actions
+            </span>
+          </div>
+
+          <div class="console-line">
+            <span class="console-label">AI ROLE</span>
+            <span>
+              Structure, clarify and improve the message
+            </span>
+          </div>
+
+          <div class="console-line">
+            <span class="console-label">HUMAN ROLE</span>
+            <span>
+              Verify facts, judgment and final tone
+            </span>
+          </div>
+
+          <div class="console-output">
+            <span>RESULT</span>
+            <strong>
+              Faster drafting without losing professional judgment.
+            </strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="work-strip">
+    <div class="container strip-grid">
+      <div>
+        <strong>6</strong>
+        <span>Work areas</span>
+      </div>
+
+      <div>
+        <strong>Practical</strong>
+        <span>Real workplace tasks</span>
+      </div>
+
+      <div>
+        <strong>Reusable</strong>
+        <span>Prompts and workflows</span>
+      </div>
+
+      <div>
+        <strong>Human-reviewed</strong>
+        <span>AI supports judgment</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="work-areas">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Practical work areas</div>
+
+          <h2>
+            Start with the job
+            you need to do.
+          </h2>
+        </div>
+
+        <p>
+          KRIYANO organizes AI around practical workplace outcomes rather than
+          individual AI models or technical features.
+        </p>
+      </div>
+
+      <div class="work-grid">
+        {
+          workAreas.map((area) => (
+            <article class="work-card">
+              <div class="work-card-top">
+                <span class="work-number">{area.number}</span>
+
+                <span class="work-tag">WORK</span>
+              </div>
+
+              <h3>{area.title}</h3>
+
+              <p>{area.description}</p>
+
+              <div class="resource-list">
+                {
+                  area.links.map((link) => (
+                    <a href={link.href}>
+                      <span>{link.label}</span>
+                      <span>↗</span>
+                    </a>
+                  ))
+                }
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="principles-section">
+    <div class="container">
+      <div class="principles-head">
+        <div>
+          <div class="section-kicker">Using AI at work</div>
+
+          <h2>
+            AI should support
+            the workflow.
+          </h2>
+        </div>
+
+        <p>
+          The goal is not to use AI everywhere. The goal is to use it where it
+          improves speed, structure or clarity without removing human judgment.
+        </p>
+      </div>
+
+      <div class="principles-grid">
+        {
+          principles.map((principle, index) => (
+            <article class="principle-card">
+              <span>
+                {String(index + 1).padStart(2, "0")}
+              </span>
+
+              <h3>{principle.title}</h3>
+
+              <p>{principle.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="workflow-section">
+    <div class="container">
+      <div class="workflow-box">
+        <div class="workflow-copy">
+          <div class="section-kicker">A simple AI work pattern</div>
+
+          <h2>
+            Task → Context → AI → Review → Action
+          </h2>
+
+          <p>
+            A useful workplace AI workflow begins with a clear task and enough
+            context. AI can then help structure or draft the work, but important
+            facts, decisions and communication still need human review.
+          </p>
+        </div>
+
+        <div class="workflow-steps">
+          <div>
+            <span>01</span>
+            <strong>Task</strong>
+          </div>
+
+          <div>
+            <span>02</span>
+            <strong>Context</strong>
+          </div>
+
+          <div>
+            <span>03</span>
+            <strong>AI Assist</strong>
+          </div>
+
+          <div>
+            <span>04</span>
+            <strong>Review</strong>
+          </div>
+
+          <div>
+            <span>05</span>
+            <strong>Action</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="work-cta">
+    <div class="container">
+      <div class="cta-box">
+        <div>
+          <div class="section-kicker">Need something specific?</div>
+
+          <h2>
+            Turn your work task
+            into a better prompt.
+          </h2>
+
+          <p>
+            Use the KRIYANO AI Prompt Builder to structure your task, context,
+            audience, output requirements and constraints.
+          </p>
+        </div>
+
+        <a href="/tools/prompt-builder/" class="button button-primary">
+          Open Prompt Builder
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .work-hero {
+    padding: 105px 0 90px;
+
+    border-bottom: 1px solid var(--line);
+
+    background:
+      radial-gradient(
+        circle at 82% 28%,
+        rgba(77, 226, 197, 0.1),
+        transparent 28%
+      ),
+      radial-gradient(
+        circle at 18% 0%,
+        rgba(183, 255, 74, 0.05),
+        transparent 25%
+      );
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.12fr 0.88fr;
+
+    gap: 80px;
+
+    align-items: center;
+  }
+
+  .hero-copy h1 {
+    max-width: 850px;
+
+    margin-top: 15px;
+
+    font-size: clamp(3.5rem, 7vw, 6.8rem);
+    line-height: 0.93;
+
+    letter-spacing: -0.065em;
+  }
+
+  .hero-copy h1 span {
+    display: block;
+
+    color: var(--lime);
+  }
+
+  .hero-copy > p {
+    max-width: 680px;
+
+    margin-top: 26px;
+
+    color: var(--muted);
+
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 22px;
+
+    margin-top: 34px;
+  }
+
+  .hero-secondary-link {
+    color: var(--lime);
+
+    font-size: 0.82rem;
+    font-weight: 750;
+  }
+
+  .work-console {
+    overflow: hidden;
+
+    border: 1px solid rgba(183, 255, 74, 0.15);
+    border-radius: 20px;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.03),
+        transparent
+      ),
+      var(--surface);
+
+    box-shadow:
+      0 30px 80px rgba(0, 0, 0, 0.22);
+  }
+
+  .console-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 14px 18px;
+
+    border-bottom: 1px solid var(--line);
+
+    color: var(--muted);
+
+    font-size: 0.65rem;
+    font-weight: 800;
+
+    letter-spacing: 0.09em;
+  }
+
+  .console-status {
+    color: var(--lime);
+  }
+
+  .console-body {
+    padding: 8px 22px 22px;
+  }
+
+  .console-line {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+
+    gap: 16px;
+
+    padding: 18px 0;
+
+    border-bottom: 1px solid var(--line);
+  }
+
+  .console-label {
+    color: var(--mint);
+
+    font-size: 0.64rem;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+  }
+
+  .console-line strong,
+  .console-line > span:last-child {
+    font-size: 0.82rem;
+    line-height: 1.55;
+  }
+
+  .console-line > span:last-child {
+    color: var(--muted);
+  }
+
+  .console-output {
+    margin-top: 22px;
+    padding: 18px;
+
+    border: 1px solid rgba(183, 255, 74, 0.14);
+    border-radius: 12px;
+
+    background: rgba(183, 255, 74, 0.05);
+  }
+
+  .console-output span {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--lime);
+
+    font-size: 0.62rem;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+  }
+
+  .console-output strong {
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .work-strip {
+    border-bottom: 1px solid var(--line);
+
+    background: rgba(255, 255, 255, 0.018);
+  }
+
+  .strip-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .strip-grid > div {
+    padding: 24px 20px;
+
+    border-right: 1px solid var(--line);
+  }
+
+  .strip-grid > div:last-child {
+    border-right: 0;
+  }
+
+  .strip-grid strong {
+    display: block;
+
+    font-size: 0.94rem;
+  }
+
+  .strip-grid span {
+    color: var(--muted);
+
+    font-size: 0.77rem;
+  }
+
+  .section-head,
+  .principles-head {
+    display: grid;
+    grid-template-columns: 1.08fr 0.92fr;
+
+    gap: 70px;
+
+    align-items: end;
+
+    margin-bottom: 48px;
+  }
+
+  .section-head h2,
+  .principles-head h2 {
+    max-width: 760px;
+
+    margin-top: 13px;
+
+    font-size: clamp(2.6rem, 5vw, 4.5rem);
+    line-height: 0.98;
+
+    letter-spacing: -0.055em;
+  }
+
+  .section-head > p,
+  .principles-head > p {
+    max-width: 490px;
+
+    color: var(--muted);
+
+    line-height: 1.75;
+  }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 17px;
+  }
+
+  .work-card {
+    padding: 27px;
+
+    border: 1px solid var(--line);
+    border-radius: 19px;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.024),
+        transparent
+      ),
+      var(--surface);
+  }
+
+  .work-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .work-number {
+    color: var(--lime);
+
+    font-size: 0.68rem;
+    font-weight: 800;
+
+    letter-spacing: 0.1em;
+  }
+
+  .work-tag {
+    color: var(--muted);
+
+    font-size: 0.62rem;
+    font-weight: 800;
+
+    letter-spacing: 0.09em;
+  }
+
+  .work-card h3 {
+    margin-top: 34px;
+
+    font-size: 1.55rem;
+
+    letter-spacing: -0.035em;
+  }
+
+  .work-card > p {
+    max-width: 540px;
+
+    margin-top: 12px;
+
+    color: var(--muted);
+
+    font-size: 0.87rem;
+    line-height: 1.65;
+  }
+
+  .resource-list {
+    margin-top: 25px;
+
+    border-top: 1px solid var(--line);
+  }
+
+  .resource-list a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid var(--line);
+
+    color: var(--text);
+
+    font-size: 0.78rem;
+
+    transition:
+      color 0.2s ease,
+      padding-left 0.2s ease;
+  }
+
+  .resource-list a > span:last-child {
+    color: var(--lime);
+  }
+
+  .resource-list a:hover {
+    padding-left: 5px;
+
+    color: var(--lime);
+  }
+
+  .principles-section {
+    padding: 100px 0;
+
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+
+    background: var(--bg-soft);
+  }
+
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 14px;
+  }
+
+  .principle-card {
+    min-height: 235px;
+
+    padding: 22px;
+
+    border: 1px solid var(--line);
+    border-radius: 17px;
+
+    background: var(--surface);
+  }
+
+  .principle-card > span {
+    color: var(--lime);
+
+    font-size: 0.65rem;
+    font-weight: 800;
+
+    letter-spacing: 0.1em;
+  }
+
+  .principle-card h3 {
+    margin-top: 48px;
+
+    font-size: 1.1rem;
+
+    letter-spacing: -0.025em;
+  }
+
+  .principle-card p {
+    margin-top: 10px;
+
+    color: var(--muted);
+
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+
+  .workflow-section {
+    padding: 100px 0;
+  }
+
+  .workflow-box {
+    padding: 50px;
+
+    border: 1px solid rgba(183, 255, 74, 0.15);
+    border-radius: 24px;
+
+    background:
+      radial-gradient(
+        circle at 80% 40%,
+        rgba(183, 255, 74, 0.08),
+        transparent 27%
+      ),
+      var(--surface);
+  }
+
+  .workflow-copy {
+    max-width: 790px;
+  }
+
+  .workflow-copy h2 {
+    margin-top: 13px;
+
+    font-size: clamp(2.3rem, 5vw, 4rem);
+    line-height: 1;
+
+    letter-spacing: -0.05em;
+  }
+
+  .workflow-copy p {
+    max-width: 700px;
+
+    margin-top: 18px;
+
+    color: var(--muted);
+
+    line-height: 1.7;
+  }
+
+  .workflow-steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+
+    margin-top: 42px;
+
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .workflow-steps > div {
+    padding: 20px 18px;
+
+    border-right: 1px solid var(--line);
+  }
+
+  .workflow-steps > div:last-child {
+    border-right: 0;
+  }
+
+  .workflow-steps span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: var(--lime);
+
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .workflow-steps strong {
+    font-size: 0.8rem;
+  }
+
+  .work-cta {
+    padding: 0 0 100px;
+  }
+
+  .cta-box {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+
+    gap: 50px;
+
+    padding: 48px;
+
+    border: 1px solid rgba(183, 255, 74, 0.15);
+    border-radius: 23px;
+
+    background: var(--surface);
+  }
+
+  .cta-box h2 {
+    max-width: 690px;
+
+    margin-top: 12px;
+
+    font-size: clamp(2.3rem, 5vw, 4rem);
+    line-height: 1;
+
+    letter-spacing: -0.05em;
+  }
+
+  .cta-box p {
+    max-width: 650px;
+
+    margin-top: 16px;
+
+    color: var(--muted);
+
+    line-height: 1.7;
+  }
+
+  @media (max-width: 950px) {
+    .hero-grid,
+    .section-head,
+    .principles-head {
+      grid-template-columns: 1fr;
+
+      gap: 38px;
+    }
+
+    .principles-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .workflow-steps {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .cta-box {
+      flex-direction: column;
+
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .work-hero {
+      padding: 72px 0 62px;
+    }
+
+    .strip-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .strip-grid > div:nth-child(2) {
+      border-right: 0;
+    }
+
+    .strip-grid > div:nth-child(-n + 2) {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .work-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .principles-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .workflow-box {
+      padding: 30px 22px;
+    }
+
+    .workflow-steps {
+      grid-template-columns: 1fr;
+    }
+
+    .workflow-steps > div {
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .workflow-steps > div:last-child {
+      border-bottom: 0;
+    }
+
+    .cta-box {
+      padding: 32px 24px;
+    }
+  }
+</style>

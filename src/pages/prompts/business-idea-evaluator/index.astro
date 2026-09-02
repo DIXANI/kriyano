@@ -1,0 +1,271 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced business analyst, startup advisor and small-business strategy specialist.
+
+TASK:
+Evaluate the following business idea realistically and practically.
+
+BUSINESS IDEA:
+[Describe the idea clearly.]
+
+PRODUCT / SERVICE:
+[What will you sell or provide?]
+
+TARGET CUSTOMER:
+[Who is most likely to buy it?]
+
+CUSTOMER PROBLEM:
+[What problem, need or inconvenience does the business solve?]
+
+LOCATION / MARKET:
+[Country, city, online market or target region.]
+
+BUSINESS MODEL:
+[Example: direct sales, subscription, service fee, marketplace, commission, digital product, retail.]
+
+EXPECTED SELLING PRICE:
+[Enter approximate price if known.]
+
+ESTIMATED STARTUP BUDGET:
+[Enter available startup capital.]
+
+AVAILABLE RESOURCES:
+[Skills, equipment, contacts, existing audience, website, vehicle, workspace or other advantages.]
+
+MAIN COMPETITORS / ALTERNATIVES:
+[List known competitors or explain how customers currently solve the problem.]
+
+CONSTRAINTS:
+[Time, capital, regulations, staffing, location, technology or other limitations.]
+
+BUSINESS GOAL:
+[Example: side income, full-time business, scalable company, online income, local service.]
+
+EVALUATION REQUIREMENTS:
+
+1. CUSTOMER PROBLEM
+- Assess whether the problem is clear and meaningful.
+- Explain why customers may or may not pay for a solution.
+- Identify the strongest customer pain points.
+
+2. TARGET MARKET
+- Assess whether the target customer is specific enough.
+- Identify likely customer segments.
+- Suggest which segment should be tested first.
+
+3. DEMAND
+- Evaluate the likely demand based on the information provided.
+- Separate assumptions from evidence.
+- Identify what demand signals should be verified.
+
+4. COMPETITION
+- Consider direct competitors and indirect alternatives.
+- Identify how customers currently solve the problem.
+- Explain where differentiation may be possible.
+
+5. VALUE PROPOSITION
+- Explain why a customer would choose this offer.
+- Identify the strongest possible positioning.
+- Highlight weak or unclear differentiation.
+
+6. REVENUE MODEL
+- Review how the business would make money.
+- Identify possible revenue streams.
+- Consider repeat purchase potential and customer lifetime value where relevant.
+
+7. PRICING
+- Assess whether the proposed price appears realistic.
+- Identify what should influence pricing.
+- Do not invent market prices if current data has not been provided.
+
+8. STARTUP REQUIREMENTS
+Estimate the main categories of startup requirements, such as:
+- Equipment
+- Inventory
+- Technology
+- Licences / registration
+- Marketing
+- Transport
+- Workspace
+- Staff
+- Working capital
+
+Do not invent precise costs without evidence.
+
+9. OPERATING REQUIREMENTS
+Explain what would be needed to run the business day to day, including:
+- Suppliers
+- Fulfilment
+- Customer service
+- Administration
+- Sales
+- Marketing
+- Record keeping
+- Quality control
+
+10. RISKS
+Identify important risks such as:
+- Low demand
+- High competition
+- Low margins
+- Cash-flow pressure
+- Supplier dependency
+- Regulatory requirements
+- Operational complexity
+- Customer acquisition cost
+- Seasonality
+- Scalability limitations
+
+11. LOW-COST VALIDATION
+Recommend practical ways to test the idea before making a large investment.
+
+Examples may include:
+- Customer interviews
+- Pre-orders
+- Landing page testing
+- Small pilot
+- Marketplace listing
+- Social media validation
+- Manual service delivery
+- Sample sales
+
+12. IMPROVEMENT OPPORTUNITIES
+Suggest ways the idea could be:
+- Simplified
+- Differentiated
+- Made cheaper to start
+- Focused on a stronger customer segment
+- Improved for recurring revenue
+- Made easier to test
+
+13. FINAL ASSESSMENT
+Give the idea one of the following ratings:
+
+STRONG POTENTIAL
+PROMISING BUT NEEDS VALIDATION
+NEEDS MAJOR CHANGES
+HIGH RISK / WEAK BUSINESS CASE
+
+Explain the reasoning clearly.
+
+OUTPUT FORMAT:
+
+1. Business Idea Summary
+2. Customer Problem
+3. Target Market
+4. Demand Assessment
+5. Competitive Position
+6. Value Proposition
+7. Revenue & Pricing
+8. Startup Requirements
+9. Operating Requirements
+10. Major Risks
+11. Low-Cost Validation Plan
+12. Improvement Opportunities
+13. Final Rating
+14. Recommended Next 3 Actions
+15. Information Still Needed
+
+Be realistic rather than overly positive.
+
+Clearly distinguish facts, assumptions and information that still needs to be verified.
+
+Do not invent market size, competitor revenue, prices, regulations or statistics.`;
+
+const steps = [
+  {
+    title: "Describe the real idea",
+    description:
+      "Explain what you want to sell, who would buy it and what problem it solves rather than giving only a business name.",
+  },
+  {
+    title: "Add your constraints",
+    description:
+      "Include your actual budget, location, available resources and limitations so the evaluation stays realistic.",
+  },
+  {
+    title: "Separate assumptions from evidence",
+    description:
+      "The prompt asks AI to identify what is known, what is assumed and what still needs real-world validation.",
+  },
+  {
+    title: "Validate before investing",
+    description:
+      "Use the suggested low-cost tests to gather evidence before committing significant money, inventory or fixed expenses.",
+  },
+];
+
+const example = {
+  input: [
+    "Business idea: Provide simple inventory-control setup services to small retail and e-commerce businesses.",
+    "Customer: Small businesses that currently manage stock manually or with basic spreadsheets.",
+    "Problem: Stock errors, poor reorder visibility and no clear inventory reports.",
+    "Business model: One-time setup fee plus optional monthly support.",
+    "Startup budget: Low. Existing laptop and inventory-management experience available.",
+  ],
+
+  output: [
+    "Customer Problem: The idea addresses practical stock-control problems, but the willingness of small businesses to pay should be validated.",
+    "Low-Cost Validation: Interview 10–15 target businesses, offer a small paid pilot and document the most common inventory problems before building a larger service package.",
+    "Revenue Model: Consider a low-entry setup package followed by optional recurring reporting, support or inventory-review services.",
+    "Next Actions: Define one narrow customer segment, create a simple pilot offer and test willingness to pay before investing in software or advertising.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Be specific about the customer",
+    description:
+      "A business aimed at 'everyone' is difficult to evaluate. A clearly defined first customer segment produces a much stronger analysis.",
+  },
+  {
+    title: "Include your real budget",
+    description:
+      "A good idea can still be unsuitable if the startup requirements do not match the capital and resources actually available.",
+  },
+  {
+    title: "Ask for validation, not reassurance",
+    description:
+      "The goal is to discover weaknesses early, before they become expensive problems.",
+  },
+];
+---
+
+<BaseLayout
+  title="Business Idea Evaluator Prompt | KRIYANO"
+  description="Evaluate a business idea using this structured AI prompt covering demand, customers, competition, pricing, startup requirements, risks and low-cost validation."
+>
+  <PromptPage
+    category="BUSINESS"
+    title="Business Idea"
+    accentTitle="Evaluator."
+    description="Pressure-test a business idea before investing money by reviewing the customer problem, demand, competition, costs, risks and practical validation steps."
+    meta={[
+      "Free prompt",
+      "Business planning",
+      "Validation focused",
+    ]}
+    bestFor={[
+      "Small-business ideas",
+      "Side businesses",
+      "Startup concepts",
+      "Online services",
+      "Local businesses",
+      "Low-capital ideas",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Don't just ask if the idea is good."
+    introDescription="Replace the bracketed sections with your actual idea, customer, budget and constraints. The prompt is designed to challenge assumptions rather than simply encourage the idea."
+    steps={steps}
+    exampleTitle="Evaluate before spending."
+    example={example}
+    tipsTitle="Get a more realistic assessment."
+    tips={tips}
+    sidebarTitle="Need a custom business analysis?"
+    sidebarDescription="Use the KRIYANO Prompt Builder to create a prompt around your exact idea, market, budget, customer and decision."
+    warningTitle="Validation note"
+    warningText="AI can help structure business analysis, but demand, pricing, regulations, competitor information and customer willingness to pay should be checked using current real-world evidence."
+  />
+</BaseLayout>

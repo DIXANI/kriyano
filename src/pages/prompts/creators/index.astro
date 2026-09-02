@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptCategoryPage from "../../../components/PromptCategoryPage.astro";
+
+const prompts = [
+  {
+    title: "Social Media Content Planner",
+    description:
+      "Create a structured social media calendar based on your audience, goals, platforms and content pillars.",
+    category: "Planning",
+    href: "/prompts/social-media-content-planner/",
+  },
+  {
+    title: "Short-Form Video Idea Generator",
+    description:
+      "Generate practical Reel, Short and TikTok ideas built around a niche, audience and content goal.",
+    category: "Video Ideas",
+    href: "/prompts/short-form-video-idea-generator/",
+  },
+  {
+    title: "Hook Generator",
+    description:
+      "Create stronger opening lines and first-second hooks for videos, posts, captions and educational content.",
+    category: "Hooks",
+    href: "/prompts/hook-generator/",
+  },
+  {
+    title: "Short-Form Video Script Prompt",
+    description:
+      "Turn a topic into a concise short-form script with a hook, value, flow and clear ending.",
+    category: "Scripts",
+    href: "/prompts/short-form-video-script/",
+  },
+  {
+    title: "Content Repurposing Prompt",
+    description:
+      "Turn one strong piece of content into multiple posts, short videos, carousels and follow-up ideas.",
+    category: "Repurposing",
+    href: "/prompts/content-repurposing/",
+  },
+  {
+    title: "Creator Content Pillar Builder",
+    description:
+      "Define a practical set of repeatable content pillars based on your niche, expertise and audience interests.",
+    category: "Strategy",
+    href: "/prompts/creator-content-pillar-builder/",
+  },
+  {
+    title: "Audience Question Generator",
+    description:
+      "Generate useful questions, problems and topic angles your target audience is likely to care about.",
+    category: "Audience",
+    href: "/prompts/audience-question-generator/",
+  },
+  {
+    title: "YouTube Video Outline Prompt",
+    description:
+      "Create a structured long-form video outline with a strong opening, clear sections and viewer retention in mind.",
+    category: "YouTube",
+    href: "/prompts/youtube-video-outline/",
+  },
+  {
+    title: "Caption Writer Prompt",
+    description:
+      "Write platform-appropriate captions that support the content without sounding generic or overproduced.",
+    category: "Captions",
+    href: "/prompts/caption-writer/",
+  },
+  {
+    title: "Creator Workflow Planner",
+    description:
+      "Organize idea generation, scripting, production, editing, publishing and repurposing into a manageable workflow.",
+    category: "Workflow",
+    href: "/prompts/creator-workflow-planner/",
+  },
+];
+---
+
+<BaseLayout
+  title="AI Prompts for Creators | KRIYANO"
+  description="Practical AI prompts for content creators, including video ideas, hooks, scripts, content planning, repurposing and creator workflows."
+>
+  <PromptCategoryPage
+    kicker="CREATORS"
+    title="AI prompts for"
+    accentTitle="better content."
+    description="Practical prompts for creators who need stronger ideas, hooks, scripts, planning, repurposing and repeatable content workflows."
+    prompts={prompts}
+  />
+</BaseLayout>

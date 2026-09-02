@@ -1,0 +1,835 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert creator strategist, audience-development consultant and content-system planner.
+
+TASK:
+Build a clear, sustainable set of content pillars for the supplied creator, personal brand, business expert or niche account.
+
+The goal is to create a content structure that:
+- serves real audience needs
+- reflects the creator's expertise
+- supports business or creator goals
+- prevents random posting
+- creates repeatable topic categories
+- works across multiple content formats
+- can be sustained over time
+
+Do NOT create vague pillars such as:
+Motivation
+Tips
+Lifestyle
+Value
+
+unless they are made specific to the creator's niche and audience.
+
+CREATOR / BRAND:
+[Name and short description.]
+
+NICHE:
+[Main topic or industry.]
+
+EXPERTISE:
+[What can the creator genuinely teach, explain, demonstrate or discuss?]
+
+TARGET AUDIENCE:
+[Who is the content for?]
+
+AUDIENCE KNOWLEDGE LEVEL:
+[Beginner / intermediate / advanced / mixed.]
+
+AUDIENCE PROBLEMS:
+[List known problems.]
+
+AUDIENCE QUESTIONS:
+[List common questions if known.]
+
+AUDIENCE DESIRED OUTCOMES:
+[What do they want to achieve?]
+
+CREATOR GOALS:
+[Authority / audience growth / leads / sales / community / education / monetization / portfolio / other.]
+
+BUSINESS / MONETIZATION MODEL:
+[Services / products / affiliate / sponsorship / ads / digital products / membership / none / other.]
+
+PRIMARY PLATFORMS:
+[Instagram / Facebook / TikTok / YouTube / LinkedIn / blog / email / other.]
+
+PREFERRED CONTENT FORMATS:
+[Short video / long-form video / carousel / article / email / live / podcast / other.]
+
+POSTING CAPACITY:
+[For example: 3 posts per week.]
+
+CONTENT CREATION RESOURCES:
+[Phone / camera / editing software / AI tools / team / solo / limited time / other.]
+
+CREATOR STYLE:
+[Professional / educational / entertaining / practical / conversational / premium / personal / other.]
+
+TOPICS THE CREATOR WANTS TO COVER:
+[List.]
+
+TOPICS TO AVOID:
+[List.]
+
+EXISTING CONTENT:
+[Optional: describe past topics or high-performing content.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+CONTENT PILLAR REQUIREMENTS:
+
+1. START WITH THE AUDIENCE
+
+2. IDENTIFY THE AUDIENCE'S MOST IMPORTANT:
+Problems
+Questions
+Goals
+Objections
+Decisions
+Tasks
+
+3. DO NOT BUILD PILLARS ONLY AROUND WHAT THE CREATOR WANTS TO TALK ABOUT
+
+4. CONNECT CREATOR EXPERTISE TO AUDIENCE NEEDS
+
+5. IDENTIFY THE CREATOR'S CREDIBLE KNOWLEDGE AREAS
+
+6. DO NOT POSITION THE CREATOR AS AN EXPERT IN AREAS NOT SUPPORTED BY THE PROVIDED INFORMATION
+
+7. IDENTIFY THE MAIN CONTENT TERRITORIES
+
+8. GROUP RELATED TOPICS INTO CLEAR PILLARS
+
+9. A GOOD PILLAR SHOULD BE:
+Specific
+Broad enough for repeated content
+Relevant to the audience
+Connected to creator expertise
+Strategically useful
+
+10. AVOID PILLARS THAT ARE TOO BROAD
+
+11. EXAMPLE OF TOO BROAD:
+"Business"
+
+12. BETTER:
+"Small-Business Inventory Control"
+
+13. AVOID PILLARS THAT ARE TOO NARROW
+
+14. EXAMPLE OF TOO NARROW:
+"How to fix one specific Excel formula"
+
+15. THAT IS BETTER USED AS A TOPIC UNDER A BROADER PILLAR
+
+16. RECOMMEND A MANAGEABLE NUMBER OF PILLARS
+
+17. DEFAULT TO 3–6 CORE PILLARS UNLESS THE CONTEXT SUPPORTS MORE
+
+18. DO NOT CREATE TEN PILLARS JUST TO LOOK COMPREHENSIVE
+
+19. DEFINE THE PURPOSE OF EACH PILLAR
+
+20. POSSIBLE PURPOSES:
+Education
+Discovery
+Authority
+Engagement
+Trust
+Conversion
+Retention
+Community
+
+21. EACH PILLAR MAY SUPPORT MORE THAN ONE PURPOSE
+
+22. IDENTIFY THE AUDIENCE NEED EACH PILLAR SERVES
+
+23. IDENTIFY THE CREATOR GOAL EACH PILLAR SUPPORTS
+
+24. CREATE SUBTOPICS UNDER EACH PILLAR
+
+25. SUBTOPICS SHOULD BE REUSABLE
+
+26. POSSIBLE SUBTOPIC TYPES:
+How-to
+Mistakes
+FAQs
+Processes
+Tools
+Frameworks
+Examples
+Comparisons
+Stories
+Case examples
+Reviews
+Behind the scenes
+Opinions
+Trends when verified
+
+27. DO NOT RELY ON CURRENT TRENDS UNLESS CURRENT INFORMATION IS PROVIDED
+
+28. CREATE RECURRING CONTENT SERIES
+
+29. SERIES SHOULD FIT NATURALLY UNDER A PILLAR
+
+30. EXAMPLES:
+"Warehouse Mistake of the Week"
+"AI Tool in 60 Seconds"
+"Before You Buy"
+"Quick Inventory Fix"
+
+31. DO NOT FORCE A SERIES NAME IF IT SOUNDS artificial.
+
+32. CREATE CONTENT ANGLES FOR EACH PILLAR
+
+33. POSSIBLE ANGLES:
+Beginner explanation
+Common mistake
+Question
+Demonstration
+Checklist
+Comparison
+Opinion
+Story
+Case example
+Problem solving
+Myth correction
+
+34. CREATE A MIX OF AWARENESS STAGES
+
+35. DISCOVERY CONTENT:
+Broad but relevant problems
+Questions
+Mistakes
+Quick insights
+
+36. DEPTH CONTENT:
+Processes
+Frameworks
+Detailed explanations
+Case examples
+
+37. TRUST CONTENT:
+Experience
+Methodology
+Behind the scenes
+Transparent lessons
+
+38. CONVERSION-SUPPORT CONTENT:
+Use cases
+Product demonstrations
+Service explanations
+FAQs
+Objection handling
+
+39. DO NOT MAKE EVERY PILLAR SALES-ORIENTED
+
+40. CREATE CONTENT THAT CAN ATTRACT NEW PEOPLE
+
+41. CREATE CONTENT THAT HELPS EXISTING FOLLOWERS
+
+42. CREATE CONTENT THAT BUILDS CREDIBILITY
+
+43. CREATE CONTENT THAT SUPPORTS BUSINESS GOALS WHEN RELEVANT
+
+44. IDENTIFY THE CREATOR'S DIFFERENTIATION
+
+45. ASK:
+What perspective can this creator credibly offer that is more specific than generic internet advice?
+
+46. DIFFERENTIATION MAY COME FROM:
+Professional experience
+Industry specialization
+Geographic knowledge
+Process expertise
+Creative style
+Practical examples
+Audience specialization
+
+47. DO NOT INVENT DIFFERENTIATORS
+
+48. IDENTIFY CONTENT OVERLAP
+
+49. REMOVE PILLARS THAT COVER NEARLY THE SAME material.
+
+50. EXPLAIN THE DISTINCTION BETWEEN SIMILAR PILLARS
+
+51. CREATE A PILLAR BOUNDARY
+
+52. FOR EACH PILLAR DEFINE:
+What belongs here
+What does not belong here
+
+53. THIS HELPS PREVENT TOPIC CONFUSION
+
+54. CREATE FORMAT MATCHING
+
+55. IDENTIFY WHICH FORMATS WORK NATURALLY FOR EACH pillar.
+
+56. EXAMPLE:
+Process pillar → tutorials, screen recordings, demonstrations
+Opinion pillar → talking-head videos, LinkedIn posts
+Reference pillar → carousels, checklists, downloadable guides
+
+57. DO NOT FORCE EVERY PILLAR INTO EVERY FORMAT
+
+58. CREATE PLATFORM MATCHING
+
+59. IDENTIFY WHICH PILLARS ARE STRONGEST FOR EACH platform.
+
+60. DO NOT ASSUME ALL PLATFORMS NEED IDENTICAL CONTENT
+
+61. CREATE SHORT-FORM POSSIBILITIES
+
+62. CREATE LONG-FORM POSSIBILITIES
+
+63. CREATE EMAIL OR NEWSLETTER POSSIBILITIES WHEN RELEVANT
+
+64. CREATE SEARCH-ORIENTED TOPICS WHEN BLOG OR YOUTUBE IS RELEVANT
+
+65. DO NOT INVENT SEARCH VOLUME
+
+66. CREATE CONTENT DEPTH LEVELS
+
+67. BEGINNER:
+Definitions
+Basic mistakes
+Simple processes
+FAQs
+
+68. INTERMEDIATE:
+Workflows
+Comparisons
+Troubleshooting
+Decision-making
+
+69. ADVANCED:
+Trade-offs
+Optimization
+Strategy
+Complex cases
+
+70. BALANCE LEVELS BASED ON AUDIENCE
+
+71. CREATE A CONTENT MIX
+
+72. EXAMPLE:
+40% education
+25% discovery
+15% authority
+10% engagement
+10% conversion-support
+
+73. DO NOT PRESENT A UNIVERSAL IDEAL RATIO
+
+74. ADAPT THE MIX TO THE CREATOR'S GOALS
+
+75. CREATE A POSTING MODEL
+
+76. MATCH IT TO REALISTIC CAPACITY
+
+77. EXAMPLE FOR 3 POSTS PER WEEK:
+Post 1 — Education pillar
+Post 2 — Discovery / problem pillar
+Post 3 — Authority / trust / conversion-support rotation
+
+78. DO NOT RECOMMEND DAILY POSTING IF THE CREATOR CANNOT SUSTAIN IT
+
+79. CREATE A ROTATION SYSTEM
+
+80. ROTATION SHOULD PREVENT:
+Overposting one topic
+Neglecting important pillars
+Constant selling
+
+81. CREATE CONTENT BATCHING OPPORTUNITIES
+
+82. GROUP CONTENT THAT CAN BE CREATED TOGETHER
+
+83. EXAMPLE:
+Record 4 videos from one pillar in one session.
+
+84. CREATE REPURPOSING OPPORTUNITIES
+
+85. SHOW HOW ONE DEEP TOPIC CAN PRODUCE:
+Short video
+Carousel
+Post
+Email
+Article
+FAQ
+
+86. DO NOT CREATE DUPLICATE CONTENT WITHOUT ADAPTATION
+
+87. IDENTIFY EVERGREEN PILLARS
+
+88. IDENTIFY TIMELY / CURRENT PILLARS WHEN APPLICABLE
+
+89. CURRENT PILLARS SHOULD REQUIRE FACT CHECKING
+
+90. CREATE A CONTENT IDEA BANK FOR EACH PILLAR
+
+91. PROVIDE MULTIPLE EXAMPLES
+
+92. DO NOT CREATE GENERIC TITLES
+
+93. MAKE TITLES SPECIFIC TO THE AUDIENCE AND NICHE
+
+94. CREATE QUESTION-BASED IDEAS
+
+95. CREATE PROBLEM-BASED IDEAS
+
+96. CREATE MISTAKE-BASED IDEAS
+
+97. CREATE HOW-TO IDEAS
+
+98. CREATE CASE / EXAMPLE IDEAS
+
+99. CREATE OPINION OR PERSPECTIVE IDEAS WHEN CREDIBLE
+
+100. CREATE CONTENT FOR DIFFERENT FUNNEL STAGES
+
+101. CREATE NON-PROMOTIONAL VALUE CONTENT
+
+102. IDENTIFY WHICH PILLARS COULD NATURALLY SUPPORT:
+Service
+Product
+Affiliate
+Download
+Newsletter
+Consultation
+
+103. DO NOT FORCE MONETIZATION INTO EVERY TOPIC
+
+104. CREATE CTA MATCHING
+
+105. DISCOVERY CTA:
+Follow
+Save
+Share
+
+106. ENGAGEMENT CTA:
+Comment
+Answer
+Share experience
+
+107. DEPTH CTA:
+Read
+Watch
+Download
+
+108. CONVERSION CTA:
+Try
+Book
+Buy
+Enquire
+
+109. USE ONLY CTAS THAT ACTUALLY EXIST
+
+110. CREATE AN AUTHORITY STRATEGY
+
+111. IDENTIFY WHICH PILLARS BEST SHOW:
+Knowledge
+Experience
+Process
+Judgment
+Results when verified
+
+112. DO NOT CREATE UNSUPPORTED AUTHORITY CLAIMS
+
+113. CREATE A TRUST STRATEGY
+
+114. TRUST MAY COME FROM:
+Transparent explanations
+Real examples
+Behind-the-scenes process
+Limitations
+Mistakes learned
+Verified results
+
+115. DO NOT INVENT CASE STUDIES OR RESULTS
+
+116. CREATE A PERSONAL CONTENT ROLE IF APPROPRIATE
+
+117. PERSONAL CONTENT SHOULD SUPPORT:
+Connection
+Context
+Perspective
+Story
+
+118. DO NOT FORCE PERSONAL-LIFE CONTENT INTO A PROFESSIONAL BRAND
+
+119. CREATE COMMUNITY CONTENT
+
+120. COMMUNITY CONTENT MAY INCLUDE:
+Questions
+Polls
+Audience experiences
+Challenges
+Feedback
+Responses
+
+121. DO NOT USE EMPTY ENGAGEMENT BAIT
+
+122. CREATE CONTENT-GAP ANALYSIS
+
+123. IDENTIFY:
+Audience needs not covered
+Overrepresented topics
+Missing funnel stages
+Missing depth
+Missing formats
+
+124. CREATE PILLAR PRIORITY
+
+125. RANK PILLARS BY:
+Audience value
+Creator credibility
+Strategic importance
+Content depth
+Sustainability
+Monetization fit when relevant
+
+126. USE:
+Core
+Supporting
+Experimental
+
+127. DO NOT CREATE FALSE NUMERICAL SCORES
+
+128. CREATE EXPERIMENTAL PILLARS CAREFULLY
+
+129. EXPERIMENTAL PILLARS MAY TEST:
+New topic
+New format
+Adjacent audience need
+
+130. DO NOT ALLOW EXPERIMENTAL TOPICS TO DILUTE THE BRAND WITHOUT reason.
+
+131. CREATE A 30-DAY CONTENT MAP
+
+132. DISTRIBUTE IDEAS ACROSS THE CORE PILLARS
+
+133. MATCH PLAN TO POSTING CAPACITY
+
+134. DO NOT FORCE 30 POSTS IF THE CREATOR POSTS THREE times per week.
+
+135. CREATE A 90-DAY DIRECTION
+
+136. FOCUS ON:
+Consistency
+Learning
+Audience response
+Topic refinement
+
+137. DO NOT LOCK THE CREATOR INTO A RIGID PLAN
+
+138. CREATE MEASUREMENT GUIDANCE
+
+139. TRACK BY PILLAR:
+Reach
+Saves
+Shares
+Comments
+Qualified clicks
+Leads
+Conversions
+Watch time
+Retention
+
+140. MATCH METRICS TO THE PILLAR PURPOSE
+
+141. DO NOT JUDGE EVERY PILLAR ONLY BY VIEWS
+
+142. AUTHORITY CONTENT MAY HAVE DIFFERENT SUCCESS SIGNALS THAN DISCOVERY CONTENT
+
+143. CREATE A PILLAR REVIEW PROCESS
+
+144. AFTER ENOUGH CONTENT IS PUBLISHED:
+Review performance
+Review audience feedback
+Identify strongest topics
+Adjust pillar weight
+
+145. DO NOT REMOVE A PILLAR AFTER ONE WEAK POST
+
+146. CREATE A CONTENT DECISION FILTER
+
+147. BEFORE POSTING ASK:
+Which pillar does this belong to?
+Which audience problem does it address?
+What is the objective?
+Why should the audience care?
+What format best communicates it?
+
+148. IF THE IDEA DOES NOT FIT ANY PILLAR
+Decide whether it is:
+A useful experiment
+Off-brand
+A sign that a new pillar is needed
+
+149. CREATE NAMING OPTIONS
+
+150. PILLAR NAMES SHOULD BE CLEAR TO THE CREATOR
+
+151. THEY DO NOT NEED TO BE PUBLIC-FACING BRAND SLOGANS
+
+152. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- pillars are audience-centered
+- pillars reflect real creator expertise
+- pillars are distinct from one another
+- pillars are broad enough for repeated content
+- pillars are specific enough to guide topic selection
+- each pillar has a strategic purpose
+- content formats match the pillar
+- platform differences are considered
+- content can be produced with available resources
+- posting frequency is sustainable
+- discovery, depth, trust and conversion are balanced
+- monetization is not forced
+- no expertise is invented
+- no results are invented
+- no current trends are invented
+- content gaps are identified
+- strong pillars are prioritized
+- the system can evolve based on performance
+
+OUTPUT FORMAT:
+
+1. CREATOR STRATEGY SNAPSHOT
+Provide:
+Niche
+Audience
+Audience problems
+Audience desired outcomes
+Creator strengths
+Creator goals
+Recommended strategic direction
+
+2. RECOMMENDED CONTENT PILLARS
+
+For each pillar provide:
+Pillar name
+Purpose
+Audience need
+Creator strength
+What belongs in this pillar
+What does not belong
+Best formats
+Best platforms
+Funnel role
+Priority
+
+3. SUBTOPICS
+Provide 5–10 reusable subtopics for each pillar.
+
+4. CONTENT IDEA BANK
+Generate practical content ideas under every pillar.
+
+For each idea provide:
+Title
+Angle
+Format
+Objective
+Audience stage
+
+5. RECURRING SERIES
+Recommend repeatable series under the strongest pillars.
+
+6. CONTENT MIX
+Recommend a practical percentage or relative weighting based on the creator's goals.
+
+Explain that it is a starting point rather than a universal rule.
+
+7. POSTING ROTATION
+Create a sustainable rotation based on the stated posting capacity.
+
+8. PLATFORM MAP
+Show which pillars are strongest for each platform.
+
+9. FORMAT MAP
+Show where to use:
+Short video
+Long-form video
+Carousel
+Post
+Email
+Article
+Live content
+
+10. CONTENT BATCHING PLAN
+Show which content can be produced together efficiently.
+
+11. REPURPOSING MAP
+Show how one strong topic can become multiple platform-native assets.
+
+12. MONETIZATION ALIGNMENT
+Where relevant, explain which pillars naturally support:
+Products
+Services
+Affiliate content
+Downloads
+Sponsorship
+Lead generation
+
+Do not force monetization where it does not fit.
+
+13. AUTHORITY & TRUST PLAN
+Identify which pillars best demonstrate expertise and trust.
+
+14. CONTENT GAP ANALYSIS
+Identify missing:
+Problems
+Questions
+Formats
+Funnel stages
+Depth levels
+
+15. 30-DAY CONTENT MAP
+Create a realistic plan based on posting capacity.
+
+16. 90-DAY DIRECTION
+Explain how to develop the strongest pillars over time.
+
+17. MEASUREMENT PLAN
+For each pillar provide:
+Purpose
+Primary metric
+Secondary metric
+What to learn
+
+18. PILLAR REVIEW FRAMEWORK
+Explain how to decide whether to:
+Increase
+Maintain
+Reduce
+Test
+Replace
+
+a pillar over time.
+
+19. CONTENT DECISION FILTER
+Provide a short checklist the creator can use before creating any new piece of content.
+
+20. FINAL RECOMMENDATION
+Provide:
+3 strongest pillars
+Best discovery pillar
+Best authority pillar
+Best trust pillar
+Best monetization-support pillar if relevant
+Best first content series
+
+IMPORTANT:
+- Build pillars around audience needs and real creator expertise.
+- Do not create vague categories that fail to guide content decisions.
+- Do not invent expertise, case studies, results or trends.
+- Do not force every post toward conversion.
+- Make the system sustainable for the creator's actual production capacity.`;
+
+const steps = [
+  {
+    title: "Connect expertise to audience need",
+    description:
+      "The strongest pillars sit where the creator's genuine knowledge overlaps with problems, questions and outcomes that matter to the audience.",
+  },
+  {
+    title: "Keep the pillars distinct",
+    description:
+      "Each pillar should have a clear boundary so the creator knows which topics belong there and avoids building several categories around essentially the same idea.",
+  },
+  {
+    title: "Give every pillar a job",
+    description:
+      "Some pillars can attract new people, others can build depth, authority, trust or support conversion. A healthy content system does not make every post perform the same role.",
+  },
+  {
+    title: "Design for sustainability",
+    description:
+      "Match the content mix, formats and posting rotation to the creator's realistic production capacity rather than creating a plan that cannot be maintained.",
+  },
+];
+
+const example = {
+  input: [
+    "Niche: Warehouse, inventory and operations management.",
+    "Audience: Storekeepers, inventory controllers, supervisors and small-business operators.",
+    "Expertise: Inventory control, warehouse processes, stock discrepancies, KPIs and practical operations.",
+    "Goal: Build professional authority and drive traffic to practical online tools.",
+    "Platforms: LinkedIn, Facebook and YouTube Shorts.",
+    "Capacity: Three posts per week.",
+  ],
+
+  output: [
+    "PILLAR 1 — Inventory Accuracy & Control: stock discrepancies, cycle counts, system-versus-physical differences, stock adjustments and root-cause checks.",
+    "PILLAR 2 — Warehouse Process Improvement: receiving, putaway, picking, dispatch, layout and workflow problems.",
+    "PILLAR 3 — Warehouse KPIs & Decision-Making: inventory accuracy, productivity, stock turnover, reorder planning and operational interpretation.",
+    "PILLAR 4 — Practical Tools & Templates: calculators, checklists, reports and templates that help operators complete real tasks.",
+    "PILLAR 5 — Career & Professional Practice: supervisor lessons, workplace problem-solving and practical skills for warehouse professionals.",
+    "ROTATION: Week 1 could use one inventory-control educational post, one warehouse-process short video and one practical-tool demonstration rather than publishing three similar inventory posts.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Pillars are decision filters",
+    description:
+      "A useful pillar system makes it easier to decide what to publish, what to postpone and what does not belong on the account.",
+  },
+  {
+    title: "Do not confuse pillars with formats",
+    description:
+      "A Reel, carousel or article is a format. The pillar is the recurring subject area that those formats communicate.",
+  },
+  {
+    title: "Allow the system to evolve",
+    description:
+      "Pillars should provide consistency without becoming permanent rules. Audience response and creator goals can justify changing their weight over time.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Creator Content Pillar Builder Prompt | KRIYANO"
+  description="Build a sustainable creator content strategy with clear content pillars, subtopics, recurring series, posting rotation and platform-specific ideas."
+>
+  <PromptPage
+    category="CREATORS"
+    title="Creator Content Pillar Builder"
+    accentTitle="Prompt."
+    description="Build clear, audience-focused content pillars that connect creator expertise with repeatable topics, platform formats, sustainable publishing and long-term goals."
+    meta={[
+      "Free prompt",
+      "Content strategy",
+      "Creator planning",
+    ]}
+    bestFor={[
+      "Personal brands",
+      "Content creators",
+      "Professional creators",
+      "Small businesses",
+      "Social media planning",
+      "Multi-platform content",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Replace random posting with a repeatable content system."
+    introDescription="Define a small number of clear content territories around your audience, expertise and goals, then turn those pillars into reusable topics, series, formats and a realistic publishing rotation."
+    steps={steps}
+    exampleTitle="Turn warehouse expertise into a structured creator content system."
+    example={example}
+    tipsTitle="Good content pillars create direction without limiting creativity."
+    tips={tips}
+    sidebarTitle="Need ideas inside each pillar?"
+    sidebarDescription="Use KRIYANO's Short-Form Video Idea Generator and Hook Generator to turn each content pillar into specific concepts and platform-ready openings."
+    warningTitle="Do not build strategy around invented expertise"
+    warningText="Keep each content pillar connected to knowledge, experience or resources the creator can genuinely support. Verify current trends, performance claims and external facts separately when they are used in published content."
+  />
+</BaseLayout>

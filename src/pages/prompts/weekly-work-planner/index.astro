@@ -1,0 +1,596 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced productivity coach and operations planner.
+
+TASK:
+Create a practical weekly work plan based on the priorities, deadlines, meetings, workload and responsibilities below.
+
+ROLE / JOB:
+[Your role or profession.]
+
+WEEK:
+[Example: Monday 7 September to Friday 11 September.]
+
+MAIN RESPONSIBILITIES:
+[List your regular responsibilities.]
+
+TOP PRIORITIES THIS WEEK:
+[List the most important outcomes you need to achieve.]
+
+TASKS:
+[List all known tasks.]
+
+DEADLINES:
+[List deadlines and due dates.]
+
+MEETINGS / FIXED COMMITMENTS:
+[List meetings, appointments, calls, inspections or fixed activities.]
+
+ONGOING PROJECTS:
+[List projects currently in progress.]
+
+FOLLOW-UPS:
+[List people, customers, suppliers, colleagues or departments you need to follow up with.]
+
+ADMIN TASKS:
+[Reports, approvals, emails, documentation, filing, system updates, etc.]
+
+PROBLEMS / RISKS:
+[List anything that could delay or disrupt the week.]
+
+AVAILABLE WORKING HOURS:
+[Example: Sunday–Thursday, 8:00 AM–5:00 PM.]
+
+PREFERRED WORK STYLE:
+[Example: focused blocks, flexible schedule, morning deep work, etc.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+WEEKLY PLANNING REQUIREMENTS:
+
+1. DEFINE THE WEEKLY OUTCOMES
+Identify the most important results that should be achieved by the end of the week.
+
+Separate:
+
+Must achieve
+Should achieve
+Could achieve
+
+Do not treat every task as equally important.
+
+2. PRIORITIZE TASKS
+Classify tasks using:
+
+P1 — Critical / urgent
+P2 — High priority
+P3 — Normal priority
+P4 — Low priority
+
+Consider:
+
+- deadline
+- business impact
+- dependency
+- customer impact
+- operational impact
+- financial impact
+- effort
+- risk of delay
+
+3. IDENTIFY FIXED COMMITMENTS
+List all non-movable activities first.
+
+Examples:
+
+- meetings
+- interviews
+- audits
+- site visits
+- deliveries
+- reporting deadlines
+- customer calls
+- inspections
+
+Build the flexible work around these commitments.
+
+4. IDENTIFY DEPENDENCIES
+For each important task identify:
+
+Task:
+Depends on:
+Blocking issue:
+Person / department involved:
+Action required:
+
+Do not schedule dependent tasks as if they can start immediately when they are blocked.
+
+5. ESTIMATE EFFORT
+Estimate each task as:
+
+Quick — under 30 minutes
+Short — 30–60 minutes
+Medium — 1–2 hours
+Deep Work — 2+ hours
+
+If effort is uncertain, mark it:
+
+"Estimate required."
+
+6. IDENTIFY DEEP-WORK TASKS
+Highlight tasks requiring:
+
+- concentration
+- analysis
+- writing
+- planning
+- complex decisions
+- report preparation
+- problem solving
+
+Schedule these during the user's strongest focus periods where possible.
+
+7. GROUP SIMILAR TASKS
+Batch similar activities such as:
+
+- emails
+- approvals
+- calls
+- reporting
+- data review
+- documentation
+- follow-ups
+
+Avoid unnecessary context switching.
+
+8. DAILY WORKLOAD BALANCE
+Do not overload one day while leaving another almost empty.
+
+Balance:
+
+- high-focus work
+- meetings
+- admin
+- follow-ups
+- routine duties
+- urgent operational tasks
+
+9. BUFFER TIME
+Leave realistic buffer for:
+
+- unexpected issues
+- urgent requests
+- delays
+- meetings running over
+- operational problems
+
+Do not schedule 100% of available working time.
+
+10. MONDAY / FIRST WORKDAY
+Use the first workday for:
+
+- weekly review
+- priority confirmation
+- urgent follow-ups
+- planning
+- starting critical tasks
+
+Avoid filling the entire first day with low-value admin.
+
+11. MIDWEEK REVIEW
+Include a short midweek checkpoint.
+
+Review:
+
+- completed priorities
+- delayed tasks
+- new urgent work
+- blocked items
+- workload changes
+- deadline risk
+
+12. FINAL WORKDAY
+Reserve time for:
+
+- completion
+- outstanding follow-ups
+- reporting
+- documentation
+- next-week preparation
+- review of incomplete tasks
+
+13. DEADLINE PROTECTION
+For important deadlines:
+
+- schedule work before the actual due date
+- include review time
+- identify dependencies
+- add contingency where appropriate
+
+Do not schedule critical work to finish at the exact deadline unless unavoidable.
+
+14. FOLLOW-UP MANAGEMENT
+Create a follow-up list.
+
+For each:
+
+Person / department:
+Topic:
+Required action:
+When to follow up:
+Next step if no response:
+
+15. EMAIL / COMMUNICATION BLOCKS
+Where useful, group email and communication into defined periods instead of interrupting focused work continuously.
+
+16. MEETING PREPARATION
+For important meetings include:
+
+- preparation time
+- required documents
+- decisions needed
+- questions
+- follow-up actions
+
+17. ADMIN CONTROL
+Schedule repetitive admin work efficiently.
+
+Examples:
+
+- timesheets
+- reports
+- approvals
+- document filing
+- system updates
+- expense claims
+- routine emails
+
+18. HIGH-RISK ITEMS
+Identify tasks at risk because of:
+
+- dependency
+- unclear ownership
+- missing information
+- resource shortage
+- tight deadline
+- customer dependency
+- approval delay
+
+Give a mitigation action for each.
+
+19. QUICK WINS
+Identify useful tasks that can be completed quickly without distracting from major priorities.
+
+20. DELEGATION OPPORTUNITIES
+Identify tasks that may be delegated.
+
+For each:
+
+Task:
+Suggested responsible role:
+Reason:
+Required instruction:
+Follow-up required:
+
+Do not assume delegation authority if the user has not stated it.
+
+21. TASKS TO DEFER
+Identify lower-priority tasks that can reasonably be moved to a later week.
+
+Explain why.
+
+22. OVERLOAD CHECK
+If the total workload appears unrealistic, clearly state:
+
+"The current workload may exceed available time."
+
+Then recommend:
+
+- defer
+- delegate
+- reduce scope
+- renegotiate deadline
+- remove low-value work
+- request support
+
+Do not pretend every task can fit.
+
+23. DAILY PLAN
+For each workday provide:
+
+Main objective:
+P1 tasks:
+P2 tasks:
+Meetings:
+Follow-ups:
+Admin:
+Deep-work block:
+Buffer:
+End-of-day check:
+
+24. TIME-BLOCKING
+Where working hours are provided, create realistic time blocks.
+
+Example:
+
+08:00–08:30 — Review & urgent messages
+08:30–10:30 — Priority project
+10:30–11:00 — Follow-ups
+11:00–12:00 — Meeting
+13:00–14:30 — Analysis / report
+14:30–15:00 — Email block
+15:00–16:00 — Operational tasks
+16:00–16:30 — Buffer
+16:30–17:00 — Daily review
+
+Adjust to the actual schedule.
+
+25. FLEXIBLE VS FIXED
+Clearly distinguish:
+
+FIXED
+Cannot easily move.
+
+FLEXIBLE
+Can move if urgent work appears.
+
+26. PRIORITY CONFLICTS
+If two high-priority tasks conflict, compare:
+
+- deadline
+- consequence of delay
+- stakeholder importance
+- dependency
+- time required
+
+Recommend which should come first.
+
+27. WAITING TASKS
+Create a separate list for tasks waiting on:
+
+- approval
+- information
+- customer
+- supplier
+- colleague
+- system access
+- management decision
+
+Include a follow-up date or trigger.
+
+28. WORK-IN-PROGRESS CONTROL
+Avoid starting too many major tasks simultaneously.
+
+Recommend finishing or advancing a small number of high-value tasks before opening additional work where possible.
+
+29. INTERRUPTION STRATEGY
+For roles with frequent interruptions, recommend:
+
+- protected focus periods
+- urgent escalation rules
+- grouped responses
+- realistic buffer
+- clear priority reset after interruption
+
+30. ENERGY / FOCUS MANAGEMENT
+Where useful:
+
+Use high-focus periods for:
+- analysis
+- writing
+- decisions
+- problem solving
+
+Use lower-energy periods for:
+- emails
+- admin
+- filing
+- simple follow-ups
+
+31. DAILY TOP THREE
+For each day identify the three most important outcomes.
+
+If these three are completed, the day should still be considered productive.
+
+32. WEEKLY SCORECARD
+Create a simple scorecard:
+
+Weekly priority:
+Target:
+Status:
+Blocker:
+Next action:
+
+Use:
+
+Not Started
+In Progress
+Completed
+Blocked
+Deferred
+
+33. PROGRESS TRACKING
+Recommend a simple daily tracking format:
+
+Completed:
+In progress:
+Blocked:
+New tasks:
+Carry forward:
+
+34. END-OF-WEEK REVIEW
+Include:
+
+What was completed?
+What was delayed?
+Why?
+What needs to move forward?
+What should be stopped?
+What should be delegated?
+What should become next week's priority?
+
+35. NEXT-WEEK PREPARATION
+Identify:
+
+Carry-forward tasks
+Upcoming deadlines
+Follow-ups
+Known meetings
+Risks
+Preparation required
+
+36. MANAGEMENT UPDATE
+If relevant, create a concise optional weekly update:
+
+Completed:
+In progress:
+Risks / blockers:
+Support required:
+Next priorities:
+
+37. OUTPUT STYLE
+Keep the plan:
+
+- practical
+- realistic
+- easy to scan
+- prioritized
+- flexible
+- not over-scheduled
+
+Do not create a motivational or generic productivity plan.
+
+OUTPUT FORMAT:
+
+1. Weekly Objectives
+2. Priority Summary
+3. Fixed Commitments
+4. Workload & Dependency Review
+5. Weekly Risk / Blocker List
+6. Daily Schedule
+7. Daily Top Three
+8. Follow-Up List
+9. Waiting-On List
+10. Delegation Opportunities
+11. Tasks to Defer
+12. Weekly Scorecard
+13. Midweek Review
+14. End-of-Week Review
+15. Next-Week Preparation
+16. Optional Management Update
+
+IMPORTANT:
+- Do not assume every task can fit into the week.
+- Protect important deadlines with preparation time.
+- Do not overfill the calendar.
+- Keep buffer for unexpected work.
+- Prioritize outcomes rather than activity.
+- Distinguish urgent from important.
+- Identify blocked work instead of repeatedly scheduling it.
+- Group similar tasks where practical.
+- Keep deep work separate from routine admin.
+- Recommend delegation or deferral when workload exceeds capacity.
+- Do not invent meetings, deadlines or responsibilities.`;
+
+const steps = [
+  {
+    title: "Start with outcomes",
+    description:
+      "Define what actually needs to be achieved by the end of the week before filling the calendar with individual tasks.",
+  },
+  {
+    title: "Protect the important work",
+    description:
+      "Place deadlines, meetings and high-focus tasks first, then fit routine admin and lower-priority work around them.",
+  },
+  {
+    title: "Leave room for reality",
+    description:
+      "Keep buffer time for interruptions, unexpected work and tasks that take longer than planned instead of scheduling every available minute.",
+  },
+  {
+    title: "Review and adjust",
+    description:
+      "Use a short midweek checkpoint to move priorities, follow up blocked work and prevent important deadlines from slipping.",
+  },
+];
+
+const example = {
+  input: [
+    "Role: Warehouse supervisor.",
+    "Main priorities: Complete monthly KPI report, close two receiving discrepancies and prepare for Friday stock count.",
+    "Meetings: Tuesday operations meeting at 10:00 AM and Thursday customer review at 2:00 PM.",
+    "Regular work: Daily floor supervision, emails, approvals and shift handover.",
+    "Risk: Inventory team is waiting for documents from receiving.",
+  ],
+
+  output: [
+    "Weekly priority 1: Complete stock-count preparation before Friday rather than leaving setup to the final day.",
+    "Weekly priority 2: Resolve or formally escalate both receiving discrepancies after checking the missing documentation dependency.",
+    "Weekly priority 3: Complete the KPI report with review time before submission.",
+    "Monday should focus on confirming stock-count scope, requesting missing receiving documents and starting KPI analysis.",
+    "Tuesday planning should protect time around the fixed operations meeting rather than scheduling a major deep-work task through it.",
+    "Thursday should include preparation time before the customer review plus a final stock-count readiness check.",
+    "Friday should keep buffer around the physical count instead of filling the day with normal administrative work.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Don't schedule 100% of the week",
+    description:
+      "A realistic plan needs buffer for urgent requests, interruptions, delays and work that takes longer than expected.",
+  },
+  {
+    title: "Protect work before deadlines",
+    description:
+      "Important tasks should normally be completed early enough to allow review, corrections and unexpected delays.",
+  },
+  {
+    title: "Blocked tasks need follow-up, not rescheduling",
+    description:
+      "When work depends on someone else, track the dependency and next follow-up instead of repeatedly placing the same blocked task on the calendar.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Weekly Work Planner Prompt | KRIYANO"
+  description="Create a realistic weekly work plan with priorities, deadlines, meetings, deep-work blocks, follow-ups, buffers and workload management."
+>
+  <PromptPage
+    category="WORK & PRODUCTIVITY"
+    title="Weekly Work"
+    accentTitle="Planner."
+    description="Turn priorities, deadlines, meetings and routine responsibilities into a realistic weekly plan that protects important work without overloading your schedule."
+    meta={[
+      "Free prompt",
+      "Weekly planning",
+      "Productivity",
+    ]}
+    bestFor={[
+      "Professionals",
+      "Managers",
+      "Supervisors",
+      "Office teams",
+      "Operations roles",
+      "Busy workweeks",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Plan outcomes, not just a longer to-do list."
+    introDescription="Organize fixed commitments, important deadlines, deep work, routine admin and follow-ups into a practical week with enough flexibility for real-world interruptions."
+    steps={steps}
+    exampleTitle="Turn a busy week into a workable plan."
+    example={example}
+    tipsTitle="Make the weekly plan realistic."
+    tips={tips}
+    sidebarTitle="Too many tasks competing for attention?"
+    sidebarDescription="Use KRIYANO's Task Prioritization Prompt to rank competing work before building your weekly schedule."
+    warningTitle="A good weekly plan should still be flexible"
+    warningText="Unexpected work, changing priorities and operational problems can make a fixed schedule unrealistic. Review the plan during the week and adjust priorities rather than trying to follow an outdated schedule."
+  />
+</BaseLayout>

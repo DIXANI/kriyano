@@ -1,0 +1,931 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert creator operations strategist, content production manager and AI-assisted workflow planner.
+
+TASK:
+Build a practical creator workflow from idea generation through publishing, repurposing and performance review.
+
+The workflow should help the creator:
+- reduce wasted time
+- separate creative work from admin work
+- batch similar tasks
+- use AI where it genuinely saves effort
+- protect quality and factual accuracy
+- avoid repetitive manual steps
+- publish consistently without overloading the creator
+- maintain a clear review process
+- learn from content performance over time
+
+The workflow should be realistic for the creator's actual time, tools, team size and publishing capacity.
+
+CREATOR / BRAND:
+[Name and short description.]
+
+NICHE:
+[Main topic or industry.]
+
+TARGET AUDIENCE:
+[Who is the content for?]
+
+PRIMARY PLATFORMS:
+[Instagram / Facebook / TikTok / YouTube / LinkedIn / blog / email / other.]
+
+CONTENT FORMATS:
+[Short video / long-form video / carousel / image post / article / email / podcast / other.]
+
+POSTING FREQUENCY:
+[For example: 3 posts per week.]
+
+AVAILABLE TIME:
+[Hours per day or week.]
+
+TEAM SIZE:
+[Solo / assistant / editor / designer / agency / other.]
+
+TOOLS AVAILABLE:
+[Phone / camera / Canva / CapCut / Adobe / Notion / Google Drive / AI tools / spreadsheet / other.]
+
+AI TOOLS AVAILABLE:
+[List if known.]
+
+CURRENT WORKFLOW:
+[Describe the current process if one exists.]
+
+CURRENT PROBLEMS:
+[For example: too much time editing, no idea system, inconsistent posting, duplicated work, missed deadlines.]
+
+CONTENT GOALS:
+[Growth / authority / leads / sales / community / education / monetization / consistency / other.]
+
+RESEARCH NEEDS:
+[Low / medium / high.]
+
+APPROVAL REQUIREMENTS:
+[None / self-review / client approval / legal review / manager review / other.]
+
+BRAND OR QUALITY REQUIREMENTS:
+[Optional.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+WORKFLOW DESIGN REQUIREMENTS:
+
+1. START WITH REAL CAPACITY
+
+2. DO NOT CREATE A WORKFLOW THAT REQUIRES MORE TIME THAN THE CREATOR HAS
+
+3. CALCULATE A PRACTICAL WEEKLY PRODUCTION LOAD
+
+4. DISTINGUISH BETWEEN:
+Creative work
+Research
+Production
+Editing
+Publishing
+Admin
+Analytics
+
+5. IDENTIFY REPEATED TASKS
+
+6. IDENTIFY TASKS THAT CAN BE BATCHED
+
+7. IDENTIFY TASKS THAT SHOULD NOT BE BATCHED
+
+8. CREATE A CLEAR PIPELINE
+
+9. DEFAULT PIPELINE:
+Idea
+Research
+Validation
+Planning
+Drafting
+Production
+Editing
+Review
+Scheduling
+Publishing
+Repurposing
+Performance review
+
+10. ADAPT THE PIPELINE TO THE CREATOR'S FORMAT
+
+11. DO NOT FORCE VIDEO-SPECIFIC STEPS ON TEXT-ONLY CREATORS
+
+12. DO NOT FORCE LONG-FORM STEPS ON SHORT-FORM-ONLY CREATORS
+
+13. CREATE AN IDEA CAPTURE SYSTEM
+
+14. THE IDEA SYSTEM SHOULD CAPTURE:
+Topic
+Audience problem
+Content pillar
+Format
+Platform
+Objective
+Status
+
+15. KEEP IDEA CAPTURE SIMPLE
+
+16. DO NOT CREATE A COMPLEX DATABASE UNLESS NEEDED
+
+17. CREATE AN IDEA REVIEW PROCESS
+
+18. SEPARATE:
+Good idea
+Needs research
+Duplicate
+Not relevant
+Future idea
+
+19. CREATE A PRIORITIZATION METHOD
+
+20. PRIORITIZE BASED ON:
+Audience value
+Strategic fit
+Creator credibility
+Effort
+Timeliness
+Repurposing potential
+
+21. DO NOT USE FALSE PRECISION
+
+22. USE:
+High
+Medium
+Low
+
+when scoring is helpful.
+
+23. CREATE A RESEARCH STEP
+
+24. RESEARCH SHOULD MATCH CONTENT RISK
+
+25. LOW-RISK CONTENT MAY REQUIRE:
+Basic verification
+
+26. HIGHER-RISK CONTENT MAY REQUIRE:
+Primary sources
+Current sources
+Expert review
+
+27. FLAG CONTENT INVOLVING:
+Health
+Finance
+Legal
+Safety
+Current events
+Statistics
+Platform updates
+Product specifications
+
+28. DO NOT LET AI GENERATE UNSOURCED FACTS
+
+29. CREATE A SOURCE-CAPTURE METHOD
+
+30. STORE:
+Source link
+Source date
+Key fact
+Claim supported
+
+31. DO NOT OVERCOMPLICATE SOURCE MANAGEMENT
+
+32. CREATE A CONTENT BRIEF
+
+33. BRIEF SHOULD INCLUDE:
+Topic
+Audience
+Objective
+Hook
+Key points
+Format
+CTA
+Sources
+Visual needs
+
+34. KEEP THE BRIEF SHORT ENOUGH TO USE
+
+35. CREATE A SCRIPT / DRAFT STEP
+
+36. DEFINE WHEN AI SHOULD HELP
+
+37. AI MAY HELP WITH:
+Idea expansion
+Outline
+First draft
+Hook variations
+Caption variations
+Repurposing
+Summaries
+Checklists
+Formatting
+
+38. AI SHOULD NOT BE TRUSTED BLINDLY FOR:
+Facts
+Statistics
+Current information
+Legal advice
+Health claims
+Financial claims
+Direct quotes
+Source attribution
+
+39. CREATE A HUMAN REVIEW STEP
+
+40. REVIEW:
+Accuracy
+Brand voice
+Clarity
+Repetition
+Claims
+CTA
+Platform fit
+
+41. CREATE A PRODUCTION STEP
+
+42. FOR VIDEO INCLUDE WHEN RELEVANT:
+Shot list
+Props
+Lighting
+Audio
+B-roll
+Screen recordings
+On-screen text
+
+43. FOR STATIC CONTENT INCLUDE WHEN RELEVANT:
+Layout
+Image selection
+Graphic preparation
+Alt text
+Caption
+
+44. FOR ARTICLES INCLUDE WHEN RELEVANT:
+Outline
+Sources
+Draft
+Editing
+Internal links
+Metadata
+
+45. CREATE A BATCHING PLAN
+
+46. GROUP SIMILAR TASKS
+
+47. POSSIBLE BATCHES:
+Research
+Script writing
+Recording
+Editing
+Thumbnail creation
+Caption writing
+Scheduling
+
+48. DO NOT BATCH TASKS THAT REQUIRE FRESH CONTEXT IF THAT HARMS QUALITY
+
+49. CREATE A PRODUCTION DAY MODEL
+
+50. EXAMPLE:
+Monday — plan
+Tuesday — script
+Wednesday — record
+Thursday — edit
+Friday — schedule and review
+
+51. ADAPT TO AVAILABLE TIME
+
+52. CREATE A DAILY MICRO-WORKFLOW IF THE CREATOR HAS LIMITED TIME
+
+53. EXAMPLE:
+30 minutes — idea/research
+45 minutes — draft
+45 minutes — production
+
+54. DO NOT ASSUME THE CREATOR CAN WORK EVERY DAY
+
+55. CREATE A FILE ORGANIZATION SYSTEM
+
+56. KEEP IT SIMPLE
+
+57. RECOMMENDED STRUCTURE:
+Ideas
+Research
+Drafts
+Raw media
+Edits
+Published
+Repurposing
+
+58. CREATE FILE-NAMING RULES
+
+59. FILE NAMES SHOULD INCLUDE:
+Date
+Topic
+Format
+Version
+
+60. DO NOT CREATE OVERLY LONG FILE NAMES
+
+61. CREATE VERSION CONTROL
+
+62. USE SIMPLE STATES:
+Draft
+Review
+Approved
+Scheduled
+Published
+
+63. CREATE A CONTENT STATUS SYSTEM
+
+64. POSSIBLE STATUS:
+Idea
+Researching
+Planned
+Drafted
+Recorded
+Editing
+Review
+Scheduled
+Published
+Repurposed
+
+65. DO NOT CREATE TOO MANY STATUS STATES
+
+66. CREATE AN APPROVAL FLOW
+
+67. IF SOLO:
+Self-review checklist
+
+68. IF CLIENT / TEAM:
+Define responsible reviewer
+
+69. CREATE A PUBLISHING CHECKLIST
+
+70. CHECK:
+Caption
+Thumbnail
+Title
+Links
+CTA
+Tags
+Subtitles
+Accessibility
+Scheduling
+Sources
+
+71. DO NOT ASSUME EVERY PLATFORM NEEDS ALL ITEMS
+
+72. CREATE A REPURPOSING STEP
+
+73. IDENTIFY SOURCE CONTENT
+
+74. TURN ONE STRONG SOURCE ASSET INTO:
+Short video
+Carousel
+Post
+Email
+Article
+Clip
+Quote graphic
+
+75. DO NOT SIMPLY COPY-PASTE THE SAME CONTENT
+
+76. ADAPT EACH ASSET TO THE PLATFORM
+
+77. CREATE A REPURPOSING DECISION RULE
+
+78. REPURPOSE WHEN:
+Topic performed well
+Topic remains relevant
+Content has multiple useful angles
+Long-form source contains standalone insights
+
+79. DO NOT REPURPOSE WEAK CONTENT AUTOMATICALLY
+
+80. CREATE A CONTENT ARCHIVE
+
+81. TRACK:
+Published date
+Platform
+Topic
+Pillar
+Format
+Link
+Performance notes
+
+82. KEEP ANALYTICS TRACKING PRACTICAL
+
+83. CREATE A PERFORMANCE REVIEW PROCESS
+
+84. REVIEW CONTENT BY:
+Objective
+Platform
+Pillar
+Format
+
+85. DO NOT JUDGE EVERYTHING ONLY BY VIEWS
+
+86. POSSIBLE METRICS:
+Reach
+Watch time
+Retention
+Saves
+Shares
+Comments
+Clicks
+Leads
+Conversions
+
+87. MATCH METRIC TO OBJECTIVE
+
+88. CREATE A WEEKLY REVIEW
+
+89. WEEKLY REVIEW SHOULD ANSWER:
+What was published?
+What worked?
+What underperformed?
+What questions appeared?
+What should be reused?
+
+90. CREATE A MONTHLY REVIEW
+
+91. MONTHLY REVIEW SHOULD ANSWER:
+Which pillars are strongest?
+Which formats are sustainable?
+Which topics should be repeated?
+Which tasks consume too much time?
+Which workflow step needs improvement?
+
+92. CREATE A CONTENT FEEDBACK LOOP
+
+93. PERFORMANCE SHOULD INFORM:
+Future ideas
+Hooks
+Formats
+Pillars
+Posting frequency
+
+94. DO NOT CHASE EVERY SHORT-TERM PERFORMANCE CHANGE
+
+95. CREATE A BACKLOG SYSTEM
+
+96. KEEP:
+Ready ideas
+Needs research
+Seasonal
+Evergreen
+Experimental
+
+97. CREATE EVERGREEN CONTENT PROCESS
+
+98. EVERGREEN CONTENT SHOULD BE REVIEWED PERIODICALLY
+
+99. FLAG OUTDATED INFORMATION
+
+100. CREATE TIME-SENSITIVE CONTENT PROCESS
+
+101. TIME-SENSITIVE CONTENT NEEDS:
+Faster research
+Current verification
+Clear publishing deadline
+
+102. DO NOT PUBLISH STALE CURRENT-EVENT CONTENT
+
+103. CREATE A TEMPLATE LIBRARY
+
+104. TEMPLATES MAY INCLUDE:
+Video brief
+Script outline
+Caption structure
+Thumbnail brief
+Research checklist
+Publishing checklist
+
+105. DO NOT OVER-TEMPLATE CREATIVE WORK
+
+106. CREATE REUSABLE PROMPT SYSTEMS
+
+107. MAP AI PROMPTS TO WORKFLOW STAGES
+
+108. EXAMPLE:
+Idea stage → Short-Form Video Idea Generator
+Hook stage → Hook Generator
+Outline stage → YouTube Video Outline
+Caption stage → Caption Writer
+Repurposing stage → Content Repurposing
+
+109. DO NOT USE AI FOR EVERY STEP JUST BECAUSE IT IS AVAILABLE
+
+110. CREATE AN AI REVIEW RULE
+
+111. EVERY AI OUTPUT SHOULD BE CHECKED FOR:
+Facts
+Tone
+Originality
+Repetition
+Unsupported claims
+Formatting
+
+112. CREATE A QUALITY GATE
+
+113. CONTENT CANNOT MOVE TO PUBLISHING UNTIL IT PASSES:
+Accuracy
+Clarity
+Brand fit
+Platform fit
+CTA fit
+
+114. CREATE A MINIMUM VIABLE WORKFLOW
+
+115. IF THE CREATOR IS OVERWHELMED
+Reduce the workflow to:
+Plan
+Create
+Review
+Publish
+Learn
+
+116. CREATE AN ADVANCED WORKFLOW ONLY WHEN CAPACITY SUPPORTS IT
+
+117. IDENTIFY BOTTLENECKS
+
+118. POSSIBLE BOTTLENECKS:
+Research
+Scripting
+Recording
+Editing
+Design
+Approval
+Scheduling
+
+119. FOR EACH BOTTLENECK
+Suggest:
+Simplify
+Batch
+Template
+Delegate
+Automate
+Remove
+
+120. DO NOT AUTOMATE A BAD PROCESS BEFORE SIMPLIFYING IT
+
+121. CREATE AUTOMATION OPPORTUNITIES
+
+122. POSSIBLE LOW-RISK AUTOMATION:
+File naming
+Status updates
+Reminder systems
+Calendar scheduling
+Template duplication
+Analytics collection
+
+123. DO NOT AUTOMATE FINAL FACT APPROVAL
+
+124. DO NOT AUTOMATE SENSITIVE CLAIM APPROVAL
+
+125. CREATE DELEGATION OPPORTUNITIES
+
+126. IF TEAM EXISTS
+Separate:
+Creator-only tasks
+Assistant tasks
+Editor tasks
+Designer tasks
+
+127. KEEP CREATIVE OWNERSHIP CLEAR
+
+128. CREATE STANDARD OPERATING PROCEDURES FOR REPEATED TASKS
+
+129. PRIORITIZE SOPs FOR:
+Publishing
+File handling
+Editing handoff
+Research
+Approvals
+
+130. DO NOT DOCUMENT ONE-OFF TASKS AS FULL SOPs
+
+131. CREATE A CONTENT CALENDAR CONNECTION
+
+132. THE CALENDAR SHOULD SHOW:
+Publish date
+Platform
+Format
+Pillar
+Status
+
+133. DO NOT OVERLOAD THE CALENDAR WITH INTERNAL DETAILS
+
+134. CREATE BUFFER TIME
+
+135. INCLUDE SPACE FOR:
+Delays
+Reshoots
+Current events
+Unexpected workload
+
+136. DO NOT SCHEDULE 100% OF AVAILABLE TIME
+
+137. CREATE A REALISTIC CONTENT BUFFER
+
+138. EXAMPLE:
+Keep at least one ready-to-publish evergreen piece when practical.
+
+139. CREATE A BURNOUT-PREVENTION RULE
+
+140. REDUCE:
+Unnecessary platforms
+Excessive posting frequency
+Overediting
+Constant trend chasing
+
+141. PRIORITIZE:
+Consistency
+Quality
+Repeatable systems
+
+142. CREATE A PLATFORM-SPECIFIC WORKFLOW
+
+143. DO NOT ASSUME ONE MASTER FILE CAN ALWAYS BE PUBLISHED EVERYWHERE UNCHANGED
+
+144. CREATE A FINAL ADAPTATION STEP
+
+145. REVIEW:
+Aspect ratio
+Caption
+Title
+Duration
+Thumbnail
+CTA
+Hashtags
+Formatting
+
+146. CREATE ACCESSIBILITY CHECKS
+
+147. WHEN RELEVANT CHECK:
+Captions/subtitles
+Readable text
+Contrast
+Alt text
+
+148. CREATE A REVIEW ARCHIVE
+
+149. KEEP LEARNINGS FROM:
+Successful content
+Failed experiments
+Audience comments
+Production issues
+
+150. CREATE A CONTINUOUS IMPROVEMENT LOOP
+
+151. EACH MONTH CHOOSE:
+One workflow step to improve
+
+152. DO NOT CHANGE THE ENTIRE SYSTEM AT ONCE
+
+153. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- workflow matches available time
+- workload is realistic
+- responsibilities are clear
+- research requirements are appropriate
+- AI use is purposeful
+- human review is preserved
+- batching opportunities are used
+- unnecessary steps are removed
+- publishing checklist exists
+- repurposing is platform-aware
+- analytics match objectives
+- feedback informs future content
+- bottlenecks are identified
+- automation does not replace critical judgment
+- workflow can be repeated consistently
+- creator has a simpler fallback workflow for busy periods
+
+OUTPUT FORMAT:
+
+1. CREATOR WORKFLOW SNAPSHOT
+Provide:
+Platforms
+Formats
+Posting frequency
+Available time
+Team size
+Main constraints
+Main workflow problem
+
+2. RECOMMENDED WORKFLOW
+Show the full pipeline from idea to performance review.
+
+3. WORKFLOW STAGES
+
+For each stage provide:
+Purpose
+Tasks
+Owner
+Tools
+AI use
+Human review
+Output
+Status
+
+4. WEEKLY PRODUCTION PLAN
+Create a realistic weekly schedule.
+
+5. DAILY MICRO-WORKFLOW
+Create a shorter version for limited-time days.
+
+6. BATCHING PLAN
+Show:
+Tasks to batch
+Recommended batch frequency
+Expected benefit
+
+7. IDEA MANAGEMENT SYSTEM
+Provide:
+Fields
+Statuses
+Review process
+
+8. RESEARCH WORKFLOW
+Provide:
+Verification level
+Source capture
+Fact-check rule
+
+9. CONTENT BRIEF TEMPLATE
+Create a concise reusable template.
+
+10. AI WORKFLOW MAP
+Show which AI prompt or tool should be used at each useful stage.
+
+11. HUMAN REVIEW CHECKPOINTS
+Identify where human judgment is mandatory.
+
+12. PRODUCTION WORKFLOW
+Adapt to the creator's formats.
+
+13. FILE & FOLDER SYSTEM
+Provide a simple structure and naming convention.
+
+14. STATUS SYSTEM
+Recommend the minimum useful workflow statuses.
+
+15. PUBLISHING CHECKLIST
+
+16. REPURPOSING WORKFLOW
+Explain how published source content becomes platform-native secondary assets.
+
+17. CONTENT ARCHIVE
+Define what should be tracked after publishing.
+
+18. WEEKLY REVIEW
+Provide a short review checklist.
+
+19. MONTHLY REVIEW
+Provide a deeper performance and workflow review.
+
+20. BOTTLENECK ANALYSIS
+For each bottleneck provide:
+Problem
+Cause
+Recommended fix
+
+21. AUTOMATION OPPORTUNITIES
+Separate:
+Safe to automate
+Needs human review
+Do not automate
+
+22. DELEGATION PLAN
+If relevant.
+
+23. TEMPLATE LIBRARY
+Recommend reusable templates.
+
+24. BUSY-WEEK FALLBACK WORKFLOW
+Create a minimum viable system for weeks with limited time.
+
+25. CONTINUOUS IMPROVEMENT PLAN
+Recommend one workflow improvement cycle.
+
+26. FINAL RECOMMENDATION
+Provide:
+Most important workflow change
+Best batching opportunity
+Best AI-assisted step
+Most important human review point
+Most likely bottleneck
+Best first automation or template
+
+IMPORTANT:
+- Build for the creator's actual capacity.
+- Simplify before automating.
+- Use AI to reduce repetitive work, not to replace factual or editorial judgment.
+- Keep quality and credibility checks before publishing.
+- Make the workflow repeatable rather than unnecessarily complex.`;
+
+const steps = [
+  {
+    title: "Map the full content pipeline",
+    description:
+      "Define what happens from idea capture through research, creation, review, publishing, repurposing and performance analysis so content does not disappear between disconnected tasks.",
+  },
+  {
+    title: "Batch repetitive work",
+    description:
+      "Group research, scripting, recording, editing and scheduling where appropriate so the creator spends less time constantly switching between different types of work.",
+  },
+  {
+    title: "Use AI selectively",
+    description:
+      "Apply AI to idea expansion, outlines, captions, repurposing and repetitive drafting while preserving human review for facts, judgment, brand voice and important claims.",
+  },
+  {
+    title: "Build a feedback loop",
+    description:
+      "Use weekly and monthly performance reviews to improve future topics, formats and workflow decisions instead of treating publishing as the end of the process.",
+  },
+];
+
+const example = {
+  input: [
+    "Creator: Solo professional content creator.",
+    "Niche: Warehouse, inventory and operations.",
+    "Platforms: LinkedIn, Facebook and YouTube Shorts.",
+    "Posting frequency: Three pieces per week.",
+    "Available time: Around 10 hours per week.",
+    "Tools: Phone, Canva, CapCut, Google Drive and AI tools.",
+    "Main problem: Too much time is lost creating each post from scratch.",
+  ],
+
+  output: [
+    "MONDAY — Plan and research three content ideas from the existing content pillars.",
+    "TUESDAY — Create hooks and short briefs for all three pieces in one batch.",
+    "WEDNESDAY — Record the week's video content in one production session.",
+    "THURSDAY — Edit videos and prepare graphics, captions and thumbnails.",
+    "FRIDAY — Final fact check, schedule content and identify one repurposing opportunity.",
+    "AI USE — Use AI for idea expansion, hook options, outlines, captions and repurposing. Keep final claims, examples and technical accuracy under human review.",
+    "ARCHIVE — Record platform, topic, pillar, format, publish date and performance notes after publishing.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Simplify before you automate",
+    description:
+      "If a workflow has unnecessary steps, automation usually makes the bad process run faster. Remove waste first, then automate stable repetitive tasks.",
+  },
+  {
+    title: "Batch by type of work",
+    description:
+      "Writing three scripts together or recording several videos in one session usually creates less context switching than finishing one post completely before starting the next.",
+  },
+  {
+    title: "Publishing is not the final step",
+    description:
+      "Archive useful content, review performance and capture audience questions so each published piece makes the next content cycle easier.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Creator Workflow Planner Prompt | KRIYANO"
+  description="Build a practical creator workflow for ideas, research, content production, AI-assisted drafting, publishing, repurposing and performance review."
+>
+  <PromptPage
+    category="CREATORS"
+    title="Creator Workflow Planner"
+    accentTitle="Prompt."
+    description="Build a repeatable creator workflow from idea capture to publishing, repurposing and performance review, with practical batching and selective AI assistance."
+    meta={[
+      "Free prompt",
+      "Creator workflow",
+      "Content operations",
+    ]}
+    bestFor={[
+      "Solo creators",
+      "Content teams",
+      "Multi-platform creators",
+      "AI-assisted workflows",
+      "Batch production",
+      "Content operations",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Turn content creation into a repeatable system."
+    introDescription="Map each stage of the creator workflow, remove unnecessary work, batch repetitive tasks and use AI where it saves time without sacrificing accuracy or editorial judgment."
+    steps={steps}
+    exampleTitle="Build a manageable weekly workflow for a solo professional creator."
+    example={example}
+    tipsTitle="A sustainable system beats a complicated one."
+    tips={tips}
+    sidebarTitle="Connect the whole Creator toolkit"
+    sidebarDescription="Combine KRIYANO's Content Pillar Builder, Audience Question Generator, Hook Generator, YouTube Video Outline, Caption Writer and Content Repurposing prompts inside one repeatable workflow."
+    warningTitle="Keep human review in the workflow"
+    warningText="AI can accelerate planning, drafting and repurposing, but factual accuracy, sensitive claims, brand judgment and final publishing decisions should still be reviewed by a responsible person."
+  />
+</BaseLayout>

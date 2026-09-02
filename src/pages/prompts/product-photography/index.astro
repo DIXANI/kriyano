@@ -1,0 +1,181 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as a professional commercial product photographer, art director and AI image prompt specialist.
+
+TASK:
+Create a highly detailed product-photography image prompt based on the information below.
+
+PRODUCT:
+[Describe the product clearly.]
+
+PRODUCT DETAILS TO PRESERVE:
+[Colour, shape, material, packaging, label, logo placement, texture, proportions or other important visual details.]
+
+IMAGE PURPOSE:
+[Example: e-commerce listing, website hero image, social media advertisement, product launch, catalogue, marketplace listing.]
+
+TARGET AUDIENCE:
+[Describe the intended customer or audience.]
+
+VISUAL STYLE:
+[Example: premium commercial, minimalist, luxury, natural lifestyle, clean studio, bold advertising, editorial.]
+
+SCENE / ENVIRONMENT:
+[Describe where the product should appear.]
+
+BACKGROUND:
+[Describe the background colour, surface, environment or texture.]
+
+COMPOSITION:
+[Describe product position, camera angle, framing, negative space and visual hierarchy.]
+
+LIGHTING:
+[Example: soft studio lighting, window light, dramatic side lighting, diffused daylight, high-key commercial lighting.]
+
+CAMERA / LENS FEEL:
+[Example: close-up product photography, 50mm commercial look, 85mm compressed perspective, macro detail.]
+
+COLOUR DIRECTION:
+[Describe the desired colour palette.]
+
+ASPECT RATIO / FORMAT:
+[Example: 1:1 product listing, 4:5 social post, 9:16 vertical advertisement, 16:9 website banner.]
+
+TEXT SPACE:
+[Specify whether clean negative space should be reserved for headlines, pricing or advertising copy.]
+
+SPECIAL REQUIREMENTS:
+[List any additional requirements.]
+
+AVOID:
+[List unwanted objects, visual problems or styles.]
+
+RESPONSE REQUIREMENTS:
+- Preserve the product's defining visual characteristics.
+- Make the product the clear visual priority.
+- Describe lighting direction, softness and reflections.
+- Describe composition and camera perspective precisely.
+- Keep props relevant and visually controlled.
+- Avoid unnecessary objects that distract from the product.
+- Use realistic materials, shadows, reflections and depth.
+- Do not invent logos, labels, text or packaging details that were not provided.
+- If a reference image is being used, explicitly instruct the image model to preserve the product identity and important reference details.
+- Avoid vague instructions such as "make it beautiful" without explaining the desired visual treatment.
+
+OUTPUT FORMAT:
+
+Create one polished image-generation prompt containing:
+
+1. Product and identity
+2. Scene and environment
+3. Composition
+4. Lighting
+5. Camera perspective
+6. Materials and textures
+7. Colour direction
+8. Commercial styling
+9. Aspect ratio / framing
+10. Important preservation requirements
+11. Negative constraints
+
+Write the final prompt as clear production-ready instructions for an AI image generator.`;
+
+const steps = [
+  {
+    title: "Describe the real product",
+    description:
+      "Include the product type, shape, materials, colours, packaging and any visual details that must remain accurate.",
+  },
+  {
+    title: "Choose the image purpose",
+    description:
+      "An e-commerce listing, premium advertisement and social media post need different compositions and styling.",
+  },
+  {
+    title: "Control the visual direction",
+    description:
+      "Specify the scene, background, lighting, camera perspective and overall style instead of leaving everything to the image model.",
+  },
+  {
+    title: "Protect important details",
+    description:
+      "State exactly what must not change, especially when using a real product reference image, packaging, label or brand identity.",
+  },
+];
+
+const example = {
+  input: [
+    "Product: Premium dark-roast coffee in a matte black 250 g coffee bag.",
+    "Purpose: Social media product advertisement.",
+    "Style: Premium, modern and sophisticated.",
+    "Scene: Dark wooden café counter with a few roasted coffee beans.",
+    "Lighting: Warm directional studio light with controlled highlights.",
+    "Composition: Product upright in the center with negative space on the upper-left for advertising copy.",
+    "Format: Vertical 4:5.",
+  ],
+
+  output: [
+    "Create a premium commercial product photograph of a matte-black 250 g dark-roast coffee bag standing upright on a dark wooden café counter.",
+    "Keep the coffee bag as the dominant subject. Use a slightly low front three-quarter camera angle with realistic packaging texture, controlled reflections and natural contact shadows.",
+    "Use warm directional studio lighting with subtle café ambience and shallow depth of field. Add only a small number of roasted coffee beans as supporting props.",
+    "Maintain generous clean negative space in the upper-left area for advertising copy. Vertical 4:5 composition. Avoid clutter, distorted packaging, invented label text and excessive props.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Define the purpose first",
+    description:
+      "A marketplace product image should usually be cleaner than a lifestyle advertisement, so tell the AI where the image will be used.",
+  },
+  {
+    title: "Control composition",
+    description:
+      "Specify subject position, camera angle and negative space when the image needs room for headlines, pricing or other design elements.",
+  },
+  {
+    title: "Protect product identity",
+    description:
+      "When working from a reference, clearly state which packaging, proportions, colours, labels and physical details must remain unchanged.",
+  },
+];
+---
+
+<BaseLayout
+  title="AI Product Photography Prompt | KRIYANO"
+  description="Create professional AI product photography prompts with structured instructions for composition, lighting, camera perspective, styling and product accuracy."
+>
+  <PromptPage
+    category="IMAGE GENERATION"
+    title="Product Photography"
+    accentTitle="Prompt."
+    description="Build detailed commercial product-image prompts with better control over composition, lighting, styling and product accuracy."
+    meta={[
+      "Free prompt",
+      "Image generation",
+      "Commercial creative",
+    ]}
+    bestFor={[
+      "E-commerce products",
+      "Social media ads",
+      "Website hero images",
+      "Product launches",
+      "Marketplace visuals",
+      "Commercial concepts",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Describe the product. Direct the entire shot."
+    introDescription="Replace the bracketed sections with your product details and creative direction. Leave sections blank only when you genuinely want the image model to decide."
+    steps={steps}
+    exampleTitle="Turn a basic product idea into art direction."
+    example={example}
+    tipsTitle="Create stronger product images."
+    tips={tips}
+    sidebarTitle="Need a different image prompt?"
+    sidebarDescription="Use the KRIYANO Prompt Builder to structure a custom prompt around your subject, visual direction, audience and requirements."
+    warningTitle="Reference-image tip"
+    warningText="When exact product accuracy matters, provide a clear reference image and explicitly identify which physical details, packaging and branding must remain unchanged."
+  />
+</BaseLayout>

@@ -1,0 +1,258 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced visual art director, photographer and AI image prompt engineer.
+
+TASK:
+Create a production-ready AI image-generation prompt based on the information below.
+
+IMAGE GOAL:
+[What should the image communicate, show or achieve?]
+
+IMAGE TYPE:
+[Example: product image, portrait, food image, social media visual, advertisement, thumbnail, editorial image, lifestyle scene.]
+
+MAIN SUBJECT:
+[Describe the main person, product, object, animal or scene.]
+
+SUBJECT DETAILS TO PRESERVE:
+[Appearance, clothing, colours, shape, proportions, product packaging, facial identity or other critical details.]
+
+ENVIRONMENT / LOCATION:
+[Describe the setting, background, time of day, weather and surrounding elements.]
+
+COMPOSITION:
+[Example: centered, rule of thirds, subject on left with text space on right, close-up hero composition.]
+
+CAMERA ANGLE:
+[Example: eye level, low angle, high angle, overhead, 45-degree angle.]
+
+SHOT TYPE:
+[Example: extreme close-up, close-up, medium shot, full body, wide shot.]
+
+LENS / PHOTOGRAPHIC FEEL:
+[Example: 35mm cinematic, 50mm natural, 85mm portrait, macro photography.]
+
+LIGHTING:
+[Example: soft window light, dramatic side lighting, golden-hour light, premium studio lighting.]
+
+VISUAL STYLE:
+[Example: photorealistic, cinematic, editorial, luxury commercial, documentary, minimalist.]
+
+MOOD:
+[Example: warm, confident, premium, energetic, calm, dramatic.]
+
+COLOUR DIRECTION:
+[Describe the desired palette or colour grading.]
+
+BACKGROUND DETAILS:
+[Describe surfaces, props, depth, blur, architecture or environmental elements.]
+
+DEPTH OF FIELD:
+[Example: shallow depth of field, deep focus, softly blurred background.]
+
+POSE / ACTION:
+[If relevant, explain what the subject is doing.]
+
+TEXT SPACE:
+[Describe where clean negative space is needed for later typography, or state "none".]
+
+ASPECT RATIO:
+[Example: 1:1, 4:5, 9:16, 16:9.]
+
+PLATFORM / PURPOSE:
+[Example: Facebook post, Instagram Reel cover, LinkedIn graphic, website hero, advertisement.]
+
+REFERENCE IMAGE REQUIREMENTS:
+[If reference images are used, state exactly what must remain consistent.]
+
+TEXT / LOGO REQUIREMENTS:
+[Specify whether visible text or logos are required, allowed or should be avoided.]
+
+SPECIAL REQUIREMENTS:
+[List any additional visual or technical instructions.]
+
+NEGATIVE CONSTRAINTS:
+[List anything that should not appear or change.]
+
+RESPONSE REQUIREMENTS:
+
+1. SUBJECT ACCURACY
+- Preserve the requested identity, appearance, proportions, colours and important visual details.
+- Do not redesign products, clothing, packaging or characters unless explicitly requested.
+- Do not add unrelated accessories or objects.
+
+2. COMPOSITION
+- Make the intended subject the clear focal point.
+- Follow the requested subject placement and framing.
+- Keep important elements inside safe margins for the requested platform.
+- Preserve clean negative space where text will be added later.
+
+3. CAMERA
+- Use the requested angle, shot type and lens feel.
+- Keep perspective realistic.
+- Avoid excessive wide-angle distortion unless specifically requested.
+
+4. LIGHTING
+- Describe a clear lighting direction.
+- Use realistic shadows, highlights and reflections.
+- Match the lighting to the mood and environment.
+
+5. MATERIAL & TEXTURE REALISM
+- Preserve realistic skin, fabric, metal, glass, wood, food, packaging or other relevant materials.
+- Avoid plastic-looking textures and excessive smoothing.
+
+6. ENVIRONMENT
+- Make the background visually support the subject.
+- Avoid unnecessary clutter.
+- Keep environmental details coherent with the location and lighting.
+
+7. REFERENCE CONSISTENCY
+If a reference image is provided:
+- preserve critical identity characteristics
+- preserve product shape and branding when requested
+- preserve clothing, hairstyle, colour and proportions where required
+- do not make unnecessary stylistic changes
+
+8. TEXT & LOGOS
+- Do not invent random text, labels, logos or watermarks.
+- If typography will be added later, create clean visual space instead.
+- If exact visible text is required, clearly state it in the final prompt.
+
+9. NEGATIVE CONTROL
+Prevent common image-generation problems such as:
+- distorted anatomy
+- extra fingers or limbs
+- warped products
+- duplicate objects
+- inconsistent reflections
+- floating props
+- random text
+- unwanted logos
+- cluttered backgrounds
+- incorrect proportions
+
+10. IMAGE QUALITY
+Aim for:
+- strong subject separation
+- believable lighting
+- accurate proportions
+- natural textures
+- controlled highlights
+- realistic shadows
+- coherent depth
+- premium finished-image quality
+
+OUTPUT FORMAT:
+
+1. Final AI Image Prompt
+2. Composition
+3. Camera & Lens
+4. Lighting
+5. Style & Colour
+6. Subject / Reference Consistency
+7. Background & Environment
+8. Negative Constraints
+
+The Final AI Image Prompt should be written as one polished block that can be copied directly into an AI image-generation model.`;
+
+const steps = [
+  {
+    title: "Define the visual goal",
+    description:
+      "Explain what the image is for before describing style. A product ad, thumbnail and editorial portrait require different composition decisions.",
+  },
+  {
+    title: "Lock critical subject details",
+    description:
+      "Specify the identity, product shape, clothing, colours or other details that must not change.",
+  },
+  {
+    title: "Direct the camera and light",
+    description:
+      "Choose the framing, viewing angle and lighting direction instead of relying only on broad words such as cinematic or premium.",
+  },
+  {
+    title: "Control unwanted changes",
+    description:
+      "Use negative constraints to reduce random text, distorted anatomy, extra objects, warped products and clutter.",
+  },
+];
+
+const example = {
+  input: [
+    "Image type: Premium LinkedIn promotional graphic.",
+    "Subject: Laptop showing an inventory dashboard.",
+    "Composition: Laptop on the left, clean text space on the right.",
+    "Environment: Modern dark workspace.",
+    "Camera: Eye-level three-quarter view.",
+    "Lighting: Soft premium studio lighting.",
+    "Style: Photorealistic business-software advertising.",
+    "Colours: Deep navy with subtle electric-lime accents.",
+    "Aspect ratio: 1:1.",
+    "Text: Do not generate visible text inside the image.",
+  ],
+
+  output: [
+    "Create a photorealistic premium business-software advertising image in a square 1:1 composition. Position a modern laptop prominently on the left side of a sophisticated dark workspace, viewed from a clean eye-level three-quarter angle.",
+    "The laptop displays a believable inventory-management dashboard with structured charts and tables but no readable generated text. Preserve generous uncluttered negative space on the right side for later typography.",
+    "Use soft controlled studio lighting, realistic screen reflections, subtle depth of field and a deep navy visual palette with restrained electric-lime accents. Keep the environment minimal, professional and suitable for a modern SaaS brand.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Describe structure before style",
+    description:
+      "Subject placement, framing and lighting usually matter more than adding many style adjectives.",
+  },
+  {
+    title: "Leave text for design tools",
+    description:
+      "When exact typography matters, generate clean text space and add the wording afterward instead of relying on the image model to render it correctly.",
+  },
+  {
+    title: "Repeat identity constraints",
+    description:
+      "When consistency matters across several images, repeat the critical appearance, clothing, product and colour details in every prompt.",
+  },
+];
+---
+
+<BaseLayout
+  title="AI Image Prompt Builder | KRIYANO"
+  description="Create structured AI image prompts with clear subject, composition, camera, lighting, style, reference consistency and negative constraints."
+>
+  <PromptPage
+    category="IMAGE GENERATION"
+    title="AI Image"
+    accentTitle="Prompt Builder."
+    description="Turn a rough image idea into structured production-ready instructions for subject, composition, camera, lighting, style and visual consistency."
+    meta={[
+      "Free prompt",
+      "Image generation",
+      "General purpose",
+    ]}
+    bestFor={[
+      "Social media visuals",
+      "Product images",
+      "Portraits",
+      "Advertisements",
+      "Thumbnails",
+      "Website graphics",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Direct the image instead of describing a mood."
+    introDescription="Start with the purpose and subject, then control composition, camera, lighting and constraints. This produces more predictable prompts than stacking vague style words."
+    steps={steps}
+    exampleTitle="From simple idea to directed image."
+    example={example}
+    tipsTitle="Get more controlled image generations."
+    tips={tips}
+    sidebarTitle="Need a more specialized image prompt?"
+    sidebarDescription="Explore KRIYANO's Product Photography and Food Photography prompts when you need deeper control for those specific image types."
+    warningTitle="Reference consistency"
+    warningText="AI image models can still alter faces, products, clothing, proportions and small details. When accuracy matters, compare each result with the reference and repeat the critical consistency requirements."
+  />
+</BaseLayout>

@@ -1,0 +1,237 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced food photographer, food stylist and AI image prompt engineer.
+
+TASK:
+Create a production-ready food photography prompt based on the details below.
+
+DISH / FOOD:
+[Describe the food or beverage.]
+
+CUISINE / STYLE:
+[Example: Sri Lankan, Italian, café-style, fine dining, homemade, street food.]
+
+KEY FOOD DETAILS TO PRESERVE:
+[Describe shape, colour, texture, ingredients, layers, garnish, portion size or other important characteristics.]
+
+SERVING STYLE:
+[Example: plated meal, bowl, tray, wooden board, cake stand, glass, takeaway packaging.]
+
+SCENE / ENVIRONMENT:
+[Example: home kitchen, rustic dining table, premium restaurant, café counter, studio setup.]
+
+MOOD:
+[Example: warm, comforting, premium, fresh, rustic, luxurious, bright.]
+
+CAMERA ANGLE:
+[Example: overhead, 45-degree angle, eye level, close-up, macro.]
+
+FRAMING:
+[Example: tight hero shot, medium composition, full table scene, negative space for text.]
+
+LIGHTING:
+[Example: soft window light, warm directional light, dramatic side light, premium studio lighting.]
+
+BACKGROUND:
+[Describe colour, material, props and environment.]
+
+FOOD STYLING:
+[Describe garnish, crumbs, sauce, utensils, napkins, steam, cut pieces or serving details.]
+
+TEXTURE EMPHASIS:
+[What should look especially appetizing? Example: crisp edges, glossy sauce, moist crumb, melted cheese.]
+
+FRESHNESS CUES:
+[Example: steam, condensation, shine, freshly cut surface, bubbling sauce.]
+
+COLOUR DIRECTION:
+[Describe the desired palette.]
+
+DEPTH OF FIELD:
+[Example: shallow depth of field, everything sharp, soft background blur.]
+
+LENS / PHOTOGRAPHIC FEEL:
+[Example: 50mm food photography, 85mm editorial look, macro close-up.]
+
+ASPECT RATIO:
+[Example: 4:5, 1:1, 9:16, 16:9.]
+
+IMAGE PURPOSE:
+[Example: Facebook post, Reel cover, menu image, website hero, advertisement, recipe article.]
+
+TEXT / LOGO REQUIREMENTS:
+[Specify whether text or branding is required, optional or should be avoided.]
+
+REFERENCE REQUIREMENTS:
+[If a reference image is used, explain what must remain visually consistent.]
+
+NEGATIVE CONSTRAINTS:
+[List anything that should not appear.]
+
+RESPONSE REQUIREMENTS:
+
+1. FOOD ACCURACY
+- Preserve the real structure, colour, ingredients and texture of the dish.
+- Do not add ingredients, garnish or decoration that were not requested.
+- Do not change the number of layers, pieces or portions when these details are specified.
+
+2. APPETIZING REALISM
+- Make the food look naturally fresh and edible.
+- Emphasize realistic texture, moisture, crispness, sauce, crumb or steam where relevant.
+- Avoid plastic-looking, overly glossy or artificial food surfaces.
+
+3. COMPOSITION
+- Make the dish the clear visual hero.
+- Use supporting props only when they improve the scene.
+- Keep important elements inside the safe area for the requested format.
+
+4. LIGHTING
+- Use believable light direction and natural shadows.
+- Avoid flat lighting unless specifically requested.
+
+5. CAMERA
+- Use the requested viewing angle and framing.
+- Keep perspective physically believable.
+- Avoid excessive wide-angle distortion.
+
+6. FOOD STYLING
+- Keep presentation attractive but realistic.
+- Use natural imperfections where appropriate.
+- Avoid excessive garnish or decorative clutter.
+
+7. BACKGROUND
+- Make the background support the food rather than compete with it.
+- Maintain visual separation between the dish and surrounding elements.
+
+8. REFERENCE CONSISTENCY
+If a reference image is provided:
+- preserve important food characteristics
+- preserve plate, container or serving style when requested
+- do not redesign the dish unnecessarily
+
+9. TEXT
+- Do not generate random text, labels, logos or watermarks.
+- If text space is required, leave clean negative space instead of inventing typography.
+
+10. IMAGE QUALITY
+Aim for:
+- photorealistic food detail
+- realistic ingredients
+- natural shadows
+- controlled highlights
+- accurate proportions
+- believable depth of field
+- premium commercial photography quality
+
+OUTPUT FORMAT:
+
+1. Final Food Photography Prompt
+2. Composition & Camera
+3. Lighting Direction
+4. Food Styling
+5. Texture & Freshness Details
+6. Background & Props
+7. Negative Constraints
+
+The Final Food Photography Prompt should be written as one polished block that can be copied directly into an AI image-generation model.`;
+
+const steps = [
+  {
+    title: "Describe the food precisely",
+    description:
+      "Mention the real shape, colour, layers, ingredients and texture so the model does not redesign the dish.",
+  },
+  {
+    title: "Choose the camera angle",
+    description:
+      "Overhead, 45-degree and eye-level views create very different food images. Select the angle based on what you need to show.",
+  },
+  {
+    title: "Control styling and props",
+    description:
+      "Specify only the garnish, utensils, plates and background elements you actually want in the final composition.",
+  },
+  {
+    title: "Protect realism",
+    description:
+      "Use negative constraints to prevent fake textures, excessive garnish, distorted food, random text and unrealistic presentation.",
+  },
+];
+
+const example = {
+  input: [
+    "Dish: Traditional Sri Lankan Pol Cake.",
+    "Food details: Low rectangular coconut cake squares with a moist dark golden-brown crumb.",
+    "Topping: Light kithul treacle glaze with visible coconut, chopped dates and cashew pieces.",
+    "Scene: Warm wooden kitchen table.",
+    "Camera: 45-degree close-up.",
+    "Lighting: Soft warm side light.",
+    "Purpose: Facebook recipe post.",
+    "Aspect ratio: 4:5.",
+  ],
+
+  output: [
+    "Create a photorealistic premium food photograph of traditional Sri Lankan Pol Cake arranged as several low rectangular cake squares on a simple ceramic serving plate.",
+    "Preserve the dense moist golden-brown coconut crumb and realistic low cake height. Add only a light kithul treacle glaze with visible coconut, chopped dates and cashew pieces.",
+    "Photograph from a close 45-degree angle using soft warm directional side lighting, natural shadows and shallow depth of field.",
+    "Use a warm wooden tabletop and minimal neutral kitchen props in the softly blurred background. Keep the cake as the clear hero of the 4:5 composition.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Texture sells the food",
+    description:
+      "Describe what makes the dish appetizing: moist crumb, crisp crust, glossy sauce, flaky pastry, creamy filling or freshly cut interior.",
+  },
+  {
+    title: "Avoid unnecessary garnish",
+    description:
+      "Image models often add herbs, berries or decorative ingredients automatically. Explicitly state what garnish is allowed.",
+  },
+  {
+    title: "Match framing to the platform",
+    description:
+      "A Reel cover needs vertical safe space, while a menu photo or website hero may need a completely different composition.",
+  },
+];
+---
+
+<BaseLayout
+  title="Food Photography Prompt | KRIYANO"
+  description="Create realistic AI food photography prompts with precise composition, lighting, styling, texture, camera direction and negative constraints."
+>
+  <PromptPage
+    category="IMAGE GENERATION"
+    title="Food Photography"
+    accentTitle="Prompt."
+    description="Turn a dish description into a detailed food-photography prompt with controlled styling, realistic texture, lighting, camera direction and composition."
+    meta={[
+      "Free prompt",
+      "Image generation",
+      "Food photography",
+    ]}
+    bestFor={[
+      "Recipe content",
+      "Restaurant visuals",
+      "Food advertisements",
+      "Social media posts",
+      "Reel covers",
+      "Menu photography",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Make the food look real, not generated."
+    introDescription="Describe the dish accurately first, then control the camera, lighting, styling and negative constraints. The goal is appetizing realism without changing the food itself."
+    steps={steps}
+    exampleTitle="From dish description to hero food shot."
+    example={example}
+    tipsTitle="Create more believable food images."
+    tips={tips}
+    sidebarTitle="Need a different image prompt?"
+    sidebarDescription="Use the KRIYANO Prompt Builder to create custom image-generation instructions around your exact subject, style, platform and composition."
+    warningTitle="Reference accuracy"
+    warningText="When recreating a specific recipe or real dish, check the generated result against the reference. AI models may change ingredients, portion size, layers, garnish or texture unless these details are clearly locked."
+  />
+</BaseLayout>

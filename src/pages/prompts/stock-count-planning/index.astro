@@ -1,0 +1,842 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced inventory-control manager, warehouse operations specialist and physical inventory count coordinator.
+
+TASK:
+Create a practical and controlled stock-count plan for the warehouse or inventory operation described below.
+
+COUNT TYPE:
+[Full Physical Inventory / Cycle Count / Spot Count / Annual Count / Customer Count / Location Count / SKU Count.]
+
+BUSINESS / OPERATION:
+[Warehouse, 3PL, distribution center, retail store, spare-parts warehouse, manufacturing store, etc.]
+
+COUNT OBJECTIVE:
+[Why is the count being conducted?]
+
+COUNT DATE / PERIOD:
+[Date, shift or planned period.]
+
+WAREHOUSE / LOCATION:
+[Warehouse, zones, aisles, racks, bins or branches.]
+
+NUMBER OF SKUs:
+[If known.]
+
+NUMBER OF LOCATIONS:
+[If known.]
+
+APPROXIMATE INVENTORY VALUE:
+[If known.]
+
+INVENTORY PROFILE:
+[Fast-moving, slow-moving, high-value, batch-controlled, expiry-controlled, serialized, mixed UOM, etc.]
+
+SYSTEM:
+[WMS / ERP / SAP / Spreadsheet / Manual.]
+
+COUNT METHOD:
+[Paper count sheet / RF scanner / Mobile device / WMS count task / Other.]
+
+AVAILABLE STAFF:
+[Number and roles.]
+
+NORMAL OPERATIONS DURING COUNT:
+[Stopped / Partially stopped / Continuing.]
+
+ABC CLASSIFICATION:
+[If available.]
+
+CURRENT INVENTORY ACCURACY:
+[If known.]
+
+KNOWN INVENTORY ISSUES:
+[Negative stock, wrong locations, mixed stock, open transactions, recurring variances, etc.]
+
+VARIANCE TOLERANCE:
+[Company-defined quantity/value/percentage tolerance if available.]
+
+BUSINESS / CUSTOMER RULES:
+[Any specific count, approval, audit or reconciliation requirements.]
+
+SPECIAL REQUIREMENTS:
+[Any other instructions.]
+
+STOCK COUNT PLANNING REQUIREMENTS:
+
+1. DEFINE COUNT OBJECTIVE
+Clearly define:
+
+- count purpose
+- count scope
+- locations included
+- locations excluded
+- SKUs included
+- inventory statuses included
+- count start point
+- count completion requirement
+- expected deliverables
+
+Do not expand or reduce the count scope without stating it.
+
+2. SELECT COUNT STRATEGY
+Recommend an appropriate method based on the operation.
+
+Possible approaches:
+
+FULL PHYSICAL COUNT
+All relevant inventory and locations counted.
+
+CYCLE COUNT
+Selected inventory counted periodically.
+
+ABC-BASED COUNT
+Higher-value or higher-risk items counted more frequently.
+
+LOCATION-BASED COUNT
+Specific warehouse locations counted.
+
+SKU-BASED COUNT
+Selected SKUs counted across all locations.
+
+RISK-BASED COUNT
+Items selected using factors such as:
+- value
+- movement
+- previous variance
+- shrinkage risk
+- expiry
+- customer importance
+- transaction frequency
+
+Explain why the recommended approach fits the operation.
+
+3. COUNT SCOPE
+Create a scope table containing:
+
+Area / Zone:
+Location range:
+Inventory type:
+SKU group:
+Count method:
+Responsible team:
+Priority:
+Special control:
+
+Include where relevant:
+
+- reserve storage
+- pick faces
+- staging
+- receiving
+- dispatch
+- returns
+- quarantine
+- damaged stock
+- blocked stock
+- quality hold
+- customer-specific stock
+- temporary locations
+
+Do not forget non-standard storage areas.
+
+4. PRE-COUNT PREPARATION
+Create a preparation checklist.
+
+Check:
+
+- warehouse housekeeping
+- stock properly located
+- labels readable
+- mixed SKUs separated
+- loose quantities organized
+- damaged stock identified
+- quarantine stock separated
+- empty locations verified
+- pallets identified
+- cartons clearly marked
+- batch / lot visible
+- expiry visible
+- serial numbers accessible
+- UOM confirmed
+- temporary stock identified
+- staging stock controlled
+
+Do not recommend hiding known discrepancies through pre-count adjustments.
+
+5. SYSTEM PREPARATION
+Before the count review:
+
+- open receipts
+- open putaway
+- open picks
+- open replenishments
+- open transfers
+- pending dispatches
+- pending returns
+- pending adjustments
+- negative stock
+- stock in temporary locations
+- unconfirmed transactions
+- interface failures
+
+Recommend closing or controlling transactions according to approved procedures.
+
+6. CUT-OFF CONTROL
+Define a clear transaction cut-off.
+
+Specify how to control:
+
+- receiving
+- putaway
+- replenishment
+- picking
+- packing
+- dispatch
+- transfers
+- returns
+- adjustments
+
+Record where relevant:
+
+Last receipt number:
+Last dispatch number:
+Last transfer:
+Last transaction time:
+System freeze time:
+
+Do not invent reference numbers.
+
+7. STOCK MOVEMENT CONTROL
+If operations stop during the count, define the freeze procedure.
+
+If operations must continue, create a controlled movement process.
+
+For each permitted movement record:
+
+Time:
+SKU:
+Quantity:
+From:
+To:
+Transaction:
+Reason:
+Authorized by:
+
+Prevent stock from being counted twice or missed because it moved during counting.
+
+8. COUNT TEAM STRUCTURE
+Recommend roles such as:
+
+Count Coordinator
+Inventory Controller
+Count Team Leader
+Counter
+Recorder
+Scanner Operator
+Recount Team
+System Support
+Supervisor
+Independent Verifier
+
+Separate counting and approval responsibilities where practical.
+
+9. TEAM ASSIGNMENT
+Create a team allocation plan.
+
+For each team provide:
+
+Team:
+Members / roles:
+Area:
+Start location:
+End location:
+Count method:
+Expected workload:
+Supervisor:
+
+Do not invent employee names.
+
+10. COUNT SEQUENCE
+Create a logical warehouse counting sequence.
+
+Consider:
+
+- zone
+- aisle
+- rack
+- bay
+- level
+- bin
+
+Example:
+
+Zone A
+→ Aisle 01
+→ Bay 01
+→ Level 01
+→ Bin 01
+
+The sequence should reduce:
+- missed locations
+- duplicate counts
+- unnecessary travel
+- confusion between teams
+
+11. BLIND COUNT
+Where appropriate, recommend blind counting.
+
+A blind count means the counter does not see the system quantity before recording the physical quantity.
+
+Explain whether blind counting is appropriate for this operation.
+
+Use blind counts where practical to reduce confirmation bias.
+
+12. COUNT METHOD
+Define exactly how each location should be counted.
+
+Check:
+
+- SKU
+- description
+- location
+- quantity
+- UOM
+- batch
+- expiry
+- serial number
+- inventory status
+- damaged quantity
+- loose quantity
+
+Explain how sealed cartons or pallets should be handled according to business rules.
+
+13. UNIT OF MEASURE
+Verify UOM carefully.
+
+Examples:
+
+1 pallet = [X] cartons
+1 carton = [X] pieces
+
+Check:
+
+- system UOM
+- physical pack size
+- conversion factor
+- loose stock
+- opened cartons
+
+Do not assume pack quantities.
+
+14. BATCH / LOT CONTROL
+For batch-controlled inventory count separately by:
+
+SKU
+Location
+Batch
+Quantity
+
+Do not combine different batches unless the system and business process specifically permit it.
+
+15. EXPIRY CONTROL
+For expiry-controlled inventory capture:
+
+SKU:
+Batch:
+Expiry date:
+Quantity:
+Location:
+
+Identify:
+- expired stock
+- short-dated stock
+- mixed expiry
+- missing expiry
+- system vs physical expiry differences
+
+16. SERIALIZED INVENTORY
+For serialized stock verify individual serial numbers.
+
+Check:
+
+- missing serial
+- duplicate serial
+- wrong SKU
+- wrong location
+- physical serial not in system
+- system serial not physically found
+
+17. EMPTY LOCATION CONTROL
+Empty locations should also be verified.
+
+Record:
+
+Location:
+System quantity:
+Physical status:
+Verification:
+
+An empty physical location with system stock may represent a serious location discrepancy.
+
+18. UNIDENTIFIED STOCK
+Create a process for stock that cannot be identified.
+
+Do not guess the SKU.
+
+Recommend:
+
+- segregate
+- label temporarily
+- record location
+- record quantity
+- photograph if appropriate
+- investigate SKU / batch / ownership
+- prevent availability until identified
+
+19. COUNT COMPLETION CONTROL
+Use a mechanism to confirm every required location was counted.
+
+Possible controls:
+
+- location checklist
+- WMS completion status
+- count tags
+- aisle sign-off
+- count-sheet sequence
+- supervisor verification
+
+Report:
+
+Total locations planned:
+Locations counted:
+Locations pending:
+Locations excluded:
+Reason for exclusion:
+
+20. FIRST COUNT REVIEW
+After initial counting identify:
+
+- system matches
+- shortages
+- overages
+- missing locations
+- duplicate counts
+- UOM problems
+- batch differences
+- serial differences
+- suspicious quantities
+
+Do not immediately adjust every variance.
+
+21. RECOUNT RULES
+Define when a recount is required.
+
+Possible criteria:
+
+- any variance
+- variance above quantity tolerance
+- variance above value tolerance
+- high-value SKU
+- critical SKU
+- serialized stock
+- unusual result
+- repeated historical variance
+
+Use company-defined tolerance when provided.
+
+If no tolerance exists, recommend management define one rather than inventing an official rule.
+
+22. RECOUNT METHOD
+Where practical:
+
+- use a different counter
+- keep the recount blind
+- verify SKU and UOM
+- verify nearby locations
+- check mixed stock
+- check loose quantities
+- verify batch / serial
+- compare transaction cut-off
+
+Record first and second counts separately.
+
+23. VARIANCE CALCULATION
+Calculate:
+
+Variance Quantity =
+Physical Quantity - System Quantity
+
+Interpretation:
+
+Positive = Overage
+Negative = Shortage
+Zero = Match
+
+Where unit cost exists:
+
+Variance Value =
+Variance Quantity × Unit Cost
+
+For variance percentage:
+
+Variance % =
+(Variance Quantity / System Quantity) × 100
+
+Handle zero system quantity separately.
+
+24. VARIANCE PRIORITIZATION
+Prioritize discrepancies using:
+
+Quantity impact
+Financial value
+SKU criticality
+Customer impact
+Previous variance
+Shrinkage risk
+Batch / expiry risk
+
+Classify:
+
+P1 — Critical
+P2 — High
+P3 — Medium
+P4 — Low
+
+Explain the reason for priority.
+
+25. VARIANCE INVESTIGATION
+Before adjustment check:
+
+- receiving transactions
+- putaway
+- picking
+- dispatch
+- transfers
+- returns
+- replenishment
+- adjustments
+- nearby locations
+- wrong SKU
+- wrong UOM
+- batch
+- serial numbers
+- transaction timing
+- cut-off
+- system interfaces
+
+Separate:
+- counting error
+- transaction error
+- location error
+- master-data issue
+- process failure
+- unexplained variance
+
+26. RECONCILIATION
+Create a reconciliation table:
+
+SKU:
+Location:
+System quantity:
+First count:
+Recount:
+Final physical quantity:
+Variance:
+Variance value:
+Investigation result:
+Recommended action:
+Approval status:
+
+Do not automatically use the latest count as the correct count without validation.
+
+27. INVENTORY ADJUSTMENT CONTROL
+Inventory adjustment should occur only after:
+
+- recount completed where required
+- investigation completed
+- evidence reviewed
+- final physical quantity agreed
+- appropriate approval received
+
+Record:
+
+Adjustment reason:
+Quantity:
+Value:
+Reference:
+Approved role:
+
+Do not invent approval authority.
+
+28. ABC / RISK-BASED CYCLE COUNTING
+If creating a cycle-count program, recommend frequency based on risk.
+
+Possible factors:
+
+- annual consumption value
+- SKU value
+- movement frequency
+- previous variance
+- shrinkage risk
+- customer criticality
+- expiry risk
+
+Do not automatically use generic A/B/C frequencies if company requirements differ.
+
+29. CYCLE COUNT SCHEDULE
+Create a schedule containing:
+
+SKU / Group:
+ABC / Risk class:
+Count frequency:
+Locations:
+Count method:
+Responsible role:
+Next count:
+Reason:
+
+Balance workload across the period.
+
+30. COUNT PRODUCTIVITY
+Where useful track:
+
+Locations counted per hour
+SKUs counted per hour
+Lines counted per hour
+Count completion %
+Recount %
+
+Do not encourage speed that reduces count accuracy.
+
+31. INVENTORY ACCURACY
+Where appropriate calculate:
+
+SKU Accuracy % =
+Accurate SKUs / Total SKUs Counted × 100
+
+Location Accuracy % =
+Accurate Locations / Total Locations Counted × 100
+
+Explain what qualifies as "accurate."
+
+If using a tolerance, state it clearly.
+
+32. VARIANCE RATE
+Where appropriate:
+
+Variance Rate % =
+SKUs with Variance / Total SKUs Counted × 100
+
+Also consider:
+
+Absolute Variance Quantity
+Absolute Variance Value
+
+Avoid allowing positive and negative variances to cancel each other when measuring total error.
+
+33. ROOT-CAUSE TREND
+Group discrepancies by likely cause:
+
+Receiving
+Putaway
+Picking
+Dispatch
+Returns
+Transfers
+UOM
+Location
+Master data
+Counting
+System
+Damage
+Unexplained
+
+Identify recurring patterns.
+
+34. POST-COUNT ACTION PLAN
+For significant findings provide:
+
+Issue:
+Evidence:
+Root cause status:
+Immediate action:
+Corrective action:
+Preventive action:
+Responsible role:
+Priority:
+Target completion:
+Follow-up KPI:
+
+35. COUNT CLOSEOUT
+Confirm:
+
+- all locations counted
+- pending recounts completed
+- discrepancies investigated
+- adjustments approved
+- system updated
+- count documents retained
+- unresolved issues recorded
+- management summary prepared
+- corrective actions assigned
+
+36. MANAGEMENT SUMMARY
+Provide:
+
+Count type:
+Scope:
+Locations counted:
+SKUs counted:
+First-count matches:
+Recounts:
+Variance quantity:
+Variance value:
+Inventory accuracy:
+Major discrepancies:
+Primary root-cause themes:
+Unresolved issues:
+Corrective actions:
+Final status:
+
+Only include figures supported by the supplied data.
+
+OUTPUT FORMAT:
+
+1. Count Objective & Scope
+2. Recommended Count Strategy
+3. Pre-Count Preparation Checklist
+4. System & Transaction Preparation
+5. Cut-Off / Movement Control
+6. Count Team Structure
+7. Team & Area Allocation
+8. Count Sequence
+9. Counting Procedure
+10. Batch / Expiry / Serial Controls
+11. Completion Control
+12. Recount Rules
+13. Variance Calculation & Prioritization
+14. Variance Investigation Procedure
+15. Reconciliation & Approval
+16. Adjustment Controls
+17. Cycle Count Schedule — if applicable
+18. Count KPIs
+19. Post-Count Action Plan
+20. Final Closeout Checklist
+21. Management Summary
+
+IMPORTANT:
+- Do not invent inventory quantities, values or company policies.
+- Never change stock merely to make system and physical quantities match.
+- Preserve the original count and recount results.
+- Use blind counts where practical.
+- Verify UOM before confirming a discrepancy.
+- Control inventory movement during counting.
+- Include non-standard inventory areas such as receiving, staging, quarantine and damaged stock where relevant.
+- Do not allow positive and negative variances to hide each other.
+- Require investigation before significant adjustments.
+- Separate counters, investigators and approvers where practical.
+- Accuracy is more important than count speed.
+- Clearly identify information that must be confirmed before the count begins.`;
+
+const steps = [
+  {
+    title: "Prepare before counting",
+    description:
+      "Clean up locations, identify open transactions, verify labels and UOMs, define the scope and make sure every inventory status and temporary storage area is included.",
+  },
+  {
+    title: "Control stock movement",
+    description:
+      "Use a clear transaction cut-off or a documented movement-control process so receipts, picks, transfers and dispatches cannot create false variances during the count.",
+  },
+  {
+    title: "Count independently",
+    description:
+      "Use blind counts where practical, follow a fixed location sequence and use an independent recount for significant or suspicious differences.",
+  },
+  {
+    title: "Investigate before adjusting",
+    description:
+      "Reconcile physical results with transactions, locations, UOMs, batches and cut-off records before approving inventory adjustments.",
+  },
+];
+
+const example = {
+  input: [
+    "Count type: Annual full physical inventory.",
+    "Operation: Distribution warehouse.",
+    "System: WMS with RF scanners.",
+    "Normal operations: Receiving and dispatch will stop during the main count.",
+    "Inventory: Approximately 2,000 SKUs across reserve storage, pick faces, receiving staging, quarantine and damaged-stock locations.",
+    "Goal: Complete an accurate count and reconcile all significant variances before reopening normal operations.",
+  ],
+
+  output: [
+    "Before count day, close or identify all open receipts, picks, replenishments, transfers, returns and adjustments and confirm the transaction cut-off.",
+    "Divide the warehouse into controlled count zones and include receiving staging, dispatch staging, quarantine, damaged stock and temporary locations rather than counting only rack locations.",
+    "Use blind first counts through the RF process where supported and require independent recounts according to the company's approved variance rules.",
+    "Record system quantity, first count and recount separately during reconciliation rather than overwriting the original result.",
+    "Investigate significant differences through nearby locations, UOM, batches and pre-cut-off transactions before approving adjustments.",
+    "Before reopening operations, verify count completion, unresolved discrepancies, approved adjustments and system inventory status.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Count locations, not just SKUs",
+    description:
+      "A location-based sequence makes it easier to prove that the entire warehouse was covered and helps detect stock stored in the wrong bin.",
+  },
+  {
+    title: "Control the cut-off",
+    description:
+      "Even an accurate physical count can create a false variance if receiving, picking or transfers are posted on the wrong side of the count cut-off.",
+  },
+  {
+    title: "Keep original count evidence",
+    description:
+      "Never replace the first count with a recount result. Keeping both provides an audit trail and helps identify counting or process problems.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Stock Count Planning Prompt | KRIYANO"
+  description="Plan physical inventory counts and cycle counts with preparation, cut-off controls, blind counts, recount rules, variance investigation, reconciliation and inventory accuracy KPIs."
+>
+  <PromptPage
+    category="OPERATIONS & LOGISTICS"
+    title="Stock Count"
+    accentTitle="Planning."
+    description="Build a controlled physical inventory or cycle-count plan covering preparation, transaction cut-off, count teams, blind counts, recounts, reconciliation and final closeout."
+    meta={[
+      "Free prompt",
+      "Inventory control",
+      "Physical stock count",
+    ]}
+    bestFor={[
+      "Inventory controllers",
+      "Warehouse supervisors",
+      "Physical inventory",
+      "Cycle counting",
+      "3PL operations",
+      "Stock reconciliation",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="A reliable stock count starts before counting begins."
+    introDescription="Define the scope, prepare the warehouse, control inventory movement and establish recount and reconciliation rules before teams start recording physical quantities."
+    steps={steps}
+    exampleTitle="Plan a controlled warehouse stock count."
+    example={example}
+    tipsTitle="Improve stock-count accuracy."
+    tips={tips}
+    sidebarTitle="Found a stock difference?"
+    sidebarDescription="Use KRIYANO's Inventory Discrepancy Investigation Prompt after counting when a physical versus system variance requires detailed root-cause investigation."
+    warningTitle="Never adjust inventory just to close the count"
+    warningText="Significant differences should be independently verified and investigated before adjustment. Preserve first counts, recounts and supporting evidence so the final inventory balance has a clear audit trail."
+  />
+</BaseLayout>

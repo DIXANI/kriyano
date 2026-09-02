@@ -1,0 +1,536 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced competitive intelligence researcher.
+
+TASK:
+Research the competitor described below and build an evidence-based competitor research profile.
+
+This is a RESEARCH task. Focus on finding, organizing and evaluating verifiable information rather than automatically recommending business strategy.
+
+COMPETITOR:
+[Company, brand, product or service.]
+
+WEBSITE:
+[Official website if known.]
+
+MARKET / LOCATION:
+[Country, region, city or online market.]
+
+INDUSTRY:
+[Industry or business category.]
+
+MY RESEARCH GOAL:
+[What do you want to understand about this competitor?]
+
+MY BUSINESS / PRODUCT:
+[Optional — describe your own business if relevant.]
+
+TARGET CUSTOMER:
+[Customer group relevant to the research.]
+
+RESEARCH PERIOD:
+[Current / last 12 months / historical period / specific dates.]
+
+KNOWN INFORMATION:
+[List anything already known.]
+
+SPECIFIC QUESTIONS:
+[List any questions you particularly want answered.]
+
+RESEARCH DEPTH:
+[Quick / Standard / Deep]
+
+COMPETITOR RESEARCH REQUIREMENTS:
+
+1. IDENTIFY THE CORRECT COMPETITOR
+Verify:
+- official company / brand name
+- official website
+- primary market
+- main business activity
+- relevant product or service
+
+Watch for companies with similar names.
+
+Do not combine information from different businesses.
+
+2. COMPANY OVERVIEW
+Research where available:
+- company description
+- location
+- markets served
+- founding information
+- ownership
+- company size indicators
+- business model
+- major customer segments
+
+Clearly mark information that cannot be verified.
+
+3. PRODUCTS & SERVICES
+Identify:
+- main products
+- services
+- packages
+- product categories
+- service tiers
+- major features
+- add-ons
+- delivery model
+
+Use current official information where possible.
+
+4. TARGET CUSTOMERS
+Investigate who the competitor appears to serve.
+
+Look for evidence from:
+- website messaging
+- product design
+- pricing
+- case studies
+- testimonials
+- industries served
+- advertising
+- distribution channels
+
+Separate explicit statements from inference.
+
+5. VALUE PROPOSITION
+Identify:
+- main customer problem addressed
+- promised benefit
+- key selling points
+- reasons customers are given to choose the competitor
+
+Use actual evidence rather than generic assumptions about the industry.
+
+6. POSITIONING
+Investigate how the competitor positions itself.
+
+Possible positioning dimensions include:
+- low cost
+- premium
+- specialist
+- simple
+- fast
+- convenient
+- innovative
+- local
+- enterprise
+- personalized
+- comprehensive
+
+Explain the evidence supporting the classification.
+
+7. PRICING
+Research where available:
+- listed prices
+- subscription plans
+- service packages
+- free plans
+- trials
+- discounts
+- bundles
+- minimum orders
+- setup fees
+- recurring charges
+
+Record:
+- currency
+- date checked
+- source
+
+If current pricing cannot be verified, state:
+"Pricing not verified."
+
+Do not invent prices.
+
+8. SALES CHANNELS
+Identify how customers can purchase or access the offer.
+
+Examples:
+- direct website
+- physical stores
+- sales representatives
+- marketplaces
+- distributors
+- resellers
+- mobile app
+- social commerce
+
+9. MARKETING CHANNELS
+Investigate visible use of:
+- search
+- social media
+- email
+- content marketing
+- video
+- influencers
+- paid advertising
+- partnerships
+- events
+- marketplaces
+- affiliate programs
+
+Do not assume a channel is important merely because an account exists.
+
+10. MESSAGING
+Identify recurring themes in:
+- headlines
+- calls to action
+- product descriptions
+- advertisements
+- social posts
+- landing pages
+
+Summarize the messaging rather than reproducing large amounts of copyrighted text.
+
+11. CUSTOMER EVIDENCE
+Research available:
+- testimonials
+- case studies
+- ratings
+- customer reviews
+- community discussions
+- recurring complaints
+- recurring positive feedback
+
+Distinguish:
+- company-selected testimonials
+- independent reviews
+- informal online comments
+
+Do not treat isolated comments as representative.
+
+12. PRODUCT / SERVICE EXPERIENCE
+Where reliable evidence is available, investigate:
+- ease of use
+- ordering process
+- onboarding
+- delivery
+- customer support
+- returns
+- cancellation
+- implementation
+- usability
+
+Clearly separate direct evidence from inference.
+
+13. REPUTATION
+Look for credible evidence concerning:
+- brand reputation
+- customer satisfaction
+- service issues
+- major complaints
+- awards
+- certifications
+- regulatory issues
+- public controversies
+
+Avoid amplifying unverified allegations.
+
+14. BUSINESS MODEL
+Determine how the competitor appears to make money.
+
+Examples:
+- one-time sale
+- subscription
+- service fee
+- commission
+- marketplace fee
+- licensing
+- advertising
+- freemium
+- consulting
+
+If the model is inferred rather than confirmed, label it as an inference.
+
+15. OPERATING MODEL
+Where information is available, investigate:
+- physical vs online operations
+- locations
+- delivery model
+- fulfillment
+- outsourcing
+- partnerships
+- distribution
+- service process
+
+Do not invent internal operational details.
+
+16. TECHNOLOGY
+Identify visible technology relevant to the offering.
+
+Examples:
+- mobile app
+- customer portal
+- automation
+- integrations
+- AI functionality
+- e-commerce platform
+
+Do not speculate about internal technology stacks without evidence.
+
+17. PARTNERSHIPS & DISTRIBUTION
+Identify publicly documented:
+- strategic partnerships
+- suppliers
+- distributors
+- integrations
+- channel partners
+- marketplace relationships
+
+18. RECENT DEVELOPMENTS
+If current research is available, check for relevant recent:
+- product launches
+- pricing changes
+- expansion
+- acquisitions
+- partnerships
+- leadership changes
+- funding
+- closures
+- regulatory developments
+
+Use publication dates.
+
+19. COMPETITOR STRENGTH SIGNALS
+Identify evidence that may indicate strength, such as:
+- broad distribution
+- strong customer reviews
+- established brand
+- product depth
+- partnerships
+- customer retention signals
+- scale
+- specialization
+
+Do not convert signals into unsupported claims.
+
+20. WEAKNESS / FRICTION SIGNALS
+Identify evidence of possible weaknesses such as:
+- recurring complaints
+- confusing pricing
+- poor support
+- missing functionality
+- limited availability
+- difficult onboarding
+- delivery problems
+
+Label these as signals unless sufficient evidence supports a stronger conclusion.
+
+21. SOURCE STRATEGY
+Prioritize:
+
+Tier 1:
+- official company website
+- official product documentation
+- official pricing
+- financial filings
+- regulators
+- government databases
+
+Tier 2:
+- reputable news organizations
+- established industry publications
+- research organizations
+- credible market reports
+
+Tier 3:
+- customer reviews
+- forums
+- community discussions
+- social media
+
+Use Tier 3 sources mainly for customer-experience signals rather than unquestioned factual claims.
+
+22. SOURCE LOG
+For important findings record:
+- Finding
+- Source
+- Source type
+- Publication / access date
+- Primary or secondary
+- Confidence level
+
+23. CONFLICTING INFORMATION
+When sources disagree:
+- identify the conflict
+- compare publication dates
+- compare source authority
+- identify which evidence is stronger
+- state what remains uncertain
+
+24. INFORMATION GAPS
+Identify important information that could not be verified.
+
+Do not fill gaps with assumptions.
+
+25. RESEARCH CONFIDENCE
+Classify major findings as:
+
+HIGH CONFIDENCE
+Supported by strong primary or multiple reliable sources.
+
+MEDIUM CONFIDENCE
+Reasonably supported but incomplete.
+
+LOW CONFIDENCE
+Based on limited, indirect or uncertain evidence.
+
+UNVERIFIED
+Insufficient evidence.
+
+26. FURTHER RESEARCH
+Recommend the highest-value next research actions.
+
+Examples:
+- request pricing
+- test free trial
+- conduct mystery shopping
+- interview customers
+- analyze recent reviews
+- examine regulatory filings
+- compare archived website versions
+- monitor product changes
+
+Use legal and ethical research methods.
+
+OUTPUT FORMAT:
+
+1. Research Summary
+2. Competitor Identity
+3. Company Overview
+4. Products & Services
+5. Target Customers
+6. Value Proposition
+7. Positioning
+8. Pricing
+9. Sales Channels
+10. Marketing Channels
+11. Messaging
+12. Customer Evidence
+13. Customer Experience
+14. Reputation
+15. Business Model
+16. Operating Model
+17. Technology
+18. Partnerships & Distribution
+19. Recent Developments
+20. Strength Signals
+21. Weakness / Friction Signals
+22. Source Log
+23. Conflicting Information
+24. Information Gaps
+25. Confidence Assessment
+26. Further Research
+
+IMPORTANT:
+- Do not invent competitor information.
+- Do not invent prices, revenue, customer numbers, market share, reviews or internal processes.
+- Distinguish facts from inference.
+- Clearly identify outdated information.
+- Prefer current primary sources for factual company information.
+- Use customer reviews as experience signals, not automatically as representative evidence.
+- Do not treat promotional claims as independently verified facts.
+- Do not make strategic recommendations unless specifically requested.
+- The purpose is to produce a reliable competitor research profile based on evidence.`;
+
+const steps = [
+  {
+    title: "Confirm the competitor first",
+    description:
+      "Verify the exact company, brand and official website before collecting information so similarly named businesses are not accidentally mixed together.",
+  },
+  {
+    title: "Start with primary sources",
+    description:
+      "Use official product pages, pricing, documentation and company information to establish basic facts before adding third-party research.",
+  },
+  {
+    title: "Add independent evidence",
+    description:
+      "Use credible news, industry sources and customer discussions to investigate reputation, customer experience and developments the company may not emphasize itself.",
+  },
+  {
+    title: "Record uncertainty",
+    description:
+      "Separate confirmed information, reasonable inference and unverified claims instead of filling research gaps with assumptions.",
+  },
+];
+
+const example = {
+  input: [
+    "Competitor: Inventory-management software provider.",
+    "Research goal: Understand its offer before developing a service for small retailers.",
+    "Questions: What customers does it target, what features and pricing does it offer, and what problems appear repeatedly in customer feedback?",
+    "Research depth: Standard.",
+  ],
+
+  output: [
+    "Begin by confirming the company's official website and current product offering.",
+    "Use official product and pricing pages to document features, plans, target segments and stated value proposition.",
+    "Use independent reviews and community discussions to identify recurring customer-experience themes, but separate those observations from verified product facts.",
+    "Record each important finding with its source and date. Mark pricing, features or claims that cannot be verified as unverified rather than estimating them.",
+    "Finish by identifying the most important remaining research gaps and the next evidence needed to understand the competitor more confidently.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Research before analyzing",
+    description:
+      "Collect reliable competitor evidence first. Strategic conclusions are stronger when they are based on verified information rather than assumptions.",
+  },
+  {
+    title: "Separate company claims from evidence",
+    description:
+      "A competitor's website is excellent for understanding what it offers and how it positions itself, but promotional claims may still require independent verification.",
+  },
+  {
+    title: "Date your findings",
+    description:
+      "Competitor pricing, features, messaging and partnerships can change quickly. Recording dates makes the research much easier to update later.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Competitor Research Prompt | KRIYANO"
+  description="Research a competitor systematically using verifiable evidence about products, pricing, customers, positioning, marketing, reviews, operations and recent developments."
+>
+  <PromptPage
+    category="RESEARCH"
+    title="Competitor Research"
+    accentTitle="Prompt."
+    description="Build an evidence-based competitor profile covering products, customers, pricing, positioning, channels, customer feedback and recent developments."
+    meta={[
+      "Free prompt",
+      "Research",
+      "Competitive intelligence",
+    ]}
+    bestFor={[
+      "Competitor research",
+      "Market research",
+      "Business planning",
+      "Product research",
+      "Pricing research",
+      "Competitive intelligence",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Collect the evidence before drawing conclusions."
+    introDescription="Research one competitor systematically using primary sources, independent evidence and customer signals while clearly separating confirmed facts from inference and unverified information."
+    steps={steps}
+    exampleTitle="Build a competitor profile from evidence."
+    example={example}
+    tipsTitle="Research competitors more reliably."
+    tips={tips}
+    sidebarTitle="Ready to compare competitors?"
+    sidebarDescription="After collecting reliable competitor evidence, use the KRIYANO Competitor Analysis Prompt to compare positioning, strengths, risks, market gaps and differentiation opportunities."
+    warningTitle="Competitor information changes"
+    warningText="Products, pricing, features, leadership and market activity can change quickly. Record source dates and verify current information before relying on competitor research for important decisions."
+  />
+</BaseLayout>

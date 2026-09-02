@@ -1,0 +1,105 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptCategoryPage from "../../../components/PromptCategoryPage.astro";
+
+const prompts = [
+  {
+    title: "Professional Email Writer",
+    description:
+      "Turn rough notes into a clear, natural and professional business email.",
+    category: "Communication",
+    href: "/prompts/professional-email-writer/",
+  },
+  {
+    title: "Meeting Summary Prompt",
+    description:
+      "Turn meeting notes into a concise summary with decisions, actions and responsibilities.",
+    category: "Meetings",
+    href: "/prompts/meeting-summary/",
+  },
+  {
+    title: "Task Prioritization Prompt",
+    description:
+      "Organize a busy task list by urgency, importance, effort and deadlines.",
+    category: "Productivity",
+    href: "/prompts/task-prioritization/",
+  },
+  {
+    title: "Weekly Work Planner",
+    description:
+      "Turn goals, deadlines and pending work into a practical weekly action plan.",
+    category: "Planning",
+    href: "/prompts/weekly-work-planner/",
+  },
+  {
+    title: "Manager Update Writer",
+    description:
+      "Create a concise professional progress update for a manager or team leader.",
+    category: "Communication",
+    href: "/prompts/manager-update-writer/",
+  },
+  {
+    title: "Problem-Solving Prompt",
+    description:
+      "Break down a workplace problem, identify causes and develop practical solutions.",
+    category: "Problem Solving",
+    href: "/prompts/problem-solving/",
+  },
+  {
+    title: "Decision-Making Prompt",
+    description:
+      "Compare options, risks and trade-offs before making an important work decision.",
+    category: "Decision Support",
+    href: "/prompts/decision-making/",
+  },
+  {
+    title: "Process Improvement Prompt",
+    description:
+      "Review an existing workflow and identify delays, waste, risks and improvement opportunities.",
+    category: "Improvement",
+    href: "/prompts/process-improvement/",
+  },
+  {
+    title: "Performance Review Preparation",
+    description:
+      "Organize achievements, responsibilities, challenges and goals before a performance review.",
+    category: "Career",
+    href: "/prompts/performance-review-preparation/",
+  },
+  {
+    title: "Difficult Workplace Conversation",
+    description:
+      "Prepare for a professional conversation involving feedback, disagreement or sensitive issues.",
+    category: "Communication",
+    href: "/prompts/difficult-workplace-conversation/",
+  },
+  {
+    title: "Action Plan Generator",
+    description:
+      "Turn an objective or problem into clear actions, owners, priorities and next steps.",
+    category: "Planning",
+    href: "/prompts/action-plan-generator/",
+  
+  },
+  {
+    title: "Work Document Simplifier",
+    description:
+      "Rewrite complex workplace information into clear, concise and easy-to-understand language.",
+    category: "Writing",
+    href: "/prompts/work-document-simplifier/",
+  },
+];
+---
+
+<BaseLayout
+  title="Work & Productivity AI Prompts | KRIYANO"
+  description="Practical AI prompts for emails, meetings, planning, productivity, problem-solving and everyday professional work."
+>
+  <PromptCategoryPage
+    kicker="WORK & PRODUCTIVITY"
+    title="AI prompts for"
+    accentTitle="better work."
+    description="Practical prompts for communication, planning, decision-making, meetings and everyday professional tasks."
+    prompts={prompts}
+  />
+</BaseLayout>

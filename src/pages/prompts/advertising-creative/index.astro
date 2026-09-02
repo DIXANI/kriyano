@@ -1,0 +1,853 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert advertising creative director, performance marketer, visual strategist and AI image-generation prompt specialist.
+
+TASK:
+Create a high-quality advertising creative concept and a detailed AI image-generation prompt designed to communicate a real offer clearly and persuasively.
+
+The creative must attract attention, communicate the main benefit quickly, remain visually credible and avoid fabricated claims, fake proof, false urgency or misleading imagery.
+
+PRODUCT / SERVICE:
+[What are you advertising?]
+
+BRAND:
+[Brand name.]
+
+TARGET AUDIENCE:
+[Who is the advertisement for?]
+
+AUDIENCE PROBLEM:
+[What real problem, need or desire does the offer address?]
+
+PRIMARY BENEFIT:
+[Main benefit supported by the available information.]
+
+SECONDARY BENEFITS:
+[Optional.]
+
+OFFER:
+[Actual offer, price, discount, trial, package or promotion. Leave blank if none.]
+
+PRIMARY MESSAGE:
+[What should the viewer understand immediately?]
+
+HEADLINE:
+[Exact headline or ask AI to suggest options.]
+
+SUPPORTING TEXT:
+[Optional.]
+
+CTA:
+[Shop now / Learn more / Book now / Try free / Download / Contact us / other.]
+
+PLATFORM:
+[Facebook / Instagram / LinkedIn / TikTok / display advertising / other.]
+
+PLACEMENT:
+[Feed / Story / Reel / square ad / vertical ad / landscape / other.]
+
+ASPECT RATIO:
+[1:1 / 4:5 / 9:16 / 16:9 / other.]
+
+MAIN SUBJECT:
+[Product / person / service visualization / result / environment / other.]
+
+PRODUCT DETAILS:
+[Shape, colour, packaging, important physical characteristics.]
+
+VISUAL STYLE:
+[Premium commercial / clean SaaS / lifestyle / editorial / luxury / bold retail / minimal / other.]
+
+BRAND COLOURS:
+[Hex codes or descriptions.]
+
+LOGO REQUIREMENTS:
+[Optional.]
+
+SCENE:
+[Describe desired environment.]
+
+COMPOSITION:
+[Optional preference.]
+
+LIGHTING:
+[Studio / natural / dramatic / clean commercial / other.]
+
+REFERENCE MATERIAL:
+[Describe supplied product, brand or character references.]
+
+MANDATORY ELEMENTS:
+[Anything that must appear.]
+
+ELEMENTS TO AVOID:
+[Anything that must not appear.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+ADVERTISING CREATIVE REQUIREMENTS:
+
+1. DEFINE THE AD OBJECTIVE
+Identify whether the advertisement is intended primarily to support:
+
+Awareness
+Consideration
+Traffic
+Lead generation
+Conversion
+Download
+Booking
+Product purchase
+Promotion
+Retargeting
+
+2. DEFINE ONE PRIMARY MESSAGE
+The advertisement should communicate one dominant idea.
+
+3. IDENTIFY THE REAL AUDIENCE PROBLEM
+Use only the problem, need or desire supported by the supplied information.
+
+Do not invent customer pain points.
+
+4. CONNECT PROBLEM TO BENEFIT
+Make the relationship between the audience's need and the product benefit easy to understand.
+
+5. DISTINGUISH FEATURE FROM BENEFIT
+FEATURE:
+What the product or service has or does.
+
+BENEFIT:
+Why that matters to the customer.
+
+6. DO NOT INVENT BENEFITS
+Only use benefits reasonably supported by the supplied product information.
+
+7. IDENTIFY THE PRIMARY BENEFIT
+Choose the strongest credible reason for the target audience to pay attention.
+
+8. KEEP SECONDARY BENEFITS SECONDARY
+Do not overload one advertisement with every possible selling point.
+
+9. DEFINE THE OFFER ACCURATELY
+Use the exact:
+
+Price
+Discount
+Trial
+Package
+Bonus
+Promotion
+
+provided by the user.
+
+10. DO NOT INVENT AN OFFER
+If no promotion exists, do not create one.
+
+11. DO NOT INVENT DISCOUNTS
+Never create:
+
+20% off
+Half price
+Special price
+
+unless supplied.
+
+12. DO NOT CREATE FALSE URGENCY
+Never add:
+
+Today only
+Act now
+Ends tonight
+Hurry
+
+unless factually supported.
+
+13. DO NOT CREATE FALSE SCARCITY
+Never add:
+
+Only 3 left
+Limited stock
+Almost sold out
+
+unless supplied.
+
+14. DO NOT INVENT DEADLINES
+Promotional end dates must come from supplied information.
+
+15. DO NOT INVENT CUSTOMER NUMBERS
+Avoid unsupported claims such as:
+
+10,000+ customers
+Used by thousands
+Millions sold
+
+16. DO NOT INVENT RATINGS
+Do not create fake:
+
+5-star ratings
+Review scores
+Awards
+
+17. DO NOT INVENT TESTIMONIALS
+Never fabricate customer quotations.
+
+18. DO NOT INVENT ENDORSEMENTS
+Do not imply support from:
+
+Experts
+Celebrities
+Organizations
+Professionals
+
+without evidence.
+
+19. DO NOT INVENT CERTIFICATIONS
+Do not add:
+
+Certified
+Approved
+Accredited
+Award-winning
+
+without verified information.
+
+20. DO NOT INVENT PERFORMANCE CLAIMS
+Avoid unsupported statements such as:
+
+2x faster
+Save 50%
+Increase sales by 300%
+Guaranteed results
+
+21. PRESERVE QUALIFIERS
+If the source says:
+
+May
+Can
+Designed to
+Up to
+Approximately
+
+do not remove those limitations.
+
+22. DO NOT TURN POSSIBILITY INTO GUARANTEE
+"This can help reduce errors" must not become "Eliminate errors."
+
+23. HANDLE BEFORE / AFTER CAREFULLY
+Do not create misleading transformation imagery.
+
+24. DO NOT FABRICATE RESULTS
+Before/after visuals must not imply results unsupported by real evidence.
+
+25. KEEP PRODUCT REPRESENTATION ACCURATE
+When a product reference is supplied, preserve:
+
+Shape
+Size
+Colour
+Packaging
+Material
+Key features
+
+26. DO NOT REDESIGN THE PRODUCT
+Unless explicitly requested.
+
+27. DO NOT INVENT PRODUCT FEATURES
+Do not add:
+
+Buttons
+Accessories
+Displays
+Ingredients
+Attachments
+Functions
+
+that the real product does not have.
+
+28. PRESERVE BRAND IDENTITY
+Use supplied:
+
+Colours
+Logo
+Typography mood
+Visual style
+
+consistently.
+
+29. DO NOT REDESIGN THE LOGO
+When a logo reference exists, preserve its shape and proportions.
+
+30. DO NOT INVENT BRAND MARKS
+Avoid fake logos or symbols.
+
+31. BUILD A VISUAL HOOK
+Create an immediate visual reason to stop scrolling.
+
+32. THE HOOK MUST SUPPORT THE MESSAGE
+Do not use unrelated shock imagery merely for attention.
+
+33. PRIORITIZE THE HERO
+The main:
+
+Product
+Person
+Result
+Benefit visualization
+
+should dominate the composition.
+
+34. CREATE STRONG SUBJECT SEPARATION
+Use:
+
+Contrast
+Lighting
+Scale
+Depth
+Negative space
+
+35. CONTROL VISUAL HIERARCHY
+Recommended hierarchy:
+
+Hero visual
+Headline
+Primary benefit
+Offer
+CTA
+Brand
+
+Adapt when appropriate.
+
+36. DESIGN FOR FAST COMPREHENSION
+A viewer should understand the core idea within a few seconds.
+
+37. DESIGN FOR MOBILE
+Assume the advertisement may first be seen on a small screen.
+
+38. KEEP TEXT SHORT
+Do not place paragraphs inside the creative.
+
+39. USE LARGE HEADLINE TEXT
+The primary message must remain readable at feed size.
+
+40. USE HIGH CONTRAST
+Maintain strong separation between text and background.
+
+41. CREATE INTENTIONAL NEGATIVE SPACE
+Reserve clean areas for important copy.
+
+42. DO NOT PLACE CRITICAL TEXT OVER BUSY DETAILS
+Avoid:
+
+Faces
+Hair
+Complex product details
+Patterns
+Bright highlights
+
+43. PRESERVE EXACT MANDATORY TEXT
+Do not paraphrase legal, pricing or offer wording when exact wording is supplied.
+
+44. DO NOT GENERATE RANDOM TEXT
+Prevent meaningless AI-generated labels and lettering.
+
+45. CTA MUST MATCH THE NEXT STEP
+Examples:
+
+Learn More — informational landing page.
+Shop Now — purchase flow.
+Book Now — booking.
+Download — downloadable resource.
+Contact Us — inquiry.
+
+46. DO NOT USE A MISLEADING CTA
+The CTA should accurately describe what happens next.
+
+47. PRODUCT AD MODE
+Prioritize:
+
+Product
+Primary benefit
+Offer
+CTA
+
+48. SERVICE AD MODE
+Visualize:
+
+Problem
+Service
+Outcome
+
+without inventing guaranteed results.
+
+49. SAAS AD MODE
+Prioritize:
+
+Problem
+Workflow improvement
+Product interface concept
+Benefit
+CTA
+
+Do not create fake performance metrics.
+
+50. B2B AD MODE
+Focus on:
+
+Business problem
+Operational impact
+Credible benefit
+Professional visual language
+
+51. B2C AD MODE
+Focus on:
+
+Relevant customer need
+Product appeal
+Clear benefit
+Easy next step
+
+52. LOCAL BUSINESS AD MODE
+Keep the message practical and geographically relevant when supplied.
+
+Do not invent addresses, locations or service areas.
+
+53. LEAD GENERATION MODE
+Communicate why submitting an inquiry is worthwhile.
+
+54. DOWNLOAD AD MODE
+Make the downloadable resource itself visually valuable.
+
+55. EVENT AD MODE
+Preserve exact:
+
+Date
+Time
+Location
+Registration information
+
+56. PROMOTIONAL SALE MODE
+Make the verified offer prominent without creating fake urgency.
+
+57. RETARGETING MODE
+Use a direct reminder or benefit-led concept without falsely claiming knowledge of individual behaviour.
+
+58. EDUCATIONAL AD MODE
+Lead with a useful insight and position the offer as the next step.
+
+59. PROBLEM-SOLUTION MODE
+Show the problem clearly but avoid exaggerated fear.
+
+60. BENEFIT-LED MODE
+Make the credible outcome the visual focus.
+
+61. FEATURE-LED MODE
+Use when a distinctive product capability is itself the strongest selling point.
+
+62. COMPARISON MODE
+Only compare against competitors when supplied evidence supports the comparison.
+
+63. DO NOT INVENT COMPETITOR WEAKNESSES
+Never fabricate comparative claims.
+
+64. DO NOT COPY COMPETITOR BRANDING
+Create an original advertising concept.
+
+65. USE EMOTION PURPOSEFULLY
+Emotion should support the real audience context.
+
+66. DO NOT MANIPULATE WITH UNSUPPORTED FEAR
+Avoid exaggerated consequences.
+
+67. KEEP PEOPLE NATURAL
+Avoid:
+
+Plastic skin
+Extreme beauty filters
+Unrealistic expressions
+Anatomical distortion
+
+68. PRESERVE CHARACTER IDENTITY
+If a person reference is supplied, keep the same identity.
+
+69. CONTROL HANDS
+If hands interact with the product, require:
+
+Correct anatomy
+Natural grip
+Realistic contact
+
+70. CONTROL PRODUCT SCALE
+Ensure the product appears realistically sized unless intentional graphic scale is clearly requested.
+
+71. CONTROL PERSPECTIVE
+Product and people must belong naturally in the same visual space.
+
+72. CONTROL MATERIALS
+Render realistic:
+
+Glass
+Metal
+Plastic
+Fabric
+Paper
+Food
+Wood
+
+according to the real subject.
+
+73. CONTROL LIGHTING
+Use lighting that reinforces the product and campaign positioning.
+
+74. PREMIUM COMMERCIAL MODE
+Use:
+
+Controlled studio lighting
+Natural materials
+Refined composition
+Subtle depth
+High-end retouching
+
+without making the image synthetic.
+
+75. LIFESTYLE MODE
+Show the product in believable use.
+
+76. MINIMAL MODE
+Use:
+
+Clean background
+Strong hero
+Limited copy
+Generous negative space
+
+77. BOLD RETAIL MODE
+Use stronger:
+
+Contrast
+Offer hierarchy
+Product scale
+
+while avoiding clutter.
+
+78. PROFESSIONAL B2B MODE
+Use:
+
+Clean geometry
+Structured spacing
+Business context
+Controlled accents
+
+79. AVOID GENERIC AI AESTHETICS
+Do not automatically add:
+
+Robots
+Glowing brains
+Holographic circuits
+Random neon interfaces
+
+80. USE VISUAL METAPHORS ONLY WHEN CLEAR
+The viewer should understand the connection to the benefit.
+
+81. DO NOT CREATE MISLEADING UI
+If showing a software interface, do not imply features or data that do not exist.
+
+82. USE PLACEHOLDER UI WHEN NECESSARY
+If actual interface details are unavailable, describe the screen as conceptual rather than factual.
+
+83. DO NOT INVENT DATA
+Avoid random:
+
+Revenue
+Growth
+Conversion
+Inventory
+Analytics
+Customer numbers
+
+84. CONTROL BACKGROUND
+The environment should reinforce the product category and audience.
+
+85. REMOVE UNRELATED PROPS
+Every major object should have a visual purpose.
+
+86. USE BRAND COLOURS STRATEGICALLY
+Apply them to:
+
+Background
+Graphic accents
+CTA
+Supporting shapes
+
+without overwhelming the hero.
+
+87. CREATE A COMPOSITION MAP
+Specify:
+
+Hero zone
+Headline zone
+Benefit zone
+Offer zone
+CTA zone
+Logo zone
+
+88. PRESERVE SAFE MARGINS
+Keep important elements away from crop-prone edges.
+
+89. PLATFORM ADAPTATION
+Adjust the concept for the specified placement.
+
+90. VERTICAL AD MODE
+Keep the main subject and message inside the central safe zone.
+
+91. SQUARE AD MODE
+Use balanced hierarchy suitable for feed viewing.
+
+92. LANDSCAPE AD MODE
+Use horizontal flow without spreading important elements too far apart.
+
+93. CREATE ONE PRIMARY CREATIVE
+Do not dilute the response with many mediocre concepts.
+
+94. CREATE OPTIONAL VARIATIONS
+Where useful, suggest variations based on:
+
+Different hook
+Different composition
+Different benefit emphasis
+
+without changing factual claims.
+
+95. INCLUDE NEGATIVE CONSTRAINTS
+Use relevant protections such as:
+
+No random text
+No fake logos
+No invented statistics
+No distorted hands
+No duplicate people
+No misleading product features
+No watermark
+
+96. DO NOT OVERLOAD NEGATIVE PROMPTS
+Keep protections focused on likely generation failures.
+
+97. CREATE A MODEL-READY PROMPT
+The final prompt should clearly describe:
+
+Subject
+Scene
+Composition
+Lighting
+Brand
+Text
+Offer
+CTA
+Quality
+Constraints
+
+98. CREATE A CLAIM CHECK
+Identify which visible claims depend on user-provided evidence.
+
+99. CREATE A PRE-PUBLISH CHECK
+Verify:
+
+Price
+Offer
+Dates
+Claims
+Logo
+Product appearance
+CTA
+Spelling
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- audience is clear
+- advertising objective is clear
+- one primary message dominates
+- audience problem is supported
+- benefit is credible
+- offer is accurate
+- no discount was invented
+- no urgency was invented
+- no scarcity was invented
+- no testimonial was fabricated
+- no rating was fabricated
+- no certification was fabricated
+- no unsupported performance claim was added
+- product identity is accurate
+- brand identity is preserved
+- visual hook supports the message
+- hero subject is obvious
+- text is mobile-readable
+- safe margins are preserved
+- CTA matches the destination
+- random AI text is prevented
+- image remains visually credible
+- final creative is suitable for the specified platform
+
+OUTPUT FORMAT:
+
+1. ADVERTISING STRATEGY
+Summarize:
+
+Audience
+Problem
+Primary benefit
+Offer
+Objective
+CTA
+
+2. CREATIVE CONCEPT
+Explain the central advertising idea in 2–4 sentences.
+
+3. VISUAL HOOK
+Describe what should stop the viewer's attention.
+
+4. COMPOSITION MAP
+Define:
+
+Hero
+Headline
+Benefit
+Offer
+CTA
+Brand placement
+
+5. FULL IMAGE GENERATION PROMPT
+Provide one polished model-ready prompt.
+
+6. TEXT & COPY HIERARCHY
+List exact visible text in priority order.
+
+7. NEGATIVE / PROTECTION INSTRUCTIONS
+List only relevant restrictions.
+
+8. OPTIONAL A/B VARIATION
+Provide one alternative hook or composition while keeping the same factual offer.
+
+9. CLAIM VERIFICATION CHECK
+List any claims, numbers or offer details that should be verified before publishing.
+
+10. PRE-PUBLISH CHECK
+Confirm:
+
+Platform
+Aspect ratio
+Mobile readability
+Offer accuracy
+CTA
+Brand consistency
+
+IMPORTANT:
+- Sell the real benefit, not an invented one.
+- Do not fabricate offers, discounts, testimonials, ratings, certifications, statistics or performance results.
+- Do not create false urgency or scarcity.
+- Preserve product and brand identity.
+- Keep one clear advertising message.
+- Design for the actual platform and placement.
+- Optimize for mobile readability.
+- Keep the creative visually persuasive without becoming misleading.`;
+
+const steps = [
+  {
+    title: "Start with the real offer",
+    description:
+      "Define the product, audience, problem, credible benefit and actual offer before deciding how the advertisement should look.",
+  },
+  {
+    title: "Choose one advertising message",
+    description:
+      "Avoid trying to communicate every feature at once. Build the creative around the strongest relevant reason for the audience to pay attention.",
+  },
+  {
+    title: "Turn the message into a visual hook",
+    description:
+      "Use the product, problem, benefit or outcome as the dominant visual idea instead of relying on unrelated attention-grabbing effects.",
+  },
+  {
+    title: "Verify before publishing",
+    description:
+      "Check prices, discounts, dates, product appearance, claims and CTA wording before using the generated creative in a real advertising campaign.",
+  },
+];
+
+const example = {
+  input: [
+    "Product: Online inventory reorder point calculator.",
+    "Audience: Small-business owners and inventory professionals.",
+    "Problem: Reordering too late can contribute to stockouts, while ordering without a structured trigger can make replenishment inconsistent.",
+    "Primary benefit: Calculates a reorder point using demand, lead time and safety stock inputs.",
+    "Offer: Free online calculator.",
+    "Platform: LinkedIn.",
+    "Format: Square 1:1 advertisement.",
+    "Style: Premium professional SaaS.",
+  ],
+
+  output: [
+    "AD STRATEGY: Lead with the replenishment decision problem and position the free calculator as a practical way to calculate when stock should be reordered.",
+    "VISUAL HOOK: Show a clean inventory level moving toward a clearly marked reorder threshold, with the calculated reorder point highlighted as the solution.",
+    "HIERARCHY: Inventory problem → reorder threshold → free calculator → CTA.",
+    "PROTECTION: Do not invent cost savings, stockout reduction percentages, customer numbers, ratings or performance guarantees.",
+  ],
+};
+
+const tips = [
+  {
+    title: "One ad, one main reason to care",
+    description:
+      "Strong advertising creatives usually make one benefit immediately understandable instead of presenting a long list of features.",
+  },
+  {
+    title: "A stronger claim is not always a stronger ad",
+    description:
+      "Unsupported guarantees and invented numbers can damage trust. Make the real benefit easier to understand rather than exaggerating it.",
+  },
+  {
+    title: "Design the creative and caption together",
+    description:
+      "Let the image communicate the hook and main benefit while the surrounding ad copy provides the supporting explanation and details.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Advertising Creative Prompt | KRIYANO"
+  description="Create persuasive AI advertising creative prompts with clear offers, benefits, visual hooks, CTA hierarchy and protection against unsupported claims."
+>
+  <PromptPage
+    category="IMAGE GENERATION"
+    title="Advertising Creative"
+    accentTitle="Prompt."
+    description="Turn a real product, service or offer into a persuasive AI advertising visual without relying on fabricated claims, fake proof or misleading urgency."
+    meta={[
+      "Free prompt",
+      "Advertising",
+      "Creative strategy",
+    ]}
+    bestFor={[
+      "Product ads",
+      "Service ads",
+      "SaaS advertising",
+      "Lead generation",
+      "Promotional campaigns",
+      "Social ads",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Build the creative around the real reason to buy."
+    introDescription="Connect the audience problem, credible benefit, offer and CTA to one strong visual idea while protecting product accuracy and advertising credibility."
+    steps={steps}
+    exampleTitle="Advertise a free business tool without inventing performance claims."
+    example={example}
+    tipsTitle="Make the advertising stronger without making the claims bigger."
+    tips={tips}
+    sidebarTitle="Creating an organic social post instead?"
+    sidebarDescription="Use KRIYANO's Social Media Visual Prompt when the main goal is platform-ready organic content rather than a conversion-focused advertising creative."
+    warningTitle="AI can make unsupported claims look convincing"
+    warningText="Always verify prices, discounts, dates, product features, statistics, testimonials and performance claims before publishing or running paid advertising. A realistic-looking AI creative is not evidence that its claims are true."
+  />
+</BaseLayout>

@@ -1,0 +1,915 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="AI Prompt Builder | KRIYANO"
+  description="Build clearer, more structured AI prompts for work, business, writing, research and everyday tasks."
+>
+  <section class="builder-hero">
+    <div class="container hero-inner">
+      <div>
+        <div class="section-kicker">KRIYANO TOOL / 01</div>
+
+        <h1>
+          AI Prompt
+          <span>Builder.</span>
+        </h1>
+
+        <p>
+          Turn a rough idea into a clearer, more structured prompt you can use
+          with ChatGPT, Gemini, Claude or other AI assistants.
+        </p>
+      </div>
+
+      <div class="hero-note">
+        <span class="status-dot"></span>
+        Runs in your browser
+      </div>
+    </div>
+  </section>
+
+  <section class="builder-section">
+    <div class="container builder-grid">
+      <div class="form-panel">
+        <div class="panel-header">
+          <div>
+            <span class="panel-number">01</span>
+            <h2>Describe your task</h2>
+          </div>
+
+          <button type="button" id="loadExample" class="text-button">
+            Load example
+          </button>
+        </div>
+
+        <div class="field-group">
+          <label for="task">
+            What do you want the AI to do?
+            <span>*</span>
+          </label>
+
+          <textarea
+            id="task"
+            rows="4"
+            placeholder="Example: Create a professional stock discrepancy investigation procedure..."
+          ></textarea>
+        </div>
+
+        <div class="field-grid">
+          <div class="field-group">
+            <label for="role">AI role</label>
+
+            <input
+              id="role"
+              type="text"
+              placeholder="Example: Inventory management expert"
+            />
+          </div>
+
+          <div class="field-group">
+            <label for="audience">Target audience</label>
+
+            <input
+              id="audience"
+              type="text"
+              placeholder="Example: Warehouse supervisors"
+            />
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="context">Context</label>
+
+          <textarea
+            id="context"
+            rows="3"
+            placeholder="Add background information the AI should understand..."
+          ></textarea>
+        </div>
+
+        <div class="field-grid">
+          <div class="field-group">
+            <label for="output">Output format</label>
+
+            <select id="output">
+              <option value="">Auto</option>
+              <option value="Step-by-step guide">Step-by-step guide</option>
+              <option value="Professional report">Professional report</option>
+              <option value="Bullet-point list">Bullet-point list</option>
+              <option value="Table">Table</option>
+              <option value="Email">Email</option>
+              <option value="SOP">SOP</option>
+              <option value="Checklist">Checklist</option>
+              <option value="Article">Article</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="tone">Tone</label>
+
+            <select id="tone">
+              <option value="">Auto</option>
+              <option value="Professional">Professional</option>
+              <option value="Clear and practical">Clear and practical</option>
+              <option value="Friendly">Friendly</option>
+              <option value="Formal">Formal</option>
+              <option value="Concise">Concise</option>
+              <option value="Persuasive">Persuasive</option>
+              <option value="Educational">Educational</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field-group">
+            <label for="detail">Detail level</label>
+
+            <select id="detail">
+              <option value="">Auto</option>
+              <option value="Brief">Brief</option>
+              <option value="Moderate">Moderate</option>
+              <option value="Detailed">Detailed</option>
+              <option value="Highly detailed">Highly detailed</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="language">Language</label>
+
+         <select id="language">
+  <option value="">Auto / Same as input</option>
+
+  <option value="English">English</option>
+  <option value="Spanish">Spanish — Español</option>
+  <option value="French">French — Français</option>
+  <option value="German">German — Deutsch</option>
+  <option value="Portuguese">Portuguese — Português</option>
+  <option value="Italian">Italian — Italiano</option>
+
+  <option value="Arabic">Arabic — العربية</option>
+  <option value="Hindi">Hindi — हिन्दी</option>
+  <option value="Bengali">Bengali — বাংলা</option>
+  <option value="Urdu">Urdu — اردو</option>
+
+  <option value="Chinese (Simplified)">
+    Chinese (Simplified) — 简体中文
+  </option>
+
+  <option value="Chinese (Traditional)">
+    Chinese (Traditional) — 繁體中文
+  </option>
+
+  <option value="Japanese">Japanese — 日本語</option>
+  <option value="Korean">Korean — 한국어</option>
+
+  <option value="Indonesian">Indonesian — Bahasa Indonesia</option>
+  <option value="Vietnamese">Vietnamese — Tiếng Việt</option>
+  <option value="Thai">Thai — ไทย</option>
+  <option value="Turkish">Turkish — Türkçe</option>
+
+  <option value="Russian">Russian — Русский</option>
+  <option value="Polish">Polish — Polski</option>
+  <option value="Dutch">Dutch — Nederlands</option>
+
+  <option value="Sinhala">Sinhala — සිංහල</option>
+  <option value="Tamil">Tamil — தமிழ்</option>
+</select>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="requirements">
+            Requirements or constraints
+          </label>
+
+          <textarea
+            id="requirements"
+            rows="3"
+            placeholder="Example: Keep it under 500 words, avoid jargon, include examples..."
+          ></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="generatePrompt" class="button button-primary">
+            Generate Prompt
+          </button>
+
+          <button type="button" id="clearForm" class="button button-secondary">
+            Clear
+          </button>
+        </div>
+      </div>
+
+      <aside class="output-panel">
+        <div class="panel-header">
+          <div>
+            <span class="panel-number">02</span>
+            <h2>Your prompt</h2>
+          </div>
+
+          <span id="promptStatus" class="prompt-status">
+            Waiting
+          </span>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+          <div class="empty-icon">↳</div>
+
+          <h3>Your structured prompt will appear here.</h3>
+
+          <p>
+            Complete the fields on the left and select
+            <strong>Generate Prompt</strong>.
+          </p>
+        </div>
+
+        <div id="resultArea" class="result-area hidden">
+          <pre id="promptOutput"></pre>
+
+          <div class="result-actions">
+            <button type="button" id="copyPrompt" class="button button-primary">
+              Copy Prompt
+            </button>
+
+            <button type="button" id="editAgain" class="button button-secondary">
+              Edit Inputs
+            </button>
+          </div>
+
+          <div id="copyMessage" class="copy-message">
+            Prompt copied
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="tips-section">
+    <div class="container tips-layout">
+      <div>
+        <div class="section-kicker">Better prompting</div>
+
+        <h2>Good prompts start with useful context.</h2>
+      </div>
+
+      <div class="tips-grid">
+        <article>
+          <span>01</span>
+          <strong>Be specific</strong>
+          <p>
+            Clearly describe the result you want instead of asking a broad
+            question.
+          </p>
+        </article>
+
+        <article>
+          <span>02</span>
+          <strong>Add context</strong>
+          <p>
+            Give the AI enough background to understand the situation and your
+            goal.
+          </p>
+        </article>
+
+        <article>
+          <span>03</span>
+          <strong>Define the output</strong>
+          <p>
+            Specify whether you need a report, checklist, email, table or
+            another format.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const task = document.querySelector("#task");
+  const role = document.querySelector("#role");
+  const audience = document.querySelector("#audience");
+  const context = document.querySelector("#context");
+  const output = document.querySelector("#output");
+  const tone = document.querySelector("#tone");
+  const detail = document.querySelector("#detail");
+  const language = document.querySelector("#language");
+  const requirements = document.querySelector("#requirements");
+
+  const generateButton = document.querySelector("#generatePrompt");
+  const clearButton = document.querySelector("#clearForm");
+  const loadExampleButton = document.querySelector("#loadExample");
+
+  const emptyState = document.querySelector("#emptyState");
+  const resultArea = document.querySelector("#resultArea");
+  const promptOutput = document.querySelector("#promptOutput");
+  const promptStatus = document.querySelector("#promptStatus");
+
+  const copyButton = document.querySelector("#copyPrompt");
+  const copyMessage = document.querySelector("#copyMessage");
+  const editAgain = document.querySelector("#editAgain");
+
+  const generatePrompt = () => {
+    const taskValue = task.value.trim();
+
+    if (!taskValue) {
+      task.focus();
+      task.classList.add("field-error");
+
+      setTimeout(() => {
+        task.classList.remove("field-error");
+      }, 1200);
+
+      return;
+    }
+
+    const sections = [];
+
+    if (role.value.trim()) {
+      sections.push(`ROLE\nAct as ${role.value.trim()}.`);
+    }
+
+    sections.push(`TASK\n${taskValue}`);
+
+    if (context.value.trim()) {
+      sections.push(`CONTEXT\n${context.value.trim()}`);
+    }
+
+    if (audience.value.trim()) {
+      sections.push(
+        `TARGET AUDIENCE\nCreate the response for ${audience.value.trim()}.`
+      );
+    }
+
+    const responseInstructions = [];
+
+    if (output.value) {
+      responseInstructions.push(`Use a ${output.value} format.`);
+    }
+
+    if (tone.value) {
+      responseInstructions.push(`Use a ${tone.value.toLowerCase()} tone.`);
+    }
+
+    if (detail.value) {
+      responseInstructions.push(
+        `Provide a ${detail.value.toLowerCase()} level of detail.`
+      );
+    }
+
+    if (language.value) {
+      responseInstructions.push(`Write the response in ${language.value}.`);
+    }
+
+    if (requirements.value.trim()) {
+      responseInstructions.push(requirements.value.trim());
+    }
+
+    if (responseInstructions.length) {
+      sections.push(
+        `RESPONSE REQUIREMENTS\n${responseInstructions
+          .map((item) => `- ${item}`)
+          .join("\n")}`
+      );
+    }
+
+    sections.push(
+      `QUALITY CHECK\nBefore finalizing, make sure the response is accurate, practical, clearly structured and directly addresses the task. Avoid unnecessary filler.`
+    );
+
+    promptOutput.textContent = sections.join("\n\n");
+
+    emptyState.classList.add("hidden");
+    resultArea.classList.remove("hidden");
+
+    promptStatus.textContent = "Ready";
+    promptStatus.classList.add("ready");
+  };
+
+  generateButton.addEventListener("click", generatePrompt);
+
+  clearButton.addEventListener("click", () => {
+    task.value = "";
+    role.value = "";
+    audience.value = "";
+    context.value = "";
+    output.value = "";
+    tone.value = "";
+    detail.value = "";
+    language.value = "";
+    requirements.value = "";
+
+    resultArea.classList.add("hidden");
+    emptyState.classList.remove("hidden");
+
+    promptOutput.textContent = "";
+
+    promptStatus.textContent = "Waiting";
+    promptStatus.classList.remove("ready");
+
+    task.focus();
+  });
+
+  loadExampleButton.addEventListener("click", () => {
+    task.value =
+      "Create a professional stock discrepancy investigation procedure for a warehouse.";
+
+    role.value =
+      "Experienced inventory control and warehouse operations specialist";
+
+    audience.value =
+      "Warehouse supervisors and inventory controllers";
+
+    context.value =
+      "Physical stock sometimes differs from the quantity shown in the warehouse management system. The procedure should help staff investigate the discrepancy before making any stock adjustment.";
+
+    output.value = "Step-by-step guide";
+    tone.value = "Clear and practical";
+    detail.value = "Detailed";
+    language.value = "English";
+
+    requirements.value =
+      "Include checks for receiving, picking, transfers, damaged stock, wrong locations, pending system transactions and documentation errors. Include escalation guidance for major discrepancies.";
+
+    task.focus();
+  });
+
+  copyButton.addEventListener("click", async () => {
+    const text = promptOutput.textContent;
+
+    if (!text) {
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(text);
+
+      copyMessage.classList.add("show");
+      copyButton.textContent = "Copied";
+
+      setTimeout(() => {
+        copyMessage.classList.remove("show");
+        copyButton.textContent = "Copy Prompt";
+      }, 1800);
+    } catch {
+      const range = document.createRange();
+      range.selectNodeContents(promptOutput);
+
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+  });
+
+  editAgain.addEventListener("click", () => {
+    task.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+
+    task.focus();
+  });
+</script>
+
+<style>
+  .builder-hero {
+    padding: 95px 0 75px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(
+        circle at 82% 25%,
+        rgba(183, 255, 74, 0.08),
+        transparent 26%
+      );
+  }
+
+  .hero-inner {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 50px;
+  }
+
+  .builder-hero h1 {
+    max-width: 850px;
+    margin-top: 14px;
+    font-size: clamp(3.3rem, 7vw, 6.4rem);
+    line-height: 0.94;
+    letter-spacing: -0.06em;
+  }
+
+  .builder-hero h1 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .builder-hero p {
+    max-width: 700px;
+    margin-top: 24px;
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .hero-note {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 13px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 0.76rem;
+  }
+
+  .status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--lime);
+    box-shadow: 0 0 12px rgba(183, 255, 74, 0.6);
+  }
+
+  .builder-section {
+    padding: 70px 0 95px;
+  }
+
+  .builder-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 0.82fr);
+    gap: 20px;
+    align-items: start;
+  }
+
+.form-panel,
+.output-panel {
+  border: 1px solid rgba(183, 255, 74, 0.14);
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.035),
+      transparent 35%
+    ),
+    #0d1d16;
+
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+  .form-panel {
+    padding: 30px;
+  }
+
+  .output-panel {
+    position: sticky;
+    top: 96px;
+    min-height: 620px;
+    padding: 30px;
+  }
+
+  .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .panel-header > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .panel-number {
+    color: var(--lime);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+  }
+
+  .panel-header h2 {
+    font-size: 1.15rem;
+  }
+
+  .text-button {
+    border: 0;
+    background: transparent;
+    color: var(--lime);
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 750;
+  }
+
+  .field-group {
+    margin-bottom: 22px;
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #dfe6e2;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  label span {
+    color: var(--lime);
+  }
+
+  textarea,
+  input,
+  select {
+      width: 100%;
+
+  border: 1px solid rgba(183, 255, 74, 0.18);
+  border-radius: 11px;
+
+  outline: none;
+
+  background: #07120e;
+
+  color: var(--text);
+
+  padding: 13px 14px;
+
+  font-size: 0.88rem;
+
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.015);
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+  textarea {
+    resize: vertical;
+    min-height: 90px;
+  }
+
+  select {
+    min-height: 48px;
+  }
+
+  option {
+    background: #0d1b15;
+    color: var(--text);
+  }
+
+  textarea::placeholder,
+   color: #7f8e86;
+  opacity: 1;
+}
+  textarea:focus,
+  input:focus,
+  select:focus {
+   background: #081610;
+
+  border-color: rgba(183, 255, 74, 0.65);
+
+  box-shadow:
+    0 0 0 3px rgba(183, 255, 74, 0.08),
+    inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+  .field-error {
+    border-color: #ff7474 !important;
+    box-shadow: 0 0 0 3px rgba(255, 116, 116, 0.08) !important;
+  }
+
+  .form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 8px;
+  }
+
+  .form-actions button,
+  .result-actions button {
+    border: 0;
+    cursor: pointer;
+  }
+
+  .button-secondary {
+    border: 1px solid var(--line) !important;
+  }
+
+  .prompt-status {
+    padding: 5px 9px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .prompt-status.ready {
+    border-color: rgba(183, 255, 74, 0.22);
+    background: rgba(183, 255, 74, 0.06);
+    color: var(--lime);
+  }
+
+  .empty-state {
+    min-height: 485px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px;
+    border: 1px dashed rgba(255, 255, 255, 0.11);
+    border-radius: 15px;
+  }
+
+  .empty-icon {
+    margin-bottom: 24px;
+    color: var(--lime);
+    font-size: 2.5rem;
+  }
+
+  .empty-state h3 {
+    max-width: 350px;
+    font-size: 1.35rem;
+    line-height: 1.2;
+  }
+
+  .empty-state p {
+    max-width: 370px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.86rem;
+  }
+
+  .result-area {
+    position: relative;
+  }
+
+  .result-area pre {
+    min-height: 460px;
+    max-height: 650px;
+    overflow: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 22px;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    color: #dce6e0;
+    font-family:
+      "SFMono-Regular",
+      Consolas,
+      "Liberation Mono",
+      monospace;
+    font-size: 0.82rem;
+    line-height: 1.75;
+  }
+
+  .result-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 11px;
+    margin-top: 16px;
+  }
+
+  .copy-message {
+    position: absolute;
+    right: 0;
+    bottom: 57px;
+    padding: 8px 11px;
+    border-radius: 8px;
+    background: var(--lime);
+    color: #07110d;
+    font-size: 0.72rem;
+    font-weight: 800;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(5px);
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .copy-message.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  .tips-section {
+    padding: 95px 0;
+    border-top: 1px solid var(--line);
+    background: var(--bg-soft);
+  }
+
+  .tips-layout {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 80px;
+  }
+
+  .tips-layout h2 {
+    max-width: 500px;
+    margin-top: 14px;
+    font-size: clamp(2.4rem, 5vw, 4.2rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .tips-grid {
+    display: grid;
+    gap: 0;
+  }
+
+  .tips-grid article {
+    display: grid;
+    grid-template-columns: 45px 150px 1fr;
+    gap: 20px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .tips-grid article:first-child {
+    border-top: 1px solid var(--line);
+  }
+
+  .tips-grid article > span {
+    color: var(--lime);
+    font-size: 0.74rem;
+    font-weight: 800;
+  }
+
+  .tips-grid article strong {
+    font-size: 0.9rem;
+  }
+
+  .tips-grid article p {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 960px) {
+    .builder-grid,
+    .tips-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .output-panel {
+      position: static;
+      min-height: auto;
+    }
+
+    .empty-state {
+      min-height: 340px;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .builder-hero {
+      padding: 70px 0 60px;
+    }
+
+    .hero-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 28px;
+    }
+
+    .builder-section {
+      padding: 45px 0 70px;
+    }
+
+    .form-panel,
+    .output-panel {
+      padding: 22px;
+    }
+
+    .field-grid {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .tips-grid article {
+      grid-template-columns: 35px 1fr;
+    }
+
+    .tips-grid article p {
+      grid-column: 2;
+    }
+  }
+</style>

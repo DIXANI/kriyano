@@ -1,0 +1,842 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced decision-analysis and business problem-solving advisor.
+
+TASK:
+Help me make a well-reasoned decision between the available options below.
+
+Analyze the decision objectively using evidence, priorities, constraints, risks, trade-offs, uncertainty and short- and long-term consequences.
+
+Do not simply choose the option that sounds most attractive.
+
+DECISION:
+[What decision needs to be made?]
+
+WHY THIS DECISION MATTERS:
+[Explain the situation and importance.]
+
+OPTIONS:
+[List the available options.]
+
+OBJECTIVE:
+[What outcome are you trying to achieve?]
+
+DECISION DEADLINE:
+[If applicable.]
+
+DECISION MAKER:
+[Individual / Manager / Team / Business owner / Other.]
+
+STAKEHOLDERS:
+[Who will be affected?]
+
+AVAILABLE BUDGET:
+[If relevant.]
+
+TIME CONSTRAINTS:
+[If relevant.]
+
+RESOURCE CONSTRAINTS:
+[People, equipment, technology, skills, etc.]
+
+REQUIREMENTS:
+[List any mandatory requirements.]
+
+PREFERENCES:
+[List important preferences.]
+
+KNOWN COSTS:
+[Provide costs for each option if available.]
+
+EXPECTED BENEFITS:
+[Provide known benefits.]
+
+KNOWN RISKS:
+[List known risks.]
+
+AVAILABLE DATA / EVIDENCE:
+[List supporting information.]
+
+UNCERTAINTIES:
+[List important unknowns.]
+
+PREVIOUS EXPERIENCE:
+[Relevant past experience.]
+
+REVERSIBILITY:
+[Can the decision easily be reversed?]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+DECISION ANALYSIS REQUIREMENTS:
+
+1. DEFINE THE DECISION
+Rewrite the decision clearly.
+
+State:
+
+Decision required:
+Primary objective:
+Decision deadline:
+Main constraint:
+Desired outcome:
+
+Do not change the user's objective.
+
+2. VERIFY THE OPTIONS
+List each available option.
+
+For each provide:
+
+Option:
+Description:
+Known advantages:
+Known disadvantages:
+Missing information:
+
+Do not invent additional facts.
+
+3. CHECK WHETHER AN IMPORTANT OPTION IS MISSING
+Consider whether realistic alternatives exist such as:
+
+- do nothing
+- delay the decision
+- run a pilot
+- use a temporary solution
+- combine two options
+- negotiate
+- outsource
+- perform internally
+- phase implementation
+
+Only add alternatives that are realistically relevant.
+
+Clearly label them:
+
+"Additional option to consider."
+
+4. DEFINE DECISION CRITERIA
+Identify the factors that should determine the choice.
+
+Possible criteria:
+
+- cost
+- expected benefit
+- quality
+- speed
+- implementation time
+- operational impact
+- customer impact
+- financial return
+- risk
+- reliability
+- scalability
+- flexibility
+- resource requirement
+- ease of implementation
+- maintenance
+- employee impact
+- strategic fit
+- compliance
+- sustainability
+- reversibility
+
+Use only relevant criteria.
+
+5. SEPARATE REQUIREMENTS FROM PREFERENCES
+Classify criteria as:
+
+MUST HAVE
+Failure means the option should normally be rejected.
+
+IMPORTANT
+Strongly influences the decision.
+
+PREFERENCE
+Useful but not essential.
+
+Do not allow a preference to outweigh a mandatory requirement.
+
+6. IDENTIFY DEAL-BREAKERS
+List any condition that would automatically make an option unacceptable.
+
+Examples:
+
+- exceeds maximum budget
+- cannot meet mandatory deadline
+- violates policy
+- creates unacceptable safety risk
+- cannot meet customer requirement
+- requires unavailable capability
+
+Only use deal-breakers supported by the user's constraints.
+
+7. ASSIGN CRITERIA WEIGHTS
+Where useful, assign relative importance.
+
+Example:
+
+Cost — 20%
+Quality — 25%
+Implementation time — 15%
+Risk — 20%
+Scalability — 10%
+Flexibility — 10%
+
+Total must equal 100%.
+
+Explain why higher-weight criteria matter.
+
+If the user's priorities are unclear, clearly state that the weights are provisional.
+
+8. EVIDENCE QUALITY
+For important information classify evidence as:
+
+Strong
+Moderate
+Weak
+Unknown
+
+Distinguish:
+
+Confirmed data
+Estimate
+Opinion
+Assumption
+
+Do not treat estimates as confirmed facts.
+
+9. COMPARE COST
+Where cost information exists analyze:
+
+Initial cost
+Recurring cost
+Implementation cost
+Maintenance cost
+Training cost
+Hidden / indirect cost
+Switching cost
+Opportunity cost
+
+Do not invent cost values.
+
+10. TOTAL COST PERSPECTIVE
+Avoid comparing options only by purchase price.
+
+Where relevant consider:
+
+Total cost of ownership
+Internal labor
+Downtime
+Maintenance
+Support
+Training
+Replacement
+Integration
+Exit cost
+
+11. BENEFIT ANALYSIS
+For each option identify:
+
+Direct benefits
+Indirect benefits
+Short-term benefits
+Long-term benefits
+Measurable benefits
+Strategic benefits
+
+Do not exaggerate benefits without evidence.
+
+12. RISK ANALYSIS
+For each option identify:
+
+Risk:
+Likelihood:
+Impact:
+Mitigation:
+Residual concern:
+
+Use:
+
+Low
+Medium
+High
+Critical
+
+where appropriate.
+
+13. UNCERTAINTY ANALYSIS
+Identify which unknowns could materially change the decision.
+
+For each:
+
+Unknown:
+Why it matters:
+How to verify:
+Decision impact:
+
+Focus research on high-impact uncertainty.
+
+14. TRADE-OFF ANALYSIS
+Explain what is gained and sacrificed with each option.
+
+Examples:
+
+Lower cost vs lower capability
+Speed vs quality
+Flexibility vs standardization
+Short-term savings vs long-term cost
+Control vs outsourcing
+Customization vs simplicity
+
+Make trade-offs explicit.
+
+15. SHORT-TERM IMPACT
+Evaluate approximately:
+
+First 30 days
+First 90 days
+
+Where relevant.
+
+Consider:
+
+Implementation effort
+Disruption
+Learning curve
+Immediate benefit
+Cash impact
+
+Do not invent specific results.
+
+16. LONG-TERM IMPACT
+Consider:
+
+1 year+
+Scalability
+Maintenance
+Strategic fit
+Recurring cost
+Future flexibility
+Dependency
+Technical debt
+Process sustainability
+
+17. REVERSIBILITY
+Classify each option:
+
+Highly reversible
+Moderately reversible
+Difficult to reverse
+Effectively irreversible
+
+Explain:
+
+Cost of reversal
+Time to reverse
+Operational consequences
+
+A difficult-to-reverse decision deserves stronger evidence before commitment.
+
+18. OPTIONALITY
+Consider whether an option preserves future choices.
+
+An option may be valuable if it allows the organization to learn before committing more resources.
+
+19. PILOT POSSIBILITY
+If uncertainty is high, consider whether a small pilot can test assumptions.
+
+Define:
+
+Pilot:
+Scope:
+Cost / effort:
+Question being tested:
+Success criteria:
+Decision after pilot:
+
+Do not recommend a pilot when the decision is trivial or testing would add unnecessary delay.
+
+20. DEPENDENCY ANALYSIS
+Identify dependencies such as:
+
+- supplier
+- customer
+- management approval
+- technology
+- employee skills
+- infrastructure
+- funding
+- regulation
+- another project
+
+For each explain the decision risk.
+
+21. IMPLEMENTATION COMPLEXITY
+Rate:
+
+Low
+Medium
+High
+
+Consider:
+
+People
+Process
+Technology
+Training
+Integration
+Time
+Change management
+
+22. RESOURCE REQUIREMENT
+For each option consider:
+
+People:
+Skills:
+Time:
+Budget:
+Technology:
+External support:
+
+Flag resources that are currently unavailable.
+
+23. STAKEHOLDER IMPACT
+For each important stakeholder identify:
+
+Stakeholder:
+Positive impact:
+Negative impact:
+Likely concern:
+Required communication:
+
+24. CUSTOMER IMPACT
+Where relevant analyze:
+
+Service
+Quality
+Price
+Delivery
+Reliability
+Experience
+Disruption
+
+25. OPERATIONAL IMPACT
+Consider:
+
+Workload
+Process change
+Capacity
+Productivity
+Quality
+Downtime
+Training
+Control
+Complexity
+
+26. FINANCIAL IMPACT
+Where sufficient data exists consider:
+
+Cost
+Savings
+Revenue impact
+Cash-flow impact
+Payback
+ROI
+
+Do not calculate ROI or payback without sufficient numbers.
+
+If data is missing, state what is required.
+
+27. STRATEGIC FIT
+Assess whether each option supports:
+
+Business direction
+Future growth
+Customer strategy
+Technology direction
+Operational model
+Long-term capability
+
+28. OPPORTUNITY COST
+Explain what choosing one option prevents or delays.
+
+Examples:
+
+Capital unavailable elsewhere
+Staff time diverted
+Alternative project delayed
+Future flexibility reduced
+
+29. WORST-CASE SCENARIO
+For each serious option ask:
+
+What could realistically go wrong?
+How severe would it be?
+Can it be controlled?
+Can the decision be reversed?
+
+Avoid unrealistic disaster scenarios.
+
+30. BEST-CASE SCENARIO
+Describe the realistic upside if the option performs well.
+
+Do not use unrealistic optimistic assumptions.
+
+31. MOST-LIKELY SCENARIO
+Based on available evidence, describe the most reasonable expected outcome.
+
+Clearly identify uncertainty.
+
+32. DECISION MATRIX
+Create a comparison table.
+
+Columns:
+
+Criterion
+Weight
+Option A
+Option B
+Option C
+Notes
+
+Use a consistent score such as:
+
+1 — Very poor
+2 — Poor
+3 — Acceptable
+4 — Good
+5 — Strong
+
+Only score criteria when enough information exists.
+
+Mark unknown items:
+
+"?"
+
+33. WEIGHTED SCORE
+Where sufficient information exists calculate:
+
+Weighted Score = Criterion Score × Criterion Weight
+
+Show the total for each option.
+
+IMPORTANT:
+The mathematical winner should not automatically become the recommendation.
+
+Review deal-breakers, uncertainty and strategic factors separately.
+
+34. SENSITIVITY ANALYSIS
+Identify whether small changes in assumptions could change the recommendation.
+
+Ask:
+
+If cost becomes more important, does the winner change?
+If implementation speed becomes more important, does it change?
+If the main benefit estimate is wrong, does it change?
+
+Highlight fragile decisions.
+
+35. BIAS CHECK
+Check for common decision biases:
+
+- confirmation bias
+- sunk-cost fallacy
+- status quo bias
+- recency bias
+- overconfidence
+- anchoring
+- loss aversion
+- familiarity bias
+
+Do not accuse the decision maker of bias.
+
+Instead identify where bias could influence the choice.
+
+36. SUNK COST CHECK
+Do not recommend continuing an option solely because money or time has already been invested.
+
+Focus on future cost and benefit.
+
+37. ASSUMPTION TEST
+List the most important assumptions behind the leading option.
+
+For each:
+
+Assumption:
+Evidence:
+Confidence:
+What happens if wrong:
+How to test:
+
+38. RED-TEAM THE LEADING OPTION
+Challenge the strongest option.
+
+Ask:
+
+Why might this fail?
+What are we underestimating?
+What would make another option better?
+What evidence contradicts the recommendation?
+What hidden dependency exists?
+
+39. COMPARE DOING NOTHING
+Where relevant include the consequences of maintaining the current situation.
+
+Consider:
+
+Cost of delay
+Risk
+Lost opportunity
+Operational impact
+Future difficulty
+
+40. DECISION TIMING
+Determine whether the decision should be:
+
+Made now
+Made after collecting specific information
+Piloted first
+Delayed
+
+Do not recommend delay simply because uncertainty exists.
+
+Balance the value of additional information against the cost of waiting.
+
+41. VALUE OF MORE INFORMATION
+Identify information worth obtaining before deciding.
+
+Prioritize information that:
+
+- could change the preferred option
+- reduces major risk
+- is reasonably easy to obtain
+
+Avoid unnecessary research that will not affect the decision.
+
+42. RECOMMENDATION
+Provide:
+
+Recommended option:
+Confidence level:
+Main reasons:
+Main trade-off:
+Main risk:
+Critical assumption:
+Required verification:
+Why other options rank lower:
+
+Confidence:
+
+High
+Medium
+Low
+
+43. CONDITIONAL RECOMMENDATION
+Where appropriate use:
+
+"Choose Option A if..."
+"Choose Option B if..."
+
+This is preferable when the best choice depends strongly on one unresolved condition.
+
+44. IMPLEMENTATION CONSIDERATIONS
+For the recommended option provide:
+
+First action:
+Owner role:
+Dependencies:
+Resources:
+Main implementation risk:
+Success measure:
+
+45. EXIT / FALLBACK PLAN
+For significant decisions define:
+
+Trigger for reconsideration:
+Fallback option:
+Exit difficulty:
+Loss limitation:
+
+46. DECISION CHECKPOINT
+Recommend when the decision should be reviewed.
+
+Examples:
+
+After pilot
+After first month
+After first milestone
+After receiving missing data
+
+Use the nature of the decision rather than arbitrary timing.
+
+47. DECISION RECORD
+Create a concise record:
+
+Decision:
+Date:
+Options considered:
+Criteria:
+Key evidence:
+Major assumptions:
+Selected option:
+Reason:
+Known risks:
+Review trigger:
+
+If date is not supplied, leave it blank.
+
+48. FINAL QUALITY CHECK
+Before recommending an option verify:
+
+- mandatory requirements are satisfied
+- evidence is separated from assumptions
+- important costs are included
+- major risks are visible
+- trade-offs are explicit
+- uncertainty is acknowledged
+- decision biases were considered
+- recommendation follows the user's objective
+- the option remains practical under stated constraints
+
+OUTPUT FORMAT:
+
+1. Decision Summary
+2. Objective & Constraints
+3. Options
+4. Must-Haves & Deal-Breakers
+5. Decision Criteria
+6. Evidence & Information Gaps
+7. Cost / Benefit Comparison
+8. Risk Comparison
+9. Trade-Off Analysis
+10. Short vs Long-Term Impact
+11. Reversibility & Optionality
+12. Decision Matrix
+13. Sensitivity Analysis
+14. Bias & Assumption Check
+15. Recommended Option
+16. Why the Other Options Rank Lower
+17. Information to Verify
+18. Implementation Considerations
+19. Fallback / Review Trigger
+20. Decision Record
+
+IMPORTANT:
+- Do not invent facts, prices, benefits, probabilities or performance.
+- Do not automatically recommend the cheapest option.
+- Do not automatically recommend the highest-feature option.
+- Distinguish mandatory requirements from preferences.
+- Separate evidence, estimates and assumptions.
+- Make important trade-offs visible.
+- Consider both short-term and long-term consequences.
+- Consider reversibility when uncertainty is high.
+- Use weighted scoring only when enough information exists.
+- Do not let a numerical score override a serious deal-breaker.
+- Identify information that could genuinely change the decision.
+- If evidence is insufficient, give a conditional recommendation rather than false certainty.`;
+
+const steps = [
+  {
+    title: "Define what actually matters",
+    description:
+      "Separate mandatory requirements from preferences and identify the criteria that should genuinely determine the decision.",
+  },
+  {
+    title: "Compare the real trade-offs",
+    description:
+      "Evaluate cost, benefit, risk, implementation effort, uncertainty and long-term impact instead of focusing on a single attractive feature.",
+  },
+  {
+    title: "Challenge the leading option",
+    description:
+      "Test assumptions, reversibility and worst-case outcomes so the preferred choice is not simply the result of confirmation bias.",
+  },
+  {
+    title: "Make the recommendation actionable",
+    description:
+      "Finish with the preferred option, confidence level, conditions, implementation considerations and a trigger for reviewing the decision.",
+  },
+];
+
+const example = {
+  input: [
+    "Decision: Choose between buying warehouse equipment or continuing to rent it.",
+    "Option A: Purchase.",
+    "Option B: Continue rental.",
+    "Objective: Reduce long-term operating cost without creating excessive financial pressure.",
+    "Known information: Rental cost is predictable, while purchase requires a larger upfront payment.",
+    "Uncertainty: Future equipment utilization may change.",
+    "Constraint: Capital is limited this year.",
+  ],
+
+  output: [
+    "The decision should not be based only on whether ownership appears cheaper over several years. Capital availability, utilization, maintenance, flexibility and the cost of exiting each option also matter.",
+    "Purchase offers potential long-term cost advantages but creates higher upfront commitment and greater exposure if future utilization falls.",
+    "Rental preserves flexibility and capital but may result in higher cumulative cost when equipment utilization remains consistently high.",
+    "The key information gap is expected utilization over the decision horizon together with realistic ownership and rental costs.",
+    "If utilization is uncertain and capital protection is currently a high-priority constraint, continued rental may be preferable until demand becomes clearer.",
+    "If utilization is reliably high and total ownership cost is demonstrably lower, purchase becomes stronger.",
+    "A final recommendation should therefore be conditional on utilization and total-cost evidence rather than based solely on purchase price versus monthly rental.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Separate must-haves from nice-to-haves",
+    description:
+      "An option with attractive features should not win if it fails a requirement that the decision genuinely cannot compromise.",
+  },
+  {
+    title: "Pay attention to reversible decisions",
+    description:
+      "When uncertainty is high, an option that preserves flexibility can sometimes be more valuable than committing immediately to the theoretically optimal choice.",
+  },
+  {
+    title: "Challenge the winner",
+    description:
+      "Before deciding, ask what would have to be true for the second-best option to become better. This exposes fragile assumptions and missing information.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Decision-Making Prompt | KRIYANO"
+  description="Compare options objectively using decision criteria, costs, benefits, risks, trade-offs, weighted scoring, uncertainty, reversibility and long-term impact."
+>
+  <PromptPage
+    category="WORK & PRODUCTIVITY"
+    title="Decision-Making"
+    accentTitle="Prompt."
+    description="Compare competing options using clear criteria, evidence, costs, benefits, risks and trade-offs, then turn the analysis into a practical recommendation."
+    meta={[
+      "Free prompt",
+      "Decision analysis",
+      "Option comparison",
+    ]}
+    bestFor={[
+      "Business decisions",
+      "Workplace choices",
+      "Managers",
+      "Project decisions",
+      "Purchase decisions",
+      "Strategic comparisons",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Make the trade-offs visible before you choose."
+    introDescription="Structure difficult decisions around what actually matters, compare alternatives consistently and challenge the leading option before committing resources."
+    steps={steps}
+    exampleTitle="Turn competing options into a structured decision."
+    example={example}
+    tipsTitle="Make stronger decisions."
+    tips={tips}
+    sidebarTitle="Still trying to define the problem?"
+    sidebarDescription="Use KRIYANO's Problem-Solving Prompt first when the challenge itself is unclear or you still need to investigate possible causes and solutions."
+    warningTitle="A decision matrix supports judgment — it doesn't replace it"
+    warningText="Weighted scores can make trade-offs easier to see, but the result depends on the quality of the evidence, criteria and assumptions. Serious risks, mandatory requirements and major uncertainties should be reviewed separately before making the final decision."
+  />
+</BaseLayout>

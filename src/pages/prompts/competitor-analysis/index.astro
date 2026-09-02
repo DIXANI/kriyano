@@ -1,0 +1,377 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced competitive intelligence analyst and business strategist.
+
+TASK:
+Conduct a structured competitor analysis for the business, product or service described below.
+
+MY BUSINESS / IDEA:
+[Describe your business, product or service.]
+
+TARGET MARKET:
+[Country, city, region or online market.]
+
+TARGET CUSTOMER:
+[Who are you trying to serve?]
+
+CUSTOMER PROBLEM:
+[What problem or need does your offer address?]
+
+MY PRODUCT / SERVICE:
+[Describe the main offer.]
+
+MY PRICE / POSITIONING:
+[Add pricing and intended positioning if known.]
+
+KNOWN COMPETITORS:
+[List competitors if known.]
+
+COMPETITOR WEBSITES / INFORMATION:
+[Paste URLs, notes, pricing, reviews or other information if available.]
+
+ANALYSIS GOAL:
+[Example: understand positioning, identify gaps, compare pricing, improve my offer, prepare for launch.]
+
+IMPORTANT COMPARISON CRITERIA:
+[List any factors that matter most.]
+
+CONSTRAINTS:
+[Budget, location, regulations, resources or other limitations.]
+
+COMPETITOR ANALYSIS REQUIREMENTS:
+
+1. COMPETITIVE LANDSCAPE
+Separate competitors into:
+- Direct competitors
+- Indirect competitors
+- Alternative solutions
+
+Explain why each belongs in that category.
+
+2. COMPETITOR PROFILE
+For each major competitor analyze, where information is available:
+- Target customer
+- Main products / services
+- Positioning
+- Value proposition
+- Pricing approach
+- Sales channels
+- Marketing channels
+- Strengths
+- Weaknesses
+- Customer experience
+- Differentiators
+
+Do not invent missing information.
+
+3. OFFER COMPARISON
+Compare:
+- Core offer
+- Features
+- Service level
+- Convenience
+- Quality
+- Support
+- Customization
+- Delivery
+- Guarantees
+- Add-ons
+
+Use only relevant criteria.
+
+4. PRICING COMPARISON
+Analyze:
+- visible pricing
+- pricing model
+- entry-level offer
+- premium offer
+- discounts or bundles
+- recurring charges
+
+Do not invent current prices.
+
+If pricing is unavailable, state:
+"Pricing not verified."
+
+5. POSITIONING
+Identify how each competitor appears to position itself.
+
+Examples:
+- lowest cost
+- premium
+- specialist
+- convenient
+- fast
+- simple
+- comprehensive
+- local
+- enterprise
+- beginner friendly
+
+Base the conclusion on available evidence.
+
+6. CUSTOMER REVIEWS
+If reliable reviews or customer feedback are available, identify recurring themes around:
+- satisfaction
+- complaints
+- quality
+- service
+- pricing
+- usability
+- reliability
+- support
+
+Do not treat one isolated review as a general customer opinion.
+
+7. COMPETITOR STRENGTHS
+Identify strengths that would be difficult to compete against.
+
+Examples:
+- brand recognition
+- existing customer base
+- pricing power
+- technology
+- distribution
+- supplier relationships
+- expertise
+- convenience
+- strong reviews
+
+8. COMPETITOR WEAKNESSES
+Identify weaknesses supported by evidence.
+
+Do not manufacture weaknesses simply to make my business look better.
+
+9. MARKET GAPS
+Look for possible opportunities such as:
+- underserved customers
+- poor service
+- complicated solutions
+- missing features
+- high pricing
+- weak customization
+- slow delivery
+- poor education
+- limited local support
+- weak customer experience
+
+For each gap identify:
+- Evidence
+- Opportunity
+- What still needs validation
+
+10. DIFFERENTIATION
+Recommend realistic ways my business could differentiate through:
+- specialization
+- customer segment
+- service
+- convenience
+- expertise
+- speed
+- customization
+- pricing model
+- education
+- support
+- user experience
+
+Avoid recommending differentiation that cannot realistically be delivered.
+
+11. COMPETITIVE ADVANTAGE
+Separate:
+
+Temporary advantages:
+[Easy for competitors to copy.]
+
+Potentially defensible advantages:
+[More difficult to copy because of expertise, processes, relationships, data, brand, distribution or other factors.]
+
+12. COMPETITIVE RISKS
+Identify risks such as:
+- price competition
+- established brands
+- low switching motivation
+- easy imitation
+- high customer acquisition costs
+- stronger distribution
+- technology advantage
+- market saturation
+
+Classify major risks as:
+- High
+- Medium
+- Low
+
+13. OPPORTUNITY MATRIX
+Evaluate potential opportunities using:
+
+Opportunity:
+Customer value:
+Competitive intensity:
+Difficulty to execute:
+Evidence level:
+Priority:
+
+14. STRATEGIC RESPONSE
+Recommend what the business should:
+- Compete on
+- Avoid competing on
+- Improve
+- Test
+- Monitor
+
+15. VALIDATION PLAN
+Recommend practical ways to verify competitive assumptions.
+
+Examples:
+- competitor website review
+- pricing inquiries
+- customer interviews
+- review analysis
+- mystery shopping
+- marketplace comparison
+- product trials
+- search-result analysis
+- social media research
+
+Use legal and ethical research methods.
+
+16. INFORMATION GAPS
+List important competitor information that is unavailable, uncertain or potentially outdated.
+
+17. FINAL ASSESSMENT
+Summarize:
+- strongest competitors
+- biggest competitive threat
+- most promising gap
+- best differentiation opportunity
+- most important assumption to validate
+
+OUTPUT FORMAT:
+
+1. Executive Summary
+2. Competitive Landscape
+3. Competitor Profiles
+4. Comparison Table
+5. Pricing Comparison
+6. Positioning Analysis
+7. Customer Feedback Themes
+8. Competitor Strengths
+9. Competitor Weaknesses
+10. Market Gaps
+11. Differentiation Opportunities
+12. Competitive Advantages
+13. Competitive Risks
+14. Opportunity Matrix
+15. Strategic Response
+16. Validation Plan
+17. Information Gaps
+18. Final Assessment
+
+IMPORTANT:
+- Do not invent competitors, prices, reviews, features, market share or customer opinions.
+- Clearly distinguish verified facts from assumptions.
+- State when information is unavailable.
+- Flag information that may be outdated.
+- When current web research is available, prioritize official competitor information and recent credible sources.
+- Customer reviews may provide useful signals but should not automatically be treated as representative of all customers.
+- Do not automatically portray my business more positively than competitors.
+- Focus on evidence that can support an actual business decision.`;
+
+const steps = [
+  {
+    title: "Start with the real competitors",
+    description:
+      "Add the competitors you already know instead of relying on the AI to guess which businesses compete with you.",
+  },
+  {
+    title: "Define what matters to customers",
+    description:
+      "Compare competitors using criteria customers actually care about, such as price, convenience, quality, service or specialization.",
+  },
+  {
+    title: "Look beyond direct competitors",
+    description:
+      "Customers may solve the same problem using software, freelancers, spreadsheets, internal staff or simply doing nothing.",
+  },
+  {
+    title: "Turn gaps into tests",
+    description:
+      "A competitor weakness is not automatically a business opportunity. Verify that customers actually care about the difference before investing.",
+  },
+];
+
+const example = {
+  input: [
+    "Business: Inventory-control setup service for small businesses.",
+    "Customers: Small retailers, distributors and e-commerce sellers.",
+    "Market: Local and remote small-business clients.",
+    "Offer: Inventory process review, spreadsheet tracker setup and stock-control procedures.",
+    "Goal: Understand what customers could use instead of this service.",
+  ],
+
+  output: [
+    "Direct competition may include independent inventory consultants and small-business process specialists offering similar setup services.",
+    "Indirect competition may include inventory-management software providers and ERP implementation companies.",
+    "Alternative solutions include Excel templates, accounting software, internal staff and continuing with manual stock records.",
+    "Potential differentiation to validate: practical implementation for businesses that need better stock control but are not ready for a full ERP system.",
+    "Important research gap: Determine whether target customers are willing to pay for setup and process expertise rather than choosing inexpensive software or managing inventory internally.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Compare customer alternatives",
+    description:
+      "Your biggest competitor may not be another company. It can be a spreadsheet, manual process, internal employee or the customer's decision to do nothing.",
+  },
+  {
+    title: "Verify current information",
+    description:
+      "Competitor pricing, features and positioning can change quickly. Check current official sources before making important decisions.",
+  },
+  {
+    title: "Do not search only for weaknesses",
+    description:
+      "Understanding what competitors do well can reveal the standards customers already expect and areas where competing directly may be difficult.",
+  },
+];
+---
+
+<BaseLayout
+  title="Competitor Analysis Prompt | KRIYANO"
+  description="Analyze competitors, alternatives, pricing, positioning, customer feedback, market gaps, risks and differentiation opportunities."
+>
+  <PromptPage
+    category="BUSINESS"
+    title="Competitor Analysis"
+    accentTitle="Prompt."
+    description="Compare competitors and customer alternatives systematically to understand positioning, strengths, weaknesses, market gaps and realistic differentiation opportunities."
+    meta={[
+      "Free prompt",
+      "Business",
+      "Competitive research",
+    ]}
+    bestFor={[
+      "Business planning",
+      "New business ideas",
+      "Product launches",
+      "Market research",
+      "Pricing decisions",
+      "Positioning",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Understand the alternatives your customer already has."
+    introDescription="Add your business, target customer and known competitors. The prompt separates direct competitors from indirect alternatives and focuses on evidence rather than simply generating a SWOT-style list."
+    steps={steps}
+    exampleTitle="Look beyond obvious competitors."
+    example={example}
+    tipsTitle="Build a stronger competitor analysis."
+    tips={tips}
+    sidebarTitle="Need broader market research?"
+    sidebarDescription="Use the KRIYANO Market Research Prompt to analyze demand, customers, market trends and validation alongside your competitive landscape."
+    warningTitle="Competitor information changes"
+    warningText="Pricing, features, offers and customer feedback can change. Verify important competitive findings with current sources before using them for pricing, investment or strategic decisions."
+  />
+</BaseLayout>

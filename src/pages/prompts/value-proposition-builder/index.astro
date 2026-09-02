@@ -1,0 +1,702 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert positioning strategist, customer-value researcher, product marketer and conversion copywriter.
+
+TASK:
+Create a clear, credible and differentiated value proposition for the supplied product, service, business or offer.
+
+The value proposition must explain:
+- who the offer is for
+- what important problem it solves
+- what outcome it helps create
+- how the solution delivers that value
+- why the customer should consider it instead of alternatives
+- what evidence is required to support important claims
+
+Do not rely on generic marketing language.
+
+BUSINESS / BRAND:
+[Name and short description.]
+
+PRODUCT / SERVICE:
+[What is being offered?]
+
+TARGET CUSTOMER:
+[Who specifically is it for?]
+
+CUSTOMER SITUATION:
+[When or why do they need it?]
+
+JOB TO BE DONE:
+[What is the customer trying to accomplish?]
+
+PRIMARY PAIN:
+[Most important problem.]
+
+SECONDARY PAINS:
+[Optional.]
+
+DESIRED OUTCOME:
+[What does the customer want instead?]
+
+CURRENT ALTERNATIVES:
+[What do they use today?]
+
+PRODUCT CAPABILITIES:
+[List real capabilities.]
+
+KEY FEATURES:
+[List real features.]
+
+KNOWN BENEFITS:
+[List benefits supported by evidence or reasonable product capability.]
+
+DIFFERENTIATORS:
+[What is genuinely different?]
+
+PROOF:
+[Customer evidence, demonstrations, data, credentials, case studies or none.]
+
+PRICE / BUSINESS MODEL:
+[Optional.]
+
+MARKET / LOCATION:
+[Optional.]
+
+COMPETITORS:
+[Optional.]
+
+BRAND TONE:
+[Professional / practical / friendly / premium / simple / technical / other.]
+
+PRIMARY CTA:
+[Try / buy / book / download / calculate / contact / other.]
+
+WHERE THE VALUE PROPOSITION WILL BE USED:
+[Homepage / landing page / advertisement / sales deck / social media / product page / other.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+VALUE PROPOSITION REQUIREMENTS:
+
+1. START WITH THE CUSTOMER
+Do not begin by describing the company.
+
+2. DEFINE THE TARGET CUSTOMER CLEARLY
+Avoid overly broad descriptions such as:
+Everyone
+Businesses
+Professionals
+Consumers
+
+unless the product genuinely serves a broad market.
+
+3. IDENTIFY THE CUSTOMER SITUATION
+Understand when the need becomes important.
+
+4. DEFINE THE JOB TO BE DONE
+What progress is the customer trying to make?
+
+5. USE THIS STRUCTURE WHEN HELPFUL:
+"When [situation], the customer wants to [job], so they can [desired outcome]."
+
+6. IDENTIFY THE PRIMARY PAIN
+Focus on the problem most closely connected to purchase motivation.
+
+7. DO NOT TREAT EVERY PROBLEM AS EQUALLY IMPORTANT
+
+8. IDENTIFY SECONDARY PAINS
+Use only when they strengthen understanding.
+
+9. DISTINGUISH PAIN FROM FEATURE
+Pain = customer problem.
+Feature = product capability.
+
+10. DISTINGUISH FEATURE FROM BENEFIT
+Feature = what the product has.
+Benefit = why that matters.
+
+11. DISTINGUISH BENEFIT FROM OUTCOME
+Benefit = immediate value.
+Outcome = broader result the customer wants.
+
+12. CREATE A FEATURE-TO-VALUE CHAIN
+For important capabilities map:
+Feature → Functional benefit → Customer outcome
+
+13. DO NOT INVENT PRODUCT FEATURES
+
+14. DO NOT INVENT PRODUCT CAPABILITIES
+
+15. DO NOT INVENT CUSTOMER RESULTS
+
+16. DO NOT INVENT SAVINGS
+
+17. DO NOT INVENT PERFORMANCE IMPROVEMENTS
+
+18. DO NOT INVENT MARKET LEADERSHIP
+
+19. IDENTIFY THE DESIRED OUTCOME
+Describe what improves for the customer.
+
+20. KEEP THE OUTCOME SPECIFIC ENOUGH TO MATTER
+
+21. AVOID EMPTY OUTCOMES
+Examples:
+Achieve success
+Grow better
+Transform your business
+Reach your potential
+
+unless made concrete.
+
+22. IDENTIFY CURRENT ALTERNATIVES
+Customers may already use:
+Competitor products
+Spreadsheets
+Manual work
+Internal processes
+Freelancers
+Agencies
+Doing nothing
+
+23. UNDERSTAND WHY ALTERNATIVES REMAIN ATTRACTIVE
+Possible reasons:
+Familiarity
+Low price
+Existing workflow
+Trust
+Integration
+Low switching effort
+
+24. IDENTIFY REAL DIFFERENTIATION
+
+25. A DIFFERENTIATOR SHOULD BE:
+Relevant
+Credible
+Meaningful
+Defensible where possible
+
+26. DO NOT CALL SOMETHING UNIQUE WITHOUT EVIDENCE
+
+27. DO NOT USE "BETTER" WITHOUT EXPLAINING BETTER IN WHAT WAY
+
+28. DIFFERENTIATION MAY COME FROM:
+Specialization
+Ease of use
+Workflow
+Speed
+Price structure
+Service
+Expertise
+Integration
+Accessibility
+Format
+Audience focus
+
+29. DIFFERENT DOES NOT AUTOMATICALLY MEAN VALUABLE
+Connect differentiation to customer needs.
+
+30. IDENTIFY THE VALUE CATEGORY
+Possible:
+Save time
+Reduce cost
+Reduce risk
+Increase convenience
+Improve quality
+Improve clarity
+Increase control
+Simplify work
+Enable capability
+Improve experience
+
+31. DO NOT CLAIM QUANTIFIED VALUE WITHOUT EVIDENCE
+
+32. CREATE A PRIMARY VALUE PROPOSITION
+It should communicate:
+Audience
+Problem / need
+Solution category
+Primary value
+Relevant differentiation
+
+33. KEEP IT CONCISE
+
+34. DO NOT FORCE EVERY DETAIL INTO ONE SENTENCE
+
+35. CREATE A SUPPORTING SUBHEAD
+Use it to explain:
+How the product works
+Who it helps
+What additional value it provides
+
+36. CREATE A BENEFIT HIERARCHY
+
+37. PRIMARY BENEFIT
+The strongest purchase-relevant value.
+
+38. SECONDARY BENEFITS
+Important supporting value.
+
+39. SUPPORTING FEATURES
+Capabilities that make the benefits credible.
+
+40. DO NOT LEAD WITH LOW-VALUE FEATURES
+
+41. PRIORITIZE OUTCOME OVER TECHNICAL DETAIL
+Unless the audience specifically values technical specifications.
+
+42. B2B MODE
+Focus on:
+Operational problem
+Business impact
+Workflow
+Risk
+Time
+Cost
+Control
+Decision quality
+
+43. B2C MODE
+Focus on:
+Personal problem
+Convenience
+Experience
+Confidence
+Time
+Cost
+Desired result
+
+44. SOFTWARE MODE
+Connect functionality to workflow improvement.
+
+45. SERVICE MODE
+Connect expertise and delivery process to customer outcome.
+
+46. TOOL MODE
+Focus on the task the tool helps complete.
+
+47. FREE TOOL MODE
+Do not exaggerate the value merely because the tool is free.
+
+48. E-COMMERCE MODE
+Connect product attributes to practical customer benefits.
+
+49. PROFESSIONAL-SERVICE MODE
+Emphasize:
+Expertise
+Process
+Trust
+Relevant outcome
+
+without unsupported guarantees.
+
+50. CREATE A PROBLEM-TO-VALUE MAP
+For each priority pain provide:
+Problem
+Product capability
+Benefit
+Desired outcome
+Proof required
+
+51. IDENTIFY PROOF REQUIREMENTS
+Ask what evidence would make each important claim believable.
+
+52. PROOF MAY INCLUDE:
+Product demonstration
+Customer case
+Verified review
+Performance data
+Certification
+Credentials
+Transparent methodology
+Comparison
+Free trial
+
+53. DO NOT INVENT PROOF
+
+54. LABEL UNSUPPORTED CLAIMS
+
+55. CLASSIFY CLAIM STRENGTH
+Use:
+Supported
+Partially supported
+Unverified
+
+56. SOFTEN CLAIMS WHEN EVIDENCE IS LIMITED
+
+57. EXAMPLE:
+Instead of:
+"Eliminates inventory errors"
+
+consider:
+"Helps teams investigate inventory discrepancies more systematically."
+
+58. PRESERVE IMPORTANT QUALIFIERS
+Examples:
+Helps
+Designed to
+Can
+May
+Up to
+Approximately
+
+59. DO NOT TURN A SUPPORTING TOOL INTO A GUARANTEED RESULT
+
+60. CREATE A POSITIONING STATEMENT
+
+61. USE THIS INTERNAL STRUCTURE:
+For [target customer]
+Who [need / problem]
+[Product] is a [category]
+That [primary value]
+Unlike [alternative]
+It [relevant differentiator]
+
+62. DO NOT FORCE "UNLIKE" WHEN NO DEFENSIBLE COMPARISON EXISTS
+
+63. CREATE A CUSTOMER-FACING VERSION
+It should sound natural rather than like a positioning worksheet.
+
+64. CREATE HOMEPAGE HEADLINE OPTIONS
+
+65. HEADLINES SHOULD PRIORITIZE:
+Clarity
+Relevance
+Specificity
+
+before cleverness.
+
+66. AVOID GENERIC HEADLINES SUCH AS:
+Work smarter
+Unlock your potential
+Transform your future
+Power your success
+
+67. CREATE MULTIPLE HEADLINE ANGLES
+
+68. PROBLEM-LED ANGLE
+Lead with the pain.
+
+69. OUTCOME-LED ANGLE
+Lead with desired result.
+
+70. TASK-LED ANGLE
+Lead with what the customer can accomplish.
+
+71. DIFFERENTIATION-LED ANGLE
+Lead with a meaningful distinction.
+
+72. CATEGORY-LED ANGLE
+Clearly explain what the product is.
+
+73. DO NOT CREATE CLICKBAIT HEADLINES
+
+74. CREATE SUPPORTING BULLETS
+Each bullet should communicate one concrete benefit.
+
+75. AVOID REPEATING THE HEADLINE
+
+76. CREATE CTA OPTIONS
+Match CTA to customer readiness.
+
+77. LOW-COMMITMENT CTA:
+See how it works
+Try the tool
+Explore features
+View example
+
+78. HIGHER-INTENT CTA:
+Buy now
+Start trial
+Request quote
+Book consultation
+
+79. DO NOT USE FALSE URGENCY IN CTA
+
+80. CREATE OBJECTION SUPPORT
+Identify what may stop the customer from believing the proposition.
+
+81. COMMON OBJECTIONS:
+Too expensive
+Too complicated
+Already have a solution
+Not sure it works
+No time to switch
+Not relevant to me
+
+82. SUGGEST PROOF OR EXPLANATION FOR EACH IMPORTANT OBJECTION
+
+83. DO NOT INVENT ANSWERS THE BUSINESS CANNOT SUPPORT
+
+84. CREATE MESSAGE VARIANTS BY AUDIENCE WHEN NEEDED
+
+85. DO NOT USE ONE VALUE PROPOSITION FOR FUNDAMENTALLY DIFFERENT SEGMENTS
+If motivations differ significantly, create separate versions.
+
+86. CREATE MESSAGE VARIANTS BY FUNNEL STAGE WHEN USEFUL
+
+87. AWARENESS MESSAGE
+Emphasize problem recognition and relevance.
+
+88. CONSIDERATION MESSAGE
+Emphasize solution and differentiation.
+
+89. CONVERSION MESSAGE
+Emphasize proof, offer and action.
+
+90. TEST CLARITY
+Ask:
+Would the target customer understand what this is within seconds?
+
+91. TEST RELEVANCE
+Would they recognize a problem or outcome they care about?
+
+92. TEST DIFFERENTIATION
+Does the message explain why this option deserves consideration?
+
+93. TEST CREDIBILITY
+Can the important claims be supported?
+
+94. TEST SPECIFICITY
+Could the same statement describe hundreds of unrelated companies?
+
+95. IF YES, MAKE IT MORE SPECIFIC
+
+96. CREATE A/B TEST OPTIONS
+Change one meaningful message variable at a time.
+
+97. DO NOT TEST COMPLETELY DIFFERENT EVERYTHING AT ONCE
+
+98. IDENTIFY RESEARCH GAPS
+State what customer information would improve the proposition.
+
+99. RECOMMEND VALIDATION
+Use:
+Customer interviews
+Landing-page tests
+Sales feedback
+Message tests
+Search behaviour
+Support data
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- target customer is clear
+- customer situation is clear
+- job to be done is clear
+- primary pain is clear
+- desired outcome is clear
+- product capability is accurate
+- features are not confused with benefits
+- primary benefit is meaningful
+- differentiation is relevant
+- differentiation is credible
+- current alternatives are considered
+- no feature was invented
+- no result was invented
+- no quantified claim was invented
+- unsupported claims are identified
+- proof requirements are clear
+- headline is understandable
+- subhead adds useful detail
+- benefit hierarchy is clear
+- CTA matches customer readiness
+- objections are considered
+- language is customer-focused
+- generic marketing jargon is minimized
+- proposition can be understood quickly
+- important assumptions are identified
+- validation opportunities are provided
+
+OUTPUT FORMAT:
+
+1. CUSTOMER VALUE SUMMARY
+Provide:
+Target customer
+Situation
+Job to be done
+Primary pain
+Desired outcome
+Current alternative
+
+2. FEATURE-TO-VALUE MAP
+
+For each important capability provide:
+Feature / capability
+Functional benefit
+Customer value
+Desired outcome
+Proof required
+
+3. PRIMARY VALUE PROPOSITION
+Create the strongest concise version.
+
+4. SUPPORTING SUBHEAD
+Explain the product and value more clearly.
+
+5. POSITIONING STATEMENT
+Provide the internal strategic positioning version.
+
+6. BENEFIT HIERARCHY
+Provide:
+Primary benefit
+Secondary benefits
+Supporting features
+
+7. HEADLINE OPTIONS
+Create versions using:
+Problem-led
+Outcome-led
+Task-led
+Differentiation-led
+Category-led
+
+8. SUPPORTING MESSAGE BULLETS
+Create 3–5 concise customer-facing benefit statements.
+
+9. CTA OPTIONS
+Provide:
+Low-commitment CTA
+Consideration CTA
+Conversion CTA
+
+10. OBJECTION MAP
+For each important objection provide:
+Objection
+Reason behind it
+Message response
+Proof needed
+
+11. CLAIM & PROOF CHECK
+Classify important claims:
+Supported
+Partially supported
+Unverified
+
+12. A/B TEST IDEAS
+Suggest practical message tests.
+
+13. RESEARCH GAPS
+List customer or market information that would improve confidence.
+
+14. FINAL RECOMMENDATION
+Provide the strongest:
+Headline
+Subhead
+Benefit bullets
+CTA
+
+IMPORTANT:
+- Start with customer value, not company description.
+- Do not invent features, benefits, results or differentiation.
+- Separate features, benefits and outcomes.
+- Keep claims proportional to available evidence.
+- Prefer clarity and specificity over clever slogans.
+- Make the proposition understandable within seconds.
+- State where more customer research is needed.`;
+
+const steps = [
+  {
+    title: "Start with the customer's job",
+    description:
+      "Define what the customer is trying to accomplish, what gets in the way and what outcome they actually care about before writing marketing copy.",
+  },
+  {
+    title: "Connect capability to value",
+    description:
+      "Map real product features to functional benefits and then to customer outcomes instead of presenting a list of features as the value proposition.",
+  },
+  {
+    title: "Find meaningful differentiation",
+    description:
+      "Focus on differences customers genuinely care about and avoid unsupported claims such as unique, best, fastest or number one.",
+  },
+  {
+    title: "Check every important claim",
+    description:
+      "Identify what evidence supports the proposition and soften or validate statements that go beyond the available proof.",
+  },
+];
+
+const example = {
+  input: [
+    "Product: Free online Reorder Point Calculator.",
+    "Audience: Small-business owners and inventory professionals.",
+    "Job to be done: Decide when an item should be reordered.",
+    "Pain: Reordering too late can contribute to stockouts, while ordering without a clear method makes planning difficult.",
+    "Capability: Calculates reorder point using demand, lead time and safety stock inputs.",
+    "CTA: Calculate reorder point.",
+  ],
+
+  output: [
+    "PRIMARY VALUE: A practical calculator that helps small businesses and inventory teams determine when stock should be reordered using their own demand, lead-time and safety-stock inputs.",
+    "HEADLINE: Know When It's Time to Reorder Stock.",
+    "SUBHEAD: Enter your demand, lead time and safety stock to calculate a practical reorder point for an inventory item.",
+    "BENEFIT: Gives users a structured calculation for replenishment timing instead of relying only on guesswork.",
+    "DIFFERENTIATION: If the tool is genuinely free and browser-based, those can support convenience positioning, but they should not be presented as unique without competitor evidence.",
+    "CLAIM CHECK: Avoid saying the calculator 'prevents stockouts' because the result also depends on forecast quality, supplier performance and other inventory conditions.",
+    "CTA: Calculate Your Reorder Point.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Features explain how; value explains why",
+    description:
+      "A calculator formula is a capability. Helping someone make a clearer replenishment decision is the customer value created by that capability.",
+  },
+  {
+    title: "Specific beats impressive-sounding",
+    description:
+      "A straightforward statement describing who the product helps and what task it improves is usually stronger than broad claims about transformation or success.",
+  },
+  {
+    title: "Differentiation needs customer relevance",
+    description:
+      "Being different only matters when the difference improves something the target customer actually values, such as simplicity, specialization, workflow or accessibility.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Value Proposition Builder Prompt | KRIYANO"
+  description="Build clearer value propositions from customer problems, desired outcomes, product capabilities, differentiation and credible proof."
+>
+  <PromptPage
+    category="MARKETING"
+    title="Value Proposition Builder"
+    accentTitle="Prompt."
+    description="Turn customer problems, desired outcomes and real product capabilities into clearer positioning, benefit hierarchy, headlines and credible value propositions."
+    meta={[
+      "Free prompt",
+      "Value proposition",
+      "Positioning",
+    ]}
+    bestFor={[
+      "Landing pages",
+      "Product positioning",
+      "Small businesses",
+      "SaaS",
+      "Services",
+      "Marketing campaigns",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Explain why the customer should care."
+    introDescription="Connect the customer's real problem to your product's capabilities, desired outcome and meaningful differentiation without relying on vague marketing claims."
+    steps={steps}
+    exampleTitle="Turn a simple inventory calculator into a clear customer value proposition."
+    example={example}
+    tipsTitle="The strongest value propositions are clear before they are clever."
+    tips={tips}
+    sidebarTitle="Need deeper customer insight?"
+    sidebarDescription="Use KRIYANO's Customer Pain Point Research Prompt first when the audience's problems, triggers, objections or desired outcomes are still uncertain."
+    warningTitle="A value proposition is not evidence"
+    warningText="Verify differentiators, performance statements, savings, results and comparative claims before publishing. A persuasive value proposition should communicate supported value rather than manufacture proof."
+  />
+</BaseLayout>

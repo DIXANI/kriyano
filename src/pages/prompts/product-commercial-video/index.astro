@@ -1,0 +1,691 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert commercial director, product cinematographer, advertising strategist and AI video prompt specialist.
+
+TASK:
+Create a polished product-commercial video prompt that presents a real product clearly, attractively and credibly.
+
+The video must preserve product identity, packaging, branding and physical details while using purposeful camera movement, lighting, staging and action to communicate the product's real value.
+
+PRODUCT:
+[What is being advertised?]
+
+BRAND:
+[Brand name.]
+
+PRODUCT CATEGORY:
+[Food / beverage / electronics / beauty / household / software / tool / fashion / industrial / other.]
+
+TARGET AUDIENCE:
+[Who is this commercial for?]
+
+VIDEO GOAL:
+[Awareness / product introduction / feature demonstration / launch / promotion / conversion / other.]
+
+PRIMARY BENEFIT:
+[Main real benefit supported by the product information.]
+
+SECONDARY BENEFITS:
+[Optional.]
+
+KEY FEATURES TO SHOW:
+[List only real features.]
+
+OFFER:
+[Price / discount / promotion / trial / none.]
+
+CTA:
+[Shop now / Learn more / Order now / Try free / Contact us / other.]
+
+PLATFORM:
+[Facebook Reel / Instagram Reel / TikTok / YouTube / website / display / other.]
+
+DURATION:
+[5 sec / 8 sec / 10 sec / 15 sec / 30 sec / other.]
+
+ASPECT RATIO:
+[9:16 / 16:9 / 1:1 / other.]
+
+PRODUCT APPEARANCE:
+[Shape, colour, packaging, logo, labels, dimensions, materials.]
+
+REFERENCE IMAGE:
+[If available, treat as the exact visual reference.]
+
+ENVIRONMENT:
+[Studio / kitchen / office / home / outdoors / retail / industrial / other.]
+
+VISUAL STYLE:
+[Premium commercial / luxury / clean modern / lifestyle / bold retail / technical / cinematic / other.]
+
+CAMERA:
+[Static / push-in / tracking / orbit / macro / overhead / other.]
+
+LIGHTING:
+[Studio / softbox / natural / dramatic / high-key / warm / other.]
+
+VISIBLE TEXT:
+[Exact text or no visible text.]
+
+LOGO REQUIREMENTS:
+[Exact logo treatment.]
+
+AUDIO:
+[Music / ambient / sound effects / voice-over / none.]
+
+ELEMENTS TO AVOID:
+[Optional.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+PRODUCT COMMERCIAL REQUIREMENTS:
+
+1. DEFINE THE COMMERCIAL OBJECTIVE
+Determine the primary goal of the video.
+
+2. KEEP ONE PRIMARY SALES MESSAGE
+Do not attempt to communicate every product feature in one short clip.
+
+3. IDENTIFY THE REAL PRODUCT VALUE
+Use only benefits supported by the supplied information.
+
+4. DISTINGUISH FEATURE FROM BENEFIT
+Feature = what the product has or does.
+Benefit = why that matters to the customer.
+
+5. DO NOT INVENT BENEFITS
+Never create unsupported advantages.
+
+6. PRESERVE PRODUCT IDENTITY
+Maintain:
+Shape
+Colour
+Dimensions
+Packaging
+Materials
+Logo
+Labels
+Distinctive design features
+
+7. TREAT PRODUCT REFERENCES AS PRIMARY VISUAL TRUTH
+Do not redesign the product.
+
+8. DO NOT ADD FEATURES
+Never invent:
+Buttons
+Screens
+Accessories
+Attachments
+Ingredients
+Packaging elements
+Functions
+
+9. DO NOT REMOVE IMPORTANT FEATURES
+Preserve details needed to identify the real product.
+
+10. PRESERVE PRODUCT PROPORTIONS
+Do not stretch, shrink or distort the product.
+
+11. CONTROL PRODUCT SCALE
+Ensure scale relative to hands, furniture and environment is believable.
+
+12. PRESERVE PACKAGING
+Do not randomly change:
+Colour
+Bottle shape
+Box dimensions
+Label layout
+Cap
+Container
+Typography placement
+
+13. PRESERVE LOGO IDENTITY
+Do not redesign or stylize an approved logo.
+
+14. DO NOT INVENT LOGOS
+No fake branding.
+
+15. CONTROL LABEL TEXT
+Use only exact supplied wording.
+
+16. DO NOT GENERATE RANDOM PRODUCT TEXT
+Avoid meaningless packaging labels.
+
+17. USE MANUAL TEXT OVERLAY WHEN NEEDED
+If exact label or headline accuracy is critical, recommend adding final text in editing.
+
+18. CREATE A PRODUCT HERO
+The product should have one dominant visual moment.
+
+19. DEFINE HERO POSITION
+Specify whether the product is:
+Centered
+Foreground dominant
+Held
+Placed on surface
+Floating only if intentionally stylized
+
+20. MAKE PRODUCT SEPARATION STRONG
+Use lighting, contrast, depth and background control.
+
+21. DO NOT HIDE KEY FEATURES
+Avoid compositions that obscure the product.
+
+22. CREATE COMMERCIAL LIGHTING
+Use highlights that reveal material and shape.
+
+23. CONTROL REFLECTIONS
+Especially for:
+Glass
+Metal
+Plastic
+Glossy packaging
+Screens
+
+24. AVOID BLOWN HIGHLIGHTS
+Retain product detail.
+
+25. CONTROL SHADOWS
+Keep the product grounded.
+
+26. USE CONTACT SHADOWS
+Avoid floating unintentionally.
+
+27. MATCH MATERIAL RESPONSE
+Glass should look like glass.
+Metal should look metallic.
+Fabric should behave like fabric.
+Food should retain realistic texture.
+
+28. PRODUCT BEAUTY SHOT MODE
+Use slow, controlled movement and strong surface detail.
+
+29. FEATURE DEMONSTRATION MODE
+Show the real feature in action.
+
+30. DO NOT DEMONSTRATE FEATURES THAT DO NOT EXIST
+
+31. LIFESTYLE MODE
+Show the product being used naturally by the target customer.
+
+32. PRESERVE REALISTIC HAND INTERACTION
+Hands should:
+Grip naturally
+Touch correct surfaces
+Use realistic finger placement
+
+33. PREVENT EXTRA FINGERS OR HANDS
+
+34. PREVENT PRODUCT DUPLICATION
+
+35. DO NOT TELEPORT THE PRODUCT
+Movement should be continuous.
+
+36. CONTROL PRODUCT ORIENTATION
+Do not allow random rotation.
+
+37. CONTROL LABEL ORIENTATION
+Important branding should face the camera when intended.
+
+38. USE CAMERA MOVEMENT PURPOSEFULLY
+Choose one dominant move per short shot.
+
+39. STATIC HERO MODE
+Useful when lighting and product detail provide enough interest.
+
+40. PUSH-IN MODE
+Use to increase focus on the product.
+
+41. PULL-BACK MODE
+Use to reveal context.
+
+42. TRACKING MODE
+Follow natural product use or motion.
+
+43. ORBIT MODE
+Use cautiously and only when unseen product sides can be generated accurately.
+
+44. MACRO MODE
+Use for:
+Texture
+Controls
+Ingredients
+Materials
+Fine details
+
+45. OVERHEAD MODE
+Use when top surfaces or usage steps matter.
+
+46. DO NOT COMBINE TOO MANY CAMERA MOVES
+
+47. CONTROL CAMERA SPEED
+Commercial motion should usually feel smooth and deliberate.
+
+48. PRESERVE FOCUS
+Keep the key product detail sharp.
+
+49. AVOID FOCUS HUNTING
+
+50. USE FOCUS PULL ONLY WHEN IT SERVES A FEATURE REVEAL
+
+51. DEFINE FIRST FRAME
+Establish the product clearly.
+
+52. DEFINE FINAL FRAME
+Finish with a strong hero, benefit or CTA composition.
+
+53. PRODUCT REVEAL MODE
+Reveal the product through:
+Light
+Camera movement
+Foreground obstruction
+Packaging opening
+Environment transition
+
+without unnecessarily transforming it.
+
+54. UNBOXING MODE
+Preserve packaging structure and realistic hand interaction.
+
+55. OPENING / CLOSING ACTIONS
+Lids, caps, doors and packaging should move through physically realistic hinges or paths.
+
+56. LIQUID PRODUCT MODE
+Respect:
+Gravity
+Flow
+Viscosity
+Pour direction
+Container contact
+
+57. FOOD PRODUCT MODE
+Prioritize:
+Texture
+Freshness
+Steam
+Gloss
+Crumb
+Sauce
+Ingredient realism
+
+58. DO NOT CHANGE FOOD STRUCTURE MID-SHOT
+
+59. ELECTRONICS MODE
+Preserve:
+Ports
+Buttons
+Screen size
+Device dimensions
+Materials
+
+60. DO NOT INVENT SCREEN CONTENT
+Use supplied UI or clearly label conceptual UI.
+
+61. SOFTWARE PRODUCT MODE
+If the product is digital, show a conceptual interface only when actual UI is unavailable.
+
+62. DO NOT INVENT SOFTWARE METRICS
+
+63. FASHION PRODUCT MODE
+Preserve:
+Pattern
+Colour
+Fabric
+Cut
+Logo
+Fit
+
+64. BEAUTY PRODUCT MODE
+Avoid unsupported medical or performance claims.
+
+65. HOUSEHOLD PRODUCT MODE
+Show practical use without exaggerating outcome.
+
+66. INDUSTRIAL PRODUCT MODE
+Prioritize:
+Function
+Durability context
+Safety
+Realistic workplace environment
+
+67. KEEP SAFETY LOGICAL
+Do not show unsafe operation.
+
+68. CREATE A VISUAL STORY
+Possible structure:
+Problem
+Product
+Demonstration
+Benefit
+Hero finish
+
+69. DO NOT USE PROBLEM-SOLUTION STRUCTURE WHEN UNNECESSARY
+Some premium commercials may work better with pure product storytelling.
+
+70. KEEP THE PRODUCT VISIBLE LONG ENOUGH
+Do not make the brand impossible to recognize.
+
+71. DO NOT OVERUSE FAST CUTS
+
+72. SOCIAL COMMERCIAL MODE
+Make the product and hook visible immediately.
+
+73. PREMIUM COMMERCIAL MODE
+Use:
+Controlled lighting
+Refined camera movement
+Clean surfaces
+Subtle depth
+High-quality materials
+
+74. BOLD RETAIL MODE
+Use stronger contrast and offer hierarchy without clutter.
+
+75. PROFESSIONAL B2B MODE
+Use practical context, restrained motion and credible benefit framing.
+
+76. CREATE AUDIO THAT SUPPORTS THE PRODUCT
+Possible sounds:
+Packaging click
+Pour
+Machine action
+Fabric movement
+Food crunch
+Button press
+
+77. SOUND EFFECTS MUST MATCH VISIBLE ACTION
+
+78. KEEP MUSIC SECONDARY TO INFORMATION
+Especially if voice-over is used.
+
+79. ALIGN VOICE-OVER WITH VISUALS
+Do not describe a feature while showing something unrelated.
+
+80. KEEP VOICE-OVER REALISTIC FOR THE DURATION
+
+81. CONTROL VISIBLE TEXT
+Keep on-screen wording short.
+
+82. PRESERVE EXACT PRICES
+Do not alter supplied prices.
+
+83. PRESERVE EXACT DISCOUNTS
+Do not invent or modify offers.
+
+84. DO NOT CREATE FALSE URGENCY
+No unsupported:
+Today only
+Last chance
+Ends tonight
+Hurry
+
+85. DO NOT CREATE FALSE SCARCITY
+No unsupported:
+Only a few left
+Limited stock
+Almost sold out
+
+86. DO NOT INVENT RATINGS
+
+87. DO NOT INVENT TESTIMONIALS
+
+88. DO NOT INVENT AWARDS
+
+89. DO NOT INVENT CERTIFICATIONS
+
+90. DO NOT INVENT CUSTOMER NUMBERS
+
+91. DO NOT INVENT PERFORMANCE CLAIMS
+Avoid unsupported:
+2x faster
+50% better
+Guaranteed
+Best in market
+Number one
+
+92. PRESERVE QUALIFIERS
+Keep:
+Can
+May
+Designed to
+Up to
+Approximately
+
+when supplied.
+
+93. DO NOT TURN A POSSIBILITY INTO A GUARANTEE
+
+94. AVOID GENERIC AI VISUAL EFFECTS
+Do not automatically add:
+Holograms
+Neon circuits
+Floating particles
+Magic transformations
+
+95. USE EFFECTS ONLY WHEN RELEVANT TO THE PRODUCT
+
+96. CREATE TARGETED NEGATIVE CONSTRAINTS
+Use relevant protections such as:
+No product redesign
+No duplicate product
+No random label text
+No fake logo
+No distorted hands
+No warped packaging
+No unsupported claims
+No watermark
+
+97. CREATE A CLAIM CHECK
+Identify all product claims that depend on supplied evidence.
+
+98. CREATE A PRODUCT FIDELITY CHECK
+Verify the generated result against the reference.
+
+99. CREATE A PRE-PUBLISH CHECK
+Confirm:
+Product identity
+Logo
+Packaging
+Offer
+Price
+CTA
+Claims
+Visible text
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- commercial objective is clear
+- target audience is clear
+- one primary benefit dominates
+- benefit is supported
+- product identity is preserved
+- product proportions are accurate
+- packaging is accurate
+- logo is preserved
+- no feature was invented
+- no unsupported benefit was added
+- product remains physically believable
+- hand interaction is realistic
+- camera movement is purposeful
+- lighting reveals the product clearly
+- reflections and shadows are coherent
+- first frame establishes the product
+- final frame feels intentional
+- text is readable
+- price and offer are accurate
+- no fake urgency was added
+- no fake scarcity was added
+- no fake testimonial was added
+- no fake rating was added
+- no unsupported performance claim was added
+- CTA matches the actual next step
+- complete video accurately represents the real product
+
+OUTPUT FORMAT:
+
+1. COMMERCIAL STRATEGY
+Summarize:
+Audience
+Objective
+Primary benefit
+Product focus
+CTA
+
+2. PRODUCT FIDELITY LOCK
+List all visual details that must remain unchanged.
+
+3. VIDEO CONCEPT
+Explain the core commercial idea in 2–4 sentences.
+
+4. SHOT / ACTION PLAN
+For each shot provide:
+Duration
+Product position
+Action
+Camera
+Lighting
+Visible feature
+Transition
+
+5. FULL PRODUCT COMMERCIAL VIDEO PROMPT
+Provide one polished model-ready prompt.
+
+6. AUDIO PLAN
+Specify:
+Music
+Voice-over
+Product sounds
+Ambient sound
+
+7. TEXT & CTA PLAN
+List exact visible wording.
+
+8. NEGATIVE / PROTECTION INSTRUCTIONS
+List only relevant generation risks.
+
+9. CLAIM VERIFICATION
+Identify claims, offer details or numbers that must be checked before publishing.
+
+10. FINAL PRODUCT CHECK
+Confirm:
+Appearance
+Packaging
+Logo
+Features
+Offer
+CTA
+Continuity
+
+IMPORTANT:
+- Treat real product references as the visual source of truth.
+- Sell only real benefits.
+- Do not fabricate features, offers, discounts, ratings, testimonials, certifications or performance results.
+- Preserve packaging and branding.
+- Use controlled commercial lighting and camera movement.
+- Make the product immediately recognizable.
+- Keep the final video persuasive without becoming misleading.`;
+
+const steps = [
+  {
+    title: "Lock the real product first",
+    description:
+      "Define the exact shape, packaging, colours, materials, labels, logo and features before planning cinematic movement around it.",
+  },
+  {
+    title: "Choose one commercial message",
+    description:
+      "Build the video around the strongest credible product benefit rather than trying to advertise every feature at the same time.",
+  },
+  {
+    title: "Plan the hero moment",
+    description:
+      "Decide where the product should look its strongest, whether that is a beauty shot, real-use demonstration, macro detail or final branded composition.",
+  },
+  {
+    title: "Verify claims before publishing",
+    description:
+      "Check visible prices, offers, product features, benefits and CTA wording against the real product information before using the commercial publicly.",
+  },
+];
+
+const example = {
+  input: [
+    "Product: Premium ground coffee in a branded matte-black pouch.",
+    "Audience: Home coffee drinkers.",
+    "Primary benefit: Freshly ground coffee prepared for home brewing.",
+    "Platform: Instagram Reel.",
+    "Duration: 10 seconds.",
+    "Aspect ratio: 9:16.",
+    "Style: Premium cinematic product commercial.",
+    "Action: Pouch hero shot → beans poured → freshly brewed coffee → final product hero.",
+  ],
+
+  output: [
+    "PRODUCT LOCK: Preserve the exact matte-black pouch shape, logo placement, label colours and packaging proportions throughout the video.",
+    "COMMERCIAL IDEA: Begin with a premium hero reveal, transition into a tactile coffee preparation moment, then finish with the pouch beside the prepared cup.",
+    "CAMERA: Use slow controlled push-ins and macro details rather than aggressive motion.",
+    "LIGHTING: Warm directional commercial lighting with controlled highlights on the pouch and natural texture on the coffee.",
+    "PROTECTION: Do not invent origin claims, roast awards, ratings, freshness guarantees, caffeine claims, discounts or packaging details.",
+  ],
+};
+
+const tips = [
+  {
+    title: "The product should survive the cinematography",
+    description:
+      "A dramatic orbit or reflection is not useful if the model changes the packaging, logo or physical design. Protect product fidelity before increasing camera complexity.",
+  },
+  {
+    title: "Demonstration is often stronger than decoration",
+    description:
+      "Showing a real feature or realistic use case can communicate more value than generic particles, light streaks or abstract visual effects.",
+  },
+  {
+    title: "Finish with recognition",
+    description:
+      "Give the product enough clean screen time at the end for viewers to recognize the item, brand and next action.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Product Commercial Video Prompt | KRIYANO"
+  description="Create professional AI product commercial video prompts with product fidelity, camera direction, feature demonstration, branding and claim protection."
+>
+  <PromptPage
+    category="VIDEO GENERATION"
+    title="Product Commercial Video"
+    accentTitle="Prompt."
+    description="Create polished AI product commercials with stronger product fidelity, cinematic presentation, real feature demonstrations and credible advertising claims."
+    meta={[
+      "Free prompt",
+      "Product video",
+      "Commercial",
+    ]}
+    bestFor={[
+      "Product launches",
+      "Social ads",
+      "Food & beverage",
+      "SaaS products",
+      "E-commerce",
+      "Brand campaigns",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Make the real product the hero."
+    introDescription="Lock product identity, choose one credible benefit, plan purposeful camera movement and finish with a strong branded hero shot without inventing features or claims."
+    steps={steps}
+    exampleTitle="Turn a packaged product into a short premium commercial."
+    example={example}
+    tipsTitle="Protect the product before adding cinematic complexity."
+    tips={tips}
+    sidebarTitle="Need a general video sequence?"
+    sidebarDescription="Use KRIYANO's Multi-Scene Video Prompt when the project is story- or process-driven rather than specifically focused on selling a product."
+    warningTitle="A polished commercial can make false claims look credible"
+    warningText="Always verify product features, prices, discounts, ratings, certifications, performance claims and packaging details before publishing. AI-generated presentation should never be treated as product evidence."
+  />
+</BaseLayout>

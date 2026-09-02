@@ -1,0 +1,797 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert thumbnail designer, visual storyteller, audience-attention strategist and AI image-generation prompt specialist.
+
+TASK:
+Create a high-impact thumbnail or cover-image prompt designed for fast recognition, strong mobile readability and clear visual storytelling.
+
+The thumbnail should attract attention without using misleading clickbait, fabricated results or irrelevant visual exaggeration.
+
+PLATFORM:
+[YouTube / Facebook Reel / YouTube Short / TikTok / Instagram Reel / other.]
+
+CONTENT TYPE:
+[Video thumbnail / Reel cover / Short cover / episode cover / tutorial cover / other.]
+
+TOPIC:
+[What is the content about?]
+
+TARGET AUDIENCE:
+[Who should click or watch?]
+
+PRIMARY PROMISE:
+[What real value will the viewer receive?]
+
+MAIN SUBJECT:
+[Person / product / food / object / result / comparison / other.]
+
+SUBJECT DETAILS:
+[Describe accurately.]
+
+CHARACTER REFERENCE:
+[If applicable, describe or provide the reference character.]
+
+EXPRESSION:
+[Excited / curious / confident / surprised / focused / warm / serious / other.]
+
+KEY OBJECT:
+[Optional.]
+
+VISIBLE TEXT:
+[Exact short text or "No visible text".]
+
+BRAND NAME:
+[Optional.]
+
+BRAND COLOURS:
+[Optional.]
+
+VISUAL STYLE:
+[Photorealistic / premium commercial / cinematic / clean professional / food-commercial / bold / editorial / other.]
+
+BACKGROUND:
+[Describe desired environment or graphic treatment.]
+
+COMPOSITION:
+[Subject left / right / centre / split / close-up / forced perspective / other.]
+
+ASPECT RATIO:
+[16:9 / 9:16 / 1:1 / other.]
+
+SAFE AREA:
+[Platform-specific requirements if known.]
+
+CAMERA:
+[Close-up / chest-up / waist-up / product hero / overhead / macro / other.]
+
+LIGHTING:
+[Studio / natural / dramatic / warm / clean commercial / other.]
+
+REFERENCE IMAGE REQUIREMENTS:
+[What must remain unchanged?]
+
+ELEMENTS TO AVOID:
+[Optional.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+THUMBNAIL DESIGN REQUIREMENTS:
+
+1. DEFINE THE THUMBNAIL'S JOB
+The thumbnail should help a viewer understand enough of the content promise to decide whether to watch.
+
+2. OPTIMIZE FOR SMALL-SCREEN VIEWING
+Assume the thumbnail will often appear very small.
+
+3. ONE PRIMARY IDEA
+Do not try to communicate the entire video inside the image.
+
+4. IDENTIFY THE MAIN VISUAL HOOK
+Choose the strongest:
+
+Person
+Expression
+Product
+Food
+Problem
+Result
+Contrast
+Question
+Unexpected visual
+
+that genuinely relates to the content.
+
+5. AVOID RANDOM ATTENTION-BAIT
+Do not add unrelated:
+
+Explosions
+Money
+Arrows
+Shocked faces
+Fire
+Warning symbols
+
+unless they genuinely support the topic.
+
+6. CREATE A CLEAR FOCAL POINT
+The eye should immediately land on the most important subject.
+
+7. MAKE THE MAIN SUBJECT LARGE
+Avoid tiny subjects that disappear at thumbnail size.
+
+8. CONTROL SUBJECT COUNT
+Prefer one dominant subject or a simple two-part comparison.
+
+9. DO NOT OVERCROWD
+Avoid too many:
+
+People
+Products
+Icons
+Labels
+Text blocks
+Decorative elements
+
+10. USE STRONG VISUAL HIERARCHY
+Typical priority:
+
+Main subject
+Key object / result
+Headline text
+Supporting element
+Brand
+
+11. DESIGN FOR MOBILE FIRST
+Check whether the main idea remains clear when mentally reduced to a small phone-screen preview.
+
+12. USE HIGH CONTRAST
+Separate the focal subject from the background using:
+
+Light
+Colour
+Depth
+Scale
+Negative space
+
+13. DO NOT RELY ON TINY DETAIL
+Small labels, fine interface elements or complex background information will disappear.
+
+14. KEEP TEXT SHORT
+Prefer approximately 2–6 strong words when text is necessary.
+
+15. DO NOT REPEAT THE FULL VIDEO TITLE
+Thumbnail text should complement the title rather than duplicate a long sentence.
+
+16. PRESERVE EXACT SUPPLIED TEXT
+If the user gives exact wording, do not rewrite it unless requested.
+
+17. DO NOT INVENT RANDOM TEXT
+Avoid meaningless AI-generated signs, labels or lettering.
+
+18. CREATE TEXT HIERARCHY
+If multiple text elements are unavoidable:
+
+Primary phrase
+Secondary phrase
+Brand
+
+19. KEEP TEXT LARGE
+Typography should remain readable at reduced size.
+
+20. USE SIMPLE TYPOGRAPHY
+Prefer bold, clean, high-legibility treatment.
+
+21. LIMIT FONT VARIETY
+Avoid mixing many unrelated styles.
+
+22. KEEP TEXT AWAY FROM BUSY DETAILS
+Use clear negative space.
+
+23. KEEP TEXT AWAY FROM IMPORTANT FACIAL FEATURES
+Do not cover:
+
+Eyes
+Mouth
+Key expression
+Important product details
+
+24. USE SAFE MARGINS
+Keep important elements away from edges that may be cropped.
+
+25. VERTICAL COVER MODE
+For Reels and Shorts, keep important content within the central safe zone.
+
+26. YOUTUBE 16:9 MODE
+Use strong horizontal composition with large recognizable subject matter.
+
+27. FACEBOOK REEL COVER MODE
+Prioritize vertical readability and ensure the central crop still works.
+
+28. SHORTS COVER MODE
+Keep the primary subject and core text near the centre.
+
+29. SPLIT-COMPARISON MODE
+For before/after or A/B concepts:
+
+Use clear visual separation
+Keep each side simple
+Do not fabricate differences
+
+30. DO NOT CREATE FAKE BEFORE / AFTER RESULTS
+Only visualize transformations supported by actual content.
+
+31. CHARACTER THUMBNAIL MODE
+If a creator or presenter appears:
+
+Keep the face large
+Preserve identity
+Use an expression appropriate to the actual content
+
+32. DO NOT REDESIGN A REFERENCE PERSON
+When a character reference is supplied, preserve:
+
+Face
+Skin tone
+Hair
+Age appearance
+Distinctive features
+
+33. DO NOT OVER-BEAUTIFY
+Avoid:
+
+Plastic skin
+Face reshaping
+Extreme smoothing
+Unrealistic teeth
+Generic influencer appearance
+
+34. EXPRESSION MUST MATCH THE CONTENT
+Do not use extreme shock for ordinary informational topics.
+
+35. CONTROL EYE DIRECTION
+The character may look:
+
+At camera
+At product
+At text
+At result
+
+to guide viewer attention.
+
+36. USE GAZE AS COMPOSITION
+Where useful, direct the subject's gaze toward the key object or message.
+
+37. USE HAND GESTURES PURPOSEFULLY
+Pointing, presenting or holding should support the story.
+
+38. KEEP HAND ANATOMY REALISTIC
+Require:
+
+Correct fingers
+Natural grip
+Believable joint position
+
+39. FOOD THUMBNAIL MODE
+Prioritize:
+
+Texture
+Moisture
+Freshness
+Colour
+Steam
+Gloss
+Cut surface
+Serving detail
+
+where relevant.
+
+40. DO NOT ALTER THE REAL DISH IDENTITY
+If reference food is supplied, preserve:
+
+Shape
+Layering
+Texture
+Colour
+Toppings
+Serving style
+
+41. PRODUCT THUMBNAIL MODE
+Keep the actual product:
+
+Shape
+Colour
+Packaging
+Material
+Proportions
+
+accurate.
+
+42. DO NOT INVENT PRODUCT FEATURES
+No imaginary buttons, accessories or packaging details.
+
+43. TUTORIAL THUMBNAIL MODE
+Show:
+
+Problem
+Tool
+Result
+Process clue
+
+without making the frame too complex.
+
+44. BUSINESS THUMBNAIL MODE
+Use:
+
+Clean visual hierarchy
+Strong contrast
+Professional styling
+Relevant workplace context
+
+45. TECH THUMBNAIL MODE
+Use actual topic-related visual cues rather than generic neon AI imagery.
+
+46. AI CONTENT MODE
+Avoid automatically using:
+
+Robot heads
+Glowing brains
+Circuits
+Random holograms
+
+unless directly relevant.
+
+47. RESULTS-BASED THUMBNAIL MODE
+If the content has a real measurable result, show only supplied values.
+
+48. DO NOT INVENT METRICS
+Never create unsupported:
+
+Revenue
+Views
+Percentages
+Savings
+Weight loss
+Performance improvements
+
+49. DO NOT INVENT SOCIAL PROOF
+Avoid fake:
+
+Subscriber numbers
+Ratings
+Comments
+Testimonials
+Awards
+
+50. DO NOT CREATE FALSE URGENCY
+Avoid:
+
+Watch now
+Before it's gone
+Last chance
+Urgent
+
+unless genuinely supported.
+
+51. DO NOT CREATE FALSE SCARCITY
+Never invent limited quantities or availability.
+
+52. CREATE CURIOSITY THROUGH INFORMATION GAPS
+Show enough to make the viewer want the explanation.
+
+53. DO NOT HIDE THE CONTENT BEHIND DECEPTION
+Curiosity should not misrepresent what the viewer will receive.
+
+54. USE CONTRAST PURPOSEFULLY
+Contrast can come from:
+
+Colour
+Scale
+Before/after
+Old/new
+Problem/solution
+Simple/complex
+
+only where relevant.
+
+55. USE COLOUR PURPOSEFULLY
+Control a limited visual palette.
+
+56. USE ACCENT COLOUR FOR EMPHASIS
+Highlight:
+
+Important text
+Key object
+Result
+Comparison point
+
+57. DO NOT MAKE EVERYTHING BRIGHT
+If every element is emphasized, nothing becomes the focal point.
+
+58. BACKGROUND SHOULD SUPPORT THE SUBJECT
+Avoid backgrounds that compete with the main idea.
+
+59. USE BACKGROUND BLUR CAREFULLY
+Blur should improve separation without making the scene fake.
+
+60. USE LIGHTING TO DIRECT ATTENTION
+Place strongest useful light on the primary subject.
+
+61. KEEP SKIN COLOUR NATURAL
+Avoid unnatural colour casts.
+
+62. CONTROL HIGHLIGHTS
+Avoid blown-out facial or product areas.
+
+63. CONTROL SHADOWS
+Keep facial details readable.
+
+64. USE FORCED PERSPECTIVE WHEN HELPFUL
+Foreground objects can appear larger for emphasis, but anatomy and product proportions should remain believable.
+
+65. DO NOT DISTORT THE FACE WITH PERSPECTIVE
+Maintain recognizability.
+
+66. USE DEPTH
+Separate:
+
+Foreground
+Subject
+Background
+
+to improve clarity.
+
+67. DO NOT CREATE VISUAL CLUTTER
+Remove elements that do not help explain or sell the content idea.
+
+68. USE ARROWS SPARINGLY
+Only use an arrow when it meaningfully directs attention to something that is not otherwise obvious.
+
+69. AVOID RED CIRCLES WITHOUT PURPOSE
+Do not automatically mimic low-quality clickbait conventions.
+
+70. USE GRAPHIC SHAPES PURPOSEFULLY
+Simple:
+
+Panels
+Gradients
+Frames
+Lines
+
+may improve hierarchy.
+
+71. KEEP STYLE CONSISTENT
+Do not combine unrelated:
+
+Photorealism
+Cartoon
+3D
+Vector
+Sketch
+
+without intentional direction.
+
+72. PRESERVE BRAND CONSISTENCY
+Use supplied:
+
+Colours
+Typography style
+Logo
+Character styling
+
+73. DO NOT REDESIGN THE LOGO
+Use the provided identity accurately.
+
+74. KEEP BRANDING SECONDARY
+The content promise should usually dominate.
+
+75. CREATE A THUMBNAIL STORY
+The viewer should be able to infer:
+
+What is happening?
+What is unusual?
+Why should I care?
+
+76. VISUALIZE THE CONTENT, NOT THE TITLE
+Instead of merely writing words, create an image that supports the concept.
+
+77. USE OBJECT RELATIONSHIPS
+Examples:
+
+Person presenting product
+Hand revealing result
+Tool next to problem
+Finished food beside ingredients
+
+78. PRIORITIZE EMOTION WHEN HUMAN-LED
+Human expressions can be strong attention anchors when authentic to the topic.
+
+79. PRIORITIZE RESULT WHEN RESULT-LED
+The finished result may be stronger than the creator's face for some content.
+
+80. PRIORITIZE PRODUCT WHEN PRODUCT-LED
+Keep packaging and form accurate.
+
+81. PRIORITIZE TEXT ONLY WHEN TEXT IS THE CONTENT
+Do not make thumbnails unnecessarily typography-heavy.
+
+82. CREATE DEPTH WITHOUT VISUAL NOISE
+Use:
+
+Lighting
+Scale
+Overlap
+Controlled shadow
+
+83. CONTROL CROPPING
+Avoid cutting off:
+
+Chin awkwardly
+Hands at joints
+Product labels
+Critical food features
+
+84. ALLOW INTENTIONAL EDGE CROPPING
+Large faces or products may extend beyond the frame when compositionally useful.
+
+85. KEEP CRITICAL FEATURES VISIBLE
+Intentional crop must not destroy recognizability.
+
+86. AVOID EMPTY DECORATIVE SPACES
+Negative space should serve:
+
+Text
+Breathing room
+Balance
+Focus
+
+87. CREATE A COMPOSITION MAP
+Define:
+
+Subject zone
+Object/result zone
+Text zone
+Brand zone
+Safe zone
+
+88. CREATE ONE PRIMARY VERSION
+Produce one strong concept rather than many weak ideas.
+
+89. CREATE OPTIONAL A/B VARIATION
+Where useful, change one major variable:
+
+Expression
+Object
+Text hook
+Composition
+
+while preserving the same content promise.
+
+90. DO NOT TEST EVERYTHING AT ONCE
+A/B variants should differ clearly enough to learn something.
+
+91. CREATE THE FINAL MODEL-READY PROMPT
+Include:
+
+Subject
+Action
+Expression
+Composition
+Camera
+Lighting
+Background
+Text
+Aspect ratio
+Quality
+Constraints
+
+92. INCLUDE EXACT TEXT IN QUOTATION MARKS
+When visible copy is requested, clearly identify the exact words.
+
+93. INCLUDE NEGATIVE CONSTRAINTS
+Use relevant instructions such as:
+
+No random text
+No extra people
+No distorted hands
+No fake logos
+No watermark
+No duplicate subject
+No product redesign
+
+94. KEEP NEGATIVE PROMPTS FOCUSED
+Avoid huge unrelated keyword lists.
+
+95. CREATE A THUMBNAIL-SIZE TEST
+Ask whether the core idea remains understandable at very small size.
+
+96. CREATE A TITLE-COMPLEMENT TEST
+Check whether thumbnail text adds something useful instead of simply repeating the title.
+
+97. CREATE A TRUTHFULNESS CHECK
+Verify the visual does not imply:
+
+A result not shown in the content
+A product feature that does not exist
+A reaction that misrepresents the topic
+A comparison unsupported by evidence
+
+98. CREATE A PLATFORM-CROP CHECK
+Confirm important details remain visible under expected platform cropping.
+
+99. CREATE A BRAND CHECK
+Ensure colours, identity and visual language remain consistent.
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- platform is defined
+- aspect ratio is correct
+- one primary idea dominates
+- focal subject is large enough
+- thumbnail works at small size
+- text is short
+- text is readable
+- exact wording is preserved
+- title and thumbnail complement each other
+- safe margins are respected
+- key subject is not accidentally cropped
+- facial expression matches the content
+- character identity is preserved
+- product or food identity is preserved
+- hands are anatomically plausible
+- background is controlled
+- contrast is strong
+- no fake results were added
+- no fake metrics were added
+- no fake testimonials or ratings were added
+- no false urgency or scarcity was added
+- no meaningless AI text appears
+- the thumbnail accurately represents the content
+
+OUTPUT FORMAT:
+
+1. THUMBNAIL STRATEGY
+Explain the main click-driving visual idea.
+
+2. PRIMARY VISUAL HOOK
+Describe the strongest attention element.
+
+3. COMPOSITION MAP
+Specify:
+
+Main subject
+Secondary object / result
+Text
+Brand
+Negative space
+Safe area
+
+4. FULL IMAGE GENERATION PROMPT
+Provide one polished model-ready prompt.
+
+5. TEXT & TYPOGRAPHY INSTRUCTIONS
+Include exact visible text and placement.
+
+6. NEGATIVE / PROTECTION INSTRUCTIONS
+List only relevant restrictions.
+
+7. OPTIONAL A/B VERSION
+Provide one meaningful alternative concept.
+
+8. MOBILE THUMBNAIL CHECK
+Explain what should remain recognizable at small size.
+
+9. TRUTHFULNESS CHECK
+Identify anything that must be verified against the actual content.
+
+IMPORTANT:
+- Optimize for small-screen and thumbnail viewing.
+- Communicate one strong visual idea.
+- Keep text short and readable.
+- Use curiosity without misleading clickbait.
+- Preserve reference people, food and products accurately.
+- Do not invent results, metrics, testimonials, ratings or product features.
+- Do not create false urgency or scarcity.
+- Design specifically for the selected platform and aspect ratio.`;
+
+const steps = [
+  {
+    title: "Find the one reason to click",
+    description:
+      "Choose the strongest real promise, result, problem or visual moment from the content instead of trying to summarize the whole video in one image.",
+  },
+  {
+    title: "Build around one large focal point",
+    description:
+      "Use a large face, product, food result or key object that still reads clearly when the thumbnail is reduced to mobile size.",
+  },
+  {
+    title: "Use text only when it adds value",
+    description:
+      "Keep visible wording short and let it complement the title instead of repeating a full headline across the artwork.",
+  },
+  {
+    title: "Check truth and crop before publishing",
+    description:
+      "Make sure the visual accurately represents the content and that platform cropping does not remove faces, products, text or other critical information.",
+  },
+];
+
+const example = {
+  input: [
+    "Platform: Facebook Reel cover.",
+    "Topic: Sri Lankan coconut cake recipe.",
+    "Main subject: Female recipe creator presenting one freshly cut cake square.",
+    "Key visual: Moist coconut cake with visible texture and glossy treacle finish.",
+    "Composition: Creator on the right, cake hero in the foreground.",
+    "Style: Premium photorealistic food-commercial.",
+    "Aspect ratio: 9:16.",
+  ],
+
+  output: [
+    "THUMBNAIL STRATEGY: Make the finished cake the appetite-driving hero while the creator adds human recognition and presentation.",
+    "VISUAL HOOK: Use a close foreground cake piece with highly visible moist coconut texture while the creator presents it naturally from the right side.",
+    "COMPOSITION: Keep both the face and cake inside the central vertical safe zone, leaving clean space for a short title if required.",
+    "PROTECTION: Preserve the creator's identity and the real dish structure; do not create extra cake layers, random toppings, distorted hands or meaningless text.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Judge it at tiny size",
+    description:
+      "Zooming in can make almost any design look impressive. The better test is whether the subject, emotion and message remain obvious when the image is very small.",
+  },
+  {
+    title: "Curiosity does not require deception",
+    description:
+      "You can create tension, comparison or an unanswered visual question without showing results or reactions that never appear in the actual content.",
+  },
+  {
+    title: "The title and thumbnail should work together",
+    description:
+      "Use the thumbnail to add visual information or emotion rather than wasting space by repeating the exact same long title.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Thumbnail Design Prompt | KRIYANO"
+  description="Create high-impact AI thumbnail and cover prompts with stronger mobile readability, focal-point hierarchy, safe zones and truthful visual hooks."
+>
+  <PromptPage
+    category="IMAGE GENERATION"
+    title="Thumbnail Design"
+    accentTitle="Prompt."
+    description="Create stronger video thumbnails and Reel covers with clear focal points, mobile-first readability, platform-safe composition and truthful visual hooks."
+    meta={[
+      "Free prompt",
+      "Thumbnail design",
+      "Video covers",
+    ]}
+    bestFor={[
+      "YouTube thumbnails",
+      "Facebook Reels",
+      "YouTube Shorts",
+      "Recipe covers",
+      "Creator content",
+      "Tutorial videos",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Make the content understandable before the viewer reads the title."
+    introDescription="Build the thumbnail around one strong visual promise using subject scale, expression, contrast, limited text and platform-aware safe zones."
+    steps={steps}
+    exampleTitle="Turn a recipe result into a strong vertical Reel cover."
+    example={example}
+    tipsTitle="Create attention without falling into generic clickbait."
+    tips={tips}
+    sidebarTitle="Creating a regular social graphic?"
+    sidebarDescription="Use KRIYANO's Social Media Visual Prompt when the image is primarily a feed post, announcement, educational visual or branded graphic rather than a video thumbnail."
+    warningTitle="High click-through does not justify misleading imagery"
+    warningText="The thumbnail should create interest while accurately representing the content. Verify any visible result, number, comparison, product feature or transformation before publishing."
+  />
+</BaseLayout>

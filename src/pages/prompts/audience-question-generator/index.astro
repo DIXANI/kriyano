@@ -1,0 +1,858 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert audience researcher, content strategist, customer-insight analyst and FAQ planner.
+
+TASK:
+Generate a structured bank of useful audience questions for the supplied niche, business, product, service, creator or topic.
+
+The goal is to identify the real questions people may ask across:
+- discovery
+- education
+- problem-solving
+- comparison
+- trust
+- objections
+- buying decisions
+- usage
+- retention
+- engagement
+
+Do NOT invent evidence that these questions are actually being searched or asked unless verified data is provided.
+
+Treat generated questions as:
+- likely questions
+- useful research prompts
+- content opportunities
+- FAQ candidates
+
+unless actual customer, search, support or research data is supplied.
+
+NICHE / TOPIC:
+[What is the subject?]
+
+BUSINESS / CREATOR:
+[Optional.]
+
+TARGET AUDIENCE:
+[Who are they?]
+
+AUDIENCE ROLE:
+[For example: small-business owner / warehouse supervisor / beginner creator / customer / manager.]
+
+AUDIENCE KNOWLEDGE LEVEL:
+[Beginner / intermediate / advanced / mixed.]
+
+AUDIENCE PROBLEMS:
+[List known problems.]
+
+AUDIENCE GOALS:
+[List desired outcomes.]
+
+PRODUCT / SERVICE:
+[Optional.]
+
+VALUE PROPOSITION:
+[Optional.]
+
+CUSTOMER JOURNEY STAGE:
+[Discovery / consideration / purchase / onboarding / usage / retention / mixed.]
+
+CONTENT OBJECTIVE:
+[Education / SEO research / social content / FAQ / sales support / product research / engagement / other.]
+
+PLATFORMS:
+[Blog / YouTube / LinkedIn / Facebook / Instagram / TikTok / email / website / support centre / other.]
+
+KNOWN CUSTOMER QUESTIONS:
+[Paste real questions if available.]
+
+SEARCH DATA:
+[Optional: verified search terms, query data or search-console information.]
+
+SUPPORT / SALES DATA:
+[Optional: support tickets, objections, sales questions or feedback.]
+
+TOPICS TO INCLUDE:
+[Optional.]
+
+TOPICS TO AVOID:
+[Optional.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+AUDIENCE QUESTION REQUIREMENTS:
+
+1. START WITH AUDIENCE CONTEXT
+
+2. IDENTIFY:
+Role
+Knowledge level
+Primary problem
+Desired outcome
+Decision stage
+
+3. DISTINGUISH VERIFIED QUESTIONS FROM GENERATED QUESTIONS
+
+4. IF REAL QUESTIONS ARE PROVIDED
+Label them as:
+Verified audience question
+
+5. IF QUESTIONS ARE INFERRED
+Label them as:
+Suggested audience question
+
+6. DO NOT CLAIM GENERATED QUESTIONS ARE:
+Frequently searched
+Trending
+Popular
+Commonly asked
+High-volume
+
+unless evidence is supplied.
+
+7. DO NOT INVENT SEARCH VOLUME
+
+8. DO NOT INVENT KEYWORD DATA
+
+9. DO NOT INVENT CUSTOMER INTERVIEWS
+
+10. DO NOT INVENT SUPPORT TICKET FREQUENCY
+
+11. DO NOT INVENT SALES OBJECTIONS
+
+12. GROUP QUESTIONS BY PURPOSE
+
+13. CREATE DISCOVERY QUESTIONS
+
+14. DISCOVERY QUESTIONS SHOULD HELP REVEAL:
+What is this?
+Why does this matter?
+Do I have this problem?
+What should I know first?
+
+15. CREATE BEGINNER QUESTIONS
+
+16. EXAMPLES OF BEGINNER INTENT:
+Definition
+Basic process
+Terminology
+First step
+Simple mistake
+
+17. CREATE EDUCATIONAL QUESTIONS
+
+18. EDUCATIONAL QUESTIONS SHOULD SUPPORT:
+Learning
+Understanding
+Skill development
+Process knowledge
+
+19. CREATE PROBLEM-SOLVING QUESTIONS
+
+20. STRUCTURE AROUND:
+Symptom
+Cause
+Diagnosis
+Correction
+Prevention
+
+21. CREATE "WHY" QUESTIONS
+
+22. USE THEM FOR:
+Causes
+Reasons
+Trade-offs
+Consequences
+
+23. CREATE "HOW" QUESTIONS
+
+24. USE THEM FOR:
+Processes
+Methods
+Implementation
+Troubleshooting
+
+25. CREATE "WHAT" QUESTIONS
+
+26. USE THEM FOR:
+Definitions
+Options
+Requirements
+Examples
+
+27. CREATE "WHEN" QUESTIONS
+
+28. USE THEM FOR:
+Timing
+Triggers
+Decision points
+Conditions
+
+29. CREATE "WHICH" QUESTIONS
+
+30. USE THEM FOR:
+Selection
+Comparison
+Prioritization
+
+31. CREATE COMPARISON QUESTIONS
+
+32. COMPARISON QUESTIONS SHOULD ADDRESS REAL DECISION DIFFERENCES
+
+33. EXAMPLES:
+Option A vs Option B
+Manual vs automated
+Simple vs advanced
+Tool vs spreadsheet
+
+34. DO NOT CREATE FALSE COMPARISONS
+
+35. CREATE BUYING-DECISION QUESTIONS
+
+36. POSSIBLE AREAS:
+Price
+Fit
+Features
+Setup
+Support
+Compatibility
+Time required
+Risk
+Alternatives
+
+37. DO NOT INVENT PRODUCT FEATURES OR PRICING
+
+38. CREATE OBJECTION QUESTIONS
+
+39. POSSIBLE OBJECTIONS:
+Cost
+Complexity
+Trust
+Time
+Need
+Risk
+Switching
+Approval
+
+40. DO NOT ASSUME EVERY AUDIENCE HAS EVERY OBJECTION
+
+41. CREATE TRUST QUESTIONS
+
+42. POSSIBLE TRUST QUESTIONS:
+How does it work?
+What data is needed?
+What are the limitations?
+What support exists?
+What evidence supports the claim?
+
+43. CREATE IMPLEMENTATION QUESTIONS
+
+44. POSSIBLE:
+How do I start?
+What do I need?
+Who should be involved?
+How long does setup take?
+What can go wrong?
+
+45. DO NOT INVENT IMPLEMENTATION TIMES
+
+46. CREATE TROUBLESHOOTING QUESTIONS
+
+47. USE:
+What went wrong?
+Why did this happen?
+What should I check?
+How can I correct it?
+How can I prevent recurrence?
+
+48. CREATE USAGE QUESTIONS
+
+49. POSSIBLE:
+How often?
+How much?
+Which setting?
+Which workflow?
+What should I monitor?
+
+50. CREATE ADVANCED QUESTIONS
+
+51. ADVANCED QUESTIONS MAY COVER:
+Trade-offs
+Optimization
+Exceptions
+Integration
+Measurement
+Decision-making
+
+52. DO NOT MAKE ADVANCED QUESTIONS COMPLEX JUST FOR APPEARANCE
+
+53. CREATE STRATEGIC QUESTIONS
+
+54. STRATEGIC QUESTIONS MAY COVER:
+Prioritization
+ROI
+Risk
+Scaling
+Process design
+Resource allocation
+
+55. DO NOT INVENT ROI
+
+56. CREATE FAQ QUESTIONS
+
+57. FAQ QUESTIONS SHOULD BE ANSWERABLE CLEARLY
+
+58. AVOID VAGUE FAQS SUCH AS:
+"Why are we the best?"
+
+59. CREATE CONTENT QUESTIONS
+
+60. TURN AUDIENCE QUESTIONS INTO:
+Article ideas
+Video ideas
+Short-form topics
+Carousel ideas
+Email topics
+
+61. DO NOT ASSUME EVERY QUESTION NEEDS A FULL ARTICLE
+
+62. CREATE SHORT-FORM-FRIENDLY QUESTIONS
+
+63. SHORT-FORM QUESTIONS SHOULD:
+Focus on one issue
+Have a clear answer
+Be understandable quickly
+
+64. CREATE LONG-FORM QUESTIONS
+
+65. LONG-FORM QUESTIONS MAY:
+Require explanation
+Compare multiple options
+Need a process
+Need examples
+
+66. CREATE SOCIAL ENGAGEMENT QUESTIONS
+
+67. ENGAGEMENT QUESTIONS SHOULD INVITE:
+Experience
+Preference
+Opinion
+Problem sharing
+Decision reasoning
+
+68. DO NOT USE EMPTY ENGAGEMENT BAIT
+
+69. AVOID:
+"Agree?"
+"Yes or no?"
+"Who else?"
+
+unless the context makes them useful.
+
+70. CREATE CUSTOMER-RESEARCH QUESTIONS
+
+71. RESEARCH QUESTIONS SHOULD HELP LEARN:
+Context
+Current process
+Pain
+Workaround
+Impact
+Desired outcome
+Decision criteria
+
+72. DO NOT LEAD THE RESPONDENT
+
+73. BAD:
+"How frustrating is your terrible inventory system?"
+
+74. BETTER:
+"What happens when the stock shown in the system does not match the physical quantity?"
+
+75. CREATE INTERVIEW QUESTIONS
+
+76. OPEN-ENDED QUESTIONS SHOULD BE USED FOR DISCOVERY
+
+77. EXAMPLE:
+"Walk me through what you normally do when this happens."
+
+78. CREATE SURVEY QUESTIONS CAREFULLY
+
+79. KEEP SURVEY QUESTIONS NEUTRAL
+
+80. DO NOT COMBINE TWO QUESTIONS INTO ONE WHEN POSSIBLE
+
+81. CREATE SALES-DISCOVERY QUESTIONS WHEN RELEVANT
+
+82. POSSIBLE:
+What process do you use today?
+What is not working?
+What happens when the issue occurs?
+Who is affected?
+What matters most in a solution?
+
+83. DO NOT MANIPULATE THE USER TOWARD A SALE
+
+84. CREATE SUPPORT-FAQ QUESTIONS WHEN RELEVANT
+
+85. POSSIBLE:
+How do I set this up?
+Why am I seeing this?
+Can I change this?
+What data is required?
+How do I correct this?
+
+86. CREATE POST-PURCHASE QUESTIONS
+
+87. POSSIBLE:
+How do I get started?
+What should I do first?
+How do I get more value?
+What mistakes should I avoid?
+
+88. CREATE RETENTION QUESTIONS
+
+89. POSSIBLE:
+What should I review regularly?
+What advanced feature should I try next?
+How do I improve results?
+
+90. DO NOT CREATE FAKE CUSTOMER SUCCESS QUESTIONS
+
+91. CREATE QUESTION CLUSTERS
+
+92. GROUP RELATED QUESTIONS UNDER A MAIN TOPIC
+
+93. EXAMPLE:
+Inventory discrepancy
+→ Why does it happen?
+→ What should I check first?
+→ When should I adjust stock?
+→ How do I prevent recurrence?
+
+94. IDENTIFY PARENT QUESTIONS
+
+95. IDENTIFY SUPPORTING QUESTIONS
+
+96. CREATE A QUESTION JOURNEY
+
+97. EXAMPLE:
+What is it?
+Why does it matter?
+How does it work?
+Which option should I choose?
+How do I implement it?
+How do I troubleshoot it?
+
+98. CREATE QUESTIONS BY AWARENESS STAGE
+
+99. UNAWARE:
+Questions around situations and symptoms.
+
+100. PROBLEM-AWARE:
+Questions around causes and solutions.
+
+101. SOLUTION-AWARE:
+Questions around approaches and comparisons.
+
+102. PRODUCT-AWARE:
+Questions around fit, features, usage and objections.
+
+103. MOST-AWARE:
+Questions around next steps, pricing, availability and implementation when verified.
+
+104. DO NOT INVENT OFFERS OR AVAILABILITY
+
+105. CREATE QUESTIONS BY FUNNEL STAGE
+
+106. TOP OF FUNNEL:
+Educational and discovery.
+
+107. MIDDLE OF FUNNEL:
+Comparison, process, trust and objections.
+
+108. BOTTOM OF FUNNEL:
+Fit, implementation and purchase decision.
+
+109. POST-PURCHASE:
+Usage, optimization and troubleshooting.
+
+110. CREATE QUESTIONS BY KNOWLEDGE LEVEL
+
+111. BEGINNER:
+Plain language.
+
+112. INTERMEDIATE:
+Process and decision questions.
+
+113. ADVANCED:
+Trade-offs, exceptions and optimization.
+
+114. REMOVE DUPLICATES
+
+115. MERGE QUESTIONS WITH THE SAME INTENT
+
+116. DO NOT KEEP NEAR-IDENTICAL QUESTIONS JUST TO INCREASE THE COUNT
+
+117. IDENTIFY HIGH-VALUE QUESTIONS
+
+118. PRIORITIZE USING:
+Audience relevance
+Problem severity
+Decision importance
+Content usefulness
+Business relevance
+
+119. USE:
+High
+Medium
+Low
+
+120. DO NOT CREATE FALSE NUMERICAL SCORES
+
+121. IDENTIFY QUESTIONS NEEDING FACT CHECKING
+
+122. FLAG QUESTIONS INVOLVING:
+Current statistics
+Laws
+Regulations
+Health
+Finance
+Safety
+Product specifications
+Current platform features
+Prices
+
+123. IDENTIFY QUESTIONS REQUIRING REAL CUSTOMER RESEARCH
+
+124. EXAMPLES:
+Why do customers choose competitor A?
+What is the most common objection?
+Which feature matters most?
+
+125. DO NOT ANSWER THESE AS FACT WITHOUT DATA
+
+126. MARK:
+Research required
+
+127. CREATE QUESTION-TO-CONTENT MAPPING
+
+128. FOR EACH HIGH-VALUE QUESTION RECOMMEND:
+Short video
+Article
+FAQ
+Carousel
+Post
+Email
+Guide
+Tool
+
+129. MATCH FORMAT TO QUESTION DEPTH
+
+130. SIMPLE QUESTIONS MAY NEED SHORT CONTENT
+
+131. COMPLEX QUESTIONS MAY NEED LONG-FORM CONTENT
+
+132. CREATE SEO RESEARCH STARTING POINTS
+
+133. TURN QUESTIONS INTO NATURAL SEARCH-STYLE PHRASES
+
+134. DO NOT CLAIM SEARCH DEMAND
+
+135. LABEL THEM:
+Keyword / search-query candidates
+
+136. CREATE YOUTUBE QUESTION IDEAS
+
+137. CREATE SOCIAL QUESTION IDEAS
+
+138. CREATE FAQ PAGE QUESTIONS
+
+139. CREATE EMAIL TOPIC QUESTIONS
+
+140. CREATE PRODUCT-RESEARCH QUESTIONS
+
+141. IDENTIFY CONTENT GAPS
+
+142. ASK:
+Which important audience problem has no useful question coverage?
+
+143. IDENTIFY QUESTION GAPS BY:
+Problem
+Journey stage
+Knowledge level
+Format
+
+144. CREATE VALIDATION METHODS
+
+145. RECOMMEND VALIDATING QUESTIONS THROUGH:
+Customer interviews
+Support tickets
+Sales calls
+On-site search
+Search Console
+Keyword research tools
+Comments
+Community discussions
+Surveys
+
+146. DO NOT CLAIM VALIDATION HAS OCCURRED
+
+147. CREATE A MINIMUM RESEARCH PLAN
+
+148. IDENTIFY THE 5–10 QUESTIONS THAT SHOULD BE validated first.
+
+149. CREATE AN UPDATE PROCESS
+
+150. AUDIENCE QUESTIONS SHOULD EVOLVE BASED ON:
+New customer feedback
+Search data
+Support patterns
+Sales objections
+Product changes
+
+151. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- questions match the target audience
+- knowledge level is considered
+- journey stage is considered
+- generated questions are not presented as verified demand
+- real questions are distinguished from suggested questions
+- search volume is not invented
+- customer frequency is not invented
+- questions are specific
+- duplicate intent is removed
+- beginner and advanced needs are balanced
+- problem-solving questions are included
+- comparison questions are included when relevant
+- objections are included when relevant
+- FAQ questions are useful
+- research questions are neutral
+- content opportunities are mapped
+- high-value questions are prioritized
+- fact-sensitive questions are flagged
+- research gaps are clearly identified
+
+OUTPUT FORMAT:
+
+1. AUDIENCE SNAPSHOT
+Provide:
+Audience
+Role
+Knowledge level
+Primary problems
+Desired outcomes
+Journey stage
+
+2. VERIFIED QUESTION INPUTS
+List any actual supplied audience questions separately.
+
+3. QUESTION THEMES
+Identify the main question clusters.
+
+4. MASTER QUESTION BANK
+
+For each question provide:
+Question
+Category
+Audience stage
+Knowledge level
+Intent
+Source status
+Priority
+
+Use source status:
+Verified audience question
+Suggested audience question
+
+5. DISCOVERY QUESTIONS
+
+6. EDUCATIONAL QUESTIONS
+
+7. PROBLEM-SOLVING QUESTIONS
+
+8. HOW-TO QUESTIONS
+
+9. FAQ QUESTIONS
+
+10. COMPARISON QUESTIONS
+
+11. OBJECTION QUESTIONS
+
+12. BUYING-DECISION QUESTIONS
+
+13. IMPLEMENTATION QUESTIONS
+
+14. TROUBLESHOOTING QUESTIONS
+
+15. ADVANCED / STRATEGIC QUESTIONS
+
+16. ENGAGEMENT QUESTIONS
+
+17. CUSTOMER INTERVIEW QUESTIONS
+
+18. SALES-DISCOVERY QUESTIONS
+When relevant.
+
+19. QUESTION CLUSTERS
+Show:
+Parent question
+Supporting questions
+
+20. QUESTION JOURNEY
+Map useful questions from discovery through post-purchase.
+
+21. TOP 20 PRIORITY QUESTIONS
+Rank the strongest questions.
+
+22. QUESTION-TO-CONTENT MAP
+For each priority question provide:
+Recommended format
+Platform
+Content angle
+
+23. SHORT-FORM VIDEO QUESTIONS
+Identify questions suitable for Reels, TikTok or Shorts.
+
+24. LONG-FORM CONTENT QUESTIONS
+Identify questions suitable for articles, YouTube or guides.
+
+25. FAQ PAGE SET
+Create a clean FAQ shortlist.
+
+26. SEARCH-QUERY CANDIDATES
+Create natural search-style versions without claiming search volume.
+
+27. RESEARCH-REQUIRED QUESTIONS
+Identify questions that cannot be responsibly answered without real customer or market data.
+
+28. FACT-CHECK QUESTIONS
+Identify topics needing up-to-date or expert verification.
+
+29. CONTENT GAPS
+Identify important audience needs not yet covered.
+
+30. VALIDATION PLAN
+Recommend how to verify which questions matter most.
+
+31. FINAL RECOMMENDATION
+Provide:
+Best discovery question
+Best educational question
+Best problem-solving question
+Best engagement question
+Best conversion-support question
+Best long-form topic
+Best short-form topic
+
+IMPORTANT:
+- Never present invented questions as verified audience demand.
+- Never fabricate search volume or customer-frequency data.
+- Separate supplied evidence from inference.
+- Remove duplicate question intent.
+- Prioritize questions that help the audience make progress.
+- Flag questions that require current, expert or customer-specific evidence.`;
+
+const steps = [
+  {
+    title: "Separate evidence from inference",
+    description:
+      "Keep real customer, search, support or sales questions distinct from AI-generated suggestions so likely audience interests are not mistaken for verified demand.",
+  },
+  {
+    title: "Cover the full customer journey",
+    description:
+      "Generate questions from initial problem awareness through comparison, implementation, troubleshooting and ongoing usage instead of focusing only on beginner FAQs.",
+  },
+  {
+    title: "Group questions by intent",
+    description:
+      "Cluster related questions around problems, processes, objections and decisions so they can become useful content series, FAQ structures and research themes.",
+  },
+  {
+    title: "Validate the highest-value questions",
+    description:
+      "Use customer conversations, support tickets, comments, search data and other real evidence to determine which suggested questions deserve the greatest content investment.",
+  },
+];
+
+const example = {
+  input: [
+    "Niche: Inventory and warehouse operations.",
+    "Audience: Inventory controllers, storekeepers, supervisors and small-business owners.",
+    "Problem: Physical stock does not match the system.",
+    "Objective: Generate educational content and FAQ topics.",
+    "Knowledge level: Beginner to intermediate.",
+  ],
+
+  output: [
+    "DISCOVERY: 'Why does physical stock differ from system stock?'",
+    "PROBLEM-SOLVING: 'What should I check first when physical stock does not match the system quantity?'",
+    "PROCESS: 'Should I adjust the inventory immediately when a discrepancy is found?'",
+    "DIAGNOSTIC: 'Can receiving or transfer transactions cause stock discrepancies?'",
+    "PREVENTION: 'How can cycle counting help identify inventory errors earlier?'",
+    "ADVANCED: 'How should repeated discrepancies be separated into transaction, process and control failures?'",
+    "CONTENT MAP: The first-check question fits a short video or checklist; repeated-discrepancy root causes are better suited to a detailed article or long-form video.",
+    "SOURCE STATUS: These are suggested audience questions unless actual search, customer or support data confirms them.",
+  ],
+};
+
+const tips = [
+  {
+    title: "A generated question is not proof of demand",
+    description:
+      "AI can help identify plausible questions, but search volume, frequency and real customer importance should come from actual research data.",
+  },
+  {
+    title: "Questions reveal content structure",
+    description:
+      "A strong cluster of related questions can become a Reel series, FAQ page, guide, email sequence or long-form content plan.",
+  },
+  {
+    title: "Prioritize progress, not just curiosity",
+    description:
+      "The most useful questions usually help the audience understand a problem, make a decision, complete a task or avoid a meaningful mistake.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Audience Question Generator Prompt | KRIYANO"
+  description="Generate structured audience questions for content research, FAQs, social media, customer interviews, buying decisions and problem-solving."
+>
+  <PromptPage
+    category="CREATORS"
+    title="Audience Question Generator"
+    accentTitle="Prompt."
+    description="Generate useful audience questions across discovery, education, problem-solving, objections, buying decisions and engagement while clearly separating verified evidence from AI-generated suggestions."
+    meta={[
+      "Free prompt",
+      "Audience research",
+      "Content planning",
+    ]}
+    bestFor={[
+      "Content creators",
+      "FAQ planning",
+      "Customer research",
+      "Social content",
+      "Blog & YouTube",
+      "Product research",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Turn audience uncertainty into useful content opportunities."
+    introDescription="Map the questions people may have at different knowledge and decision stages, then prioritize the strongest topics for content, FAQs and further customer research."
+    steps={steps}
+    exampleTitle="Turn one inventory problem into a structured audience-question bank."
+    example={example}
+    tipsTitle="Useful questions are research inputs, not invented evidence."
+    tips={tips}
+    sidebarTitle="Turn the questions into content"
+    sidebarDescription="Use KRIYANO's Short-Form Video Idea Generator, Hook Generator and Creator Content Pillar Builder to convert high-value audience questions into repeatable content."
+    warningTitle="Validate audience demand"
+    warningText="AI-generated questions are useful hypotheses, not proof that people frequently ask or search for them. Validate important questions with customer conversations, support data, search data, comments or other real evidence when possible."
+  />
+</BaseLayout>

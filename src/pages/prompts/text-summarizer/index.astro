@@ -1,0 +1,782 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced editor, analyst and professional summarization specialist.
+
+TASK:
+Summarize the material below accurately, clearly and at the requested level of detail.
+
+The summary must preserve the meaning of the source while removing repetition, unnecessary detail and low-value wording.
+
+Do not invent facts, explanations, causes, conclusions, dates, numbers, decisions, action items or context that are not supported by the source.
+
+SOURCE MATERIAL:
+[Paste the text, report, email, article, meeting notes, policy, SOP, research, transcript or other material.]
+
+SUMMARY PURPOSE:
+[Quick understanding / executive review / study notes / management update / decision support / meeting recap / other.]
+
+TARGET AUDIENCE:
+[Who will read the summary?]
+
+SUMMARY LENGTH:
+[Very short / short / medium / detailed / specific word count.]
+
+OUTPUT STYLE:
+[Paragraph / bullet points / executive summary / structured sections / key takeaways / action items / other.]
+
+TONE:
+[Professional / neutral / simple / technical / concise / other.]
+
+PRIORITY INFORMATION:
+[Anything that must not be omitted.]
+
+INFORMATION TO EXCLUDE:
+[Optional.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+SUMMARIZATION REQUIREMENTS:
+
+1. IDENTIFY THE SOURCE TYPE
+Classify the material where useful:
+
+Report
+Email
+Article
+Meeting notes
+Research
+Policy
+Procedure
+Contract
+Technical document
+Transcript
+Other
+
+2. IDENTIFY THE PURPOSE
+Determine what the source is mainly trying to:
+
+Inform
+Explain
+Recommend
+Decide
+Request
+Document
+Persuade
+Instruct
+
+3. IDENTIFY THE CORE MESSAGE
+State the main point before expanding into supporting detail.
+
+4. PRESERVE MEANING
+Do not simplify in a way that changes the original meaning.
+
+5. PRESERVE IMPORTANT FACTS
+Retain material facts that affect interpretation or decisions.
+
+6. PRESERVE NUMBERS
+Keep relevant:
+
+Amounts
+Percentages
+Quantities
+Dates
+Times
+Measurements
+Targets
+KPIs
+
+exactly as stated.
+
+7. DO NOT MODIFY NUMBERS
+Do not round, recalculate or reinterpret numbers unless explicitly requested.
+
+8. PRESERVE NAMES AND ROLES
+Keep important:
+
+People
+Organizations
+Departments
+Products
+Locations
+Roles
+
+accurately.
+
+9. PRESERVE DATES AND DEADLINES
+Do not omit dates that affect decisions, actions or obligations.
+
+10. PRESERVE DECISIONS
+If the source records decisions, clearly identify them.
+
+11. PRESERVE ACTION ITEMS
+If actions exist, capture:
+
+Action
+Owner
+Deadline
+Dependency
+
+only when supported by the source.
+
+12. DO NOT INVENT ACTION ITEMS
+A recommendation in the source is not automatically an assigned action.
+
+13. DISTINGUISH FACT FROM OPINION
+Where relevant separate:
+
+Facts
+Opinions
+Recommendations
+Assumptions
+Unresolved questions
+
+14. DISTINGUISH DECISIONS FROM DISCUSSION
+Do not present something merely discussed as approved.
+
+15. DISTINGUISH PROPOSALS FROM COMMITMENTS
+Words such as:
+
+Suggest
+Consider
+Propose
+Recommend
+
+do not mean:
+
+Approved
+Confirmed
+Agreed
+Committed
+
+16. PRESERVE UNCERTAINTY
+If the source says:
+
+May
+Could
+Possibly
+Expected
+Estimated
+Provisional
+
+retain that level of uncertainty.
+
+17. DO NOT ADD CERTAINTY
+Do not convert:
+
+"may reduce costs"
+
+into:
+
+"will reduce costs."
+
+18. DO NOT ADD CAUSALITY
+Do not infer that one event caused another unless the source supports it.
+
+19. DO NOT ADD MOTIVES
+Do not infer why a person or organization acted unless stated.
+
+20. IDENTIFY KEY THEMES
+Group related information into meaningful themes.
+
+21. PRIORITIZE INFORMATION
+Classify internally as:
+
+Critical
+Important
+Supporting
+Low value
+
+Use this to determine what should remain.
+
+22. REMOVE REPETITION
+Combine repeated points without losing important nuance.
+
+23. REMOVE FILLER
+Reduce:
+
+Long introductions
+Repeated explanations
+Unnecessary examples
+Administrative wording
+
+when they do not affect meaning.
+
+24. KEEP NECESSARY CONTEXT
+Do not shorten so aggressively that key statements become misleading.
+
+25. ADAPT TO REQUESTED LENGTH
+For VERY SHORT summaries:
+Keep only the core conclusion and essential facts.
+
+For SHORT summaries:
+Include main points, decisions and significant actions.
+
+For MEDIUM summaries:
+Include supporting context and important reasoning.
+
+For DETAILED summaries:
+Preserve major arguments, evidence, decisions and limitations.
+
+26. EXECUTIVE SUMMARY MODE
+If requested, focus on:
+
+Purpose
+Main findings
+Business impact
+Risks
+Decisions
+Required actions
+
+27. KEY TAKEAWAYS MODE
+Create concise points capturing the most useful information.
+
+28. ACTION-ITEM MODE
+Extract only real actions supported by the source.
+
+Use:
+
+Action
+Owner
+Deadline
+Status
+
+If missing, state:
+
+Not specified.
+
+29. MEETING SUMMARY MODE
+Include where supported:
+
+Purpose
+Topics discussed
+Key points
+Decisions
+Action items
+Open questions
+Next steps
+
+30. EMAIL SUMMARY MODE
+Identify:
+
+Sender's purpose
+Main request
+Important information
+Deadline
+Required response
+
+31. REPORT SUMMARY MODE
+Include:
+
+Objective
+Key findings
+Evidence
+Major issues
+Recommendations
+Conclusion
+
+32. ARTICLE SUMMARY MODE
+Include:
+
+Main argument
+Important supporting points
+Evidence
+Conclusion
+
+33. RESEARCH SUMMARY MODE
+Include:
+
+Research question
+Method
+Main findings
+Limitations
+Conclusion
+
+only when stated.
+
+34. POLICY SUMMARY MODE
+Preserve:
+
+Scope
+Requirements
+Responsibilities
+Restrictions
+Exceptions
+Approval
+Compliance obligations
+
+35. SOP / PROCEDURE SUMMARY MODE
+Preserve:
+
+Purpose
+Sequence
+Responsibilities
+Critical controls
+Safety or quality requirements
+
+Do not remove important controls merely for brevity.
+
+36. TECHNICAL DOCUMENT MODE
+Preserve:
+
+Specifications
+Dependencies
+Conditions
+Technical terminology
+Warnings
+Limitations
+
+37. CONTRACT / LEGAL DOCUMENT MODE
+Do not casually simplify language in a way that could change obligations.
+
+Focus on:
+
+Parties
+Scope
+Key obligations
+Dates
+Payments
+Termination
+Conditions
+Responsibilities
+
+Flag that qualified review may be needed for legal interpretation.
+
+38. SAFETY-SENSITIVE MATERIAL
+Do not omit:
+
+Warnings
+Mandatory controls
+Escalation requirements
+Emergency instructions
+
+if they are relevant to the summary.
+
+39. FINANCIAL MATERIAL
+Preserve:
+
+Currency
+Amounts
+Periods
+Assumptions
+Variance
+Financial definitions
+
+40. KPI / PERFORMANCE MATERIAL
+Preserve:
+
+Metric
+Target
+Actual
+Variance
+Period
+Status
+
+41. IDENTIFY MAIN FINDINGS
+Separate findings from background information.
+
+42. IDENTIFY RECOMMENDATIONS
+Clearly label recommendations as recommendations.
+
+43. IDENTIFY RISKS
+Include material risks discussed in the source.
+
+44. IDENTIFY ISSUES
+Separate active issues from future risks.
+
+45. IDENTIFY BLOCKERS
+Capture constraints preventing progress.
+
+46. IDENTIFY DEPENDENCIES
+Include dependencies that affect decisions or actions.
+
+47. IDENTIFY OPEN QUESTIONS
+List unresolved questions explicitly present in the source.
+
+48. IDENTIFY INFORMATION GAPS
+If the source itself says information is missing, preserve that point.
+
+49. DO NOT FILL GAPS
+Do not answer unanswered questions using general knowledge unless specifically requested.
+
+50. IDENTIFY CONTRADICTIONS
+If different parts of the source conflict, flag the contradiction rather than choosing one version silently.
+
+51. IDENTIFY AMBIGUITY
+Highlight wording that materially affects interpretation.
+
+52. HANDLE MULTIPLE VIEWPOINTS
+When different people or sections express different positions, preserve the distinction.
+
+53. DO NOT CREATE FALSE CONSENSUS
+Do not write:
+
+"The team agreed..."
+
+unless agreement is actually recorded.
+
+54. QUOTE SPARINGLY
+Paraphrase where possible.
+
+Use short exact quotes only when wording itself is important.
+
+55. MAINTAIN NEUTRALITY
+Do not make the summary more positive or negative than the original.
+
+56. REMOVE EMOTIONAL EXAGGERATION
+Keep tone proportional to the source.
+
+57. DO NOT SANITIZE IMPORTANT PROBLEMS
+If the source identifies serious problems, retain them clearly.
+
+58. DO NOT OVEREMPHASIZE MINOR DETAILS
+Balance the summary according to significance.
+
+59. KEEP IMPORTANT EXCEPTIONS
+Words such as:
+
+Except
+Unless
+Only if
+Subject to
+Provided that
+
+can materially change meaning.
+
+Preserve them.
+
+60. PRESERVE CONDITIONS
+Do not summarize conditional requirements as absolute instructions.
+
+61. PRESERVE COMPARISONS
+If the source compares options, retain the basis of comparison.
+
+62. PRESERVE TRADE-OFFS
+Do not report only advantages while omitting meaningful disadvantages.
+
+63. PRESERVE LIMITATIONS
+Include important limitations stated in the source.
+
+64. PRESERVE SOURCE CONFIDENCE
+If findings are tentative, preliminary or uncertain, keep that characterization.
+
+65. HANDLE LONG DOCUMENTS
+For long material:
+
+Identify sections
+Summarize each major section
+Then create an overall synthesis
+
+66. AVOID SECTION-BY-SECTION COPYING
+Synthesize instead of simply shortening every paragraph.
+
+67. IDENTIFY DUPLICATED THEMES
+Merge repeated points appearing across several sections.
+
+68. CREATE INFORMATION HIERARCHY
+Organize from:
+
+Most important
+Supporting
+Additional context
+
+69. USE CLEAR HEADINGS
+Where useful use headings such as:
+
+Summary
+Key Findings
+Decisions
+Actions
+Risks
+Open Questions
+
+70. USE BULLETS SELECTIVELY
+Use bullets when they improve scanability.
+
+Do not turn every sentence into a bullet.
+
+71. KEEP PARAGRAPHS CONCISE
+Use compact paragraphs for narrative summaries.
+
+72. SIMPLE LANGUAGE MODE
+If requested, simplify vocabulary while preserving meaning.
+
+73. TECHNICAL MODE
+If the audience is technical, retain necessary specialist terminology.
+
+74. EXECUTIVE MODE
+Reduce technical detail unless it affects:
+
+Cost
+Risk
+Performance
+Decision
+Timeline
+Compliance
+
+75. BEGINNER MODE
+Explain critical technical terms briefly where necessary.
+
+76. DO NOT ADD EXPLANATIONS WITHOUT LABELING
+If clarification beyond the source is requested, clearly separate:
+
+SOURCE SUMMARY
+
+from:
+
+ADDITIONAL EXPLANATION
+
+77. DO NOT ADD EXTERNAL FACTS
+Unless specifically asked, summarize only the supplied material.
+
+78. NO FAKE CONTEXT
+Do not invent background to make the summary appear more complete.
+
+79. NO FAKE SOURCES
+Do not cite sources that were not provided.
+
+80. NO FAKE QUOTES
+Do not invent statements attributed to people.
+
+81. NO FAKE OWNERS
+If an action has no assigned owner, state:
+
+Owner not specified.
+
+82. NO FAKE DEADLINES
+If no deadline exists, state:
+
+Deadline not specified.
+
+83. NO FAKE STATUS
+Do not label actions:
+
+Completed
+Pending
+Delayed
+
+unless stated or clearly supported.
+
+84. PRESERVE NEGATION
+Be careful with:
+
+Not
+Never
+No
+Cannot
+Should not
+
+Removing one can reverse meaning.
+
+85. PRESERVE MODAL LANGUAGE
+Distinguish:
+
+Must
+Should
+May
+Can
+Will
+
+86. CHECK PRONOUN REFERENCES
+Make sure shortened text remains clear about who:
+
+They
+It
+This
+Those
+
+refer to.
+
+87. RESOLVE ONLY SAFE REFERENCES
+Replace pronouns with names or roles only when the reference is clear.
+
+88. KEEP TERMINOLOGY CONSISTENT
+Use the source's key terms consistently.
+
+89. PRESERVE DOCUMENT-SPECIFIC DEFINITIONS
+Do not substitute a common definition when the document defines a term differently.
+
+90. INCLUDE CRITICAL DETAILS EVEN IF LENGTH INCREASES
+Accuracy is more important than meeting an arbitrary word limit exactly.
+
+91. PRODUCE A ONE-LINE SUMMARY
+Where useful provide one sentence capturing the central message.
+
+92. PRODUCE A QUICK SUMMARY
+Where useful provide 3–5 high-value points.
+
+93. PRODUCE A DETAILED SUMMARY
+Where requested provide enough context for someone who has not read the source.
+
+94. IDENTIFY WHAT REQUIRES ATTENTION
+For management material highlight:
+
+Decision needed
+Action needed
+Risk
+Deadline
+Escalation
+Missing information
+
+95. PROVIDE A SOURCE-FAITHFUL CHECK
+Ask:
+
+Would someone reading only the summary reach a materially different understanding from someone reading the source?
+
+If yes, revise.
+
+96. CHECK NUMBERS
+Compare every included number against the source.
+
+97. CHECK NAMES
+Verify spelling and role references against the source.
+
+98. CHECK DECISIONS
+Verify that every listed decision was actually made.
+
+99. CHECK ACTIONS
+Verify that each action, owner and deadline is supported.
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- the main message is clear
+- important facts are preserved
+- numbers are accurate
+- dates are accurate
+- decisions are not confused with proposals
+- risks are not confused with issues
+- opinions are not presented as facts
+- no missing context was invented
+- no owners were invented
+- no deadlines were invented
+- uncertainty is preserved
+- important exceptions remain
+- repetition is reduced
+- requested length and audience are respected
+- the summary remains faithful to the source
+
+OUTPUT FORMAT:
+
+1. One-Line Summary
+2. Main Summary
+3. Key Takeaways
+4. Decisions — if any
+5. Action Items — if any
+6. Important Numbers / Dates — if relevant
+7. Risks / Issues — if relevant
+8. Open Questions — if any
+9. Important Limitations / Conditions — if relevant
+
+If a section has no supported information, omit it unless the user specifically asks for that section.
+
+IMPORTANT:
+- Summarize only what the source supports.
+- Never invent missing context.
+- Preserve important facts, numbers, names, dates, conditions and decisions.
+- Do not turn proposals into approved decisions.
+- Do not turn recommendations into assigned actions.
+- Do not invent owners, deadlines or status.
+- Preserve uncertainty and limitations.
+- Keep serious safety, compliance, legal, financial or operational requirements visible.
+- Accuracy takes priority over extreme brevity.`;
+
+const steps = [
+  {
+    title: "Paste the real source",
+    description:
+      "Give the AI the actual email, report, article, notes or document you want summarized rather than asking it to reconstruct missing context.",
+  },
+  {
+    title: "Define what matters",
+    description:
+      "Specify the audience, desired length and any facts, decisions, numbers or action items that must remain visible.",
+  },
+  {
+    title: "Preserve meaning, not wording",
+    description:
+      "A useful summary removes repetition and detail without changing certainty, responsibilities, conditions or the source's actual conclusion.",
+  },
+  {
+    title: "Verify decisions and actions",
+    description:
+      "Check that anything presented as approved, assigned or deadline-driven is genuinely supported by the original material.",
+  },
+];
+
+const example = {
+  input: [
+    "Meeting note: The warehouse team discussed moving the weekly stock count from Thursday to Wednesday.",
+    "Operations recommended Wednesday because Thursday outbound volume has increased.",
+    "Finance asked for two weeks of count-accuracy data before approving the change.",
+    "Dinesh will prepare the accuracy report by 12 September.",
+    "No final decision was made.",
+  ],
+
+  output: [
+    "One-line summary: The team discussed changing the weekly stock-count day, but approval is pending additional accuracy data.",
+    "Key point: Operations prefers Wednesday because Thursday outbound activity has increased.",
+    "Decision status: No final decision was made.",
+    "Action item: Dinesh to prepare two weeks of stock-count accuracy data by 12 September.",
+    "Open item: Finance will need the requested data before the proposed schedule change can be approved.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Shorter is not always better",
+    description:
+      "A summary that removes a deadline, exception, control or unresolved decision may be shorter but materially less accurate.",
+  },
+  {
+    title: "Watch proposal vs decision",
+    description:
+      "Words such as discussed, proposed and recommended should not become agreed, approved or confirmed in the summary.",
+  },
+  {
+    title: "Protect numbers and conditions",
+    description:
+      "Dates, quantities, percentages, responsibilities and phrases such as 'only if' or 'subject to' can completely change the meaning when omitted.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Text Summarizer Prompt | KRIYANO"
+  description="Summarize reports, emails, articles, meetings and documents while preserving important facts, numbers, decisions, actions, conditions and uncertainty."
+>
+  <PromptPage
+    category="WRITING"
+    title="Text"
+    accentTitle="Summarizer."
+    description="Turn long text into a clear, useful summary without losing important facts, numbers, decisions, actions, conditions or uncertainty."
+    meta={[
+      "Free prompt",
+      "Summarization",
+      "Document analysis",
+    ]}
+    bestFor={[
+      "Reports",
+      "Emails",
+      "Meeting notes",
+      "Articles",
+      "Research",
+      "Work documents",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Summarize the source without changing what it actually says."
+    introDescription="Remove repetition and low-value detail while preserving the facts, decisions, responsibilities, deadlines and conditions that matter."
+    steps={steps}
+    exampleTitle="Keep a proposed change separate from an approved decision."
+    example={example}
+    tipsTitle="Make summaries shorter without making them less accurate."
+    tips={tips}
+    sidebarTitle="Need to improve the original document?"
+    sidebarDescription="Use KRIYANO's Work Document Simplifier when the goal is to rewrite the document itself in clearer language rather than produce a separate summary."
+    warningTitle="A concise summary can still be misleading"
+    warningText="Always check important numbers, dates, decisions, action owners, deadlines and conditional wording against the original source. Never allow missing information to be filled with invented context."
+  />
+</BaseLayout>

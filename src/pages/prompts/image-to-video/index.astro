@@ -1,0 +1,720 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an expert image-to-video prompt designer, cinematographer, motion director and visual-continuity specialist.
+
+TASK:
+Animate the supplied reference image into a realistic, controlled video while preserving the original image's identity, composition and important visual details.
+
+Treat the supplied image as the PRIMARY VISUAL SOURCE OF TRUTH.
+
+Do not unnecessarily redesign, replace or reinterpret elements that are already established in the reference image.
+
+REFERENCE IMAGE:
+[Attach the image to the video-generation model.]
+
+VIDEO GOAL:
+[What should happen to the reference image?]
+
+PLATFORM:
+[Facebook Reel / Instagram Reel / TikTok / YouTube Short / YouTube / advertisement / website / other.]
+
+DURATION:
+[5 sec / 8 sec / 10 sec / other.]
+
+ASPECT RATIO:
+[Preserve source / 9:16 / 16:9 / 1:1 / other.]
+
+PRIMARY SUBJECT:
+[Person / product / food / object / environment.]
+
+SUBJECT ACTION:
+[Describe exactly what the main subject should do.]
+
+SECONDARY MOTION:
+[Hair / fabric / steam / liquid / background / environmental movement / none.]
+
+CAMERA:
+[Static / slow push-in / pull-back / pan / tilt / tracking / orbit / handheld / other.]
+
+CAMERA SPEED:
+[Static / very slow / gentle / moderate / other.]
+
+ENDING FRAME:
+[Describe how the clip should end.]
+
+AUDIO:
+[None / ambient / dialogue / voice-over / other.]
+
+VISIBLE TEXT:
+[Preserve existing text / exact text / no new text.]
+
+ELEMENTS THAT MUST NOT CHANGE:
+[List critical identity, product, food, clothing, background or composition details.]
+
+ELEMENTS TO AVOID:
+[Optional.]
+
+SPECIAL REQUIREMENTS:
+[Any additional instructions.]
+
+IMAGE-TO-VIDEO REQUIREMENTS:
+
+1. USE THE REFERENCE IMAGE AS THE FIRST-FRAME AUTHORITY
+The generated video should begin as close as possible to the supplied image.
+
+2. PRESERVE THE ORIGINAL SUBJECT
+Do not replace the main subject with a similar-looking alternative.
+
+3. PRESERVE CHARACTER IDENTITY
+When the image contains a person, maintain:
+
+Face shape
+Facial proportions
+Skin tone
+Eyes
+Eyebrows
+Nose
+Lips
+Hair
+Age appearance
+Distinctive features
+Body proportions
+
+4. DO NOT ALLOW FACE DRIFT
+The face should not gradually become a different person.
+
+5. DO NOT BEAUTIFY UNNECESSARILY
+Avoid:
+
+Face reshaping
+Skin whitening
+Extreme smoothing
+Larger eyes
+Different nose
+Different lips
+Generic influencer appearance
+
+6. PRESERVE HAIRSTYLE
+Keep:
+
+Length
+Colour
+Curl pattern
+Parting
+General volume
+
+consistent.
+
+7. ALLOW NATURAL HAIR MOTION
+Hair may move subtly due to:
+
+Body movement
+Wind
+Gravity
+
+without changing hairstyle.
+
+8. PRESERVE CLOTHING
+Keep the same:
+
+Garment type
+Colour
+Pattern
+Sleeves
+Neckline
+Fit
+
+unless a clothing change is explicitly requested.
+
+9. PRESERVE ACCESSORIES
+Keep:
+
+Jewellery
+Glasses
+Watches
+Headwear
+Other distinctive accessories
+
+stable.
+
+10. PRESERVE PRODUCT IDENTITY
+For products, maintain:
+
+Shape
+Dimensions
+Colour
+Packaging
+Materials
+Logo placement
+Labels
+Distinctive features
+
+11. DO NOT REDESIGN PRODUCTS
+Do not add or remove product features unless explicitly requested.
+
+12. PRESERVE FOOD IDENTITY
+For food, maintain:
+
+Dish type
+Shape
+Height
+Layers
+Texture
+Colour
+Toppings
+Sauce
+Serving vessel
+
+13. DO NOT TRANSFORM THE DISH
+A single-layer cake must not become a layered cake.
+
+14. PRESERVE OBJECT COUNT
+Do not randomly duplicate or remove important objects.
+
+15. PRESERVE PROP IDENTITY
+Keep existing:
+
+Plates
+Utensils
+Furniture
+Containers
+Tools
+Decorations
+
+consistent.
+
+16. PRESERVE THE ENVIRONMENT
+The room, kitchen, workplace, landscape or set should remain recognizable.
+
+17. DO NOT REBUILD THE BACKGROUND
+Avoid random changes to:
+
+Walls
+Doors
+Windows
+Furniture
+Shelves
+Counters
+Decorations
+
+18. PRESERVE ORIGINAL COLOUR PALETTE
+Do not introduce unrelated colours.
+
+19. PRESERVE LIGHTING DIRECTION
+Existing highlights and shadows establish the scene lighting.
+
+20. PRESERVE TIME-OF-DAY APPEARANCE
+Do not change daylight into night or vice versa unless requested.
+
+21. PRESERVE COMPOSITION
+The opening frame should respect the original subject placement.
+
+22. DO NOT RECROP UNNECESSARILY
+Keep important elements visible.
+
+23. CONTROL ASPECT-RATIO EXPANSION
+If the source image must be extended, continue the environment naturally.
+
+24. DO NOT INVENT IMPORTANT CONTENT OUTSIDE THE FRAME
+Outpainting should remain visually plausible and secondary.
+
+25. DEFINE ONE PRIMARY ACTION
+The clip should have one dominant movement.
+
+26. KEEP ACTION APPROPRIATE TO DURATION
+Do not overload a short clip.
+
+27. START MOTION NATURALLY
+Avoid an abrupt first-frame jump.
+
+28. END MOTION NATURALLY
+The clip should finish in a visually intentional state.
+
+29. DO NOT TELEPORT OBJECTS
+Movement must occur continuously.
+
+30. DO NOT ALLOW OBJECT POP-IN
+New objects should not suddenly appear.
+
+31. DO NOT ALLOW OBJECT DISAPPEARANCE
+Existing objects should not vanish unless intentionally removed through visible action.
+
+32. MAINTAIN PHYSICAL CONTACT
+Hands holding objects should remain correctly attached to them.
+
+33. PRESERVE HAND IDENTITY AND POSITION
+Avoid sudden changes in hand size or orientation.
+
+34. REALISTIC HAND ANATOMY
+Require:
+
+Five fingers per visible hand when anatomically expected
+Natural joints
+Correct grip
+Natural contact
+
+35. PREVENT EXTRA LIMBS
+No duplicated:
+
+Hands
+Arms
+Legs
+Fingers
+
+36. CONTROL BODY MOTION
+Movement should remain anatomically plausible.
+
+37. CONTROL FACIAL MOVEMENT
+Expressions should transition naturally.
+
+38. AVOID FACIAL FLICKER
+Eyes, mouth and facial features should remain stable between frames.
+
+39. NATURAL BLINKING
+If appropriate, allow subtle realistic blinking.
+
+40. CONTROL EYE DIRECTION
+Maintain gaze or specify a deliberate gaze change.
+
+41. CONTROL MOUTH MOTION
+If no speech is requested, avoid unnecessary talking-like mouth movement.
+
+42. DIALOGUE MODE
+If speech is requested, keep dialogue short enough for the clip duration.
+
+43. PRESERVE BODY PROPORTIONS
+Do not allow stretching or shrinking.
+
+44. USE REALISTIC PHYSICS
+Respect:
+
+Gravity
+Weight
+Momentum
+Contact
+Friction
+
+45. LIQUID MOTION
+Liquids should flow continuously from a logical source to destination.
+
+46. FOOD MOTION
+Cutting, lifting, pouring and serving should preserve realistic food structure.
+
+47. FABRIC MOTION
+Clothing should react naturally without changing design.
+
+48. STEAM MOTION
+Steam should rise naturally and remain subtle.
+
+49. SMOKE MOTION
+Use realistic diffusion where relevant.
+
+50. REFLECTION CONTINUITY
+Reflections should correspond to moving objects and camera position.
+
+51. SHADOW CONTINUITY
+Shadows should remain attached to their objects.
+
+52. CONTACT SHADOWS
+Objects should remain visually grounded.
+
+53. PRESERVE PERSPECTIVE
+Do not warp object scale during motion.
+
+54. PRESERVE STRAIGHT LINES
+Protect:
+
+Architecture
+Furniture
+Packaging
+Screens
+Counters
+
+from bending.
+
+55. CAMERA MOTION SHOULD BE SIMPLE
+Prefer one dominant movement.
+
+56. STATIC CAMERA MODE
+Use when the subject action is already visually interesting.
+
+57. SLOW PUSH-IN MODE
+Move gradually toward the subject while maintaining perspective.
+
+58. PULL-BACK MODE
+Reveal more environment without changing the scene identity.
+
+59. PAN MODE
+Reveal adjacent space smoothly.
+
+60. TILT MODE
+Use for controlled vertical reveal.
+
+61. TRACKING MODE
+Follow a moving subject while maintaining framing.
+
+62. ORBIT MODE
+Use cautiously because it requires generating unseen sides of the subject.
+
+63. AVOID ORBITING WHEN IDENTITY IS CRITICAL
+Large viewpoint changes can increase character and product drift.
+
+64. HANDHELD MODE
+Keep motion subtle and physically plausible.
+
+65. DO NOT COMBINE CONFLICTING CAMERA MOVES
+Avoid requests such as simultaneous orbit, zoom, pan and tracking.
+
+66. CONTROL CAMERA SPEED
+Use slow controlled motion for identity-sensitive scenes.
+
+67. AVOID CAMERA JUMPS
+The viewpoint should move continuously.
+
+68. MAINTAIN SCREEN DIRECTION
+Subjects should not randomly reverse movement.
+
+69. CONTROL FOCUS
+Keep the primary subject appropriately sharp.
+
+70. AVOID FOCUS PULSING
+Do not allow random blur changes.
+
+71. USE FOCUS PULL ONLY WHEN INTENTIONAL
+Specify the start and destination of focus.
+
+72. PRESERVE DEPTH OF FIELD
+Keep the source image's general optical character where possible.
+
+73. PRESERVE PHOTOGRAPHIC STYLE
+If the source is photorealistic, keep the animation photorealistic.
+
+74. PRESERVE ILLUSTRATION STYLE
+If the source is illustrated, maintain the same visual language unless transformation is requested.
+
+75. DO NOT MIX STYLES ACCIDENTALLY
+Avoid photorealistic elements appearing inside a consistent illustration or vice versa.
+
+76. PRESERVE IMAGE QUALITY
+Maintain:
+
+Texture
+Surface detail
+Lighting quality
+Material realism
+
+77. DO NOT OVERSHARPEN
+Avoid artificial edge halos.
+
+78. DO NOT OVER-SMOOTH
+Preserve natural skin, fabric, food and material textures.
+
+79. SOCIAL VIDEO MODE
+Make the meaningful motion visible quickly.
+
+80. FOOD VIDEO MODE
+Prioritize:
+
+Texture
+Steam
+Gloss
+Cutting
+Pouring
+Serving
+
+while preserving the actual dish.
+
+81. PRODUCT VIDEO MODE
+Prioritize:
+
+Product identity
+Material
+Logo
+Surface details
+Controlled camera movement
+
+82. CHARACTER VIDEO MODE
+Prioritize identity preservation over dramatic motion.
+
+83. BUSINESS VIDEO MODE
+Use restrained movement and professional visual language.
+
+84. CINEMATIC MODE
+Use cinematic movement without sacrificing source-image fidelity.
+
+85. DO NOT ADD GENERIC AI EFFECTS
+Avoid automatic:
+
+Particles
+Holograms
+Circuits
+Neon glows
+Magic transformations
+
+86. ADD EFFECTS ONLY WHEN REQUESTED
+Effects must serve the intended scene.
+
+87. PRESERVE EXISTING TEXT
+Do not alter text already visible in the reference if it must remain readable.
+
+88. DO NOT GENERATE RANDOM TEXT
+Avoid new:
+
+Labels
+Captions
+Signs
+Watermarks
+Logos
+
+89. PRESERVE LOGOS
+If the source contains an approved logo, maintain its identity and placement as closely as possible.
+
+90. DO NOT INVENT BRANDING
+No new brand marks.
+
+91. DO NOT INVENT RESULTS
+Do not add unsupported:
+
+Statistics
+Performance improvements
+Transformations
+Before/after outcomes
+
+92. DO NOT CREATE FALSE SOCIAL PROOF
+No fake:
+
+Ratings
+Reviews
+Awards
+Follower counts
+
+93. DEFINE STABLE ELEMENTS
+Explicitly identify what should NOT move.
+
+94. DEFINE MOVING ELEMENTS
+Explicitly identify what SHOULD move.
+
+95. USE MICRO-MOTION FOR REALISM
+Where appropriate, use subtle:
+
+Breathing
+Blinking
+Hair movement
+Steam
+Fabric movement
+Environmental movement
+
+96. DO NOT ANIMATE EVERYTHING
+Stable areas help preserve image fidelity.
+
+97. CREATE TARGETED NEGATIVE CONSTRAINTS
+Use only relevant protections such as:
+
+No face morphing
+No extra fingers
+No duplicate objects
+No clothing change
+No product redesign
+No background warping
+No random text
+No camera jump
+No watermark
+
+98. CREATE FIRST-FRAME FIDELITY CHECK
+Verify the opening remains faithful to the reference.
+
+99. CREATE CONTINUITY CHECK
+Verify identity, props, lighting, environment and composition remain stable.
+
+100. FINAL QUALITY CHECK
+Before finalizing verify:
+
+- reference image is treated as primary visual truth
+- duration is achievable
+- aspect ratio is correct
+- first frame preserves the source
+- primary subject identity remains stable
+- face does not drift
+- hair remains consistent
+- clothing remains consistent
+- accessories remain consistent
+- product identity remains unchanged
+- food identity remains unchanged
+- object count remains stable
+- hands remain anatomically plausible
+- background remains recognizable
+- lighting remains consistent
+- shadows remain physically coherent
+- perspective remains stable
+- one primary action dominates
+- camera movement is controlled
+- no abrupt camera jump occurs
+- no random text appears
+- no fake logos appear
+- no unsupported results are introduced
+- final frame looks intentional
+
+OUTPUT FORMAT:
+
+1. REFERENCE IMAGE LOCK
+List the visual elements that must remain unchanged.
+
+2. VIDEO INTENT
+Summarize what should happen during the clip.
+
+3. MOTION PLAN
+Separate:
+
+Primary subject motion
+Secondary motion
+Elements that remain static
+
+4. ACTION TIMELINE
+Break the requested duration into simple stages.
+
+Example:
+0–2 sec
+2–5 sec
+5–8 sec
+
+Adapt to the actual duration.
+
+5. CAMERA PLAN
+Specify:
+
+Framing
+Angle
+Movement
+Speed
+Focus
+
+6. FULL IMAGE-TO-VIDEO PROMPT
+Provide one polished, coherent model-ready prompt.
+
+7. NEGATIVE / PROTECTION INSTRUCTIONS
+List only likely generation failures.
+
+8. FINAL FRAME
+Describe the desired ending state.
+
+9. FIDELITY & CONTINUITY CHECK
+Confirm:
+
+Character / product / food identity
+Clothing
+Props
+Background
+Lighting
+Hands
+Camera
+Motion
+
+IMPORTANT:
+- Treat the supplied image as the primary visual source of truth.
+- Preserve identity before adding dramatic movement.
+- Keep short clips simple.
+- Explicitly distinguish moving elements from stable elements.
+- Avoid morphing, duplication, warping, random text and unnecessary redesign.
+- Use physically believable motion.
+- Preserve the source image's visual style and important details.`;
+
+const steps = [
+  {
+    title: "Lock the reference image",
+    description:
+      "Identify the face, clothing, product, food, props, lighting, environment and composition details that the video model must preserve.",
+  },
+  {
+    title: "Choose one main movement",
+    description:
+      "Decide exactly what should animate instead of asking the model to change the subject, camera, environment and multiple objects simultaneously.",
+  },
+  {
+    title: "Separate motion from stability",
+    description:
+      "Tell the model which elements should move and which should remain fixed. Stable areas help reduce morphing and scene drift.",
+  },
+  {
+    title: "Define the final frame",
+    description:
+      "Give the animation a clear destination while keeping the ending visually connected to the supplied reference image.",
+  },
+];
+
+const example = {
+  input: [
+    "Reference: Portrait-oriented image of a female food creator presenting a finished cake in a home kitchen.",
+    "Platform: Facebook Reel.",
+    "Duration: 8 seconds.",
+    "Action: She gently presents the cake slightly toward the camera and smiles naturally.",
+    "Camera: Very slow push-in.",
+    "Secondary motion: Subtle natural breathing, one soft blink and minimal hair movement.",
+  ],
+
+  output: [
+    "REFERENCE LOCK: Preserve the exact same woman's facial proportions, skin tone, hairstyle, clothing, jewellery, cake appearance, kitchen environment, lighting and original colour palette.",
+    "MOTION: She makes one small natural presenting movement with the cake while maintaining a warm expression. Allow only subtle breathing, one natural blink and minimal hair movement.",
+    "CAMERA: Use one very slow controlled push-in with no angle change or orbit.",
+    "STATIC ELEMENTS: Kitchen layout, countertop, background objects, cake design and lighting remain unchanged.",
+    "PROTECTION: No face morphing, no clothing changes, no extra fingers, no duplicated cake, no background rearrangement, no random text and no camera jump.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Protect identity before adding motion",
+    description:
+      "Large camera moves, dramatic expressions and complex body actions increase the chance that a reference person or product will drift away from the original image.",
+  },
+  {
+    title: "Tell the model what stays still",
+    description:
+      "Image-to-video prompts often focus only on movement. Explicitly locking the background, clothing, props and lighting can improve continuity.",
+  },
+  {
+    title: "Use micro-motion when the image is already strong",
+    description:
+      "A subtle push-in, natural blink, breathing, steam or small hand movement can make a strong still image feel alive without forcing unnecessary scene changes.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Image-to-Video Prompt | KRIYANO"
+  description="Create controlled AI image-to-video prompts that preserve character, product and scene identity while adding realistic motion and camera movement."
+>
+  <PromptPage
+    category="VIDEO GENERATION"
+    title="Image-to-Video"
+    accentTitle="Prompt."
+    description="Animate an existing image while protecting character identity, products, food, clothing, composition and environment from unwanted AI drift."
+    meta={[
+      "Free prompt",
+      "Image-to-video",
+      "Continuity control",
+    ]}
+    bestFor={[
+      "Character animation",
+      "Food videos",
+      "Product animation",
+      "Reel clips",
+      "Creator content",
+      "Commercial visuals",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Animate the image without losing what made it work."
+    introDescription="Treat the reference as the visual source of truth, lock important details, choose one achievable movement and control the camera so the animation remains connected to the original image."
+    steps={steps}
+    exampleTitle="Add natural motion to a creator image without changing her identity."
+    example={example}
+    tipsTitle="Use motion selectively to improve continuity."
+    tips={tips}
+    sidebarTitle="Don't have a starting image?"
+    sidebarDescription="Use KRIYANO's Text-to-Video Prompt when the entire scene needs to be created directly from a written description."
+    warningTitle="Reference images can still drift during animation"
+    warningText="Image-to-video models may alter faces, hands, products, clothing, backgrounds or text between frames. Review the complete generated clip rather than judging only the first frame."
+  />
+</BaseLayout>

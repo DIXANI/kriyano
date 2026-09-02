@@ -1,0 +1,875 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced warehouse safety reviewer and logistics operations specialist.
+
+TASK:
+Review the warehouse operation described below and identify practical safety risks, control gaps, inspection priorities and corrective actions.
+
+WAREHOUSE / OPERATION:
+[Describe the warehouse, distribution center, store, 3PL operation or storage facility.]
+
+BUSINESS TYPE:
+[Retail / E-commerce / FMCG / Manufacturing / Spare Parts / Cold Storage / Other.]
+
+WAREHOUSE ACTIVITIES:
+[Receiving, putaway, picking, packing, dispatch, replenishment, returns, loading, unloading, etc.]
+
+LAYOUT:
+[Describe aisles, racks, docks, staging areas, pedestrian walkways, storage zones and emergency exits.]
+
+EQUIPMENT:
+[Forklifts, reach trucks, pallet jacks, order pickers, conveyors, dock levelers, ladders, chargers, etc.]
+
+STORAGE:
+[Palletized / Floor stacked / Shelving / Racking / Mezzanine / Mixed.]
+
+WORKFORCE:
+[Approximate number of employees, shifts and contractors.]
+
+CURRENT SAFETY CONTROLS:
+[PPE, barriers, signage, procedures, inspections, permits, training, toolbox talks, etc.]
+
+KNOWN INCIDENTS / NEAR MISSES:
+[If any.]
+
+HAZARDOUS MATERIALS:
+[If applicable.]
+
+SPECIAL AREAS:
+[Battery charging, flammable storage, cold rooms, yard, docks, maintenance areas, etc.]
+
+LOCAL / COMPANY REQUIREMENTS:
+[Add any specific safety rules, standards or regulatory requirements that apply.]
+
+ANALYSIS GOAL:
+[Example: prepare inspection, identify high-risk areas, review controls, prepare corrective action plan.]
+
+IMPORTANT:
+This review is a practical operational safety assessment aid.
+It does not replace:
+- a competent on-site safety inspection
+- engineering assessment
+- legal advice
+- fire authority requirements
+- occupational health review
+- local regulatory compliance requirements
+
+WAREHOUSE SAFETY REVIEW REQUIREMENTS:
+
+1. SAFETY REVIEW SCOPE
+Define:
+- areas included
+- activities included
+- equipment included
+- employees / contractors exposed
+- known exclusions
+- information gaps
+
+Do not assume an area is safe merely because no incident has been reported.
+
+2. HAZARD IDENTIFICATION
+Identify hazards under categories such as:
+
+- Vehicle movement
+- Pedestrian movement
+- Loading docks
+- Racking
+- Stacking
+- Falling objects
+- Manual handling
+- Slips / trips / falls
+- Fire
+- Electrical
+- Battery charging
+- Equipment
+- Machinery
+- Housekeeping
+- Emergency access
+- Chemicals
+- Temperature
+- Lighting
+- Noise
+- Ergonomics
+- Contractor activity
+- Yard / external areas
+
+Only include categories relevant to the operation.
+
+3. RISK PRIORITIZATION
+For each hazard classify:
+
+Hazard:
+People exposed:
+Potential consequence:
+Likelihood:
+Severity:
+Existing controls:
+Control effectiveness:
+Risk level:
+Further action required:
+
+Use a simple qualitative scale such as:
+
+Likelihood:
+Low / Medium / High
+
+Severity:
+Low / Medium / High
+
+Risk:
+Low / Medium / High / Critical
+
+Do not invent a company-specific risk matrix if one has not been supplied.
+
+4. FORKLIFT & PEDESTRIAN SAFETY
+Review:
+
+- separated walkways
+- barriers
+- crossing points
+- blind corners
+- mirrors
+- warning signs
+- speed controls
+- reversing
+- horn use
+- pedestrian awareness
+- forklift parking
+- keys / authorization
+- loading areas
+- aisle visibility
+- high-risk intersections
+
+Check whether pedestrians and powered industrial trucks share space unnecessarily.
+
+5. FORKLIFT OPERATIONS
+Review:
+
+- operator authorization
+- pre-use checks
+- seat belts
+- speed
+- load stability
+- fork position
+- visibility
+- reversing
+- parking
+- battery / fuel condition
+- defects
+- maintenance
+- charging
+- capacity limits
+
+Do not infer operator competency without evidence.
+
+6. LOADING DOCK SAFETY
+Review:
+
+- dock edge protection
+- vehicle restraint
+- wheel chocks
+- trailer movement
+- dock levelers
+- dock plates
+- lighting
+- pedestrian separation
+- loading sequence
+- vehicle departure controls
+- trailer condition
+- fall risk
+- communication with drivers
+
+Identify risk of premature vehicle departure.
+
+7. RACKING SAFETY
+Review:
+
+- rack damage
+- bent uprights
+- beam damage
+- missing locking pins
+- anchors
+- load signs
+- overloaded bays
+- damaged pallets
+- rack protection
+- clearance
+- leaning loads
+- unauthorized modifications
+
+Any visibly damaged structural racking should be escalated for competent assessment.
+
+Do not judge structural integrity from description alone.
+
+8. PALLET & STACKING SAFETY
+Review:
+
+- pallet condition
+- broken boards
+- protruding nails
+- unstable loads
+- overhanging cartons
+- leaning pallets
+- excessive stacking
+- crushed cartons
+- unsupported loads
+- floor stacking stability
+
+Identify possible falling-object hazards.
+
+9. MANUAL HANDLING
+Review:
+
+- load weight
+- lift frequency
+- awkward posture
+- twisting
+- carrying distance
+- lifting height
+- team lifting
+- mechanical aids
+- repetitive tasks
+- ergonomic design
+
+Recommend reducing handling risk through:
+- redesign
+- mechanical assistance
+- load reduction
+- improved work height
+- training
+
+Do not rely on training alone where the physical task remains high risk.
+
+10. HOUSEKEEPING
+Review:
+
+- blocked aisles
+- loose wrapping
+- broken pallets
+- spillages
+- waste
+- cartons
+- damaged stock
+- cables
+- debris
+- blocked equipment
+- floor condition
+
+Poor housekeeping should be treated as both a safety and operational-control issue.
+
+11. SLIP / TRIP / FALL RISKS
+Check:
+
+- wet floors
+- damaged flooring
+- level differences
+- loose material
+- cables
+- open packaging
+- poor lighting
+- temporary storage in aisles
+- stairs
+- mezzanines
+- ladders
+
+12. WORKING AT HEIGHT
+If applicable, review:
+
+- ladders
+- mobile platforms
+- order-picking equipment
+- mezzanines
+- guardrails
+- access
+- falling-object protection
+- equipment suitability
+
+Do not recommend improvised access methods.
+
+13. FIRE SAFETY
+Review visible operational controls such as:
+
+- clear fire exits
+- exit signage
+- emergency lighting
+- fire extinguishers
+- access to fire equipment
+- sprinkler clearance
+- combustible storage
+- ignition sources
+- smoking controls
+- emergency routes
+- fire doors
+- evacuation information
+
+Do not certify fire compliance.
+
+Refer technical fire-system adequacy to competent fire-safety professionals.
+
+14. EMERGENCY EXITS & ROUTES
+Check whether:
+
+- exits are unobstructed
+- exit doors are accessible
+- routes are marked
+- assembly points are known
+- emergency maps are available
+- staff understand evacuation procedures
+- staging does not block escape paths
+
+15. ELECTRICAL SAFETY
+Review obvious operational issues:
+
+- damaged plugs
+- damaged cables
+- exposed wiring
+- overloaded extensions
+- temporary wiring
+- charger condition
+- blocked panels
+- water near electrical equipment
+- unauthorized repairs
+
+Technical electrical defects should be referred to qualified personnel.
+
+16. BATTERY CHARGING
+Where applicable check:
+
+- designated charging area
+- ventilation
+- ignition control
+- charger condition
+- cable condition
+- housekeeping
+- PPE
+- spill response
+- emergency equipment
+- pedestrian protection
+- vehicle positioning
+
+For battery chemistry-specific risks, follow manufacturer and local safety requirements.
+
+17. EQUIPMENT SAFETY
+Review equipment such as:
+
+- pallet jacks
+- conveyors
+- dock equipment
+- compactors
+- wrapping machines
+- lifting equipment
+- ladders
+
+Check:
+
+- guards
+- emergency stops
+- defects
+- inspections
+- authorized use
+- maintenance
+- isolation procedures
+
+18. LOCKOUT / ISOLATION
+Where maintenance or clearing jams occurs, review whether hazardous energy is appropriately controlled.
+
+Do not design a formal lockout/tagout system without understanding the equipment and applicable requirements.
+
+19. PPE
+Review whether PPE is:
+
+- suitable for the hazard
+- available
+- maintained
+- worn correctly
+- replaced when damaged
+- included in training
+
+Examples:
+- safety footwear
+- high-visibility clothing
+- gloves
+- eye protection
+- hearing protection
+- task-specific PPE
+
+Do not treat PPE as the first control when hazards can be eliminated or engineered out.
+
+20. SAFETY SIGNAGE
+Review:
+
+- speed limits
+- pedestrian routes
+- forklift crossings
+- PPE requirements
+- fire exits
+- restricted areas
+- height / load limits
+- hazardous materials
+- emergency information
+
+Check whether signage is visible and understood.
+
+21. BARRIERS & SEGREGATION
+Review whether barriers appropriately separate:
+
+- pedestrians
+- forklifts
+- docks
+- equipment
+- hazardous areas
+- battery charging
+- damaged structures
+- temporary works
+
+22. LIGHTING & VISIBILITY
+Check:
+
+- aisles
+- docks
+- loading areas
+- emergency routes
+- blind corners
+- outdoor yard areas
+- rack labels
+
+Poor visibility can increase both safety and inventory errors.
+
+23. NOISE
+If noise may be significant, identify sources and recommend competent assessment where needed.
+
+Do not estimate exposure levels without measurement.
+
+24. HAZARDOUS MATERIALS
+If hazardous materials exist, review:
+
+- identification
+- labeling
+- segregation
+- SDS availability
+- spill response
+- incompatible storage
+- PPE
+- training
+- ventilation
+- waste disposal
+- emergency procedure
+
+Do not give chemical-specific handling advice without product and SDS information.
+
+25. COLD / HOT ENVIRONMENTS
+Where applicable review:
+
+- exposure duration
+- protective clothing
+- breaks
+- hydration
+- emergency access
+- floor condition
+- visibility
+- condensation
+- door operation
+
+Refer health exposure limits to competent occupational-health guidance.
+
+26. DAMAGED STOCK
+Review how damaged goods are:
+
+- identified
+- segregated
+- labeled
+- stored
+- investigated
+- disposed / returned
+
+Ensure damaged stock does not create unstable stacks, leaks or blocked access.
+
+27. CHEMICAL / LIQUID SPILLS
+If relevant review:
+
+- spill kits
+- isolation
+- reporting
+- clean-up responsibility
+- waste disposal
+- PPE
+- drainage risks
+
+Use SDS and site-specific procedures for hazardous substances.
+
+28. YARD SAFETY
+If applicable review:
+
+- truck routes
+- pedestrian routes
+- reversing
+- parking
+- driver waiting areas
+- trailer movement
+- lighting
+- speed limits
+- dock approach
+- weather conditions
+- contractor drivers
+
+29. CONTRACTOR SAFETY
+Review:
+
+- induction
+- authorization
+- supervision
+- work permits
+- restricted areas
+- equipment use
+- high-risk work
+- emergency procedures
+
+30. VISITOR SAFETY
+Review:
+
+- visitor registration
+- induction
+- escort
+- PPE
+- permitted areas
+- pedestrian routes
+- emergency instructions
+
+31. TRAINING
+Review evidence of:
+
+- forklift training
+- manual handling
+- emergency procedures
+- equipment-specific training
+- hazardous material awareness
+- incident reporting
+- refresher training
+
+Do not treat attendance records alone as proof of competence.
+
+32. TOOLBOX MEETINGS
+Evaluate whether toolbox or safety meetings address:
+
+- recent incidents
+- near misses
+- unsafe conditions
+- seasonal risks
+- procedural changes
+- high-risk activities
+- corrective actions
+
+33. NEAR-MISS REPORTING
+Review whether workers can:
+
+- report near misses
+- report unsafe conditions
+- escalate anonymously where applicable
+- receive feedback
+- see corrective actions
+
+A low number of reports does not necessarily mean low risk.
+
+34. INCIDENT REVIEW
+For available incident data identify:
+
+- repeated locations
+- repeated activities
+- repeated equipment
+- repeated causes
+- shift patterns
+- severity trends
+
+Do not infer causation without investigation.
+
+35. PRE-USE INSPECTIONS
+Where relevant check inspection controls for:
+
+- forklifts
+- pallet jacks
+- dock equipment
+- ladders
+- lifting devices
+- safety barriers
+
+Identify how defects are isolated from use.
+
+36. RACK INSPECTIONS
+Review whether routine visual inspections exist.
+
+Check how:
+- damage is reported
+- areas are protected
+- loads are removed if necessary
+- competent assessment is arranged
+
+Do not set structural repair standards without qualified input.
+
+37. SAFETY OBSERVATIONS
+Recommend practical observational checks such as:
+
+- pedestrian behavior
+- forklift speed
+- aisle blockage
+- pallet condition
+- PPE
+- dock practices
+- manual handling
+- housekeeping
+
+Use observations to identify behavior and process conditions, not to blame individuals.
+
+38. CONTROL HIERARCHY
+For each significant hazard consider controls in this order:
+
+1. Eliminate
+2. Substitute
+3. Engineering control
+4. Administrative control
+5. PPE
+
+Prefer higher-level controls where reasonably practical.
+
+39. IMMEDIATE STOP / ESCALATION CONDITIONS
+Flag conditions that may justify immediate isolation or escalation, such as:
+
+- seriously damaged racking
+- unstable pallet stack
+- blocked emergency exit
+- exposed electrical hazard
+- unsafe equipment defect
+- uncontrolled chemical leak
+- missing critical guard
+- unsafe work at height
+
+Do not instruct unqualified personnel to repair technical hazards.
+
+40. CORRECTIVE ACTION
+For each significant issue provide:
+
+Hazard:
+Location:
+Evidence:
+Risk:
+Immediate control:
+Corrective action:
+Responsible role:
+Priority:
+Verification required:
+
+Do not invent employee names.
+
+41. PREVENTIVE ACTION
+Recommend where appropriate:
+
+- procedure revision
+- engineering control
+- barrier installation
+- layout change
+- inspection frequency
+- maintenance
+- training
+- signage
+- supervision
+- supplier control
+- housekeeping standard
+
+42. PRIORITY MATRIX
+Prioritize actions:
+
+P1 — Immediate / Critical
+P2 — High
+P3 — Medium
+P4 — Low
+
+Base priority on potential harm and control weakness, not inconvenience alone.
+
+43. SAFETY KPI RECOMMENDATIONS
+Where appropriate recommend:
+
+- Recordable incidents
+- Lost-time incidents
+- Near misses
+- Unsafe condition reports
+- Safety observations
+- Corrective action closure %
+- Forklift inspection completion %
+- Rack inspection completion %
+- Training completion %
+- Damage incidents
+
+Do not use low incident numbers as the only safety performance measure.
+
+44. INSPECTION CHECKLIST
+Create a practical site checklist grouped into:
+
+- Traffic
+- Docks
+- Racking
+- Storage
+- Equipment
+- Housekeeping
+- Emergency
+- Fire
+- Electrical
+- PPE
+- Manual handling
+- Special hazards
+
+Use:
+OK
+Needs Attention
+Critical
+Not Applicable
+
+45. MANAGEMENT SUMMARY
+Summarize:
+
+Highest-risk issue:
+Most urgent corrective action:
+Main vehicle / pedestrian concern:
+Main storage concern:
+Main equipment concern:
+Main emergency concern:
+Training / control gap:
+Best preventive improvement:
+Items requiring qualified specialist review:
+Overall operational safety priority:
+
+OUTPUT FORMAT:
+
+1. Executive Summary
+2. Scope & Information Gaps
+3. Hazard Register
+4. Critical Risks
+5. Forklift & Pedestrian Review
+6. Loading Dock Review
+7. Racking & Storage Review
+8. Manual Handling
+9. Housekeeping & Slip/Trip Risks
+10. Fire & Emergency Review
+11. Electrical & Charging Areas
+12. Equipment Review
+13. PPE, Signage & Segregation
+14. Hazardous / Special Areas
+15. Training & Safety Management
+16. Incident / Near-Miss Review
+17. Corrective Action Plan
+18. Preventive Actions
+19. Safety KPI Recommendations
+20. Inspection Checklist
+21. Management Summary
+
+IMPORTANT:
+- Do not certify that the warehouse is safe or compliant.
+- Do not invent legal or regulatory requirements.
+- Do not assess structural rack integrity without competent inspection.
+- Do not provide chemical-specific controls without SDS/product information.
+- Do not provide electrical repair instructions.
+- Do not recommend productivity improvements that reduce safety.
+- Use the hierarchy of controls.
+- Distinguish observed hazards, reported hazards and assumptions.
+- Escalate technical or high-risk conditions to appropriately qualified professionals.
+- Treat blocked emergency routes, unstable loads and serious equipment defects as high-priority issues.
+- Base corrective actions on evidence and practical warehouse conditions.`;
+
+const steps = [
+  {
+    title: "Review the operation by area",
+    description:
+      "Assess traffic routes, docks, racks, storage, equipment, emergency access and work practices separately so important hazards are not hidden inside a general inspection.",
+  },
+  {
+    title: "Prioritize real exposure",
+    description:
+      "Consider who is exposed, how serious the possible consequence could be and whether the existing controls actually prevent the event.",
+  },
+  {
+    title: "Use stronger controls first",
+    description:
+      "Where possible, eliminate or physically control hazards before relying only on procedures, signs, training or PPE.",
+  },
+  {
+    title: "Track actions to closure",
+    description:
+      "Assign each important finding to a responsible role and verify that corrective action was actually completed and effective.",
+  },
+];
+
+const example = {
+  input: [
+    "Operation: Distribution warehouse.",
+    "Observation: Forklifts and pedestrians share part of the route between picking aisles and the dispatch staging area.",
+    "Current controls: Floor markings, high-visibility vests and warning signs.",
+    "Additional observation: A blind corner exists near the staging entrance.",
+    "Goal: Review the risk and recommend practical improvements.",
+  ],
+
+  output: [
+    "Primary hazard: Pedestrian and forklift collision exposure at a shared route and blind corner.",
+    "Existing administrative controls such as markings, PPE and signs provide some protection but may not adequately control physical interaction.",
+    "Priority investigation: Observe traffic volume, crossing behavior, visibility, forklift speed and whether physical separation is practical.",
+    "Preferred improvement direction: Consider engineered segregation, controlled crossing points or route redesign before relying on additional signage alone.",
+    "Immediate control may include increased supervision and temporary traffic controls while a safer permanent solution is assessed.",
+    "Any layout or barrier change should preserve emergency access, equipment clearance and operational requirements.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Look beyond PPE",
+    description:
+      "PPE is important, but a physical barrier or redesigned traffic route can often control a warehouse hazard more effectively.",
+  },
+  {
+    title: "Near misses are useful signals",
+    description:
+      "Repeated near misses, damaged racks, pallet damage or emergency braking can reveal high-risk conditions before a serious incident occurs.",
+  },
+  {
+    title: "Escalate technical hazards",
+    description:
+      "Structural racking, electrical systems, fire protection and hazardous-material controls may require competent specialists rather than operational judgment alone.",
+  },
+];
+
+---
+
+<BaseLayout
+  title="Warehouse Safety Review Prompt | KRIYANO"
+  description="Review warehouse safety risks across forklifts, pedestrians, docks, racking, storage, manual handling, fire, emergency access, equipment, PPE and corrective actions."
+>
+  <PromptPage
+    category="OPERATIONS & LOGISTICS"
+    title="Warehouse Safety"
+    accentTitle="Review."
+    description="Identify practical warehouse hazards, assess control gaps and prioritize corrective actions across traffic, storage, equipment, emergency access and everyday operations."
+    meta={[
+      "Free prompt",
+      "Warehouse safety",
+      "Risk review",
+    ]}
+    bestFor={[
+      "Warehouse supervisors",
+      "Operations managers",
+      "Safety inspections",
+      "3PL operations",
+      "Distribution centers",
+      "Corrective-action planning",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Review risk where the work actually happens."
+    introDescription="Examine warehouse traffic, storage, equipment, loading, emergency access and work practices systematically, then prioritize stronger controls for the hazards with the greatest potential consequence."
+    steps={steps}
+    exampleTitle="Turn a warehouse observation into a safety action."
+    example={example}
+    tipsTitle="Make the safety review practical."
+    tips={tips}
+    sidebarTitle="Need to improve the underlying process?"
+    sidebarDescription="Use KRIYANO's Warehouse Process Improvement Prompt when a recurring safety issue is being created by layout, workflow, congestion or process design."
+    warningTitle="This does not replace a qualified safety inspection"
+    warningText="Safety requirements vary by site, equipment, product and jurisdiction. Structural, fire, electrical, occupational-health and hazardous-material issues should be reviewed by appropriately qualified professionals and against applicable local requirements."
+  />
+</BaseLayout>

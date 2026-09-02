@@ -1,0 +1,186 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PromptPage from "../../../components/PromptPage.astro";
+
+const masterPrompt = `Act as an experienced business meeting analyst and professional note summarizer.
+
+TASK:
+Turn the meeting notes, transcript or rough discussion below into a clear and structured meeting summary.
+
+MEETING TYPE:
+[Example: team meeting, project meeting, client meeting, management review, interview, operations meeting.]
+
+MEETING PURPOSE:
+[Explain why the meeting was held.]
+
+PARTICIPANTS:
+[List participants and roles if known.]
+
+MEETING NOTES / TRANSCRIPT:
+[Paste the notes, transcript or rough discussion here.]
+
+SUMMARY REQUIREMENTS:
+
+1. MEETING OVERVIEW
+- Summarize the main purpose and context of the meeting.
+- Keep this concise and factual.
+
+2. KEY DISCUSSION POINTS
+- Identify the main topics discussed.
+- Group related points together.
+- Remove repetition and unnecessary conversation.
+
+3. DECISIONS MADE
+- List confirmed decisions separately.
+- Do not treat suggestions or opinions as final decisions.
+- If no decision was clearly made, say so.
+
+4. ACTION ITEMS
+For each action item, identify:
+- Action required
+- Responsible person / owner
+- Deadline
+- Priority if stated
+
+Do not invent an owner or deadline if it was not provided.
+
+5. OPEN ISSUES
+- List unresolved questions, concerns or pending decisions.
+- Highlight anything that requires further clarification.
+
+6. RISKS / BLOCKERS
+- Identify any risks, delays, dependencies or problems mentioned.
+- Separate confirmed issues from possible risks.
+
+7. FOLLOW-UP REQUIREMENTS
+- Identify meetings, approvals, documents, updates or communications that should happen next.
+
+8. IMPORTANT DATES
+- Extract deadlines, review dates, delivery dates or other time-sensitive commitments mentioned.
+
+9. RESPONSIBILITY CHECK
+- Make it clear who is responsible for what where the meeting notes provide this information.
+- Mark missing responsibility as "Owner not specified."
+
+10. INFORMATION GAPS
+- Identify anything important that appears incomplete, unclear or missing.
+
+OUTPUT FORMAT:
+
+1. Meeting Overview
+2. Key Discussion Points
+3. Decisions Made
+4. Action Items
+5. Open Issues
+6. Risks / Blockers
+7. Follow-Up Requirements
+8. Important Dates
+9. Information Gaps
+
+For Action Items, use this format:
+
+Action:
+Owner:
+Deadline:
+Priority:
+
+Be concise, professional and factual.
+
+Do not invent decisions, responsibilities, deadlines, facts or commitments that were not present in the original meeting information.`;
+
+const steps = [
+  {
+    title: "Paste the real notes",
+    description:
+      "Use rough notes, bullet points or a transcript. The prompt is designed to organize messy meeting information into a useful structure.",
+  },
+  {
+    title: "Separate decisions from discussion",
+    description:
+      "A good meeting summary should clearly distinguish what was discussed from what was actually agreed.",
+  },
+  {
+    title: "Extract ownership",
+    description:
+      "Capture who is responsible for each action and mark missing owners rather than guessing.",
+  },
+  {
+    title: "Track follow-up",
+    description:
+      "Use the final summary to identify deadlines, unresolved issues and what needs to happen before the next meeting.",
+  },
+];
+
+const example = {
+  input: [
+    "Meeting: Weekly warehouse operations meeting.",
+    "Purpose: Review inventory discrepancies and receiving delays.",
+    "Participants: Warehouse supervisor, inventory controller and receiving team leader.",
+    "Notes: Three stock variances remain unresolved. Inventory controller will investigate them before Thursday. Receiving backlog is caused by late supplier documentation. Team agreed to introduce a daily pending-receipt review. Responsibility for preparing the review sheet was not assigned.",
+  ],
+
+  output: [
+    "Decision: Introduce a daily pending-receipt review.",
+    "Action: Investigate the three unresolved inventory variances.",
+    "Owner: Inventory Controller.",
+    "Deadline: Thursday.",
+    "Open Issue: Responsibility for preparing the daily pending-receipt review sheet has not been assigned.",
+    "Risk / Blocker: Late supplier documentation is contributing to receiving delays.",
+  ],
+};
+
+const tips = [
+  {
+    title: "Include names when possible",
+    description:
+      "Action tracking becomes much more useful when participants and responsibilities are clearly identified.",
+  },
+  {
+    title: "Keep unclear points visible",
+    description:
+      "Do not let AI silently fill gaps. Missing owners, deadlines and decisions should remain clearly marked.",
+  },
+  {
+    title: "Use the summary immediately",
+    description:
+      "Review the action items and follow-up requirements soon after the meeting while the discussion is still fresh.",
+  },
+];
+---
+
+<BaseLayout
+  title="Meeting Summary Prompt | KRIYANO"
+  description="Turn meeting notes or transcripts into structured summaries with decisions, action items, owners, deadlines, risks and follow-up requirements."
+>
+  <PromptPage
+    category="WORK & PRODUCTIVITY"
+    title="Meeting"
+    accentTitle="Summary."
+    description="Turn messy meeting notes into a clear record of discussions, decisions, responsibilities, deadlines and next actions."
+    meta={[
+      "Free prompt",
+      "Meeting productivity",
+      "Action focused",
+    ]}
+    bestFor={[
+      "Team meetings",
+      "Project meetings",
+      "Management reviews",
+      "Client meetings",
+      "Operations meetings",
+      "Meeting transcripts",
+    ]}
+    masterPrompt={masterPrompt}
+    introTitle="Paste the meeting. Extract what matters."
+    introDescription="Add your meeting notes or transcript. The prompt separates discussion from decisions and turns commitments into clear action items."
+    steps={steps}
+    exampleTitle="Turn rough notes into accountable actions."
+    example={example}
+    tipsTitle="Create more useful meeting records."
+    tips={tips}
+    sidebarTitle="Need a different meeting format?"
+    sidebarDescription="Use the KRIYANO Prompt Builder to create a custom prompt for your meeting type, audience, reporting format and follow-up requirements."
+    warningTitle="Accuracy tip"
+    warningText="Always review names, decisions, action owners and deadlines against the original meeting notes before distributing the summary."
+  />
+</BaseLayout>
