@@ -1,0 +1,1296 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const sourceCriteria = [
+  {
+    number: "01",
+    title: "Authority",
+    text:
+      "Who created the information? Check the organisation, author, publisher or institution behind the source and whether they are qualified to speak on the topic.",
+  },
+  {
+    number: "02",
+    title: "Relevance",
+    text:
+      "A trustworthy source can still be the wrong source for your question. Check whether it directly addresses the specific issue, location, industry, date or decision you are researching.",
+  },
+  {
+    number: "03",
+    title: "Currency",
+    text:
+      "Some information changes quickly. Check when the source was published or updated and whether newer guidance, data, prices, regulations or policies may now apply.",
+  },
+  {
+    number: "04",
+    title: "Evidence",
+    text:
+      "Strong sources usually show where their claims come from through data, documents, references, methodology, records or other verifiable evidence.",
+  },
+  {
+    number: "05",
+    title: "Purpose",
+    text:
+      "Understand why the content exists. A source designed to inform may need different scrutiny from one designed to sell, persuade, promote or attract attention.",
+  },
+  {
+    number: "06",
+    title: "Consistency",
+    text:
+      "Compare important claims with other reliable evidence, especially when one source makes an unusual, high-impact or surprising statement.",
+  },
+];
+
+const sourceTypes = [
+  {
+    label: "PRIMARY SOURCE",
+    title: "Original evidence",
+    examples:
+      "Policies, contracts, government publications, official statistics, transaction records, research papers, company filings and direct documentation.",
+    use:
+      "Usually the strongest place to verify a specific factual claim when the original material is available.",
+  },
+  {
+    label: "SECONDARY SOURCE",
+    title: "Analysis or interpretation",
+    examples:
+      "Professional publications, reputable news reporting, industry analysis, textbooks and expert commentary.",
+    use:
+      "Useful for explanation, comparison and context, especially when the source clearly identifies its underlying evidence.",
+  },
+  {
+    label: "DISCOVERY SOURCE",
+    title: "Useful for finding leads",
+    examples:
+      "Blogs, forums, social posts, community discussions, videos and general web articles.",
+    use:
+      "Can help identify terminology, questions, experiences or possible sources, but important claims should normally be checked elsewhere.",
+  },
+];
+
+const redFlags = [
+  "No author, organisation or publication information is visible.",
+  "The source makes strong claims without showing evidence.",
+  "The page is old but discusses information that changes frequently.",
+  "The headline is more dramatic than the evidence provided.",
+  "Statistics appear without a definition, date, methodology or original source.",
+  "The source copies another article instead of linking to original evidence.",
+  "Commercial promotion is presented as neutral research.",
+  "The source does not distinguish fact, opinion and speculation.",
+];
+
+const researchQuestions = [
+  {
+    question: "Who produced this?",
+    reason: "Establish authority and accountability.",
+  },
+  {
+    question: "What evidence supports it?",
+    reason: "Separate supported claims from assertions.",
+  },
+  {
+    question: "When was it published or updated?",
+    reason: "Check whether the information is still current.",
+  },
+  {
+    question: "Does it answer my exact question?",
+    reason: "Avoid using broadly related evidence for a specific claim.",
+  },
+  {
+    question: "Can I trace the claim to an original source?",
+    reason: "Reduce dependence on repeated or distorted information.",
+  },
+  {
+    question: "What would happen if this source were wrong?",
+    reason: "Match verification effort to the consequence of error.",
+  },
+];
+
+const comparisonRows = [
+  {
+    criterion: "Authority",
+    weak: "Unnamed blog author",
+    stronger: "Official government department",
+  },
+  {
+    criterion: "Evidence",
+    weak: "Claims with no supporting documents",
+    stronger: "Published data and methodology",
+  },
+  {
+    criterion: "Currency",
+    weak: "Old article on a changing regulation",
+    stronger: "Current official guidance",
+  },
+  {
+    criterion: "Purpose",
+    weak: "Sales page presenting promotional claims",
+    stronger: "Independent technical documentation",
+  },
+  {
+    criterion: "Traceability",
+    weak: "Repeats statistics from another website",
+    stronger: "Links to the original dataset",
+  },
+];
+
+const workflow = [
+  {
+    stage: "FIND",
+    title: "Locate possible sources",
+    text:
+      "Use search, AI or existing references to identify sources that may contain the information you need.",
+  },
+  {
+    stage: "FILTER",
+    title: "Remove obviously weak sources",
+    text:
+      "Check authority, relevance, date, evidence and purpose before spending time reading deeply.",
+  },
+  {
+    stage: "TRACE",
+    title: "Move toward original evidence",
+    text:
+      "Follow citations, links and references until you reach the strongest available source behind the claim.",
+  },
+  {
+    stage: "COMPARE",
+    title: "Check important claims",
+    text:
+      "Compare the source against other reliable evidence when the claim is important, disputed or high consequence.",
+  },
+  {
+    stage: "USE",
+    title: "Match the source to the decision",
+    text:
+      "Decide whether the evidence is strong enough for drafting, research, recommendation or formal action.",
+  },
+];
+---
+
+<BaseLayout
+  title="Evaluating Sources | KRIYANO"
+  description="Learn how to evaluate sources for authority, relevance, currency, evidence and reliability when using AI for research and real work."
+>
+  <article class="article-page">
+    <header class="article-hero">
+      <div class="container article-hero-grid">
+        <div class="article-heading">
+          <a href="/learn/" class="back-link">← LEARN</a>
+
+          <div class="article-meta">
+            <span>ACCURACY &amp; RESEARCH</span>
+            <span>15</span>
+            <span>BEGINNER</span>
+          </div>
+
+          <h1>
+            Evaluating
+            <span>Sources.</span>
+          </h1>
+
+          <p class="article-intro">
+            Finding a source is not enough. Good research depends on knowing
+            whether that source is authoritative, relevant, current and strong
+            enough to support the claim you want to make.
+          </p>
+        </div>
+
+        <aside class="lesson-panel">
+          <div class="panel-header">
+            <span>LESSON 15</span>
+            <span>ACCURACY &amp; RESEARCH</span>
+          </div>
+
+          <div class="panel-content">
+            <span class="panel-kicker">SOURCE QUALITY CHANGES THE ANSWER</span>
+
+            <strong>
+              Reliable research depends on the quality of the evidence behind
+              it.
+            </strong>
+
+            <p>
+              AI can help you find and organise information, but you still need
+              to judge whether the source deserves your trust.
+            </p>
+          </div>
+
+          <div class="panel-footer">
+            <span>AUTHORITY → EVIDENCE → RELEVANCE → USE</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section class="article-body-section">
+      <div class="container article-layout">
+        <aside class="article-sidebar">
+          <div class="sidebar-box">
+            <span class="sidebar-title">IN THIS GUIDE</span>
+
+            <a href="#source-quality">Why source quality matters</a>
+            <a href="#criteria">Six evaluation criteria</a>
+            <a href="#source-types">Source types</a>
+            <a href="#red-flags">Warning signs</a>
+            <a href="#comparison">Weak vs stronger sources</a>
+            <a href="#workplace-example">Workplace example</a>
+            <a href="#workflow">Evaluation workflow</a>
+            <a href="#takeaway">The practical takeaway</a>
+          </div>
+        </aside>
+
+        <main class="article-content">
+          <section id="source-quality">
+            <div class="section-marker">01 / WHY SOURCE QUALITY MATTERS</div>
+
+            <h2>A source can be real and still be unsuitable.</h2>
+
+            <p>
+              One of the most common research mistakes is treating every source
+              as equally useful. A webpage may exist, an article may look
+              professional and a document may contain the right keywords, but
+              none of that automatically makes it strong evidence.
+            </p>
+
+            <p>
+              The right source depends on the claim you are checking and what
+              you plan to do with the information.
+            </p>
+
+            <div class="concept-box">
+              <span>KEY PRINCIPLE</span>
+              <p>
+                Do not ask only, “Is this source credible?” Also ask, “Is this
+                source strong enough for this specific claim and decision?”
+              </p>
+            </div>
+          </section>
+
+          <section id="criteria">
+            <div class="section-marker">02 / SIX EVALUATION CRITERIA</div>
+
+            <h2>Evaluate the source before relying on the information.</h2>
+
+            <div class="criteria-grid">
+              {
+                sourceCriteria.map((item) => (
+                  <article class="criteria-card">
+                    <span>{item.number}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="decision-box">
+              <span>NO SINGLE TEST IS ENOUGH</span>
+              <p>
+                A source may be authoritative but outdated, current but
+                irrelevant, or detailed but unsupported. Evaluate several
+                dimensions together.
+              </p>
+            </div>
+          </section>
+
+          <section id="source-types">
+            <div class="section-marker">03 / SOURCE TYPES</div>
+
+            <h2>Different sources serve different research purposes.</h2>
+
+            <div class="source-type-stack">
+              {
+                sourceTypes.map((item) => (
+                  <article class="source-type-card">
+                    <div class="source-type-heading">
+                      <span>{item.label}</span>
+                      <h3>{item.title}</h3>
+                    </div>
+
+                    <div>
+                      <span class="mini-label">EXAMPLES</span>
+                      <p>{item.examples}</p>
+                    </div>
+
+                    <div>
+                      <span class="mini-label">BEST USE</span>
+                      <p>{item.use}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="concept-box">
+              <span>PRIMARY DOES NOT ALWAYS MEAN PERFECT</span>
+              <p>
+                Original sources can still contain errors, limitations or bias.
+                Their advantage is that you are closer to the evidence and can
+                inspect it directly.
+              </p>
+            </div>
+          </section>
+
+          <section id="red-flags">
+            <div class="section-marker">04 / WARNING SIGNS</div>
+
+            <h2>Weak sources often reveal themselves through predictable signals.</h2>
+
+            <div class="red-flag-list">
+              {
+                redFlags.map((item, index) => (
+                  <div class="red-flag-row">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <strong>{item}</strong>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="warning-box">
+              <span>POPULARITY IS NOT AUTHORITY</span>
+              <p>
+                Search ranking, social engagement, shares and repeated mentions
+                do not prove that a source is accurate.
+              </p>
+            </div>
+          </section>
+
+          <section id="comparison">
+            <div class="section-marker">05 / SOURCE COMPARISON</div>
+
+            <h2>Compare sources using evidence quality, not appearance.</h2>
+
+            <div class="comparison-table">
+              <div class="comparison-header">
+                <span>CRITERION</span>
+                <span>WEAKER EXAMPLE</span>
+                <span>STRONGER EXAMPLE</span>
+              </div>
+
+              {
+                comparisonRows.map((row) => (
+                  <div class="comparison-row">
+                    <strong>{row.criterion}</strong>
+                    <p>{row.weak}</p>
+                    <p>{row.stronger}</p>
+                  </div>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="workplace-example">
+            <div class="section-marker">06 / WORKPLACE EXAMPLE</div>
+
+            <h2>Imagine you need to confirm a warehouse storage requirement.</h2>
+
+            <div class="case-box">
+              <span>RESEARCH QUESTION</span>
+              <p>
+                “What storage temperature should be used for this product?”
+              </p>
+            </div>
+
+            <div class="source-example-grid">
+              <article>
+                <span>SOURCE A</span>
+                <h3>Online discussion forum</h3>
+                <p>
+                  A user says their warehouse normally stores the product at a
+                  particular temperature.
+                </p>
+
+                <div class="source-rating">
+                  <strong>USEFUL FOR</strong>
+                  <p>Finding practical questions or possible issues.</p>
+                </div>
+
+                <div class="source-rating">
+                  <strong>LIMITATION</strong>
+                  <p>
+                    The information may apply to a different product,
+                    specification or operating environment.
+                  </p>
+                </div>
+              </article>
+
+              <article>
+                <span>SOURCE B</span>
+                <h3>Supplier product specification</h3>
+                <p>
+                  The current official specification identifies the required
+                  storage conditions for the exact product.
+                </p>
+
+                <div class="source-rating">
+                  <strong>USEFUL FOR</strong>
+                  <p>Verifying the product-specific requirement.</p>
+                </div>
+
+                <div class="source-rating">
+                  <strong>STRENGTH</strong>
+                  <p>
+                    Directly relevant to the exact product and issued by the
+                    responsible supplier.
+                  </p>
+                </div>
+              </article>
+            </div>
+
+            <div class="corrected-output">
+              <span>BETTER RESEARCH DECISION</span>
+
+              <p>
+                Use the supplier's current product specification as the primary
+                evidence for the storage requirement. The forum discussion may
+                still help identify operational questions, but it should not
+                override the official specification.
+              </p>
+            </div>
+          </section>
+
+          <section id="workflow">
+            <div class="section-marker">07 / EVALUATION WORKFLOW</div>
+
+            <h2>Move from discovery toward stronger evidence.</h2>
+
+            <div class="workflow-list">
+              {
+                workflow.map((item, index) => (
+                  <article class="workflow-row">
+                    <div class="workflow-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
+
+                    <div>
+                      <span>{item.stage}</span>
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <h3 class="subheading">Six questions before you trust a source</h3>
+
+            <div class="question-list">
+              {
+                researchQuestions.map((item, index) => (
+                  <article>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <div>
+                      <strong>{item.question}</strong>
+                      <p>{item.reason}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="takeaway">
+            <div class="section-marker">08 / PRACTICAL TAKEAWAY</div>
+
+            <h2>Use AI to discover sources, but evaluate the evidence yourself.</h2>
+
+            <p>
+              AI can make research faster by suggesting search directions,
+              summarising documents and helping organise findings. But source
+              quality still determines whether the final conclusion deserves
+              confidence.
+            </p>
+
+            <div class="takeaway-flow">
+              <div>
+                <span>01</span>
+                <strong>Find</strong>
+                <p>Locate possible sources.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>02</span>
+                <strong>Evaluate</strong>
+                <p>Check source quality.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>03</span>
+                <strong>Trace</strong>
+                <p>Reach original evidence.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>04</span>
+                <strong>Use</strong>
+                <p>Match evidence to decision.</p>
+              </div>
+            </div>
+
+            <div class="tool-callout">
+              <div>
+                <span class="tool-kicker">RESEARCH WITH BETTER STRUCTURE</span>
+
+                <h3>Ask AI to separate sources from conclusions.</h3>
+
+                <p>
+                  A useful research prompt can require AI to identify the claim,
+                  source, source type, publication date, supporting evidence and
+                  any uncertainty before presenting a conclusion.
+                </p>
+              </div>
+
+              <a href="/tools/prompt-builder/" class="button button-primary">
+                Open Prompt Builder
+              </a>
+            </div>
+          </section>
+
+          <section class="next-lesson">
+            <div>
+              <span class="next-label">NEXT LESSON</span>
+
+              <h2>AI-Assisted Research</h2>
+
+              <p>
+                Learn how to use AI as part of a structured research workflow
+                without confusing generated summaries with verified evidence.
+              </p>
+            </div>
+
+            <a
+  href="/learn/accuracy-and-research/ai-assisted-research/"
+  class="next-status"
+>
+  CONTINUE →
+</a>
+          </section>
+        </main>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    overflow: hidden;
+  }
+
+  .article-hero {
+    padding: 92px 0 82px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(circle at 82% 20%, rgba(183, 255, 74, 0.08), transparent 27%),
+      radial-gradient(circle at 14% 0%, rgba(77, 226, 197, 0.055), transparent 28%);
+  }
+
+  .article-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 75px;
+    align-items: end;
+  }
+
+  .back-link {
+    color: var(--lime);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 28px;
+  }
+
+  .article-meta span {
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-heading h1 {
+    max-width: 930px;
+    margin-top: 22px;
+    font-size: clamp(3.5rem, 7vw, 6.6rem);
+    line-height: 0.94;
+    letter-spacing: -0.065em;
+  }
+
+  .article-heading h1 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .article-intro {
+    max-width: 760px;
+    margin-top: 27px;
+    color: var(--muted);
+    font-size: 1.04rem;
+    line-height: 1.8;
+  }
+
+  .lesson-panel {
+    overflow: hidden;
+    border: 1px solid rgba(183, 255, 74, 0.17);
+    border-radius: 21px;
+    background: var(--surface);
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .panel-content {
+    padding: 31px 26px 34px;
+  }
+
+  .panel-kicker {
+    display: block;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .panel-content strong {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.45rem;
+    line-height: 1.35;
+    letter-spacing: -0.035em;
+  }
+
+  .panel-content p {
+    margin-top: 17px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .panel-footer {
+    padding: 17px 20px;
+    border-top: 1px solid var(--line);
+    background: rgba(183, 255, 74, 0.03);
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-body-section {
+    padding: 88px 0 110px;
+  }
+
+  .article-layout {
+    display: grid;
+    grid-template-columns: 235px minmax(0, 800px);
+    gap: 78px;
+    justify-content: center;
+  }
+
+  .sidebar-box {
+    position: sticky;
+    top: 105px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+  }
+
+  .sidebar-title {
+    padding: 16px 0;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .sidebar-box a {
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  .sidebar-box a:hover {
+    color: var(--lime);
+  }
+
+  .article-content > section:not(:first-child) {
+    margin-top: 90px;
+  }
+
+  .section-marker {
+    color: var(--lime);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .article-content h2 {
+    max-width: 760px;
+    margin-top: 14px;
+    font-size: clamp(2.3rem, 5vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.052em;
+  }
+
+  .article-content > section > p {
+    max-width: 760px;
+    margin-top: 23px;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .concept-box,
+  .warning-box,
+  .decision-box {
+    margin: 34px 0;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .concept-box > span,
+  .warning-box > span,
+  .decision-box > span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .concept-box p,
+  .warning-box p,
+  .decision-box p {
+    margin-top: 12px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .criteria-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+    margin-top: 36px;
+  }
+
+  .criteria-card {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .criteria-card > span {
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .criteria-card h3 {
+    margin-top: 21px;
+    font-size: 1rem;
+  }
+
+  .criteria-card p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.76rem;
+    line-height: 1.68;
+  }
+
+  .source-type-stack {
+    display: grid;
+    gap: 13px;
+    margin-top: 35px;
+  }
+
+  .source-type-card {
+    display: grid;
+    grid-template-columns: 170px 1fr 1fr;
+    gap: 27px;
+    padding: 25px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .source-type-heading > span,
+  .mini-label {
+    color: var(--lime);
+    font-size: 0.57rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .source-type-heading h3 {
+    margin-top: 9px;
+    font-size: 0.96rem;
+  }
+
+  .source-type-card p {
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 0.73rem;
+    line-height: 1.65;
+  }
+
+  .red-flag-list {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .red-flag-row {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 20px;
+    padding: 19px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .red-flag-row span {
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .red-flag-row strong {
+    font-size: 0.83rem;
+    line-height: 1.5;
+  }
+
+  .comparison-table {
+    margin-top: 35px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+  }
+
+  .comparison-header,
+  .comparison-row {
+    display: grid;
+    grid-template-columns: 0.7fr 1.2fr 1.2fr;
+    gap: 1px;
+  }
+
+  .comparison-header {
+    background: rgba(183, 255, 74, 0.04);
+  }
+
+  .comparison-header span {
+    padding: 16px 18px;
+    color: var(--lime);
+    font-size: 0.56rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .comparison-row {
+    border-top: 1px solid var(--line);
+  }
+
+  .comparison-row strong,
+  .comparison-row p {
+    padding: 18px;
+  }
+
+  .comparison-row strong {
+    font-size: 0.76rem;
+  }
+
+  .comparison-row p {
+    color: var(--muted);
+    font-size: 0.74rem;
+    line-height: 1.55;
+  }
+
+  .case-box {
+    margin-top: 35px;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .case-box span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .case-box p {
+    margin-top: 13px;
+    font-size: 1.05rem;
+    line-height: 1.65;
+  }
+
+  .source-example-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 18px;
+  }
+
+  .source-example-grid article {
+    padding: 25px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .source-example-grid article > span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .source-example-grid h3 {
+    margin-top: 16px;
+    font-size: 1rem;
+  }
+
+  .source-example-grid > article > p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.76rem;
+    line-height: 1.65;
+  }
+
+  .source-rating {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+
+  .source-rating strong {
+    color: var(--lime);
+    font-size: 0.56rem;
+    letter-spacing: 0.07em;
+  }
+
+  .source-rating p {
+    margin-top: 7px;
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.55;
+  }
+
+  .corrected-output {
+    margin-top: 18px;
+    padding: 26px;
+    border: 1px solid rgba(183, 255, 74, 0.2);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .corrected-output span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .corrected-output p {
+    margin-top: 14px;
+    font-size: 0.87rem;
+    line-height: 1.72;
+  }
+
+  .workflow-list {
+    margin-top: 36px;
+    border-top: 1px solid var(--line);
+  }
+
+  .workflow-row {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 23px;
+    padding: 25px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .workflow-number {
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .workflow-row div:last-child > span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .workflow-row h3 {
+    margin-top: 8px;
+    font-size: 1.02rem;
+  }
+
+  .workflow-row p {
+    max-width: 650px;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.68;
+  }
+
+  .subheading {
+    margin-top: 45px;
+    font-size: 1.45rem;
+    letter-spacing: -0.025em;
+  }
+
+  .question-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .question-list article {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 18px;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface);
+  }
+
+  .question-list article > span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+  }
+
+  .question-list strong {
+    font-size: 0.84rem;
+  }
+
+  .question-list p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.55;
+  }
+
+  .takeaway-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-top: 35px;
+    padding: 27px 22px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .takeaway-flow > div span {
+    display: block;
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .takeaway-flow strong {
+    display: block;
+    margin-top: 13px;
+    font-size: 0.82rem;
+  }
+
+  .takeaway-flow p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.67rem;
+    line-height: 1.5;
+  }
+
+  .flow-arrow {
+    color: var(--mint);
+  }
+
+  .tool-callout {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    margin-top: 40px;
+    padding: 32px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 19px;
+    background:
+      linear-gradient(145deg, rgba(183, 255, 74, 0.04), transparent 50%),
+      var(--surface);
+  }
+
+  .tool-kicker,
+  .next-label {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .tool-callout h3 {
+    margin-top: 11px;
+    font-size: 1.35rem;
+  }
+
+  .tool-callout p {
+    max-width: 510px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+
+  .tool-callout .button {
+    flex-shrink: 0;
+  }
+
+  .next-lesson {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    padding-top: 43px;
+    border-top: 1px solid var(--line);
+  }
+
+  .next-lesson h2 {
+    margin-top: 11px;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+
+  .next-lesson p {
+    max-width: 540px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.79rem;
+    line-height: 1.65;
+  }
+
+  .next-status {
+    flex-shrink: 0;
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  a.next-status:hover {
+    color: var(--lime);
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1000px) {
+    .article-hero-grid,
+    .article-layout {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .article-sidebar {
+      display: none;
+    }
+
+    .source-type-card {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .flow-arrow {
+      display: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .article-hero {
+      padding: 68px 0 60px;
+    }
+
+    .article-body-section {
+      padding: 65px 0 80px;
+    }
+
+    .criteria-grid,
+    .source-example-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .comparison-header {
+      display: none;
+    }
+
+    .comparison-row {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding: 17px;
+    }
+
+    .comparison-row strong,
+    .comparison-row p {
+      padding: 7px 0;
+    }
+
+    .red-flag-row,
+    .workflow-row {
+      grid-template-columns: 42px 1fr;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .takeaway-flow > div {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .takeaway-flow > div:last-of-type {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .tool-callout,
+    .next-lesson {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

@@ -1,0 +1,1334 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const researchStages = [
+  {
+    number: "01",
+    title: "Define the question",
+    text:
+      "Start with a clear research question. AI works better when the topic, scope, time period, location and intended decision are defined before searching begins.",
+  },
+  {
+    number: "02",
+    title: "Identify what must be verified",
+    text:
+      "Separate the research question into facts, numbers, definitions, policies, comparisons and assumptions that may require different types of evidence.",
+  },
+  {
+    number: "03",
+    title: "Use AI for discovery",
+    text:
+      "Ask AI to suggest search terms, relevant source types, sub-questions and possible evidence locations without treating those suggestions as verified facts.",
+  },
+  {
+    number: "04",
+    title: "Collect reliable sources",
+    text:
+      "Move from discovery toward primary, official or otherwise authoritative sources that directly support the important claims.",
+  },
+  {
+    number: "05",
+    title: "Use AI to organise evidence",
+    text:
+      "AI can help summarise documents, compare findings, create tables, identify disagreements and organise notes after the source material is available.",
+  },
+  {
+    number: "06",
+    title: "Verify the final conclusion",
+    text:
+      "Before using the research, check that the conclusion accurately reflects the strongest available evidence and clearly preserves any uncertainty.",
+  },
+];
+
+const goodUses = [
+  {
+    title: "Breaking down a broad question",
+    text:
+      "AI can turn a large research topic into smaller questions that are easier to investigate.",
+  },
+  {
+    title: "Generating search directions",
+    text:
+      "AI can suggest terminology, alternative phrases and source categories that may improve the search process.",
+  },
+  {
+    title: "Summarising supplied material",
+    text:
+      "When you provide a document or trusted source, AI can help extract key points, compare sections and create structured notes.",
+  },
+  {
+    title: "Comparing evidence",
+    text:
+      "AI can organise information from several sources into categories, similarities, differences, risks and unresolved questions.",
+  },
+  {
+    title: "Finding gaps",
+    text:
+      "AI can help identify what information is still missing before a conclusion is made.",
+  },
+  {
+    title: "Drafting the final structure",
+    text:
+      "Once the evidence is verified, AI can help turn research notes into a clear report, summary, recommendation or presentation outline.",
+  },
+];
+
+const badUses = [
+  "Treating an AI-generated summary as the original source.",
+  "Accepting citations without opening and checking them.",
+  "Asking AI to decide which facts are true without independent evidence.",
+  "Using one source simply because AI ranked it first.",
+  "Allowing AI to fill missing evidence with assumptions.",
+  "Presenting generated research as verified when the supporting sources were never reviewed.",
+];
+
+const researchPromptParts = [
+  {
+    label: "QUESTION",
+    example: "What exactly am I trying to find out?",
+  },
+  {
+    label: "SCOPE",
+    example: "Which country, industry, product, period or situation applies?",
+  },
+  {
+    label: "EVIDENCE",
+    example: "What type of sources should support the answer?",
+  },
+  {
+    label: "OUTPUT",
+    example: "How should findings be organised?",
+  },
+  {
+    label: "UNCERTAINTY",
+    example: "How should missing or conflicting information be shown?",
+  },
+  {
+    label: "BOUNDARY",
+    example: "What must AI avoid assuming or inventing?",
+  },
+];
+
+const researchWorkflow = [
+  {
+    stage: "QUESTION",
+    title: "Define the decision or information need",
+    text:
+      "A focused question prevents research from becoming a collection of loosely related information.",
+  },
+  {
+    stage: "DISCOVER",
+    title: "Use AI to expand the search",
+    text:
+      "Generate keywords, sub-questions and possible source categories.",
+  },
+  {
+    stage: "SOURCE",
+    title: "Collect evidence independently",
+    text:
+      "Open and review the actual sources rather than relying on AI descriptions of them.",
+  },
+  {
+    stage: "ANALYSE",
+    title: "Use AI to organise the evidence",
+    text:
+      "Summarise, compare, classify and identify gaps while keeping the original sources available for checking.",
+  },
+  {
+    stage: "VERIFY",
+    title: "Check important claims",
+    text:
+      "Trace conclusions back to the evidence and correct unsupported statements.",
+  },
+  {
+    stage: "DELIVER",
+    title: "Create the final output",
+    text:
+      "Use the verified findings to prepare the report, recommendation, briefing or next action.",
+  },
+];
+
+const evidenceStatus = [
+  {
+    status: "VERIFIED",
+    title: "Supported by reliable evidence",
+    text:
+      "The claim has been checked against an appropriate source.",
+  },
+  {
+    status: "PARTIALLY VERIFIED",
+    title: "Some evidence exists",
+    text:
+      "Part of the statement is supported, but additional checking is still required.",
+  },
+  {
+    status: "UNRESOLVED",
+    title: "Evidence is insufficient",
+    text:
+      "The research does not currently support a firm conclusion.",
+  },
+];
+---
+
+<BaseLayout
+  title="AI-Assisted Research | KRIYANO"
+  description="Learn how to use AI for research without confusing generated output with verified evidence, using a practical workflow for discovery, source evaluation, analysis and human review."
+>
+  <article class="article-page">
+    <header class="article-hero">
+      <div class="container article-hero-grid">
+        <div class="article-heading">
+          <a href="/learn/" class="back-link">← LEARN</a>
+
+          <div class="article-meta">
+            <span>ACCURACY &amp; RESEARCH</span>
+            <span>16</span>
+            <span>BEGINNER</span>
+          </div>
+
+          <h1>
+            AI-Assisted
+            <span>Research.</span>
+          </h1>
+
+          <p class="article-intro">
+            AI can make research faster, but it should support the research
+            process rather than replace evidence. The strongest workflow uses
+            AI for discovery, organisation and drafting while keeping source
+            verification and final judgment under human control.
+          </p>
+        </div>
+
+        <aside class="lesson-panel">
+          <div class="panel-header">
+            <span>LESSON 16</span>
+            <span>ACCURACY &amp; RESEARCH</span>
+          </div>
+
+          <div class="panel-content">
+            <span class="panel-kicker">AI ASSISTS. EVIDENCE DECIDES.</span>
+
+            <strong>
+              Use AI to move through research faster without giving up source
+              control.
+            </strong>
+
+            <p>
+              The goal is not to ask AI for a final answer and trust it. The
+              goal is to build a research process where important claims can be
+              traced back to reliable evidence.
+            </p>
+          </div>
+
+          <div class="panel-footer">
+            <span>QUESTION → DISCOVER → SOURCE → VERIFY</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section class="article-body-section">
+      <div class="container article-layout">
+        <aside class="article-sidebar">
+          <div class="sidebar-box">
+            <span class="sidebar-title">IN THIS GUIDE</span>
+
+            <a href="#role">AI's role in research</a>
+            <a href="#stages">Six research stages</a>
+            <a href="#good-uses">Where AI helps</a>
+            <a href="#bad-uses">Where AI creates risk</a>
+            <a href="#prompting">Research prompts</a>
+            <a href="#workplace-example">Workplace example</a>
+            <a href="#workflow">Research workflow</a>
+            <a href="#takeaway">The practical takeaway</a>
+          </div>
+        </aside>
+
+        <main class="article-content">
+          <section id="role">
+            <div class="section-marker">01 / AI'S ROLE IN RESEARCH</div>
+
+            <h2>AI should support the path to evidence, not replace it.</h2>
+
+            <p>
+              AI can be extremely useful during research because it can help you
+              understand a topic, generate questions, organise material and
+              compare information quickly.
+            </p>
+
+            <p>
+              The risk begins when generated output is treated as if it were a
+              verified source. A strong research process keeps a clear
+              distinction between what AI generated and what the evidence
+              actually proves.
+            </p>
+
+            <div class="concept-box">
+              <span>CORE PRINCIPLE</span>
+              <p>
+                Use AI to help you find, understand and organise evidence. Do
+                not use AI output as a substitute for the evidence itself.
+              </p>
+            </div>
+          </section>
+
+          <section id="stages">
+            <div class="section-marker">02 / SIX RESEARCH STAGES</div>
+
+            <h2>Build research as a process, not a single prompt.</h2>
+
+            <div class="stage-grid">
+              {
+                researchStages.map((item) => (
+                  <article class="stage-card">
+                    <span>{item.number}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="decision-box">
+              <span>THE IMPORTANT SHIFT</span>
+              <p>
+                Instead of asking AI, “What is the answer?”, ask how AI can
+                help you reach a better-supported answer.
+              </p>
+            </div>
+          </section>
+
+          <section id="good-uses">
+            <div class="section-marker">03 / WHERE AI HELPS</div>
+
+            <h2>AI is strongest when it reduces research effort without becoming the source of truth.</h2>
+
+            <div class="use-grid">
+              {
+                goodUses.map((item, index) => (
+                  <article class="use-card">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="bad-uses">
+            <div class="section-marker">04 / WHERE AI CREATES RISK</div>
+
+            <h2>Research becomes unreliable when AI is allowed to hide missing evidence.</h2>
+
+            <div class="risk-list">
+              {
+                badUses.map((item, index) => (
+                  <div class="risk-row">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <strong>{item}</strong>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="warning-box">
+              <span>WATCH FOR FALSE COMPLETENESS</span>
+              <p>
+                AI is good at producing a complete-looking answer. Research is
+                often incomplete. A trustworthy workflow must allow unresolved
+                questions to remain unresolved until evidence is available.
+              </p>
+            </div>
+          </section>
+
+          <section id="prompting">
+            <div class="section-marker">05 / RESEARCH PROMPTS</div>
+
+            <h2>A good research prompt defines both the task and the evidence boundaries.</h2>
+
+            <div class="prompt-parts">
+              {
+                researchPromptParts.map((item) => (
+                  <article>
+                    <span>{item.label}</span>
+                    <p>{item.example}</p>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="prompt-example">
+              <span>EXAMPLE RESEARCH INSTRUCTION</span>
+
+              <p>
+                “Help me research this issue. First break the question into
+                smaller research questions. Suggest the types of reliable
+                sources I should check. Do not invent facts or citations.
+                Clearly separate verified information, assumptions and
+                unresolved questions. When I provide source material, base the
+                analysis only on that evidence.”
+              </p>
+            </div>
+
+            <div class="concept-box">
+              <span>USEFUL BOUNDARY</span>
+              <p>
+                When the source material matters, tell AI explicitly to work
+                only from the provided evidence and to identify anything the
+                evidence does not support.
+              </p>
+            </div>
+          </section>
+
+          <section id="workplace-example">
+            <div class="section-marker">06 / WORKPLACE EXAMPLE</div>
+
+            <h2>Research whether an inventory problem is isolated or recurring.</h2>
+
+            <div class="case-box">
+              <div class="case-header">
+                <span>RESEARCH QUESTION</span>
+                <strong>Inventory discrepancy pattern</strong>
+              </div>
+
+              <p>
+                “Several discrepancies have been reported for the same SKU.
+                Is there enough evidence to conclude that the problem is
+                recurring?”
+              </p>
+            </div>
+
+            <div class="research-sequence">
+              <article>
+                <span>STEP 01 / DEFINE</span>
+                <h3>Clarify the question.</h3>
+                <p>
+                  Determine the period being reviewed, the SKU, locations,
+                  discrepancy threshold and what qualifies as a recurring
+                  pattern.
+                </p>
+              </article>
+
+              <article>
+                <span>STEP 02 / COLLECT</span>
+                <h3>Gather source records.</h3>
+                <p>
+                  Retrieve verified stock-count results, system inventory,
+                  transaction history, adjustment records and investigation
+                  notes for the selected period.
+                </p>
+              </article>
+
+              <article>
+                <span>STEP 03 / ORGANISE</span>
+                <h3>Use AI to structure the evidence.</h3>
+                <p>
+                  Ask AI to create a table showing dates, system quantities,
+                  physical quantities, variance and investigation status using
+                  only the supplied records.
+                </p>
+              </article>
+
+              <article>
+                <span>STEP 04 / ANALYSE</span>
+                <h3>Look for repeated patterns.</h3>
+                <p>
+                  AI can help identify repeated locations, transaction types,
+                  timing or variance direction, but each pattern should still
+                  be checked against the records.
+                </p>
+              </article>
+
+              <article>
+                <span>STEP 05 / CONCLUDE</span>
+                <h3>Match the conclusion to the evidence.</h3>
+                <p>
+                  If the records show repeated verified discrepancies, describe
+                  the pattern. If the evidence is incomplete, state that more
+                  data is required.
+                </p>
+              </article>
+            </div>
+
+            <div class="output-comparison">
+              <article>
+                <span>WEAK CONCLUSION</span>
+                <p>
+                  “The SKU has a recurring receiving problem that is causing
+                  inventory shortages.”
+                </p>
+                <strong>
+                  Problem: a specific root cause has been stated without enough
+                  evidence.
+                </strong>
+              </article>
+
+              <article>
+                <span>BETTER CONCLUSION</span>
+                <p>
+                  “Repeated discrepancies have been recorded for this SKU
+                  during the reviewed period. The available records support the
+                  existence of a recurring variance pattern, but they do not yet
+                  confirm a single root cause.”
+                </p>
+                <strong>
+                  Better: the conclusion stays within what the evidence
+                  supports.
+                </strong>
+              </article>
+            </div>
+          </section>
+
+          <section id="workflow">
+            <div class="section-marker">07 / PRACTICAL RESEARCH WORKFLOW</div>
+
+            <h2>Keep AI inside a controlled evidence workflow.</h2>
+
+            <div class="workflow-list">
+              {
+                researchWorkflow.map((item, index) => (
+                  <article class="workflow-row">
+                    <div class="workflow-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
+
+                    <div>
+                      <span>{item.stage}</span>
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <h3 class="subheading">Classify the evidence before finalising</h3>
+
+            <div class="status-grid">
+              {
+                evidenceStatus.map((item) => (
+                  <article>
+                    <span>{item.status}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="takeaway">
+            <div class="section-marker">08 / PRACTICAL TAKEAWAY</div>
+
+            <h2>Let AI accelerate the research process, not replace the research standard.</h2>
+
+            <p>
+              The best AI-assisted research combines fast discovery and
+              organisation with strong source evaluation, fact-checking and
+              human judgment. Keep evidence traceable from the research
+              question through to the final conclusion.
+            </p>
+
+            <div class="takeaway-flow">
+              <div>
+                <span>01</span>
+                <strong>Question</strong>
+                <p>Define what matters.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>02</span>
+                <strong>Discover</strong>
+                <p>Use AI to explore.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>03</span>
+                <strong>Verify</strong>
+                <p>Check real evidence.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>04</span>
+                <strong>Conclude</strong>
+                <p>Stay within the evidence.</p>
+              </div>
+            </div>
+
+            <div class="tool-callout">
+              <div>
+                <span class="tool-kicker">BUILD BETTER RESEARCH PROMPTS</span>
+
+                <h3>Make evidence handling part of the prompt.</h3>
+
+                <p>
+                  Define the research question, source expectations, output
+                  structure and rules for uncertainty before asking AI to help
+                  with the analysis.
+                </p>
+              </div>
+
+              <a href="/tools/prompt-builder/" class="button button-primary">
+                Open Prompt Builder
+              </a>
+            </div>
+          </section>
+
+          <section class="completion-box">
+            <span class="completion-kicker">LEARNING PATH COMPLETE</span>
+
+            <h2>Accuracy &amp; Research</h2>
+
+            <p>
+              You have completed the four guides in this learning path:
+            </p>
+
+            <div class="completion-lessons">
+              <span>13 — Why AI Can Produce Wrong Answers</span>
+              <span>14 — How to Fact-Check AI Output</span>
+              <span>15 — Evaluating Sources</span>
+              <span>16 — AI-Assisted Research</span>
+            </div>
+          </section>
+
+          <section class="next-lesson">
+            <div>
+              <span class="next-label">NEXT LEARNING PATH</span>
+
+              <h2>Safe &amp; Responsible Use</h2>
+
+              <p>
+                Learn what information should not be shared with AI, how to
+                handle workplace data, and how to think about copyright and
+                responsible AI use.
+              </p>
+            </div>
+
+            <span class="next-status">COMING NEXT →</span>
+          </section>
+        </main>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    overflow: hidden;
+  }
+
+  .article-hero {
+    padding: 92px 0 82px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(circle at 82% 20%, rgba(183, 255, 74, 0.08), transparent 27%),
+      radial-gradient(circle at 14% 0%, rgba(77, 226, 197, 0.055), transparent 28%);
+  }
+
+  .article-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 75px;
+    align-items: end;
+  }
+
+  .back-link {
+    color: var(--lime);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 28px;
+  }
+
+  .article-meta span {
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-heading h1 {
+    max-width: 930px;
+    margin-top: 22px;
+    font-size: clamp(3.5rem, 7vw, 6.6rem);
+    line-height: 0.94;
+    letter-spacing: -0.065em;
+  }
+
+  .article-heading h1 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .article-intro {
+    max-width: 760px;
+    margin-top: 27px;
+    color: var(--muted);
+    font-size: 1.04rem;
+    line-height: 1.8;
+  }
+
+  .lesson-panel {
+    overflow: hidden;
+    border: 1px solid rgba(183, 255, 74, 0.17);
+    border-radius: 21px;
+    background: var(--surface);
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .panel-content {
+    padding: 31px 26px 34px;
+  }
+
+  .panel-kicker {
+    display: block;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .panel-content strong {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.45rem;
+    line-height: 1.35;
+    letter-spacing: -0.035em;
+  }
+
+  .panel-content p {
+    margin-top: 17px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .panel-footer {
+    padding: 17px 20px;
+    border-top: 1px solid var(--line);
+    background: rgba(183, 255, 74, 0.03);
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-body-section {
+    padding: 88px 0 110px;
+  }
+
+  .article-layout {
+    display: grid;
+    grid-template-columns: 235px minmax(0, 800px);
+    gap: 78px;
+    justify-content: center;
+  }
+
+  .sidebar-box {
+    position: sticky;
+    top: 105px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+  }
+
+  .sidebar-title {
+    padding: 16px 0;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .sidebar-box a {
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  .sidebar-box a:hover {
+    color: var(--lime);
+  }
+
+  .article-content > section:not(:first-child) {
+    margin-top: 90px;
+  }
+
+  .section-marker {
+    color: var(--lime);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .article-content h2 {
+    max-width: 760px;
+    margin-top: 14px;
+    font-size: clamp(2.3rem, 5vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.052em;
+  }
+
+  .article-content > section > p {
+    max-width: 760px;
+    margin-top: 23px;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .concept-box,
+  .warning-box,
+  .decision-box {
+    margin: 34px 0;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .concept-box > span,
+  .warning-box > span,
+  .decision-box > span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .concept-box p,
+  .warning-box p,
+  .decision-box p {
+    margin-top: 12px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .stage-grid,
+  .use-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+    margin-top: 36px;
+  }
+
+  .stage-card,
+  .use-card {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .stage-card > span,
+  .use-card > span {
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .stage-card h3,
+  .use-card h3 {
+    margin-top: 21px;
+    font-size: 1rem;
+  }
+
+  .stage-card p,
+  .use-card p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.76rem;
+    line-height: 1.68;
+  }
+
+  .risk-list {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .risk-row {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 20px;
+    padding: 19px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .risk-row span {
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .risk-row strong {
+    font-size: 0.83rem;
+    line-height: 1.5;
+  }
+
+  .prompt-parts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+    margin-top: 35px;
+  }
+
+  .prompt-parts article {
+    padding: 22px;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background: var(--surface);
+  }
+
+  .prompt-parts span {
+    color: var(--lime);
+    font-size: 0.57rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .prompt-parts p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .prompt-example {
+    margin-top: 20px;
+    padding: 28px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .prompt-example span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .prompt-example p {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
+
+  .case-box {
+    margin-top: 35px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .case-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .case-header span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .case-header strong {
+    font-size: 0.74rem;
+  }
+
+  .case-box > p {
+    padding: 28px;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .research-sequence {
+    display: grid;
+    gap: 13px;
+    margin-top: 18px;
+  }
+
+  .research-sequence article {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background: var(--surface);
+  }
+
+  .research-sequence span {
+    color: var(--lime);
+    font-size: 0.57rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .research-sequence h3 {
+    margin-top: 13px;
+    font-size: 1rem;
+  }
+
+  .research-sequence p {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.77rem;
+    line-height: 1.67;
+  }
+
+  .output-comparison {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 18px;
+  }
+
+  .output-comparison article {
+    padding: 25px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .output-comparison span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .output-comparison p {
+    margin-top: 15px;
+    color: var(--muted);
+    font-size: 0.79rem;
+    line-height: 1.7;
+  }
+
+  .output-comparison strong {
+    display: block;
+    margin-top: 18px;
+    font-size: 0.72rem;
+    line-height: 1.55;
+  }
+
+  .workflow-list {
+    margin-top: 36px;
+    border-top: 1px solid var(--line);
+  }
+
+  .workflow-row {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 23px;
+    padding: 25px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .workflow-number {
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .workflow-row div:last-child > span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .workflow-row h3 {
+    margin-top: 8px;
+    font-size: 1.02rem;
+  }
+
+  .workflow-row p {
+    max-width: 650px;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.68;
+  }
+
+  .subheading {
+    margin-top: 45px;
+    font-size: 1.45rem;
+    letter-spacing: -0.025em;
+  }
+
+  .status-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
+    margin-top: 20px;
+  }
+
+  .status-grid article {
+    padding: 23px;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background: var(--surface);
+  }
+
+  .status-grid span {
+    color: var(--lime);
+    font-size: 0.56rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+  }
+
+  .status-grid h3 {
+    margin-top: 14px;
+    font-size: 0.92rem;
+  }
+
+  .status-grid p {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.6;
+  }
+
+  .takeaway-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-top: 35px;
+    padding: 27px 22px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .takeaway-flow > div span {
+    display: block;
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .takeaway-flow strong {
+    display: block;
+    margin-top: 13px;
+    font-size: 0.82rem;
+  }
+
+  .takeaway-flow p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.67rem;
+    line-height: 1.5;
+  }
+
+  .flow-arrow {
+    color: var(--mint);
+  }
+
+  .tool-callout {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    margin-top: 40px;
+    padding: 32px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 19px;
+    background:
+      linear-gradient(145deg, rgba(183, 255, 74, 0.04), transparent 50%),
+      var(--surface);
+  }
+
+  .tool-kicker,
+  .next-label,
+  .completion-kicker {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .tool-callout h3 {
+    margin-top: 11px;
+    font-size: 1.35rem;
+  }
+
+  .tool-callout p {
+    max-width: 510px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+
+  .tool-callout .button {
+    flex-shrink: 0;
+  }
+
+  .completion-box {
+    padding: 34px;
+    border: 1px solid rgba(183, 255, 74, 0.2);
+    border-radius: 20px;
+    background:
+      radial-gradient(circle at 85% 15%, rgba(183, 255, 74, 0.07), transparent 35%),
+      var(--surface);
+  }
+
+  .completion-box h2 {
+    margin-top: 12px;
+  }
+
+  .completion-box > p {
+    margin-top: 15px;
+    color: var(--muted);
+    font-size: 0.83rem;
+    line-height: 1.65;
+  }
+
+  .completion-lessons {
+    display: grid;
+    gap: 9px;
+    margin-top: 23px;
+  }
+
+  .completion-lessons span {
+    padding: 13px 15px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 0.72rem;
+  }
+
+  .next-lesson {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    padding-top: 43px;
+    border-top: 1px solid var(--line);
+  }
+
+  .next-lesson h2 {
+    margin-top: 11px;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+
+  .next-lesson p {
+    max-width: 540px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.79rem;
+    line-height: 1.65;
+  }
+
+  .next-status {
+    flex-shrink: 0;
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  a.next-status:hover {
+    color: var(--lime);
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1000px) {
+    .article-hero-grid,
+    .article-layout {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .article-sidebar {
+      display: none;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .flow-arrow {
+      display: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .article-hero {
+      padding: 68px 0 60px;
+    }
+
+    .article-body-section {
+      padding: 65px 0 80px;
+    }
+
+    .stage-grid,
+    .use-grid,
+    .prompt-parts,
+    .output-comparison,
+    .status-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .risk-row,
+    .workflow-row {
+      grid-template-columns: 42px 1fr;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .takeaway-flow > div {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .takeaway-flow > div:last-of-type {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .tool-callout,
+    .next-lesson {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
