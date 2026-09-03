@@ -442,7 +442,12 @@ const workflowExamples = [
               </p>
             </div>
 
-            <span class="next-status">COMING NEXT →</span>
+            <a
+  href="/learn/prompting-fundamentals/anatomy-of-a-good-prompt/"
+  class="next-status"
+>
+  START PATH →
+</a>
           </section>
         </main>
       </div>
@@ -992,13 +997,21 @@ const workflowExamples = [
     line-height: 1.65;
   }
 
-  .next-status {
-    flex-shrink: 0;
-    color: var(--muted);
-    font-size: 0.62rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-  }
+ .next-status {
+  flex-shrink: 0;
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+a.next-status:hover {
+  color: var(--lime);
+  transform: translateX(4px);
+}
 
   @media (max-width: 1000px) {
     .article-hero-grid,

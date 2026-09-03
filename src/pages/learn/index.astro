@@ -6,6 +6,11 @@ const learningPaths = [
     number: "01",
     level: "START HERE",
     title: "AI Fundamentals",
+
+     status: "4 GUIDES AVAILABLE",
+  
+
+    
     description:
       "Understand what generative AI can do, where it struggles and how to use it realistically.",
     lessons: [
@@ -24,26 +29,43 @@ const learningPaths = [
       {
   title: "AI vs Human Judgment",
   href: "/learn/ai-fundamentals/ai-vs-human-judgment/",
-},
+  
+}, 
+
     ],
+    
   },
   {
     number: "02",
     level: "PRACTICAL",
     title: "Prompting Fundamentals",
+    status: "4 GUIDES AVAILABLE",
     description:
       "Learn how clear instructions, context and constraints can produce more useful AI responses.",
     lessons: [
-      "Anatomy of a Good Prompt",
-      "How to Give AI Better Context",
-      "Using Roles, Constraints & Examples",
-      "Improving a Weak Prompt",
+       {
+    title: "Anatomy of a Good Prompt",
+    href: "/learn/prompting-fundamentals/anatomy-of-a-good-prompt/",
+  },
+      {
+  title: "How to Give AI Better Context",
+  href: "/learn/prompting-fundamentals/how-to-give-ai-better-context/",
+},
+      {
+  title: "Using Roles, Constraints & Examples",
+  href: "/learn/prompting-fundamentals/using-roles-constraints-and-examples/",
+},
+      {
+  title: "Improving a Weak Prompt",
+  href: "/learn/prompting-fundamentals/improving-a-weak-prompt/",
+},
     ],
   },
   {
     number: "03",
     level: "WORKFLOW",
     title: "Using AI for Real Work",
+    status: "Guides coming progressively",
     description:
       "Move beyond one-off questions and build AI into practical, repeatable workflows.",
     lessons: [
@@ -57,6 +79,7 @@ const learningPaths = [
     number: "04",
     level: "VERIFY",
     title: "Accuracy & Research",
+    status: "Guides coming progressively",
     description:
       "Learn why AI answers need verification and how to evaluate sources, claims and research.",
     lessons: [
@@ -70,6 +93,7 @@ const learningPaths = [
     number: "05",
     level: "RESPONSIBLE",
     title: "Safe & Responsible Use",
+    status: "Guides coming progressively",
     description:
       "Understand privacy, sensitive information, copyright concerns and responsible workplace use.",
     lessons: [
@@ -83,6 +107,7 @@ const learningPaths = [
     number: "06",
     level: "ADVANCE",
     title: "Better AI Systems",
+    status: "Guides coming progressively",
     description:
       "Turn useful prompting techniques into repeatable systems for work, business and content creation.",
     lessons: [
@@ -330,9 +355,9 @@ const quickResources = [
   }
 </div>
 
-              <div class="coming-label">
-                Guides coming progressively
-              </div>
+             <div class="path-status">
+            {path.status}
+    </div>
             </article>
           ))
         }
@@ -590,7 +615,20 @@ const quickResources = [
     font-size: 1.05rem;
     line-height: 1.8;
   }
-
+.path-status {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-top: 28px;
+  padding: 9px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  background: transparent;
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1;
+}
   .hero-actions {
     display: flex;
     align-items: center;

@@ -1,0 +1,1076 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const contextTypes = [
+  {
+    number: "01",
+    title: "Situation",
+    text:
+      "Explain what is happening now so AI understands the background of the task.",
+    example: "A customer order is delayed because one item is out of stock.",
+  },
+  {
+    number: "02",
+    title: "Goal",
+    text:
+      "State what you are trying to achieve, not just what you want AI to produce.",
+    example: "Keep the customer informed without promising an unconfirmed date.",
+  },
+  {
+    number: "03",
+    title: "Relevant facts",
+    text:
+      "Include the facts that directly affect the answer and leave out details that do not matter.",
+    example: "The replacement item is expected from the supplier within three days.",
+  },
+  {
+    number: "04",
+    title: "Audience",
+    text:
+      "Tell AI who the output is for so it can adjust tone, terminology and detail.",
+    example: "The message is for a retail customer, not an internal operations team.",
+  },
+  {
+    number: "05",
+    title: "Previous actions",
+    text:
+      "Mention what has already been checked, tried or communicated when that affects the next step.",
+    example: "The supplier has already been contacted and the ETA is still pending.",
+  },
+  {
+    number: "06",
+    title: "Important limits",
+    text:
+      "Include boundaries that prevent AI from making unsupported assumptions or giving unusable advice.",
+    example: "Do not offer a refund unless the customer requests cancellation.",
+  },
+];
+
+const contextFilter = [
+  {
+    label: "KEEP",
+    text: "Facts that change the answer.",
+  },
+  {
+    label: "KEEP",
+    text: "Requirements the output must follow.",
+  },
+  {
+    label: "KEEP",
+    text: "Previous actions that affect the next step.",
+  },
+  {
+    label: "REMOVE",
+    text: "Background details that do not influence the task.",
+  },
+  {
+    label: "REMOVE",
+    text: "Repeated information already stated clearly.",
+  },
+  {
+    label: "REMOVE",
+    text: "Sensitive information that AI does not need.",
+  },
+];
+
+const checklist = [
+  "What is happening?",
+  "What result am I trying to achieve?",
+  "Which facts actually affect the answer?",
+  "What has already happened?",
+  "Who will use the output?",
+  "What should AI avoid assuming?",
+];
+---
+
+<BaseLayout
+  title="How to Give AI Better Context | KRIYANO"
+  description="Learn how to give AI useful context without overloading your prompt, using practical workplace examples and a simple context framework."
+>
+  <article class="article-page">
+    <header class="article-hero">
+      <div class="container article-hero-grid">
+        <div class="article-heading">
+          <a href="/learn/" class="back-link">← LEARN</a>
+
+          <div class="article-meta">
+            <span>PROMPTING FUNDAMENTALS</span>
+            <span>06</span>
+            <span>BEGINNER</span>
+          </div>
+
+          <h1>
+            How to Give AI
+            <span>Better Context.</span>
+          </h1>
+
+          <p class="article-intro">
+            Context helps AI understand the situation behind your request.
+            The goal is not to provide everything you know. It is to provide
+            the information that meaningfully changes the answer.
+          </p>
+        </div>
+
+        <aside class="lesson-panel">
+          <div class="panel-header">
+            <span>LESSON 06</span>
+            <span>PROMPTING FUNDAMENTALS</span>
+          </div>
+
+          <div class="panel-content">
+            <span class="panel-kicker">THE CONTEXT RULE</span>
+
+            <strong>
+              Give AI what it needs to know, not everything you know.
+            </strong>
+
+            <p>
+              Useful context reduces assumptions. Too much irrelevant context
+              can make a prompt harder to follow.
+            </p>
+          </div>
+
+          <div class="panel-footer">
+            <span>RELEVANT → SPECIFIC → NECESSARY</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section class="article-body-section">
+      <div class="container article-layout">
+        <aside class="article-sidebar">
+          <div class="sidebar-box">
+            <span class="sidebar-title">IN THIS GUIDE</span>
+
+            <a href="#why-context">Why context matters</a>
+            <a href="#types">Six useful types of context</a>
+            <a href="#comparison">Weak vs better context</a>
+            <a href="#filter">What to include and remove</a>
+            <a href="#work-example">A real-work example</a>
+            <a href="#checklist">Context checklist</a>
+            <a href="#takeaway">The practical takeaway</a>
+          </div>
+        </aside>
+
+        <main class="article-content">
+          <section id="why-context">
+            <div class="section-marker">01 / THE CORE IDEA</div>
+
+            <h2>AI cannot see the situation you are thinking about.</h2>
+
+            <p>
+              You may already know the customer history, the warehouse problem,
+              the previous email, the deadline or the reason a decision matters.
+              AI does not know any of that unless you provide it.
+            </p>
+
+            <p>
+              Without enough context, the model fills gaps using patterns and
+              assumptions. That can produce an answer that sounds reasonable but
+              does not fit the real situation.
+            </p>
+
+            <div class="concept-box">
+              <span>CONTEXT IS NOT</span>
+
+              <p>
+                A long background story. Good context is the minimum useful
+                information AI needs to understand the task correctly.
+              </p>
+            </div>
+          </section>
+
+          <section id="types">
+            <div class="section-marker">02 / USEFUL CONTEXT</div>
+
+            <h2>Six types of context that often improve AI output.</h2>
+
+            <p>
+              You will not need all six every time. Use the ones that reduce
+              uncertainty in the task.
+            </p>
+
+            <div class="parts-grid">
+              {
+                contextTypes.map((item) => (
+                  <article class="part-card">
+                    <span class="part-number">{item.number}</span>
+
+                    <h3>{item.title}</h3>
+
+                    <p>{item.text}</p>
+
+                    <div class="part-example">
+                      <span>EXAMPLE</span>
+                      <p>{item.example}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="comparison">
+            <div class="section-marker">03 / BEFORE & AFTER</div>
+
+            <h2>Better context can change the usefulness of the answer.</h2>
+
+            <div class="prompt-comparison">
+              <div class="prompt-card weak">
+                <span>WEAK CONTEXT</span>
+
+                <p>
+                  Write an email to a customer about a delayed order.
+                </p>
+              </div>
+
+              <div class="prompt-card stronger">
+                <span>BETTER CONTEXT</span>
+
+                <p>
+                  Draft a professional email to a retail customer whose order
+                  is delayed because one item is temporarily out of stock. The
+                  supplier has been contacted, but the revised delivery date is
+                  not yet confirmed. Reassure the customer that the order is
+                  being followed up. Do not promise a delivery date until it is
+                  confirmed.
+                </p>
+              </div>
+            </div>
+
+            <p>
+              The second prompt gives AI enough information to avoid inventing a
+              delivery date or suggesting actions that do not match the actual
+              situation.
+            </p>
+          </section>
+
+          <section id="filter">
+            <div class="section-marker">04 / CONTEXT FILTER</div>
+
+            <h2>More context is not always better context.</h2>
+
+            <p>
+              A useful prompt gives AI the information that affects the answer
+              and removes information that only adds noise.
+            </p>
+
+            <div class="filter-grid">
+              {
+                contextFilter.map((item) => (
+                  <div class={`filter-card ${item.label.toLowerCase()}`}>
+                    <span>{item.label}</span>
+                    <p>{item.text}</p>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="decision-box">
+              <span>ASK YOURSELF</span>
+
+              <p>
+                If I remove this detail, would AI still understand the task and
+                produce the same quality of answer? If yes, the detail may not
+                be necessary.
+              </p>
+            </div>
+          </section>
+
+          <section id="work-example">
+            <div class="section-marker">05 / REAL-WORK EXAMPLE</div>
+
+            <h2>Context is especially important when the situation has already evolved.</h2>
+
+            <p>
+              Imagine you are investigating an inventory shortage and want AI
+              to help prepare the next action plan.
+            </p>
+
+            <div class="work-flow">
+              <div class="flow-row">
+                <span>01</span>
+                <div>
+                  <strong>Current situation</strong>
+                  <p>
+                    System stock shows 1,250 units. Physical count shows 1,226
+                    units.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flow-row">
+                <span>02</span>
+                <div>
+                  <strong>Checks already completed</strong>
+                  <p>
+                    The physical count was repeated. Recent receiving and
+                    outbound transactions were checked.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flow-row">
+                <span>03</span>
+                <div>
+                  <strong>What is still unknown</strong>
+                  <p>
+                    The reason for the 24-unit difference has not yet been
+                    confirmed.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flow-row">
+                <span>04</span>
+                <div>
+                  <strong>Goal</strong>
+                  <p>
+                    Identify practical next checks without assuming the cause.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flow-row">
+                <span>05</span>
+                <div>
+                  <strong>Constraint</strong>
+                  <p>
+                    Recommendations must be based only on the information
+                    provided.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="assembled-prompt">
+              <span>ASSEMBLED PROMPT</span>
+
+              <p>
+                Act as an inventory control supervisor. System stock shows
+                1,250 units, while two verified physical counts show 1,226
+                units. Recent receiving and outbound transactions have already
+                been checked, but the reason for the 24-unit variance has not
+                been confirmed. Suggest the next practical investigation steps
+                in priority order. Do not assume or invent a root cause. Base
+                the recommendations only on the information provided.
+              </p>
+            </div>
+          </section>
+
+          <section id="checklist">
+            <div class="section-marker">06 / QUICK CHECK</div>
+
+            <h2>Use these questions before adding more background.</h2>
+
+            <div class="checklist">
+              {
+                checklist.map((item, index) => (
+                  <div class="check-row">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <p>{item}</p>
+                    <strong>✓</strong>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="privacy-box">
+              <span>IMPORTANT</span>
+
+              <p>
+                Context should be useful, but it should also be appropriate to
+                share. Avoid including confidential, personal or sensitive
+                information when AI does not need it to complete the task.
+              </p>
+            </div>
+          </section>
+
+          <section id="takeaway">
+            <div class="section-marker">07 / PRACTICAL TAKEAWAY</div>
+
+            <h2>Good context gives AI a clearer view of the real problem.</h2>
+
+            <p>
+              Start with the situation. Add the facts that change the answer.
+              Include what has already happened, then define what AI should help
+              you do next.
+            </p>
+
+            <div class="takeaway-flow">
+              <div>
+                <span>01</span>
+                <strong>Situation</strong>
+                <p>What is happening now?</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>02</span>
+                <strong>Facts</strong>
+                <p>What actually matters?</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>03</span>
+                <strong>History</strong>
+                <p>What has already happened?</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>04</span>
+                <strong>Goal</strong>
+                <p>What should happen next?</p>
+              </div>
+            </div>
+
+            <div class="tool-callout">
+              <div>
+                <span class="tool-kicker">TRY IT IN KRIYANO</span>
+
+                <h3>Add useful context to your next prompt.</h3>
+
+                <p>
+                  The KRIYANO Prompt Builder gives you a dedicated context field
+                  so you can separate background information from the task,
+                  audience and output requirements.
+                </p>
+              </div>
+
+              <a href="/tools/prompt-builder/" class="button button-primary">
+                Open Prompt Builder
+              </a>
+            </div>
+          </section>
+
+          <section class="next-lesson">
+            <div>
+              <span class="next-label">NEXT LESSON</span>
+
+              <h2>Using Roles, Constraints & Examples</h2>
+
+              <p>
+                Learn when these prompt controls improve a response, when they
+                are unnecessary, and how to use them without overcomplicating
+                your instructions.
+              </p>
+            </div>
+
+            <a
+  href="/learn/prompting-fundamentals/using-roles-constraints-and-examples/"
+  class="next-status"
+>
+  CONTINUE →
+</a>
+          </section>
+        </main>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    overflow: hidden;
+  }
+
+  .article-hero {
+    padding: 92px 0 82px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(
+        circle at 82% 20%,
+        rgba(183, 255, 74, 0.08),
+        transparent 27%
+      ),
+      radial-gradient(
+        circle at 14% 0%,
+        rgba(77, 226, 197, 0.055),
+        transparent 28%
+      );
+  }
+
+  .article-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 75px;
+    align-items: end;
+  }
+
+  .back-link {
+    color: var(--lime);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 28px;
+  }
+
+  .article-meta span {
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-heading h1 {
+    max-width: 900px;
+    margin-top: 22px;
+    font-size: clamp(3.5rem, 7vw, 6.6rem);
+    line-height: 0.94;
+    letter-spacing: -0.065em;
+  }
+
+  .article-heading h1 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .article-intro {
+    max-width: 760px;
+    margin-top: 27px;
+    color: var(--muted);
+    font-size: 1.04rem;
+    line-height: 1.8;
+  }
+
+  .lesson-panel {
+    overflow: hidden;
+    border: 1px solid rgba(183, 255, 74, 0.17);
+    border-radius: 21px;
+    background: var(--surface);
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .panel-content {
+    padding: 31px 26px 34px;
+  }
+
+  .panel-kicker {
+    display: block;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .panel-content strong {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.45rem;
+    line-height: 1.35;
+    letter-spacing: -0.035em;
+  }
+
+  .panel-content p {
+    margin-top: 17px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .panel-footer {
+    padding: 17px 20px;
+    border-top: 1px solid var(--line);
+    background: rgba(183, 255, 74, 0.03);
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-body-section {
+    padding: 88px 0 110px;
+  }
+
+  .article-layout {
+    display: grid;
+    grid-template-columns: 235px minmax(0, 800px);
+    gap: 78px;
+    justify-content: center;
+  }
+
+  .sidebar-box {
+    position: sticky;
+    top: 105px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+  }
+
+  .sidebar-title {
+    padding: 16px 0;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .sidebar-box a {
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  .sidebar-box a:hover {
+    color: var(--lime);
+  }
+
+  .article-content > section:not(:first-child) {
+    margin-top: 90px;
+  }
+
+  .section-marker {
+    color: var(--lime);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .article-content h2 {
+    max-width: 760px;
+    margin-top: 14px;
+    font-size: clamp(2.3rem, 5vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.052em;
+  }
+
+  .article-content > section > p {
+    max-width: 760px;
+    margin-top: 23px;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .concept-box,
+  .decision-box,
+  .privacy-box {
+    margin: 34px 0;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .concept-box span,
+  .decision-box span,
+  .privacy-box span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .concept-box p,
+  .decision-box p,
+  .privacy-box p {
+    margin-top: 12px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .parts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 35px;
+  }
+
+  .part-card {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .part-number {
+    color: var(--lime);
+    font-size: 0.63rem;
+    font-weight: 800;
+  }
+
+  .part-card h3 {
+    margin-top: 30px;
+    font-size: 1.08rem;
+  }
+
+  .part-card > p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.7;
+  }
+
+  .part-example {
+    margin-top: 19px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+
+  .part-example span {
+    color: var(--mint);
+    font-size: 0.57rem;
+    font-weight: 800;
+  }
+
+  .part-example p {
+    margin-top: 7px;
+    font-size: 0.7rem;
+    line-height: 1.55;
+  }
+
+  .prompt-comparison {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 14px;
+    margin-top: 35px;
+  }
+
+  .prompt-card {
+    padding: 25px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .prompt-card span {
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .prompt-card.weak span {
+    color: #ff8e8e;
+  }
+
+  .prompt-card.stronger span {
+    color: var(--lime);
+  }
+
+  .prompt-card p {
+    margin-top: 22px;
+    color: var(--muted);
+    font-size: 0.84rem;
+    line-height: 1.75;
+  }
+
+  .filter-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 34px;
+  }
+
+  .filter-card {
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface);
+  }
+
+  .filter-card span {
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .filter-card.keep span {
+    color: var(--lime);
+  }
+
+  .filter-card.remove span {
+    color: #ff8e8e;
+  }
+
+  .filter-card p {
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 0.77rem;
+    line-height: 1.6;
+  }
+
+  .work-flow {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .flow-row {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 15px;
+    padding: 19px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .flow-row > span {
+    color: var(--lime);
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .flow-row strong {
+    font-size: 0.84rem;
+  }
+
+  .flow-row p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.65;
+  }
+
+  .assembled-prompt {
+    margin-top: 28px;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.19);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .assembled-prompt span {
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .assembled-prompt p {
+    margin-top: 13px;
+    font-size: 0.91rem;
+    line-height: 1.8;
+  }
+
+  .checklist {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .check-row {
+    display: grid;
+    grid-template-columns: 45px 1fr 30px;
+    gap: 15px;
+    align-items: center;
+    padding: 17px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .check-row span,
+  .check-row strong {
+    color: var(--lime);
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .check-row p {
+    font-size: 0.85rem;
+  }
+
+  .takeaway-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-top: 35px;
+    padding: 27px 22px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .takeaway-flow > div span {
+    display: block;
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .takeaway-flow strong {
+    display: block;
+    margin-top: 13px;
+    font-size: 0.82rem;
+  }
+
+  .takeaway-flow p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.67rem;
+    line-height: 1.5;
+  }
+
+  .flow-arrow {
+    color: var(--mint);
+  }
+
+  .tool-callout {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    margin-top: 40px;
+    padding: 32px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 19px;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(183, 255, 74, 0.04),
+        transparent 50%
+      ),
+      var(--surface);
+  }
+
+  .tool-kicker,
+  .next-label {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .tool-callout h3 {
+    margin-top: 11px;
+    font-size: 1.35rem;
+  }
+
+  .tool-callout p {
+    max-width: 510px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+
+  .tool-callout .button {
+    flex-shrink: 0;
+  }
+
+  .next-lesson {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    padding-top: 43px;
+    border-top: 1px solid var(--line);
+  }
+
+  .next-lesson h2 {
+    margin-top: 11px;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+
+  .next-lesson p {
+    max-width: 540px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.79rem;
+    line-height: 1.65;
+  }
+
+  .next-status {
+  flex-shrink: 0;
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+a.next-status:hover {
+  color: var(--lime);
+  transform: translateX(4px);
+}
+
+  @media (max-width: 1000px) {
+    .article-hero-grid,
+    .article-layout {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .article-sidebar {
+      display: none;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .flow-arrow {
+      display: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .article-hero {
+      padding: 68px 0 60px;
+    }
+
+    .article-body-section {
+      padding: 65px 0 80px;
+    }
+
+    .parts-grid,
+    .prompt-comparison,
+    .filter-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .takeaway-flow > div {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .takeaway-flow > div:last-of-type {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .check-row {
+      grid-template-columns: 35px 1fr;
+    }
+
+    .check-row strong {
+      display: none;
+    }
+
+    .tool-callout,
+    .next-lesson {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

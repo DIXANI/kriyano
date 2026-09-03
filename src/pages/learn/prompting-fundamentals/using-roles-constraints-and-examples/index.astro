@@ -1,0 +1,1154 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const roleExamples = [
+  {
+    title: "Operations perspective",
+    prompt: "Act as an operations manager reviewing this process.",
+    use: "Useful when you want the response framed around efficiency, risk, coordination and execution.",
+  },
+  {
+    title: "Customer-service perspective",
+    prompt: "Act as a customer service supervisor.",
+    use: "Useful when tone, clarity and customer impact matter.",
+  },
+  {
+    title: "Trainer perspective",
+    prompt: "Explain this as a workplace trainer.",
+    use: "Useful when you want a structured explanation for beginners.",
+  },
+];
+
+const constraintExamples = [
+  {
+    number: "01",
+    title: "Length",
+    example: "Keep the answer under 200 words.",
+  },
+  {
+    number: "02",
+    title: "Format",
+    example: "Return the answer as a five-step checklist.",
+  },
+  {
+    number: "03",
+    title: "Scope",
+    example: "Focus only on warehouse receiving operations.",
+  },
+  {
+    number: "04",
+    title: "Evidence",
+    example: "Do not invent facts that are not provided.",
+  },
+  {
+    number: "05",
+    title: "Language",
+    example: "Use simple English suitable for frontline staff.",
+  },
+  {
+    number: "06",
+    title: "Decision limits",
+    example: "Do not approve or reject the request. Only summarize the risks.",
+  },
+];
+
+const exampleTypes = [
+  {
+    title: "Format example",
+    text:
+      "Show AI what the final answer should look like when structure matters.",
+  },
+  {
+    title: "Style example",
+    text:
+      "Provide a short sample when you want a specific communication style.",
+  },
+  {
+    title: "Classification example",
+    text:
+      "Show one or two labelled examples when AI needs to sort information into categories.",
+  },
+  {
+    title: "Before-and-after example",
+    text:
+      "Useful when asking AI to rewrite or improve content while preserving the original meaning.",
+  },
+];
+
+const checklist = [
+  "Would a role genuinely improve the perspective?",
+  "Which constraints are essential to the task?",
+  "Could an example remove ambiguity?",
+  "Am I giving instructions that conflict with each other?",
+  "Have I kept the prompt practical rather than overloaded?",
+  "Will I still review the final result myself?",
+];
+---
+
+<BaseLayout
+  title="Using Roles, Constraints & Examples | KRIYANO"
+  description="Learn how to use roles, constraints and examples in AI prompts to improve clarity, control and consistency without overcomplicating your instructions."
+>
+  <article class="article-page">
+    <header class="article-hero">
+      <div class="container article-hero-grid">
+        <div class="article-heading">
+          <a href="/learn/" class="back-link">← LEARN</a>
+
+          <div class="article-meta">
+            <span>PROMPTING FUNDAMENTALS</span>
+            <span>07</span>
+            <span>BEGINNER</span>
+          </div>
+
+          <h1>
+            Using Roles,
+            <span>Constraints & Examples.</span>
+          </h1>
+
+          <p class="article-intro">
+            Roles, constraints and examples can give you more control over AI
+            output. The key is knowing when they actually improve the task and
+            when they only make the prompt longer.
+          </p>
+        </div>
+
+        <aside class="lesson-panel">
+          <div class="panel-header">
+            <span>LESSON 07</span>
+            <span>PROMPTING FUNDAMENTALS</span>
+          </div>
+
+          <div class="panel-content">
+            <span class="panel-kicker">THREE CONTROL TOOLS</span>
+
+            <strong>
+              Role = perspective. Constraint = boundary. Example = reference.
+            </strong>
+
+            <p>
+              Use each one for a specific reason. Strong prompts are controlled,
+              not crowded.
+            </p>
+          </div>
+
+          <div class="panel-footer">
+            <span>PERSPECTIVE → BOUNDARIES → REFERENCE</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section class="article-body-section">
+      <div class="container article-layout">
+        <aside class="article-sidebar">
+          <div class="sidebar-box">
+            <span class="sidebar-title">IN THIS GUIDE</span>
+
+            <a href="#roles">Using roles</a>
+            <a href="#constraints">Using constraints</a>
+            <a href="#examples">Using examples</a>
+            <a href="#combined">Combining all three</a>
+            <a href="#mistakes">What to avoid</a>
+            <a href="#checklist">Prompt checklist</a>
+            <a href="#takeaway">The practical takeaway</a>
+          </div>
+        </aside>
+
+        <main class="article-content">
+          <section id="roles">
+            <div class="section-marker">01 / ROLES</div>
+
+            <h2>Use a role when perspective changes the answer.</h2>
+
+            <p>
+              A role tells AI what kind of viewpoint or working perspective
+              should guide the response. This can be useful when the same task
+              could be approached differently by different functions.
+            </p>
+
+            <p>
+              But a role is not magic. Writing “act as an expert” does not
+              automatically make an answer accurate. The task, context and
+              evidence still matter.
+            </p>
+
+            <div class="role-grid">
+              {
+                roleExamples.map((item) => (
+                  <article class="role-card">
+                    <h3>{item.title}</h3>
+
+                    <div class="mini-prompt">
+                      <span>PROMPT</span>
+                      <p>{item.prompt}</p>
+                    </div>
+
+                    <p>{item.use}</p>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="concept-box">
+              <span>USE A ROLE WHEN</span>
+
+              <p>
+                The perspective affects priorities, terminology, tone or the
+                way the task should be evaluated.
+              </p>
+            </div>
+          </section>
+
+          <section id="constraints">
+            <div class="section-marker">02 / CONSTRAINTS</div>
+
+            <h2>Constraints define what the answer must and must not do.</h2>
+
+            <p>
+              Constraints are one of the most practical ways to improve prompt
+              control. They help reduce unwanted assumptions, excessive detail,
+              wrong formats and recommendations outside your actual scope.
+            </p>
+
+            <div class="constraint-grid">
+              {
+                constraintExamples.map((item) => (
+                  <article class="constraint-card">
+                    <span>{item.number}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.example}</p>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="warning-box">
+              <span>WATCH FOR CONFLICTS</span>
+
+              <p>
+                Do not give AI incompatible constraints such as “be extremely
+                detailed” and “keep the answer under 50 words.” If two
+                instructions compete, the result becomes less predictable.
+              </p>
+            </div>
+          </section>
+
+          <section id="examples">
+            <div class="section-marker">03 / EXAMPLES</div>
+
+            <h2>Examples show AI what you mean instead of only describing it.</h2>
+
+            <p>
+              Examples are especially useful when the desired format, style or
+              classification is difficult to explain precisely in one sentence.
+            </p>
+
+            <div class="example-grid">
+              {
+                exampleTypes.map((item, index) => (
+                  <div class="example-card">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="before-after">
+              <div>
+                <span>WITHOUT EXAMPLE</span>
+
+                <p>
+                  Rewrite these warehouse instructions in a clear professional
+                  style.
+                </p>
+              </div>
+
+              <div>
+                <span>WITH STYLE EXAMPLE</span>
+
+                <p>
+                  Rewrite these warehouse instructions in a clear professional
+                  style. Use short direct sentences similar to this:
+                  “Verify the item code before confirming receipt. Report any
+                  mismatch before posting the transaction.”
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="combined">
+            <div class="section-marker">04 / PUTTING THEM TOGETHER</div>
+
+            <h2>Use only the controls that improve the real task.</h2>
+
+            <p>
+              Imagine you need help preparing a management summary after a stock
+              discrepancy investigation.
+            </p>
+
+            <div class="work-flow">
+              <div class="flow-row">
+                <span>ROLE</span>
+                <div>
+                  <strong>Set the useful perspective</strong>
+                  <p>
+                    Act as an inventory control supervisor.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flow-row">
+                <span>TASK</span>
+                <div>
+                  <strong>Define the job</strong>
+                  <p>
+                    Prepare a concise investigation summary for management.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flow-row">
+                <span>CONTEXT</span>
+                <div>
+                  <strong>Provide the facts</strong>
+                  <p>
+                    System quantity is 840 units and verified physical quantity
+                    is 818 units. Receiving, dispatch and recent adjustment
+                    transactions have been checked.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flow-row">
+                <span>CONSTRAINT</span>
+                <div>
+                  <strong>Control the answer</strong>
+                  <p>
+                    Do not state a root cause unless it is supported by the
+                    information provided.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flow-row">
+                <span>EXAMPLE</span>
+                <div>
+                  <strong>Show the required structure</strong>
+                  <p>
+                    Use the headings: Variance, Checks Completed, Findings,
+                    Outstanding Questions, Recommended Next Action.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="assembled-prompt">
+              <span>ASSEMBLED PROMPT</span>
+
+              <p>
+                Act as an inventory control supervisor. Prepare a concise
+                investigation summary for management. System quantity is 840
+                units and verified physical quantity is 818 units. Receiving,
+                dispatch and recent adjustment transactions have already been
+                checked. Use the headings: Variance, Checks Completed, Findings,
+                Outstanding Questions and Recommended Next Action. Do not state
+                a root cause unless it is supported by the information
+                provided.
+              </p>
+            </div>
+          </section>
+
+          <section id="mistakes">
+            <div class="section-marker">05 / WHAT TO AVOID</div>
+
+            <h2>More instructions do not automatically create a better prompt.</h2>
+
+            <div class="mistake-list">
+              <div>
+                <span>01</span>
+                <strong>Fake expertise</strong>
+                <p>
+                  Do not rely on “act as a world-class expert” instead of
+                  providing proper context and evidence.
+                </p>
+              </div>
+
+              <div>
+                <span>02</span>
+                <strong>Too many constraints</strong>
+                <p>
+                  Avoid adding rules that do not materially improve the output.
+                </p>
+              </div>
+
+              <div>
+                <span>03</span>
+                <strong>Conflicting instructions</strong>
+                <p>
+                  Check that tone, length, format and detail requirements can
+                  all be satisfied together.
+                </p>
+              </div>
+
+              <div>
+                <span>04</span>
+                <strong>Bad examples</strong>
+                <p>
+                  AI may imitate the weaknesses of the example you provide, so
+                  use examples that actually represent the quality you want.
+                </p>
+              </div>
+
+              <div>
+                <span>05</span>
+                <strong>Over-controlling creative tasks</strong>
+                <p>
+                  Leave room for useful variation when you are brainstorming or
+                  exploring ideas.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="checklist">
+            <div class="section-marker">06 / QUICK CHECK</div>
+
+            <h2>Before adding another instruction, ask whether it earns its place.</h2>
+
+            <div class="checklist">
+              {
+                checklist.map((item, index) => (
+                  <div class="check-row">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <p>{item}</p>
+                    <strong>✓</strong>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="decision-box">
+              <span>SIMPLE RULE</span>
+
+              <p>
+                Add a role for perspective, a constraint for control, and an
+                example for clarity. If one of them does not improve the task,
+                leave it out.
+              </p>
+            </div>
+          </section>
+
+          <section id="takeaway">
+            <div class="section-marker">07 / PRACTICAL TAKEAWAY</div>
+
+            <h2>Use prompt controls deliberately.</h2>
+
+            <p>
+              Start with the task and context. Then add roles, constraints or
+              examples only where they make the expected result clearer.
+            </p>
+
+            <div class="takeaway-flow">
+              <div>
+                <span>01</span>
+                <strong>Role</strong>
+                <p>Choose the useful perspective.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>02</span>
+                <strong>Constraint</strong>
+                <p>Set meaningful boundaries.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>03</span>
+                <strong>Example</strong>
+                <p>Show what good looks like.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>04</span>
+                <strong>Review</strong>
+                <p>Remove anything unnecessary.</p>
+              </div>
+            </div>
+
+            <div class="tool-callout">
+              <div>
+                <span class="tool-kicker">BUILD IT WITH KRIYANO</span>
+
+                <h3>Put these controls into a structured prompt.</h3>
+
+                <p>
+                  Use the KRIYANO Prompt Builder to combine role, context,
+                  output requirements, tone and constraints without losing sight
+                  of the main task.
+                </p>
+              </div>
+
+              <a href="/tools/prompt-builder/" class="button button-primary">
+                Open Prompt Builder
+              </a>
+            </div>
+          </section>
+
+          <section class="next-lesson">
+            <div>
+              <span class="next-label">NEXT LESSON</span>
+
+              <h2>Improving a Weak Prompt</h2>
+
+              <p>
+                Learn a practical step-by-step method for diagnosing a weak
+                prompt and improving it without rewriting everything from
+                scratch.
+              </p>
+            </div>
+
+            <a
+  href="/learn/prompting-fundamentals/improving-a-weak-prompt/"
+  class="next-status"
+>
+  CONTINUE →
+</a>
+          </section>
+        </main>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    overflow: hidden;
+  }
+
+  .article-hero {
+    padding: 92px 0 82px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(
+        circle at 82% 20%,
+        rgba(183, 255, 74, 0.08),
+        transparent 27%
+      ),
+      radial-gradient(
+        circle at 14% 0%,
+        rgba(77, 226, 197, 0.055),
+        transparent 28%
+      );
+  }
+
+  .article-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 75px;
+    align-items: end;
+  }
+
+  .back-link {
+    color: var(--lime);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 28px;
+  }
+
+  .article-meta span {
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-heading h1 {
+    max-width: 900px;
+    margin-top: 22px;
+    font-size: clamp(3.5rem, 7vw, 6.6rem);
+    line-height: 0.94;
+    letter-spacing: -0.065em;
+  }
+
+  .article-heading h1 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .article-intro {
+    max-width: 760px;
+    margin-top: 27px;
+    color: var(--muted);
+    font-size: 1.04rem;
+    line-height: 1.8;
+  }
+
+  .lesson-panel {
+    overflow: hidden;
+    border: 1px solid rgba(183, 255, 74, 0.17);
+    border-radius: 21px;
+    background: var(--surface);
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .panel-content {
+    padding: 31px 26px 34px;
+  }
+
+  .panel-kicker {
+    display: block;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .panel-content strong {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.45rem;
+    line-height: 1.35;
+    letter-spacing: -0.035em;
+  }
+
+  .panel-content p {
+    margin-top: 17px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .panel-footer {
+    padding: 17px 20px;
+    border-top: 1px solid var(--line);
+    background: rgba(183, 255, 74, 0.03);
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-body-section {
+    padding: 88px 0 110px;
+  }
+
+  .article-layout {
+    display: grid;
+    grid-template-columns: 235px minmax(0, 800px);
+    gap: 78px;
+    justify-content: center;
+  }
+
+  .sidebar-box {
+    position: sticky;
+    top: 105px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+  }
+
+  .sidebar-title {
+    padding: 16px 0;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .sidebar-box a {
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  .sidebar-box a:hover {
+    color: var(--lime);
+  }
+
+  .article-content > section:not(:first-child) {
+    margin-top: 90px;
+  }
+
+  .section-marker {
+    color: var(--lime);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .article-content h2 {
+    max-width: 760px;
+    margin-top: 14px;
+    font-size: clamp(2.3rem, 5vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.052em;
+  }
+
+  .article-content > section > p {
+    max-width: 760px;
+    margin-top: 23px;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .concept-box,
+  .warning-box,
+  .decision-box {
+    margin: 34px 0;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .concept-box span,
+  .warning-box span,
+  .decision-box span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .concept-box p,
+  .warning-box p,
+  .decision-box p {
+    margin-top: 12px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .role-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 35px;
+  }
+
+  .role-card,
+  .constraint-card,
+  .example-card {
+    padding: 23px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .role-card h3,
+  .constraint-card h3,
+  .example-card h3 {
+    font-size: 1rem;
+  }
+
+  .role-card > p,
+  .constraint-card p,
+  .example-card p {
+    margin-top: 13px;
+    color: var(--muted);
+    font-size: 0.76rem;
+    line-height: 1.65;
+  }
+
+  .mini-prompt {
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+
+  .mini-prompt span {
+    color: var(--lime);
+    font-size: 0.56rem;
+    font-weight: 800;
+  }
+
+  .mini-prompt p {
+    margin-top: 8px;
+    font-size: 0.72rem;
+    line-height: 1.6;
+  }
+
+  .constraint-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 35px;
+  }
+
+  .constraint-card > span,
+  .example-card > span {
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .constraint-card h3,
+  .example-card h3 {
+    margin-top: 24px;
+  }
+
+  .example-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 35px;
+  }
+
+  .before-after {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 14px;
+    margin-top: 27px;
+  }
+
+  .before-after > div {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .before-after span {
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+  }
+
+  .before-after p {
+    margin-top: 15px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+
+  .work-flow {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .flow-row {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 15px;
+    padding: 19px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .flow-row > span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+  }
+
+  .flow-row strong {
+    font-size: 0.84rem;
+  }
+
+  .flow-row p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.65;
+  }
+
+  .assembled-prompt {
+    margin-top: 28px;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.19);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .assembled-prompt span {
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .assembled-prompt p {
+    margin-top: 13px;
+    font-size: 0.91rem;
+    line-height: 1.8;
+  }
+
+  .mistake-list {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .mistake-list > div {
+    display: grid;
+    grid-template-columns: 45px 180px 1fr;
+    gap: 18px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .mistake-list span {
+    color: var(--lime);
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .mistake-list strong {
+    font-size: 0.82rem;
+  }
+
+  .mistake-list p {
+    color: var(--muted);
+    font-size: 0.77rem;
+    line-height: 1.6;
+  }
+
+  .checklist {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .check-row {
+    display: grid;
+    grid-template-columns: 45px 1fr 30px;
+    gap: 15px;
+    align-items: center;
+    padding: 17px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .check-row span,
+  .check-row strong {
+    color: var(--lime);
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .check-row p {
+    font-size: 0.85rem;
+  }
+
+  .takeaway-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-top: 35px;
+    padding: 27px 22px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .takeaway-flow > div span {
+    display: block;
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .takeaway-flow strong {
+    display: block;
+    margin-top: 13px;
+    font-size: 0.82rem;
+  }
+
+  .takeaway-flow p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.67rem;
+    line-height: 1.5;
+  }
+
+  .flow-arrow {
+    color: var(--mint);
+  }
+
+  .tool-callout {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    margin-top: 40px;
+    padding: 32px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 19px;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(183, 255, 74, 0.04),
+        transparent 50%
+      ),
+      var(--surface);
+  }
+
+  .tool-kicker,
+  .next-label {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .tool-callout h3 {
+    margin-top: 11px;
+    font-size: 1.35rem;
+  }
+
+  .tool-callout p {
+    max-width: 510px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+
+  .tool-callout .button {
+    flex-shrink: 0;
+  }
+
+  .next-lesson {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    padding-top: 43px;
+    border-top: 1px solid var(--line);
+  }
+
+  .next-lesson h2 {
+    margin-top: 11px;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+
+  .next-lesson p {
+    max-width: 540px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.79rem;
+    line-height: 1.65;
+  }
+
+  .next-status {
+  flex-shrink: 0;
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+a.next-status:hover {
+  color: var(--lime);
+  transform: translateX(4px);
+}
+
+  @media (max-width: 1000px) {
+    .article-hero-grid,
+    .article-layout {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .article-sidebar {
+      display: none;
+    }
+
+    .role-grid,
+    .constraint-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .takeaway-flow {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .flow-arrow {
+      display: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .article-hero {
+      padding: 68px 0 60px;
+    }
+
+    .article-body-section {
+      padding: 65px 0 80px;
+    }
+
+    .role-grid,
+    .constraint-grid,
+    .example-grid,
+    .before-after {
+      grid-template-columns: 1fr;
+    }
+
+    .mistake-list > div {
+      grid-template-columns: 35px 1fr;
+    }
+
+    .mistake-list p {
+      grid-column: 2;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .takeaway-flow > div {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .takeaway-flow > div:last-of-type {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .check-row {
+      grid-template-columns: 35px 1fr;
+    }
+
+    .check-row strong {
+      display: none;
+    }
+
+    .tool-callout,
+    .next-lesson {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
