@@ -9,10 +9,22 @@ const learningPaths = [
     description:
       "Understand what generative AI can do, where it struggles and how to use it realistically.",
     lessons: [
-      "What Generative AI Actually Does",
-      "What AI Is Good At",
-      "Where AI Can Go Wrong",
-      "AI vs Human Judgment",
+      {
+    title: "What Generative AI Actually Does",
+    href: "/learn/ai-fundamentals/what-generative-ai-actually-does/",
+      },
+      {
+  title: "What AI Is Good At",
+  href: "/learn/ai-fundamentals/what-ai-is-good-at/",
+},
+      {
+  title: "Where AI Can Go Wrong",
+  href: "/learn/ai-fundamentals/where-ai-can-go-wrong/",
+},
+      {
+  title: "AI vs Human Judgment",
+  href: "/learn/ai-fundamentals/ai-vs-human-judgment/",
+},
     ],
   },
   {
@@ -301,15 +313,22 @@ const quickResources = [
               <p>{path.description}</p>
 
               <div class="lesson-list">
-                {
-                  path.lessons.map((lesson) => (
-                    <div>
-                      <span>→</span>
-                      <span>{lesson}</span>
-                    </div>
-                  ))
-                }
-              </div>
+  {
+    path.lessons.map((lesson) =>
+      typeof lesson === "string" ? (
+        <div class="lesson-item">
+          <span>→</span>
+          <span>{lesson}</span>
+        </div>
+      ) : (
+        <a href={lesson.href} class="lesson-item lesson-link">
+          <span>→</span>
+          <span>{lesson.title}</span>
+        </a>
+      )
+    )
+  }
+</div>
 
               <div class="coming-label">
                 Guides coming progressively
@@ -843,22 +862,39 @@ const quickResources = [
     border-top: 1px solid var(--line);
   }
 
-  .lesson-list > div {
-    display: grid;
-    grid-template-columns: 24px 1fr;
+  .lesson-item {
+  display: grid;
+  grid-template-columns: 24px 1fr;
 
-    gap: 8px;
+  gap: 8px;
 
-    padding: 11px 0;
+  padding: 11px 0;
 
-    border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 
-    font-size: 0.77rem;
-  }
+  color: var(--text);
 
-  .lesson-list > div span:first-child {
-    color: var(--mint);
-  }
+  font-size: 0.77rem;
+}
+
+.lesson-item span:first-child {
+  color: var(--mint);
+}
+
+.lesson-link {
+  transition:
+    color 0.2s ease,
+    padding-left 0.2s ease;
+}
+
+.lesson-link:hover {
+  padding-left: 5px;
+  color: var(--lime);
+}
+
+.lesson-link:hover span:first-child {
+  color: var(--lime);
+}
 
   .coming-label {
     display: inline-block;

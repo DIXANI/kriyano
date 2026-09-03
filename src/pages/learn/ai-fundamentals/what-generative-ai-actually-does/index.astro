@@ -1,0 +1,1075 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const takeaways = [
+  "Generative AI predicts and creates output from patterns learned during training.",
+  "It does not understand information in exactly the same way a person does.",
+  "It can produce useful work while still making confident mistakes.",
+  "The quality of the result depends heavily on the task, context and instructions you provide.",
+  "Human review remains important whenever accuracy, judgment or consequences matter.",
+];
+
+const examples = [
+  {
+    task: "Writing",
+    input: "Draft a professional follow-up email after a supplier meeting.",
+    output:
+      "AI can generate a structured email using patterns from professional business communication.",
+  },
+  {
+    task: "Analysis",
+    input: "Summarise these stock discrepancy notes and identify possible investigation areas.",
+    output:
+      "AI can organise the supplied information, highlight patterns and suggest areas to review.",
+  },
+  {
+    task: "Brainstorming",
+    input: "Give me ten practical ways a small business could reduce repetitive admin work.",
+    output:
+      "AI can generate possible approaches by combining patterns and ideas related to the request.",
+  },
+];
+
+const limitations = [
+  {
+    title: "It can sound certain when it is wrong",
+    text:
+      "Generative AI is designed to produce plausible responses. A fluent, confident answer is not proof that the information is correct.",
+  },
+  {
+    title: "It does not automatically know your situation",
+    text:
+      "If important context is missing, the model may make assumptions. Giving clear background information usually improves the usefulness of the result.",
+  },
+  {
+    title: "It may not have current information",
+    text:
+      "Depending on the AI service and the tools available to it, the model may not automatically know what happened today or have access to live information.",
+  },
+  {
+    title: "It cannot replace responsibility",
+    text:
+      "AI can assist with thinking, drafting and analysis, but important workplace, financial, legal, safety or operational decisions still require appropriate human judgment.",
+  },
+];
+---
+
+<BaseLayout
+  title="What Generative AI Actually Does | KRIYANO"
+  description="Understand how generative AI works in practical terms, what it can produce, why it can make mistakes, and how to use it more effectively for real work."
+>
+  <article class="article-page">
+    <header class="article-hero">
+      <div class="container article-hero-grid">
+        <div class="article-heading">
+          <a href="/learn/" class="back-link">← LEARN</a>
+
+          <div class="article-meta">
+            <span>AI FUNDAMENTALS</span>
+            <span>01</span>
+            <span>BEGINNER</span>
+          </div>
+
+          <h1>
+            What Generative AI
+            <span>Actually Does.</span>
+          </h1>
+
+          <p class="article-intro">
+            Generative AI can write emails, summarise documents, create images,
+            analyse information and help structure ideas. But understanding what
+            is happening behind the interface makes it much easier to use AI
+            effectively—and to recognise when you should not trust the first
+            answer you receive.
+          </p>
+        </div>
+
+        <aside class="lesson-panel">
+          <div class="panel-header">
+            <span>LESSON 01</span>
+            <span>AI FUNDAMENTALS</span>
+          </div>
+
+          <div class="panel-content">
+            <span class="panel-kicker">THE SIMPLE IDEA</span>
+
+            <strong>
+              Generative AI creates new output by recognising and continuing
+              patterns.
+            </strong>
+
+            <p>
+              It does not retrieve a perfect answer from a hidden database.
+              Instead, it generates a response based on patterns learned during
+              training and the information available in your current request.
+            </p>
+          </div>
+
+          <div class="panel-footer">
+            <span>READ → UNDERSTAND → APPLY</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section class="article-body-section">
+      <div class="container article-layout">
+        <aside class="article-sidebar">
+          <div class="sidebar-box">
+            <span class="sidebar-title">IN THIS GUIDE</span>
+
+            <a href="#simple-explanation">The simple explanation</a>
+            <a href="#prediction">Prediction, not human thinking</a>
+            <a href="#examples">Practical examples</a>
+            <a href="#limitations">Where problems appear</a>
+            <a href="#working-with-ai">How to work with AI</a>
+            <a href="#takeaways">Key takeaways</a>
+          </div>
+        </aside>
+
+        <main class="article-content">
+          <section id="simple-explanation">
+            <div class="section-marker">01 / THE SIMPLE EXPLANATION</div>
+
+            <h2>Generative AI creates rather than simply looks up.</h2>
+
+            <p>
+              Traditional software usually follows predefined instructions. A
+              calculator performs a mathematical operation. A database returns a
+              stored record. A warehouse management system updates inventory
+              according to transactions recorded in the system.
+            </p>
+
+            <p>
+              Generative AI works differently. You provide an instruction,
+              question or piece of information, and the model generates a new
+              response that fits the patterns it learned during training.
+            </p>
+
+            <div class="concept-box">
+              <span>THINK OF IT THIS WAY</span>
+
+              <p>
+                You give the model a task and some context. It evaluates what
+                kind of response is likely to fit that request, then generates
+                the output step by step.
+              </p>
+            </div>
+
+            <p>
+              This is why the same AI system can help draft an email, explain a
+              business concept, reorganise notes, generate code or suggest ideas.
+              The underlying system is not limited to one fixed workflow.
+            </p>
+          </section>
+
+          <section id="prediction">
+            <div class="section-marker">02 / PREDICTION</div>
+
+            <h2>AI prediction is not the same as human understanding.</h2>
+
+            <p>
+              When a language model writes a response, it is effectively
+              predicting what pieces of language should come next given the
+              request and everything generated so far.
+            </p>
+
+            <p>
+              Modern AI models are extremely sophisticated, so that simple idea
+              can produce surprisingly capable behaviour. They can identify
+              relationships, follow instructions, transform information and
+              produce useful reasoning-like outputs.
+            </p>
+
+            <p>
+              But the distinction still matters. An AI response may look
+              knowledgeable without the model having human experience,
+              responsibility or real-world awareness behind the words.
+            </p>
+
+            <div class="comparison">
+              <div class="comparison-column">
+                <span class="comparison-label">HUMAN</span>
+
+                <h3>Understands through experience</h3>
+
+                <p>
+                  People combine knowledge with lived experience, goals,
+                  situational awareness, values and responsibility for decisions.
+                </p>
+              </div>
+
+              <div class="comparison-column highlighted">
+                <span class="comparison-label">GENERATIVE AI</span>
+
+                <h3>Generates through learned patterns</h3>
+
+                <p>
+                  AI processes the available information and generates an output
+                  that statistically and structurally fits the request.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="examples">
+            <div class="section-marker">03 / PRACTICAL EXAMPLES</div>
+
+            <h2>What this looks like during real work.</h2>
+
+            <p>
+              The easiest way to understand generative AI is to look at what
+              happens when you give it different kinds of tasks.
+            </p>
+
+            <div class="example-stack">
+              {
+                examples.map((example, index) => (
+                  <article class="example-card">
+                    <div class="example-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
+
+                    <div class="example-body">
+                      <span>{example.task}</span>
+
+                      <h3>{example.input}</h3>
+
+                      <p>{example.output}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <p>
+              In each case, the model is generating an answer from the
+              instruction and available context. It is not automatically
+              checking whether every statement is correct or whether the final
+              result is suitable for your exact organisation.
+            </p>
+          </section>
+
+          <section id="limitations">
+            <div class="section-marker">04 / LIMITATIONS</div>
+
+            <h2>Why useful AI can still produce bad answers.</h2>
+
+            <p>
+              Generative AI's ability to create plausible output is both its
+              strength and one of its main weaknesses. The system is trying to
+              produce an appropriate response—not guarantee that every sentence
+              represents verified reality.
+            </p>
+
+            <div class="limitation-grid">
+              {
+                limitations.map((item, index) => (
+                  <article class="limitation-card">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+
+                    <h3>{item.title}</h3>
+
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="working-with-ai">
+            <div class="section-marker">05 / WORKING WITH AI</div>
+
+            <h2>Treat AI as a capable assistant, not an automatic authority.</h2>
+
+            <p>
+              A practical approach is to give AI a clearly defined task, provide
+              the relevant context, describe the result you want, add important
+              constraints and then review the output before using it.
+            </p>
+
+            <div class="workflow-box">
+              <div>
+                <span>01</span>
+                <strong>Define</strong>
+                <p>What exactly are you trying to accomplish?</p>
+              </div>
+
+              <div class="workflow-arrow">→</div>
+
+              <div>
+                <span>02</span>
+                <strong>Context</strong>
+                <p>What information does the model need?</p>
+              </div>
+
+              <div class="workflow-arrow">→</div>
+
+              <div>
+                <span>03</span>
+                <strong>Generate</strong>
+                <p>Ask AI to produce the required result.</p>
+              </div>
+
+              <div class="workflow-arrow">→</div>
+
+              <div>
+                <span>04</span>
+                <strong>Review</strong>
+                <p>Check accuracy, suitability and missing details.</p>
+              </div>
+            </div>
+
+            <p>
+              This approach is especially useful in professional work. For
+              example, AI may help organise an inventory discrepancy
+              investigation, but the physical count, system transactions,
+              receiving records and stock adjustments still need to be checked
+              against real evidence before a decision is made.
+            </p>
+
+            <div class="tool-callout">
+              <div>
+                <span class="tool-kicker">KRIYANO TOOL</span>
+
+                <h3>Turn a real task into a structured prompt.</h3>
+
+                <p>
+                  The KRIYANO Prompt Builder helps you define the task, context,
+                  output, constraints and other details before sending the
+                  request to an AI assistant.
+                </p>
+              </div>
+
+              <a href="/tools/prompt-builder/" class="button button-primary">
+                Open Prompt Builder
+              </a>
+            </div>
+          </section>
+
+          <section id="takeaways">
+            <div class="section-marker">06 / KEY TAKEAWAYS</div>
+
+            <h2>What to remember from this lesson.</h2>
+
+            <div class="takeaway-list">
+              {
+                takeaways.map((item, index) => (
+                  <div class="takeaway-row">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <p>{item}</p>
+                  </div>
+                ))
+              }
+            </div>
+          </section>
+
+          <section class="next-lesson">
+  <div>
+    <span class="next-label">NEXT LESSON</span>
+
+    <h2>What AI Is Good At</h2>
+
+    <p>
+      Learn which tasks are particularly suitable for generative AI
+      and where it can provide the most practical value.
+    </p>
+  </div>
+
+  <a
+    href="/learn/ai-fundamentals/what-ai-is-good-at/"
+    class="next-status"
+  >
+    CONTINUE →
+  </a>
+</section>
+        </main>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    overflow: hidden;
+  }
+
+  .article-hero {
+    padding: 92px 0 82px;
+
+    border-bottom: 1px solid var(--line);
+
+    background:
+      radial-gradient(
+        circle at 82% 20%,
+        rgba(183, 255, 74, 0.08),
+        transparent 27%
+      ),
+      radial-gradient(
+        circle at 14% 0%,
+        rgba(77, 226, 197, 0.055),
+        transparent 28%
+      );
+  }
+
+  .article-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+
+    gap: 75px;
+
+    align-items: end;
+  }
+
+  .back-link {
+    color: var(--lime);
+
+    font-size: 0.7rem;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+    margin-top: 28px;
+  }
+
+  .article-meta span {
+    padding: 7px 9px;
+
+    border: 1px solid var(--line);
+    border-radius: 6px;
+
+    color: var(--muted);
+
+    font-size: 0.6rem;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+  }
+
+  .article-heading h1 {
+    max-width: 900px;
+
+    margin-top: 22px;
+
+    font-size: clamp(3.5rem, 7vw, 6.6rem);
+    line-height: 0.94;
+
+    letter-spacing: -0.065em;
+  }
+
+  .article-heading h1 span {
+    display: block;
+
+    color: var(--lime);
+  }
+
+  .article-intro {
+    max-width: 760px;
+
+    margin-top: 27px;
+
+    color: var(--muted);
+
+    font-size: 1.04rem;
+    line-height: 1.8;
+  }
+
+  .lesson-panel {
+    overflow: hidden;
+
+    border: 1px solid rgba(183, 255, 74, 0.17);
+    border-radius: 21px;
+
+    background: var(--surface);
+
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 15px 18px;
+
+    border-bottom: 1px solid var(--line);
+
+    color: var(--muted);
+
+    font-size: 0.61rem;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+  }
+
+  .panel-content {
+    padding: 31px 26px 34px;
+  }
+
+  .panel-kicker {
+    display: block;
+
+    color: var(--lime);
+
+    font-size: 0.6rem;
+    font-weight: 800;
+
+    letter-spacing: 0.09em;
+  }
+
+  .panel-content strong {
+    display: block;
+
+    margin-top: 20px;
+
+    font-size: 1.45rem;
+    line-height: 1.35;
+
+    letter-spacing: -0.035em;
+  }
+
+  .panel-content p {
+    margin-top: 17px;
+
+    color: var(--muted);
+
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .panel-footer {
+    padding: 17px 20px;
+
+    border-top: 1px solid var(--line);
+
+    background: rgba(183, 255, 74, 0.03);
+
+    color: var(--lime);
+
+    font-size: 0.59rem;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+  }
+
+  .article-body-section {
+    padding: 88px 0 110px;
+  }
+
+  .article-layout {
+    display: grid;
+    grid-template-columns: 235px minmax(0, 800px);
+
+    gap: 78px;
+
+    justify-content: center;
+  }
+
+  .article-sidebar {
+    position: relative;
+  }
+
+  .sidebar-box {
+    position: sticky;
+    top: 105px;
+
+    display: flex;
+    flex-direction: column;
+
+    border-top: 1px solid var(--line);
+  }
+
+  .sidebar-title {
+    padding: 16px 0;
+
+    color: var(--lime);
+
+    font-size: 0.6rem;
+    font-weight: 800;
+
+    letter-spacing: 0.09em;
+  }
+
+  .sidebar-box a {
+    padding: 11px 0;
+
+    border-top: 1px solid var(--line);
+
+    color: var(--muted);
+
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  .sidebar-box a:hover {
+    color: var(--lime);
+  }
+
+  .article-content > section:not(:first-child) {
+    margin-top: 90px;
+  }
+
+  .section-marker {
+    color: var(--lime);
+
+    font-size: 0.64rem;
+    font-weight: 800;
+
+    letter-spacing: 0.09em;
+  }
+
+  .article-content h2 {
+    max-width: 760px;
+
+    margin-top: 14px;
+
+    font-size: clamp(2.3rem, 5vw, 3.8rem);
+    line-height: 1;
+
+    letter-spacing: -0.052em;
+  }
+
+  .article-content > section > p {
+    max-width: 760px;
+
+    margin-top: 23px;
+
+    color: var(--muted);
+
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .concept-box {
+    margin: 34px 0;
+    padding: 27px;
+
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .concept-box span {
+    color: var(--lime);
+
+    font-size: 0.6rem;
+    font-weight: 800;
+
+    letter-spacing: 0.09em;
+  }
+
+  .concept-box p {
+    margin-top: 12px;
+
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .comparison {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 15px;
+
+    margin-top: 35px;
+  }
+
+  .comparison-column {
+    min-height: 245px;
+
+    padding: 25px;
+
+    border: 1px solid var(--line);
+    border-radius: 17px;
+
+    background: var(--surface);
+  }
+
+  .comparison-column.highlighted {
+    border-color: rgba(183, 255, 74, 0.18);
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(183, 255, 74, 0.035),
+        transparent 55%
+      ),
+      var(--surface);
+  }
+
+  .comparison-label {
+    color: var(--lime);
+
+    font-size: 0.6rem;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+  }
+
+  .comparison-column h3 {
+    margin-top: 45px;
+
+    font-size: 1.2rem;
+    line-height: 1.25;
+  }
+
+  .comparison-column p {
+    margin-top: 12px;
+
+    color: var(--muted);
+
+    font-size: 0.79rem;
+    line-height: 1.7;
+  }
+
+  .example-stack {
+    margin-top: 35px;
+
+    border-top: 1px solid var(--line);
+  }
+
+  .example-card {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+
+    gap: 22px;
+
+    padding: 25px 0;
+
+    border-bottom: 1px solid var(--line);
+  }
+
+  .example-number {
+    color: var(--lime);
+
+    font-size: 0.66rem;
+    font-weight: 800;
+  }
+
+  .example-body > span {
+    color: var(--mint);
+
+    font-size: 0.62rem;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+  }
+
+  .example-body h3 {
+    margin-top: 7px;
+
+    font-size: 1.08rem;
+    line-height: 1.45;
+  }
+
+  .example-body p {
+    margin-top: 9px;
+
+    color: var(--muted);
+
+    font-size: 0.82rem;
+    line-height: 1.65;
+  }
+
+  .limitation-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 14px;
+
+    margin-top: 34px;
+  }
+
+  .limitation-card {
+    min-height: 230px;
+
+    padding: 24px;
+
+    border: 1px solid var(--line);
+    border-radius: 16px;
+
+    background: var(--surface);
+  }
+
+  .limitation-card > span {
+    color: var(--lime);
+
+    font-size: 0.63rem;
+    font-weight: 800;
+  }
+
+  .limitation-card h3 {
+    margin-top: 39px;
+
+    font-size: 1.08rem;
+    line-height: 1.3;
+  }
+
+  .limitation-card p {
+    margin-top: 10px;
+
+    color: var(--muted);
+
+    font-size: 0.78rem;
+    line-height: 1.7;
+  }
+
+  .workflow-box {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+
+    gap: 12px;
+
+    align-items: center;
+
+    margin-top: 37px;
+    padding: 27px 22px;
+
+    border: 1px solid var(--line);
+    border-radius: 17px;
+
+    background: var(--surface);
+  }
+
+  .workflow-box > div:not(.workflow-arrow) span {
+    display: block;
+
+    color: var(--lime);
+
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .workflow-box strong {
+    display: block;
+
+    margin-top: 13px;
+
+    font-size: 0.85rem;
+  }
+
+  .workflow-box p {
+    margin-top: 6px;
+
+    color: var(--muted);
+
+    font-size: 0.68rem;
+    line-height: 1.5;
+  }
+
+  .workflow-arrow {
+    color: var(--mint);
+
+    font-size: 0.8rem;
+  }
+
+  .tool-callout {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+
+    gap: 35px;
+
+    margin-top: 40px;
+    padding: 32px;
+
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 19px;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(183, 255, 74, 0.04),
+        transparent 50%
+      ),
+      var(--surface);
+  }
+
+  .tool-kicker {
+    color: var(--lime);
+
+    font-size: 0.6rem;
+    font-weight: 800;
+
+    letter-spacing: 0.09em;
+  }
+
+  .tool-callout h3 {
+    margin-top: 11px;
+
+    font-size: 1.35rem;
+  }
+
+  .tool-callout p {
+    max-width: 510px;
+
+    margin-top: 10px;
+
+    color: var(--muted);
+
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+
+  .tool-callout .button {
+    flex-shrink: 0;
+  }
+
+  .takeaway-list {
+    margin-top: 34px;
+
+    border-top: 1px solid var(--line);
+  }
+
+  .takeaway-row {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+
+    gap: 18px;
+
+    padding: 17px 0;
+
+    border-bottom: 1px solid var(--line);
+  }
+
+  .takeaway-row span {
+    color: var(--lime);
+
+    font-size: 0.64rem;
+    font-weight: 800;
+  }
+
+  .takeaway-row p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  .next-lesson {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+
+    gap: 35px;
+
+    padding-top: 43px;
+
+    border-top: 1px solid var(--line);
+  }
+
+  .next-label {
+    color: var(--lime);
+
+    font-size: 0.6rem;
+    font-weight: 800;
+
+    letter-spacing: 0.09em;
+  }
+
+  .next-lesson h2 {
+    margin-top: 11px;
+
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+
+  .next-lesson p {
+    max-width: 540px;
+
+    margin-top: 10px;
+
+    color: var(--muted);
+
+    font-size: 0.79rem;
+    line-height: 1.65;
+  }
+
+  .next-status {
+    flex-shrink: 0;
+
+    color: var(--muted);
+
+    font-size: 0.62rem;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+  }
+
+.next-status:hover {
+  color: var(--lime);
+}
+  @media (max-width: 1000px) {
+    .article-hero-grid {
+      grid-template-columns: 1fr;
+
+      gap: 45px;
+    }
+
+    .article-layout {
+      grid-template-columns: 1fr;
+
+      gap: 45px;
+    }
+
+    .article-sidebar {
+      display: none;
+    }
+
+    .workflow-box {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .workflow-arrow {
+      display: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .article-hero {
+      padding: 68px 0 60px;
+    }
+
+    .article-body-section {
+      padding: 65px 0 80px;
+    }
+
+    .comparison,
+    .limitation-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .workflow-box {
+      grid-template-columns: 1fr;
+
+      gap: 22px;
+    }
+
+    .workflow-box > div:not(.workflow-arrow) {
+      padding-bottom: 18px;
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .workflow-box > div:not(.workflow-arrow):last-child {
+      padding-bottom: 0;
+
+      border-bottom: 0;
+    }
+
+    .tool-callout,
+    .next-lesson {
+      flex-direction: column;
+
+      align-items: flex-start;
+    }
+
+    .example-card {
+      grid-template-columns: 38px 1fr;
+    }
+  }
+</style>

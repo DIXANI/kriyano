@@ -1,0 +1,938 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const strengths = [
+  {
+    number: "01",
+    title: "Drafting & rewriting",
+    text:
+      "AI is useful for creating first drafts, improving clarity, changing tone, shortening text and restructuring existing writing.",
+    examples: "Emails · Reports · Proposals · Instructions · Social content",
+  },
+  {
+    number: "02",
+    title: "Summarising information",
+    text:
+      "AI can reduce long notes or documents into key points, action items, structured summaries or information for a specific audience.",
+    examples: "Meeting notes · Documents · Policies · Research notes",
+  },
+  {
+    number: "03",
+    title: "Organising & structuring",
+    text:
+      "Unstructured information can often be converted into tables, categories, checklists, plans or step-by-step formats.",
+    examples: "Checklists · SOP drafts · Plans · Tables · Task lists",
+  },
+  {
+    number: "04",
+    title: "Brainstorming",
+    text:
+      "AI can quickly generate alternatives, questions, angles and possible approaches when you need a starting point.",
+    examples: "Ideas · Names · Topics · Approaches · Questions",
+  },
+  {
+    number: "05",
+    title: "Explaining & learning",
+    text:
+      "AI can explain unfamiliar concepts, provide examples and adapt an explanation to different levels of knowledge.",
+    examples: "Concepts · Examples · Practice · Comparisons",
+  },
+  {
+    number: "06",
+    title: "Transforming information",
+    text:
+      "AI is particularly useful when the information already exists but needs to be converted into another useful form.",
+    examples: "Notes → Email · Data → Summary · Outline → Draft",
+  },
+];
+
+const suitabilityQuestions = [
+  "Can I clearly describe the task?",
+  "Can I provide the information AI needs?",
+  "Can a human review the result?",
+  "Would a useful first draft save meaningful time?",
+  "Can errors be detected before they cause a problem?",
+];
+
+const poorFits = [
+  {
+    title: "Unverified critical decisions",
+    text:
+      "Do not treat an AI response as the final authority for decisions where an error could have serious financial, legal, medical, safety or operational consequences.",
+  },
+  {
+    title: "Tasks requiring unavailable facts",
+    text:
+      "AI cannot reliably work with information it does not have. Current prices, live inventory, internal company records or recent events may require connected or verified data sources.",
+  },
+  {
+    title: "Confidential information without approval",
+    text:
+      "A task may technically be suitable for AI but still be inappropriate if it requires entering confidential, personal or restricted company information into an unapproved service.",
+  },
+  {
+    title: "Automatic action without review",
+    text:
+      "When mistakes could affect customers, inventory, money, compliance or operations, generating the output and approving the action should usually be treated as separate steps.",
+  },
+];
+---
+
+<BaseLayout
+  title="What AI Is Good At | KRIYANO"
+  description="Learn which tasks generative AI handles well, where it provides practical value at work, and how to decide whether AI is suitable for a task."
+>
+  <article class="article-page">
+    <header class="article-hero">
+      <div class="container article-hero-grid">
+        <div class="article-heading">
+          <a href="/learn/" class="back-link">← LEARN</a>
+
+          <div class="article-meta">
+            <span>AI FUNDAMENTALS</span>
+            <span>02</span>
+            <span>BEGINNER</span>
+          </div>
+
+          <h1>
+            What AI Is
+            <span>Good At.</span>
+          </h1>
+
+          <p class="article-intro">
+            AI becomes much more useful when you give it the right kind of work.
+            Some tasks match its strengths extremely well. Others require
+            information, judgment or responsibility that should remain with
+            people and reliable systems.
+          </p>
+        </div>
+
+        <aside class="lesson-panel">
+          <div class="panel-header">
+            <span>LESSON 02</span>
+            <span>AI FUNDAMENTALS</span>
+          </div>
+
+          <div class="panel-content">
+            <span class="panel-kicker">THE PRACTICAL RULE</span>
+
+            <strong>
+              Use AI where generating, transforming or organising information
+              creates value.
+            </strong>
+
+            <p>
+              Tasks become particularly suitable when you can provide clear
+              context and review the result before it is used.
+            </p>
+          </div>
+
+          <div class="panel-footer">
+            <span>CHOOSE → GENERATE → REVIEW</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section class="article-body-section">
+      <div class="container article-layout">
+        <aside class="article-sidebar">
+          <div class="sidebar-box">
+            <span class="sidebar-title">IN THIS GUIDE</span>
+
+            <a href="#right-task">Start with the right task</a>
+            <a href="#strengths">Six useful strengths</a>
+            <a href="#work-example">A real-work example</a>
+            <a href="#suitability">Should you use AI?</a>
+            <a href="#poor-fit">Where AI is a poor fit</a>
+            <a href="#takeaway">The practical takeaway</a>
+          </div>
+        </aside>
+
+        <main class="article-content">
+          <section id="right-task">
+            <div class="section-marker">01 / THE RIGHT TASK</div>
+
+            <h2>AI does not need to do the whole job to be useful.</h2>
+
+            <p>
+              A common mistake is asking whether AI can replace an entire task
+              or role. A more useful question is whether part of the work can be
+              completed faster or more effectively with AI assistance.
+            </p>
+
+            <p>
+              Consider preparing a monthly operations report. Gathering the
+              correct figures, investigating unusual results and deciding what
+              action to take may require employees who understand the operation.
+              But turning verified notes and figures into a clear first draft
+              can be a strong AI task.
+            </p>
+
+            <div class="concept-box">
+              <span>LOOK FOR THE ASSISTABLE STEP</span>
+
+              <p>
+                Instead of asking, “Can AI do this job?”, ask, “Which part of
+                this job involves drafting, summarising, organising, comparing
+                or transforming information?”
+              </p>
+            </div>
+          </section>
+
+          <section id="strengths">
+            <div class="section-marker">02 / AI STRENGTHS</div>
+
+            <h2>Six areas where generative AI can be particularly useful.</h2>
+
+            <p>
+              These categories appear across many professions because they deal
+              primarily with language, information and structure.
+            </p>
+
+            <div class="strength-grid">
+              {
+                strengths.map((item) => (
+                  <article class="strength-card">
+                    <span class="strength-number">{item.number}</span>
+
+                    <h3>{item.title}</h3>
+
+                    <p>{item.text}</p>
+
+                    <div class="examples">{item.examples}</div>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="work-example">
+            <div class="section-marker">03 / REAL-WORK EXAMPLE</div>
+
+            <h2>Use AI around the evidence—not instead of the evidence.</h2>
+
+            <p>
+              Imagine a warehouse team discovers that physical stock is 24
+              units lower than the quantity shown in the inventory system.
+            </p>
+
+            <div class="workflow">
+              <div class="workflow-row human">
+                <span>01</span>
+
+                <div>
+                  <strong>Human / system work</strong>
+                  <p>
+                    Recount the stock and confirm the physical discrepancy.
+                  </p>
+                </div>
+              </div>
+
+              <div class="workflow-row human">
+                <span>02</span>
+
+                <div>
+                  <strong>Human / system work</strong>
+                  <p>
+                    Review receiving, picking, dispatch, transfer and adjustment
+                    transactions.
+                  </p>
+                </div>
+              </div>
+
+              <div class="workflow-row ai">
+                <span>03</span>
+
+                <div>
+                  <strong>Good AI assistance</strong>
+                  <p>
+                    Organise the verified investigation notes into a structured
+                    discrepancy summary.
+                  </p>
+                </div>
+              </div>
+
+              <div class="workflow-row ai">
+                <span>04</span>
+
+                <div>
+                  <strong>Good AI assistance</strong>
+                  <p>
+                    Draft a concise email explaining the issue, checks completed
+                    and next action required.
+                  </p>
+                </div>
+              </div>
+
+              <div class="workflow-row human">
+                <span>05</span>
+
+                <div>
+                  <strong>Human decision</strong>
+                  <p>
+                    Review the evidence and approve any inventory adjustment
+                    according to company procedure.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <p>
+              AI provides value here without becoming the source of truth. The
+              inventory records and physical investigation provide the facts;
+              AI helps transform those facts into useful communication and
+              structure.
+            </p>
+          </section>
+
+          <section id="suitability">
+            <div class="section-marker">04 / TASK CHECK</div>
+
+            <h2>Five questions before giving a task to AI.</h2>
+
+            <p>
+              You do not need a complicated assessment for everyday work. A few
+              simple questions can quickly indicate whether AI is likely to
+              help.
+            </p>
+
+            <div class="question-list">
+              {
+                suitabilityQuestions.map((question, index) => (
+                  <div class="question-row">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <p>{question}</p>
+                    <strong>?</strong>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="decision-box">
+              <span>GOOD SIGNAL</span>
+
+              <p>
+                If the task can be clearly explained, the necessary context can
+                be supplied, and someone can review the result before it matters,
+                AI is often worth testing.
+              </p>
+            </div>
+          </section>
+
+          <section id="poor-fit">
+            <div class="section-marker">05 / KNOW THE LIMITS</div>
+
+            <h2>Some tasks need more than a plausible answer.</h2>
+
+            <p>
+              The fact that AI can generate an answer does not automatically
+              make AI the right tool for the task.
+            </p>
+
+            <div class="poor-fit-grid">
+              {
+                poorFits.map((item, index) => (
+                  <article class="poor-fit-card">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+
+                    <h3>{item.title}</h3>
+
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="takeaway">
+            <div class="section-marker">06 / PRACTICAL TAKEAWAY</div>
+
+            <h2>Start with tasks where review is easy and value is clear.</h2>
+
+            <p>
+              You do not need to automate an entire workflow on your first
+              attempt. Start with a task you already understand well and use AI
+              for one assistable step.
+            </p>
+
+            <div class="takeaway-flow">
+              <div>
+                <span>01</span>
+                <strong>Choose</strong>
+                <p>Pick a clear, manageable task.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>02</span>
+                <strong>Provide</strong>
+                <p>Give the relevant context.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>03</span>
+                <strong>Generate</strong>
+                <p>Use AI for the assistable step.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>04</span>
+                <strong>Review</strong>
+                <p>Check before using the result.</p>
+              </div>
+            </div>
+
+            <div class="tool-callout">
+              <div>
+                <span class="tool-kicker">TRY IT WITH KRIYANO</span>
+
+                <h3>Turn your task into a clearer AI instruction.</h3>
+
+                <p>
+                  Define what you need, add context and specify the expected
+                  output using the KRIYANO Prompt Builder.
+                </p>
+              </div>
+
+              <a href="/tools/prompt-builder/" class="button button-primary">
+                Open Prompt Builder
+              </a>
+            </div>
+          </section>
+
+          <section class="next-lesson">
+            <div>
+              <span class="next-label">NEXT LESSON</span>
+
+              <h2>Where AI Can Go Wrong</h2>
+
+              <p>
+                Learn why AI can produce incorrect, misleading or unsuitable
+                results—and what you can do about it.
+              </p>
+            </div>
+
+            <a
+  href="/learn/ai-fundamentals/where-ai-can-go-wrong/"
+  class="next-status"
+>
+  CONTINUE →
+</a>
+          </section>
+        </main>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    overflow: hidden;
+  }
+
+  .article-hero {
+    padding: 92px 0 82px;
+    border-bottom: 1px solid var(--line);
+
+    background:
+      radial-gradient(
+        circle at 82% 20%,
+        rgba(183, 255, 74, 0.08),
+        transparent 27%
+      ),
+      radial-gradient(
+        circle at 14% 0%,
+        rgba(77, 226, 197, 0.055),
+        transparent 28%
+      );
+  }
+
+  .article-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 75px;
+    align-items: end;
+  }
+
+  .back-link {
+    color: var(--lime);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 28px;
+  }
+
+  .article-meta span {
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-heading h1 {
+    max-width: 900px;
+    margin-top: 22px;
+    font-size: clamp(3.5rem, 7vw, 6.6rem);
+    line-height: 0.94;
+    letter-spacing: -0.065em;
+  }
+
+  .article-heading h1 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .article-intro {
+    max-width: 760px;
+    margin-top: 27px;
+    color: var(--muted);
+    font-size: 1.04rem;
+    line-height: 1.8;
+  }
+
+  .lesson-panel {
+    overflow: hidden;
+    border: 1px solid rgba(183, 255, 74, 0.17);
+    border-radius: 21px;
+    background: var(--surface);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .panel-content {
+    padding: 31px 26px 34px;
+  }
+
+  .panel-kicker {
+    display: block;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .panel-content strong {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.45rem;
+    line-height: 1.35;
+    letter-spacing: -0.035em;
+  }
+
+  .panel-content p {
+    margin-top: 17px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .panel-footer {
+    padding: 17px 20px;
+    border-top: 1px solid var(--line);
+    background: rgba(183, 255, 74, 0.03);
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-body-section {
+    padding: 88px 0 110px;
+  }
+
+  .article-layout {
+    display: grid;
+    grid-template-columns: 235px minmax(0, 800px);
+    gap: 78px;
+    justify-content: center;
+  }
+
+  .sidebar-box {
+    position: sticky;
+    top: 105px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+  }
+
+  .sidebar-title {
+    padding: 16px 0;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .sidebar-box a {
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  .sidebar-box a:hover {
+    color: var(--lime);
+  }
+
+  .article-content > section:not(:first-child) {
+    margin-top: 90px;
+  }
+
+  .section-marker {
+    color: var(--lime);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .article-content h2 {
+    max-width: 760px;
+    margin-top: 14px;
+    font-size: clamp(2.3rem, 5vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.052em;
+  }
+
+  .article-content > section > p {
+    max-width: 760px;
+    margin-top: 23px;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .concept-box,
+  .decision-box {
+    margin: 34px 0;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .concept-box span,
+  .decision-box span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .concept-box p,
+  .decision-box p {
+    margin-top: 12px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .strength-grid,
+  .poor-fit-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 35px;
+  }
+
+  .strength-card,
+  .poor-fit-card {
+    min-height: 250px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .strength-number,
+  .poor-fit-card > span {
+    color: var(--lime);
+    font-size: 0.63rem;
+    font-weight: 800;
+  }
+
+  .strength-card h3,
+  .poor-fit-card h3 {
+    margin-top: 36px;
+    font-size: 1.1rem;
+    line-height: 1.3;
+  }
+
+  .strength-card p,
+  .poor-fit-card p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.7;
+  }
+
+  .examples {
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    color: var(--mint);
+    font-size: 0.66rem;
+    line-height: 1.6;
+  }
+
+  .workflow {
+    margin-top: 36px;
+    border-top: 1px solid var(--line);
+  }
+
+  .workflow-row {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 18px;
+    padding: 21px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .workflow-row > span {
+    color: var(--muted);
+    font-size: 0.64rem;
+    font-weight: 800;
+  }
+
+  .workflow-row.ai > span,
+  .workflow-row.ai strong {
+    color: var(--lime);
+  }
+
+  .workflow-row strong {
+    font-size: 0.84rem;
+  }
+
+  .workflow-row p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.79rem;
+    line-height: 1.65;
+  }
+
+  .question-list {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .question-row {
+    display: grid;
+    grid-template-columns: 50px 1fr 30px;
+    gap: 15px;
+    align-items: center;
+    padding: 17px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .question-row > span,
+  .question-row > strong {
+    color: var(--lime);
+    font-size: 0.65rem;
+    font-weight: 800;
+  }
+
+  .question-row > strong {
+    text-align: right;
+    font-size: 1rem;
+  }
+
+  .question-row p {
+    font-size: 0.87rem;
+    line-height: 1.55;
+  }
+
+  .takeaway-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-top: 37px;
+    padding: 27px 22px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .takeaway-flow > div span {
+    display: block;
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .takeaway-flow strong {
+    display: block;
+    margin-top: 13px;
+    font-size: 0.85rem;
+  }
+
+  .takeaway-flow p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.68rem;
+    line-height: 1.5;
+  }
+
+  .flow-arrow {
+    color: var(--mint);
+    font-size: 0.8rem;
+  }
+
+  .tool-callout {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    margin-top: 40px;
+    padding: 32px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 19px;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(183, 255, 74, 0.04),
+        transparent 50%
+      ),
+      var(--surface);
+  }
+
+  .tool-kicker,
+  .next-label {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .tool-callout h3 {
+    margin-top: 11px;
+    font-size: 1.35rem;
+  }
+
+  .tool-callout p {
+    max-width: 510px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+
+  .tool-callout .button {
+    flex-shrink: 0;
+  }
+
+  .next-lesson {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    padding-top: 43px;
+    border-top: 1px solid var(--line);
+  }
+
+  .next-lesson h2 {
+    margin-top: 11px;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+
+  .next-lesson p {
+    max-width: 540px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.79rem;
+    line-height: 1.65;
+  }
+
+  .next-status {
+    flex-shrink: 0;
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .next-status:hover {
+  color: var(--lime);
+}
+
+  @media (max-width: 1000px) {
+    .article-hero-grid,
+    .article-layout {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .article-sidebar {
+      display: none;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .flow-arrow {
+      display: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .article-hero {
+      padding: 68px 0 60px;
+    }
+
+    .article-body-section {
+      padding: 65px 0 80px;
+    }
+
+    .strength-grid,
+    .poor-fit-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .takeaway-flow > div {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .takeaway-flow > div:last-of-type {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .tool-callout,
+    .next-lesson {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

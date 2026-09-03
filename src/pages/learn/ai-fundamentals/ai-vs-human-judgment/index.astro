@@ -1,0 +1,1083 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const judgmentAreas = [
+  {
+    number: "01",
+    title: "Context",
+    ai:
+      "AI can process the context you provide and identify patterns or possible interpretations.",
+    human:
+      "People understand hidden context, workplace realities, relationships, history and consequences that may never appear in the prompt.",
+  },
+  {
+    number: "02",
+    title: "Responsibility",
+    ai:
+      "AI can suggest options, structure information and explain possible next steps.",
+    human:
+      "A person or organization remains responsible for approving decisions and accepting the consequences.",
+  },
+  {
+    number: "03",
+    title: "Priorities",
+    ai:
+      "AI can compare criteria when those criteria are clearly defined.",
+    human:
+      "People decide which goals matter most when speed, cost, quality, fairness, safety or customer impact conflict.",
+  },
+  {
+    number: "04",
+    title: "Experience",
+    ai:
+      "AI can generate guidance based on patterns in available information.",
+    human:
+      "Experienced workers recognize unusual situations, practical constraints and warning signs that may not be obvious from the data alone.",
+  },
+  {
+    number: "05",
+    title: "Ethics",
+    ai:
+      "AI can help surface considerations and possible risks.",
+    human:
+      "People must decide what is appropriate, fair and acceptable within the real situation.",
+  },
+  {
+    number: "06",
+    title: "Final decisions",
+    ai:
+      "AI can support decision-making with summaries, comparisons, scenarios and questions.",
+    human:
+      "Important decisions require accountable human judgment, especially when the consequences are significant.",
+  },
+];
+
+const delegationQuestions = [
+  "Does this task require factual verification?",
+  "Would a wrong answer create a meaningful consequence?",
+  "Does the decision depend on experience or situational knowledge?",
+  "Is there confidential or sensitive information involved?",
+  "Does someone need to be accountable for the final decision?",
+];
+
+const workflowExamples = [
+  {
+    task: "Drafting a routine email",
+    aiRole: "Create the first draft",
+    humanRole: "Check tone, facts and recipient",
+  },
+  {
+    task: "Investigating stock variance",
+    aiRole: "Organise verified findings",
+    humanRole: "Investigate records and approve action",
+  },
+  {
+    task: "Preparing an SOP",
+    aiRole: "Structure a draft",
+    humanRole: "Confirm the real process and controls",
+  },
+  {
+    task: "Comparing business options",
+    aiRole: "Summarise criteria and trade-offs",
+    humanRole: "Choose based on priorities and risk",
+  },
+];
+---
+
+<BaseLayout
+  title="AI vs Human Judgment | KRIYANO"
+  description="Learn how to combine AI assistance with human judgment, responsibility and experience when using generative AI for real work."
+>
+  <article class="article-page">
+    <header class="article-hero">
+      <div class="container article-hero-grid">
+        <div class="article-heading">
+          <a href="/learn/" class="back-link">← LEARN</a>
+
+          <div class="article-meta">
+            <span>AI FUNDAMENTALS</span>
+            <span>04</span>
+            <span>BEGINNER</span>
+          </div>
+
+          <h1>
+            AI vs Human
+            <span>Judgment.</span>
+          </h1>
+
+          <p class="article-intro">
+            AI can generate, organise and analyse information quickly. Human
+            judgment decides what matters, what is appropriate and what should
+            actually be done. Good AI use depends on knowing where one ends and
+            the other begins.
+          </p>
+        </div>
+
+        <aside class="lesson-panel">
+          <div class="panel-header">
+            <span>LESSON 04</span>
+            <span>AI FUNDAMENTALS</span>
+          </div>
+
+          <div class="panel-content">
+            <span class="panel-kicker">THE WORKING MODEL</span>
+
+            <strong>
+              Let AI assist with information. Keep people responsible for
+              judgment and action.
+            </strong>
+
+            <p>
+              The strongest workflows usually combine machine speed with human
+              experience, context and accountability.
+            </p>
+          </div>
+
+          <div class="panel-footer">
+            <span>AI ASSISTS → HUMAN DECIDES</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section class="article-body-section">
+      <div class="container article-layout">
+        <aside class="article-sidebar">
+          <div class="sidebar-box">
+            <span class="sidebar-title">IN THIS GUIDE</span>
+
+            <a href="#different-strengths">Different strengths</a>
+            <a href="#judgment">Where judgment matters</a>
+            <a href="#warehouse-example">A practical example</a>
+            <a href="#delegation">What should AI handle?</a>
+            <a href="#workflow">Designing the workflow</a>
+            <a href="#takeaway">The practical takeaway</a>
+          </div>
+        </aside>
+
+        <main class="article-content">
+          <section id="different-strengths">
+            <div class="section-marker">01 / DIFFERENT STRENGTHS</div>
+
+            <h2>The goal is not AI or humans. It is the right combination.</h2>
+
+            <p>
+              AI is valuable because it can work with large amounts of
+              information quickly, generate alternatives, organise material and
+              create useful first drafts.
+            </p>
+
+            <p>
+              Human judgment is valuable because real work contains context,
+              priorities, responsibility and consequences that cannot always be
+              reduced to the information inside a prompt.
+            </p>
+
+            <div class="concept-box">
+              <span>BETTER QUESTION</span>
+
+              <p>
+                Instead of asking, “Should AI or a person do this?”, ask,
+                “Which parts benefit from AI assistance, and which parts require
+                human judgment?”
+              </p>
+            </div>
+          </section>
+
+          <section id="judgment">
+            <div class="section-marker">02 / HUMAN JUDGMENT</div>
+
+            <h2>Six areas where human involvement remains essential.</h2>
+
+            <div class="judgment-grid">
+              {
+                judgmentAreas.map((item) => (
+                  <article class="judgment-card">
+                    <div class="judgment-head">
+                      <span>{item.number}</span>
+                      <h3>{item.title}</h3>
+                    </div>
+
+                    <div class="role-block">
+                      <span>AI CAN HELP</span>
+                      <p>{item.ai}</p>
+                    </div>
+
+                    <div class="role-block human">
+                      <span>HUMAN JUDGMENT</span>
+                      <p>{item.human}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="warehouse-example">
+            <div class="section-marker">03 / REAL-WORK EXAMPLE</div>
+
+            <h2>A stock discrepancy shows why both sides matter.</h2>
+
+            <p>
+              Imagine a warehouse investigation finds a recurring shortage on
+              the same item. Several transactions appear unusual, and the team
+              needs to decide what should happen next.
+            </p>
+
+            <div class="scenario">
+              <div class="scenario-column">
+                <span class="scenario-label">AI CONTRIBUTION</span>
+
+                <div class="scenario-item">
+                  <span>01</span>
+                  <p>Summarise verified transaction findings.</p>
+                </div>
+
+                <div class="scenario-item">
+                  <span>02</span>
+                  <p>Group possible causes identified by the investigation.</p>
+                </div>
+
+                <div class="scenario-item">
+                  <span>03</span>
+                  <p>Draft a discrepancy report or escalation email.</p>
+                </div>
+
+                <div class="scenario-item">
+                  <span>04</span>
+                  <p>Create a checklist for follow-up actions.</p>
+                </div>
+              </div>
+
+              <div class="scenario-column human-column">
+                <span class="scenario-label">HUMAN JUDGMENT</span>
+
+                <div class="scenario-item">
+                  <span>01</span>
+                  <p>Decide whether the evidence is sufficient.</p>
+                </div>
+
+                <div class="scenario-item">
+                  <span>02</span>
+                  <p>Determine whether recounting or escalation is required.</p>
+                </div>
+
+                <div class="scenario-item">
+                  <span>03</span>
+                  <p>Consider staff, process and customer impact.</p>
+                </div>
+
+                <div class="scenario-item">
+                  <span>04</span>
+                  <p>Approve any stock adjustment or corrective action.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="scenario-rule">
+              <span>WHY THIS MATTERS</span>
+
+              <strong>
+                AI can make the investigation easier to understand. It should
+                not replace the investigation itself or the accountable person
+                making the final decision.
+              </strong>
+            </div>
+          </section>
+
+          <section id="delegation">
+            <div class="section-marker">04 / DELEGATION CHECK</div>
+
+            <h2>Before delegating a task, check what kind of judgment it needs.</h2>
+
+            <p>
+              Some tasks can be heavily assisted by AI. Others should use AI
+              only for a small supporting step. These questions help identify
+              the difference.
+            </p>
+
+            <div class="question-list">
+              {
+                delegationQuestions.map((question, index) => (
+                  <div class="question-row">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <p>{question}</p>
+                    <strong>?</strong>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="decision-box">
+              <span>SIMPLE RULE</span>
+
+              <p>
+                The more a task depends on accountability, consequence,
+                sensitive context or professional judgment, the less appropriate
+                it is to delegate the entire task to AI.
+              </p>
+            </div>
+          </section>
+
+          <section id="workflow">
+            <div class="section-marker">05 / WORKFLOW DESIGN</div>
+
+            <h2>Separate generation from approval.</h2>
+
+            <p>
+              One of the simplest ways to use AI responsibly is to separate the
+              step that creates an output from the step that approves or acts on
+              it.
+            </p>
+
+            <div class="workflow-table">
+              <div class="workflow-header">
+                <span>TASK</span>
+                <span>AI ROLE</span>
+                <span>HUMAN ROLE</span>
+              </div>
+
+              {
+                workflowExamples.map((item) => (
+                  <div class="workflow-row">
+                    <strong>{item.task}</strong>
+                    <p>{item.aiRole}</p>
+                    <p>{item.humanRole}</p>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="workflow-principle">
+              <div>
+                <span>01</span>
+                <strong>Generate</strong>
+                <p>AI creates or organises the first output.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>02</span>
+                <strong>Review</strong>
+                <p>A person checks facts, context and suitability.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>03</span>
+                <strong>Approve</strong>
+                <p>The responsible person decides whether to use it.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>04</span>
+                <strong>Act</strong>
+                <p>The approved result becomes part of real work.</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="takeaway">
+            <div class="section-marker">06 / PRACTICAL TAKEAWAY</div>
+
+            <h2>Use AI to extend judgment, not remove it.</h2>
+
+            <p>
+              AI is most valuable when it reduces repetitive information work
+              and gives people more time to focus on investigation, decisions,
+              communication and improvement.
+            </p>
+
+            <div class="takeaway-grid">
+              <div>
+                <span>AI IS STRONG AT</span>
+                <strong>Speed</strong>
+                <p>Drafting, organising, summarising and generating options.</p>
+              </div>
+
+              <div>
+                <span>PEOPLE ARE STRONG AT</span>
+                <strong>Judgment</strong>
+                <p>Context, responsibility, experience and real-world decisions.</p>
+              </div>
+
+              <div>
+                <span>THE BEST RESULT</span>
+                <strong>Combination</strong>
+                <p>AI assistance with accountable human review and action.</p>
+              </div>
+            </div>
+
+            <div class="completion-box">
+              <span class="completion-kicker">AI FUNDAMENTALS COMPLETE</span>
+
+              <h3>You now have the foundation.</h3>
+
+              <p>
+                You understand what generative AI does, where it is useful,
+                where it can fail and why human judgment remains essential. The
+                next learning path focuses on writing better instructions for
+                AI.
+              </p>
+
+              <a href="/learn/" class="button button-primary">
+                Back to Learning Paths
+              </a>
+            </div>
+          </section>
+
+          <section class="next-lesson">
+            <div>
+              <span class="next-label">NEXT LEARNING PATH</span>
+
+              <h2>Prompting Fundamentals</h2>
+
+              <p>
+                Learn how task definition, context, constraints and examples
+                improve the quality of AI output.
+              </p>
+            </div>
+
+            <span class="next-status">COMING NEXT →</span>
+          </section>
+        </main>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    overflow: hidden;
+  }
+
+  .article-hero {
+    padding: 92px 0 82px;
+    border-bottom: 1px solid var(--line);
+
+    background:
+      radial-gradient(
+        circle at 82% 20%,
+        rgba(183, 255, 74, 0.08),
+        transparent 27%
+      ),
+      radial-gradient(
+        circle at 14% 0%,
+        rgba(77, 226, 197, 0.055),
+        transparent 28%
+      );
+  }
+
+  .article-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 75px;
+    align-items: end;
+  }
+
+  .back-link {
+    color: var(--lime);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 28px;
+  }
+
+  .article-meta span {
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-heading h1 {
+    max-width: 900px;
+    margin-top: 22px;
+    font-size: clamp(3.5rem, 7vw, 6.6rem);
+    line-height: 0.94;
+    letter-spacing: -0.065em;
+  }
+
+  .article-heading h1 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .article-intro {
+    max-width: 760px;
+    margin-top: 27px;
+    color: var(--muted);
+    font-size: 1.04rem;
+    line-height: 1.8;
+  }
+
+  .lesson-panel {
+    overflow: hidden;
+    border: 1px solid rgba(183, 255, 74, 0.17);
+    border-radius: 21px;
+    background: var(--surface);
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .panel-content {
+    padding: 31px 26px 34px;
+  }
+
+  .panel-kicker {
+    display: block;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .panel-content strong {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.45rem;
+    line-height: 1.35;
+    letter-spacing: -0.035em;
+  }
+
+  .panel-content p {
+    margin-top: 17px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .panel-footer {
+    padding: 17px 20px;
+    border-top: 1px solid var(--line);
+    background: rgba(183, 255, 74, 0.03);
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-body-section {
+    padding: 88px 0 110px;
+  }
+
+  .article-layout {
+    display: grid;
+    grid-template-columns: 235px minmax(0, 800px);
+    gap: 78px;
+    justify-content: center;
+  }
+
+  .sidebar-box {
+    position: sticky;
+    top: 105px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+  }
+
+  .sidebar-title {
+    padding: 16px 0;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .sidebar-box a {
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  .sidebar-box a:hover {
+    color: var(--lime);
+  }
+
+  .article-content > section:not(:first-child) {
+    margin-top: 90px;
+  }
+
+  .section-marker {
+    color: var(--lime);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .article-content h2 {
+    max-width: 760px;
+    margin-top: 14px;
+    font-size: clamp(2.3rem, 5vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.052em;
+  }
+
+  .article-content > section > p {
+    max-width: 760px;
+    margin-top: 23px;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .concept-box,
+  .decision-box {
+    margin: 34px 0;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .concept-box span,
+  .decision-box span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .concept-box p,
+  .decision-box p {
+    margin-top: 12px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .judgment-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 35px;
+  }
+
+  .judgment-card {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .judgment-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 19px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .judgment-head > span {
+    color: var(--lime);
+    font-size: 0.63rem;
+    font-weight: 800;
+  }
+
+  .judgment-head h3 {
+    font-size: 1.05rem;
+  }
+
+  .role-block {
+    margin-top: 19px;
+  }
+
+  .role-block span {
+    color: var(--mint);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+  }
+
+  .role-block.human span {
+    color: var(--lime);
+  }
+
+  .role-block p {
+    margin-top: 7px;
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.65;
+  }
+
+  .scenario {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 35px;
+  }
+
+  .scenario-column {
+    padding: 25px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .scenario-label {
+    display: block;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--mint);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .human-column .scenario-label {
+    color: var(--lime);
+  }
+
+  .scenario-item {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 12px;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .scenario-item:last-child {
+    border-bottom: 0;
+  }
+
+  .scenario-item span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+  }
+
+  .scenario-item p {
+    color: var(--muted);
+    font-size: 0.76rem;
+    line-height: 1.6;
+  }
+
+  .scenario-rule {
+    margin-top: 14px;
+    padding: 25px;
+    border: 1px solid rgba(183, 255, 74, 0.17);
+    border-radius: 15px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .scenario-rule span {
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .scenario-rule strong {
+    display: block;
+    margin-top: 10px;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .question-list {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .question-row {
+    display: grid;
+    grid-template-columns: 45px 1fr 30px;
+    gap: 15px;
+    align-items: center;
+    padding: 17px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .question-row span,
+  .question-row strong {
+    color: var(--lime);
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .question-row p {
+    font-size: 0.85rem;
+    line-height: 1.55;
+  }
+
+  .workflow-table {
+    margin-top: 35px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+  }
+
+  .workflow-header,
+  .workflow-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    padding: 17px 20px;
+  }
+
+  .workflow-header {
+    background: rgba(183, 255, 74, 0.035);
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+  }
+
+  .workflow-row {
+    border-top: 1px solid var(--line);
+  }
+
+  .workflow-row strong {
+    font-size: 0.77rem;
+    line-height: 1.5;
+  }
+
+  .workflow-row p {
+    color: var(--muted);
+    font-size: 0.73rem;
+    line-height: 1.55;
+  }
+
+  .workflow-principle {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-top: 30px;
+    padding: 27px 22px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .workflow-principle > div span {
+    display: block;
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .workflow-principle strong {
+    display: block;
+    margin-top: 13px;
+    font-size: 0.82rem;
+  }
+
+  .workflow-principle p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.67rem;
+    line-height: 1.5;
+  }
+
+  .flow-arrow {
+    color: var(--mint);
+  }
+
+  .takeaway-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 35px;
+  }
+
+  .takeaway-grid > div {
+    padding: 23px;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background: var(--surface);
+  }
+
+  .takeaway-grid span {
+    color: var(--lime);
+    font-size: 0.57rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+  }
+
+  .takeaway-grid strong {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.05rem;
+  }
+
+  .takeaway-grid p {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.6;
+  }
+
+  .completion-box {
+    margin-top: 40px;
+    padding: 32px;
+    border: 1px solid rgba(183, 255, 74, 0.2);
+    border-radius: 19px;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(183, 255, 74, 0.05),
+        transparent 50%
+      ),
+      var(--surface);
+  }
+
+  .completion-kicker,
+  .next-label {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .completion-box h3 {
+    margin-top: 12px;
+    font-size: 1.5rem;
+  }
+
+  .completion-box p {
+    max-width: 600px;
+    margin-top: 11px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .completion-box .button {
+    margin-top: 23px;
+  }
+
+  .next-lesson {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    padding-top: 43px;
+    border-top: 1px solid var(--line);
+  }
+
+  .next-lesson h2 {
+    margin-top: 11px;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+
+  .next-lesson p {
+    max-width: 540px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.79rem;
+    line-height: 1.65;
+  }
+
+  .next-status {
+    flex-shrink: 0;
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 1000px) {
+    .article-hero-grid,
+    .article-layout {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .article-sidebar {
+      display: none;
+    }
+
+    .takeaway-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .workflow-principle {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .flow-arrow {
+      display: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .article-hero {
+      padding: 68px 0 60px;
+    }
+
+    .article-body-section {
+      padding: 65px 0 80px;
+    }
+
+    .judgment-grid,
+    .scenario {
+      grid-template-columns: 1fr;
+    }
+
+    .workflow-header {
+      display: none;
+    }
+
+    .workflow-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .workflow-row p {
+      padding-left: 12px;
+      border-left: 1px solid var(--line);
+    }
+
+    .workflow-principle {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .workflow-principle > div {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .workflow-principle > div:last-of-type {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .question-row {
+      grid-template-columns: 35px 1fr;
+    }
+
+    .question-row strong {
+      display: none;
+    }
+
+    .next-lesson {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

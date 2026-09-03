@@ -1,0 +1,1102 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const failureModes = [
+  {
+    number: "01",
+    title: "Confidently wrong answers",
+    text:
+      "AI can produce an answer that sounds clear and convincing even when some of the information is incorrect, invented or unsupported.",
+    signal: "Plausible ≠ verified",
+  },
+  {
+    number: "02",
+    title: "Missing context",
+    text:
+      "If important details are missing from your prompt, AI may fill the gaps with assumptions that do not match your actual situation.",
+    signal: "Missing input → weaker output",
+  },
+  {
+    number: "03",
+    title: "Outdated information",
+    text:
+      "An AI system may not automatically have the latest prices, policies, regulations, product details, news or internal company information.",
+    signal: "Current facts need current sources",
+  },
+  {
+    number: "04",
+    title: "Calculation & logic errors",
+    text:
+      "AI can make mistakes in arithmetic, comparisons, multi-step reasoning or data interpretation. Important figures should be checked independently.",
+    signal: "Recalculate critical numbers",
+  },
+  {
+    number: "05",
+    title: "Incomplete or biased output",
+    text:
+      "An answer can reflect incomplete information, patterns in its training data or the way a question was framed, leaving out important perspectives.",
+    signal: "Check what may be missing",
+  },
+  {
+    number: "06",
+    title: "Following a weak instruction",
+    text:
+      "AI may produce poor results simply because the task, audience, constraints or expected output were not clearly defined.",
+    signal: "Better context improves control",
+  },
+];
+
+const reviewQuestions = [
+  "Which claims in this output need verification?",
+  "Are names, dates, numbers and references correct?",
+  "Did AI assume anything I did not provide?",
+  "Is important context missing from the answer?",
+  "Would an error here affect money, safety, customers or operations?",
+  "Who should approve this before it is used?",
+];
+
+const riskLevels = [
+  {
+    level: "LOWER RISK",
+    title: "Brainstorming ideas",
+    text:
+      "Generating possible names, topics, questions or early concepts where a wrong suggestion causes little harm.",
+    review: "Quick human review",
+  },
+  {
+    level: "MEDIUM RISK",
+    title: "Workplace drafts",
+    text:
+      "Emails, reports, SOP drafts and summaries that may influence other people but can be reviewed before use.",
+    review: "Careful review before sending",
+  },
+  {
+    level: "HIGHER RISK",
+    title: "Decisions & critical facts",
+    text:
+      "Financial, legal, medical, safety, compliance or operational decisions where incorrect information could cause serious consequences.",
+    review: "Verify with authoritative sources",
+  },
+];
+---
+
+<BaseLayout
+  title="Where AI Can Go Wrong | KRIYANO"
+  description="Learn where generative AI can produce incorrect, incomplete or misleading results and how to review AI output before using it for real work."
+>
+  <article class="article-page">
+    <header class="article-hero">
+      <div class="container article-hero-grid">
+        <div class="article-heading">
+          <a href="/learn/" class="back-link">← LEARN</a>
+
+          <div class="article-meta">
+            <span>AI FUNDAMENTALS</span>
+            <span>03</span>
+            <span>BEGINNER</span>
+          </div>
+
+          <h1>
+            Where AI Can
+            <span>Go Wrong.</span>
+          </h1>
+
+          <p class="article-intro">
+            Generative AI can produce useful work quickly, but a polished answer
+            is not proof that the answer is correct. Understanding how AI can
+            fail helps you decide what to trust, what to check and when human
+            judgment must take over.
+          </p>
+        </div>
+
+        <aside class="lesson-panel">
+          <div class="panel-header">
+            <span>LESSON 03</span>
+            <span>AI FUNDAMENTALS</span>
+          </div>
+
+          <div class="panel-content">
+            <span class="panel-kicker">THE CORE RISK</span>
+
+            <strong>
+              AI can sound confident without actually knowing that its answer is
+              correct.
+            </strong>
+
+            <p>
+              Treat important AI output as something to review—not automatically
+              as a verified source of truth.
+            </p>
+          </div>
+
+          <div class="panel-footer">
+            <span>GENERATE → CHECK → DECIDE</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section class="article-body-section">
+      <div class="container article-layout">
+        <aside class="article-sidebar">
+          <div class="sidebar-box">
+            <span class="sidebar-title">IN THIS GUIDE</span>
+
+            <a href="#confidence">Confidence is not accuracy</a>
+            <a href="#failure-modes">Six common failure modes</a>
+            <a href="#inventory-example">A practical example</a>
+            <a href="#risk">Match review to risk</a>
+            <a href="#review">Review AI output</a>
+            <a href="#takeaway">The practical takeaway</a>
+          </div>
+        </aside>
+
+        <main class="article-content">
+          <section id="confidence">
+            <div class="section-marker">01 / CONFIDENCE VS ACCURACY</div>
+
+            <h2>A convincing answer can still be wrong.</h2>
+
+            <p>
+              Generative AI is designed to produce useful responses from the
+              information and patterns available to it. That means an answer can
+              be well written, detailed and professionally formatted while still
+              containing incorrect information.
+            </p>
+
+            <p>
+              This is especially important at work because presentation can
+              create a false sense of reliability. A neatly structured report,
+              calculation or explanation may look ready to use before its facts
+              have actually been checked.
+            </p>
+
+            <div class="concept-box">
+              <span>IMPORTANT DISTINCTION</span>
+
+              <p>
+                Fluency tells you that AI generated a coherent response. It does
+                not tell you that every claim inside that response has been
+                verified.
+              </p>
+            </div>
+          </section>
+
+          <section id="failure-modes">
+            <div class="section-marker">02 / COMMON FAILURE MODES</div>
+
+            <h2>Six ways an AI response can become unreliable.</h2>
+
+            <p>
+              Not every mistake has the same cause. Recognising the type of
+              failure makes it easier to decide how the output should be checked
+              or improved.
+            </p>
+
+            <div class="failure-grid">
+              {
+                failureModes.map((item) => (
+                  <article class="failure-card">
+                    <span class="failure-number">{item.number}</span>
+
+                    <h3>{item.title}</h3>
+
+                    <p>{item.text}</p>
+
+                    <div class="failure-signal">{item.signal}</div>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="inventory-example">
+            <div class="section-marker">03 / REAL-WORK EXAMPLE</div>
+
+            <h2>AI should not invent the reason for an inventory variance.</h2>
+
+            <p>
+              Imagine the system shows 500 units of an item, while a physical
+              count finds only 476 units. There is a shortage of 24 units.
+            </p>
+
+            <p>
+              If you simply ask AI, “Why are 24 units missing?”, it may suggest
+              several possible causes: receiving errors, incorrect picking,
+              unrecorded damage, transfer mistakes or theft.
+            </p>
+
+            <div class="comparison">
+              <div class="comparison-card wrong">
+                <span>✕ WRONG APPROACH</span>
+
+                <h3>Treat the suggestion as the cause.</h3>
+
+                <p>
+                  “AI says the shortage was caused by an unrecorded outbound
+                  transaction.”
+                </p>
+
+                <small>
+                  AI has not inspected your warehouse, WMS transactions or
+                  physical stock.
+                </small>
+              </div>
+
+              <div class="comparison-card right">
+                <span>✓ BETTER APPROACH</span>
+
+                <h3>Use real records to establish the cause.</h3>
+
+                <p>
+                  Recount the stock, review receiving and outbound transactions,
+                  transfers, adjustments, locations and other relevant records.
+                </p>
+
+                <small>
+                  Once the evidence is collected, AI can help organise and
+                  communicate the findings.
+                </small>
+              </div>
+            </div>
+
+            <div class="evidence-flow">
+              <div>
+                <span>01</span>
+                <strong>Evidence</strong>
+                <p>Collect real operational records.</p>
+              </div>
+
+              <span>→</span>
+
+              <div>
+                <span>02</span>
+                <strong>Investigation</strong>
+                <p>Determine what actually happened.</p>
+              </div>
+
+              <span>→</span>
+
+              <div>
+                <span>03</span>
+                <strong>AI assistance</strong>
+                <p>Structure or summarise verified findings.</p>
+              </div>
+
+              <span>→</span>
+
+              <div>
+                <span>04</span>
+                <strong>Human approval</strong>
+                <p>Review before taking action.</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="risk">
+            <div class="section-marker">04 / RISK LEVEL</div>
+
+            <h2>The amount of checking should match the consequence of error.</h2>
+
+            <p>
+              Not every AI response needs the same level of verification. A
+              brainstorming mistake and an incorrect compliance instruction do
+              not carry the same consequences.
+            </p>
+
+            <div class="risk-grid">
+              {
+                riskLevels.map((item, index) => (
+                  <article class="risk-card">
+                    <div class="risk-top">
+                      <span>{String(index + 1).padStart(2, "0")}</span>
+                      <strong>{item.level}</strong>
+                    </div>
+
+                    <h3>{item.title}</h3>
+
+                    <p>{item.text}</p>
+
+                    <div class="review-level">{item.review}</div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="risk-rule">
+              <span>GENERAL RULE</span>
+
+              <strong>
+                The greater the consequence of being wrong, the stronger the
+                verification should be.
+              </strong>
+            </div>
+          </section>
+
+          <section id="review">
+            <div class="section-marker">05 / HUMAN REVIEW</div>
+
+            <h2>Ask questions about the output before you use it.</h2>
+
+            <p>
+              Reviewing AI output does not mean reading it once and deciding
+              that it “looks good.” Focus your review on the parts most likely
+              to create problems.
+            </p>
+
+            <div class="question-list">
+              {
+                reviewQuestions.map((question, index) => (
+                  <div class="question-row">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <p>{question}</p>
+                    <strong>CHECK</strong>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="verification-box">
+              <div>
+                <span class="verification-kicker">VERIFY AGAINST</span>
+                <strong>Reliable evidence</strong>
+              </div>
+
+              <div class="verification-items">
+                <span>Official documents</span>
+                <span>Company systems</span>
+                <span>Original records</span>
+                <span>Authoritative sources</span>
+                <span>Qualified professionals</span>
+              </div>
+            </div>
+          </section>
+
+          <section id="takeaway">
+            <div class="section-marker">06 / PRACTICAL TAKEAWAY</div>
+
+            <h2>Use AI as an assistant, not automatic proof.</h2>
+
+            <p>
+              The goal is not to distrust every AI response. The goal is to
+              understand what kind of confidence is justified for the task in
+              front of you.
+            </p>
+
+            <div class="takeaway-flow">
+              <div>
+                <span>01</span>
+                <strong>Generate</strong>
+                <p>Use AI to produce useful work.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>02</span>
+                <strong>Question</strong>
+                <p>Identify assumptions and claims.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>03</span>
+                <strong>Verify</strong>
+                <p>Check important facts independently.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>04</span>
+                <strong>Decide</strong>
+                <p>Apply human judgment before action.</p>
+              </div>
+            </div>
+
+            <div class="tool-callout">
+              <div>
+                <span class="tool-kicker">BETTER INPUTS HELP</span>
+
+                <h3>Give AI clearer context and constraints.</h3>
+
+                <p>
+                  Better prompting cannot eliminate every AI error, but clear
+                  context, requirements and output instructions can reduce
+                  avoidable misunderstandings.
+                </p>
+              </div>
+
+              <a href="/tools/prompt-builder/" class="button button-primary">
+                Open Prompt Builder
+              </a>
+            </div>
+          </section>
+
+          <section class="next-lesson">
+            <div>
+              <span class="next-label">NEXT LESSON</span>
+
+              <h2>AI vs Human Judgment</h2>
+
+              <p>
+                Learn where AI assistance ends and human experience,
+                responsibility and judgment become essential.
+              </p>
+            </div>
+
+            <a
+  href="/learn/ai-fundamentals/ai-vs-human-judgment/"
+  class="next-status"
+>
+  CONTINUE →
+</a>
+          </section>
+        </main>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    overflow: hidden;
+  }
+
+  .article-hero {
+    padding: 92px 0 82px;
+    border-bottom: 1px solid var(--line);
+
+    background:
+      radial-gradient(
+        circle at 82% 20%,
+        rgba(183, 255, 74, 0.08),
+        transparent 27%
+      ),
+      radial-gradient(
+        circle at 14% 0%,
+        rgba(77, 226, 197, 0.055),
+        transparent 28%
+      );
+  }
+
+  .article-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 75px;
+    align-items: end;
+  }
+
+  .back-link {
+    color: var(--lime);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 28px;
+  }
+
+  .article-meta span {
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-heading h1 {
+    max-width: 900px;
+    margin-top: 22px;
+    font-size: clamp(3.5rem, 7vw, 6.6rem);
+    line-height: 0.94;
+    letter-spacing: -0.065em;
+  }
+
+  .article-heading h1 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .article-intro {
+    max-width: 760px;
+    margin-top: 27px;
+    color: var(--muted);
+    font-size: 1.04rem;
+    line-height: 1.8;
+  }
+
+  .lesson-panel {
+    overflow: hidden;
+    border: 1px solid rgba(183, 255, 74, 0.17);
+    border-radius: 21px;
+    background: var(--surface);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .panel-content {
+    padding: 31px 26px 34px;
+  }
+
+  .panel-kicker {
+    display: block;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .panel-content strong {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.45rem;
+    line-height: 1.35;
+    letter-spacing: -0.035em;
+  }
+
+  .panel-content p {
+    margin-top: 17px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .panel-footer {
+    padding: 17px 20px;
+    border-top: 1px solid var(--line);
+    background: rgba(183, 255, 74, 0.03);
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-body-section {
+    padding: 88px 0 110px;
+  }
+
+  .article-layout {
+    display: grid;
+    grid-template-columns: 235px minmax(0, 800px);
+    gap: 78px;
+    justify-content: center;
+  }
+
+  .sidebar-box {
+    position: sticky;
+    top: 105px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+  }
+
+  .sidebar-title {
+    padding: 16px 0;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .sidebar-box a {
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  .sidebar-box a:hover {
+    color: var(--lime);
+  }
+
+  .article-content > section:not(:first-child) {
+    margin-top: 90px;
+  }
+
+  .section-marker {
+    color: var(--lime);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .article-content h2 {
+    max-width: 760px;
+    margin-top: 14px;
+    font-size: clamp(2.3rem, 5vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.052em;
+  }
+
+  .article-content > section > p {
+    max-width: 760px;
+    margin-top: 23px;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .concept-box {
+    margin: 34px 0;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .concept-box span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .concept-box p {
+    margin-top: 12px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .failure-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 35px;
+  }
+
+  .failure-card {
+    min-height: 255px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .failure-number {
+    color: var(--lime);
+    font-size: 0.63rem;
+    font-weight: 800;
+  }
+
+  .failure-card h3 {
+    margin-top: 34px;
+    font-size: 1.08rem;
+    line-height: 1.3;
+  }
+
+  .failure-card p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.7;
+  }
+
+  .failure-signal {
+    margin-top: 19px;
+    padding-top: 13px;
+    border-top: 1px solid var(--line);
+    color: var(--mint);
+    font-size: 0.66rem;
+    font-weight: 700;
+  }
+
+  .comparison {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 35px;
+  }
+
+  .comparison-card {
+    padding: 25px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .comparison-card > span {
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .comparison-card.wrong > span {
+    color: #ff8e8e;
+  }
+
+  .comparison-card.right > span {
+    color: var(--lime);
+  }
+
+  .comparison-card h3 {
+    margin-top: 26px;
+    font-size: 1.08rem;
+    line-height: 1.35;
+  }
+
+  .comparison-card p {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+
+  .comparison-card small {
+    display: block;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.67rem;
+    line-height: 1.6;
+  }
+
+  .evidence-flow,
+  .takeaway-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-top: 30px;
+    padding: 27px 22px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .evidence-flow > div span,
+  .takeaway-flow > div span {
+    display: block;
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .evidence-flow > div strong,
+  .takeaway-flow > div strong {
+    display: block;
+    margin-top: 13px;
+    font-size: 0.82rem;
+  }
+
+  .evidence-flow > div p,
+  .takeaway-flow > div p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.67rem;
+    line-height: 1.5;
+  }
+
+  .evidence-flow > span,
+  .flow-arrow {
+    color: var(--mint);
+    font-size: 0.8rem;
+  }
+
+  .risk-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
+    margin-top: 35px;
+  }
+
+  .risk-card {
+    padding: 23px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .risk-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .risk-top span,
+  .risk-top strong {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+  }
+
+  .risk-card h3 {
+    margin-top: 31px;
+    font-size: 1rem;
+  }
+
+  .risk-card p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.65;
+  }
+
+  .review-level {
+    margin-top: 20px;
+    padding-top: 13px;
+    border-top: 1px solid var(--line);
+    color: var(--mint);
+    font-size: 0.64rem;
+    font-weight: 700;
+  }
+
+  .risk-rule {
+    margin-top: 14px;
+    padding: 24px;
+    border: 1px solid rgba(183, 255, 74, 0.17);
+    border-radius: 15px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .risk-rule span {
+    display: block;
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .risk-rule strong {
+    display: block;
+    margin-top: 10px;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .question-list {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .question-row {
+    display: grid;
+    grid-template-columns: 45px 1fr auto;
+    gap: 15px;
+    align-items: center;
+    padding: 17px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .question-row > span,
+  .question-row > strong {
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .question-row p {
+    font-size: 0.85rem;
+    line-height: 1.55;
+  }
+
+  .verification-box {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 30px;
+    margin-top: 30px;
+    padding: 26px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .verification-kicker {
+    display: block;
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .verification-box strong {
+    display: block;
+    margin-top: 9px;
+    font-size: 1.05rem;
+  }
+
+  .verification-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .verification-items span {
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    color: var(--muted);
+    font-size: 0.66rem;
+  }
+
+  .tool-callout {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    margin-top: 40px;
+    padding: 32px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 19px;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(183, 255, 74, 0.04),
+        transparent 50%
+      ),
+      var(--surface);
+  }
+
+  .tool-kicker,
+  .next-label {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .tool-callout h3 {
+    margin-top: 11px;
+    font-size: 1.35rem;
+  }
+
+  .tool-callout p {
+    max-width: 510px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+
+  .tool-callout .button {
+    flex-shrink: 0;
+  }
+
+  .next-lesson {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    padding-top: 43px;
+    border-top: 1px solid var(--line);
+  }
+
+  .next-lesson h2 {
+    margin-top: 11px;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+
+  .next-lesson p {
+    max-width: 540px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.79rem;
+    line-height: 1.65;
+  }
+
+  .next-status {
+    flex-shrink: 0;
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+  
+  .next-status:hover {
+  color: var(--lime);
+}
+
+  @media (max-width: 1000px) {
+    .article-hero-grid,
+    .article-layout {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .article-sidebar {
+      display: none;
+    }
+
+    .risk-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .evidence-flow,
+    .takeaway-flow {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .evidence-flow > span,
+    .flow-arrow {
+      display: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .article-hero {
+      padding: 68px 0 60px;
+    }
+
+    .article-body-section {
+      padding: 65px 0 80px;
+    }
+
+    .failure-grid,
+    .comparison,
+    .verification-box {
+      grid-template-columns: 1fr;
+    }
+
+    .evidence-flow,
+    .takeaway-flow {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .evidence-flow > div,
+    .takeaway-flow > div {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .evidence-flow > div:last-of-type,
+    .takeaway-flow > div:last-of-type {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .question-row {
+      grid-template-columns: 35px 1fr;
+    }
+
+    .question-row > strong {
+      display: none;
+    }
+
+    .tool-callout,
+    .next-lesson {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
