@@ -1,0 +1,253 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Contact | KRIYANO"
+  description="Contact KRIYANO for questions, feedback, partnerships or general enquiries."
+>
+  <section class="contact-hero">
+    <div class="container contact-grid">
+      <div>
+        <div class="section-kicker">Contact</div>
+
+        <h1>Let’s talk about useful AI.</h1>
+
+        <p class="contact-intro">
+          Have a question, suggestion, partnership idea or feedback about KRIYANO?
+          Get in touch and let us know how we can help.
+        </p>
+      </div>
+
+      <div class="contact-card">
+        <span class="contact-label">Email</span>
+
+        <a href="mailto:contact@kriyano.com" class="contact-email">
+  contact@kriyano.com
+</a>
+
+<p>
+  For general enquiries, feedback, business enquiries or partnership
+  discussions.
+</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-options">
+        <article class="contact-option">
+          <span>01</span>
+          <h2>General enquiries</h2>
+          <p>
+            Questions about KRIYANO, its tools, prompts, guides or website
+            content.
+          </p>
+        </article>
+
+        <article class="contact-option">
+          <span>02</span>
+          <h2>Feedback</h2>
+          <p>
+            Found something that could be improved or have an idea for a new
+            tool, prompt or resource? We’d like to hear it.
+          </p>
+        </article>
+
+        <article class="contact-option">
+          <span>03</span>
+          <h2>Business & partnerships</h2>
+          <p>
+            For collaboration, affiliate, sponsorship or other business-related
+            enquiries.
+          </p>
+        </article>
+      </div>
+
+      <div class="contact-note">
+        <div class="section-kicker">Please note</div>
+
+        <p>
+          KRIYANO does not currently provide individual legal, medical,
+          financial or other regulated professional advice through email.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-hero {
+    padding: 105px 0 90px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(
+        circle at 82% 22%,
+        rgba(77, 226, 197, 0.1),
+        transparent 28%
+      ),
+      var(--bg);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(340px, 0.9fr);
+    gap: 80px;
+    align-items: center;
+  }
+
+  .contact-hero h1 {
+    max-width: 760px;
+    margin-top: 16px;
+    font-size: clamp(3.2rem, 7vw, 6rem);
+    line-height: 0.94;
+    letter-spacing: -0.06em;
+  }
+
+  .contact-intro {
+    max-width: 680px;
+    margin-top: 26px;
+    color: var(--muted);
+    font-size: 1.08rem;
+    line-height: 1.75;
+  }
+
+  .contact-card {
+    padding: 34px;
+    border: 1px solid rgba(183, 255, 74, 0.16);
+    border-radius: 22px;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.035),
+        transparent
+      ),
+      var(--surface);
+  }
+
+  .contact-label {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--mint);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .contact-email {
+    display: inline-block;
+    color: var(--lime);
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    text-decoration: none;
+  }
+
+  .contact-email:hover {
+    text-decoration: underline;
+  }
+
+  .contact-card p {
+    margin-top: 18px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .contact-section {
+    padding: 90px 0 110px;
+  }
+
+  .contact-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .contact-option {
+    min-height: 240px;
+    padding: 28px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--surface);
+  }
+
+  .contact-option > span {
+    color: var(--lime);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+  }
+
+  .contact-option h2 {
+    margin-top: 36px;
+    font-size: 1.35rem;
+  }
+
+  .contact-option p {
+    margin-top: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .contact-note {
+    max-width: 760px;
+    margin-top: 70px;
+    padding-top: 34px;
+    border-top: 1px solid var(--line);
+  }
+
+  .contact-note p {
+    margin-top: 14px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  @media (max-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 44px;
+    }
+
+    .contact-options {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .contact-hero {
+      padding: 64px 0 58px;
+    }
+
+    .contact-hero h1 {
+      font-size: clamp(3rem, 13vw, 4.3rem);
+    }
+
+    .contact-intro {
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    .contact-card {
+      padding: 26px;
+    }
+
+    .contact-section {
+      padding: 60px 0 78px;
+    }
+
+    .contact-option {
+      min-height: auto;
+      padding: 24px;
+    }
+
+    .contact-option h2 {
+      margin-top: 28px;
+    }
+
+    .contact-note {
+      margin-top: 52px;
+    }
+  }
+</style>

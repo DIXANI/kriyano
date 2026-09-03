@@ -40,10 +40,23 @@ const categories = [
 ];
 
 const tools = [
-  "Prompt Builder",
-  "Business Email Builder",
-  "SOP Prompt Builder",
-  "Image Prompt Builder",
+  {
+    name: "Prompt Builder",
+    status: "Available now",
+    href: "/tools/prompt-builder/",
+  },
+  {
+    name: "Business Email Builder",
+    status: "Coming soon",
+  },
+  {
+    name: "SOP Prompt Builder",
+    status: "Coming soon",
+  },
+  {
+    name: "Image Prompt Builder",
+    status: "Coming soon",
+  },
 ];
 ---
 
@@ -203,15 +216,26 @@ const tools = [
       </div>
 
       <div class="tool-stack">
-        {
-          tools.map((tool, index) => (
-            <div class="tool-item">
-              <span>{String(index + 1).padStart(2, "0")} / {tool}</span>
-              <span>Coming soon</span>
-            </div>
-          ))
-        }
-      </div>
+  {
+    tools.map((tool, index) =>
+      tool.href ? (
+        <a href={tool.href} class="tool-item">
+          <span>
+            {String(index + 1).padStart(2, "0")} / {tool.name}
+          </span>
+          <span>{tool.status}</span>
+        </a>
+      ) : (
+        <div class="tool-item">
+          <span>
+            {String(index + 1).padStart(2, "0")} / {tool.name}
+          </span>
+          <span>{tool.status}</span>
+        </div>
+      )
+    )
+  }
+</div>
     </div>
   </section>
 
@@ -757,9 +781,151 @@ const tools = [
   }
 
   @media (max-width: 760px) {
-    .hero {
-      padding: 75px 0;
-    }
+  /* HERO */
+  .hero {
+    padding: 52px 0 58px;
+  }
+
+  .hero-grid {
+    gap: 42px;
+  }
+
+  .eyebrow {
+    margin-bottom: 18px;
+    font-size: 0.72rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.2rem, 15vw, 4.6rem);
+    line-height: 0.94;
+  }
+
+  .hero-description {
+    margin-top: 22px;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .hero-actions {
+    margin-top: 26px;
+    gap: 10px;
+  }
+
+  /* WORKSPACE CONSOLE */
+  .console {
+    min-height: auto;
+    border-radius: 20px;
+  }
+
+  .console-header {
+    height: 48px;
+    padding: 0 16px;
+  }
+
+  .console-body {
+    padding: 20px;
+  }
+
+  .prompt-box {
+    padding: 16px;
+    font-size: 0.86rem;
+    line-height: 1.6;
+  }
+
+  .workflow {
+    margin-top: 18px;
+    gap: 9px;
+  }
+
+  .workflow-row {
+    padding: 12px;
+  }
+
+  .console-footer {
+    margin-top: 18px;
+    padding-top: 15px;
+  }
+
+  /* SIGNAL STRIP */
+  .signal {
+    padding: 20px 0;
+  }
+
+  .signal strong {
+    margin-bottom: 4px;
+  }
+
+  /* HOMEPAGE SECTIONS */
+  .section {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .section-head {
+    margin-bottom: 32px;
+  }
+
+  .section-head h2 {
+    font-size: clamp(2.5rem, 12vw, 3.5rem);
+  }
+
+  /* BENTO CARDS */
+  .bento-grid {
+    gap: 12px;
+  }
+
+  .feature,
+  .feature-large,
+  .feature-small,
+  .feature-medium {
+    min-height: 220px;
+    padding: 22px;
+  }
+
+  .feature h3 {
+    margin-top: 28px;
+  }
+
+  /* TOOLS */
+  .tools-row {
+    gap: 38px;
+  }
+
+  .tools-copy h2 {
+    font-size: clamp(2.5rem, 12vw, 3.5rem);
+  }
+
+  .tool-item {
+    padding: 16px;
+  }
+
+  /* PHILOSOPHY */
+  .philosophy-grid {
+    gap: 38px;
+  }
+
+  .big-statement {
+    font-size: clamp(3rem, 14vw, 4.5rem);
+  }
+
+  .step {
+    padding: 19px 0;
+  }
+
+  /* FINAL CTA */
+  .cta-wrap {
+    padding-bottom: 64px;
+  }
+
+  .cta {
+    padding: 38px 24px;
+    border-radius: 22px;
+  }
+
+  .cta h2 {
+    font-size: clamp(2.5rem, 12vw, 3.7rem);
+  }
+}
 
     .console {
       min-height: auto;
@@ -771,9 +937,120 @@ const tools = [
   }
 
   @media (max-width: 520px) {
-    .signal-grid {
-      grid-template-columns: 1fr;
-    }
+  /* Keep the four signals compact on phones */
+  .signal-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .signal {
+    padding: 20px 16px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .signal:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .signal:nth-child(3),
+  .signal:nth-child(4) {
+    border-bottom: 0;
+  }
+
+  .signal strong {
+    font-size: 0.9rem;
+  }
+
+  .signal span {
+    font-size: 0.75rem;
+    line-height: 1.45;
+  }
+
+  /* Extra compact workspace for phones */
+.console-header {
+  height: 44px;
+  padding: 0 14px;
+  font-size: 0.68rem;
+}
+
+.console-body {
+  padding: 16px;
+}
+
+.console-label {
+  margin-bottom: 9px;
+}
+
+.prompt-box {
+  padding: 14px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.workflow {
+  margin-top: 14px;
+  gap: 8px;
+}
+
+.workflow-row {
+  grid-template-columns: 28px 1fr auto;
+  gap: 10px;
+  padding: 11px 12px;
+}
+
+.workflow-number {
+  width: 28px;
+  height: 28px;
+}
+
+.workflow-text strong {
+  font-size: 0.8rem;
+}
+
+.workflow-text span {
+  font-size: 0.69rem;
+}
+
+.workflow-status {
+  grid-column: auto;
+  font-size: 0.65rem;
+}
+
+.console-footer {
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 14px;
+  padding-top: 13px;
+  font-size: 0.66rem;
+}
+
+  /* Stack hero buttons on very narrow phones */
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Compact workflow cards */
+  .workflow-row {
+    grid-template-columns: 30px 1fr;
+  }
+
+  .workflow-status {
+    grid-column: 2;
+  }
+
+  /* Prevent footer text inside console feeling cramped */
+  .console-footer {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
 
     .signal {
       border-right: 0;
