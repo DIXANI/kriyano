@@ -1,0 +1,1182 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const goodCandidates = [
+  {
+    number: "01",
+    title: "Drafting",
+    text:
+      "Creating a first version of emails, reports, instructions, summaries or other routine workplace content.",
+  },
+  {
+    number: "02",
+    title: "Summarising",
+    text:
+      "Reducing long information into key points, actions, decisions or structured notes.",
+  },
+  {
+    number: "03",
+    title: "Organising",
+    text:
+      "Turning unstructured information into categories, checklists, tables, workflows or clearer structures.",
+  },
+  {
+    number: "04",
+    title: "Rewriting",
+    text:
+      "Improving clarity, tone, grammar, length or readability while preserving the intended meaning.",
+  },
+  {
+    number: "05",
+    title: "Brainstorming",
+    text:
+      "Generating options, questions, approaches or starting ideas that a person can evaluate.",
+  },
+  {
+    number: "06",
+    title: "Pattern exploration",
+    text:
+      "Helping you inspect provided information for possible themes, inconsistencies or areas that deserve further investigation.",
+  },
+];
+
+const suitabilityQuestions = [
+  {
+    label: "TASK",
+    question: "Can the task be clearly described?",
+    explanation:
+      "If you cannot explain what a good result looks like, it will be difficult to direct and evaluate AI.",
+  },
+  {
+    label: "INPUT",
+    question: "Can you provide the necessary information?",
+    explanation:
+      "AI performs better when the relevant facts and context can be supplied without exposing inappropriate information.",
+  },
+  {
+    label: "REVIEW",
+    question: "Can a person check the result?",
+    explanation:
+      "A task is safer to delegate when someone can verify important facts, calculations, recommendations or conclusions.",
+  },
+  {
+    label: "RISK",
+    question: "What happens if the answer is wrong?",
+    explanation:
+      "The greater the consequence of an error, the stronger the human review and controls should be.",
+  },
+  {
+    label: "VALUE",
+    question: "Will AI actually save useful time?",
+    explanation:
+      "Using AI is not automatically efficient. Consider whether prompting, correcting and checking will take less effort than doing the task directly.",
+  },
+];
+
+const poorFits = [
+  {
+    title: "Final approval",
+    text:
+      "AI can help prepare information, but responsibility for important approvals should remain with an authorised person.",
+  },
+  {
+    title: "Unsupported factual decisions",
+    text:
+      "Do not ask AI to decide what happened when the necessary evidence is unavailable.",
+  },
+  {
+    title: "High-stakes judgment",
+    text:
+      "Tasks involving significant legal, financial, safety, employment or operational consequences require appropriate human expertise and review.",
+  },
+  {
+    title: "Actions requiring authority",
+    text:
+      "Generating a recommendation is different from having the authority to approve, reject or execute it.",
+  },
+];
+
+const taskExamples = [
+  {
+    task: "Draft a supplier follow-up email",
+    suitability: "GOOD CANDIDATE",
+    reason:
+      "The task is clear, the facts can be supplied and a person can review the message before sending.",
+  },
+  {
+    task: "Summarise a warehouse meeting",
+    suitability: "GOOD CANDIDATE",
+    reason:
+      "AI can structure provided notes into decisions, issues and action items for human review.",
+  },
+  {
+    task: "Suggest checks for a stock discrepancy",
+    suitability: "ASSIST WITH REVIEW",
+    reason:
+      "AI can suggest investigation areas, but it should not invent or confirm the root cause without evidence.",
+  },
+  {
+    task: "Approve an inventory adjustment",
+    suitability: "HUMAN DECISION",
+    reason:
+      "AI may help prepare the supporting information, but approval belongs to the authorised person following the organisation's controls.",
+  },
+];
+---
+
+<BaseLayout
+  title="Choosing Tasks for AI | KRIYANO"
+  description="Learn how to decide which workplace tasks are suitable for AI, where human review is essential, and whether AI will genuinely improve the workflow."
+>
+  <article class="article-page">
+    <header class="article-hero">
+      <div class="container article-hero-grid">
+        <div class="article-heading">
+          <a href="/learn/" class="back-link">← LEARN</a>
+
+          <div class="article-meta">
+            <span>USING AI FOR REAL WORK</span>
+            <span>09</span>
+            <span>BEGINNER</span>
+          </div>
+
+          <h1>
+            Choosing Tasks
+            <span>for AI.</span>
+          </h1>
+
+          <p class="article-intro">
+            AI is useful for many workplace tasks, but that does not mean every
+            task should be handed to AI. The first skill is choosing where AI
+            can genuinely help while keeping the right work under human
+            control.
+          </p>
+        </div>
+
+        <aside class="lesson-panel">
+          <div class="panel-header">
+            <span>LESSON 09</span>
+            <span>USING AI FOR REAL WORK</span>
+          </div>
+
+          <div class="panel-content">
+            <span class="panel-kicker">START WITH THE TASK</span>
+
+            <strong>
+              Don't ask “Can AI do it?” Ask “Should AI help with it?”
+            </strong>
+
+            <p>
+              A useful AI task has a clear purpose, appropriate information,
+              manageable risk and a practical way to review the result.
+            </p>
+          </div>
+
+          <div class="panel-footer">
+            <span>VALUE → RISK → REVIEW</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section class="article-body-section">
+      <div class="container article-layout">
+        <aside class="article-sidebar">
+          <div class="sidebar-box">
+            <span class="sidebar-title">IN THIS GUIDE</span>
+
+            <a href="#starting-point">Start with the work</a>
+            <a href="#good-candidates">Good AI candidates</a>
+            <a href="#suitability">Task suitability test</a>
+            <a href="#risk">Think about risk</a>
+            <a href="#example">Warehouse example</a>
+            <a href="#efficiency">Will AI save time?</a>
+            <a href="#takeaway">The practical takeaway</a>
+          </div>
+        </aside>
+
+        <main class="article-content">
+          <section id="starting-point">
+            <div class="section-marker">01 / STARTING POINT</div>
+
+            <h2>Start with a real task, not with the technology.</h2>
+
+            <p>
+              A common mistake is looking for something to give AI simply
+              because AI is available. A better approach is to start with work
+              that already needs to be done.
+            </p>
+
+            <p>
+              Look at the task, the information involved, the expected result
+              and the consequences of getting it wrong. Then decide whether AI
+              can make part of that process faster or easier.
+            </p>
+
+            <div class="concept-box">
+              <span>A BETTER QUESTION</span>
+
+              <p>
+                Instead of asking “Where can we use AI?”, ask “Which parts of
+                this workflow take time and could benefit from AI assistance?”
+              </p>
+            </div>
+          </section>
+
+          <section id="good-candidates">
+            <div class="section-marker">02 / GOOD CANDIDATES</div>
+
+            <h2>AI is often strongest as a first-draft and transformation tool.</h2>
+
+            <p>
+              Generative AI is particularly useful when the work involves
+              producing, restructuring or exploring information that a person
+              can then review.
+            </p>
+
+            <div class="candidate-grid">
+              {
+                goodCandidates.map((item) => (
+                  <article class="candidate-card">
+                    <span>{item.number}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="concept-box">
+              <span>USEFUL PATTERN</span>
+
+              <p>
+                AI often creates the most value when it helps produce the first
+                60–80% of a routine information task and a person completes the
+                final review, correction and decision.
+              </p>
+            </div>
+          </section>
+
+          <section id="suitability">
+            <div class="section-marker">03 / AI TASK SUITABILITY TEST</div>
+
+            <h2>Ask five questions before putting a task into an AI workflow.</h2>
+
+            <div class="suitability-list">
+              {
+                suitabilityQuestions.map((item, index) => (
+                  <div class="suitability-row">
+                    <span class="row-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+
+                    <div class="row-question">
+                      <span>{item.label}</span>
+                      <strong>{item.question}</strong>
+                    </div>
+
+                    <p>{item.explanation}</p>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="decision-box">
+              <span>SIMPLE DECISION RULE</span>
+
+              <p>
+                Clear task + usable input + reviewable output + manageable risk
+                + meaningful time saving = a stronger candidate for AI
+                assistance.
+              </p>
+            </div>
+          </section>
+
+          <section id="risk">
+            <div class="section-marker">04 / RISK & RESPONSIBILITY</div>
+
+            <h2>The cost of a wrong answer should affect how you use AI.</h2>
+
+            <p>
+              Not all tasks need the same level of control. A weak first draft
+              of an internal email is very different from a wrong decision that
+              affects money, safety, employment or customers.
+            </p>
+
+            <div class="risk-scale">
+              <div class="risk-card">
+                <span>LOWER RISK</span>
+                <strong>AI can do more of the first draft.</strong>
+                <p>
+                  Brainstorming, rewriting, formatting, routine summaries and
+                  internal draft content.
+                </p>
+              </div>
+
+              <div class="risk-arrow">→</div>
+
+              <div class="risk-card">
+                <span>MEDIUM RISK</span>
+                <strong>AI assists, human verifies.</strong>
+                <p>
+                  Analysis support, operational recommendations, external
+                  communications and work based on important facts.
+                </p>
+              </div>
+
+              <div class="risk-arrow">→</div>
+
+              <div class="risk-card">
+                <span>HIGHER RISK</span>
+                <strong>Human expertise leads.</strong>
+                <p>
+                  Important approvals, safety decisions, legal or financial
+                  judgments and actions with significant consequences.
+                </p>
+              </div>
+            </div>
+
+            <h3 class="subheading">Some tasks should remain human-led.</h3>
+
+            <div class="poor-fit-grid">
+              {
+                poorFits.map((item) => (
+                  <article>
+                    <h4>{item.title}</h4>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="example">
+            <div class="section-marker">05 / REAL-WORK EXAMPLE</div>
+
+            <h2>One warehouse workflow can contain several different AI decisions.</h2>
+
+            <p>
+              Imagine an inventory team discovers a stock discrepancy. Instead
+              of asking whether the entire investigation should “use AI,” break
+              the work into individual tasks.
+            </p>
+
+            <div class="task-table">
+              {
+                taskExamples.map((item) => (
+                  <div class="task-row">
+                    <div>
+                      <span>TASK</span>
+                      <strong>{item.task}</strong>
+                    </div>
+
+                    <div>
+                      <span>USE</span>
+                      <strong>{item.suitability}</strong>
+                    </div>
+
+                    <p>{item.reason}</p>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="warehouse-case">
+              <span>THE KEY DIFFERENCE</span>
+
+              <h3>AI can support the investigation without owning the decision.</h3>
+
+              <p>
+                For example, AI could turn verified investigation notes into a
+                management summary, organise possible next checks and improve
+                the wording of the final report. The inventory team still
+                verifies the transactions, establishes the evidence and follows
+                the organisation's approval process.
+              </p>
+            </div>
+          </section>
+
+          <section id="efficiency">
+            <div class="section-marker">06 / PRACTICAL VALUE</div>
+
+            <h2>Using AI only makes sense when the workflow becomes better.</h2>
+
+            <p>
+              A task may technically be possible with AI but still be a poor
+              choice if preparing the prompt, correcting the response and
+              checking the result takes longer than doing the work directly.
+            </p>
+
+            <div class="efficiency-grid">
+              <div>
+                <span>BEFORE AI</span>
+                <h3>How is the task done now?</h3>
+                <p>
+                  Understand the current time, repetition, difficulty and
+                  quality problems before changing the process.
+                </p>
+              </div>
+
+              <div>
+                <span>WITH AI</span>
+                <h3>Which step becomes easier?</h3>
+                <p>
+                  Identify the specific part AI will draft, organise,
+                  summarise, transform or help analyse.
+                </p>
+              </div>
+
+              <div>
+                <span>AFTER AI</span>
+                <h3>What still needs a person?</h3>
+                <p>
+                  Include verification, correction, approval, communication and
+                  any action that remains human responsibility.
+                </p>
+              </div>
+            </div>
+
+            <div class="warning-box">
+              <span>EFFICIENCY CHECK</span>
+
+              <p>
+                If using AI adds more complexity than it removes, it may not be
+                the right tool for that task.
+              </p>
+            </div>
+          </section>
+
+          <section id="takeaway">
+            <div class="section-marker">07 / PRACTICAL TAKEAWAY</div>
+
+            <h2>Choose the task first. Then decide where AI belongs.</h2>
+
+            <p>
+              The goal is not maximum AI usage. The goal is a better workflow
+              with appropriate human control.
+            </p>
+
+            <div class="takeaway-flow">
+              <div>
+                <span>01</span>
+                <strong>Identify</strong>
+                <p>Start with the real task.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>02</span>
+                <strong>Evaluate</strong>
+                <p>Check value and risk.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>03</span>
+                <strong>Assist</strong>
+                <p>Give AI the suitable part.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>04</span>
+                <strong>Review</strong>
+                <p>Keep people in control.</p>
+              </div>
+            </div>
+
+            <div class="tool-callout">
+              <div>
+                <span class="tool-kicker">TRY IT WITH KRIYANO</span>
+
+                <h3>Once you choose the task, build the instruction.</h3>
+
+                <p>
+                  Use the KRIYANO Prompt Builder to define the task, context,
+                  audience, format and constraints for the part of the workflow
+                  you want AI to assist with.
+                </p>
+              </div>
+
+              <a href="/tools/prompt-builder/" class="button button-primary">
+                Open Prompt Builder
+              </a>
+            </div>
+          </section>
+
+          <section class="next-lesson">
+            <div>
+              <span class="next-label">NEXT LESSON</span>
+
+              <h2>AI-Assisted Workflows</h2>
+
+              <p>
+                Learn how to place AI inside a practical workflow instead of
+                treating every prompt as an isolated task.
+              </p>
+            </div>
+
+            <a
+  href="/learn/using-ai-for-real-work/ai-assisted-workflows/"
+  class="next-status"
+>
+  CONTINUE →
+</a>
+          </section>
+        </main>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    overflow: hidden;
+  }
+
+  .article-hero {
+    padding: 92px 0 82px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(
+        circle at 82% 20%,
+        rgba(183, 255, 74, 0.08),
+        transparent 27%
+      ),
+      radial-gradient(
+        circle at 14% 0%,
+        rgba(77, 226, 197, 0.055),
+        transparent 28%
+      );
+  }
+
+  .article-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 75px;
+    align-items: end;
+  }
+
+  .back-link {
+    color: var(--lime);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 28px;
+  }
+
+  .article-meta span {
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-heading h1 {
+    max-width: 900px;
+    margin-top: 22px;
+    font-size: clamp(3.5rem, 7vw, 6.6rem);
+    line-height: 0.94;
+    letter-spacing: -0.065em;
+  }
+
+  .article-heading h1 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .article-intro {
+    max-width: 760px;
+    margin-top: 27px;
+    color: var(--muted);
+    font-size: 1.04rem;
+    line-height: 1.8;
+  }
+
+  .lesson-panel {
+    overflow: hidden;
+    border: 1px solid rgba(183, 255, 74, 0.17);
+    border-radius: 21px;
+    background: var(--surface);
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .panel-content {
+    padding: 31px 26px 34px;
+  }
+
+  .panel-kicker {
+    display: block;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .panel-content strong {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.45rem;
+    line-height: 1.35;
+    letter-spacing: -0.035em;
+  }
+
+  .panel-content p {
+    margin-top: 17px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .panel-footer {
+    padding: 17px 20px;
+    border-top: 1px solid var(--line);
+    background: rgba(183, 255, 74, 0.03);
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-body-section {
+    padding: 88px 0 110px;
+  }
+
+  .article-layout {
+    display: grid;
+    grid-template-columns: 235px minmax(0, 800px);
+    gap: 78px;
+    justify-content: center;
+  }
+
+  .sidebar-box {
+    position: sticky;
+    top: 105px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+  }
+
+  .sidebar-title {
+    padding: 16px 0;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .sidebar-box a {
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  .sidebar-box a:hover {
+    color: var(--lime);
+  }
+
+  .article-content > section:not(:first-child) {
+    margin-top: 90px;
+  }
+
+  .section-marker {
+    color: var(--lime);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .article-content h2 {
+    max-width: 760px;
+    margin-top: 14px;
+    font-size: clamp(2.3rem, 5vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.052em;
+  }
+
+  .article-content > section > p {
+    max-width: 760px;
+    margin-top: 23px;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .concept-box,
+  .decision-box,
+  .warning-box {
+    margin: 34px 0;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .concept-box span,
+  .decision-box span,
+  .warning-box span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .concept-box p,
+  .decision-box p,
+  .warning-box p {
+    margin-top: 12px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .candidate-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
+    margin-top: 35px;
+  }
+
+  .candidate-card {
+    padding: 23px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .candidate-card > span {
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .candidate-card h3 {
+    margin-top: 25px;
+    font-size: 1rem;
+  }
+
+  .candidate-card p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.65;
+  }
+
+  .suitability-list {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .suitability-row {
+    display: grid;
+    grid-template-columns: 45px 245px 1fr;
+    gap: 20px;
+    padding: 21px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .row-number,
+  .row-question > span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+  }
+
+  .row-question strong {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.82rem;
+  }
+
+  .suitability-row > p {
+    color: var(--muted);
+    font-size: 0.77rem;
+    line-height: 1.65;
+  }
+
+  .risk-scale {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 12px;
+    align-items: stretch;
+    margin-top: 35px;
+  }
+
+  .risk-card {
+    padding: 23px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .risk-card > span {
+    color: var(--lime);
+    font-size: 0.57rem;
+    font-weight: 800;
+  }
+
+  .risk-card strong {
+    display: block;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .risk-card p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.6;
+  }
+
+  .risk-arrow {
+    align-self: center;
+    color: var(--mint);
+  }
+
+  .subheading {
+    margin-top: 45px;
+    font-size: 1.45rem;
+    letter-spacing: -0.025em;
+  }
+
+  .poor-fit-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .poor-fit-grid article {
+    padding: 22px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface);
+  }
+
+  .poor-fit-grid h4 {
+    font-size: 0.88rem;
+  }
+
+  .poor-fit-grid p {
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 0.74rem;
+    line-height: 1.65;
+  }
+
+  .task-table {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .task-row {
+    display: grid;
+    grid-template-columns: 1fr 155px 1.25fr;
+    gap: 20px;
+    padding: 21px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .task-row span {
+    display: block;
+    color: var(--lime);
+    font-size: 0.56rem;
+    font-weight: 800;
+  }
+
+  .task-row strong {
+    display: block;
+    margin-top: 7px;
+    font-size: 0.79rem;
+    line-height: 1.45;
+  }
+
+  .task-row > p {
+    color: var(--muted);
+    font-size: 0.74rem;
+    line-height: 1.65;
+  }
+
+  .warehouse-case {
+    margin-top: 30px;
+    padding: 28px;
+    border: 1px solid rgba(183, 255, 74, 0.19);
+    border-radius: 17px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .warehouse-case > span {
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+  }
+
+  .warehouse-case h3 {
+    max-width: 590px;
+    margin-top: 13px;
+    font-size: 1.3rem;
+    line-height: 1.35;
+  }
+
+  .warehouse-case p {
+    margin-top: 13px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+
+  .efficiency-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
+    margin-top: 35px;
+  }
+
+  .efficiency-grid > div {
+    padding: 23px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .efficiency-grid span {
+    color: var(--lime);
+    font-size: 0.57rem;
+    font-weight: 800;
+  }
+
+  .efficiency-grid h3 {
+    margin-top: 20px;
+    font-size: 0.95rem;
+  }
+
+  .efficiency-grid p {
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 0.73rem;
+    line-height: 1.65;
+  }
+
+  .takeaway-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-top: 35px;
+    padding: 27px 22px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .takeaway-flow > div span {
+    display: block;
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .takeaway-flow strong {
+    display: block;
+    margin-top: 13px;
+    font-size: 0.82rem;
+  }
+
+  .takeaway-flow p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.67rem;
+    line-height: 1.5;
+  }
+
+  .flow-arrow {
+    color: var(--mint);
+  }
+
+  .tool-callout {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    margin-top: 40px;
+    padding: 32px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 19px;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(183, 255, 74, 0.04),
+        transparent 50%
+      ),
+      var(--surface);
+  }
+
+  .tool-kicker,
+  .next-label {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .tool-callout h3 {
+    margin-top: 11px;
+    font-size: 1.35rem;
+  }
+
+  .tool-callout p {
+    max-width: 510px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+
+  .tool-callout .button {
+    flex-shrink: 0;
+  }
+
+  .next-lesson {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    padding-top: 43px;
+    border-top: 1px solid var(--line);
+  }
+
+  .next-lesson h2 {
+    margin-top: 11px;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+
+  .next-lesson p {
+    max-width: 540px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.79rem;
+    line-height: 1.65;
+  }
+
+  .next-status {
+    flex-shrink: 0;
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  a.next-status:hover {
+    color: var(--lime);
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1000px) {
+    .article-hero-grid,
+    .article-layout {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .article-sidebar {
+      display: none;
+    }
+
+    .candidate-grid,
+    .efficiency-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .risk-scale {
+      grid-template-columns: 1fr;
+    }
+
+    .risk-arrow {
+      display: none;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .flow-arrow {
+      display: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .article-hero {
+      padding: 68px 0 60px;
+    }
+
+    .article-body-section {
+      padding: 65px 0 80px;
+    }
+
+    .candidate-grid,
+    .poor-fit-grid,
+    .efficiency-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .suitability-row {
+      grid-template-columns: 35px 1fr;
+    }
+
+    .suitability-row > p {
+      grid-column: 2;
+    }
+
+    .task-row {
+      grid-template-columns: 1fr;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .takeaway-flow > div {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .takeaway-flow > div:last-of-type {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .tool-callout,
+    .next-lesson {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

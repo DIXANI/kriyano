@@ -1,0 +1,1156 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const workflowSteps = [
+  {
+    number: "01",
+    title: "Input",
+    text:
+      "Start with the information the task actually needs: facts, notes, records, requirements, instructions or other relevant material.",
+  },
+  {
+    number: "02",
+    title: "AI task",
+    text:
+      "Give AI a clearly defined job such as drafting, summarising, organising, comparing or transforming the supplied information.",
+  },
+  {
+    number: "03",
+    title: "Human review",
+    text:
+      "Check the output for factual accuracy, missing information, inappropriate assumptions, tone and whether it meets the real requirement.",
+  },
+  {
+    number: "04",
+    title: "Action",
+    text:
+      "An authorised person decides what to send, approve, update, escalate or do next based on the reviewed output.",
+  },
+  {
+    number: "05",
+    title: "Record & follow-up",
+    text:
+      "Where the process requires it, record the action, preserve the relevant evidence and follow up on unresolved items.",
+  },
+];
+
+const workflowExamples = [
+  {
+    title: "Supplier follow-up",
+    input: "PO details, promised delivery date and current status.",
+    ai: "Draft a concise supplier follow-up email.",
+    human: "Verify dates, quantities, recipient and requested action.",
+    action: "Send the approved email and track the response.",
+  },
+  {
+    title: "Meeting summary",
+    input: "Verified meeting notes or transcript.",
+    ai: "Organise decisions, issues, owners and action items.",
+    human: "Confirm that the summary reflects what was actually agreed.",
+    action: "Share the reviewed minutes and track assigned actions.",
+  },
+  {
+    title: "Operational report",
+    input: "Verified figures, incidents, observations and completed actions.",
+    ai: "Turn the information into a structured management summary.",
+    human: "Check numbers, wording, conclusions and unsupported claims.",
+    action: "Submit or circulate the approved report.",
+  },
+];
+
+const failurePoints = [
+  {
+    title: "Weak input",
+    text:
+      "Incomplete, incorrect or poorly selected information can produce an output that looks useful but is based on the wrong foundation.",
+  },
+  {
+    title: "Unclear AI responsibility",
+    text:
+      "If AI is asked to investigate, decide, approve and communicate all at once, responsibility becomes difficult to control.",
+  },
+  {
+    title: "Skipped review",
+    text:
+      "A polished response can still contain incorrect facts, unsupported conclusions or unsuitable recommendations.",
+  },
+  {
+    title: "No workflow ownership",
+    text:
+      "Someone still needs responsibility for the final decision, action, record and follow-up.",
+  },
+];
+
+const stockSteps = [
+  {
+    stage: "INPUT",
+    title: "Collect verified information",
+    text:
+      "System quantity: 1,480 units. Physical count: 1,452 units. A second count confirms the physical quantity. Relevant receiving, outbound and adjustment records have been reviewed.",
+  },
+  {
+    stage: "AI ASSISTANCE",
+    title: "Structure the investigation summary",
+    text:
+      "Ask AI to organise only the supplied facts into a concise discrepancy summary, completed checks, unresolved points and suggested next checks.",
+  },
+  {
+    stage: "HUMAN REVIEW",
+    title: "Verify every operational statement",
+    text:
+      "Confirm the quantities, checks performed and wording. Remove any AI-generated assumption that is not supported by warehouse records.",
+  },
+  {
+    stage: "ACTION",
+    title: "Follow the actual control process",
+    text:
+      "The responsible employee or manager decides the next investigation, escalation or adjustment action according to company procedure.",
+  },
+  {
+    stage: "RECORD",
+    title: "Preserve the result",
+    text:
+      "Record the verified findings, approvals and completed actions so the discrepancy has a traceable operational history.",
+  },
+];
+
+const reviewQuestions = [
+  "Are the important facts correct?",
+  "Did AI add anything that was not in the source information?",
+  "Is any important context missing?",
+  "Does the output follow the required format and tone?",
+  "Does a recommendation require additional evidence or expertise?",
+  "Who is responsible for approving the final action?",
+];
+---
+
+<BaseLayout
+  title="AI-Assisted Workflows | KRIYANO"
+  description="Learn how to build practical AI-assisted workflows that combine clear inputs, focused AI tasks, human review, action and follow-up."
+>
+  <article class="article-page">
+    <header class="article-hero">
+      <div class="container article-hero-grid">
+        <div class="article-heading">
+          <a href="/learn/" class="back-link">← LEARN</a>
+
+          <div class="article-meta">
+            <span>USING AI FOR REAL WORK</span>
+            <span>10</span>
+            <span>BEGINNER</span>
+          </div>
+
+          <h1>
+            AI-Assisted
+            <span>Workflows.</span>
+          </h1>
+
+          <p class="article-intro">
+            Useful workplace AI is rarely just one prompt. A stronger approach
+            places AI inside a controlled process where information enters,
+            AI performs a defined task, a person reviews the result and the
+            real-world action remains accountable.
+          </p>
+        </div>
+
+        <aside class="lesson-panel">
+          <div class="panel-header">
+            <span>LESSON 10</span>
+            <span>USING AI FOR REAL WORK</span>
+          </div>
+
+          <div class="panel-content">
+            <span class="panel-kicker">THINK IN WORKFLOWS</span>
+
+            <strong>
+              AI should have a defined role inside the process.
+            </strong>
+
+            <p>
+              Separate information, AI assistance, human review and final
+              action instead of treating one generated answer as the entire
+              workflow.
+            </p>
+          </div>
+
+          <div class="panel-footer">
+            <span>INPUT → AI → REVIEW → ACTION</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section class="article-body-section">
+      <div class="container article-layout">
+        <aside class="article-sidebar">
+          <div class="sidebar-box">
+            <span class="sidebar-title">IN THIS GUIDE</span>
+
+            <a href="#workflow">From prompt to workflow</a>
+            <a href="#five-stages">Five workflow stages</a>
+            <a href="#examples">Practical examples</a>
+            <a href="#failure-points">Where workflows fail</a>
+            <a href="#warehouse">Warehouse example</a>
+            <a href="#review">Human review point</a>
+            <a href="#takeaway">The practical takeaway</a>
+          </div>
+        </aside>
+
+        <main class="article-content">
+          <section id="workflow">
+            <div class="section-marker">01 / FROM PROMPT TO WORKFLOW</div>
+
+            <h2>A prompt is one step. The workflow is the complete process.</h2>
+
+            <p>
+              Imagine asking AI to draft a supplier email. The generated email
+              is not the entire job. Someone first needs accurate order
+              information. The draft must then be checked, sent to the correct
+              person and followed up if the supplier does not respond.
+            </p>
+
+            <p>
+              This distinction matters because workplace value comes from the
+              complete result, not simply from generating text.
+            </p>
+
+            <div class="workflow-line">
+              <div>
+                <span>01</span>
+                <strong>INPUT</strong>
+              </div>
+              <span class="flow-arrow">→</span>
+              <div>
+                <span>02</span>
+                <strong>AI TASK</strong>
+              </div>
+              <span class="flow-arrow">→</span>
+              <div>
+                <span>03</span>
+                <strong>REVIEW</strong>
+              </div>
+              <span class="flow-arrow">→</span>
+              <div>
+                <span>04</span>
+                <strong>ACTION</strong>
+              </div>
+              <span class="flow-arrow">→</span>
+              <div>
+                <span>05</span>
+                <strong>FOLLOW-UP</strong>
+              </div>
+            </div>
+
+            <div class="concept-box">
+              <span>WORKFLOW PRINCIPLE</span>
+              <p>
+                Give AI responsibility for a clearly defined task, not
+                responsibility for the entire business process.
+              </p>
+            </div>
+          </section>
+
+          <section id="five-stages">
+            <div class="section-marker">02 / FIVE WORKFLOW STAGES</div>
+
+            <h2>Build the process around five clear stages.</h2>
+
+            <div class="stage-list">
+              {
+                workflowSteps.map((item) => (
+                  <article class="stage-row">
+                    <span class="stage-number">{item.number}</span>
+
+                    <div>
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="concept-box">
+              <span>IMPORTANT</span>
+              <p>
+                Not every workflow needs all five stages in exactly the same
+                form. The useful principle is to make the handoffs between AI
+                and people deliberate rather than accidental.
+              </p>
+            </div>
+          </section>
+
+          <section id="examples">
+            <div class="section-marker">03 / PRACTICAL EXAMPLES</div>
+
+            <h2>The same structure can support very different kinds of work.</h2>
+
+            <div class="example-stack">
+              {
+                workflowExamples.map((item) => (
+                  <article class="example-card">
+                    <div class="example-title">
+                      <span>WORKFLOW</span>
+                      <h3>{item.title}</h3>
+                    </div>
+
+                    <div class="example-grid">
+                      <div>
+                        <span>INPUT</span>
+                        <p>{item.input}</p>
+                      </div>
+
+                      <div>
+                        <span>AI TASK</span>
+                        <p>{item.ai}</p>
+                      </div>
+
+                      <div>
+                        <span>HUMAN REVIEW</span>
+                        <p>{item.human}</p>
+                      </div>
+
+                      <div>
+                        <span>ACTION</span>
+                        <p>{item.action}</p>
+                      </div>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="failure-points">
+            <div class="section-marker">04 / FAILURE POINTS</div>
+
+            <h2>A workflow can fail even when the prompt looks good.</h2>
+
+            <p>
+              Prompt quality matters, but a well-written prompt cannot repair
+              every weakness in the surrounding process.
+            </p>
+
+            <div class="failure-grid">
+              {
+                failurePoints.map((item) => (
+                  <article>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="warning-box">
+              <span>WATCH FOR AUTOMATION BIAS</span>
+
+              <p>
+                People can become less critical of a result simply because it
+                was produced quickly or presented confidently. AI output still
+                needs the level of checking appropriate to the task.
+              </p>
+            </div>
+          </section>
+
+          <section id="warehouse">
+            <div class="section-marker">05 / REAL-WORK EXAMPLE</div>
+
+            <h2>Build an AI-assisted stock discrepancy workflow.</h2>
+
+            <p>
+              Suppose the system shows 1,480 units while two physical counts
+              confirm 1,452 units. That creates a verified difference of 28
+              units, but the difference itself does not prove why it happened.
+            </p>
+
+            <div class="stock-workflow">
+              {
+                stockSteps.map((item, index) => (
+                  <article class="stock-step">
+                    <div class="stock-index">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
+
+                    <div class="stock-content">
+                      <span>{item.stage}</span>
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="warehouse-case">
+              <span>WHAT AI SHOULD NOT DO</span>
+
+              <h3>
+                “The shortage was caused by an incorrect outbound transaction.”
+              </h3>
+
+              <p>
+                That may be one possibility, but unless the evidence confirms
+                it, AI should not present it as the cause. The workflow should
+                preserve the difference between a verified fact, a possible
+                explanation and a confirmed root cause.
+              </p>
+            </div>
+          </section>
+
+          <section id="review">
+            <div class="section-marker">06 / HUMAN REVIEW POINT</div>
+
+            <h2>Decide what must be checked before the workflow continues.</h2>
+
+            <p>
+              “Human review” should be more specific than simply reading the
+              response. Define what the reviewer is responsible for checking.
+            </p>
+
+            <div class="review-list">
+              {
+                reviewQuestions.map((question, index) => (
+                  <div class="review-row">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <strong>{question}</strong>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="decision-box">
+              <span>CONTROL POINT</span>
+
+              <p>
+                The higher the consequence of an error, the more important it
+                is to define who reviews the output, what evidence they check
+                and who has authority to approve the next action.
+              </p>
+            </div>
+          </section>
+
+          <section id="takeaway">
+            <div class="section-marker">07 / PRACTICAL TAKEAWAY</div>
+
+            <h2>Design the handoff between AI and people.</h2>
+
+            <p>
+              A useful AI workflow does not remove people from the process. It
+              places AI where it can reduce routine effort while keeping
+              verification, judgment and responsibility where they belong.
+            </p>
+
+            <div class="takeaway-grid">
+              <div>
+                <span>01</span>
+                <strong>Define the input</strong>
+                <p>Know what information enters the workflow.</p>
+              </div>
+
+              <div>
+                <span>02</span>
+                <strong>Limit the AI task</strong>
+                <p>Give AI a clear and useful responsibility.</p>
+              </div>
+
+              <div>
+                <span>03</span>
+                <strong>Create a review point</strong>
+                <p>Specify what a person must verify.</p>
+              </div>
+
+              <div>
+                <span>04</span>
+                <strong>Keep action accountable</strong>
+                <p>Know who owns the final decision and follow-up.</p>
+              </div>
+            </div>
+
+            <div class="tool-callout">
+              <div>
+                <span class="tool-kicker">BUILD THE AI STEP</span>
+
+                <h3>Turn one workflow stage into a clear instruction.</h3>
+
+                <p>
+                  Once you know exactly what AI should do inside the workflow,
+                  use the KRIYANO Prompt Builder to define its role, task,
+                  context, output and constraints.
+                </p>
+              </div>
+
+              <a href="/tools/prompt-builder/" class="button button-primary">
+                Open Prompt Builder
+              </a>
+            </div>
+          </section>
+
+          <section class="next-lesson">
+            <div>
+              <span class="next-label">NEXT LESSON</span>
+
+              <h2>Human Review &amp; Quality Control</h2>
+
+              <p>
+                Learn how to review AI-generated work systematically before it
+                becomes part of a real decision, document or business action.
+              </p>
+            </div>
+
+            <a
+  href="/learn/using-ai-for-real-work/human-review-and-quality-control/"
+  class="next-status"
+>
+  CONTINUE →
+</a>
+          </section>
+        </main>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    overflow: hidden;
+  }
+
+  .article-hero {
+    padding: 92px 0 82px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(
+        circle at 82% 20%,
+        rgba(183, 255, 74, 0.08),
+        transparent 27%
+      ),
+      radial-gradient(
+        circle at 14% 0%,
+        rgba(77, 226, 197, 0.055),
+        transparent 28%
+      );
+  }
+
+  .article-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 75px;
+    align-items: end;
+  }
+
+  .back-link {
+    color: var(--lime);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 28px;
+  }
+
+  .article-meta span {
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-heading h1 {
+    max-width: 900px;
+    margin-top: 22px;
+    font-size: clamp(3.5rem, 7vw, 6.6rem);
+    line-height: 0.94;
+    letter-spacing: -0.065em;
+  }
+
+  .article-heading h1 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .article-intro {
+    max-width: 760px;
+    margin-top: 27px;
+    color: var(--muted);
+    font-size: 1.04rem;
+    line-height: 1.8;
+  }
+
+  .lesson-panel {
+    overflow: hidden;
+    border: 1px solid rgba(183, 255, 74, 0.17);
+    border-radius: 21px;
+    background: var(--surface);
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .panel-content {
+    padding: 31px 26px 34px;
+  }
+
+  .panel-kicker {
+    display: block;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .panel-content strong {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.45rem;
+    line-height: 1.35;
+    letter-spacing: -0.035em;
+  }
+
+  .panel-content p {
+    margin-top: 17px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .panel-footer {
+    padding: 17px 20px;
+    border-top: 1px solid var(--line);
+    background: rgba(183, 255, 74, 0.03);
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-body-section {
+    padding: 88px 0 110px;
+  }
+
+  .article-layout {
+    display: grid;
+    grid-template-columns: 235px minmax(0, 800px);
+    gap: 78px;
+    justify-content: center;
+  }
+
+  .sidebar-box {
+    position: sticky;
+    top: 105px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+  }
+
+  .sidebar-title {
+    padding: 16px 0;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .sidebar-box a {
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  .sidebar-box a:hover {
+    color: var(--lime);
+  }
+
+  .article-content > section:not(:first-child) {
+    margin-top: 90px;
+  }
+
+  .section-marker {
+    color: var(--lime);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .article-content h2 {
+    max-width: 760px;
+    margin-top: 14px;
+    font-size: clamp(2.3rem, 5vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.052em;
+  }
+
+  .article-content > section > p {
+    max-width: 760px;
+    margin-top: 23px;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .concept-box,
+  .warning-box,
+  .decision-box {
+    margin: 34px 0;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .concept-box span,
+  .warning-box span,
+  .decision-box span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .concept-box p,
+  .warning-box p,
+  .decision-box p {
+    margin-top: 12px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .workflow-line {
+    display: grid;
+    grid-template-columns: repeat(9, auto);
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 36px;
+    padding: 27px 23px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .workflow-line div span {
+    display: block;
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+  }
+
+  .workflow-line div strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.7rem;
+  }
+
+  .flow-arrow {
+    color: var(--mint);
+  }
+
+  .stage-list {
+    margin-top: 36px;
+    border-top: 1px solid var(--line);
+  }
+
+  .stage-row {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 25px;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stage-number {
+    color: var(--lime);
+    font-size: 0.68rem;
+    font-weight: 800;
+  }
+
+  .stage-row h3 {
+    font-size: 1.12rem;
+  }
+
+  .stage-row p {
+    max-width: 650px;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+
+  .example-stack {
+    display: grid;
+    gap: 15px;
+    margin-top: 36px;
+  }
+
+  .example-card {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .example-title {
+    padding: 21px 23px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .example-title span,
+  .example-grid span {
+    color: var(--lime);
+    font-size: 0.57rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+  }
+
+  .example-title h3 {
+    margin-top: 7px;
+    font-size: 1.1rem;
+  }
+
+  .example-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .example-grid > div {
+    min-height: 145px;
+    padding: 20px;
+    border-right: 1px solid var(--line);
+  }
+
+  .example-grid > div:last-child {
+    border-right: 0;
+  }
+
+  .example-grid p {
+    margin-top: 11px;
+    color: var(--muted);
+    font-size: 0.7rem;
+    line-height: 1.6;
+  }
+
+  .failure-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+    margin-top: 35px;
+  }
+
+  .failure-grid article {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background: var(--surface);
+  }
+
+  .failure-grid h3 {
+    font-size: 0.95rem;
+  }
+
+  .failure-grid p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.76rem;
+    line-height: 1.68;
+  }
+
+  .stock-workflow {
+    margin-top: 36px;
+    border-top: 1px solid var(--line);
+  }
+
+  .stock-step {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 23px;
+    padding: 25px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stock-index {
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .stock-content > span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .stock-content h3 {
+    margin-top: 8px;
+    font-size: 1.02rem;
+  }
+
+  .stock-content p {
+    max-width: 650px;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.68;
+  }
+
+  .warehouse-case {
+    margin-top: 31px;
+    padding: 28px;
+    border: 1px solid rgba(183, 255, 74, 0.19);
+    border-radius: 17px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .warehouse-case > span {
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+  }
+
+  .warehouse-case h3 {
+    margin-top: 13px;
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+
+  .warehouse-case p {
+    margin-top: 13px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+
+  .review-list {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .review-row {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 20px;
+    padding: 19px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .review-row span {
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .review-row strong {
+    font-size: 0.83rem;
+    line-height: 1.5;
+  }
+
+  .takeaway-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+    margin-top: 35px;
+  }
+
+  .takeaway-grid > div {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background: var(--surface);
+  }
+
+  .takeaway-grid span {
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .takeaway-grid strong {
+    display: block;
+    margin-top: 17px;
+    font-size: 0.9rem;
+  }
+
+  .takeaway-grid p {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.74rem;
+    line-height: 1.6;
+  }
+
+  .tool-callout {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    margin-top: 40px;
+    padding: 32px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 19px;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(183, 255, 74, 0.04),
+        transparent 50%
+      ),
+      var(--surface);
+  }
+
+  .tool-kicker,
+  .next-label {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .tool-callout h3 {
+    margin-top: 11px;
+    font-size: 1.35rem;
+  }
+
+  .tool-callout p {
+    max-width: 510px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+
+  .tool-callout .button {
+    flex-shrink: 0;
+  }
+
+  .next-lesson {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    padding-top: 43px;
+    border-top: 1px solid var(--line);
+  }
+
+  .next-lesson h2 {
+    margin-top: 11px;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+
+  .next-lesson p {
+    max-width: 540px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.79rem;
+    line-height: 1.65;
+  }
+
+  .next-status {
+    flex-shrink: 0;
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  a.next-status:hover {
+    color: var(--lime);
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1000px) {
+    .article-hero-grid,
+    .article-layout {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .article-sidebar {
+      display: none;
+    }
+
+    .example-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .example-grid > div:nth-child(2) {
+      border-right: 0;
+    }
+
+    .example-grid > div:nth-child(-n + 2) {
+      border-bottom: 1px solid var(--line);
+    }
+  }
+
+  @media (max-width: 720px) {
+    .article-hero {
+      padding: 68px 0 60px;
+    }
+
+    .article-body-section {
+      padding: 65px 0 80px;
+    }
+
+    .workflow-line {
+      grid-template-columns: 1fr;
+      justify-content: stretch;
+    }
+
+    .flow-arrow {
+      display: none;
+    }
+
+    .workflow-line > div {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .workflow-line > div:last-of-type {
+      border-bottom: 0;
+    }
+
+    .example-grid,
+    .failure-grid,
+    .takeaway-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .example-grid > div {
+      min-height: 0;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .example-grid > div:last-child {
+      border-bottom: 0;
+    }
+
+    .stage-row,
+    .stock-step {
+      grid-template-columns: 45px 1fr;
+    }
+
+    .tool-callout,
+    .next-lesson {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

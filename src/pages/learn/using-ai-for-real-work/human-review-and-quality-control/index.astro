@@ -1,0 +1,1059 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const reviewChecks = [
+  {
+    number: "01",
+    title: "Facts",
+    text:
+      "Check names, dates, quantities, references, calculations and other factual details against the source information.",
+  },
+  {
+    number: "02",
+    title: "Completeness",
+    text:
+      "Confirm that important context, requirements, exceptions and unresolved points have not been omitted.",
+  },
+  {
+    number: "03",
+    title: "Assumptions",
+    text:
+      "Identify anything AI has inferred or invented that is not directly supported by the available evidence.",
+  },
+  {
+    number: "04",
+    title: "Logic",
+    text:
+      "Check whether the conclusion actually follows from the facts and whether any important reasoning step is missing.",
+  },
+  {
+    number: "05",
+    title: "Communication",
+    text:
+      "Review tone, wording, audience, clarity and whether the result could be misunderstood.",
+  },
+  {
+    number: "06",
+    title: "Authority",
+    text:
+      "Confirm whether the output is only a draft or recommendation, and who has responsibility for the final decision or action.",
+  },
+];
+
+const reviewLevels = [
+  {
+    level: "LIGHT REVIEW",
+    use: "Low-risk internal drafts",
+    examples:
+      "Simple rewriting, brainstorming, formatting and non-critical internal content.",
+    control:
+      "Quick human check for clarity, obvious errors and suitability before use.",
+  },
+  {
+    level: "STRUCTURED REVIEW",
+    use: "Operational and external work",
+    examples:
+      "Reports, customer or supplier communication, analysis summaries and recommendations.",
+    control:
+      "Verify key facts, source information, assumptions, format and required actions.",
+  },
+  {
+    level: "EXPERT / AUTHORISED REVIEW",
+    use: "Higher-consequence work",
+    examples:
+      "Important financial, safety, legal, employment or operational decisions.",
+    control:
+      "Use qualified human expertise, organisational controls and formal approval where required.",
+  },
+];
+
+const warehouseChecks = [
+  {
+    stage: "SOURCE",
+    title: "Verify the quantities",
+    text:
+      "System stock is 2,160 units and two physical counts confirm 2,131 units. The verified difference is 29 units.",
+  },
+  {
+    stage: "EVIDENCE",
+    title: "Separate completed checks from assumptions",
+    text:
+      "Receiving, outbound movements and adjustment records were reviewed. The information available does not yet confirm the root cause.",
+  },
+  {
+    stage: "AI OUTPUT",
+    title: "Check what the model added",
+    text:
+      "If the draft says the shortage was caused by a missed dispatch posting, remove or rewrite that statement unless the records prove it.",
+  },
+  {
+    stage: "COMMUNICATION",
+    title: "Review the management summary",
+    text:
+      "Make sure the report clearly distinguishes verified facts, investigation completed, unresolved issues and recommended next checks.",
+  },
+  {
+    stage: "APPROVAL",
+    title: "Keep the final decision with the authorised person",
+    text:
+      "Any inventory adjustment, escalation or corrective action should follow the organisation's approval process.",
+  },
+];
+
+const redFlags = [
+  "A very specific claim with no visible source",
+  "A confident explanation for an unresolved issue",
+  "Numbers that were calculated without being checked",
+  "Important facts missing from the original input",
+  "A recommendation presented as if it were an approved decision",
+  "Wording that changes the meaning of the source information",
+];
+
+const finalQuestions = [
+  "What information did the AI use?",
+  "Which statements can I verify directly?",
+  "What did the AI infer?",
+  "What could happen if this output is wrong?",
+  "Who must review or approve it?",
+  "Is this ready to use, or only ready for the next step?",
+];
+---
+
+<BaseLayout
+  title="Human Review & Quality Control | KRIYANO"
+  description="Learn how to review AI-generated work for factual accuracy, completeness, unsupported assumptions, communication quality and appropriate human approval."
+>
+  <article class="article-page">
+    <header class="article-hero">
+      <div class="container article-hero-grid">
+        <div class="article-heading">
+          <a href="/learn/" class="back-link">← LEARN</a>
+
+          <div class="article-meta">
+            <span>USING AI FOR REAL WORK</span>
+            <span>11</span>
+            <span>BEGINNER</span>
+          </div>
+
+          <h1>
+            Human Review &amp;
+            <span>Quality Control.</span>
+          </h1>
+
+          <p class="article-intro">
+            AI can produce useful work quickly, but speed and confidence are
+            not the same as accuracy. Before AI output becomes part of a real
+            document, decision or action, someone needs to check what is true,
+            what is missing and what still requires human judgment.
+          </p>
+        </div>
+
+        <aside class="lesson-panel">
+          <div class="panel-header">
+            <span>LESSON 11</span>
+            <span>USING AI FOR REAL WORK</span>
+          </div>
+
+          <div class="panel-content">
+            <span class="panel-kicker">REVIEW BEFORE USE</span>
+
+            <strong>
+              Treat AI output as work to inspect, not work to automatically trust.
+            </strong>
+
+            <p>
+              Good quality control checks both the content itself and whether
+              the output is appropriate for the decision or action that follows.
+            </p>
+          </div>
+
+          <div class="panel-footer">
+            <span>VERIFY → QUESTION → APPROVE</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section class="article-body-section">
+      <div class="container article-layout">
+        <aside class="article-sidebar">
+          <div class="sidebar-box">
+            <span class="sidebar-title">IN THIS GUIDE</span>
+
+            <a href="#why-review">Why review matters</a>
+            <a href="#six-checks">Six review checks</a>
+            <a href="#review-levels">Match review to risk</a>
+            <a href="#red-flags">Common red flags</a>
+            <a href="#warehouse">Warehouse example</a>
+            <a href="#final-check">Final review questions</a>
+            <a href="#takeaway">The practical takeaway</a>
+          </div>
+        </aside>
+
+        <main class="article-content">
+          <section id="why-review">
+            <div class="section-marker">01 / WHY REVIEW MATTERS</div>
+
+            <h2>AI can sound finished before the work is actually finished.</h2>
+
+            <p>
+              A response can be grammatically strong, well structured and
+              convincing while still containing a wrong number, missing fact,
+              unsupported assumption or unsuitable recommendation.
+            </p>
+
+            <p>
+              That is why workplace AI should usually be treated as an
+              intermediate output: something that helps move the task forward,
+              but still needs the level of human checking appropriate to the
+              situation.
+            </p>
+
+            <div class="concept-box">
+              <span>QUALITY CONTROL PRINCIPLE</span>
+              <p>
+                The better the output looks, the easier it can be to overlook
+                hidden errors. Review the evidence, not just the presentation.
+              </p>
+            </div>
+          </section>
+
+          <section id="six-checks">
+            <div class="section-marker">02 / SIX REVIEW CHECKS</div>
+
+            <h2>Use a repeatable review instead of relying on a quick glance.</h2>
+
+            <div class="check-grid">
+              {
+                reviewChecks.map((item) => (
+                  <article class="check-card">
+                    <span>{item.number}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="review-formula">
+              <span>REVIEW FRAMEWORK</span>
+
+              <div>
+                <strong>Facts</strong>
+                <span>→</span>
+                <strong>Completeness</strong>
+                <span>→</span>
+                <strong>Assumptions</strong>
+                <span>→</span>
+                <strong>Logic</strong>
+                <span>→</span>
+                <strong>Communication</strong>
+                <span>→</span>
+                <strong>Authority</strong>
+              </div>
+            </div>
+          </section>
+
+          <section id="review-levels">
+            <div class="section-marker">03 / REVIEW LEVELS</div>
+
+            <h2>Not every AI output needs the same amount of checking.</h2>
+
+            <p>
+              Review effort should increase with the consequence of being
+              wrong. A low-risk draft and a decision affecting money or
+              operations should not be treated the same way.
+            </p>
+
+            <div class="level-stack">
+              {
+                reviewLevels.map((item, index) => (
+                  <article class="level-card">
+                    <div class="level-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
+
+                    <div class="level-main">
+                      <span>{item.level}</span>
+                      <h3>{item.use}</h3>
+                    </div>
+
+                    <div>
+                      <span>EXAMPLES</span>
+                      <p>{item.examples}</p>
+                    </div>
+
+                    <div>
+                      <span>CONTROL</span>
+                      <p>{item.control}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="warning-box">
+              <span>DO NOT CONFUSE REVIEW WITH APPROVAL</span>
+              <p>
+                A person may verify that an AI-generated document is accurate
+                without having authority to approve the business action
+                described in that document.
+              </p>
+            </div>
+          </section>
+
+          <section id="red-flags">
+            <div class="section-marker">04 / RED FLAGS</div>
+
+            <h2>Some signals should trigger a closer review.</h2>
+
+            <div class="red-flag-list">
+              {
+                redFlags.map((item, index) => (
+                  <div class="red-flag-row">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <strong>{item}</strong>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="concept-box">
+              <span>USEFUL HABIT</span>
+              <p>
+                When AI makes a statement that matters, ask yourself:
+                “What evidence would I need to confirm this without the AI?”
+              </p>
+            </div>
+          </section>
+
+          <section id="warehouse">
+            <div class="section-marker">05 / REAL-WORK EXAMPLE</div>
+
+            <h2>Review an AI-generated stock discrepancy summary.</h2>
+
+            <p>
+              Imagine a warehouse system shows 2,160 units while two physical
+              counts confirm 2,131 units. The verified difference is 29 units.
+              AI is asked to draft a management summary from the investigation
+              notes.
+            </p>
+
+            <div class="warehouse-review">
+              {
+                warehouseChecks.map((item, index) => (
+                  <article class="warehouse-step">
+                    <div class="warehouse-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
+
+                    <div>
+                      <span>{item.stage}</span>
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="comparison-box">
+              <div>
+                <span>UNSAFE WORDING</span>
+                <p>
+                  “The 29-unit shortage was caused by an outbound transaction
+                  that was not posted correctly.”
+                </p>
+              </div>
+
+              <div>
+                <span>BETTER WORDING</span>
+                <p>
+                  “A verified shortage of 29 units remains unresolved after
+                  review of the available receiving, outbound and adjustment
+                  records. Further investigation is required before confirming
+                  the root cause.”
+                </p>
+              </div>
+            </div>
+
+            <p>
+              The second version keeps verified facts separate from an
+              unconfirmed explanation. That distinction is one of the most
+              important parts of reviewing AI-generated operational content.
+            </p>
+          </section>
+
+          <section id="final-check">
+            <div class="section-marker">06 / FINAL REVIEW QUESTIONS</div>
+
+            <h2>Before using the output, answer six questions.</h2>
+
+            <div class="question-list">
+              {
+                finalQuestions.map((item, index) => (
+                  <div class="question-row">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <strong>{item}</strong>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="decision-box">
+              <span>STOP CONDITION</span>
+              <p>
+                If an important statement cannot be verified and the
+                consequence of being wrong is meaningful, do not treat the
+                output as final. Get the missing evidence, expertise or approval
+                first.
+              </p>
+            </div>
+          </section>
+
+          <section id="takeaway">
+            <div class="section-marker">07 / PRACTICAL TAKEAWAY</div>
+
+            <h2>Quality comes from the combination of AI speed and human control.</h2>
+
+            <p>
+              AI can reduce drafting and information-handling effort, but the
+              person reviewing the output is still responsible for checking
+              whether it is accurate, appropriate and ready for the next step.
+            </p>
+
+            <div class="takeaway-flow">
+              <div>
+                <span>01</span>
+                <strong>Generate</strong>
+                <p>Use AI for the defined task.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>02</span>
+                <strong>Verify</strong>
+                <p>Check against the evidence.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>03</span>
+                <strong>Correct</strong>
+                <p>Remove errors and assumptions.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>04</span>
+                <strong>Approve</strong>
+                <p>Use the right human authority.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="next-lesson">
+            <div>
+              <span class="next-label">NEXT LESSON</span>
+
+              <h2>Building Reusable Prompts</h2>
+
+              <p>
+                Learn how to turn effective one-time prompts into repeatable
+                templates that can support consistent work.
+              </p>
+            </div>
+
+            <a
+  href="/learn/using-ai-for-real-work/building-reusable-prompts/"
+  class="next-status"
+>
+  CONTINUE →
+</a>
+          </section>
+        </main>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    overflow: hidden;
+  }
+
+  .article-hero {
+    padding: 92px 0 82px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(
+        circle at 82% 20%,
+        rgba(183, 255, 74, 0.08),
+        transparent 27%
+      ),
+      radial-gradient(
+        circle at 14% 0%,
+        rgba(77, 226, 197, 0.055),
+        transparent 28%
+      );
+  }
+
+  .article-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 75px;
+    align-items: end;
+  }
+
+  .back-link {
+    color: var(--lime);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 28px;
+  }
+
+  .article-meta span {
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-heading h1 {
+    max-width: 900px;
+    margin-top: 22px;
+    font-size: clamp(3.5rem, 7vw, 6.6rem);
+    line-height: 0.94;
+    letter-spacing: -0.065em;
+  }
+
+  .article-heading h1 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .article-intro {
+    max-width: 760px;
+    margin-top: 27px;
+    color: var(--muted);
+    font-size: 1.04rem;
+    line-height: 1.8;
+  }
+
+  .lesson-panel {
+    overflow: hidden;
+    border: 1px solid rgba(183, 255, 74, 0.17);
+    border-radius: 21px;
+    background: var(--surface);
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .panel-content {
+    padding: 31px 26px 34px;
+  }
+
+  .panel-kicker {
+    display: block;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .panel-content strong {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.45rem;
+    line-height: 1.35;
+    letter-spacing: -0.035em;
+  }
+
+  .panel-content p {
+    margin-top: 17px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .panel-footer {
+    padding: 17px 20px;
+    border-top: 1px solid var(--line);
+    background: rgba(183, 255, 74, 0.03);
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-body-section {
+    padding: 88px 0 110px;
+  }
+
+  .article-layout {
+    display: grid;
+    grid-template-columns: 235px minmax(0, 800px);
+    gap: 78px;
+    justify-content: center;
+  }
+
+  .sidebar-box {
+    position: sticky;
+    top: 105px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+  }
+
+  .sidebar-title {
+    padding: 16px 0;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .sidebar-box a {
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  .sidebar-box a:hover {
+    color: var(--lime);
+  }
+
+  .article-content > section:not(:first-child) {
+    margin-top: 90px;
+  }
+
+  .section-marker {
+    color: var(--lime);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .article-content h2 {
+    max-width: 760px;
+    margin-top: 14px;
+    font-size: clamp(2.3rem, 5vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.052em;
+  }
+
+  .article-content > section > p {
+    max-width: 760px;
+    margin-top: 23px;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .concept-box,
+  .warning-box,
+  .decision-box {
+    margin: 34px 0;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .concept-box span,
+  .warning-box span,
+  .decision-box span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .concept-box p,
+  .warning-box p,
+  .decision-box p {
+    margin-top: 12px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .check-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
+    margin-top: 36px;
+  }
+
+  .check-card {
+    padding: 23px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .check-card > span {
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .check-card h3 {
+    margin-top: 24px;
+    font-size: 1rem;
+  }
+
+  .check-card p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.65;
+  }
+
+  .review-formula {
+    margin-top: 32px;
+    padding: 25px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .review-formula > span {
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .review-formula > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-top: 16px;
+  }
+
+  .review-formula strong {
+    font-size: 0.76rem;
+  }
+
+  .review-formula div span {
+    color: var(--mint);
+  }
+
+  .level-stack {
+    display: grid;
+    gap: 13px;
+    margin-top: 35px;
+  }
+
+  .level-card {
+    display: grid;
+    grid-template-columns: 55px 1.1fr 1fr 1fr;
+    gap: 22px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .level-number {
+    color: var(--lime);
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .level-card span {
+    color: var(--lime);
+    font-size: 0.56rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+  }
+
+  .level-card h3 {
+    margin-top: 8px;
+    font-size: 0.92rem;
+  }
+
+  .level-card p {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.6;
+  }
+
+  .red-flag-list,
+  .question-list {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .red-flag-row,
+  .question-row {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 20px;
+    padding: 19px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .red-flag-row span,
+  .question-row span {
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .red-flag-row strong,
+  .question-row strong {
+    font-size: 0.83rem;
+    line-height: 1.5;
+  }
+
+  .warehouse-review {
+    margin-top: 36px;
+    border-top: 1px solid var(--line);
+  }
+
+  .warehouse-step {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 22px;
+    padding: 25px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .warehouse-number {
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .warehouse-step span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .warehouse-step h3 {
+    margin-top: 8px;
+    font-size: 1.03rem;
+  }
+
+  .warehouse-step p {
+    max-width: 650px;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.68;
+  }
+
+  .comparison-box {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+    margin-top: 32px;
+  }
+
+  .comparison-box > div {
+    padding: 25px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .comparison-box span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .comparison-box p {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.68;
+  }
+
+  .takeaway-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-top: 35px;
+    padding: 27px 22px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .takeaway-flow > div span {
+    display: block;
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .takeaway-flow strong {
+    display: block;
+    margin-top: 13px;
+    font-size: 0.82rem;
+  }
+
+  .takeaway-flow p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.67rem;
+    line-height: 1.5;
+  }
+
+  .flow-arrow {
+    color: var(--mint);
+  }
+
+  .next-label {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .next-lesson {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    padding-top: 43px;
+    border-top: 1px solid var(--line);
+  }
+
+  .next-lesson h2 {
+    margin-top: 11px;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+
+  .next-lesson p {
+    max-width: 540px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.79rem;
+    line-height: 1.65;
+  }
+
+  .next-status {
+    flex-shrink: 0;
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  a.next-status:hover {
+    color: var(--lime);
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1000px) {
+    .article-hero-grid,
+    .article-layout {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .article-sidebar {
+      display: none;
+    }
+
+    .check-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .level-card {
+      grid-template-columns: 50px 1fr;
+    }
+
+    .level-card > div:nth-child(3),
+    .level-card > div:nth-child(4) {
+      grid-column: 2;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .flow-arrow {
+      display: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .article-hero {
+      padding: 68px 0 60px;
+    }
+
+    .article-body-section {
+      padding: 65px 0 80px;
+    }
+
+    .check-grid,
+    .comparison-box {
+      grid-template-columns: 1fr;
+    }
+
+    .level-card {
+      grid-template-columns: 38px 1fr;
+    }
+
+    .warehouse-step {
+      grid-template-columns: 42px 1fr;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .takeaway-flow > div {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .takeaway-flow > div:last-of-type {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .next-lesson {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

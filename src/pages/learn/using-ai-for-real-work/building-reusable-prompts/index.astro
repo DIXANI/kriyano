@@ -1,0 +1,1217 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const reusableParts = [
+  {
+    number: "01",
+    title: "Stable role",
+    text:
+      "Keep the perspective consistent when the same type of work is repeated, such as operations supervisor, customer service agent or inventory controller.",
+  },
+  {
+    number: "02",
+    title: "Repeatable task",
+    text:
+      "Describe the job in a way that can be reused, such as drafting a follow-up email, summarising an investigation or organising meeting notes.",
+  },
+  {
+    number: "03",
+    title: "Variable inputs",
+    text:
+      "Replace changing details with placeholders for dates, names, quantities, references, incidents or other task-specific information.",
+  },
+  {
+    number: "04",
+    title: "Output structure",
+    text:
+      "Define the format you want every time, such as headings, bullet points, table columns, email sections or a fixed report structure.",
+  },
+  {
+    number: "05",
+    title: "Quality rules",
+    text:
+      "Keep useful constraints inside the template, including tone, length, evidence requirements and instructions not to invent missing facts.",
+  },
+];
+
+const templateExamples = [
+  {
+    title: "Supplier follow-up",
+    purpose: "Create consistent supplier follow-up emails.",
+    variables:
+      "[supplier name], [PO number], [item], [promised date], [current delay], [required response]",
+  },
+  {
+    title: "Inventory discrepancy summary",
+    purpose: "Turn verified investigation notes into a repeatable management summary.",
+    variables:
+      "[system quantity], [physical quantity], [difference], [checks completed], [unresolved points], [next action]",
+  },
+  {
+    title: "Meeting notes",
+    purpose: "Convert raw notes into structured minutes and action items.",
+    variables:
+      "[meeting topic], [participants], [notes], [decisions], [actions], [owners], [deadlines]",
+  },
+  {
+    title: "Operational report",
+    purpose: "Produce a consistent summary from verified daily or weekly information.",
+    variables:
+      "[period], [KPIs], [issues], [incidents], [actions taken], [pending items]",
+  },
+];
+
+const improvementChecks = [
+  "Does the template work across more than one real example?",
+  "Are the changing inputs clearly separated from the permanent instructions?",
+  "Does the output structure match how the information will actually be used?",
+  "Does the template tell AI what not to assume?",
+  "Can another person understand how to use it without additional explanation?",
+  "Is there a clear human review point before the output is used?",
+];
+
+const lifecycle = [
+  {
+    stage: "BUILD",
+    title: "Start from a prompt that already works",
+    text:
+      "Do not create complexity simply for the sake of having a template. Start with a real prompt that has produced useful results.",
+  },
+  {
+    stage: "GENERALISE",
+    title: "Separate fixed instructions from changing details",
+    text:
+      "Keep the stable task, format and quality rules. Replace changing information with clear placeholders.",
+  },
+  {
+    stage: "TEST",
+    title: "Run the template with different examples",
+    text:
+      "A reusable prompt should work across several realistic cases, not just the situation it was originally written for.",
+  },
+  {
+    stage: "REFINE",
+    title: "Fix recurring weaknesses",
+    text:
+      "If the same problem appears repeatedly, improve the template instead of correcting the output manually every time.",
+  },
+  {
+    stage: "MAINTAIN",
+    title: "Update the template when the workflow changes",
+    text:
+      "Processes, requirements and systems change. Reusable prompts should be reviewed when the real work changes.",
+  },
+];
+
+const badTemplateSignals = [
+  {
+    title: "Too many placeholders",
+    text:
+      "If users need to fill in dozens of fields for a simple task, the template may create more work than it saves.",
+  },
+  {
+    title: "Hidden assumptions",
+    text:
+      "A reusable prompt should not quietly assume facts, policies or conditions that may differ from one case to another.",
+  },
+  {
+    title: "Overly rigid output",
+    text:
+      "A fixed format is useful until it prevents the model from handling legitimate differences between cases.",
+  },
+  {
+    title: "No ownership",
+    text:
+      "A template can standardise the AI step, but someone still needs responsibility for checking and approving the result.",
+  },
+];
+---
+
+<BaseLayout
+  title="Building Reusable Prompts | KRIYANO"
+  description="Learn how to turn effective one-time prompts into reusable templates for recurring workplace tasks, with practical examples and quality-control guidance."
+>
+  <article class="article-page">
+    <header class="article-hero">
+      <div class="container article-hero-grid">
+        <div class="article-heading">
+          <a href="/learn/" class="back-link">← LEARN</a>
+
+          <div class="article-meta">
+            <span>USING AI FOR REAL WORK</span>
+            <span>12</span>
+            <span>BEGINNER</span>
+          </div>
+
+          <h1>
+            Building
+            <span>Reusable Prompts.</span>
+          </h1>
+
+          <p class="article-intro">
+            A useful prompt should not always have to be rebuilt from zero.
+            When the same type of task happens repeatedly, a tested prompt can
+            become a reusable template that improves speed, consistency and
+            quality.
+          </p>
+        </div>
+
+        <aside class="lesson-panel">
+          <div class="panel-header">
+            <span>LESSON 12</span>
+            <span>USING AI FOR REAL WORK</span>
+          </div>
+
+          <div class="panel-content">
+            <span class="panel-kicker">FROM PROMPT TO TEMPLATE</span>
+
+            <strong>
+              Keep the instructions stable. Change only the information that
+              belongs to the specific case.
+            </strong>
+
+            <p>
+              Reusable prompts work best when they standardise a real recurring
+              task without removing the flexibility needed for different
+              situations.
+            </p>
+          </div>
+
+          <div class="panel-footer">
+            <span>BUILD → TEST → REFINE → REUSE</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section class="article-body-section">
+      <div class="container article-layout">
+        <aside class="article-sidebar">
+          <div class="sidebar-box">
+            <span class="sidebar-title">IN THIS GUIDE</span>
+
+            <a href="#why-reuse">Why reuse prompts</a>
+            <a href="#five-parts">Five reusable parts</a>
+            <a href="#template-example">Build a template</a>
+            <a href="#workplace-examples">Workplace examples</a>
+            <a href="#lifecycle">Template lifecycle</a>
+            <a href="#quality">Quality checks</a>
+            <a href="#takeaway">The practical takeaway</a>
+          </div>
+        </aside>
+
+        <main class="article-content">
+          <section id="why-reuse">
+            <div class="section-marker">01 / WHY REUSE PROMPTS</div>
+
+            <h2>Repeatable work should not require repeatable reinvention.</h2>
+
+            <p>
+              If you regularly use AI for the same type of task, rewriting the
+              instructions every time creates unnecessary effort and can also
+              produce inconsistent results.
+            </p>
+
+            <p>
+              A reusable prompt keeps the parts that should stay consistent
+              while allowing the details of each case to change.
+            </p>
+
+            <div class="concept-box">
+              <span>REUSABLE PROMPT PRINCIPLE</span>
+              <p>
+                Standardise the instruction, not the facts. The template should
+                provide a reliable structure while the current information
+                remains specific to the task.
+              </p>
+            </div>
+          </section>
+
+          <section id="five-parts">
+            <div class="section-marker">02 / FIVE REUSABLE PARTS</div>
+
+            <h2>A strong template separates stable instructions from variable inputs.</h2>
+
+            <div class="parts-grid">
+              {
+                reusableParts.map((item) => (
+                  <article class="part-card">
+                    <span>{item.number}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="template-formula">
+              <span>TEMPLATE FORMULA</span>
+
+              <div>
+                <strong>Role</strong>
+                <span>+</span>
+                <strong>Task</strong>
+                <span>+</span>
+                <strong>Variables</strong>
+                <span>+</span>
+                <strong>Output</strong>
+                <span>+</span>
+                <strong>Rules</strong>
+              </div>
+            </div>
+          </section>
+
+          <section id="template-example">
+            <div class="section-marker">03 / BUILD A TEMPLATE</div>
+
+            <h2>Turn a one-time inventory prompt into a reusable format.</h2>
+
+            <p>
+              Suppose you frequently need to prepare a management summary after
+              an inventory discrepancy investigation.
+            </p>
+
+            <div class="prompt-comparison">
+              <div>
+                <span>ONE-TIME PROMPT</span>
+
+                <p>
+                  Act as an inventory control supervisor. Prepare a management
+                  summary for a stock discrepancy. The system quantity is 900
+                  units and the physical count is 876 units. Two physical
+                  counts were completed and receiving, outbound and adjustment
+                  records were reviewed. The root cause has not been confirmed.
+                  Use headings for discrepancy, checks completed, findings and
+                  next actions. Do not invent a cause.
+                </p>
+              </div>
+
+              <div>
+                <span>REUSABLE TEMPLATE</span>
+
+                <p>
+                  Act as an inventory control supervisor. Prepare a concise
+                  management summary for an inventory discrepancy using only
+                  the information provided.
+                </p>
+
+                <p>
+                  System quantity: [system quantity]<br />
+                  Physical quantity: [physical quantity]<br />
+                  Difference: [difference]<br />
+                  Checks completed: [checks completed]<br />
+                  Confirmed findings: [confirmed findings]<br />
+                  Unresolved points: [unresolved points]
+                </p>
+
+                <p>
+                  Use the headings: Discrepancy, Checks Completed, Findings,
+                  Unresolved Points and Recommended Next Actions. Do not invent
+                  a root cause or present an assumption as a verified fact.
+                </p>
+              </div>
+            </div>
+
+            <div class="concept-box">
+              <span>WHAT CHANGED?</span>
+              <p>
+                The role, task, output structure and quality rules remain
+                stable. Only the details of the current discrepancy are
+                replaced each time.
+              </p>
+            </div>
+          </section>
+
+          <section id="workplace-examples">
+            <div class="section-marker">04 / WORKPLACE EXAMPLES</div>
+
+            <h2>Reusable prompts are useful wherever the work pattern repeats.</h2>
+
+            <div class="example-stack">
+              {
+                templateExamples.map((item) => (
+                  <article class="example-card">
+                    <div>
+                      <span>TEMPLATE</span>
+                      <h3>{item.title}</h3>
+                    </div>
+
+                    <div>
+                      <span>PURPOSE</span>
+                      <p>{item.purpose}</p>
+                    </div>
+
+                    <div>
+                      <span>VARIABLE INPUTS</span>
+                      <p>{item.variables}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="warning-box">
+              <span>DO NOT TEMPLATE EVERYTHING</span>
+              <p>
+                Reuse works best for recurring patterns. A highly unusual,
+                sensitive or judgment-heavy task may require a fresh prompt and
+                more deliberate review.
+              </p>
+            </div>
+          </section>
+
+          <section id="lifecycle">
+            <div class="section-marker">05 / TEMPLATE LIFECYCLE</div>
+
+            <h2>A reusable prompt should improve through real use.</h2>
+
+            <div class="lifecycle-list">
+              {
+                lifecycle.map((item, index) => (
+                  <article class="lifecycle-row">
+                    <div class="lifecycle-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
+
+                    <div class="lifecycle-main">
+                      <span>{item.stage}</span>
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="decision-box">
+              <span>IMPROVEMENT RULE</span>
+              <p>
+                When you repeatedly make the same correction to AI output,
+                consider whether that correction belongs inside the template.
+              </p>
+            </div>
+          </section>
+
+          <section id="quality">
+            <div class="section-marker">06 / QUALITY CONTROL</div>
+
+            <h2>Reusable prompts need testing just like reusable workflows.</h2>
+
+            <div class="quality-list">
+              {
+                improvementChecks.map((item, index) => (
+                  <div class="quality-row">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <strong>{item}</strong>
+                  </div>
+                ))
+              }
+            </div>
+
+            <h3 class="subheading">Watch for weak template design.</h3>
+
+            <div class="signal-grid">
+              {
+                badTemplateSignals.map((item) => (
+                  <article>
+                    <h4>{item.title}</h4>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="takeaway">
+            <div class="section-marker">07 / PRACTICAL TAKEAWAY</div>
+
+            <h2>Turn proven prompts into small pieces of reusable work infrastructure.</h2>
+
+            <p>
+              A well-designed reusable prompt reduces repeated setup, improves
+              consistency and makes it easier for the same task to be handled
+              across multiple cases. But it should remain simple enough to
+              understand, test and review.
+            </p>
+
+            <div class="takeaway-flow">
+              <div>
+                <span>01</span>
+                <strong>Find</strong>
+                <p>Choose a recurring task.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>02</span>
+                <strong>Separate</strong>
+                <p>Fixed rules from variable data.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>03</span>
+                <strong>Test</strong>
+                <p>Use several real examples.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>04</span>
+                <strong>Improve</strong>
+                <p>Refine from recurring issues.</p>
+              </div>
+            </div>
+
+            <div class="tool-callout">
+              <div>
+                <span class="tool-kicker">BUILD YOUR FIRST VERSION</span>
+
+                <h3>Use KRIYANO to structure a repeatable prompt.</h3>
+
+                <p>
+                  Start with the task, role, context, output format and
+                  constraints. Then replace the changing information with clear
+                  placeholders before saving the prompt for reuse.
+                </p>
+              </div>
+
+              <a href="/tools/prompt-builder/" class="button button-primary">
+                Open Prompt Builder
+              </a>
+            </div>
+
+            <div class="completion-box">
+              <span>LEARNING PATH COMPLETE</span>
+
+              <h3>Using AI for Real Work</h3>
+
+              <p>
+                You have completed the four guides in this learning path:
+                choosing suitable tasks, building AI-assisted workflows,
+                reviewing AI output and creating reusable prompts.
+              </p>
+
+              <div class="completion-lessons">
+                <span>09 — Choosing Tasks for AI</span>
+                <span>10 — AI-Assisted Workflows</span>
+                <span>11 — Human Review &amp; Quality Control</span>
+                <span>12 — Building Reusable Prompts</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="next-lesson">
+            <div>
+              <span class="next-label">NEXT LEARNING PATH</span>
+
+              <h2>Accuracy &amp; Research</h2>
+
+              <p>
+                Learn why AI can produce wrong answers, how to fact-check its
+                output, evaluate sources and use AI more carefully for
+                research.
+              </p>
+            </div>
+
+            <span class="next-status">COMING NEXT →</span>
+          </section>
+        </main>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    overflow: hidden;
+  }
+
+  .article-hero {
+    padding: 92px 0 82px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(
+        circle at 82% 20%,
+        rgba(183, 255, 74, 0.08),
+        transparent 27%
+      ),
+      radial-gradient(
+        circle at 14% 0%,
+        rgba(77, 226, 197, 0.055),
+        transparent 28%
+      );
+  }
+
+  .article-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 75px;
+    align-items: end;
+  }
+
+  .back-link {
+    color: var(--lime);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 28px;
+  }
+
+  .article-meta span {
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-heading h1 {
+    max-width: 900px;
+    margin-top: 22px;
+    font-size: clamp(3.5rem, 7vw, 6.6rem);
+    line-height: 0.94;
+    letter-spacing: -0.065em;
+  }
+
+  .article-heading h1 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .article-intro {
+    max-width: 760px;
+    margin-top: 27px;
+    color: var(--muted);
+    font-size: 1.04rem;
+    line-height: 1.8;
+  }
+
+  .lesson-panel {
+    overflow: hidden;
+    border: 1px solid rgba(183, 255, 74, 0.17);
+    border-radius: 21px;
+    background: var(--surface);
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .panel-content {
+    padding: 31px 26px 34px;
+  }
+
+  .panel-kicker {
+    display: block;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .panel-content strong {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.45rem;
+    line-height: 1.35;
+    letter-spacing: -0.035em;
+  }
+
+  .panel-content p {
+    margin-top: 17px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .panel-footer {
+    padding: 17px 20px;
+    border-top: 1px solid var(--line);
+    background: rgba(183, 255, 74, 0.03);
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-body-section {
+    padding: 88px 0 110px;
+  }
+
+  .article-layout {
+    display: grid;
+    grid-template-columns: 235px minmax(0, 800px);
+    gap: 78px;
+    justify-content: center;
+  }
+
+  .sidebar-box {
+    position: sticky;
+    top: 105px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+  }
+
+  .sidebar-title {
+    padding: 16px 0;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .sidebar-box a {
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  .sidebar-box a:hover {
+    color: var(--lime);
+  }
+
+  .article-content > section:not(:first-child) {
+    margin-top: 90px;
+  }
+
+  .section-marker {
+    color: var(--lime);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .article-content h2 {
+    max-width: 760px;
+    margin-top: 14px;
+    font-size: clamp(2.3rem, 5vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.052em;
+  }
+
+  .article-content > section > p {
+    max-width: 760px;
+    margin-top: 23px;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .concept-box,
+  .warning-box,
+  .decision-box {
+    margin: 34px 0;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .concept-box span,
+  .warning-box span,
+  .decision-box span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .concept-box p,
+  .warning-box p,
+  .decision-box p {
+    margin-top: 12px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .parts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
+    margin-top: 36px;
+  }
+
+  .part-card {
+    padding: 23px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .part-card > span {
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .part-card h3 {
+    margin-top: 24px;
+    font-size: 1rem;
+  }
+
+  .part-card p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.65;
+  }
+
+  .template-formula {
+    margin-top: 32px;
+    padding: 25px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .template-formula > span {
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .template-formula > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-top: 16px;
+  }
+
+  .template-formula strong {
+    font-size: 0.8rem;
+  }
+
+  .template-formula div span {
+    color: var(--mint);
+  }
+
+  .prompt-comparison {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 35px;
+  }
+
+  .prompt-comparison > div {
+    padding: 27px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .prompt-comparison > div > span {
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .prompt-comparison p {
+    margin-top: 15px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.75;
+  }
+
+  .example-stack {
+    display: grid;
+    gap: 13px;
+    margin-top: 35px;
+  }
+
+  .example-card {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr 1.7fr;
+    gap: 22px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .example-card span {
+    color: var(--lime);
+    font-size: 0.57rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+  }
+
+  .example-card h3 {
+    margin-top: 8px;
+    font-size: 0.94rem;
+  }
+
+  .example-card p {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.73rem;
+    line-height: 1.6;
+  }
+
+  .lifecycle-list {
+    margin-top: 36px;
+    border-top: 1px solid var(--line);
+  }
+
+  .lifecycle-row {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 23px;
+    padding: 25px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .lifecycle-number {
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .lifecycle-main > span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .lifecycle-main h3 {
+    margin-top: 8px;
+    font-size: 1.02rem;
+  }
+
+  .lifecycle-main p {
+    max-width: 650px;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.68;
+  }
+
+  .quality-list {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .quality-row {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 20px;
+    padding: 19px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .quality-row span {
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .quality-row strong {
+    font-size: 0.83rem;
+    line-height: 1.5;
+  }
+
+  .subheading {
+    margin-top: 45px;
+    font-size: 1.45rem;
+    letter-spacing: -0.025em;
+  }
+
+  .signal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+    margin-top: 20px;
+  }
+
+  .signal-grid article {
+    padding: 23px;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background: var(--surface);
+  }
+
+  .signal-grid h4 {
+    font-size: 0.9rem;
+  }
+
+  .signal-grid p {
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 0.74rem;
+    line-height: 1.65;
+  }
+
+  .takeaway-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-top: 35px;
+    padding: 27px 22px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .takeaway-flow > div span {
+    display: block;
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .takeaway-flow strong {
+    display: block;
+    margin-top: 13px;
+    font-size: 0.82rem;
+  }
+
+  .takeaway-flow p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.67rem;
+    line-height: 1.5;
+  }
+
+  .flow-arrow {
+    color: var(--mint);
+  }
+
+  .tool-callout {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    margin-top: 40px;
+    padding: 32px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 19px;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(183, 255, 74, 0.04),
+        transparent 50%
+      ),
+      var(--surface);
+  }
+
+  .tool-kicker,
+  .next-label {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .tool-callout h3 {
+    margin-top: 11px;
+    font-size: 1.35rem;
+  }
+
+  .tool-callout p {
+    max-width: 510px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+
+  .tool-callout .button {
+    flex-shrink: 0;
+  }
+
+  .completion-box {
+    margin-top: 45px;
+    padding: 31px;
+    border: 1px solid rgba(183, 255, 74, 0.22);
+    border-radius: 19px;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(183, 255, 74, 0.055),
+        transparent 55%
+      ),
+      var(--surface);
+  }
+
+  .completion-box > span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .completion-box h3 {
+    margin-top: 12px;
+    font-size: 1.55rem;
+  }
+
+  .completion-box > p {
+    max-width: 640px;
+    margin-top: 11px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+
+  .completion-lessons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .completion-lessons span {
+    padding: 13px 15px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--muted);
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+
+  .next-lesson {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    padding-top: 43px;
+    border-top: 1px solid var(--line);
+  }
+
+  .next-lesson h2 {
+    margin-top: 11px;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+
+  .next-lesson p {
+    max-width: 540px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.79rem;
+    line-height: 1.65;
+  }
+
+  .next-status {
+    flex-shrink: 0;
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  a.next-status:hover {
+    color: var(--lime);
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1000px) {
+    .article-hero-grid,
+    .article-layout {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .article-sidebar {
+      display: none;
+    }
+
+    .parts-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .example-card {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .example-card > div:last-child {
+      grid-column: 1 / -1;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .flow-arrow {
+      display: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .article-hero {
+      padding: 68px 0 60px;
+    }
+
+    .article-body-section {
+      padding: 65px 0 80px;
+    }
+
+    .parts-grid,
+    .prompt-comparison,
+    .signal-grid,
+    .completion-lessons {
+      grid-template-columns: 1fr;
+    }
+
+    .example-card {
+      grid-template-columns: 1fr;
+    }
+
+    .example-card > div:last-child {
+      grid-column: auto;
+    }
+
+    .lifecycle-row {
+      grid-template-columns: 42px 1fr;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .takeaway-flow > div {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .takeaway-flow > div:last-of-type {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .tool-callout,
+    .next-lesson {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
