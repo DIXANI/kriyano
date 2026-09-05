@@ -1,0 +1,1235 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const sensitiveTypes = [
+  {
+    number: "01",
+    title: "Passwords & authentication details",
+    text:
+      "Do not paste passwords, one-time codes, API keys, recovery codes, private tokens or login credentials into an AI tool.",
+  },
+  {
+    number: "02",
+    title: "Financial information",
+    text:
+      "Avoid sharing bank account numbers, card details, payment credentials, confidential pricing information or sensitive financial records unless you are using an approved system specifically designed for that data.",
+  },
+  {
+    number: "03",
+    title: "Personal identity information",
+    text:
+      "Be careful with passport numbers, national identification numbers, employee IDs, private addresses, personal phone numbers and other data that could identify someone.",
+  },
+  {
+    number: "04",
+    title: "Confidential workplace information",
+    text:
+      "Internal reports, customer records, contracts, pricing, unreleased plans, operational incidents and company documents may be confidential even when they do not look highly sensitive.",
+  },
+  {
+    number: "05",
+    title: "Customer & employee data",
+    text:
+      "Names, contact details, performance records, payroll information, complaints, HR information and customer histories may be protected by company policy or privacy requirements.",
+  },
+  {
+    number: "06",
+    title: "Restricted technical information",
+    text:
+      "Source code, security configurations, internal architecture, proprietary formulas, private credentials and vulnerability information should only be shared through approved systems and processes.",
+  },
+];
+
+const decisionQuestions = [
+  {
+    label: "OWNERSHIP",
+    question: "Do I have the right to share this information?",
+  },
+  {
+    label: "NECESSITY",
+    question: "Does AI actually need this detail to complete the task?",
+  },
+  {
+    label: "SENSITIVITY",
+    question: "Could this information harm someone or the organisation if exposed?",
+  },
+  {
+    label: "POLICY",
+    question: "Does my organisation allow this information to be used with this AI tool?",
+  },
+  {
+    label: "MINIMISATION",
+    question: "Can I remove names, numbers or confidential details first?",
+  },
+  {
+    label: "ALTERNATIVE",
+    question: "Can I describe the situation without sharing the original data?",
+  },
+];
+
+const saferMethods = [
+  {
+    title: "Replace real names",
+    before: "Customer: Mohamed Ali",
+    after: "Customer A",
+  },
+  {
+    title: "Remove account identifiers",
+    before: "Account 4892-7721-1184",
+    after: "Customer account",
+  },
+  {
+    title: "Generalise commercial details",
+    before: "Supplier rate: QAR 7.85 per unit",
+    after: "Current supplier rate",
+  },
+  {
+    title: "Use sample values",
+    before: "Actual payroll figures",
+    after: "Example figures for demonstration",
+  },
+  {
+    title: "Describe instead of uploading",
+    before: "Full confidential incident report",
+    after: "A summary of the relevant non-sensitive facts",
+  },
+  {
+    title: "Limit the scope",
+    before: "Complete customer database",
+    after: "Only the non-identifying fields required for the task",
+  },
+];
+
+const riskLevels = [
+  {
+    level: "LOWER RISK",
+    title: "Public or generic information",
+    text:
+      "Public product descriptions, generic examples, common knowledge and fictional practice data are normally easier to use safely.",
+  },
+  {
+    level: "MEDIUM RISK",
+    title: "Internal operational information",
+    text:
+      "Internal processes, non-public reports and workplace details may require approval, redaction or use of an organisation-approved AI system.",
+  },
+  {
+    level: "HIGHER RISK",
+    title: "Personal, confidential or security-sensitive data",
+    text:
+      "Credentials, personal records, financial details, restricted business information and security data should not be entered into unapproved AI services.",
+  },
+];
+
+const workplaceSteps = [
+  {
+    stage: "PAUSE",
+    title: "Identify the information",
+    text:
+      "Before pasting anything, recognise whether the material contains personal, confidential, restricted or commercially sensitive information.",
+  },
+  {
+    stage: "REDUCE",
+    title: "Remove unnecessary details",
+    text:
+      "Keep only the information AI genuinely needs to perform the task.",
+  },
+  {
+    stage: "ANONYMIZE",
+    title: "Replace identifying information",
+    text:
+      "Use labels, placeholders or fictional examples where the real identity is not necessary.",
+  },
+  {
+    stage: "CHECK",
+    title: "Confirm the tool is approved",
+    text:
+      "Follow your organisation's rules about which AI systems may be used for workplace information.",
+  },
+  {
+    stage: "REVIEW",
+    title: "Inspect before submitting",
+    text:
+      "Read the final prompt once more and remove anything that should not leave the approved environment.",
+  },
+];
+
+const promptExamples = [
+  {
+    type: "UNSAFE",
+    text:
+      "Write a complaint response to customer John Perera, passport number N1234567, phone +974 XXXXXXXX, regarding account 984277 and the payment dispute described in the attached internal customer file.",
+  },
+  {
+    type: "SAFER",
+    text:
+      "Write a professional response to a customer regarding a disputed payment. The customer says the amount charged does not match the agreed amount. Acknowledge the concern, explain that the transaction is being reviewed, and ask the customer to wait for confirmation. Do not invent the investigation result.",
+  },
+];
+---
+
+<BaseLayout
+  title="What Not to Share With AI | KRIYANO"
+  description="Learn what information should not be shared with AI tools, how to recognise sensitive workplace data, and how to reduce privacy and confidentiality risks before using AI."
+>
+  <article class="article-page">
+    <header class="article-hero">
+      <div class="container article-hero-grid">
+        <div class="article-heading">
+          <a href="/learn/" class="back-link">← LEARN</a>
+
+          <div class="article-meta">
+            <span>SAFE &amp; RESPONSIBLE USE</span>
+            <span>17</span>
+            <span>BEGINNER</span>
+          </div>
+
+          <h1>
+            What Not to Share
+            <span>With AI.</span>
+          </h1>
+
+          <p class="article-intro">
+            AI can be useful for drafting, analysing and organising work, but
+            the information you provide matters. Before entering workplace or
+            personal data into an AI tool, decide whether that information
+            should be shared at all.
+          </p>
+        </div>
+
+        <aside class="lesson-panel">
+          <div class="panel-header">
+            <span>LESSON 17</span>
+            <span>SAFE &amp; RESPONSIBLE USE</span>
+          </div>
+
+          <div class="panel-content">
+            <span class="panel-kicker">SHARE LESS. PROTECT MORE.</span>
+
+            <strong>
+              AI only needs the information required to complete the task.
+            </strong>
+
+            <p>
+              Good AI use includes protecting personal information,
+              confidential workplace data and security-sensitive details before
+              they enter the prompt.
+            </p>
+          </div>
+
+          <div class="panel-footer">
+            <span>PAUSE → REDUCE → CHECK → SUBMIT</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section class="article-body-section">
+      <div class="container article-layout">
+        <aside class="article-sidebar">
+          <div class="sidebar-box">
+            <span class="sidebar-title">IN THIS GUIDE</span>
+
+            <a href="#principle">The core principle</a>
+            <a href="#sensitive-data">Sensitive information</a>
+            <a href="#before-sharing">Before sharing anything</a>
+            <a href="#safer-inputs">Safer ways to use data</a>
+            <a href="#risk-levels">Think in risk levels</a>
+            <a href="#workplace-example">Workplace example</a>
+            <a href="#workflow">Safe input workflow</a>
+            <a href="#takeaway">The practical takeaway</a>
+          </div>
+        </aside>
+
+        <main class="article-content">
+          <section id="principle">
+            <div class="section-marker">01 / THE CORE PRINCIPLE</div>
+
+            <h2>Do not share information simply because AI can process it.</h2>
+
+            <p>
+              A useful AI prompt does not need every detail you know. In many
+              situations, the safest and most effective approach is to provide
+              only the minimum information required for the task.
+            </p>
+
+            <p>
+              This is especially important when working with information that
+              belongs to customers, employees, suppliers, employers or other
+              people.
+            </p>
+
+            <div class="concept-box">
+              <span>CORE PRINCIPLE</span>
+              <p>
+                If a piece of information is not necessary for the AI task,
+                leave it out.
+              </p>
+            </div>
+          </section>
+
+          <section id="sensitive-data">
+            <div class="section-marker">02 / SENSITIVE INFORMATION</div>
+
+            <h2>Some information deserves extra protection.</h2>
+
+            <div class="sensitive-grid">
+              {
+                sensitiveTypes.map((item) => (
+                  <article class="sensitive-card">
+                    <span>{item.number}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="warning-box">
+              <span>IMPORTANT</span>
+              <p>
+                Something does not have to be secret to be sensitive. A normal
+                workplace document may still contain personal, commercial or
+                operational information that should not be entered into an
+                unapproved AI system.
+              </p>
+            </div>
+          </section>
+
+          <section id="before-sharing">
+            <div class="section-marker">03 / BEFORE SHARING ANYTHING</div>
+
+            <h2>Ask six questions before putting real information into AI.</h2>
+
+            <div class="question-list">
+              {
+                decisionQuestions.map((item, index) => (
+                  <article class="question-row">
+                    <div class="question-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
+
+                    <div>
+                      <span>{item.label}</span>
+                      <h3>{item.question}</h3>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="decision-box">
+              <span>SIMPLE DECISION RULE</span>
+              <p>
+                If you would hesitate to send the information to an unknown
+                external person, do not automatically paste it into an AI tool.
+              </p>
+            </div>
+          </section>
+
+          <section id="safer-inputs">
+            <div class="section-marker">04 / SAFER INPUTS</div>
+
+            <h2>Most AI tasks can be completed with less sensitive information.</h2>
+
+            <p>
+              Redaction and anonymisation can often preserve the useful context
+              while removing information that AI does not need.
+            </p>
+
+            <div class="method-grid">
+              {
+                saferMethods.map((item) => (
+                  <article class="method-card">
+                    <span>{item.title}</span>
+
+                    <div class="method-example">
+                      <div>
+                        <small>INSTEAD OF</small>
+                        <p>{item.before}</p>
+                      </div>
+
+                      <div>
+                        <small>USE</small>
+                        <p>{item.after}</p>
+                      </div>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="concept-box">
+              <span>DATA MINIMISATION</span>
+              <p>
+                Reduce the prompt to the smallest amount of real information
+                necessary to achieve the result.
+              </p>
+            </div>
+          </section>
+
+          <section id="risk-levels">
+            <div class="section-marker">05 / THINK IN RISK LEVELS</div>
+
+            <h2>Not every AI input carries the same level of risk.</h2>
+
+            <div class="risk-grid">
+              {
+                riskLevels.map((item) => (
+                  <article class="risk-card">
+                    <span>{item.level}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+
+            <p>
+              Higher-risk information deserves stronger controls. This may mean
+              not using AI at all, using only an organisation-approved AI
+              environment, or removing sensitive details before processing.
+            </p>
+          </section>
+
+          <section id="workplace-example">
+            <div class="section-marker">06 / WORKPLACE EXAMPLE</div>
+
+            <h2>You need AI to help write an inventory investigation summary.</h2>
+
+            <div class="case-box">
+              <div class="case-header">
+                <span>SITUATION</span>
+                <strong>Stock discrepancy investigation</strong>
+              </div>
+
+              <p>
+                A warehouse team identifies a stock difference. The internal
+                investigation file contains employee names, customer details,
+                document numbers and other operational information.
+              </p>
+            </div>
+
+            <div class="comparison-grid">
+              <article>
+                <span>POOR APPROACH</span>
+                <h3>Paste the complete investigation file.</h3>
+                <p>
+                  This may expose personal and internal operational information
+                  that AI does not need in order to help structure the report.
+                </p>
+              </article>
+
+              <article>
+                <span>BETTER APPROACH</span>
+                <h3>Extract only the necessary facts.</h3>
+                <p>
+                  Provide the verified system quantity, physical quantity,
+                  variance, checks already performed and investigation status
+                  without including unnecessary identifying details.
+                </p>
+              </article>
+            </div>
+
+            <div class="example-facts">
+              <span>MINIMISED INPUT</span>
+
+              <ul>
+                <li>System quantity: 1,780 units</li>
+                <li>Verified physical quantity: 1,753 units</li>
+                <li>Variance: 27 units shortage</li>
+                <li>Receiving records reviewed</li>
+                <li>Outbound transactions reviewed</li>
+                <li>Adjustment history reviewed</li>
+                <li>Root cause not yet confirmed</li>
+              </ul>
+            </div>
+
+            <div class="prompt-comparison">
+              {
+                promptExamples.map((item) => (
+                  <article>
+                    <span>{item.type}</span>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="workflow">
+            <div class="section-marker">07 / SAFE INPUT WORKFLOW</div>
+
+            <h2>Build privacy checks into the workflow before AI is used.</h2>
+
+            <div class="workflow-list">
+              {
+                workplaceSteps.map((item, index) => (
+                  <article class="workflow-row">
+                    <div class="workflow-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
+
+                    <div>
+                      <span>{item.stage}</span>
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="warning-box">
+              <span>WORKPLACE RULE</span>
+              <p>
+                If your employer has an AI policy, data-handling policy or list
+                of approved tools, follow that policy before using workplace
+                information with AI.
+              </p>
+            </div>
+          </section>
+
+          <section id="takeaway">
+            <div class="section-marker">08 / PRACTICAL TAKEAWAY</div>
+
+            <h2>Useful prompts do not require unnecessary exposure.</h2>
+
+            <p>
+              Responsible AI use begins before the prompt is submitted. Identify
+              sensitive information, remove what is unnecessary, anonymise what
+              can be anonymised and use approved systems for information that
+              requires stronger protection.
+            </p>
+
+            <div class="takeaway-flow">
+              <div>
+                <span>01</span>
+                <strong>Identify</strong>
+                <p>Recognise sensitive data.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>02</span>
+                <strong>Reduce</strong>
+                <p>Remove unnecessary details.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>03</span>
+                <strong>Check</strong>
+                <p>Confirm the tool is appropriate.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>04</span>
+                <strong>Use</strong>
+                <p>Submit only what is needed.</p>
+              </div>
+            </div>
+
+            <div class="tool-callout">
+              <div>
+                <span class="tool-kicker">BUILD SAFER PROMPTS</span>
+
+                <h3>Describe the task without exposing unnecessary data.</h3>
+
+                <p>
+                  Use placeholders, anonymised facts and clear constraints when
+                  building prompts for workplace tasks.
+                </p>
+              </div>
+
+              <a href="/tools/prompt-builder/" class="button button-primary">
+                Open Prompt Builder
+              </a>
+            </div>
+          </section>
+
+          <section class="next-lesson">
+            <div>
+              <span class="next-label">CONTINUE LEARNING</span>
+
+              <h2>AI &amp; Workplace Information</h2>
+
+              <p>
+                Learn how to think about company data, internal documents and
+                workplace information when using AI tools.
+              </p>
+            </div>
+
+            <a
+  href="/learn/safe-and-responsible-use/ai-and-workplace-information/"
+  class="next-status"
+>
+  CONTINUE →
+</a>
+          </section>
+        </main>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    overflow: hidden;
+  }
+
+  .article-hero {
+    padding: 92px 0 82px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(circle at 82% 20%, rgba(183, 255, 74, 0.08), transparent 27%),
+      radial-gradient(circle at 14% 0%, rgba(77, 226, 197, 0.055), transparent 28%);
+  }
+
+  .article-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 75px;
+    align-items: end;
+  }
+
+  .back-link {
+    color: var(--lime);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 28px;
+  }
+
+  .article-meta span {
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-heading h1 {
+    max-width: 930px;
+    margin-top: 22px;
+    font-size: clamp(3.5rem, 7vw, 6.6rem);
+    line-height: 0.94;
+    letter-spacing: -0.065em;
+  }
+
+  .article-heading h1 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .article-intro {
+    max-width: 760px;
+    margin-top: 27px;
+    color: var(--muted);
+    font-size: 1.04rem;
+    line-height: 1.8;
+  }
+
+  .lesson-panel {
+    overflow: hidden;
+    border: 1px solid rgba(183, 255, 74, 0.17);
+    border-radius: 21px;
+    background: var(--surface);
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .panel-content {
+    padding: 31px 26px 34px;
+  }
+
+  .panel-kicker {
+    display: block;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .panel-content strong {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.45rem;
+    line-height: 1.35;
+    letter-spacing: -0.035em;
+  }
+
+  .panel-content p {
+    margin-top: 17px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .panel-footer {
+    padding: 17px 20px;
+    border-top: 1px solid var(--line);
+    background: rgba(183, 255, 74, 0.03);
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-body-section {
+    padding: 88px 0 110px;
+  }
+
+  .article-layout {
+    display: grid;
+    grid-template-columns: 235px minmax(0, 800px);
+    gap: 78px;
+    justify-content: center;
+  }
+
+  .sidebar-box {
+    position: sticky;
+    top: 105px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+  }
+
+  .sidebar-title {
+    padding: 16px 0;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .sidebar-box a {
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  .sidebar-box a:hover {
+    color: var(--lime);
+  }
+
+  .article-content > section:not(:first-child) {
+    margin-top: 90px;
+  }
+
+  .section-marker {
+    color: var(--lime);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .article-content h2 {
+    max-width: 760px;
+    margin-top: 14px;
+    font-size: clamp(2.3rem, 5vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.052em;
+  }
+
+  .article-content > section > p {
+    max-width: 760px;
+    margin-top: 23px;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .concept-box,
+  .warning-box,
+  .decision-box {
+    margin: 34px 0;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .concept-box > span,
+  .warning-box > span,
+  .decision-box > span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .concept-box p,
+  .warning-box p,
+  .decision-box p {
+    margin-top: 12px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .sensitive-grid,
+  .method-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+    margin-top: 36px;
+  }
+
+  .sensitive-card,
+  .method-card {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .sensitive-card > span {
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .sensitive-card h3 {
+    margin-top: 21px;
+    font-size: 1rem;
+  }
+
+  .sensitive-card p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.76rem;
+    line-height: 1.68;
+  }
+
+  .question-list {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .question-row {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 22px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .question-number {
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .question-row span {
+    color: var(--lime);
+    font-size: 0.57rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .question-row h3 {
+    margin-top: 7px;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .method-card > span {
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .method-example {
+    display: grid;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .method-example div {
+    padding-top: 13px;
+    border-top: 1px solid var(--line);
+  }
+
+  .method-example small {
+    color: var(--muted);
+    font-size: 0.54rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .method-example p {
+    margin-top: 6px;
+    font-size: 0.76rem;
+    line-height: 1.55;
+  }
+
+  .risk-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
+    margin-top: 36px;
+  }
+
+  .risk-card {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .risk-card span {
+    color: var(--lime);
+    font-size: 0.57rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .risk-card h3 {
+    margin-top: 16px;
+    font-size: 0.98rem;
+  }
+
+  .risk-card p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.74rem;
+    line-height: 1.65;
+  }
+
+  .case-box {
+    margin-top: 35px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .case-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .case-header span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .case-header strong {
+    font-size: 0.74rem;
+  }
+
+  .case-box > p {
+    padding: 28px;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .comparison-grid,
+  .prompt-comparison {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 18px;
+  }
+
+  .comparison-grid article,
+  .prompt-comparison article {
+    padding: 25px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .comparison-grid span,
+  .prompt-comparison span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .comparison-grid h3 {
+    margin-top: 14px;
+    font-size: 1rem;
+  }
+
+  .comparison-grid p,
+  .prompt-comparison p {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.7;
+  }
+
+  .example-facts {
+    margin-top: 18px;
+    padding: 26px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .example-facts > span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .example-facts ul {
+    display: grid;
+    gap: 10px;
+    margin: 18px 0 0;
+    padding-left: 18px;
+    color: var(--muted);
+    font-size: 0.79rem;
+    line-height: 1.6;
+  }
+
+  .workflow-list {
+    margin-top: 36px;
+    border-top: 1px solid var(--line);
+  }
+
+  .workflow-row {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 23px;
+    padding: 25px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .workflow-number {
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .workflow-row div:last-child > span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .workflow-row h3 {
+    margin-top: 8px;
+    font-size: 1.02rem;
+  }
+
+  .workflow-row p {
+    max-width: 650px;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.68;
+  }
+
+  .takeaway-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-top: 35px;
+    padding: 27px 22px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .takeaway-flow > div span {
+    display: block;
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .takeaway-flow strong {
+    display: block;
+    margin-top: 13px;
+    font-size: 0.82rem;
+  }
+
+  .takeaway-flow p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.67rem;
+    line-height: 1.5;
+  }
+
+  .flow-arrow {
+    color: var(--mint);
+  }
+
+  .tool-callout {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    margin-top: 40px;
+    padding: 32px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 19px;
+    background:
+      linear-gradient(145deg, rgba(183, 255, 74, 0.04), transparent 50%),
+      var(--surface);
+  }
+
+  .tool-kicker,
+  .next-label {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .tool-callout h3 {
+    margin-top: 11px;
+    font-size: 1.35rem;
+  }
+
+  .tool-callout p {
+    max-width: 510px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+
+  .tool-callout .button {
+    flex-shrink: 0;
+  }
+
+  .next-lesson {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    padding-top: 43px;
+    border-top: 1px solid var(--line);
+  }
+
+  .next-lesson h2 {
+    margin-top: 11px;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+
+  .next-lesson p {
+    max-width: 540px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.79rem;
+    line-height: 1.65;
+  }
+
+  .next-status {
+    flex-shrink: 0;
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  a.next-status:hover {
+    color: var(--lime);
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1000px) {
+    .article-hero-grid,
+    .article-layout {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .article-sidebar {
+      display: none;
+    }
+
+    .risk-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .flow-arrow {
+      display: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .article-hero {
+      padding: 68px 0 60px;
+    }
+
+    .article-body-section {
+      padding: 65px 0 80px;
+    }
+
+    .sensitive-grid,
+    .method-grid,
+    .comparison-grid,
+    .prompt-comparison {
+      grid-template-columns: 1fr;
+    }
+
+    .question-row,
+    .workflow-row {
+      grid-template-columns: 42px 1fr;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .takeaway-flow > div {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .takeaway-flow > div:last-of-type {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .tool-callout,
+    .next-lesson {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

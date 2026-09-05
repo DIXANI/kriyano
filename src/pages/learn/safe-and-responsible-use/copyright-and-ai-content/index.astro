@@ -1,0 +1,1242 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const copyrightPrinciples = [
+  {
+    number: "01",
+    title: "AI access is not permission",
+    text:
+      "The fact that an AI tool can analyse, transform or generate material does not automatically mean you have permission to use the underlying source material.",
+  },
+  {
+    number: "02",
+    title: "Source material still matters",
+    text:
+      "Articles, photographs, illustrations, videos, music, software and other creative works may be protected even when they are easy to find online.",
+  },
+  {
+    number: "03",
+    title: "Generation does not remove responsibility",
+    text:
+      "AI-generated output can still create copyright, licensing, attribution or originality concerns. Review how the output was created and how you intend to use it.",
+  },
+  {
+    number: "04",
+    title: "Commercial use deserves extra care",
+    text:
+      "Content used for advertising, client work, products, websites or other commercial purposes should receive stronger review than low-risk internal experimentation.",
+  },
+];
+
+const sourceTypes = [
+  {
+    label: "YOUR OWN MATERIAL",
+    title: "Content you created or control",
+    text:
+      "Using your own notes, photographs, drafts, data and original materials can reduce uncertainty, provided no third-party rights or confidential information are included.",
+  },
+  {
+    label: "LICENSED MATERIAL",
+    title: "Content used under a licence",
+    text:
+      "Check what the licence actually permits, including modification, AI-related use, attribution and commercial use where relevant.",
+  },
+  {
+    label: "PUBLIC DOMAIN",
+    title: "Material not protected by copyright",
+    text:
+      "Public-domain material can provide more flexibility, but verify its status rather than assuming that old or freely available content is automatically public domain.",
+  },
+  {
+    label: "THIRD-PARTY MATERIAL",
+    title: "Content created by someone else",
+    text:
+      "Articles, images, videos, designs, code and other works from third parties may require permission, a suitable licence or another valid legal basis for your intended use.",
+  },
+];
+
+const practicalCases = [
+  {
+    task: "Summarising an article",
+    safer:
+      "Use AI to understand or summarise the ideas for your own analysis rather than reproducing substantial portions of the original text.",
+  },
+  {
+    task: "Creating website content",
+    safer:
+      "Use research as input, then create genuinely original explanations, examples and structure rather than lightly rewriting another page.",
+  },
+  {
+    task: "Generating an image",
+    safer:
+      "Describe the visual characteristics you need instead of asking for a near-copy of a specific protected image.",
+  },
+  {
+    task: "Creating marketing material",
+    safer:
+      "Review generated text and visuals for third-party logos, characters, artwork, slogans or other protected elements before publishing.",
+  },
+  {
+    task: "Working with code",
+    safer:
+      "Review source licences and generated code carefully, particularly when the result will be distributed or included in a commercial product.",
+  },
+  {
+    task: "Using AI for client work",
+    safer:
+      "Understand who owns the supplied materials, what permissions exist and what the client expects regarding originality and AI use.",
+  },
+];
+
+const reviewQuestions = [
+  "Where did the source material come from?",
+  "Do I own it, have permission, or have a licence that supports this use?",
+  "Am I asking AI to copy or closely reproduce someone else's work?",
+  "Does the output contain recognisable third-party material?",
+  "Will the result be published, sold, advertised or delivered to a client?",
+  "Do I need attribution, permission or specialist legal review before using it?",
+];
+
+const workflow = [
+  {
+    stage: "IDENTIFY",
+    title: "Know your source",
+    text:
+      "Identify which text, images, video, audio, code or other material is being used as input or reference.",
+  },
+  {
+    stage: "CHECK",
+    title: "Understand your rights",
+    text:
+      "Check ownership, permissions, licences and any restrictions that apply to the intended use.",
+  },
+  {
+    stage: "CREATE",
+    title: "Aim for original value",
+    text:
+      "Use AI to support your own analysis, structure and creative work rather than simply reproducing existing material.",
+  },
+  {
+    stage: "REVIEW",
+    title: "Inspect the output",
+    text:
+      "Look for copied passages, recognisable protected elements, questionable attribution or output that is too close to a source.",
+  },
+  {
+    stage: "DOCUMENT",
+    title: "Keep useful records",
+    text:
+      "For important commercial work, keep records of key sources, licences, permissions and your own review process where appropriate.",
+  },
+  {
+    stage: "ESCALATE",
+    title: "Get expert advice when needed",
+    text:
+      "For high-value, disputed or legally sensitive uses, obtain qualified legal advice rather than relying on AI to determine copyright status.",
+  },
+];
+
+const originalitySignals = [
+  {
+    title: "Add your own expertise",
+    text:
+      "Include experience, examples, analysis, judgement and practical observations that come from you or your organisation.",
+  },
+  {
+    title: "Change the purpose",
+    text:
+      "Build content around the needs of your audience rather than following another source's structure paragraph by paragraph.",
+  },
+  {
+    title: "Use multiple reliable sources",
+    text:
+      "Research broadly and develop your own synthesis instead of depending heavily on one article, video or creator.",
+  },
+  {
+    title: "Review every final output",
+    text:
+      "Do not assume generated content is automatically original, accurate or ready to publish simply because AI produced it.",
+  },
+];
+---
+
+<BaseLayout
+  title="Copyright & AI Content | KRIYANO"
+  description="Learn practical copyright considerations for AI-assisted content, including source material, originality, licensing and responsible review before publishing."
+>
+  <article class="article-page">
+    <header class="article-hero">
+      <div class="container article-hero-grid">
+        <div class="article-heading">
+          <a href="/learn/" class="back-link">← LEARN</a>
+
+          <div class="article-meta">
+            <span>SAFE &amp; RESPONSIBLE USE</span>
+            <span>19</span>
+            <span>BEGINNER</span>
+          </div>
+
+          <h1>
+            Copyright &amp;
+            <span>AI Content.</span>
+          </h1>
+
+          <p class="article-intro">
+            AI makes it easy to generate, rewrite and transform content, but
+            copyright questions do not disappear when AI enters the workflow.
+            Responsible use means understanding your sources, permissions,
+            intended use and the originality of the final result.
+          </p>
+        </div>
+
+        <aside class="lesson-panel">
+          <div class="panel-header">
+            <span>LESSON 19</span>
+            <span>SAFE &amp; RESPONSIBLE USE</span>
+          </div>
+
+          <div class="panel-content">
+            <span class="panel-kicker">GENERATED DOES NOT MEAN UNRESTRICTED</span>
+
+            <strong>
+              Treat AI as part of the creative process, not as a copyright
+              shortcut.
+            </strong>
+
+            <p>
+              The source, licence, transformation and intended use all matter
+              when deciding whether AI-assisted content is appropriate to
+              publish.
+            </p>
+          </div>
+
+          <div class="panel-footer">
+            <span>SOURCE → RIGHTS → CREATE → REVIEW</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section class="article-body-section">
+      <div class="container article-layout">
+        <aside class="article-sidebar">
+          <div class="sidebar-box">
+            <span class="sidebar-title">IN THIS GUIDE</span>
+
+            <a href="#principle">The core principle</a>
+            <a href="#sources">Know your source material</a>
+            <a href="#practical-use">Common AI content tasks</a>
+            <a href="#originality">Build original value</a>
+            <a href="#review">Questions before publishing</a>
+            <a href="#example">Practical example</a>
+            <a href="#workflow">Copyright-aware workflow</a>
+            <a href="#takeaway">The practical takeaway</a>
+          </div>
+        </aside>
+
+        <main class="article-content">
+          <section id="principle">
+            <div class="section-marker">01 / THE CORE PRINCIPLE</div>
+
+            <h2>AI does not erase the rights attached to creative work.</h2>
+
+            <p>
+              Copyright protects many forms of original creative expression.
+              Using AI to summarise, transform, analyse or generate material
+              does not automatically remove the need to consider ownership,
+              permission, licensing and the way the final content will be used.
+            </p>
+
+            <p>
+              The exact legal position can vary by country and circumstance, so
+              copyright-sensitive decisions should not be based only on what an
+              AI system says.
+            </p>
+
+            <div class="concept-box">
+              <span>CORE PRINCIPLE</span>
+              <p>
+                Ask what rights you have to use the material—not simply whether
+                the AI tool is technically able to process it.
+              </p>
+            </div>
+          </section>
+
+          <section id="sources">
+            <div class="section-marker">02 / KNOW YOUR SOURCE MATERIAL</div>
+
+            <h2>Different sources come with different permissions.</h2>
+
+            <div class="principle-grid">
+              {
+                copyrightPrinciples.map((item) => (
+                  <article class="principle-card">
+                    <span>{item.number}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="source-grid">
+              {
+                sourceTypes.map((item) => (
+                  <article class="source-card">
+                    <span>{item.label}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="warning-box">
+              <span>COMMON MISTAKE</span>
+              <p>
+                Publicly accessible does not automatically mean free to copy,
+                modify or use commercially. Availability and permission are
+                different questions.
+              </p>
+            </div>
+          </section>
+
+          <section id="practical-use">
+            <div class="section-marker">03 / COMMON AI CONTENT TASKS</div>
+
+            <h2>Use AI to create value, not simply to reproduce.</h2>
+
+            <div class="task-list">
+              {
+                practicalCases.map((item, index) => (
+                  <article class="task-row">
+                    <div class="task-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
+
+                    <div class="task-name">
+                      <span>TASK</span>
+                      <h3>{item.task}</h3>
+                    </div>
+
+                    <div class="task-approach">
+                      <span>BETTER APPROACH</span>
+                      <p>{item.safer}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="originality">
+            <div class="section-marker">04 / BUILD ORIGINAL VALUE</div>
+
+            <h2>AI-assisted content should still have a reason to come from you.</h2>
+
+            <p>
+              A useful way to reduce both quality and originality problems is to
+              treat source material as research rather than as a draft waiting
+              to be rewritten.
+            </p>
+
+            <div class="originality-grid">
+              {
+                originalitySignals.map((item) => (
+                  <article>
+                    <span>+</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="formula-box">
+              <span>STRONGER CONTENT PROCESS</span>
+
+              <div>
+                <strong>Research</strong>
+                <span>→</span>
+                <strong>Understand</strong>
+                <span>→</span>
+                <strong>Add expertise</strong>
+                <span>→</span>
+                <strong>Create</strong>
+                <span>→</span>
+                <strong>Review</strong>
+              </div>
+            </div>
+          </section>
+
+          <section id="review">
+            <div class="section-marker">05 / BEFORE PUBLISHING</div>
+
+            <h2>Review the source and the output—not only the prompt.</h2>
+
+            <div class="review-list">
+              {
+                reviewQuestions.map((question, index) => (
+                  <article>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <strong>{question}</strong>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="decision-box">
+              <span>HIGHER-STAKES USE</span>
+              <p>
+                If the content will be sold, licensed, used in major commercial
+                campaigns or is already disputed, qualified legal advice may be
+                appropriate before publication.
+              </p>
+            </div>
+          </section>
+
+          <section id="example">
+            <div class="section-marker">06 / PRACTICAL EXAMPLE</div>
+
+            <h2>You are creating an AI guide for your business website.</h2>
+
+            <div class="case-box">
+              <div class="case-header">
+                <span>SCENARIO</span>
+                <strong>Creating an original educational article</strong>
+              </div>
+
+              <p>
+                You find several useful articles explaining how AI can support
+                workplace productivity. You want to use AI to help create your
+                own guide on the same broad topic.
+              </p>
+            </div>
+
+            <div class="comparison-grid">
+              <article>
+                <span>WEAK APPROACH</span>
+                <h3>Rewrite one article paragraph by paragraph.</h3>
+                <p>
+                  Asking AI to make small wording changes while preserving
+                  another author's structure and expression does little to
+                  create independent value.
+                </p>
+              </article>
+
+              <article>
+                <span>STRONGER APPROACH</span>
+                <h3>Research the topic, then build your own guide.</h3>
+                <p>
+                  Understand the subject from appropriate sources, decide what
+                  your audience needs, add your own examples and expertise, and
+                  create a new structure around that purpose.
+                </p>
+              </article>
+            </div>
+
+            <div class="example-process">
+              <span>ORIGINAL CONTENT WORKFLOW</span>
+
+              <div class="process-row">
+                <div>
+                  <small>01</small>
+                  <strong>Research</strong>
+                  <p>Understand the topic using appropriate sources.</p>
+                </div>
+
+                <div>
+                  <small>02</small>
+                  <strong>Plan</strong>
+                  <p>Choose your own audience, angle and structure.</p>
+                </div>
+
+                <div>
+                  <small>03</small>
+                  <strong>Create</strong>
+                  <p>Add original explanations and practical examples.</p>
+                </div>
+
+                <div>
+                  <small>04</small>
+                  <strong>Verify</strong>
+                  <p>Fact-check claims and review source use.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="concept-box">
+              <span>KRIYANO APPROACH</span>
+              <p>
+                AI can help organise and improve your work, but the final
+                resource should deliver independent value to the reader.
+              </p>
+            </div>
+          </section>
+
+          <section id="workflow">
+            <div class="section-marker">07 / COPYRIGHT-AWARE WORKFLOW</div>
+
+            <h2>Make source review part of the creation process.</h2>
+
+            <div class="workflow-list">
+              {
+                workflow.map((item, index) => (
+                  <article class="workflow-row">
+                    <div class="workflow-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
+
+                    <div>
+                      <span>{item.stage}</span>
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="warning-box">
+              <span>REMEMBER</span>
+              <p>
+                AI output can assist your workflow, but it should not be treated
+                as a legal determination that content is copyright-free,
+                properly licensed or safe for every intended use.
+              </p>
+            </div>
+          </section>
+
+          <section id="takeaway">
+            <div class="section-marker">08 / PRACTICAL TAKEAWAY</div>
+
+            <h2>Create with AI while keeping the source visible in your thinking.</h2>
+
+            <p>
+              Know where material comes from, understand what rights or
+              permissions apply, create independent value and review the final
+              result before publication. The more commercial or legally
+              sensitive the use, the more carefully that process should be
+              handled.
+            </p>
+
+            <div class="takeaway-flow">
+              <div>
+                <span>01</span>
+                <strong>Source</strong>
+                <p>Know what you're using.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>02</span>
+                <strong>Rights</strong>
+                <p>Check permission and licence.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>03</span>
+                <strong>Create</strong>
+                <p>Add independent value.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>04</span>
+                <strong>Review</strong>
+                <p>Inspect before publishing.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="next-lesson">
+            <div>
+              <span class="next-label">CONTINUE LEARNING</span>
+
+              <h2>Responsible AI Use</h2>
+
+              <p>
+                Bring privacy, accuracy, human judgement, transparency and
+                accountability together into a practical approach for everyday
+                AI use.
+              </p>
+            </div>
+
+            <a
+  href="/learn/safe-and-responsible-use/responsible-ai-use/"
+  class="next-status"
+>
+  CONTINUE →
+</a>
+          </section>
+        </main>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    overflow: hidden;
+  }
+
+  .article-hero {
+    padding: 92px 0 82px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(circle at 82% 20%, rgba(183, 255, 74, 0.08), transparent 27%),
+      radial-gradient(circle at 14% 0%, rgba(77, 226, 197, 0.055), transparent 28%);
+  }
+
+  .article-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 75px;
+    align-items: end;
+  }
+
+  .back-link {
+    color: var(--lime);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 28px;
+  }
+
+  .article-meta span {
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-heading h1 {
+    max-width: 930px;
+    margin-top: 22px;
+    font-size: clamp(3.5rem, 7vw, 6.6rem);
+    line-height: 0.94;
+    letter-spacing: -0.065em;
+  }
+
+  .article-heading h1 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .article-intro {
+    max-width: 760px;
+    margin-top: 27px;
+    color: var(--muted);
+    font-size: 1.04rem;
+    line-height: 1.8;
+  }
+
+  .lesson-panel {
+    overflow: hidden;
+    border: 1px solid rgba(183, 255, 74, 0.17);
+    border-radius: 21px;
+    background: var(--surface);
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .panel-content {
+    padding: 31px 26px 34px;
+  }
+
+  .panel-kicker {
+    display: block;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .panel-content strong {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.45rem;
+    line-height: 1.35;
+    letter-spacing: -0.035em;
+  }
+
+  .panel-content p {
+    margin-top: 17px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .panel-footer {
+    padding: 17px 20px;
+    border-top: 1px solid var(--line);
+    background: rgba(183, 255, 74, 0.03);
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-body-section {
+    padding: 88px 0 110px;
+  }
+
+  .article-layout {
+    display: grid;
+    grid-template-columns: 235px minmax(0, 800px);
+    gap: 78px;
+    justify-content: center;
+  }
+
+  .sidebar-box {
+    position: sticky;
+    top: 105px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+  }
+
+  .sidebar-title {
+    padding: 16px 0;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .sidebar-box a {
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  .sidebar-box a:hover {
+    color: var(--lime);
+  }
+
+  .article-content > section:not(:first-child) {
+    margin-top: 90px;
+  }
+
+  .section-marker {
+    color: var(--lime);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .article-content h2 {
+    max-width: 760px;
+    margin-top: 14px;
+    font-size: clamp(2.3rem, 5vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.052em;
+  }
+
+  .article-content > section > p {
+    max-width: 760px;
+    margin-top: 23px;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .concept-box,
+  .warning-box,
+  .decision-box {
+    margin: 34px 0;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .concept-box > span,
+  .warning-box > span,
+  .decision-box > span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .concept-box p,
+  .warning-box p,
+  .decision-box p {
+    margin-top: 12px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .principle-grid,
+  .source-grid,
+  .originality-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+    margin-top: 36px;
+  }
+
+  .source-grid {
+    margin-top: 13px;
+  }
+
+  .principle-card,
+  .source-card,
+  .originality-grid article {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .principle-card > span,
+  .source-card > span,
+  .originality-grid article > span {
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+  }
+
+  .principle-card h3,
+  .source-card h3,
+  .originality-grid h3 {
+    margin-top: 18px;
+    font-size: 1rem;
+  }
+
+  .principle-card p,
+  .source-card p,
+  .originality-grid p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.76rem;
+    line-height: 1.68;
+  }
+
+  .task-list {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .task-row {
+    display: grid;
+    grid-template-columns: 45px 185px 1fr;
+    gap: 22px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .task-number {
+    color: var(--muted);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .task-name span,
+  .task-approach span {
+    color: var(--lime);
+    font-size: 0.55rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .task-name h3 {
+    margin-top: 8px;
+    font-size: 0.93rem;
+  }
+
+  .task-approach p {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.76rem;
+    line-height: 1.65;
+  }
+
+  .formula-box {
+    margin-top: 25px;
+    padding: 26px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .formula-box > span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .formula-box > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .formula-box strong {
+    font-size: 0.79rem;
+  }
+
+  .formula-box div span {
+    color: var(--mint);
+  }
+
+  .review-list {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .review-list article {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .review-list span {
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .review-list strong {
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+
+  .case-box {
+    margin-top: 35px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .case-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .case-header span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .case-header strong {
+    font-size: 0.74rem;
+  }
+
+  .case-box > p {
+    padding: 28px;
+    font-size: 0.96rem;
+    line-height: 1.72;
+  }
+
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 18px;
+  }
+
+  .comparison-grid article {
+    padding: 25px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .comparison-grid span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .comparison-grid h3 {
+    margin-top: 14px;
+    font-size: 1rem;
+  }
+
+  .comparison-grid p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.77rem;
+    line-height: 1.68;
+  }
+
+  .example-process {
+    margin-top: 18px;
+    padding: 25px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .example-process > span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .process-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 22px;
+  }
+
+  .process-row div {
+    padding-top: 15px;
+    border-top: 1px solid var(--line);
+  }
+
+  .process-row small {
+    color: var(--lime);
+    font-size: 0.57rem;
+    font-weight: 800;
+  }
+
+  .process-row strong {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.81rem;
+  }
+
+  .process-row p {
+    margin-top: 7px;
+    color: var(--muted);
+    font-size: 0.68rem;
+    line-height: 1.55;
+  }
+
+  .workflow-list {
+    margin-top: 36px;
+    border-top: 1px solid var(--line);
+  }
+
+  .workflow-row {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 23px;
+    padding: 25px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .workflow-number {
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .workflow-row div:last-child > span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .workflow-row h3 {
+    margin-top: 8px;
+    font-size: 1.02rem;
+  }
+
+  .workflow-row p {
+    max-width: 650px;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.68;
+  }
+
+  .takeaway-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-top: 35px;
+    padding: 27px 22px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .takeaway-flow > div span {
+    display: block;
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .takeaway-flow strong {
+    display: block;
+    margin-top: 13px;
+    font-size: 0.82rem;
+  }
+
+  .takeaway-flow p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.67rem;
+    line-height: 1.5;
+  }
+
+  .flow-arrow {
+    color: var(--mint);
+  }
+
+  .next-lesson {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    padding-top: 43px;
+    border-top: 1px solid var(--line);
+  }
+
+  .next-label {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .next-lesson h2 {
+    margin-top: 11px;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+
+  .next-lesson p {
+    max-width: 540px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.79rem;
+    line-height: 1.65;
+  }
+
+  .next-status {
+    flex-shrink: 0;
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  a.next-status:hover {
+    color: var(--lime);
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1000px) {
+    .article-hero-grid,
+    .article-layout {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .article-sidebar {
+      display: none;
+    }
+
+    .process-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .takeaway-flow {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .flow-arrow {
+      display: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .article-hero {
+      padding: 68px 0 60px;
+    }
+
+    .article-body-section {
+      padding: 65px 0 80px;
+    }
+
+    .principle-grid,
+    .source-grid,
+    .originality-grid,
+    .comparison-grid,
+    .process-row {
+      grid-template-columns: 1fr;
+    }
+
+    .task-row {
+      grid-template-columns: 38px 1fr;
+    }
+
+    .task-approach {
+      grid-column: 2;
+    }
+
+    .review-list article,
+    .workflow-row {
+      grid-template-columns: 42px 1fr;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .takeaway-flow > div {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .takeaway-flow > div:last-of-type {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .next-lesson {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
