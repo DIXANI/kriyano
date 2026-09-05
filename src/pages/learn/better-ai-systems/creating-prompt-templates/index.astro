@@ -1,0 +1,1055 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const templateParts = [
+  {
+    number: "01",
+    title: "Purpose",
+    text:
+      "Define what the prompt is designed to achieve. A reusable template should solve a recurring task, not a vague category of work.",
+  },
+  {
+    number: "02",
+    title: "Role",
+    text:
+      "Tell the AI what kind of perspective or expertise it should apply when that genuinely improves the result.",
+  },
+  {
+    number: "03",
+    title: "Inputs",
+    text:
+      "Identify the information that changes each time the template is used, such as product details, audience, dates, quantities or context.",
+  },
+  {
+    number: "04",
+    title: "Instructions",
+    text:
+      "Explain what the AI should do with the inputs and in what order.",
+  },
+  {
+    number: "05",
+    title: "Constraints",
+    text:
+      "Set boundaries such as length, tone, format, exclusions, safety requirements or business rules.",
+  },
+  {
+    number: "06",
+    title: "Output format",
+    text:
+      "Define the structure of the final result so repeated use produces more consistent outputs.",
+  },
+];
+
+const weakVsStrong = [
+  {
+    label: "WEAK TEMPLATE",
+    title: "Too generic to control the result",
+    prompt:
+      "Write a professional email about a stock issue.",
+    problem:
+      "Important context is missing, so every use may require rewriting the prompt from scratch.",
+  },
+  {
+    label: "STRONGER TEMPLATE",
+    title: "Reusable structure with clear variables",
+    prompt:
+      "Act as a warehouse supervisor. Write a concise professional email to [recipient] about [stock issue]. Include [key facts], explain [impact], request [required action], and keep the tone [tone]. Do not make assumptions beyond the information provided.",
+    problem:
+      "The structure stays stable while the task-specific information changes.",
+  },
+];
+
+const variableExamples = [
+  {
+    variable: "[recipient]",
+    example: "Inventory Manager",
+  },
+  {
+    variable: "[stock issue]",
+    example: "physical count does not match system stock",
+  },
+  {
+    variable: "[key facts]",
+    example: "System 1,240 units; physical 1,217 units; variance -23",
+  },
+  {
+    variable: "[impact]",
+    example: "order allocation may be affected",
+  },
+  {
+    variable: "[required action]",
+    example: "approve recount and transaction review",
+  },
+  {
+    variable: "[tone]",
+    example: "professional and factual",
+  },
+];
+
+const mistakes = [
+  {
+    title: "Too many fixed details",
+    text:
+      "If most of the prompt has to be edited every time, it is not functioning as a useful template.",
+  },
+  {
+    title: "Variables are unclear",
+    text:
+      "Placeholders should tell the user exactly what information belongs there.",
+  },
+  {
+    title: "No quality controls",
+    text:
+      "A reusable prompt should include important rules that should apply every time, not rely on the user remembering them.",
+  },
+  {
+    title: "Output format keeps changing",
+    text:
+      "Repeated tasks become easier when the expected structure is built directly into the template.",
+  },
+  {
+    title: "The template is too broad",
+    text:
+      "One prompt for every possible task usually performs worse than several focused templates.",
+  },
+  {
+    title: "No review after use",
+    text:
+      "Templates should improve over time based on the quality of real outputs.",
+  },
+];
+
+const workflow = [
+  {
+    stage: "IDENTIFY",
+    title: "Find a recurring task",
+    text:
+      "Choose work you perform repeatedly and where the desired output structure is reasonably stable.",
+  },
+  {
+    stage: "SEPARATE",
+    title: "Separate fixed instructions from changing inputs",
+    text:
+      "Keep the recurring rules in the template and turn task-specific details into variables.",
+  },
+  {
+    stage: "STRUCTURE",
+    title: "Organise the prompt",
+    text:
+      "Arrange purpose, inputs, instructions, constraints and output format in a logical order.",
+  },
+  {
+    stage: "TEST",
+    title: "Run different examples",
+    text:
+      "Use several realistic input sets to see whether the template produces consistently useful results.",
+  },
+  {
+    stage: "REVIEW",
+    title: "Look for recurring weaknesses",
+    text:
+      "Identify what the AI repeatedly misunderstands, omits or formats poorly.",
+  },
+  {
+    stage: "IMPROVE",
+    title: "Refine the template",
+    text:
+      "Update the fixed instructions so the next use starts from a stronger baseline.",
+  },
+];
+---
+
+<BaseLayout
+  title="Creating Prompt Templates | KRIYANO"
+  description="Learn how to turn successful AI prompts into reusable prompt templates using variables, fixed instructions, constraints and consistent output structures."
+>
+  <article class="article-page">
+    <header class="article-hero">
+      <div class="container article-hero-grid">
+        <div class="article-heading">
+          <a href="/learn/" class="back-link">← LEARN</a>
+
+          <div class="article-meta">
+            <span>BETTER AI SYSTEMS</span>
+            <span>21</span>
+            <span>BEGINNER</span>
+          </div>
+
+          <h1>
+            Creating Prompt
+            <span>Templates.</span>
+          </h1>
+
+          <p class="article-intro">
+            A good prompt solves one task. A good prompt template creates a
+            repeatable structure that can solve the same type of task again
+            with new information.
+          </p>
+        </div>
+
+        <aside class="lesson-panel">
+          <div class="panel-header">
+            <span>LESSON 21</span>
+            <span>BETTER AI SYSTEMS</span>
+          </div>
+
+          <div class="panel-content">
+            <span class="panel-kicker">FROM ONE-OFF PROMPT TO REUSABLE SYSTEM</span>
+
+            <strong>
+              Keep the structure. Change the inputs.
+            </strong>
+
+            <p>
+              Prompt templates reduce repeated writing and help produce more
+              consistent results across similar tasks.
+            </p>
+          </div>
+
+          <div class="panel-footer">
+            <span>STRUCTURE → VARIABLES → TEST → IMPROVE</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section class="article-body-section">
+      <div class="container article-layout">
+        <aside class="article-sidebar">
+          <div class="sidebar-box">
+            <span class="sidebar-title">IN THIS GUIDE</span>
+
+            <a href="#template">What a prompt template is</a>
+            <a href="#parts">Six template parts</a>
+            <a href="#example">Weak vs stronger template</a>
+            <a href="#variables">Using variables</a>
+            <a href="#mistakes">Common mistakes</a>
+            <a href="#workflow">Template workflow</a>
+            <a href="#takeaway">Practical takeaway</a>
+          </div>
+        </aside>
+
+        <main class="article-content">
+          <section id="template">
+            <div class="section-marker">01 / WHAT A PROMPT TEMPLATE IS</div>
+
+            <h2>A prompt template separates what stays the same from what changes.</h2>
+
+            <p>
+              Many people rewrite similar prompts repeatedly. The task may be
+              almost identical each time, but names, quantities, dates,
+              products or context change.
+            </p>
+
+            <p>
+              A prompt template solves this by keeping the recurring structure
+              fixed and turning the changing information into placeholders or
+              variables.
+            </p>
+
+            <div class="concept-box">
+              <span>SIMPLE MODEL</span>
+              <p>
+                <strong>Reusable instructions</strong> + <strong>changing inputs</strong>
+                = a prompt template.
+              </p>
+            </div>
+          </section>
+
+          <section id="parts">
+            <div class="section-marker">02 / SIX TEMPLATE PARTS</div>
+
+            <h2>Build the template around the parts that matter every time.</h2>
+
+            <div class="principle-grid">
+              {
+                templateParts.map((item) => (
+                  <article class="principle-card">
+                    <span>{item.number}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="example">
+            <div class="section-marker">03 / WEAK VS STRONGER TEMPLATE</div>
+
+            <h2>A reusable prompt should reduce repeated decisions.</h2>
+
+            <div class="comparison-grid">
+              {
+                weakVsStrong.map((item) => (
+                  <article>
+                    <span>{item.label}</span>
+                    <h3>{item.title}</h3>
+
+                    <div class="prompt-box">
+                      {item.prompt}
+                    </div>
+
+                    <p>{item.problem}</p>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="concept-box">
+              <span>WHAT CHANGED?</span>
+              <p>
+                The stronger version defines the role, purpose, changing
+                information, required content, tone and an important
+                constraint. The user only needs to replace the variables.
+              </p>
+            </div>
+          </section>
+
+          <section id="variables">
+            <div class="section-marker">04 / USING VARIABLES</div>
+
+            <h2>Variables should make the template easier to use—not harder to understand.</h2>
+
+            <p>
+              Use clear placeholders for information that changes. A placeholder
+              such as <strong>[key facts]</strong> is more useful than something
+              vague such as <strong>[details]</strong>.
+            </p>
+
+            <div class="variable-table">
+              <div class="table-header">
+                <span>VARIABLE</span>
+                <span>EXAMPLE INPUT</span>
+              </div>
+
+              {
+                variableExamples.map((item) => (
+                  <div class="table-row">
+                    <code>{item.variable}</code>
+                    <span>{item.example}</span>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="template-demo">
+              <span class="template-label">REUSABLE TEMPLATE</span>
+
+              <p>
+                Act as a warehouse supervisor. Write a concise professional
+                email to <mark>[recipient]</mark> about
+                <mark>[stock issue]</mark>. Include
+                <mark>[key facts]</mark>, explain
+                <mark>[impact]</mark>, request
+                <mark>[required action]</mark>, and keep the tone
+                <mark>[tone]</mark>. Do not make assumptions beyond the
+                information provided.
+              </p>
+            </div>
+          </section>
+
+          <section id="mistakes">
+            <div class="section-marker">05 / COMMON MISTAKES</div>
+
+            <h2>A template can save time only if the structure is genuinely reusable.</h2>
+
+            <div class="mistake-grid">
+              {
+                mistakes.map((item, index) => (
+                  <article>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="workflow">
+            <div class="section-marker">06 / TEMPLATE WORKFLOW</div>
+
+            <h2>Build prompt templates from real repeated work.</h2>
+
+            <div class="workflow-list">
+              {
+                workflow.map((item, index) => (
+                  <article class="workflow-row">
+                    <div class="workflow-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
+
+                    <div>
+                      <span>{item.stage}</span>
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="workflow-summary">
+              <span>PROMPT TEMPLATE LOOP</span>
+
+              <div>
+                <strong>Identify</strong>
+                <span>→</span>
+                <strong>Separate</strong>
+                <span>→</span>
+                <strong>Structure</strong>
+                <span>→</span>
+                <strong>Test</strong>
+                <span>→</span>
+                <strong>Improve</strong>
+              </div>
+            </div>
+          </section>
+
+          <section id="takeaway">
+            <div class="section-marker">07 / PRACTICAL TAKEAWAY</div>
+
+            <h2>Turn successful prompts into reusable assets.</h2>
+
+            <p>
+              When a prompt works well for a repeated task, do not leave it as a
+              one-time conversation. Extract the reusable structure, replace
+              changing details with clear variables, test it with different
+              examples and improve it over time.
+            </p>
+
+            <div class="takeaway-flow">
+              <div>
+                <span>01</span>
+                <strong>Keep</strong>
+                <p>Recurring instructions.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>02</span>
+                <strong>Replace</strong>
+                <p>Changing details with variables.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>03</span>
+                <strong>Test</strong>
+                <p>Different real examples.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>04</span>
+                <strong>Improve</strong>
+                <p>Refine repeated weaknesses.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="next-lesson">
+            <div>
+              <span class="next-label">NEXT LESSON</span>
+
+              <h2>Building AI Workflows</h2>
+
+              <p>
+                Learn how to connect prompts, human review and operational
+                steps into a repeatable AI-assisted process.
+              </p>
+            </div>
+
+            <a
+  href="/learn/better-ai-systems/building-ai-workflows/"
+  class="next-status"
+>
+  CONTINUE →
+</a>
+          </section>
+        </main>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    overflow: hidden;
+  }
+
+  .article-hero {
+    padding: 92px 0 82px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(circle at 82% 20%, rgba(183, 255, 74, 0.08), transparent 27%),
+      radial-gradient(circle at 14% 0%, rgba(77, 226, 197, 0.055), transparent 28%);
+  }
+
+  .article-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 75px;
+    align-items: end;
+  }
+
+  .back-link {
+    color: var(--lime);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 28px;
+  }
+
+  .article-meta span {
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-heading h1 {
+    max-width: 930px;
+    margin-top: 22px;
+    font-size: clamp(3.5rem, 7vw, 6.6rem);
+    line-height: 0.94;
+    letter-spacing: -0.065em;
+  }
+
+  .article-heading h1 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .article-intro {
+    max-width: 760px;
+    margin-top: 27px;
+    color: var(--muted);
+    font-size: 1.04rem;
+    line-height: 1.8;
+  }
+
+  .lesson-panel {
+    overflow: hidden;
+    border: 1px solid rgba(183, 255, 74, 0.17);
+    border-radius: 21px;
+    background: var(--surface);
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .panel-content {
+    padding: 31px 26px 34px;
+  }
+
+  .panel-kicker {
+    display: block;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .panel-content strong {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.45rem;
+    line-height: 1.35;
+    letter-spacing: -0.035em;
+  }
+
+  .panel-content p {
+    margin-top: 17px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .panel-footer {
+    padding: 17px 20px;
+    border-top: 1px solid var(--line);
+    background: rgba(183, 255, 74, 0.03);
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-body-section {
+    padding: 88px 0 110px;
+  }
+
+  .article-layout {
+    display: grid;
+    grid-template-columns: 235px minmax(0, 800px);
+    gap: 78px;
+    justify-content: center;
+  }
+
+  .sidebar-box {
+    position: sticky;
+    top: 105px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+  }
+
+  .sidebar-title {
+    padding: 16px 0;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .sidebar-box a {
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  .sidebar-box a:hover {
+    color: var(--lime);
+  }
+
+  .article-content > section:not(:first-child) {
+    margin-top: 90px;
+  }
+
+  .section-marker {
+    color: var(--lime);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .article-content h2 {
+    max-width: 760px;
+    margin-top: 14px;
+    font-size: clamp(2.3rem, 5vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.052em;
+  }
+
+  .article-content > section > p {
+    max-width: 760px;
+    margin-top: 23px;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .concept-box {
+    margin: 34px 0;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .concept-box > span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .concept-box p {
+    margin-top: 12px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .principle-grid,
+  .mistake-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+    margin-top: 36px;
+  }
+
+  .principle-card,
+  .mistake-grid article {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .principle-card > span,
+  .mistake-grid article > span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+  }
+
+  .principle-card h3,
+  .mistake-grid h3 {
+    margin-top: 19px;
+    font-size: 1rem;
+  }
+
+  .principle-card p,
+  .mistake-grid p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.76rem;
+    line-height: 1.68;
+  }
+
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 35px;
+  }
+
+  .comparison-grid article {
+    padding: 25px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .comparison-grid > article > span {
+    color: var(--lime);
+    font-size: 0.57rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .comparison-grid h3 {
+    margin-top: 14px;
+    font-size: 1rem;
+  }
+
+  .comparison-grid p {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 0.77rem;
+    line-height: 1.68;
+  }
+
+  .prompt-box {
+    margin-top: 18px;
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 0.76rem;
+    line-height: 1.65;
+  }
+
+  .variable-table {
+    margin-top: 34px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .table-header,
+  .table-row {
+    display: grid;
+    grid-template-columns: 0.7fr 1.3fr;
+    gap: 20px;
+    padding: 17px 21px;
+  }
+
+  .table-header {
+    border-bottom: 1px solid var(--line);
+    color: var(--lime);
+    font-size: 0.56rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .table-row {
+    border-bottom: 1px solid var(--line);
+    font-size: 0.76rem;
+  }
+
+  .table-row:last-child {
+    border-bottom: 0;
+  }
+
+  .table-row code {
+    color: var(--lime-soft);
+    font-family: inherit;
+    font-weight: 700;
+  }
+
+  .table-row span {
+    color: var(--muted);
+  }
+
+  .template-demo {
+    margin-top: 24px;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .template-label {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .template-demo p {
+    margin-top: 17px;
+    font-size: 0.91rem;
+    line-height: 1.8;
+  }
+
+  .template-demo mark {
+    padding: 1px 4px;
+    border-radius: 4px;
+    background: rgba(183, 255, 74, 0.12);
+    color: var(--lime);
+  }
+
+  .workflow-list {
+    margin-top: 36px;
+    border-top: 1px solid var(--line);
+  }
+
+  .workflow-row {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 23px;
+    padding: 25px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .workflow-number {
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .workflow-row div:last-child > span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .workflow-row h3 {
+    margin-top: 8px;
+    font-size: 1.02rem;
+  }
+
+  .workflow-row p {
+    max-width: 650px;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.68;
+  }
+
+  .workflow-summary {
+    margin-top: 30px;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .workflow-summary > span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .workflow-summary div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 18px;
+    align-items: center;
+  }
+
+  .workflow-summary strong {
+    font-size: 0.8rem;
+  }
+
+  .workflow-summary div span {
+    color: var(--mint);
+  }
+
+  .takeaway-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-top: 35px;
+    padding: 27px 22px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .takeaway-flow > div span {
+    display: block;
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .takeaway-flow strong {
+    display: block;
+    margin-top: 13px;
+    font-size: 0.82rem;
+  }
+
+  .takeaway-flow p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.67rem;
+    line-height: 1.5;
+  }
+
+  .flow-arrow {
+    color: var(--mint);
+  }
+
+  .next-lesson {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    padding-top: 43px;
+    border-top: 1px solid var(--line);
+  }
+
+  .next-label {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .next-lesson h2 {
+    margin-top: 11px;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+
+  .next-lesson p {
+    max-width: 540px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.79rem;
+    line-height: 1.65;
+  }
+
+  .next-status {
+    flex-shrink: 0;
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  a.next-status:hover {
+    color: var(--lime);
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1000px) {
+    .article-hero-grid,
+    .article-layout {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .article-sidebar {
+      display: none;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .flow-arrow {
+      display: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .article-hero {
+      padding: 68px 0 60px;
+    }
+
+    .article-body-section {
+      padding: 65px 0 80px;
+    }
+
+    .principle-grid,
+    .mistake-grid,
+    .comparison-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .workflow-row {
+      grid-template-columns: 42px 1fr;
+    }
+
+    .table-header,
+    .table-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .takeaway-flow > div {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .takeaway-flow > div:last-of-type {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .next-lesson {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

@@ -1,0 +1,1572 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const reviewAreas = [
+  {
+    number: "01",
+    title: "Output quality",
+    text:
+      "Check whether the system consistently produces accurate, useful and appropriately structured results.",
+  },
+  {
+    number: "02",
+    title: "Consistency",
+    text:
+      "Test whether similar inputs produce outputs that follow the same standards, structure and level of detail.",
+  },
+  {
+    number: "03",
+    title: "Time saved",
+    text:
+      "Compare the complete AI-assisted process with the previous method, including preparation and human review time.",
+  },
+  {
+    number: "04",
+    title: "Error rate",
+    text:
+      "Track recurring factual, formatting, classification or reasoning errors instead of judging the system from one successful result.",
+  },
+  {
+    number: "05",
+    title: "Review burden",
+    text:
+      "Measure how much human correction is still required. Fast generation has limited value if every output needs major rewriting.",
+  },
+  {
+    number: "06",
+    title: "Operational usefulness",
+    text:
+      "Confirm that the final output actually supports the next decision or action in the real workflow.",
+  },
+];
+
+const metrics = [
+  {
+    label: "QUALITY",
+    title: "Is the output good enough?",
+    text:
+      "Accuracy, completeness, clarity, relevance and compliance with the required format.",
+  },
+  {
+    label: "CONSISTENCY",
+    title: "Does it work repeatedly?",
+    text:
+      "Performance across different users, inputs, scenarios and normal variations in the task.",
+  },
+  {
+    label: "EFFICIENCY",
+    title: "Does it reduce useful work?",
+    text:
+      "Total time saved after including data preparation, prompting, checking and correction.",
+  },
+  {
+    label: "CONTROL",
+    title: "Can mistakes be caught?",
+    text:
+      "Whether important facts, assumptions and decisions are visible enough for effective human review.",
+  },
+];
+
+const failureLog = [
+  {
+    type: "FACTUAL",
+    example: "Incorrect quantity, date, name or operational detail",
+    response: "Strengthen source inputs and verification.",
+  },
+  {
+    type: "MISSING",
+    example: "Required section or important information omitted",
+    response: "Improve instructions or output structure.",
+  },
+  {
+    type: "FORMAT",
+    example: "Correct information presented in the wrong structure",
+    response: "Tighten formatting requirements or template.",
+  },
+  {
+    type: "ASSUMPTION",
+    example: "AI invents a cause or fills a missing fact",
+    response: "Add uncertainty rules and evidence controls.",
+  },
+  {
+    type: "HANDOFF",
+    example: "Information changes between workflow stages",
+    response: "Improve the input/output contract between tasks.",
+  },
+  {
+    type: "REVIEW",
+    example: "Human checker repeatedly misses the same issue",
+    response: "Improve the checklist or approval checkpoint.",
+  },
+];
+
+const versionSteps = [
+  {
+    version: "V1.0",
+    title: "Initial working system",
+    text:
+      "Document the prompt, template, workflow stages, required inputs and review process.",
+  },
+  {
+    version: "V1.1",
+    title: "Small controlled improvement",
+    text:
+      "Change one meaningful element based on a recurring problem or clearly identified opportunity.",
+  },
+  {
+    version: "TEST",
+    title: "Compare representative cases",
+    text:
+      "Run normal, difficult and incomplete examples instead of testing only the easiest case.",
+  },
+  {
+    version: "REVIEW",
+    title: "Check the effect",
+    text:
+      "Determine whether the change improved quality without creating a new problem elsewhere.",
+  },
+  {
+    version: "V1.2",
+    title: "Keep or revise",
+    text:
+      "Retain successful changes, record what changed and continue improving from a known version.",
+  },
+];
+
+const testCases = [
+  {
+    title: "Normal case",
+    text:
+      "A typical example containing the information the workflow normally expects.",
+  },
+  {
+    title: "Incomplete case",
+    text:
+      "Important information is missing and the system should identify the gap instead of inventing it.",
+  },
+  {
+    title: "Complex case",
+    text:
+      "Several issues or conditions appear together and require careful separation.",
+  },
+  {
+    title: "Edge case",
+    text:
+      "An unusual but realistic situation tests whether the system's assumptions are too narrow.",
+  },
+];
+
+const warehouseReview = [
+  {
+    stage: "OBSERVE",
+    title: "Recurring issue",
+    text:
+      "Investigation drafts repeatedly suggest receiving errors even when the evidence does not confirm the cause.",
+  },
+  {
+    stage: "TRACE",
+    title: "Locate the weakness",
+    text:
+      "The analysis prompt asks for the 'most likely cause' before the transaction evidence has been verified.",
+  },
+  {
+    stage: "CHANGE",
+    title: "Improve the instruction",
+    text:
+      "The prompt is changed to separate confirmed findings, possible investigation areas and missing evidence.",
+  },
+  {
+    stage: "TEST",
+    title: "Run representative cases",
+    text:
+      "The revised workflow is tested using several discrepancies with different causes and incomplete records.",
+  },
+  {
+    stage: "MEASURE",
+    title: "Compare the results",
+    text:
+      "Check whether unsupported root-cause statements decrease without making the investigation summary less useful.",
+  },
+  {
+    stage: "STANDARDISE",
+    title: "Update the working version",
+    text:
+      "If the change performs better, update the reusable template and record the new version.",
+  },
+];
+
+const improvementSteps = [
+  {
+    stage: "MEASURE",
+    title: "Observe real performance",
+    text:
+      "Use actual outputs, corrections, failures and user feedback instead of relying only on how good the system looks during setup.",
+  },
+  {
+    stage: "LOG",
+    title: "Record recurring weaknesses",
+    text:
+      "Group repeated problems so that isolated mistakes are not confused with systematic weaknesses.",
+  },
+  {
+    stage: "PRIORITISE",
+    title: "Fix the important problems first",
+    text:
+      "Give priority to errors that affect accuracy, decisions, customers, compliance or significant human review time.",
+  },
+  {
+    stage: "CHANGE",
+    title: "Make a controlled adjustment",
+    text:
+      "Improve the prompt, input, handoff, template, review rule or workflow stage responsible for the problem.",
+  },
+  {
+    stage: "TEST",
+    title: "Compare before and after",
+    text:
+      "Use representative cases to check whether the change genuinely improved the system.",
+  },
+  {
+    stage: "STANDARDISE",
+    title: "Document the better version",
+    text:
+      "Keep the successful improvement as the new working standard and continue monitoring it.",
+  },
+];
+---
+
+<BaseLayout
+  title="Reviewing & Improving Your System | KRIYANO"
+  description="Learn how to review and improve AI-assisted systems by measuring quality, tracking recurring failures, testing changes and maintaining reliable working versions."
+>
+  <article class="article-page">
+    <header class="article-hero">
+      <div class="container article-hero-grid">
+        <div class="article-heading">
+          <a href="/learn/" class="back-link">← LEARN</a>
+
+          <div class="article-meta">
+            <span>BETTER AI SYSTEMS</span>
+            <span>24</span>
+            <span>BEGINNER</span>
+          </div>
+
+          <h1>
+            Reviewing &amp; Improving
+            <span>Your System.</span>
+          </h1>
+
+          <p class="article-intro">
+            A useful AI system is not finished when it works once. Reliable
+            systems improve through measurement, testing, human feedback and
+            controlled changes over time.
+          </p>
+        </div>
+
+        <aside class="lesson-panel">
+          <div class="panel-header">
+            <span>LESSON 24</span>
+            <span>BETTER AI SYSTEMS</span>
+          </div>
+
+          <div class="panel-content">
+            <span class="panel-kicker">TURN EXPERIENCE INTO IMPROVEMENT</span>
+
+            <strong>
+              Review the system, not just the latest output.
+            </strong>
+
+            <p>
+              Look for patterns across real use. Improve the part of the
+              workflow causing the problem, test the change and keep a record
+              of what works.
+            </p>
+          </div>
+
+          <div class="panel-footer">
+            <span>MEASURE → LEARN → CHANGE → TEST → IMPROVE</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section class="article-body-section">
+      <div class="container article-layout">
+        <aside class="article-sidebar">
+          <div class="sidebar-box">
+            <span class="sidebar-title">IN THIS GUIDE</span>
+
+            <a href="#review">What should you review?</a>
+            <a href="#measure">Measure the whole system</a>
+            <a href="#failures">Learn from failures</a>
+            <a href="#versions">Improve with versions</a>
+            <a href="#testing">Test representative cases</a>
+            <a href="#example">Warehouse example</a>
+            <a href="#loop">Improvement loop</a>
+            <a href="#takeaway">Practical takeaway</a>
+          </div>
+        </aside>
+
+        <main class="article-content">
+          <section id="review">
+            <div class="section-marker">01 / WHAT SHOULD YOU REVIEW?</div>
+
+            <h2>Do not judge an AI system from one impressive output.</h2>
+
+            <p>
+              A workflow can produce an excellent result once and still be
+              unreliable. Review performance across repeated use, different
+              inputs and realistic situations.
+            </p>
+
+            <p>
+              The goal is not to make every AI output perfect. The goal is to
+              create a process where useful results are produced consistently
+              and important mistakes can be identified before they cause harm.
+            </p>
+
+            <div class="review-grid">
+              {
+                reviewAreas.map((item) => (
+                  <article class="review-card">
+                    <span>{item.number}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="measure">
+            <div class="section-marker">02 / MEASURE THE WHOLE SYSTEM</div>
+
+            <h2>Generation speed is only one part of performance.</h2>
+
+            <p>
+              An AI task may generate an answer in seconds, but the complete
+              workflow could still be inefficient if employees spend significant
+              time preparing inputs, correcting mistakes or rewriting outputs.
+            </p>
+
+            <div class="metric-grid">
+              {
+                metrics.map((item) => (
+                  <article>
+                    <span>{item.label}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="formula-box">
+              <span>BETTER QUESTION</span>
+
+              <div>
+                <strong>
+                  Preparation + AI processing + human review + correction
+                </strong>
+                <span>→</span>
+                <strong>Useful final output</strong>
+              </div>
+
+              <p>
+                Measure the complete path to a usable result—not only the time
+                taken for AI to generate text.
+              </p>
+            </div>
+          </section>
+
+          <section id="failures">
+            <div class="section-marker">03 / LEARN FROM FAILURES</div>
+
+            <h2>Recurring mistakes are information about your system.</h2>
+
+            <p>
+              When the same type of problem appears repeatedly, simply
+              correcting the final output wastes an opportunity. Trace the
+              problem back to the prompt, input, workflow, handoff or review
+              process that allowed it to happen.
+            </p>
+
+            <div class="failure-table">
+              <div class="failure-head">
+                <span>TYPE</span>
+                <span>EXAMPLE</span>
+                <span>SYSTEM RESPONSE</span>
+              </div>
+
+              {
+                failureLog.map((item) => (
+                  <div class="failure-row">
+                    <strong>{item.type}</strong>
+                    <p>{item.example}</p>
+                    <p>{item.response}</p>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="concept-box">
+              <span>IMPORTANT</span>
+              <p>
+                Do not redesign a workflow because of every isolated mistake.
+                Look for repeated weaknesses, high-impact failures or clear
+                opportunities to reduce unnecessary human effort.
+              </p>
+            </div>
+          </section>
+
+          <section id="versions">
+            <div class="section-marker">04 / IMPROVE WITH VERSIONS</div>
+
+            <h2>Change systems deliberately instead of constantly rewriting them.</h2>
+
+            <p>
+              When prompts and workflows are edited without keeping track of
+              changes, it becomes difficult to know which version performed
+              better or why a new problem appeared.
+            </p>
+
+            <div class="version-list">
+              {
+                versionSteps.map((item) => (
+                  <article>
+                    <div class="version-label">{item.version}</div>
+
+                    <div>
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="change-note">
+              <span>SIMPLE CHANGE NOTE</span>
+
+              <div class="change-grid">
+                <div>
+                  <small>VERSION</small>
+                  <strong>1.2</strong>
+                </div>
+
+                <div>
+                  <small>PROBLEM</small>
+                  <strong>AI assumes missing causes</strong>
+                </div>
+
+                <div>
+                  <small>CHANGE</small>
+                  <strong>Added evidence-status rule</strong>
+                </div>
+
+                <div>
+                  <small>RESULT</small>
+                  <strong>Retest required</strong>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="testing">
+            <div class="section-marker">05 / TEST REPRESENTATIVE CASES</div>
+
+            <h2>A system should work beyond the example used to build it.</h2>
+
+            <p>
+              Testing only one ideal example can hide weaknesses. Use several
+              realistic cases so you can see how the system behaves when
+              information is incomplete, unusual or more complicated.
+            </p>
+
+            <div class="test-grid">
+              {
+                testCases.map((item, index) => (
+                  <article>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="test-flow">
+              <strong>SAME SYSTEM</strong>
+              <span>→</span>
+              <strong>MULTIPLE CASES</strong>
+              <span>→</span>
+              <strong>COMPARE RESULTS</strong>
+              <span>→</span>
+              <strong>IDENTIFY PATTERNS</strong>
+            </div>
+          </section>
+
+          <section id="example">
+            <div class="section-marker">06 / WAREHOUSE EXAMPLE</div>
+
+            <h2>Improve a stock discrepancy workflow using recurring evidence.</h2>
+
+            <div class="warehouse-case">
+              <div class="case-header">
+                <span>WORKFLOW REVIEW</span>
+                <strong>Inventory discrepancy investigation</strong>
+              </div>
+
+              <div class="case-intro">
+                <p>
+                  The workflow is producing useful investigation summaries, but
+                  reviewers notice a recurring problem: AI sometimes presents a
+                  possible cause as though it has already been confirmed.
+                </p>
+              </div>
+            </div>
+
+            <div class="warehouse-review">
+              {
+                warehouseReview.map((item, index) => (
+                  <article>
+                    <div class="warehouse-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
+
+                    <div>
+                      <span>{item.stage}</span>
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="before-after">
+              <div>
+                <span>BEFORE</span>
+                <strong>
+                  "Identify the most likely cause of this discrepancy."
+                </strong>
+                <p>
+                  Encourages the model to select a cause even when the evidence
+                  may be incomplete.
+                </p>
+              </div>
+
+              <div class="before-after-arrow">→</div>
+
+              <div>
+                <span>IMPROVED</span>
+                <strong>
+                  "Separate confirmed findings, possible investigation areas
+                  and missing evidence."
+                </strong>
+                <p>
+                  Keeps uncertainty visible and makes human verification easier.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="loop">
+            <div class="section-marker">07 / THE IMPROVEMENT LOOP</div>
+
+            <h2>Build a feedback loop around real use.</h2>
+
+            <div class="improvement-list">
+              {
+                improvementSteps.map((item, index) => (
+                  <article class="improvement-row">
+                    <div class="improvement-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
+
+                    <div>
+                      <span>{item.stage}</span>
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="loop-summary">
+              <span>CONTINUOUS IMPROVEMENT</span>
+
+              <div>
+                <strong>Measure</strong>
+                <span>→</span>
+                <strong>Log</strong>
+                <span>→</span>
+                <strong>Prioritise</strong>
+                <span>→</span>
+                <strong>Change</strong>
+                <span>→</span>
+                <strong>Test</strong>
+                <span>→</span>
+                <strong>Standardise</strong>
+              </div>
+            </div>
+          </section>
+
+          <section id="takeaway">
+            <div class="section-marker">08 / PRACTICAL TAKEAWAY</div>
+
+            <h2>A strong AI system should become more reliable as you use it.</h2>
+
+            <p>
+              Treat prompts, templates and workflows as working systems rather
+              than one-time instructions. Observe real performance, learn from
+              recurring failures, make controlled improvements and keep human
+              responsibility around important decisions.
+            </p>
+
+            <div class="takeaway-flow">
+              <div>
+                <span>01</span>
+                <strong>Measure</strong>
+                <p>Judge real performance.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>02</span>
+                <strong>Learn</strong>
+                <p>Find recurring weaknesses.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>03</span>
+                <strong>Improve</strong>
+                <p>Make controlled changes.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>04</span>
+                <strong>Repeat</strong>
+                <p>Keep the system useful.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="completion-box">
+            <span class="completion-label">LEARNING PATH COMPLETE</span>
+
+            <h2>Better AI Systems</h2>
+
+            <p>
+              You have completed all four guides in this learning path:
+              creating reusable prompt templates, building AI workflows,
+              combining multiple AI tasks, and reviewing and improving the
+              systems you create.
+            </p>
+
+            <div class="completed-lessons">
+              <span>21 — Creating Prompt Templates</span>
+              <span>22 — Building AI Workflows</span>
+              <span>23 — Combining Multiple AI Tasks</span>
+              <span>24 — Reviewing &amp; Improving Your System</span>
+            </div>
+          </section>
+
+          <section class="curriculum-complete">
+            <div>
+              <span class="complete-kicker">KRIYANO LEARN</span>
+
+              <h2>24 guides completed.</h2>
+
+              <p>
+                You have reached the end of the KRIYANO foundational learning
+                paths. Continue by applying what you learned through practical
+                prompts, tools and real-world AI workflows.
+              </p>
+            </div>
+
+            <div class="resource-links">
+              <a href="/tools/prompt-builder/">
+                <span>BUILD</span>
+                <strong>AI Prompt Builder</strong>
+                <small>OPEN TOOL →</small>
+              </a>
+
+              <a href="/prompts/">
+                <span>EXPLORE</span>
+                <strong>Prompt Library</strong>
+                <small>VIEW PROMPTS →</small>
+              </a>
+
+              <a href="/learn/">
+                <span>REVIEW</span>
+                <strong>Learning Paths</strong>
+                <small>BACK TO LEARN →</small>
+              </a>
+            </div>
+          </section>
+        </main>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    overflow: hidden;
+  }
+
+  .article-hero {
+    padding: 92px 0 82px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(circle at 82% 20%, rgba(183, 255, 74, 0.08), transparent 27%),
+      radial-gradient(circle at 14% 0%, rgba(77, 226, 197, 0.055), transparent 28%);
+  }
+
+  .article-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 75px;
+    align-items: end;
+  }
+
+  .back-link {
+    color: var(--lime);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 28px;
+  }
+
+  .article-meta span {
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-heading h1 {
+    max-width: 930px;
+    margin-top: 22px;
+    font-size: clamp(3.5rem, 7vw, 6.6rem);
+    line-height: 0.94;
+    letter-spacing: -0.065em;
+  }
+
+  .article-heading h1 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .article-intro {
+    max-width: 760px;
+    margin-top: 27px;
+    color: var(--muted);
+    font-size: 1.04rem;
+    line-height: 1.8;
+  }
+
+  .lesson-panel {
+    overflow: hidden;
+    border: 1px solid rgba(183, 255, 74, 0.17);
+    border-radius: 21px;
+    background: var(--surface);
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .panel-content {
+    padding: 31px 26px 34px;
+  }
+
+  .panel-kicker {
+    display: block;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .panel-content strong {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.45rem;
+    line-height: 1.35;
+    letter-spacing: -0.035em;
+  }
+
+  .panel-content p {
+    margin-top: 17px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .panel-footer {
+    padding: 17px 20px;
+    border-top: 1px solid var(--line);
+    background: rgba(183, 255, 74, 0.03);
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-body-section {
+    padding: 88px 0 110px;
+  }
+
+  .article-layout {
+    display: grid;
+    grid-template-columns: 235px minmax(0, 800px);
+    gap: 78px;
+    justify-content: center;
+  }
+
+  .sidebar-box {
+    position: sticky;
+    top: 105px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+  }
+
+  .sidebar-title {
+    padding: 16px 0;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .sidebar-box a {
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  .sidebar-box a:hover {
+    color: var(--lime);
+  }
+
+  .article-content > section:not(:first-child) {
+    margin-top: 90px;
+  }
+
+  .section-marker {
+    color: var(--lime);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .article-content h2 {
+    max-width: 760px;
+    margin-top: 14px;
+    font-size: clamp(2.3rem, 5vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.052em;
+  }
+
+  .article-content > section > p {
+    max-width: 760px;
+    margin-top: 23px;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .review-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+    margin-top: 36px;
+  }
+
+  .review-card {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .review-card > span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+  }
+
+  .review-card h3 {
+    margin-top: 19px;
+    font-size: 1rem;
+  }
+
+  .review-card p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.76rem;
+    line-height: 1.68;
+  }
+
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+    margin-top: 35px;
+  }
+
+  .metric-grid article {
+    padding: 25px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .metric-grid article > span {
+    color: var(--lime);
+    font-size: 0.57rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .metric-grid h3 {
+    margin-top: 17px;
+    font-size: 1rem;
+  }
+
+  .metric-grid p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.76rem;
+    line-height: 1.65;
+  }
+
+  .formula-box {
+    margin-top: 27px;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .formula-box > span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .formula-box div {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    margin-top: 18px;
+  }
+
+  .formula-box div strong {
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .formula-box div span {
+    color: var(--mint);
+  }
+
+  .formula-box p {
+    margin-top: 15px;
+    color: var(--muted);
+    font-size: 0.74rem;
+    line-height: 1.6;
+  }
+
+  .failure-table {
+    margin-top: 35px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+  }
+
+  .failure-head,
+  .failure-row {
+    display: grid;
+    grid-template-columns: 0.65fr 1.4fr 1.35fr;
+    gap: 20px;
+    padding: 17px 20px;
+  }
+
+  .failure-head {
+    background: rgba(183, 255, 74, 0.035);
+    color: var(--lime);
+    font-size: 0.54rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+  }
+
+  .failure-row {
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+  }
+
+  .failure-row strong {
+    color: var(--lime);
+    font-size: 0.61rem;
+  }
+
+  .failure-row p {
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.55;
+  }
+
+  .concept-box {
+    margin: 34px 0;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .concept-box > span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .concept-box p {
+    margin-top: 12px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .version-list {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .version-list article {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 23px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .version-label {
+    color: var(--lime);
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .version-list h3 {
+    font-size: 1rem;
+  }
+
+  .version-list p {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.77rem;
+    line-height: 1.65;
+  }
+
+  .change-note {
+    margin-top: 28px;
+    padding: 26px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .change-note > span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .change-grid {
+    display: grid;
+    grid-template-columns: 0.5fr 1.25fr 1.25fr 1fr;
+    gap: 22px;
+    margin-top: 20px;
+  }
+
+  .change-grid small {
+    display: block;
+    color: var(--muted);
+    font-size: 0.51rem;
+    font-weight: 800;
+  }
+
+  .change-grid strong {
+    display: block;
+    margin-top: 7px;
+    font-size: 0.72rem;
+    line-height: 1.45;
+  }
+
+  .test-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+    margin-top: 35px;
+  }
+
+  .test-grid article {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .test-grid article > span {
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+  }
+
+  .test-grid h3 {
+    margin-top: 18px;
+    font-size: 1rem;
+  }
+
+  .test-grid p {
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.65;
+  }
+
+  .test-flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+    align-items: center;
+    margin-top: 26px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .test-flow strong {
+    font-size: 0.68rem;
+  }
+
+  .test-flow span {
+    color: var(--mint);
+  }
+
+  .warehouse-case {
+    margin-top: 35px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .case-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .case-header span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .case-header strong {
+    font-size: 0.74rem;
+  }
+
+  .case-intro {
+    padding: 24px;
+  }
+
+  .case-intro p {
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.72;
+  }
+
+  .warehouse-review {
+    margin-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  .warehouse-review article,
+  .improvement-row {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 23px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .warehouse-number,
+  .improvement-number {
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .warehouse-review article div:last-child > span,
+  .improvement-row div:last-child > span {
+    color: var(--lime);
+    font-size: 0.57rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .warehouse-review h3,
+  .improvement-row h3 {
+    margin-top: 8px;
+    font-size: 1rem;
+  }
+
+  .warehouse-review p,
+  .improvement-row p {
+    max-width: 650px;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.77rem;
+    line-height: 1.65;
+  }
+
+  .before-after {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 23px;
+    align-items: center;
+    margin-top: 28px;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .before-after > div:not(.before-after-arrow) > span {
+    color: var(--lime);
+    font-size: 0.56rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .before-after strong {
+    display: block;
+    margin-top: 12px;
+    font-size: 0.82rem;
+    line-height: 1.55;
+  }
+
+  .before-after p {
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 0.71rem;
+    line-height: 1.58;
+  }
+
+  .before-after-arrow {
+    color: var(--mint);
+  }
+
+  .improvement-list {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .loop-summary {
+    margin-top: 29px;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .loop-summary > span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .loop-summary div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-top: 18px;
+  }
+
+  .loop-summary strong {
+    font-size: 0.8rem;
+  }
+
+  .loop-summary div span {
+    color: var(--mint);
+  }
+
+  .takeaway-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-top: 35px;
+    padding: 27px 22px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .takeaway-flow > div span {
+    display: block;
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .takeaway-flow strong {
+    display: block;
+    margin-top: 13px;
+    font-size: 0.82rem;
+  }
+
+  .takeaway-flow p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.67rem;
+    line-height: 1.5;
+  }
+
+  .flow-arrow {
+    color: var(--mint);
+  }
+
+  .completion-box {
+    padding: 35px;
+    border: 1px solid rgba(183, 255, 74, 0.2);
+    border-radius: 19px;
+    background:
+      radial-gradient(circle at 90% 10%, rgba(183, 255, 74, 0.07), transparent 35%),
+      var(--surface);
+  }
+
+  .completion-label {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .completion-box h2 {
+    margin-top: 13px;
+  }
+
+  .completion-box > p {
+    max-width: 690px;
+    margin-top: 16px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .completed-lessons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 25px;
+  }
+
+  .completed-lessons span {
+    padding: 13px 15px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    color: var(--muted);
+    font-size: 0.69rem;
+  }
+
+  .curriculum-complete {
+    padding-top: 48px;
+    border-top: 1px solid var(--line);
+  }
+
+  .complete-kicker {
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .curriculum-complete > div:first-child p {
+    max-width: 650px;
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .resource-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
+    margin-top: 31px;
+  }
+
+  .resource-links a {
+    padding: 23px;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background: var(--surface);
+    transition:
+      border-color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .resource-links a:hover {
+    border-color: rgba(183, 255, 74, 0.35);
+    transform: translateY(-3px);
+  }
+
+  .resource-links a > span {
+    display: block;
+    color: var(--lime);
+    font-size: 0.54rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .resource-links strong {
+    display: block;
+    margin-top: 14px;
+    font-size: 0.91rem;
+  }
+
+  .resource-links small {
+    display: block;
+    margin-top: 22px;
+    color: var(--muted);
+    font-size: 0.56rem;
+    font-weight: 800;
+  }
+
+  @media (max-width: 1000px) {
+    .article-hero-grid,
+    .article-layout {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .article-sidebar {
+      display: none;
+    }
+
+    .change-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .takeaway-flow {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .takeaway-flow > .flow-arrow {
+      display: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .article-hero {
+      padding: 68px 0 60px;
+    }
+
+    .article-body-section {
+      padding: 65px 0 80px;
+    }
+
+    .review-grid,
+    .metric-grid,
+    .test-grid,
+    .completed-lessons,
+    .resource-links {
+      grid-template-columns: 1fr;
+    }
+
+    .failure-head {
+      display: none;
+    }
+
+    .failure-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .version-list article,
+    .warehouse-review article,
+    .improvement-row {
+      grid-template-columns: 45px 1fr;
+    }
+
+    .change-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .formula-box div {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .before-after {
+      grid-template-columns: 1fr;
+    }
+
+    .before-after-arrow {
+      transform: rotate(90deg);
+    }
+
+    .takeaway-flow {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .takeaway-flow > div {
+      padding-bottom: 17px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .takeaway-flow > div:last-of-type {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+  }
+</style>

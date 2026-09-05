@@ -1,0 +1,1374 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const reasons = [
+  {
+    number: "01",
+    title: "Each task stays focused",
+    text:
+      "A smaller AI task can have a clearer purpose, narrower instructions and a more predictable output.",
+  },
+  {
+    number: "02",
+    title: "Outputs become easier to check",
+    text:
+      "When work is divided into stages, you can verify one result before allowing it to influence the next stage.",
+  },
+  {
+    number: "03",
+    title: "Errors are easier to locate",
+    text:
+      "If the final result is poor, a staged process makes it easier to identify where the problem entered the workflow.",
+  },
+  {
+    number: "04",
+    title: "Different prompts can do different jobs",
+    text:
+      "Extraction, analysis, drafting and review often benefit from different instructions instead of one oversized prompt.",
+  },
+  {
+    number: "05",
+    title: "Human review can happen between tasks",
+    text:
+      "Important facts can be checked before they become inputs for another AI-generated result.",
+  },
+  {
+    number: "06",
+    title: "Useful stages can be reused",
+    text:
+      "A well-designed task can later become part of several workflows instead of belonging to only one process.",
+  },
+];
+
+const taskChain = [
+  {
+    stage: "TASK 1",
+    title: "Extract",
+    input: "Raw information",
+    output: "Relevant facts in a defined structure",
+  },
+  {
+    stage: "TASK 2",
+    title: "Organise",
+    input: "Extracted facts",
+    output: "Grouped or prioritised information",
+  },
+  {
+    stage: "TASK 3",
+    title: "Analyse",
+    input: "Structured information",
+    output: "Patterns, differences or investigation points",
+  },
+  {
+    stage: "TASK 4",
+    title: "Draft",
+    input: "Verified findings",
+    output: "Report, email, summary or other deliverable",
+  },
+  {
+    stage: "TASK 5",
+    title: "Review",
+    input: "Draft output",
+    output: "Quality checks and issues requiring human attention",
+  },
+];
+
+const handoffRules = [
+  {
+    title: "Define the output",
+    text:
+      "The first task should produce information in a structure the next task can reliably understand.",
+  },
+  {
+    title: "Pass only what is needed",
+    text:
+      "Do not automatically carry the entire conversation into every stage. Provide the information relevant to the next task.",
+  },
+  {
+    title: "Preserve verified facts",
+    text:
+      "Clearly distinguish confirmed information from AI suggestions, assumptions or unresolved points.",
+  },
+  {
+    title: "Do not hide uncertainty",
+    text:
+      "If a stage cannot determine something reliably, that uncertainty should remain visible in the handoff.",
+  },
+  {
+    title: "Add checkpoints",
+    text:
+      "Important outputs should be reviewed before they become trusted inputs for consequential downstream tasks.",
+  },
+  {
+    title: "Keep traceability",
+    text:
+      "For important work, retain enough information to understand where key facts and conclusions came from.",
+  },
+];
+
+const warehouseChain = [
+  {
+    stage: "01 / EXTRACT",
+    title: "Collect discrepancy facts",
+    text:
+      "Extract SKU, location, system quantity, physical quantity, variance and relevant transaction references.",
+  },
+  {
+    stage: "02 / CLASSIFY",
+    title: "Group possible investigation areas",
+    text:
+      "Organise the available information into receiving, outbound, transfer, adjustment and counting categories.",
+  },
+  {
+    stage: "03 / HUMAN CHECK",
+    title: "Verify the records",
+    text:
+      "A responsible person checks the actual transactions and confirms which findings are supported by evidence.",
+  },
+  {
+    stage: "04 / SUMMARISE",
+    title: "Create verified findings",
+    text:
+      "AI converts the confirmed evidence into a concise investigation summary without presenting unresolved possibilities as facts.",
+  },
+  {
+    stage: "05 / DRAFT",
+    title: "Prepare the report",
+    text:
+      "Use the verified findings to draft the discrepancy report, escalation or corrective-action request.",
+  },
+  {
+    stage: "06 / APPROVE",
+    title: "Human final review",
+    text:
+      "Review quantities, conclusions, wording and proposed actions before the output is used operationally.",
+  },
+];
+
+const mistakes = [
+  {
+    title: "One giant prompt",
+    text:
+      "Trying to extract, analyse, decide, draft and review everything in one instruction can make the reasoning and errors difficult to control.",
+  },
+  {
+    title: "Passing errors downstream",
+    text:
+      "An incorrect output from an early task can contaminate every later stage if it is treated as verified information.",
+  },
+  {
+    title: "Undefined handoffs",
+    text:
+      "If one task produces free-form text while the next expects structured facts, important information can be lost or misunderstood.",
+  },
+  {
+    title: "Duplicating unnecessary context",
+    text:
+      "Passing excessive information into every stage increases complexity and can distract the model from the task that matters.",
+  },
+  {
+    title: "No human checkpoints",
+    text:
+      "Multi-stage AI does not remove the need for verification. In some workflows it makes deliberate checkpoints even more important.",
+  },
+  {
+    title: "Too many stages",
+    text:
+      "Breaking work into more tasks is useful only when the separation improves control, quality or reuse.",
+  },
+];
+
+const buildSteps = [
+  {
+    stage: "DECOMPOSE",
+    title: "Break the work into outcomes",
+    text:
+      "Identify the distinct results required before the final deliverable can be produced.",
+  },
+  {
+    stage: "ORDER",
+    title: "Put tasks in a logical sequence",
+    text:
+      "A later task should depend only on information that can reasonably exist after the earlier stages.",
+  },
+  {
+    stage: "DEFINE",
+    title: "Specify each handoff",
+    text:
+      "State what one task must produce and what the next task is allowed to treat as input.",
+  },
+  {
+    stage: "VERIFY",
+    title: "Place review where it matters",
+    text:
+      "Check important facts and conclusions before they propagate through the rest of the chain.",
+  },
+  {
+    stage: "TEST",
+    title: "Run the complete chain",
+    text:
+      "Test whether information remains accurate and useful as it moves through several AI tasks.",
+  },
+  {
+    stage: "SIMPLIFY",
+    title: "Remove unnecessary stages",
+    text:
+      "Keep only the steps that improve reliability, clarity, control or reuse.",
+  },
+];
+---
+
+<BaseLayout
+  title="Combining Multiple AI Tasks | KRIYANO"
+  description="Learn how to divide complex work into focused AI tasks, connect outputs between stages, add verification checkpoints and build reliable multi-step AI processes."
+>
+  <article class="article-page">
+    <header class="article-hero">
+      <div class="container article-hero-grid">
+        <div class="article-heading">
+          <a href="/learn/" class="back-link">← LEARN</a>
+
+          <div class="article-meta">
+            <span>BETTER AI SYSTEMS</span>
+            <span>23</span>
+            <span>BEGINNER</span>
+          </div>
+
+          <h1>
+            Combining Multiple
+            <span>AI Tasks.</span>
+          </h1>
+
+          <p class="article-intro">
+            Complex work does not always belong in one prompt. Breaking it into
+            focused AI tasks can make the process easier to control, verify,
+            improve and reuse.
+          </p>
+        </div>
+
+        <aside class="lesson-panel">
+          <div class="panel-header">
+            <span>LESSON 23</span>
+            <span>BETTER AI SYSTEMS</span>
+          </div>
+
+          <div class="panel-content">
+            <span class="panel-kicker">DIVIDE COMPLEX WORK INTO CONTROLLED STAGES</span>
+
+            <strong>
+              One task produces the input for the next.
+            </strong>
+
+            <p>
+              The value comes from clear handoffs, focused instructions and
+              verification—not simply from using AI several times.
+            </p>
+          </div>
+
+          <div class="panel-footer">
+            <span>DECOMPOSE → HANDOFF → VERIFY → CONTINUE</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section class="article-body-section">
+      <div class="container article-layout">
+        <aside class="article-sidebar">
+          <div class="sidebar-box">
+            <span class="sidebar-title">IN THIS GUIDE</span>
+
+            <a href="#why">Why combine AI tasks?</a>
+            <a href="#chain">A simple task chain</a>
+            <a href="#handoffs">Designing handoffs</a>
+            <a href="#example">Warehouse example</a>
+            <a href="#mistakes">Common mistakes</a>
+            <a href="#build">Building a task chain</a>
+            <a href="#takeaway">Practical takeaway</a>
+          </div>
+        </aside>
+
+        <main class="article-content">
+          <section id="why">
+            <div class="section-marker">01 / WHY COMBINE AI TASKS?</div>
+
+            <h2>Complex work becomes easier to control when each stage has one clear job.</h2>
+
+            <p>
+              A single prompt can sometimes handle several instructions, but
+              combining too many objectives makes it harder to see which stage
+              failed, which information is verified and why the final result
+              looks the way it does.
+            </p>
+
+            <p>
+              A multi-task approach separates the work into meaningful stages.
+              Each stage receives a defined input and produces an output that
+              can be reviewed or passed forward.
+            </p>
+
+            <div class="principle-grid">
+              {
+                reasons.map((item) => (
+                  <article class="principle-card">
+                    <span>{item.number}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="chain">
+            <div class="section-marker">02 / A SIMPLE TASK CHAIN</div>
+
+            <h2>Think in outputs and handoffs rather than one long conversation.</h2>
+
+            <div class="task-chain">
+              {
+                taskChain.map((item, index) => (
+                  <article class="chain-row">
+                    <div class="chain-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
+
+                    <div class="chain-main">
+                      <span>{item.stage}</span>
+                      <h3>{item.title}</h3>
+                    </div>
+
+                    <div class="chain-detail">
+                      <small>INPUT</small>
+                      <p>{item.input}</p>
+                    </div>
+
+                    <div class="chain-detail">
+                      <small>OUTPUT</small>
+                      <p>{item.output}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="chain-visual">
+              <strong>EXTRACT</strong>
+              <span>→</span>
+              <strong>ORGANISE</strong>
+              <span>→</span>
+              <strong>ANALYSE</strong>
+              <span>→</span>
+              <strong>DRAFT</strong>
+              <span>→</span>
+              <strong>REVIEW</strong>
+            </div>
+
+            <div class="concept-box">
+              <span>IMPORTANT</span>
+              <p>
+                This is not a rule that every workflow needs five AI tasks.
+                Use only the stages that make the real process clearer or more
+                reliable.
+              </p>
+            </div>
+          </section>
+
+          <section id="handoffs">
+            <div class="section-marker">03 / DESIGNING HANDOFFS</div>
+
+            <h2>The connection between tasks matters as much as the prompts themselves.</h2>
+
+            <p>
+              If Task 2 depends on Task 1, you need to decide exactly what Task
+              1 should pass forward. A vague handoff can cause information to
+              change, disappear or become falsely certain.
+            </p>
+
+            <div class="handoff-grid">
+              {
+                handoffRules.map((item, index) => (
+                  <article>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="handoff-example">
+              <span class="handoff-label">BETTER HANDOFF</span>
+
+              <div class="handoff-columns">
+                <div>
+                  <small>TASK 1 OUTPUT</small>
+                  <strong>Structured findings</strong>
+                  <p>
+                    Confirmed facts, unresolved points and source references
+                    are kept in separate fields.
+                  </p>
+                </div>
+
+                <span class="handoff-arrow">→</span>
+
+                <div>
+                  <small>TASK 2 INPUT</small>
+                  <strong>Only verified findings</strong>
+                  <p>
+                    The drafting task is instructed not to convert unresolved
+                    possibilities into confirmed statements.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="example">
+            <div class="section-marker">04 / WAREHOUSE EXAMPLE</div>
+
+            <h2>Use several focused tasks to support a discrepancy investigation.</h2>
+
+            <div class="case-box">
+              <div class="case-header">
+                <span>EXAMPLE</span>
+                <strong>Stock variance investigation chain</strong>
+              </div>
+
+              <div class="case-data">
+                <div>
+                  <small>SYSTEM</small>
+                  <strong>4,625</strong>
+                </div>
+
+                <div>
+                  <small>PHYSICAL</small>
+                  <strong>4,579</strong>
+                </div>
+
+                <div>
+                  <small>VARIANCE</small>
+                  <strong>-46</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="warehouse-chain">
+              {
+                warehouseChain.map((item) => (
+                  <article>
+                    <span>{item.stage}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="control-flow">
+              <div>
+                <span>AI</span>
+                <strong>Extract</strong>
+              </div>
+              <span>→</span>
+              <div>
+                <span>AI</span>
+                <strong>Classify</strong>
+              </div>
+              <span>→</span>
+              <div class="human-stage">
+                <span>HUMAN</span>
+                <strong>Verify</strong>
+              </div>
+              <span>→</span>
+              <div>
+                <span>AI</span>
+                <strong>Summarise</strong>
+              </div>
+              <span>→</span>
+              <div>
+                <span>AI</span>
+                <strong>Draft</strong>
+              </div>
+              <span>→</span>
+              <div class="human-stage">
+                <span>HUMAN</span>
+                <strong>Approve</strong>
+              </div>
+            </div>
+
+            <div class="concept-box">
+              <span>CONTROL POINT</span>
+              <p>
+                Notice that verified evidence is established before AI drafts
+                the final report. This prevents an early AI hypothesis from
+                quietly becoming a stated root cause later in the chain.
+              </p>
+            </div>
+          </section>
+
+          <section id="mistakes">
+            <div class="section-marker">05 / COMMON MISTAKES</div>
+
+            <h2>More AI stages do not automatically create a better system.</h2>
+
+            <div class="mistake-grid">
+              {
+                mistakes.map((item, index) => (
+                  <article>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section id="build">
+            <div class="section-marker">06 / BUILDING A TASK CHAIN</div>
+
+            <h2>Design the information flow before adding more prompts.</h2>
+
+            <div class="workflow-list">
+              {
+                buildSteps.map((item, index) => (
+                  <article class="workflow-row">
+                    <div class="workflow-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
+
+                    <div>
+                      <span>{item.stage}</span>
+                      <h3>{item.title}</h3>
+                      <p>{item.text}</p>
+                    </div>
+                  </article>
+                ))
+              }
+            </div>
+
+            <div class="workflow-summary">
+              <span>MULTI-TASK DESIGN LOOP</span>
+
+              <div>
+                <strong>Decompose</strong>
+                <span>→</span>
+                <strong>Order</strong>
+                <span>→</span>
+                <strong>Define</strong>
+                <span>→</span>
+                <strong>Verify</strong>
+                <span>→</span>
+                <strong>Test</strong>
+                <span>→</span>
+                <strong>Simplify</strong>
+              </div>
+            </div>
+          </section>
+
+          <section id="takeaway">
+            <div class="section-marker">07 / PRACTICAL TAKEAWAY</div>
+
+            <h2>Break complex work apart only when the separation gives you more control.</h2>
+
+            <p>
+              Combining AI tasks works best when each stage has a clear
+              purpose, the handoffs preserve reliable information and human
+              review is placed before important errors can travel downstream.
+            </p>
+
+            <div class="takeaway-flow">
+              <div>
+                <span>01</span>
+                <strong>Divide</strong>
+                <p>Create focused tasks.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>02</span>
+                <strong>Connect</strong>
+                <p>Define each handoff.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>03</span>
+                <strong>Verify</strong>
+                <p>Stop errors travelling.</p>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div>
+                <span>04</span>
+                <strong>Simplify</strong>
+                <p>Keep only useful stages.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="next-lesson">
+            <div>
+              <span class="next-label">NEXT LESSON</span>
+
+              <h2>Reviewing &amp; Improving Your System</h2>
+
+              <p>
+                Learn how to evaluate an AI-assisted system, identify recurring
+                weaknesses and improve prompts, handoffs and controls over time.
+              </p>
+            </div>
+
+            <a
+  href="/learn/better-ai-systems/reviewing-and-improving-your-system/"
+  class="next-status"
+>
+  CONTINUE →
+</a>
+          </section>
+        </main>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    overflow: hidden;
+  }
+
+  .article-hero {
+    padding: 92px 0 82px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(circle at 82% 20%, rgba(183, 255, 74, 0.08), transparent 27%),
+      radial-gradient(circle at 14% 0%, rgba(77, 226, 197, 0.055), transparent 28%);
+  }
+
+  .article-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 75px;
+    align-items: end;
+  }
+
+  .back-link {
+    color: var(--lime);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 28px;
+  }
+
+  .article-meta span {
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-heading h1 {
+    max-width: 930px;
+    margin-top: 22px;
+    font-size: clamp(3.5rem, 7vw, 6.6rem);
+    line-height: 0.94;
+    letter-spacing: -0.065em;
+  }
+
+  .article-heading h1 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .article-intro {
+    max-width: 760px;
+    margin-top: 27px;
+    color: var(--muted);
+    font-size: 1.04rem;
+    line-height: 1.8;
+  }
+
+  .lesson-panel {
+    overflow: hidden;
+    border: 1px solid rgba(183, 255, 74, 0.17);
+    border-radius: 21px;
+    background: var(--surface);
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .panel-content {
+    padding: 31px 26px 34px;
+  }
+
+  .panel-kicker {
+    display: block;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .panel-content strong {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.45rem;
+    line-height: 1.35;
+    letter-spacing: -0.035em;
+  }
+
+  .panel-content p {
+    margin-top: 17px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
+  .panel-footer {
+    padding: 17px 20px;
+    border-top: 1px solid var(--line);
+    background: rgba(183, 255, 74, 0.03);
+    color: var(--lime);
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .article-body-section {
+    padding: 88px 0 110px;
+  }
+
+  .article-layout {
+    display: grid;
+    grid-template-columns: 235px minmax(0, 800px);
+    gap: 78px;
+    justify-content: center;
+  }
+
+  .sidebar-box {
+    position: sticky;
+    top: 105px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+  }
+
+  .sidebar-title {
+    padding: 16px 0;
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .sidebar-box a {
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  .sidebar-box a:hover {
+    color: var(--lime);
+  }
+
+  .article-content > section:not(:first-child) {
+    margin-top: 90px;
+  }
+
+  .section-marker {
+    color: var(--lime);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .article-content h2 {
+    max-width: 760px;
+    margin-top: 14px;
+    font-size: clamp(2.3rem, 5vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.052em;
+  }
+
+  .article-content > section > p {
+    max-width: 760px;
+    margin-top: 23px;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.85;
+  }
+
+  .concept-box {
+    margin: 34px 0;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .concept-box > span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .concept-box p {
+    margin-top: 12px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .principle-grid,
+  .handoff-grid,
+  .mistake-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+    margin-top: 36px;
+  }
+
+  .principle-card,
+  .handoff-grid article,
+  .mistake-grid article {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .principle-card > span,
+  .handoff-grid article > span,
+  .mistake-grid article > span {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+  }
+
+  .principle-card h3,
+  .handoff-grid h3,
+  .mistake-grid h3 {
+    margin-top: 19px;
+    font-size: 1rem;
+  }
+
+  .principle-card p,
+  .handoff-grid p,
+  .mistake-grid p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.76rem;
+    line-height: 1.68;
+  }
+
+  .task-chain {
+    margin-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .chain-row {
+    display: grid;
+    grid-template-columns: 45px 0.7fr 1fr 1fr;
+    gap: 20px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+  }
+
+  .chain-number {
+    color: var(--muted);
+    font-size: 0.6rem;
+    font-weight: 800;
+  }
+
+  .chain-main > span {
+    color: var(--lime);
+    font-size: 0.54rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+  }
+
+  .chain-main h3 {
+    margin-top: 7px;
+    font-size: 0.9rem;
+  }
+
+  .chain-detail small {
+    color: var(--lime);
+    font-size: 0.52rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+  }
+
+  .chain-detail p {
+    margin-top: 7px;
+    color: var(--muted);
+    font-size: 0.71rem;
+    line-height: 1.55;
+  }
+
+  .chain-visual {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 13px;
+    margin-top: 28px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .chain-visual strong {
+    font-size: 0.68rem;
+  }
+
+  .chain-visual span {
+    color: var(--mint);
+  }
+
+  .handoff-example {
+    margin-top: 25px;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .handoff-label {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .handoff-columns {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 24px;
+    align-items: center;
+    margin-top: 23px;
+  }
+
+  .handoff-columns small {
+    display: block;
+    color: var(--muted);
+    font-size: 0.53rem;
+    font-weight: 800;
+  }
+
+  .handoff-columns strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.92rem;
+  }
+
+  .handoff-columns p {
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 0.73rem;
+    line-height: 1.6;
+  }
+
+  .handoff-arrow {
+    color: var(--mint);
+  }
+
+  .case-box {
+    margin-top: 35px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .case-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .case-header span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .case-header strong {
+    font-size: 0.74rem;
+  }
+
+  .case-data {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .case-data div {
+    padding: 24px;
+    border-right: 1px solid var(--line);
+  }
+
+  .case-data div:last-child {
+    border-right: 0;
+  }
+
+  .case-data small {
+    display: block;
+    color: var(--muted);
+    font-size: 0.55rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+  }
+
+  .case-data strong {
+    display: block;
+    margin-top: 8px;
+    color: var(--lime);
+    font-size: 1.4rem;
+  }
+
+  .warehouse-chain {
+    margin-top: 22px;
+    border-top: 1px solid var(--line);
+  }
+
+  .warehouse-chain article {
+    padding: 23px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .warehouse-chain article > span {
+    color: var(--lime);
+    font-size: 0.57rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .warehouse-chain h3 {
+    margin-top: 8px;
+    font-size: 1rem;
+  }
+
+  .warehouse-chain p {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.77rem;
+    line-height: 1.65;
+  }
+
+  .control-flow {
+    display: grid;
+    grid-template-columns:
+      1fr auto 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 8px;
+    align-items: center;
+    margin-top: 27px;
+    padding: 23px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+
+  .control-flow > div span {
+    display: block;
+    color: var(--lime);
+    font-size: 0.5rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+  }
+
+  .control-flow > div strong {
+    display: block;
+    margin-top: 7px;
+    font-size: 0.67rem;
+  }
+
+  .control-flow > span {
+    color: var(--mint);
+  }
+
+  .control-flow .human-stage {
+    padding: 11px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 8px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .workflow-list {
+    margin-top: 36px;
+    border-top: 1px solid var(--line);
+  }
+
+  .workflow-row {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 23px;
+    padding: 25px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .workflow-number {
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .workflow-row div:last-child > span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .workflow-row h3 {
+    margin-top: 8px;
+    font-size: 1.02rem;
+  }
+
+  .workflow-row p {
+    max-width: 650px;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.68;
+  }
+
+  .workflow-summary {
+    margin-top: 30px;
+    padding: 27px;
+    border: 1px solid rgba(183, 255, 74, 0.18);
+    border-radius: 16px;
+    background: rgba(183, 255, 74, 0.035);
+  }
+
+  .workflow-summary > span {
+    color: var(--lime);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .workflow-summary div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 18px;
+    align-items: center;
+  }
+
+  .workflow-summary strong {
+    font-size: 0.8rem;
+  }
+
+  .workflow-summary div span {
+    color: var(--mint);
+  }
+
+  .takeaway-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-top: 35px;
+    padding: 27px 22px;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: var(--surface);
+  }
+
+  .takeaway-flow > div span {
+    display: block;
+    color: var(--lime);
+    font-size: 0.61rem;
+    font-weight: 800;
+  }
+
+  .takeaway-flow strong {
+    display: block;
+    margin-top: 13px;
+    font-size: 0.82rem;
+  }
+
+  .takeaway-flow p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.67rem;
+    line-height: 1.5;
+  }
+
+  .flow-arrow {
+    color: var(--mint);
+  }
+
+  .next-lesson {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    padding-top: 43px;
+    border-top: 1px solid var(--line);
+  }
+
+  .next-label {
+    color: var(--lime);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .next-lesson h2 {
+    margin-top: 11px;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+
+  .next-lesson p {
+    max-width: 540px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.79rem;
+    line-height: 1.65;
+  }
+
+  .next-status {
+    flex-shrink: 0;
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  a.next-status:hover {
+    color: var(--lime);
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1000px) {
+    .article-hero-grid,
+    .article-layout {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .article-sidebar {
+      display: none;
+    }
+
+    .control-flow {
+      grid-template-columns: repeat(6, 1fr);
+    }
+
+    .control-flow > span {
+      display: none;
+    }
+
+    .takeaway-flow {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .takeaway-flow > .flow-arrow {
+      display: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .article-hero {
+      padding: 68px 0 60px;
+    }
+
+    .article-body-section {
+      padding: 65px 0 80px;
+    }
+
+    .principle-grid,
+    .handoff-grid,
+    .mistake-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .chain-row {
+      grid-template-columns: 38px 1fr;
+    }
+
+    .chain-detail {
+      grid-column: 2;
+    }
+
+    .handoff-columns {
+      grid-template-columns: 1fr;
+    }
+
+    .handoff-arrow {
+      transform: rotate(90deg);
+    }
+
+    .case-data {
+      grid-template-columns: 1fr;
+    }
+
+    .case-data div {
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .case-data div:last-child {
+      border-bottom: 0;
+    }
+
+    .control-flow,
+    .takeaway-flow {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .control-flow > div,
+    .takeaway-flow > div {
+      padding-bottom: 17px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .control-flow > div:last-of-type,
+    .takeaway-flow > div:last-of-type {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .workflow-row {
+      grid-template-columns: 42px 1fr;
+    }
+
+    .next-lesson {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
