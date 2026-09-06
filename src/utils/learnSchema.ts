@@ -25,6 +25,8 @@ export function createLearnSchema({
     description,
     url: articleUrl,
     mainEntityOfPage: articleUrl,
+
+    image: `${siteUrl}/learn-default.png`,
     author: {
   "@type": "Organization",
   "@id": `${siteUrl}/#organization`,
