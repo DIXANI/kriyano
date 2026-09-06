@@ -25,6 +25,12 @@ export function createLearnSchema({
     description,
     url: articleUrl,
     mainEntityOfPage: articleUrl,
+    author: {
+  "@type": "Organization",
+  "@id": `${siteUrl}/#organization`,
+  name: "KRIYANO",
+  url: `${siteUrl}/`,
+},
     publisher: {
       "@id": `${siteUrl}/#organization`,
     },
