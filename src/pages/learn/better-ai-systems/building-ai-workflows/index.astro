@@ -1,5 +1,19 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { createLearnSchema } from "../../../../utils/learnSchema";
+
+const articleTitle = "Building AI Workflows | KRIYANO";
+
+const articleDescription =
+  "Learn how to build practical AI-assisted workflows by connecting inputs, AI tasks, human review, outputs and actions into a repeatable process.";
+
+const schema = createLearnSchema({
+  title: "Building AI Workflows",
+  description: articleDescription,
+  pathName: "Better AI Systems",
+  pathSlug: "better-ai-systems",
+  articleSlug: "building-ai-workflows",
+});
 
 const workflowParts = [
   {
@@ -180,8 +194,9 @@ const buildSteps = [
 ---
 
 <BaseLayout
-  title="Building AI Workflows | KRIYANO"
-  description="Learn how to build practical AI-assisted workflows by connecting inputs, AI tasks, human review, outputs and actions into a repeatable process."
+  title={articleTitle}
+  description={articleDescription}
+  schema={schema}
 >
   <article class="article-page">
     <header class="article-hero">

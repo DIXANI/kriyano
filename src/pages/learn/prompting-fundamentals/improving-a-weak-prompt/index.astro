@@ -1,6 +1,19 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { createLearnSchema } from "../../../../utils/learnSchema";
 
+const articleTitle = "Improving a Weak Prompt | KRIYANO";
+
+const articleDescription =
+  "Learn how to improve weak AI prompts by making the task clearer, adding relevant context, defining constraints and specifying the output you need.";
+
+const schema = createLearnSchema({
+  title: "Improving a Weak Prompt",
+  description: articleDescription,
+  pathName: "Prompting Fundamentals",
+  pathSlug: "prompting-fundamentals",
+  articleSlug: "improving-a-weak-prompt",
+});
 const weakSignals = [
   {
     number: "01",
@@ -96,8 +109,9 @@ const checklist = [
 ---
 
 <BaseLayout
-  title="Improving a Weak Prompt | KRIYANO"
-  description="Learn a practical step-by-step method for identifying weak AI prompts and improving them with clearer tasks, context, output requirements and constraints."
+  title={articleTitle}
+  description={articleDescription}
+  schema={schema}
 >
   <article class="article-page">
     <header class="article-hero">

@@ -1,6 +1,20 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
 
+import { createLearnSchema } from "../../../../utils/learnSchema";
+
+const articleTitle = "Copyright & AI Content | KRIYANO";
+
+const articleDescription =
+  "Learn the key copyright considerations when using AI-generated content, including source material, permissions, originality and responsible use.";
+
+const schema = createLearnSchema({
+  title: "Copyright & AI Content",
+  description: articleDescription,
+  pathName: "Safe & Responsible Use",
+  pathSlug: "safe-and-responsible-use",
+  articleSlug: "copyright-and-ai-content",
+});
 const copyrightPrinciples = [
   {
     number: "01",
@@ -161,8 +175,9 @@ const originalitySignals = [
 ---
 
 <BaseLayout
-  title="Copyright & AI Content | KRIYANO"
-  description="Learn practical copyright considerations for AI-assisted content, including source material, originality, licensing and responsible review before publishing."
+  title={articleTitle}
+  description={articleDescription}
+  schema={schema}
 >
   <article class="article-page">
     <header class="article-hero">

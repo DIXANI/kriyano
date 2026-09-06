@@ -1,6 +1,19 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { createLearnSchema } from "../../../../utils/learnSchema";
 
+const articleTitle = "Using Roles, Constraints & Examples | KRIYANO";
+
+const articleDescription =
+  "Learn how to improve AI prompts by using roles, constraints and examples to guide perspective, control the response and produce more consistent results.";
+
+const schema = createLearnSchema({
+  title: "Using Roles, Constraints & Examples",
+  description: articleDescription,
+  pathName: "Prompting Fundamentals",
+  pathSlug: "prompting-fundamentals",
+  articleSlug: "using-roles-constraints-and-examples",
+});
 const roleExamples = [
   {
     title: "Operations perspective",
@@ -86,8 +99,9 @@ const checklist = [
 ---
 
 <BaseLayout
-  title="Using Roles, Constraints & Examples | KRIYANO"
-  description="Learn how to use roles, constraints and examples in AI prompts to improve clarity, control and consistency without overcomplicating your instructions."
+  title={articleTitle}
+  description={articleDescription}
+  schema={schema}
 >
   <article class="article-page">
     <header class="article-hero">

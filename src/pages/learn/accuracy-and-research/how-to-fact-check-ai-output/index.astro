@@ -1,6 +1,20 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
 
+import { createLearnSchema } from "../../../../utils/learnSchema";
+
+const articleTitle = "How to Fact-Check AI Output | KRIYANO";
+
+const articleDescription =
+  "Learn how to fact-check AI output by identifying important claims, verifying facts against reliable sources and reviewing information before using it in real work.";
+
+const schema = createLearnSchema({
+  title: "How to Fact-Check AI Output",
+  description: articleDescription,
+  pathName: "Accuracy & Research",
+  pathSlug: "accuracy-and-research",
+  articleSlug: "how-to-fact-check-ai-output",
+});
 const factCheckSteps = [
   {
     number: "01",
@@ -141,8 +155,9 @@ const resultTypes = [
 ---
 
 <BaseLayout
-  title="How to Fact-Check AI Output | KRIYANO"
-  description="Learn a practical method for fact-checking AI-generated claims, numbers, citations and conclusions using reliable sources and human review."
+  title={articleTitle}
+  description={articleDescription}
+  schema={schema}
 >
   <article class="article-page">
     <header class="article-hero">

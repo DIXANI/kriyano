@@ -1,6 +1,19 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { createLearnSchema } from "../../../../utils/learnSchema";
 
+const articleTitle = "What Generative AI Actually Does | KRIYANO";
+
+const articleDescription =
+  "Learn what generative AI actually does, how it creates responses from learned patterns, why it can make mistakes and where human review remains important.";
+
+const schema = createLearnSchema({
+  title: "What Generative AI Actually Does",
+  description: articleDescription,
+  pathName: "AI Fundamentals",
+  pathSlug: "ai-fundamentals",
+  articleSlug: "what-generative-ai-actually-does",
+});
 const takeaways = [
   "Generative AI predicts and creates output from patterns learned during training.",
   "It does not understand information in exactly the same way a person does.",
@@ -55,8 +68,9 @@ const limitations = [
 ---
 
 <BaseLayout
-  title="What Generative AI Actually Does | KRIYANO"
-  description="Understand how generative AI works in practical terms, what it can produce, why it can make mistakes, and how to use it more effectively for real work."
+  title={articleTitle}
+  description={articleDescription}
+  schema={schema}
 >
   <article class="article-page">
     <header class="article-hero">

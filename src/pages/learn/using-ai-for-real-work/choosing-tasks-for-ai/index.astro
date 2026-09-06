@@ -1,6 +1,19 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { createLearnSchema } from "../../../../utils/learnSchema";
 
+const articleTitle = "Choosing Tasks for AI | KRIYANO";
+
+const articleDescription =
+  "Learn how to choose suitable tasks for AI by identifying work where AI can assist effectively while keeping human judgement and review in the right places.";
+
+const schema = createLearnSchema({
+  title: "Choosing Tasks for AI",
+  description: articleDescription,
+  pathName: "Using AI for Real Work",
+  pathSlug: "using-ai-for-real-work",
+  articleSlug: "choosing-tasks-for-ai",
+});
 const goodCandidates = [
   {
     number: "01",
@@ -125,8 +138,9 @@ const taskExamples = [
 ---
 
 <BaseLayout
-  title="Choosing Tasks for AI | KRIYANO"
-  description="Learn how to decide which workplace tasks are suitable for AI, where human review is essential, and whether AI will genuinely improve the workflow."
+  title={articleTitle}
+  description={articleDescription}
+  schema={schema}
 >
   <article class="article-page">
     <header class="article-hero">

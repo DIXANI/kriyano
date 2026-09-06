@@ -1,5 +1,19 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { createLearnSchema } from "../../../../utils/learnSchema";
+
+const articleTitle = "Reviewing & Improving Your System | KRIYANO";
+const articleDescription =
+  "Learn how to review and improve AI-assisted systems by measuring quality, tracking recurring failures, testing changes and maintaining reliable working versions.";
+
+
+const schema = createLearnSchema({
+  title: "Reviewing & Improving Your System",
+  description: articleDescription,
+  pathName: "Better AI Systems",
+  pathSlug: "better-ai-systems",
+  articleSlug: "reviewing-and-improving-your-system",
+});
 
 const reviewAreas = [
   {
@@ -236,9 +250,11 @@ const improvementSteps = [
 ---
 
 <BaseLayout
-  title="Reviewing & Improving Your System | KRIYANO"
-  description="Learn how to review and improve AI-assisted systems by measuring quality, tracking recurring failures, testing changes and maintaining reliable working versions."
+  title={articleTitle}
+  description={articleDescription}
+  schema={schema}
 >
+
   <article class="article-page">
     <header class="article-hero">
       <div class="container article-hero-grid">

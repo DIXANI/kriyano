@@ -1,6 +1,20 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
 
+import { createLearnSchema } from "../../../../utils/learnSchema";
+
+const articleTitle = "Responsible AI Use | KRIYANO";
+
+const articleDescription =
+  "Learn practical principles for responsible AI use, including clear purpose, information protection, human oversight, verification and accountability.";
+
+const schema = createLearnSchema({
+  title: "Responsible AI Use",
+  description: articleDescription,
+  pathName: "Safe & Responsible Use",
+  pathSlug: "safe-and-responsible-use",
+  articleSlug: "responsible-ai-use",
+});
 const principles = [
   {
     number: "01",
@@ -181,8 +195,9 @@ const pathLessons = [
 ---
 
 <BaseLayout
-  title="Responsible AI Use | KRIYANO"
-  description="Learn a practical framework for responsible AI use that combines privacy, accuracy, human judgement, copyright awareness, risk assessment and accountability."
+  title={articleTitle}
+  description={articleDescription}
+  schema={schema}
 >
   <article class="article-page">
     <header class="article-hero">

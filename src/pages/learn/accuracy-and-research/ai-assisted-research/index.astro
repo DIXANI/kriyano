@@ -1,6 +1,19 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { createLearnSchema } from "../../../../utils/learnSchema";
 
+const articleTitle = "AI-Assisted Research | KRIYANO";
+
+const articleDescription =
+  "Learn how to use AI for research by defining clear questions, gathering relevant information, evaluating sources, verifying claims and producing useful research outputs.";
+
+const schema = createLearnSchema({
+  title: "AI-Assisted Research",
+  description: articleDescription,
+  pathName: "Accuracy & Research",
+  pathSlug: "accuracy-and-research",
+  articleSlug: "ai-assisted-research",
+});
 const researchStages = [
   {
     number: "01",
@@ -171,8 +184,9 @@ const evidenceStatus = [
 ---
 
 <BaseLayout
-  title="AI-Assisted Research | KRIYANO"
-  description="Learn how to use AI for research without confusing generated output with verified evidence, using a practical workflow for discovery, source evaluation, analysis and human review."
+  title={articleTitle}
+  description={articleDescription}
+  schema={schema}
 >
   <article class="article-page">
     <header class="article-hero">

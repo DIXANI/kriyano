@@ -8,6 +8,7 @@ interface Props {
   description?: string;
   image?: string;
   noindex?: boolean;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
@@ -15,6 +16,7 @@ const {
   description = "KRIYANO provides practical AI tools, prompts, guides and resources for real work, business and creators.",
   image = "/og-default.png",
   noindex = false,
+  schema,
 } = Astro.props;
 
 const siteUrl = Astro.site ?? new URL(Astro.url.origin);
@@ -61,6 +63,45 @@ const socialImageUrl = new URL(image, siteUrl).toString();
     <meta name="theme-color" content="#07110d" />
 
     <meta name="generator" content={Astro.generator} />
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://kriyano.com/#organization",
+            name: "KRIYANO",
+            url: "https://kriyano.com/",
+            logo: "https://kriyano.com/favicon.svg",
+            description:
+              "KRIYANO provides practical AI tools, prompts, guides and resources for real work, business and creators.",
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://kriyano.com/#website",
+            url: "https://kriyano.com/",
+            name: "KRIYANO",
+            description:
+              "Practical AI tools, prompts, guides and resources for real work, business and creators.",
+            publisher: {
+              "@id": "https://kriyano.com/#organization",
+            },
+          },
+        ],
+      })}
+    />
+
+{
+  schema && (
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(schema)}
+    />
+  )
+}
+
   </head>
 
   <body>

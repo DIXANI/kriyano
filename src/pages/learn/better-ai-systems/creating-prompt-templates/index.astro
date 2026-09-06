@@ -1,7 +1,25 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
 
-const templateParts = [
+import { createLearnSchema } from "../../../../utils/learnSchema";
+
+
+
+const articleTitle = "Creating Prompt Templates | KRIYANO";
+
+const articleDescription =
+  "Learn how to turn successful AI prompts into reusable prompt templates using variables, fixed instructions, constraints and consistent output structures.";
+
+const schema = createLearnSchema({
+  title: "Creating Prompt Templates",
+  description: articleDescription,
+  pathName: "Better AI Systems",
+  pathSlug: "better-ai-systems",
+  articleSlug: "creating-prompt-templates",
+});
+ 
+
+const templateParts = [ 
   {
     number: "01",
     title: "Purpose",
@@ -160,8 +178,9 @@ const workflow = [
 ---
 
 <BaseLayout
-  title="Creating Prompt Templates | KRIYANO"
-  description="Learn how to turn successful AI prompts into reusable prompt templates using variables, fixed instructions, constraints and consistent output structures."
+  title={articleTitle}
+  description={articleDescription}
+  schema={schema}
 >
   <article class="article-page">
     <header class="article-hero">

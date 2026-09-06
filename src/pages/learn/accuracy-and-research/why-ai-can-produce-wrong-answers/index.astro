@@ -1,6 +1,20 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
 
+import { createLearnSchema } from "../../../../utils/learnSchema";
+
+const articleTitle = "Why AI Can Produce Wrong Answers | KRIYANO";
+
+const articleDescription =
+  "Learn why AI can produce incorrect or misleading answers, including prediction-based generation, missing context, outdated information and unsupported assumptions.";
+
+const schema = createLearnSchema({
+  title: "Why AI Can Produce Wrong Answers",
+  description: articleDescription,
+  pathName: "Accuracy & Research",
+  pathSlug: "accuracy-and-research",
+  articleSlug: "why-ai-can-produce-wrong-answers",
+});
 const failureReasons = [
   {
     number: "01",
@@ -103,8 +117,9 @@ const riskExamples = [
 ---
 
 <BaseLayout
-  title="Why AI Can Produce Wrong Answers | KRIYANO"
-  description="Learn why generative AI can produce incorrect, outdated or invented information and how to recognise and reduce factual risk when using AI for real work."
+  title={articleTitle}
+  description={articleDescription}
+  schema={schema}
 >
   <article class="article-page">
     <header class="article-hero">

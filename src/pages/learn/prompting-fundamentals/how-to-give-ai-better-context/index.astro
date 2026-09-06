@@ -1,6 +1,19 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { createLearnSchema } from "../../../../utils/learnSchema";
 
+const articleTitle = "How to Give AI Better Context | KRIYANO";
+
+const articleDescription =
+  "Learn how to give AI better context by explaining the situation, goal, audience and relevant background so it can produce more accurate and useful results.";
+
+const schema = createLearnSchema({
+  title: "How to Give AI Better Context",
+  description: articleDescription,
+  pathName: "Prompting Fundamentals",
+  pathSlug: "prompting-fundamentals",
+  articleSlug: "how-to-give-ai-better-context",
+});
 const contextTypes = [
   {
     number: "01",
@@ -84,8 +97,9 @@ const checklist = [
 ---
 
 <BaseLayout
-  title="How to Give AI Better Context | KRIYANO"
-  description="Learn how to give AI useful context without overloading your prompt, using practical workplace examples and a simple context framework."
+  title={articleTitle}
+  description={articleDescription}
+  schema={schema}
 >
   <article class="article-page">
     <header class="article-hero">

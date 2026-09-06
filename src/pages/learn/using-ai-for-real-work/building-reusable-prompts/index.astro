@@ -1,6 +1,19 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { createLearnSchema } from "../../../../utils/learnSchema";
 
+const articleTitle = "Building Reusable Prompts | KRIYANO";
+
+const articleDescription =
+  "Learn how to build reusable AI prompts by separating stable instructions from changing inputs and creating consistent structures for repeated work.";
+
+const schema = createLearnSchema({
+  title: "Building Reusable Prompts",
+  description: articleDescription,
+  pathName: "Using AI for Real Work",
+  pathSlug: "using-ai-for-real-work",
+  articleSlug: "building-reusable-prompts",
+});
 const reusableParts = [
   {
     number: "01",
@@ -128,8 +141,9 @@ const badTemplateSignals = [
 ---
 
 <BaseLayout
-  title="Building Reusable Prompts | KRIYANO"
-  description="Learn how to turn effective one-time prompts into reusable templates for recurring workplace tasks, with practical examples and quality-control guidance."
+  title={articleTitle}
+  description={articleDescription}
+  schema={schema}
 >
   <article class="article-page">
     <header class="article-hero">

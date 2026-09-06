@@ -1,6 +1,19 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { createLearnSchema } from "../../../../utils/learnSchema";
 
+const articleTitle = "Human Review & Quality Control | KRIYANO";
+
+const articleDescription =
+  "Learn how to review AI-generated work by checking facts, accuracy, completeness, relevance and quality before using the output in real work.";
+
+const schema = createLearnSchema({
+  title: "Human Review & Quality Control",
+  description: articleDescription,
+  pathName: "Using AI for Real Work",
+  pathSlug: "using-ai-for-real-work",
+  articleSlug: "human-review-and-quality-control",
+});
 const reviewChecks = [
   {
     number: "01",
@@ -120,8 +133,9 @@ const finalQuestions = [
 ---
 
 <BaseLayout
-  title="Human Review & Quality Control | KRIYANO"
-  description="Learn how to review AI-generated work for factual accuracy, completeness, unsupported assumptions, communication quality and appropriate human approval."
+  title={articleTitle}
+  description={articleDescription}
+  schema={schema}
 >
   <article class="article-page">
     <header class="article-hero">

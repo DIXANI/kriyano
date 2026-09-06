@@ -1,6 +1,19 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { createLearnSchema } from "../../../../utils/learnSchema";
 
+const articleTitle = "Where AI Can Go Wrong | KRIYANO";
+
+const articleDescription =
+  "Learn where AI can go wrong, including confidently incorrect answers, missing context, unsupported assumptions and other limitations that require human review.";
+
+const schema = createLearnSchema({
+  title: "Where AI Can Go Wrong",
+  description: articleDescription,
+  pathName: "AI Fundamentals",
+  pathSlug: "ai-fundamentals",
+  articleSlug: "where-ai-can-go-wrong",
+});
 const failureModes = [
   {
     number: "01",
@@ -81,8 +94,9 @@ const riskLevels = [
 ---
 
 <BaseLayout
-  title="Where AI Can Go Wrong | KRIYANO"
-  description="Learn where generative AI can produce incorrect, incomplete or misleading results and how to review AI output before using it for real work."
+  title={articleTitle}
+  description={articleDescription}
+  schema={schema}
 >
   <article class="article-page">
     <header class="article-hero">

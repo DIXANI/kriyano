@@ -1,5 +1,19 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { createLearnSchema } from "../../../../utils/learnSchema";
+
+const articleTitle = "What AI Is Good At | KRIYANO";
+
+const articleDescription =
+  "Learn what AI is good at, including drafting, rewriting, summarising, organising information and supporting repetitive knowledge work.";
+
+const schema = createLearnSchema({
+  title: "What AI Is Good At",
+  description: articleDescription,
+  pathName: "AI Fundamentals",
+  pathSlug: "ai-fundamentals",
+  articleSlug: "what-ai-is-good-at",
+});
 
 const strengths = [
   {
@@ -79,8 +93,9 @@ const poorFits = [
 ---
 
 <BaseLayout
-  title="What AI Is Good At | KRIYANO"
-  description="Learn which tasks generative AI handles well, where it provides practical value at work, and how to decide whether AI is suitable for a task."
+  title={articleTitle}
+  description={articleDescription}
+  schema={schema}
 >
   <article class="article-page">
     <header class="article-hero">

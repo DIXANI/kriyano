@@ -1,6 +1,21 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
 
+import { createLearnSchema } from "../../../../utils/learnSchema";
+
+const articleTitle = "AI & Workplace Information | KRIYANO";
+
+const articleDescription =
+  "Learn how to use AI responsibly with workplace information by understanding public, internal and confidential data and applying appropriate controls.";
+
+const schema = createLearnSchema({
+  title: "AI & Workplace Information",
+  description: articleDescription,
+  pathName: "Safe & Responsible Use",
+  pathSlug: "safe-and-responsible-use",
+  articleSlug: "ai-and-workplace-information",
+});
+
 const workplaceData = [
   {
     number: "01",
@@ -144,8 +159,9 @@ const scenarios = [
 ---
 
 <BaseLayout
-  title="AI & Workplace Information | KRIYANO"
-  description="Learn how to handle company data, internal documents and workplace information responsibly when using AI tools."
+  title={articleTitle}
+  description={articleDescription}
+  schema={schema}
 >
   <article class="article-page">
     <header class="article-hero">
