@@ -1,10 +1,31 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+const pageTitle = "AI Prompt Builder | KRIYANO";
+
+const pageDescription =
+  "Build clearer, more structured AI prompts for work, business, writing, research and everyday tasks.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "AI Prompt Builder",
+  description: pageDescription,
+  url: "https://kriyano.com/tools/prompt-builder/",
+  applicationCategory: "ProductivityApplication",
+  operatingSystem: "Any",
+  browserRequirements: "Requires a modern web browser",
+  isAccessibleForFree: true,
+  publisher: {
+    "@id": "https://kriyano.com/#organization",
+  },
+};
 ---
 
 <BaseLayout
-  title="AI Prompt Builder | KRIYANO"
-  description="Build clearer, more structured AI prompts for work, business, writing, research and everyday tasks."
+  title={pageTitle}
+  description={pageDescription}
+  schema={schema}
 >
   <section class="builder-hero">
     <div class="container hero-inner">
