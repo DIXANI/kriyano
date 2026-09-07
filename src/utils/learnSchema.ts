@@ -49,23 +49,17 @@ export function createLearnSchema({
         item: `${siteUrl}/`,
       },
       {
-        "@type": "ListItem",
-        position: 2,
-        name: "Learn",
-        item: `${siteUrl}/learn/`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: pathName,
-        item: `${siteUrl}/learn/`,
-      },
-      {
-        "@type": "ListItem",
-        position: 4,
-        name: title,
-        item: articleUrl,
-      },
+  "@type": "ListItem",
+  position: 2,
+  name: "Learn",
+  item: `${siteUrl}/learn/`,
+},
+{
+  "@type": "ListItem",
+  position: 3,
+  name: title,
+  item: articleUrl,
+},
     ],
   };
 
