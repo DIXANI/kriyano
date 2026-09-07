@@ -14,7 +14,7 @@ interface Props {
 const {
   title = "KRIYANO — Practical AI for Real Work",
   description = "KRIYANO provides practical AI tools, prompts, guides and resources for real work, business and creators.",
-  image = "/og-default.png",
+  image,
   noindex = false,
   schema,
 } = Astro.props;
@@ -22,7 +22,11 @@ const {
 const siteUrl = Astro.site ?? new URL(Astro.url.origin);
 
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
-const socialImageUrl = new URL(image, siteUrl).toString();
+const defaultImage = Astro.url.pathname.startsWith("/learn/")
+  ? "/learn-default.png"
+  : "/og-default.png";
+
+const socialImageUrl = new URL(image ?? defaultImage, siteUrl).toString();
 ---
 
 <!doctype html>
