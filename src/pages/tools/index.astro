@@ -3,46 +3,20 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const tools = [
   {
-  title: "AI Prompt Builder",
-  description: "Build stronger prompts for general work, planning, writing and problem-solving.",
-  category: "Prompting",
-  status: "Available",
-  href: "/tools/prompt-builder/",
-    },
-  {
-    title: "Business Email Prompt Builder",
-    description: "Create structured prompts for professional emails, replies, follow-ups and requests.",
-    category: "Work",
-    status: "Coming soon",
-    href: "#",
+    title: "KRIYANO CHECK",
+    description:
+      "Review AI-generated answers, reports, summaries and recommendations to identify what may need verification before you rely on them.",
+    category: "AI Output Review",
+    status: "Available now",
+    href: "/check/",
   },
   {
-    title: "SOP Prompt Builder",
-    description: "Turn a process or task into a structured prompt for creating clear SOPs.",
-    category: "Operations",
-    status: "Coming soon",
-    href: "#",
-  },
-  {
-    title: "Image Prompt Builder",
-    description: "Build detailed image-generation prompts with subject, lighting, style and composition.",
-    category: "Creators",
-    status: "Coming soon",
-    href: "#",
-  },
-  {
-    title: "AI Video Prompt Builder",
-    description: "Structure better prompts for AI video generation with scenes, motion and camera direction.",
-    category: "Creators",
-    status: "Coming soon",
-    href: "#",
-  },
-  {
-    title: "Excel Prompt Builder",
-    description: "Create useful AI prompts for formulas, reports, analysis and spreadsheet automation.",
-    category: "Productivity",
-    status: "Coming soon",
-    href: "#",
+    title: "AI Prompt Builder",
+    description:
+      "Build stronger prompts for general work, planning, writing and problem-solving.",
+    category: "Prompting",
+    status: "Available now",
+    href: "/tools/prompt-builder/",
   },
 ];
 ---
@@ -74,7 +48,7 @@ const tools = [
     <div class="container status-grid">
       <div>
         <strong>{tools.length}</strong>
-        <span>Tools planned</span>
+        <span>Available tools</span>
       </div>
 
       <div>
@@ -111,7 +85,12 @@ const tools = [
       <div class="tools-grid">
         {
           tools.map((tool, index) => (
-            <article class="tool-card">
+            <article
+  class:list={[
+    "tool-card",
+    { "tool-card-featured": index === 0 },
+  ]}
+>
               <div class="tool-top">
                 <span class="tool-number">
                   {String(index + 1).padStart(2, "0")}
@@ -144,73 +123,73 @@ const tools = [
   </section>
 
   <section class="workflow-section">
-    <div class="container workflow-layout">
-      <div class="workflow-copy">
-        <div class="section-kicker">How it works</div>
+  <div class="container workflow-layout">
+    <div class="workflow-copy">
+      <div class="section-kicker">How KRIYANO tools work</div>
 
-        <h2>
-          Start with your task.
-          <span>Not the technology.</span>
-        </h2>
+      <h2>
+        Start with your task.
+        <span>Use the right tool.</span>
+      </h2>
 
-        <p>
-          You shouldn't need to become a prompt engineer just to get a useful
-          answer from AI. KRIYANO tools help you add the right context, structure
-          and instructions step by step.
-        </p>
+      <p>
+        KRIYANO tools are designed around practical tasks. Choose what you need
+        to accomplish, provide only the necessary information and review the
+        result before using it.
+      </p>
+    </div>
+
+    <div class="process">
+      <div class="process-row">
+        <span>01</span>
+        <div>
+          <strong>Choose your task</strong>
+          <p>Select the KRIYANO tool that matches what you need to accomplish.</p>
+        </div>
       </div>
 
-      <div class="process">
-        <div class="process-row">
-          <span>01</span>
-          <div>
-            <strong>Choose your task</strong>
-            <p>Select the tool that matches what you want to accomplish.</p>
-          </div>
+      <div class="process-row">
+        <span>02</span>
+        <div>
+          <strong>Add the necessary information</strong>
+          <p>Provide the relevant text, context or requirements for the task.</p>
         </div>
+      </div>
 
-        <div class="process-row">
-          <span>02</span>
-          <div>
-            <strong>Add your information</strong>
-            <p>Answer a few practical questions about your goal and requirements.</p>
-          </div>
+      <div class="process-row">
+        <span>03</span>
+        <div>
+          <strong>Use the tool</strong>
+          <p>Let KRIYANO structure your prompt or review your AI-generated output.</p>
         </div>
+      </div>
 
-        <div class="process-row">
-          <span>03</span>
-          <div>
-            <strong>Generate your prompt</strong>
-            <p>KRIYANO structures your information into a more useful AI instruction.</p>
-          </div>
-        </div>
-
-        <div class="process-row">
-          <span>04</span>
-          <div>
-            <strong>Use it with your AI</strong>
-            <p>Copy the result into ChatGPT, Gemini, Claude or another compatible AI.</p>
-          </div>
+      <div class="process-row">
+        <span>04</span>
+        <div>
+          <strong>Review before acting</strong>
+          <p>Check the result, apply your judgment and verify important information.</p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <section class="directory-cta">
-    <div class="container">
-      <div class="cta-box">
-        <div>
-          <div class="section-kicker">First tool coming next</div>
+  <div class="container">
+    <div class="cta-box">
+      <div>
+        <div class="section-kicker">KRIYANO FLAGSHIP TOOL</div>
 
-          <h2>We're building the toolkit one useful tool at a time.</h2>
-        </div>
-
-        <a href="/" class="button button-secondary">
-          Back to KRIYANO
-        </a>
+        <h2>Check AI output before you use it.</h2>
       </div>
+
+      <a href="/check/" class="button button-secondary">
+        Open KRIYANO CHECK
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 </BaseLayout>
 
 <style>
@@ -338,6 +317,23 @@ const tools = [
       transform 0.25s ease,
       border-color 0.25s ease;
   }
+  .tool-card-featured {
+  grid-column: 1 / -1;
+  min-height: 350px;
+  border-color: rgba(183, 255, 74, 0.28);
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(183, 255, 74, 0.12),
+      transparent 32%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.035),
+      transparent
+    ),
+    var(--surface);
+}
 
   .tool-card:hover {
     transform: translateY(-4px);
