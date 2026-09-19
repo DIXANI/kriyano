@@ -8,7 +8,7 @@ export default defineConfig({
 
   integrations: [
     sitemap({
-      filter: (page) => page !== "https://kriyano.com/404/",
+      filter: (page) => !/\/404(?:\.html|\/)?$/.test(page),
     }),
   ],
 });
