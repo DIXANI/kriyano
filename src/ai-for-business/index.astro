@@ -1,0 +1,1201 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const businessAreas = [
+  {
+    number: "01",
+    title: "Business Planning",
+    description:
+      "Turn ideas into clearer plans, evaluate opportunities and structure business decisions.",
+    links: [
+      {
+        label: "Business Idea Evaluator",
+        href: "/prompts/business-idea-evaluator/",
+      },
+      {
+        label: "Business Plan Builder",
+        href: "/prompts/business-plan-builder/",
+      },
+      {
+        label: "SWOT Analysis",
+        href: "/prompts/swot-analysis/",
+      },
+      {
+        label: "Business Decision Framework",
+        href: "/prompts/business-decision-framework/",
+      },
+    ],
+  },
+  {
+    number: "02",
+    title: "Customers & Market",
+    description:
+      "Understand customer needs, market positioning, competitors and practical growth opportunities.",
+    links: [
+      {
+        label: "Customer Persona Builder",
+        href: "/prompts/customer-persona-builder/",
+      },
+      {
+        label: "Customer Pain Point Research",
+        href: "/prompts/customer-pain-point-research/",
+      },
+      {
+        label: "Market Research",
+        href: "/prompts/market-research/",
+      },
+      {
+        label: "Competitor Analysis",
+        href: "/prompts/competitor-analysis/",
+      },
+    ],
+  },
+  {
+    number: "03",
+    title: "Marketing & Sales",
+    description:
+      "Develop stronger positioning, messaging and campaigns for products and services.",
+    links: [
+      {
+        label: "Marketing Strategy",
+        href: "/prompts/marketing-strategy/",
+      },
+      {
+        label: "Value Proposition Builder",
+        href: "/prompts/value-proposition-builder/",
+      },
+      {
+        label: "Ad Copy Writer",
+        href: "/prompts/ad-copy-writer/",
+      },
+      {
+        label: "Landing Page Messaging",
+        href: "/prompts/landing-page-messaging/",
+      },
+    ],
+  },
+  {
+    number: "04",
+    title: "Operations & Processes",
+    description:
+      "Improve workflows, standardize procedures and investigate recurring business problems.",
+    links: [
+      {
+        label: "SOP Creation",
+        href: "/prompts/sop-creation/",
+      },
+      {
+        label: "Process Improvement",
+        href: "/prompts/process-improvement/",
+      },
+      {
+        label: "Root Cause Analysis",
+        href: "/prompts/root-cause-analysis/",
+      },
+      {
+        label: "Corrective Action Plan",
+        href: "/prompts/corrective-action-plan/",
+      },
+    ],
+  },
+  {
+    number: "05",
+    title: "Risk & Decisions",
+    description:
+      "Use structured analysis to identify risks, compare options and support better business decisions.",
+    links: [
+      {
+        label: "Business Risk Analysis",
+        href: "/prompts/business-risk-analysis/",
+      },
+      {
+        label: "Pricing Strategy",
+        href: "/prompts/pricing-strategy/",
+      },
+      {
+        label: "Research & Comparison",
+        href: "/prompts/research-comparison/",
+      },
+      {
+        label: "Fact Checking",
+        href: "/prompts/fact-checking/",
+      },
+    ],
+  },
+  {
+    number: "06",
+    title: "Content & Communication",
+    description:
+      "Create clearer business communication, campaign content and customer-facing materials.",
+    links: [
+      {
+        label: "Professional Email Writer",
+        href: "/prompts/professional-email-writer/",
+      },
+      {
+        label: "Email Marketing Campaign",
+        href: "/prompts/email-marketing-campaign/",
+      },
+      {
+        label: "Social Media Content Planner",
+        href: "/prompts/social-media-content-planner/",
+      },
+      {
+        label: "Content Repurposing",
+        href: "/prompts/content-repurposing/",
+      },
+    ],
+  },
+];
+
+const useCases = [
+  {
+    title: "Explore an idea",
+    description:
+      "Test assumptions, identify weaknesses and understand what needs validation before investing time or money.",
+  },
+  {
+    title: "Understand the market",
+    description:
+      "Organize competitor research, customer insights and market information into practical findings.",
+  },
+  {
+    title: "Improve operations",
+    description:
+      "Review processes, investigate problems and create structured procedures or corrective actions.",
+  },
+  {
+    title: "Communicate better",
+    description:
+      "Turn rough business information into clearer emails, reports, marketing messages and customer content.",
+  },
+];
+
+const frameworkSteps = [
+  {
+    number: "01",
+    title: "Goal",
+    description: "Define the business outcome you want.",
+  },
+  {
+    number: "02",
+    title: "Context",
+    description: "Give AI the relevant business background.",
+  },
+  {
+    number: "03",
+    title: "Analysis",
+    description: "Use AI to organize, compare or generate options.",
+  },
+  {
+    number: "04",
+    title: "Validate",
+    description: "Check facts, assumptions and commercial reality.",
+  },
+  {
+    number: "05",
+    title: "Decide",
+    description: "Apply human judgment before taking action.",
+  },
+];
+---
+
+<BaseLayout
+  title="AI for Business | KRIYANO"
+  description="Practical AI resources for business planning, market research, marketing, operations, decision-making and growth."
+>
+  <section class="business-hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="section-kicker">AI FOR BUSINESS</div>
+
+        <h1>
+          Turn AI into
+          <span>business action.</span>
+        </h1>
+
+        <p>
+          Practical prompts, tools and workflows for planning, market research,
+          marketing, operations, business decisions and everyday execution.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#business-areas" class="button button-primary">
+            Explore business resources
+          </a>
+
+          <a href="/prompts/business/" class="hero-secondary-link">
+            Browse business prompts ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="business-panel">
+        <div class="panel-header">
+          <span>BUSINESS SIGNAL</span>
+          <span class="status-dot">ACTIVE</span>
+        </div>
+
+        <div class="panel-body">
+          <div class="panel-question">
+            <span>OBJECTIVE</span>
+            <strong>
+              Evaluate a new business opportunity before investing.
+            </strong>
+          </div>
+
+          <div class="panel-grid">
+            <div>
+              <span>MARKET</span>
+              <strong>Demand</strong>
+              <small>Who needs it?</small>
+            </div>
+
+            <div>
+              <span>VALUE</span>
+              <strong>Offer</strong>
+              <small>Why choose it?</small>
+            </div>
+
+            <div>
+              <span>RISK</span>
+              <strong>Reality</strong>
+              <small>What could fail?</small>
+            </div>
+
+            <div>
+              <span>ACTION</span>
+              <strong>Next step</strong>
+              <small>What to test first?</small>
+            </div>
+          </div>
+
+          <div class="panel-output">
+            <span>AI ROLE</span>
+            <p>
+              Structure the analysis, challenge assumptions and identify
+              questions that still need real-world validation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="business-strip">
+    <div class="container strip-grid">
+      <div>
+        <strong>Plan</strong>
+        <span>Ideas & direction</span>
+      </div>
+
+      <div>
+        <strong>Research</strong>
+        <span>Markets & customers</span>
+      </div>
+
+      <div>
+        <strong>Improve</strong>
+        <span>Processes & operations</span>
+      </div>
+
+      <div>
+        <strong>Decide</strong>
+        <span>Evidence before action</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="business-areas">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Business resource areas</div>
+
+          <h2>
+            Start with the
+            business problem.
+          </h2>
+        </div>
+
+        <p>
+          Good business use of AI begins with a real objective. Choose the area
+          closest to what you need to understand, improve or decide.
+        </p>
+      </div>
+
+      <div class="business-grid">
+        {
+          businessAreas.map((area) => (
+            <article class="business-card">
+              <div class="card-head">
+                <span class="card-number">{area.number}</span>
+                <span class="card-type">BUSINESS</span>
+              </div>
+
+              <h3>{area.title}</h3>
+
+              <p>{area.description}</p>
+
+              <div class="resource-list">
+                {
+                  area.links.map((link) => (
+                    <a href={link.href}>
+                      <span>{link.label}</span>
+                      <span>↗</span>
+                    </a>
+                  ))
+                }
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="use-cases-section">
+    <div class="container">
+      <div class="section-head use-case-head">
+        <div>
+          <div class="section-kicker">Where AI can help</div>
+
+          <h2>
+            Useful before,
+            during and after decisions.
+          </h2>
+        </div>
+
+        <p>
+          AI is strongest when it helps you structure information and think
+          more clearly. It should not replace real customer evidence, financial
+          judgment or operational experience.
+        </p>
+      </div>
+
+      <div class="use-case-grid">
+        {
+          useCases.map((item, index) => (
+            <article class="use-case-card">
+              <span class="use-number">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+
+              <h3>{item.title}</h3>
+
+              <p>{item.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="framework-section">
+    <div class="container">
+      <div class="framework-box">
+        <div class="framework-copy">
+          <div class="section-kicker">Business AI framework</div>
+
+          <h2>
+            AI can support the decision.
+            It cannot own it.
+          </h2>
+
+          <p>
+            Use AI to organize information, expose assumptions, generate
+            alternatives and prepare analysis. Then validate the important
+            parts using reliable data and real business conditions.
+          </p>
+        </div>
+
+        <div class="framework-flow">
+          {
+            frameworkSteps.map((step) => (
+              <div class="framework-step">
+                <span>{step.number}</span>
+                <strong>{step.title}</strong>
+                <p>{step.description}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="business-focus">
+    <div class="container focus-grid">
+      <div class="focus-copy">
+        <div class="section-kicker">Built for practical businesses</div>
+
+        <h2>
+          AI does not have to mean
+          enterprise complexity.
+        </h2>
+
+        <p>
+          Small businesses, independent professionals and operational teams can
+          use AI for practical tasks without expensive systems or complicated
+          implementations.
+        </p>
+
+        <a href="/tools/prompt-builder/" class="text-link">
+          Build a prompt for your business task ↗
+        </a>
+      </div>
+
+      <div class="focus-list">
+        <div>
+          <span>01</span>
+          <div>
+            <strong>Small business</strong>
+            <p>
+              Planning, customer research, marketing and everyday operations.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <span>02</span>
+          <div>
+            <strong>Operations teams</strong>
+            <p>
+              SOPs, process improvement, investigation and corrective action.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <span>03</span>
+          <div>
+            <strong>Independent professionals</strong>
+            <p>
+              Research, communication, reporting and structured decision-making.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <span>04</span>
+          <div>
+            <strong>Growing teams</strong>
+            <p>
+              Repeatable workflows, clearer documentation and better planning.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="business-cta">
+    <div class="container">
+      <div class="cta-box">
+        <div>
+          <div class="section-kicker">Start with a real task</div>
+
+          <h2>
+            What business problem
+            are you trying to solve?
+          </h2>
+
+          <p>
+            Describe the goal, context and constraints. KRIYANO's Prompt Builder
+            can help turn that into a more structured AI prompt.
+          </p>
+        </div>
+
+        <a href="/tools/prompt-builder/" class="button button-primary">
+          Open Prompt Builder
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .business-hero {
+    padding: 105px 0 90px;
+
+    border-bottom: 1px solid var(--line);
+
+    background:
+      radial-gradient(
+        circle at 84% 24%,
+        rgba(183, 255, 74, 0.09),
+        transparent 27%
+      ),
+      radial-gradient(
+        circle at 16% 4%,
+        rgba(77, 226, 197, 0.07),
+        transparent 24%
+      );
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.08fr 0.92fr;
+    gap: 76px;
+
+    align-items: center;
+  }
+
+  .hero-copy h1 {
+    margin-top: 15px;
+
+    font-size: clamp(3.5rem, 7vw, 6.8rem);
+    line-height: 0.93;
+
+    letter-spacing: -0.065em;
+  }
+
+  .hero-copy h1 span {
+    display: block;
+    color: var(--lime);
+  }
+
+  .hero-copy > p {
+    max-width: 670px;
+
+    margin-top: 26px;
+
+    color: var(--muted);
+
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 22px;
+
+    margin-top: 34px;
+  }
+
+  .hero-secondary-link,
+  .text-link {
+    color: var(--lime);
+
+    font-size: 0.82rem;
+    font-weight: 750;
+  }
+
+  .business-panel {
+    overflow: hidden;
+
+    border: 1px solid rgba(77, 226, 197, 0.18);
+    border-radius: 21px;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.03),
+        transparent
+      ),
+      var(--surface);
+
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.23);
+  }
+
+  .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 14px 18px;
+
+    border-bottom: 1px solid var(--line);
+
+    color: var(--muted);
+
+    font-size: 0.65rem;
+    font-weight: 800;
+
+    letter-spacing: 0.09em;
+  }
+
+  .status-dot {
+    color: var(--mint);
+  }
+
+  .panel-body {
+    padding: 22px;
+  }
+
+  .panel-question {
+    padding-bottom: 21px;
+
+    border-bottom: 1px solid var(--line);
+  }
+
+  .panel-question span,
+  .panel-output span,
+  .panel-grid span {
+    display: block;
+
+    color: var(--mint);
+
+    font-size: 0.61rem;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+  }
+
+  .panel-question strong {
+    display: block;
+
+    margin-top: 8px;
+
+    font-size: 0.94rem;
+    line-height: 1.55;
+  }
+
+  .panel-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 1px;
+
+    margin-top: 1px;
+
+    background: var(--line);
+  }
+
+  .panel-grid > div {
+    padding: 20px;
+
+    background: var(--surface);
+  }
+
+  .panel-grid strong {
+    display: block;
+
+    margin-top: 7px;
+
+    font-size: 0.9rem;
+  }
+
+  .panel-grid small {
+    color: var(--muted);
+
+    font-size: 0.72rem;
+  }
+
+  .panel-output {
+    margin-top: 22px;
+    padding: 18px;
+
+    border: 1px solid rgba(183, 255, 74, 0.13);
+    border-radius: 12px;
+
+    background: rgba(183, 255, 74, 0.045);
+  }
+
+  .panel-output span {
+    color: var(--lime);
+  }
+
+  .panel-output p {
+    margin-top: 7px;
+
+    color: var(--muted);
+
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+
+  .business-strip {
+    border-bottom: 1px solid var(--line);
+
+    background: rgba(255, 255, 255, 0.018);
+  }
+
+  .strip-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .strip-grid > div {
+    padding: 24px 20px;
+
+    border-right: 1px solid var(--line);
+  }
+
+  .strip-grid > div:last-child {
+    border-right: 0;
+  }
+
+  .strip-grid strong {
+    display: block;
+
+    font-size: 0.94rem;
+  }
+
+  .strip-grid span {
+    color: var(--muted);
+
+    font-size: 0.77rem;
+  }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 1.08fr 0.92fr;
+
+    gap: 70px;
+
+    align-items: end;
+
+    margin-bottom: 48px;
+  }
+
+  .section-head h2 {
+    max-width: 760px;
+
+    margin-top: 13px;
+
+    font-size: clamp(2.6rem, 5vw, 4.5rem);
+    line-height: 0.98;
+
+    letter-spacing: -0.055em;
+  }
+
+  .section-head > p {
+    max-width: 500px;
+
+    color: var(--muted);
+
+    line-height: 1.75;
+  }
+
+  .business-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 17px;
+  }
+
+  .business-card {
+    padding: 27px;
+
+    border: 1px solid var(--line);
+    border-radius: 19px;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.024),
+        transparent
+      ),
+      var(--surface);
+  }
+
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-number {
+    color: var(--lime);
+
+    font-size: 0.68rem;
+    font-weight: 800;
+
+    letter-spacing: 0.1em;
+  }
+
+  .card-type {
+    color: var(--muted);
+
+    font-size: 0.62rem;
+    font-weight: 800;
+
+    letter-spacing: 0.09em;
+  }
+
+  .business-card h3 {
+    margin-top: 34px;
+
+    font-size: 1.55rem;
+
+    letter-spacing: -0.035em;
+  }
+
+  .business-card > p {
+    max-width: 540px;
+
+    margin-top: 12px;
+
+    color: var(--muted);
+
+    font-size: 0.87rem;
+    line-height: 1.65;
+  }
+
+  .resource-list {
+    margin-top: 25px;
+
+    border-top: 1px solid var(--line);
+  }
+
+  .resource-list a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid var(--line);
+
+    color: var(--text);
+
+    font-size: 0.78rem;
+
+    transition:
+      color 0.2s ease,
+      padding-left 0.2s ease;
+  }
+
+  .resource-list a > span:last-child {
+    color: var(--lime);
+  }
+
+  .resource-list a:hover {
+    padding-left: 5px;
+
+    color: var(--lime);
+  }
+
+  .use-cases-section {
+    padding: 100px 0;
+
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+
+    background: var(--bg-soft);
+  }
+
+  .use-case-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 14px;
+  }
+
+  .use-case-card {
+    min-height: 225px;
+
+    padding: 22px;
+
+    border: 1px solid var(--line);
+    border-radius: 17px;
+
+    background: var(--surface);
+  }
+
+  .use-number {
+    color: var(--mint);
+
+    font-size: 0.65rem;
+    font-weight: 800;
+
+    letter-spacing: 0.1em;
+  }
+
+  .use-case-card h3 {
+    margin-top: 45px;
+
+    font-size: 1.12rem;
+
+    letter-spacing: -0.025em;
+  }
+
+  .use-case-card p {
+    margin-top: 10px;
+
+    color: var(--muted);
+
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+
+  .framework-section {
+    padding: 100px 0;
+  }
+
+  .framework-box {
+    padding: 50px;
+
+    border: 1px solid rgba(183, 255, 74, 0.15);
+    border-radius: 24px;
+
+    background:
+      radial-gradient(
+        circle at 83% 33%,
+        rgba(77, 226, 197, 0.07),
+        transparent 27%
+      ),
+      var(--surface);
+  }
+
+  .framework-copy {
+    max-width: 820px;
+  }
+
+  .framework-copy h2 {
+    margin-top: 13px;
+
+    font-size: clamp(2.3rem, 5vw, 4rem);
+    line-height: 1;
+
+    letter-spacing: -0.05em;
+  }
+
+  .framework-copy p {
+    max-width: 710px;
+
+    margin-top: 18px;
+
+    color: var(--muted);
+
+    line-height: 1.7;
+  }
+
+  .framework-flow {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+
+    margin-top: 42px;
+
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .framework-step {
+    padding: 21px 18px;
+
+    border-right: 1px solid var(--line);
+  }
+
+  .framework-step:last-child {
+    border-right: 0;
+  }
+
+  .framework-step span {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--lime);
+
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .framework-step strong {
+    font-size: 0.82rem;
+  }
+
+  .framework-step p {
+    margin-top: 6px;
+
+    color: var(--muted);
+
+    font-size: 0.72rem;
+    line-height: 1.5;
+  }
+
+  .business-focus {
+    padding: 100px 0;
+
+    border-top: 1px solid var(--line);
+
+    background: var(--bg-soft);
+  }
+
+  .focus-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+
+    gap: 80px;
+
+    align-items: start;
+  }
+
+  .focus-copy h2 {
+    margin-top: 13px;
+
+    font-size: clamp(2.4rem, 5vw, 4.1rem);
+    line-height: 1;
+
+    letter-spacing: -0.05em;
+  }
+
+  .focus-copy > p {
+    max-width: 570px;
+
+    margin-top: 18px;
+
+    color: var(--muted);
+
+    line-height: 1.75;
+  }
+
+  .focus-copy .text-link {
+    display: inline-block;
+
+    margin-top: 24px;
+  }
+
+  .focus-list {
+    border-top: 1px solid var(--line);
+  }
+
+  .focus-list > div {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+
+    gap: 18px;
+
+    padding: 21px 0;
+
+    border-bottom: 1px solid var(--line);
+  }
+
+  .focus-list > div > span {
+    color: var(--lime);
+
+    font-size: 0.65rem;
+    font-weight: 800;
+  }
+
+  .focus-list strong {
+    font-size: 0.9rem;
+  }
+
+  .focus-list p {
+    margin-top: 5px;
+
+    color: var(--muted);
+
+    font-size: 0.78rem;
+    line-height: 1.55;
+  }
+
+  .business-cta {
+    padding: 100px 0;
+  }
+
+  .cta-box {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+
+    gap: 50px;
+
+    padding: 48px;
+
+    border: 1px solid rgba(183, 255, 74, 0.15);
+    border-radius: 23px;
+
+    background: var(--surface);
+  }
+
+  .cta-box h2 {
+    max-width: 700px;
+
+    margin-top: 12px;
+
+    font-size: clamp(2.3rem, 5vw, 4rem);
+    line-height: 1;
+
+    letter-spacing: -0.05em;
+  }
+
+  .cta-box p {
+    max-width: 650px;
+
+    margin-top: 16px;
+
+    color: var(--muted);
+
+    line-height: 1.7;
+  }
+
+  @media (max-width: 950px) {
+    .hero-grid,
+    .section-head,
+    .focus-grid {
+      grid-template-columns: 1fr;
+
+      gap: 38px;
+    }
+
+    .use-case-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .framework-flow {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .cta-box {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .business-hero {
+      padding: 72px 0 62px;
+    }
+
+    .strip-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .strip-grid > div:nth-child(2) {
+      border-right: 0;
+    }
+
+    .strip-grid > div:nth-child(-n + 2) {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .business-grid,
+    .use-case-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .panel-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .framework-box {
+      padding: 30px 22px;
+    }
+
+    .framework-flow {
+      grid-template-columns: 1fr;
+    }
+
+    .framework-step {
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .framework-step:last-child {
+      border-bottom: 0;
+    }
+
+    .cta-box {
+      padding: 32px 24px;
+    }
+  }
+</style>
