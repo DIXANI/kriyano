@@ -10,7 +10,7 @@ const description =
   title={title}
   description={description}
 >
-  <main class="check-page">
+  <div class="check-page">
 
     <section class="check-hero">
       <div class="check-wrap">
@@ -35,9 +35,7 @@ const description =
               <p>Paste the output you want to review.</p>
             </div>
 
-            <div class="status">
-              V1
-            </div>
+            <button id="check-example" type="button" class="check-example">Try an example</button>
           </div>
 
           <label for="ai-output" class="input-label">
@@ -50,6 +48,11 @@ const description =
             placeholder="Paste the AI output here..."
           ></textarea>
 
+          <div class="check-privacy">
+            <label><input type="checkbox" id="check-online"/> Include online AI review</label>
+            <p>Local checks stay in your browser. Enabling AI review sends this text to Cloudflare Workers AI. Avoid confidential or personal information. <a href="/privacy/">Privacy details</a></p>
+          </div>
+          <p id="check-input-status" role="status" class="check-input-status"></p>
           <div class="input-footer">
 
             <span id="character-count">
@@ -78,7 +81,7 @@ const description =
       </div>
    </section>
 
-<section id="check-results" class="check-results" hidden>
+<section id="check-results" class="check-results" hidden aria-label="Check results">
   <div class="check-wrap">
 
     <div class="results-card">
@@ -114,6 +117,8 @@ const description =
       </div>
 
 
+      <section id="arithmetic-results" class="arithmetic-results" hidden><h2>Possible calculation errors</h2><p>These checks cover simple written equations and a limited stock-quantity pattern. They do not verify the underlying facts.</p><ul id="arithmetic-list"></ul></section>
+      <p class="local-review-note">Local signals are not a fact-check. Online AI review is optional and may miss errors.</p>
       <!-- Browser Detected Signals -->
       <div class="results-heading">
 
@@ -284,10 +289,11 @@ const description =
       </div>
     </section>
 
-  </main>
+  </div>
 
 
   <script>
+  import { citationSignals as findCitations, arithmeticChecks, deduplicateFindings } from '../../utils/check-tools.mjs';
   const textarea = document.querySelector("#ai-output");
   const counter = document.querySelector("#character-count");
   const button = document.querySelector("#check-button");
@@ -391,10 +397,11 @@ const description =
      * Citation/source language.
      * These are signals only — not verified citations.
      */
-    const citationSignals = uniqueMatches(
-      text,
-      /\b(?:according to|study|studies|research|report|source|citation|doi|journal|published by|data from)\b/gi
-    );
+    const citationSignals = findCitations(text);
+    const arithmetic = arithmeticChecks(text);
+    const arithmeticSection = document.getElementById('arithmetic-results');
+    const arithmeticList = document.getElementById('arithmetic-list');
+    if (arithmeticSection && arithmeticList) { arithmeticSection.hidden = arithmetic.length === 0; arithmeticList.replaceChildren(); arithmetic.forEach(message => { const li = document.createElement('li'); li.textContent = message; arithmeticList.append(li); }); }
 
     /*
      * General numeric values.
@@ -465,9 +472,7 @@ const description =
           <div class="nothing-detected">
             <strong>No structured review items detected.</strong>
             <p>
-              This does not mean the output is accurate. Semantic AI review
-              will handle claims, assumptions and recommendations in the
-              next stage.
+              This does not mean the output is accurate. You can enable online AI review to look for claims, assumptions and recommendations.
             </p>
           </div>
         `;
@@ -573,9 +578,9 @@ if (priorityHeading instanceof HTMLElement) {
 
   priorityList.innerHTML = "";
 
-  const priorities = Array.isArray(analysis.priorities)
+  const priorities = deduplicateFindings(Array.isArray(analysis.priorities)
     ? analysis.priorities
-    : [];
+    : []);
 
   priorities.forEach((item) => {
     const card = document.createElement("article");
@@ -627,15 +632,26 @@ if (priorityHeading instanceof HTMLElement) {
       !(textarea instanceof HTMLTextAreaElement) ||
       textarea.value.trim().length === 0
     ) {
+      document.getElementById('check-input-status').textContent = 'Paste some text or try the example first.';
       textarea?.focus();
       return;
     }
 
     const text = textarea.value.trim();
+    document.getElementById('check-input-status').textContent = '';
+    const oldSemantic = document.getElementById('semantic-results');
+    if (oldSemantic) oldSemantic.hidden = true;
 
     // Run browser checks first.
     runLocalCheck(text);
 
+    if (!document.querySelector<HTMLInputElement>('#check-online')?.checked) {
+      document.getElementById('check-input-status').textContent = 'Local check complete. No text was sent for AI review.';
+      return;
+    }
+    textarea.disabled = true;
+    document.querySelector<HTMLInputElement>('#check-online').disabled = true;
+    document.querySelector<HTMLButtonElement>('#check-example').disabled = true;
     // Prevent duplicate submissions while AI review is running.
     button.disabled = true;
 button.textContent = "Checking AI Output...";
@@ -658,6 +674,7 @@ if (previousPriorityHeading instanceof HTMLElement) {
 try {
       const response = await fetch("/api/check", {
         method: "POST",
+        signal: AbortSignal.timeout(30000),
         headers: {
           "Content-Type": "application/json"
         },
@@ -674,17 +691,11 @@ try {
         );
       }
 
-      console.log(
-        "KRIYANO semantic analysis:",
-        data.analysis
-      );
+
 
       renderSemanticResults(data.analysis);
     } catch (error) {
-      console.error(
-        "KRIYANO CHECK request failed:",
-        error
-      );
+
 
       const semanticResults =
         document.getElementById("semantic-results");
@@ -722,10 +733,18 @@ try {
       }
     } finally {
       button.disabled = false;
+      textarea.disabled = false;
+      document.querySelector<HTMLInputElement>('#check-online').disabled = false;
+      document.querySelector<HTMLButtonElement>('#check-example').disabled = false;
       button.textContent = "Check AI Output";
     }
   });
 }
+document.querySelector('#check-example')?.addEventListener('click', () => {
+  if (textarea instanceof HTMLTextAreaElement) { textarea.value = 'Example inventory report: System stock is 100 units and physical stock is 90 units. The shortage is 20 units. This proves the supplier delivered fewer items.'; textarea.dispatchEvent(new Event('input')); textarea.focus(); }
+});
+textarea?.addEventListener('input', () => { if (results instanceof HTMLElement) results.hidden = true; document.getElementById('check-input-status').textContent = ''; });
+document.querySelector('#check-online')?.addEventListener('change', () => { if (results instanceof HTMLElement) results.hidden = true; document.getElementById('check-input-status').textContent = ''; });
 </script>
 
 </BaseLayout>
@@ -749,7 +768,7 @@ try {
   }
 
   .check-hero {
-    padding: 110px 0 80px;
+    padding: 50px 0 45px;
   }
 
   .check-hero .check-wrap {
@@ -1485,4 +1504,19 @@ try {
 #check-results {
   scroll-margin-top: 90px;
 }
+</style>
+<style>
+.check-example { background: transparent; border: 1px solid #556b5c; padding: 10px 14px; border-radius: 9px; color: var(--lime); font: inherit; font-size: .88rem; }
+.check-privacy { margin-top: 16px; text-align: left; }
+.check-privacy label { display: flex; align-items: center; gap: 10px; font-weight: 650; }
+.check-privacy input { accent-color: var(--lime); width: 18px; height: 18px; }
+.check-privacy p, .local-review-note { color: var(--muted); font-size: .86rem; line-height: 1.7; margin-top: 10px; }
+.check-privacy a { color: var(--lime); text-decoration: underline; }
+.check-input-status { color: var(--mint); font-size: .88rem; margin-top: 10px; text-align: left; }
+.arithmetic-results { text-align: left; background: #2a2418; border: 1px solid #9d8242; padding: 22px; border-radius: 12px; margin-bottom: 24px; }
+.arithmetic-results h2 { font-size: 1.2rem; }
+.arithmetic-results p { color: #ded5bc; margin: 10px 0; font-size: .9rem; }
+.arithmetic-results ul { padding-left: 20px; }
+.arithmetic-results li { margin-top: 12px; line-height: 1.7; }
+.local-review-note { margin-bottom: 25px; }
 </style>
