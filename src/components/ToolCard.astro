@@ -1,0 +1,11 @@
+---
+import ToolIcon from './ToolIcon.astro';
+import type { Tool } from '../data/tools';
+interface Props { tool: Tool; }
+const { tool } = Astro.props;
+---
+<a class="kit-card" href={tool.href} data-tool-card data-category={tool.category} data-search={`${tool.name} ${tool.description} ${tool.keywords}`.toLowerCase()}>
+ <div class="kit-card-top"><span class="kit-icon"><ToolIcon name={tool.icon}/></span><span class="kit-tag">{tool.category}</span></div>
+ <h3>{tool.name}</h3><p>{tool.description}</p>
+ <div class="kit-card-foot"><span>{tool.action}</span><span aria-hidden="true">↗</span></div><small>{tool.detail}</small>
+</a>

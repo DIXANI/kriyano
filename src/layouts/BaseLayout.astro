@@ -12,8 +12,8 @@ interface Props {
 }
 
 const {
-  title = "KRIYANO — Practical AI for Real Work",
-  description = "KRIYANO provides practical AI tools, prompts, guides and resources for real work, business and creators.",
+  title = "KRIYANO — Free Tools for Everyday Work",
+  description = "Free practical tools, prompts and guides for everyday office work and small businesses.",
   image,
   noindex = false,
   schema,
@@ -80,7 +80,7 @@ const socialImageUrl = new URL(image ?? defaultImage, siteUrl).toString();
             url: "https://kriyano.com/",
             logo: "https://kriyano.com/favicon.svg",
             description:
-              "KRIYANO provides practical AI tools, prompts, guides and resources for real work, business and creators.",
+              "Free practical tools, prompts and guides for everyday office work and small businesses.",
           },
           {
             "@type": "WebSite",
@@ -88,7 +88,7 @@ const socialImageUrl = new URL(image ?? defaultImage, siteUrl).toString();
             url: "https://kriyano.com/",
             name: "KRIYANO",
             description:
-              "Practical AI tools, prompts, guides and resources for real work, business and creators.",
+              "Free tools for everyday work, business and AI.",
             publisher: {
               "@id": "https://kriyano.com/#organization",
             },
@@ -109,9 +109,10 @@ const socialImageUrl = new URL(image ?? defaultImage, siteUrl).toString();
   </head>
 
   <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
     <Header />
 
-    <main>
+    <main id="main-content" tabindex="-1">
       <slot />
     </main>
 

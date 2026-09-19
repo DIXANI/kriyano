@@ -1,72 +1,22 @@
+---
+const links = [ {href:'/tools/',label:'Tools'}, {href:'/prompts/',label:'Prompts'}, {href:'/learn/',label:'Learn'}, {href:'/about/',label:'About'} ];
+const active = (href: string) => Astro.url.pathname.startsWith(href);
+---
 <header class="site-header">
-  <div class="container nav">
-    <a href="/" class="brand">
-      <span class="brand-mark"></span>
-      KRIYANO
-    </a>
-
-    <button
-      class="mobile-menu-toggle"
-      type="button"
-      aria-label="Open navigation"
-      aria-expanded="false"
-      aria-controls="mobile-menu"
-    >
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-
-    <nav class="desktop-nav" aria-label="Main navigation">
-      <ul class="nav-links">
-        <li><a href="/tools/">Tools</a></li>
-        <li><a href="/prompts/">Prompts</a></li>
-        <li><a href="/ai-for-work/">Work</a></li>
-        <li><a href="/ai-for-business/">Business</a></li>
-        <li><a href="/creators/">Creators</a></li>
-        <li><a href="/learn/">Learn</a></li>
-      </ul>
-    </nav>
-
-    <a href="/check/" class="nav-cta">Check AI Output</a>
-  </div>
-
-  <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation">
-    <div class="container">
-      <a href="/tools/">Tools</a>
-      <a href="/prompts/">Prompts</a>
-      <a href="/ai-for-work/">Work</a>
-      <a href="/ai-for-business/">Business</a>
-      <a href="/creators/">Creators</a>
-      <a href="/learn/">Learn</a>
-      <a href="/check/" class="mobile-menu-cta">Check AI Output</a>
-    </div>
-  </nav>
+ <div class="container nav">
+  <a href="/" class="brand" aria-label="KRIYANO home"><span class="brand-mark" aria-hidden="true"></span>KRIYANO</a>
+  <nav class="desktop-nav" aria-label="Main navigation"><ul class="nav-links">{links.map(link=><li><a href={link.href} aria-current={active(link.href)?'page':undefined}>{link.label}</a></li>)}</ul></nav>
+  <a href="/check/" class="nav-cta">Check AI Output ↗</a>
+  <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
+ </div>
+ <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation" hidden><div class="container">{links.map(link=><a href={link.href} aria-current={active(link.href)?'page':undefined}>{link.label}</a>)}<a href="/check/" class="mobile-menu-cta">Check AI Output</a></div></nav>
 </header>
-
 <script>
-  const toggle = document.querySelector('.mobile-menu-toggle');
-  const menu = document.querySelector('.mobile-menu');
-
-  if (toggle && menu) {
-    toggle.addEventListener('click', () => {
-      const isOpen = menu.classList.toggle('is-open');
-
-      toggle.classList.toggle('is-open', isOpen);
-      toggle.setAttribute('aria-expanded', String(isOpen));
-      toggle.setAttribute(
-        'aria-label',
-        isOpen ? 'Close navigation' : 'Open navigation'
-      );
-    });
-
-    menu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        menu.classList.remove('is-open');
-        toggle.classList.remove('is-open');
-        toggle.setAttribute('aria-expanded', 'false');
-        toggle.setAttribute('aria-label', 'Open navigation');
-      });
-    });
-  }
+const toggle=document.querySelector<HTMLButtonElement>('.mobile-menu-toggle')!;
+const menu=document.querySelector<HTMLElement>('#mobile-menu')!;
+function close(){menu.hidden=true;menu.classList.remove('is-open');toggle.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Open navigation');}
+toggle.addEventListener('click',()=>{const open=menu.hidden;menu.hidden=!open;menu.classList.toggle('is-open',open);toggle.classList.toggle('is-open',open);toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Close navigation':'Open navigation');});
+menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',close));
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!menu.hidden){close();toggle.focus();}});
+window.matchMedia('(min-width: 901px)').addEventListener('change',close);
 </script>

@@ -433,3 +433,17 @@ footer {
     gap: 12px 18px;
   }
 }
+/* Shared accessibility and readable controls. Hidden states must beat component display rules. */
+[hidden] { display: none !important; }
+:focus-visible { outline: 3px solid var(--mint); outline-offset: 4px; }
+input, textarea, select, button { font: inherit; }
+input, textarea, select { color-scheme: dark; }
+input, textarea, select { max-width: 100%; }
+img, svg { max-width: 100%; }
+button { cursor: pointer; }
+.nav-links a[aria-current=page] { color: var(--lime); }
+.skip-link { position: fixed; top: 8px; left: 10px; transform: translateY(-180%); z-index: 1000; padding: 12px 18px; background: var(--lime); color: #07110d; border-radius: 8px; }
+.skip-link:focus { transform: translateY(0); }
+#main-content { scroll-margin-top: 95px; }
+[id] { scroll-margin-top: 95px; }
+@media(prefers-reduced-motion:reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
