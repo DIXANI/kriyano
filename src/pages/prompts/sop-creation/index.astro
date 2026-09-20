@@ -2,124 +2,140 @@
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PromptPage from "../../../components/PromptPage.astro";
 
-const masterPrompt = `Act as an experienced operations and process-improvement specialist.
+const masterPrompt = `Act as an operations documentation specialist.
 
 TASK:
-Create a clear, practical Standard Operating Procedure (SOP) for the process described below.
+Turn the supplied process notes into a draft Standard Operating Procedure (SOP) for review by the process owner.
 
-PROCESS / TASK:
-[Describe the process, activity or task.]
+PROCESS:
+[Name the process and describe what employees actually do.]
 
 OBJECTIVE:
-[Explain what the SOP should achieve.]
+[Explain the intended result.]
 
 SCOPE:
-[Define where, when and to whom this SOP applies.]
+[Define the starting point, ending point, locations and activities covered. State any exclusions.]
 
 RESPONSIBLE ROLES:
-[List the roles or departments involved.]
+[List who performs each task, who verifies it and who can approve exceptions. Mark unknown responsibilities as unconfirmed.]
 
-INPUTS / REQUIREMENTS:
-[List any documents, tools, systems, materials or information required.]
+INPUTS:
+[List required documents, systems, tools, materials and information.]
 
-PROCESS STEPS:
-[Provide any known process steps, even if incomplete.]
+CURRENT WORKFLOW:
+[Describe the known steps in order. Include handovers between roles.]
 
-RISKS / CONTROL POINTS:
-[List important risks, quality checks, safety requirements, approvals or control points.]
+CONTROLS:
+[Provide required checks, approval rules and applicable internal procedures.]
 
 EXCEPTIONS:
-[Describe known exceptions, unusual cases or escalation requirements.]
+[Describe what happens when information is missing, a check fails or an unexpected situation occurs.]
 
-OUTPUT / COMPLETION CRITERIA:
-[Explain what should be completed or verified at the end.]
+RECORDS:
+[List records to create, where to store them and any confirmed retention requirements.]
 
-RESPONSE REQUIREMENTS:
-- Use clear and practical language.
-- Write for employees who may be unfamiliar with the process.
-- Organize the SOP in a professional structure.
-- Use numbered steps for the main procedure.
-- Separate responsibilities, controls and escalation points.
-- Highlight critical warnings or checks where relevant.
-- Do not invent company-specific policies that were not provided.
-- Clearly identify missing information that should be confirmed.
+COMPLETION CRITERIA:
+[Describe the evidence needed to confirm that the process is complete.]
+
+DOCUMENT DETAILS:
+[Provide the process owner, document reference, version and approval details if known.]
+
+DRAFTING RULES:
+- Use plain language and numbered steps.
+- Follow the supplied workflow and distinguish confirmed requirements from suggestions.
+- For each procedure step, identify the responsible role, action, check and record.
+- Do not invent approval authority, system instructions, acceptance limits, retention periods or company policies.
+- Do not invent legal or safety requirements or claim that the draft establishes compliance.
+- If a missing detail affects whether a step can proceed, mark it "CONFIRM BEFORE USE" and explain the question.
+- Put optional improvements in a separate section. Do not present them as existing requirements.
+- Explain exception handling using only the supplied authority and escalation arrangements.
+- Do not describe the document as approved or ready for implementation.
 
 OUTPUT FORMAT:
-
-1. SOP Title
+1. Document Details — clearly marked DRAFT
 2. Purpose
-3. Scope
+3. Scope and Exclusions
 4. Roles and Responsibilities
-5. Required Tools / Documents / Inputs
-6. Procedure
-7. Quality / Control Checks
+5. Required Inputs
+6. Numbered Procedure
+7. Control Checks
 8. Exceptions and Escalation
-9. Records / Documentation
+9. Records
 10. Completion Criteria
-11. Missing Information / Assumptions
+11. Questions to Resolve Before Approval
+12. Suggested Improvements — subject to review
 
-Before finalizing, review the SOP for clarity, logical sequence, operational practicality and consistency.`;
+Finish with a review checklist for the process owner covering accuracy, responsibilities, exceptions, records and approval.`;
 
 const steps = [
   {
-    title: "Describe the task",
+    title: "Gather the actual process notes",
     description:
-      "Explain what employees actually do, rather than only giving the process name.",
+      "Identify the start and end of the process, documents used, systems involved and existing instructions. Remove confidential information before using an external AI assistant.",
   },
   {
-    title: "Define responsibility",
+    title: "Replace the bracketed sections",
     description:
-      "Identify who performs the activity, who verifies it and who handles exceptions or approvals.",
+      "Describe the real workflow and assign only confirmed responsibilities. Write “unconfirmed” where an owner, approval rule or control is unknown.",
   },
   {
-    title: "Add controls and risks",
+    title: "Generate and check the draft",
     description:
-      "Include important checks, documentation requirements, safety controls and error-prevention points.",
+      "Paste the completed prompt into your AI assistant. Compare each proposed step with your notes and separate useful suggestions from existing requirements.",
   },
   {
-    title: "Review before implementation",
+    title: "Walk through it before approval",
     description:
-      "AI can structure the procedure, but the final SOP should be reviewed against your actual workplace process and policies.",
+      "Ask the people who perform the task to review a normal case and an exception. Resolve missing details, then follow your organization’s document approval process.",
   },
 ];
 
 const example = {
   input: [
-    "Process: Receiving supplier deliveries into a warehouse.",
-    "Objective: Ensure received goods match the purchase order and are entered correctly into the system.",
-    "Roles: Receiving clerk, warehouse supervisor and inventory controller.",
-    "Controls: Check quantity, SKU, visible damage, documentation and system receipt before put-away.",
+    "Fictional training example: receiving a delivery of boxed stationery. Scope starts with document checking and ends with accepted stock handed over for put-away.",
+    "Documents: purchase order PO-DEMO-001 and delivery note DN-DEMO-001. The PO lists 100 units of SKU DEMO-01. The clerk counts 98 units with no visible damage.",
+    "Confirmed roles: the receiving clerk checks the SKU, unit of measure, quantity and visible condition. The warehouse supervisor reviews discrepancies. The inventory controller posts the authorized receipt.",
+    "Confirmed exception rule for this example: keep a discrepant delivery in the designated receiving hold area. Record the difference and notify the supervisor. Do not post or release it until an authorized disposition is documented.",
+    "Unknown details: who may authorize a partial receipt, which system fields are mandatory and how long receiving records must be retained.",
   ],
-
   output: [
-    "Purpose: Ensure all incoming supplier deliveries are accurately checked, documented and received into inventory.",
-    "Responsibility: Receiving Clerk — physical verification and system receipt. Supervisor — exception approval. Inventory Controller — discrepancy investigation.",
-    "Procedure: Verify delivery documents → inspect goods → count quantities → compare with PO → record discrepancies → complete system receipt → release goods for put-away.",
+    "Illustrative draft excerpt — written to show the expected structure, not a recorded AI test result or an approved SOP.",
+    "1. Receiving clerk: compare the PO and delivery note with the delivered SKU and unit of measure. Count the goods and record visible condition on the receiving record.",
+    "2. Receiving clerk: record expected quantity 100, counted quantity 98 and variance −2 units. Retain the document references and notify the warehouse supervisor.",
+    "3. Receiving clerk: keep the delivery in the designated receiving hold area under the supplied exception rule. Do not release it for put-away.",
+    "4. Warehouse supervisor: review the discrepancy and arrange an authorized disposition. CONFIRM BEFORE USE: identify who is permitted to approve a partial receipt.",
+    "5. Inventory controller: after documented authorization, post only the authorized quantity using the verified system procedure. Record the transaction reference before release for put-away.",
+    "Open questions before approval: confirm partial-receipt authority, required system fields and record retention. The receipt remains incomplete while authorization is unresolved.",
   ],
 };
 
 const tips = [
   {
-    title: "Use real workflow details",
+    title: "Make every step observable",
     description:
-      "Include actual roles, systems, documents and approval steps instead of keeping the description generic.",
+      "Replace vague instructions such as “check the delivery” with specific actions: compare SKU and unit of measure, count quantity, inspect visible condition and record the result.",
   },
   {
-    title: "Include exceptions",
+    title: "Keep approval authority explicit",
     description:
-      "Good SOPs explain what happens when something goes wrong, not only the normal process.",
+      "Reviewing an issue does not automatically mean a role can approve it. Confirm who can authorize exceptions, adjustments or release of goods.",
   },
   {
-    title: "Validate every control",
+    title: "Test the exception path",
     description:
-      "Confirm that safety, legal, quality and company-specific requirements match your real organization.",
+      "Walk through a shortage, missing document or system failure. Check that the draft explains who records the issue, who receives it and what must happen before work continues.",
+  },
+  {
+    title: "Control the approved version",
+    description:
+      "Before issuing the SOP, confirm its owner, version, approval and effective date. Keep unresolved questions out of the instructions employees are expected to follow.",
   },
 ];
 ---
 
 <BaseLayout
-  title="SOP Creation Prompt | KRIYANO"
-  description="Create clear, practical Standard Operating Procedures with this structured AI prompt for operations, business and workplace processes."
+ title="SOP Creation Prompt for AI + Warehouse Example | KRIYANO"
+description="Copy an editable AI prompt to draft a standard operating procedure. Includes a warehouse receiving example, exception handling and a review checklist."
 >
   <PromptPage
     category="OPERATIONS & BUSINESS"
@@ -140,16 +156,16 @@ const tips = [
       "Small-business operations",
     ]}
     masterPrompt={masterPrompt}
-    introTitle="Give AI the process. Get a structured SOP."
-    introDescription="Replace the bracketed sections with information about your process. Even incomplete notes can be used as a starting point."
+    introTitle="Turn process notes into a reviewable SOP draft."
+    introDescription="Copy the prompt, replace the bracketed sections and paste it into your AI assistant. Provide confirmed workflow details and leave unknown requirements clearly marked."
     steps={steps}
-    exampleTitle="From rough notes to an SOP."
+    exampleTitle="Worked example: receiving 98 units against an order for 100."
     example={example}
     tipsTitle="Better input creates better procedures."
     tips={tips}
     sidebarTitle="Build a custom prompt."
     sidebarDescription="Use the KRIYANO Prompt Builder to structure a prompt around your exact workflow, audience, context and requirements."
-    warningTitle="Important"
-    warningText="Treat AI-generated SOPs as drafts. Verify them against actual company policy, regulations, safety requirements and operational practice before implementation."
+    warningTitle="Review before use"
+    warningText="This prompt creates a draft, not an approved procedure. The responsible process owner must verify the workflow, authority, applicable requirements and exception handling before implementation."
   />
 </BaseLayout>
