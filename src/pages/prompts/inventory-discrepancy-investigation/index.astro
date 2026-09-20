@@ -21,7 +21,17 @@ UNIT OF MEASURE:
 
 WAREHOUSE / LOCATION:
 [Enter warehouse, zone, aisle, rack, bin or storage location.]
+COUNT TIME / CUT-OFF:
+[Enter the physical count date, time and time zone, plus the system balance timestamp. Describe any movements during the count.]
 
+STOCK SCOPE:
+[Specify whether both quantities cover the same location, batch, ownership and stock status. Identify whether the system figure is on-hand or available stock.]
+
+SUPPORTING EVIDENCE:
+[List count sheets, transaction references, movement timestamps and documents actually reviewed. Separate verified records from unconfirmed reports.]
+
+APPROVAL / ESCALATION RULES:
+[Provide known approval roles and escalation thresholds. Mark anything unknown as unconfirmed.]
 DISCREPANCY TYPE:
 [Shortage, excess, unknown or mixed.]
 
@@ -36,7 +46,15 @@ KNOWN INFORMATION:
 
 INVESTIGATION REQUIREMENTS:
 
-Investigate the discrepancy systematically before recommending any stock adjustment.
+Help plan and document the investigation using only the supplied information. Do not imply that you have inspected stock, accessed the inventory system or verified documents.
+
+Before interpreting the difference:
+- Confirm that physical and system quantities use the same unit of measure, stock scope and cut-off.
+- Do not compare physical on-hand stock directly with available stock unless reservations and status differences have been reconciled.
+- If quantities are comparable, calculate variance as physical quantity minus system quantity. A negative result is a shortage; a positive result is an excess.
+- If they are not comparable, label the difference provisional and explain what must be reconciled.
+- Separate confirmed facts, possible explanations and missing evidence.
+- Treat matching transaction quantities as investigation leads, not proof of a cause.
 
 Check the following areas:
 
@@ -93,106 +111,104 @@ Check the following areas:
 - Check whether the physical count occurred while transactions were still in progress.
 - Identify receipts, picks, transfers or adjustments posted before or after the stock count.
 
-11. ROOT CAUSE
-Classify the most likely root cause, such as:
-- Receiving error
-- Picking error
-- Transfer error
-- Wrong location
-- Unit-of-measure error
-- Duplicate transaction
-- Missing transaction
-- Damage / write-off issue
-- Documentation error
-- Counting error
-- Process-control weakness
-- System / integration issue
-- Unknown pending further investigation
+11. FINDINGS AND ROOT CAUSE
+- For each possible explanation, state supporting evidence, conflicting evidence and the next check needed.
+- Distinguish the event that explains the quantity difference from any underlying process-control failure.
+- Mark the cause as unconfirmed when evidence is insufficient.
+- Do not infer theft, misconduct or individual blame from a stock difference alone.
 
-12. CORRECTIVE ACTION
-Recommend practical corrective actions to prevent recurrence.
+12. CORRECTION AND PREVENTION
+- Distinguish a counting correction, location/status correction, missing or incorrect source transaction, and residual stock adjustment.
+- If a source transaction needs correction, explain the evidence and authorization required under the supplied procedures.
+- Do not propose both a source-transaction correction and a stock adjustment for the same units.
+- Recommend preventive actions only where findings support them. Mark other improvements as suggestions for review.
 
-13. STOCK ADJUSTMENT
-Do not recommend a stock adjustment until reasonable investigation steps have been completed.
-
-If an adjustment is necessary:
-- Explain why.
-- State the quantity to adjust.
-- Identify whether it is an increase or decrease.
-- State what evidence or approval should support the adjustment.
-- Recommend management escalation for significant discrepancies.
+13. ADJUSTMENT DECISION
+- Do not recommend an unconditional stock adjustment from the initial variance.
+- Reconcile verified movements and approved transaction corrections first.
+- If a residual unexplained difference remains, state the evidence and unresolved questions for an authorized reviewer.
+- Calculate any proposed adjustment only from comparable, reconciled quantities, and show the arithmetic.
+- Do not invent approval authority or escalation thresholds.
+- An unresolved cause must remain documented as unresolved, even if an adjustment is later authorized.
 
 OUTPUT FORMAT:
+1. Scope and Cut-off Check
+2. Discrepancy Calculation
+3. Confirmed Facts and Missing Evidence
+4. Prioritized Investigation Checklist
+5. Transaction Timeline
+6. Possible Causes and Evidence Required
+7. Findings — Confirmed or Unresolved
+8. Proposed Correction Route and Approval Needed
+9. Preventive Actions
+10. Escalation and Open Questions
 
-1. Discrepancy Summary
-2. Immediate Verification
-3. Investigation Checklist
-4. Transaction Review
-5. Findings
-6. Most Likely Root Cause
-7. Recommended Corrective Action
-8. Stock Adjustment Recommendation
-9. Escalation Requirement
-10. Missing Information / Further Checks
+For each investigation check, identify the action, evidence needed and suggested responsible role. Label suggested roles as subject to confirmation.
 
-Be practical and evidence-based. Do not invent transaction history or assume a root cause without supporting information.`;
+Be practical and evidence-based. Never invent transaction history, completed checks or approvals.`;
 
 const steps = [
   {
-    title: "Verify the physical stock",
+    title: "Match the count and system scope",
     description:
-      "Recount the item, confirm the SKU and unit of measure, and check nearby, overflow and special-status locations before reviewing system transactions.",
+      "Confirm SKU, unit of measure, location, stock status and cut-off. Use comparable on-hand quantities and account for movements during the count.",
   },
   {
-    title: "Trace recent transactions",
+    title: "Recount and gather evidence",
     description:
-      "Review receipts, picks, transfers, returns, adjustments and pending transactions that could explain the difference.",
+      "Arrange an independent recount and review relevant locations. Collect count sheets and transaction references, removing confidential details before using an external AI assistant.",
   },
   {
-    title: "Identify the root cause",
+    title: "Trace movements in time order",
     description:
-      "Separate the immediate quantity difference from the process failure that created it, such as a receiving, picking, transfer or documentation error.",
+      "Compare physical movement times with system posting times for receipts, picks, transfers and returns. Separate verified events from possible explanations.",
   },
   {
-    title: "Adjust only with evidence",
+    title: "Choose the supported correction",
     description:
-      "A stock adjustment should be the final control step, supported by investigation findings, documentation and the required approval.",
+      "Resolve verified source-transaction errors through the approved process. Recalculate any remaining variance before considering a separate stock adjustment.",
   },
 ];
 
 const example = {
   input: [
-    "SKU: ABC-125",
-    "System quantity: 120 units.",
-    "Physical quantity: 114 units.",
-    "Location: WH01 / Aisle 04 / Rack B / Bin 02.",
-    "Known information: The item had one receipt and several outbound picks during the past week.",
+    "Fictional training example: SKU DEMO-125, location WH01 / A-04 / B-02, unit of measure each. Physical and system quantities cover the same owned, unrestricted stock.",
+    "At the 14:00 cut-off, system on-hand quantity is 120 units. The initial count and independent recount both show 114 units. No movements occurred during counting.",
+    "Picking document PICK-DEMO-006 lists 6 units. Its existence is confirmed, but physical dispatch, system posting and cancellation status have not been verified.",
+    "Known review roles: the inventory controller gathers transaction evidence and the warehouse supervisor reviews findings. Correction authority has not been supplied.",
   ],
-
   output: [
-    "Discrepancy Summary: Physical stock is 6 units lower than the system quantity.",
-    "Immediate Verification: Perform an independent recount and confirm SKU, UOM, adjacent locations, staging and damaged-stock areas.",
-    "Transaction Review: Compare the recent receipt quantity with supporting documents and review outbound pick confirmations for possible under-posted or unconfirmed quantities.",
-    "Root Cause: Do not assign a final cause until transaction and location checks are completed.",
-    "Adjustment Recommendation: Hold the adjustment until the investigation provides sufficient evidence and approval.",
+    "Illustrative investigation response — not a recorded AI test result or a completed investigation.",
+    "Variance: 114 − 120 = −6 units, a six-unit shortage against the stated system balance.",
+    "Confirmed facts: two counts agree at 114 units; the reported system balance is 120; a picking document lists 6 units. The document alone does not establish that goods left the count scope.",
+    "Next checks: verify SKU, location and unit of measure on the picking document. Trace picking, staging and dispatch evidence, including physical movement time, posting time and any cancellation or reversal.",
+    "Other checks: review nearby and special-status locations, recent receipts, transfers and returns. Record results and document references rather than assuming these checks are clear.",
+    "Conditional correction: if evidence confirms that 6 units left the count scope before 14:00 and the corresponding inventory deduction is missing, refer the source transaction for authorized correction. Do not also post a six-unit stock adjustment for that movement.",
+    "Reconciliation: if that authorized correction reduces the comparable system balance from 120 to 114, the remaining variance is 114 − 114 = 0. This is conditional arithmetic, not a finding.",
+    "Current conclusion: cause unresolved. Confirm the transaction evidence and correction authority before changing inventory records.",
   ],
 };
 
 const tips = [
   {
-    title: "Recount before investigating",
+    title: "Compare the same stock",
     description:
-      "A second independent physical count can quickly eliminate counting mistakes before time is spent reviewing transactions.",
+      "On-hand and available quantities can differ because of reservations or stock status. Confirm what each figure includes before treating the difference as a shortage.",
   },
   {
-    title: "Follow the stock movement",
+    title: "Record movement and posting times",
     description:
-      "Think chronologically: how did the stock enter, where was it stored, how was it moved and how could it leave the location?",
+      "A transaction posted after the count may relate to goods moved before it. Reconcile both timestamps to the count cut-off.",
   },
   {
-    title: "Fix the cause, not only the quantity",
+    title: "Treat a matching quantity as a lead",
     description:
-      "Correcting the system balance solves today's discrepancy. Correcting the process prevents the same discrepancy from returning.",
+      "A six-unit picking document does not prove a six-unit shortage was caused by dispatch. Verify the item, location, movement, posting and cancellation status.",
+  },
+  {
+    title: "Avoid correcting the same units twice",
+    description:
+      "After an approved source-transaction correction, recalculate the variance. Consider a separate adjustment only for a remaining difference supported by the review.",
   },
 ];
 ---
@@ -220,16 +236,16 @@ const tips = [
       "Inventory adjustments",
     ]}
     masterPrompt={masterPrompt}
-    introTitle="Don't adjust first. Investigate first."
-    introDescription="Enter the stock difference and any information you already have. The prompt guides the investigation through physical checks, locations, transactions, documentation and root cause."
+    introTitle="Build an evidence-based stock investigation."
+    introDescription="Copy the prompt, replace the bracketed fields and paste it into your AI assistant. Include comparable quantities, count timing and verified records. The response helps organize checks; it does not perform them."
     steps={steps}
-    exampleTitle="Investigate a six-unit shortage."
+    exampleTitle="Six units missing. Does a picking document explain it?"
     example={example}
     tipsTitle="Make discrepancy investigations stronger."
     tips={tips}
     sidebarTitle="Need a custom inventory prompt?"
     sidebarDescription="Use the KRIYANO Prompt Builder to create a prompt around your exact warehouse process, stock issue, system and reporting requirements."
     warningTitle="Control note"
-    warningText="AI can help structure an investigation, but stock adjustments should follow your organization's approval controls, documented evidence and inventory-management procedures."
+    warningText="AI can organize evidence and suggest checks, but it cannot verify physical stock or authorize corrections. Follow your organization's documented review and approval process before changing inventory records."
   />
 </BaseLayout>
