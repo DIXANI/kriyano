@@ -115,7 +115,7 @@ const {
 </section>
 
 <section class="section">
-  <div class="container prompt-layout">
+ <div class="prompt-box" id="master-prompt">
     <article class="main-content">
       <div class="content-intro">
         <div class="section-kicker">Ready-to-use prompt</div>
@@ -124,6 +124,12 @@ const {
 
         <p>{introDescription}</p>
       </div>
+
+      <nav class="prompt-jump-links" aria-label="On this page">
+  <a href="#master-prompt">Prompt</a>
+  {steps.length > 0 && <a href="#how-to-use">How to use</a>}
+  {example && <a href="#worked-example">Worked example</a>}
+</nav>
 
       <div class="prompt-box">
         <div class="prompt-box-head">
@@ -137,16 +143,31 @@ const {
           </button>
         </div>
 
-        <pre id="promptText">{masterPrompt}</pre>
+        <p class="prompt-copy-note">
+  Copy the complete prompt, or expand it to read and select the text.
+</p>
 
-        <div id="copyMessage" class="copy-message">
-          Prompt copied to clipboard.
-        </div>
+<details class="prompt-details" id="promptDetails">
+  <summary>
+    <span class="label-closed">Show full prompt</span>
+    <span class="label-open">Show less</span>
+  </summary>
+
+  <pre id="promptText">{masterPrompt}</pre>
+</details>
+
+<div
+  id="copyMessage"
+  class="copy-message"
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
+></div>
       </div>
 
       {
         steps.length > 0 && (
-          <section class="content-block">
+          <section class="content-block" id="how-to-use">
             <div class="section-kicker">How to use it</div>
 
             <h2>Use the prompt effectively.</h2>
@@ -171,7 +192,7 @@ const {
 
       {
         example && (
-          <section class="content-block">
+          <section class="content-block" id="worked-example">
             <div class="section-kicker">Example</div>
 
             <h2>{exampleTitle}</h2>
@@ -268,34 +289,70 @@ const {
 </section>
 
 <script>
-  const copyButton = document.querySelector("#copyPrompt");
-  const promptText = document.querySelector("#promptText");
-  const copyMessage = document.querySelector("#copyMessage");
+  function setupPromptControls() {
+    const copyButton =
+      document.querySelector<HTMLButtonElement>("#copyPrompt");
+    const promptText = document.querySelector<HTMLElement>("#promptText");
+    const copyMessage = document.querySelector<HTMLElement>("#copyMessage");
+    const promptDetails =
+      document.querySelector<HTMLDetailsElement>("#promptDetails");
 
-  copyButton?.addEventListener("click", async () => {
-    const text = promptText?.textContent || "";
-
-    try {
-      await navigator.clipboard.writeText(text);
-
-      copyButton.textContent = "Copied ✓";
-      copyMessage?.classList.add("show");
-
-      setTimeout(() => {
-        copyButton.textContent = "Copy Prompt";
-        copyMessage?.classList.remove("show");
-      }, 2200);
-    } catch {
-      const range = document.createRange();
-      const selection = window.getSelection();
-
-      if (promptText && selection) {
-        range.selectNodeContents(promptText);
-        selection.removeAllRanges();
-        selection.addRange(range);
-      }
+    if (
+      !copyButton ||
+      !promptText ||
+      !copyMessage ||
+      !promptDetails ||
+      copyButton.dataset.initialized === "true"
+    ) {
+      return;
     }
-  });
+
+    copyButton.dataset.initialized = "true";
+
+    let resetTimer: ReturnType<typeof setTimeout> | undefined;
+
+    copyButton.addEventListener("click", async () => {
+      if (resetTimer !== undefined) {
+        clearTimeout(resetTimer);
+      }
+
+      copyMessage.textContent = "";
+      copyButton.disabled = true;
+
+      try {
+        // textContent includes the entire prompt even when collapsed.
+        await navigator.clipboard.writeText(promptText.textContent ?? "");
+
+        copyButton.textContent = "Copied ✓";
+        copyMessage.textContent = "Complete prompt copied to clipboard.";
+
+        resetTimer = setTimeout(() => {
+          copyButton.textContent = "Copy Prompt";
+          copyMessage.textContent = "";
+        }, 3000);
+      } catch {
+        promptDetails.open = true;
+
+        const selection = window.getSelection();
+
+        if (selection) {
+          const range = document.createRange();
+          range.selectNodeContents(promptText);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+
+        copyButton.textContent = "Copy Prompt";
+        copyMessage.textContent =
+          "Automatic copying was unavailable. The prompt is expanded. Select and copy the text manually.";
+      } finally {
+        copyButton.disabled = false;
+      }
+    });
+  }
+
+  setupPromptControls();
+  document.addEventListener("astro:page-load", setupPromptControls);
 </script>
 
 <style>
