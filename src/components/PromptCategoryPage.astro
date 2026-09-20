@@ -32,9 +32,9 @@ const availableCount = prompts.filter((prompt) => prompt.href !== "#").length;
     <p class="section-kicker">{kicker}</p>
 
     <h1>
-      {title}
-      {accentTitle && <span>{accentTitle}</span>}
-    </h1>
+  {title}
+  {accentTitle && <>{" "}<span>{accentTitle}</span></>}
+</h1>
 
     <p class="hero-description">
       {description}
@@ -109,7 +109,7 @@ const availableCount = prompts.filter((prompt) => prompt.href !== "#").length;
     </div>
   </div>
 </section>
-
+<slot />
 <section class="category-bottom">
   <div class="container">
     <div class="bottom-card">

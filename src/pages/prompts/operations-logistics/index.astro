@@ -77,14 +77,282 @@ const prompts = [
 ---
 
 <BaseLayout
-  title="Operations & Logistics AI Prompts | KRIYANO"
-  description="Practical AI prompts for warehouse operations, logistics, inventory control, SOPs, discrepancy investigations, KPIs and process improvement."
+  title="AI Prompts for Operations & Logistics | KRIYANO"
+  description="Explore 10 AI prompts for warehouse operations and logistics: write SOPs, investigate stock discrepancies, review inventory reports and plan corrective actions."
 >
   <PromptCategoryPage
     kicker="OPERATIONS & LOGISTICS"
     title="AI prompts for"
-    accentTitle="real operations."
-    description="Practical prompts for warehouse operations, inventory control, logistics, process improvement, investigations and operational reporting."
+    accentTitle="operations & logistics."
+    description="Choose from 10 practical prompts for warehouse supervisors, inventory controllers and operations teams. Draft SOPs, investigate stock differences, review reports and plan corrective actions. Add your process details, then verify the AI response against your records."
     prompts={prompts}
-  />
+  >
+    <section class="operations-guide" aria-labelledby="operations-guide-title">
+      <div class="container">
+        <p class="section-kicker">PUT THE PROMPTS TO WORK</p>
+        <h2 id="operations-guide-title">Start with the task in front of you.</h2>
+
+        <div class="task-grid">
+          <article>
+            <h3>Stock does not match</h3>
+            <p>
+              Use Inventory Discrepancy Investigation for differences between
+              physical stock and system balances. Use Receiving Discrepancy
+              Investigation when the issue starts with an inbound delivery.
+            </p>
+          </article>
+
+          <article>
+            <h3>A process needs documenting</h3>
+            <p>
+              Start with SOP Creation. Supply the actual steps, responsible
+              roles, required records and approval points. Ask the AI to flag
+              missing information rather than invent company procedures.
+            </p>
+          </article>
+
+          <article>
+            <h3>A problem keeps returning</h3>
+            <p>
+              Start with Root Cause Analysis to organize evidence and possible
+              causes. Then use Corrective Action Plan to assign actions,
+              owners, deadlines and checks that confirm the action worked.
+            </p>
+          </article>
+        </div>
+
+        <article class="worked-example" aria-labelledby="stock-example-title">
+          <p class="section-kicker">WORKED EXAMPLE · FICTIONAL DATA</p>
+          <h2 id="stock-example-title">Investigate a 10-unit stock difference.</h2>
+
+          <p>
+            A count finds 90 units where the system shows 100. A picking
+            document lists 10 units, but nobody has confirmed whether that
+            movement explains the difference.
+          </p>
+
+          <h3>Example prompt to adapt</h3>
+
+          <div class="example-prompt">
+            <p>
+              Act as an inventory-control assistant. Help me plan an
+              investigation before any stock adjustment.
+            </p>
+            <p>
+              SKU: DEMO-001. Location: A-01. Unit of measure: each.
+              At the count cutoff, the system shows 100 units and the first
+              physical count shows 90. A picking document for 10 units exists,
+              but its physical movement and system-posting status are unverified.
+            </p>
+            <p>
+              Calculate the variance as physical minus system. Separate
+              confirmed facts from possible explanations. Give me a checklist
+              covering recounts, other locations, receiving, picking, transfers,
+              damaged stock and transactions around the cutoff.
+            </p>
+            <p>
+              For each check, state the evidence needed and a suggested
+              responsible role. Do not assume the picking document explains
+              the difference. Do not recommend posting an adjustment without
+              investigation and approval under our company procedure.
+            </p>
+          </div>
+
+          <h3>What a useful response should include</h3>
+          <ul>
+            <li>
+              <strong>Correct arithmetic:</strong>
+              90 − 100 = −10 units, a shortage of 10 units.
+            </li>
+            <li>
+              <strong>A recount:</strong>
+              verify the SKU, location, unit of measure and count cutoff.
+            </li>
+            <li>
+              <strong>Evidence checks:</strong>
+              establish whether the picking document represents a real movement
+              and whether it was posted before or after the cutoff.
+            </li>
+            <li>
+              <strong>Other explanations:</strong>
+              check misplaced stock, transfers, receipts, damage and recording
+              errors before accepting a cause.
+            </li>
+            <li>
+              <strong>An unresolved conclusion when appropriate:</strong>
+              matching quantities alone do not prove what happened.
+            </li>
+          </ul>
+
+          <p class="review-note">
+            This is an illustrative review checklist, not a recorded AI test
+            result. Verify any generated answer against your documents and
+            approved procedures. Use anonymized examples when working with
+            an external AI service.
+          </p>
+
+          <a
+            class="guide-link"
+            href="/prompts/inventory-discrepancy-investigation/"
+          >
+            Open the full inventory investigation prompt →
+          </a>
+        </article>
+
+        <div class="supporting-tools">
+          <h2>Prepare your data. Check the answer.</h2>
+
+          <p>
+            Comparing SKU lists? The List Cleaner can identify shared or
+            missing entries between two lists. It compares entries; it does
+            not reconcile stock quantities.
+          </p>
+
+          <div class="guide-links">
+            <a class="guide-link" href="/tools/list-cleaner/">
+              Open Spreadsheet List Cleaner →
+            </a>
+            <a class="guide-link" href="/check/">
+              Review an AI answer with KRIYANO CHECK →
+            </a>
+          </div>
+
+          <p class="review-note">
+            KRIYANO CHECK can flag items for review. It cannot confirm your
+            warehouse records or replace an operational investigation.
+          </p>
+        </div>
+      </div>
+    </section>
+  </PromptCategoryPage>
 </BaseLayout>
+
+<style>
+  .operations-guide {
+    padding: 0 0 80px;
+    color: var(--text);
+  }
+
+  .operations-guide h2 {
+    max-width: 850px;
+    margin: 12px 0 24px;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    line-height: 1.15;
+    letter-spacing: -0.035em;
+  }
+
+  .operations-guide h3 {
+    margin: 0 0 12px;
+    font-size: 1.15rem;
+    line-height: 1.4;
+  }
+
+  .operations-guide p,
+  .operations-guide li {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .operations-guide p {
+    color: var(--muted);
+  }
+
+  .operations-guide .section-kicker {
+    color: var(--lime);
+    font-size: 0.75rem;
+  }
+
+  .task-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    margin: 30px 0 40px;
+  }
+
+  .task-grid article,
+  .worked-example,
+  .supporting-tools {
+    min-width: 0;
+    padding: clamp(22px, 4vw, 36px);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: #0d1d16;
+    overflow-wrap: anywhere;
+  }
+
+  .task-grid p {
+    margin-bottom: 0;
+  }
+
+  .worked-example > h3 {
+    margin-top: 30px;
+  }
+
+  .example-prompt {
+    padding: 20px;
+    border-left: 3px solid var(--lime);
+    border-radius: 0 12px 12px 0;
+    background: #07120d;
+  }
+
+  .example-prompt p {
+    color: var(--text);
+  }
+
+  .example-prompt p:first-child {
+    margin-top: 0;
+  }
+
+  .example-prompt p:last-child {
+    margin-bottom: 0;
+  }
+
+  .worked-example ul {
+    padding-left: 24px;
+  }
+
+  .worked-example li {
+    margin-bottom: 14px;
+    color: var(--muted);
+  }
+
+  .worked-example li strong {
+    color: var(--text);
+  }
+
+  .operations-guide .review-note {
+    margin-top: 24px;
+    font-size: 0.9rem;
+  }
+
+  .supporting-tools {
+    margin-top: 24px;
+  }
+
+  .guide-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 28px;
+  }
+
+  .guide-link {
+    display: inline-block;
+    padding: 8px 0;
+    color: var(--lime);
+    font-weight: 700;
+    line-height: 1.6;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .guide-link:focus-visible {
+    outline: 2px solid var(--lime);
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 760px) {
+    .task-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
