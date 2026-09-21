@@ -44,11 +44,66 @@ test('quotation UI: line totals, printing, invalid dates, literal HTML and clear
  p.input('quote-valid','2000-01-01');p.submit('quote-form');assert.match(p.get('quote-error').textContent,/validity date/);assert.equal(p.get('quote-preview-section').hidden,true);
  p.get('quote-add').click();assert.equal(p.get('quote-items').children.length,3);p.get('quote-clear').click();assert.equal(p.get('quote-items').children.length,1);assert.equal(p.get('quote-business').value,'');p.dom.window.close();
 });
-test('CHECK UI: local result makes no request, online failure leaves local result',async()=>{
+test('CHECK UI: local result makes no request, online failure leaves local result', async () => {
+  const p = await page('check', 'src/pages/check/index.astro');
+
+  const waitForCompletion = async () => {
+    const deadline = Date.now() + 2000;
+
+    while (p.get('check-button').disabled) {
+      if (Date.now() >= deadline) {
+        assert.fail('CHECK did not finish within 2 seconds');
+      }
+      await new Promise(resolve => setTimeout(resolve, 10));
+    }
+  };
+
+  try {
+    // Local checks must complete without sending any request.
+    p.get('check-example').click();
+    p.get('check-button').click();
+
+    assert.equal(p.get('check-button').disabled, true);
+    await waitForCompletion();
+
+    assert.equal(p.state().requests, 0);
+    assert.equal(p.get('check-results').hidden, false);
+    assert.equal(p.get('arithmetic-results').hidden, false);
+    assert.match(
+      p.get('arithmetic-list').textContent,
+      /10 units, not 20/
+    );
+    assert.equal(p.get('stat-citations').textContent, '0');
+    assert.equal(p.get('semantic-results').hidden, true);
+
+    // A simulated online failure must preserve local results.
+    p.get('check-online').checked = true;
+    p.get('check-online').dispatchEvent(new p.w.Event('change'));
+    p.get('check-button').click();
+
+    await waitForCompletion();
+
+    assert.equal(p.state().requests, 1);
+    assert.equal(p.get('semantic-results').hidden, false);
+    assert.equal(p.get('semantic-error').hidden, false);
+    assert.equal(p.get('review-badge').textContent, 'UNAVAILABLE');
+    assert.equal(p.get('arithmetic-results').hidden, false);
+    assert.equal(p.get('ai-output').disabled, false);
+    assert.equal(p.get('check-online').disabled, false);
+    assert.equal(p.get('check-example').disabled, false);
+
+    // Editing the input must hide outdated results.
+    p.input('ai-output', 'New text');
+    assert.equal(p.get('check-results').hidden, true);
+  } finally {
+    p.dom.window.close();
+  }
+});
+async()=>{
  const p=await page('check','src/pages/check/index.astro');p.get('check-example').click();p.get('check-button').click();await settle();assert.equal(p.state().requests,0);assert.equal(p.get('arithmetic-results').hidden,false);assert.match(p.get('arithmetic-list').textContent,/10 units, not 20/);assert.equal(p.get('stat-citations').textContent,'0');assert.equal(p.get('semantic-results').hidden,true);
  p.get('check-online').checked=true;p.get('check-online').dispatchEvent(new p.w.Event('change'));p.get('check-button').click();await settle();assert.equal(p.state().requests,1);assert.equal(p.get('semantic-error').hidden,false);assert.equal(p.get('arithmetic-results').hidden,false);assert.equal(p.get('ai-output').disabled,false);
  p.input('ai-output','New text');assert.equal(p.get('check-results').hidden,true);p.dom.window.close();
-});
+};
 test('directory filters and navigation Escape state',async()=>{
  const p=await page('tools','src/pages/tools/index.astro');p.input('tool-search','Excel');assert.equal([...p.w.document.querySelectorAll('[data-tool-card]')].filter(e=>!e.hidden).length,1);p.input('tool-search','nothingmatches');assert.equal(p.get('tool-empty').hidden,false);p.get('reset-filters').click();assert.equal(p.get('tool-empty').hidden,true);
  const toggle=p.w.document.querySelector('.mobile-menu-toggle');assert.equal(p.get('mobile-menu').hidden,true);toggle.click();assert.equal(toggle.getAttribute('aria-expanded'),'true');p.w.document.dispatchEvent(new p.w.KeyboardEvent('keydown',{key:'Escape'}));assert.equal(p.get('mobile-menu').hidden,true);p.dom.window.close();

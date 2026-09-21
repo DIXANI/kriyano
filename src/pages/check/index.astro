@@ -86,37 +86,6 @@ const description =
 
     <div class="results-card">
 
-      <!-- Main KRIYANO AI Review -->
-      <div id="semantic-results" class="semantic-results" hidden>
-
-        <div class="semantic-heading">
-          <span id="review-badge" class="review-badge">
-            REVIEW
-          </span>
-
-          <h2 id="review-title">
-            AI Output Review
-          </h2>
-        </div>
-        <div id="semantic-error" class="semantic-error" hidden>
-  <strong>AI review couldn't be completed.</strong>
-  <p>
-    The browser-based signals below are still available.
-    Please try the AI review again.
-  </p>
-</div>
-        <p id="review-summary" class="review-summary"></p>
-
-        <div class="priority-heading">
-          <span>CHECK FIRST</span>
-          <h3>What needs your attention</h3>
-        </div>
-
-        <div id="priority-list" class="priority-list"></div>
-
-      </div>
-
-
       <section id="arithmetic-results" class="arithmetic-results" hidden><h2>Possible calculation errors</h2><p>These checks cover simple written equations and a limited stock-quantity pattern. They do not verify the underlying facts.</p><ul id="arithmetic-list"></ul></section>
       <p class="local-review-note">Local signals are not a fact-check. Online AI review is optional and may miss errors.</p>
       <!-- Browser Detected Signals -->
@@ -177,6 +146,39 @@ const description =
 
       <!-- Detailed Detected Items -->
       <div id="detected-items" class="detected-items"></div>
+
+      <!-- Main KRIYANO AI Review -->
+      <div id="semantic-results" class="semantic-results" hidden>
+
+        <div class="semantic-heading">
+          <span id="review-badge" class="review-badge">
+            REVIEW
+          </span>
+
+          <h2 id="review-title">
+            AI Output Review
+          </h2>
+        </div>
+        <div id="semantic-error" class="semantic-error" hidden>
+  <strong>AI review couldn't be completed.</strong>
+  <p>
+    The browser-based signals above are still available.
+    Please try the AI review again.
+  </p>
+</div>
+        <p id="review-summary" class="review-summary"></p>
+
+        <div class="priority-heading">
+          <span>CHECK FIRST</span>
+          <h3>What needs your attention</h3>
+        </div>
+
+        <div id="priority-list" class="priority-list"></div>
+
+      </div>
+
+
+
 
     </div>
 
@@ -482,7 +484,7 @@ const description =
       results.hidden = false;
 
       results.scrollIntoView({
-        behavior: "smooth",
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
         block: "start"
       });
     }
@@ -626,117 +628,140 @@ if (priorityHeading instanceof HTMLElement) {
 
   semanticResults.hidden = false;
 }
-  if (button instanceof HTMLButtonElement) {
+if (button instanceof HTMLButtonElement) {
+  let running = false;
+
   button.addEventListener("click", async () => {
-    if (
-      !(textarea instanceof HTMLTextAreaElement) ||
-      textarea.value.trim().length === 0
-    ) {
-      document.getElementById('check-input-status').textContent = 'Paste some text or try the example first.';
-      textarea?.focus();
-      return;
-    }
+    if (running) return;
+
+    const status = document.getElementById("check-input-status");
+    const online = document.querySelector<HTMLInputElement>("#check-online");
+    const example = document.querySelector<HTMLButtonElement>("#check-example");
+    const semantic = document.getElementById("semantic-results");
+    const semanticError = document.getElementById("semantic-error");
+    const badge = document.getElementById("review-badge");
+    const title = document.getElementById("review-title");
+    const summary = document.getElementById("review-summary");
+    const priorities = document.getElementById("priority-list");
+    const heading =
+      document.querySelector<HTMLElement>(".priority-heading");
+
+    if (!(textarea instanceof HTMLTextAreaElement) || !status) return;
 
     const text = textarea.value.trim();
-    document.getElementById('check-input-status').textContent = '';
-    const oldSemantic = document.getElementById('semantic-results');
-    if (oldSemantic) oldSemantic.hidden = true;
 
-    // Run browser checks first.
-    runLocalCheck(text);
-
-    if (!document.querySelector<HTMLInputElement>('#check-online')?.checked) {
-      document.getElementById('check-input-status').textContent = 'Local check complete. No text was sent for AI review.';
+    if (!text) {
+      status.textContent = "Paste some text or try the example first.";
+      textarea.focus();
       return;
     }
-    textarea.disabled = true;
-    document.querySelector<HTMLInputElement>('#check-online').disabled = true;
-    document.querySelector<HTMLButtonElement>('#check-example').disabled = true;
-    // Prevent duplicate submissions while AI review is running.
+
+    if (textarea.value.length > 8000) {
+      status.textContent = "Please limit the input to 8,000 characters.";
+      textarea.focus();
+      return;
+    }
+
+    const includeOnline = online?.checked === true;
+    const originalButton = button.innerHTML;
+    let localComplete = false;
+
+    running = true;
     button.disabled = true;
-button.textContent = "Checking AI Output...";
+    textarea.disabled = true;
+    if (online) online.disabled = true;
+    if (example) example.disabled = true;
 
-// Reset any previous AI failure state.
-const previousSemanticError =
-  document.getElementById("semantic-error");
+    button.textContent = "Checking…";
+    status.textContent = "Checking text in your browser…";
 
-const previousPriorityHeading =
-  document.querySelector(".priority-heading");
+    // Clear the previous review, including its title and badge.
+    if (semantic) semantic.hidden = true;
+    if (semanticError) semanticError.hidden = true;
+    if (badge) {
+      badge.className = "review-badge";
+      badge.textContent = "REVIEW";
+    }
+    if (title) title.textContent = "AI Output Review";
+    if (summary) summary.textContent = "";
+    priorities?.replaceChildren();
+    if (heading) heading.hidden = true;
 
-if (previousSemanticError instanceof HTMLElement) {
-  previousSemanticError.hidden = true;
-}
+    try {
+      // Give the browser an opportunity to paint the loading state.
+      await new Promise<void>((resolve) => {
+        requestAnimationFrame(() => {
+          setTimeout(resolve, 0);
+        });
+      });
 
-if (previousPriorityHeading instanceof HTMLElement) {
-  previousPriorityHeading.hidden = false;
-}
+      runLocalCheck(text);
+      localComplete = true;
 
-try {
+      if (!includeOnline) {
+        status.textContent =
+          "Local check complete. No text was sent for AI review.";
+        return;
+      }
+
+      button.textContent = "Reviewing online…";
+      status.textContent =
+        "Local results are ready. Online AI review is running.";
+
       const response = await fetch("/api/check", {
         method: "POST",
         signal: AbortSignal.timeout(30000),
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          text
-        })
+        body: JSON.stringify({ text }),
       });
+
+      if (!response.ok) {
+        throw new Error("Online review unavailable");
+      }
 
       const data = await response.json();
 
-      if (!response.ok || !data.ok) {
-        throw new Error(
-          data.error || "Unable to complete AI review"
-        );
+      if (
+        !data?.ok ||
+        !data.analysis ||
+        typeof data.analysis !== "object" ||
+        Array.isArray(data.analysis)
+      ) {
+        throw new Error("Invalid review response");
       }
-
-
 
       renderSemanticResults(data.analysis);
-    } catch (error) {
+      status.textContent =
+        "Online review complete. Find it below the local results.";
+    } catch {
+      if (localComplete && includeOnline) {
+        if (badge) {
+          badge.className = "review-badge";
+          badge.textContent = "UNAVAILABLE";
+        }
+        if (title) title.textContent = "Online review unavailable";
+        if (summary) summary.textContent = "";
+        priorities?.replaceChildren();
+        if (heading) heading.hidden = true;
+        if (semanticError) semanticError.hidden = false;
+        if (semantic) semantic.hidden = false;
 
-
-      const semanticResults =
-        document.getElementById("semantic-results");
-
-      const semanticError =
-        document.getElementById("semantic-error");
-
-      const reviewSummary =
-        document.getElementById("review-summary");
-
-      const priorityList =
-        document.getElementById("priority-list");
-
-      const priorityHeading =
-        document.querySelector(".priority-heading");
-
-      if (semanticResults instanceof HTMLElement) {
-        semanticResults.hidden = false;
-      }
-
-      if (semanticError instanceof HTMLElement) {
-        semanticError.hidden = false;
-      }
-
-      if (reviewSummary instanceof HTMLElement) {
-        reviewSummary.textContent = "";
-      }
-
-      if (priorityList instanceof HTMLElement) {
-        priorityList.innerHTML = "";
-      }
-
-      if (priorityHeading instanceof HTMLElement) {
-        priorityHeading.hidden = true;
+        status.textContent =
+          "Online review couldn't be completed. Local results remain available.";
+      } else {
+        if (results instanceof HTMLElement) results.hidden = true;
+        status.textContent =
+          "The local check couldn't be completed. Please try again.";
       }
     } finally {
+      running = false;
       button.disabled = false;
       textarea.disabled = false;
-      document.querySelector<HTMLInputElement>('#check-online').disabled = false;
-      document.querySelector<HTMLButtonElement>('#check-example').disabled = false;
-      button.textContent = "Check AI Output";
+      if (online) online.disabled = false;
+      if (example) example.disabled = false;
+      button.innerHTML = originalButton;
     }
   });
 }
@@ -867,22 +892,22 @@ document.querySelector('#check-online')?.addEventListener('change', () => { if (
   border: 1px solid currentColor;
 }
 
-.review-badge.light {
+#review-badge:global(.light) {
   color: #b7ff4a;
   background: rgba(183, 255, 74, 0.08);
 }
 
-.review-badge.advised {
+#review-badge:global(.advised) {
   color: #f2d675;
   background: rgba(242, 214, 117, 0.08);
 }
 
-.review-badge.verify {
+#review-badge:global(.verify) {
   color: #ffb45e;
   background: rgba(255, 180, 94, 0.08);
 }
 
-.review-badge.high {
+#review-badge:global(.high) {
   color: #ff7676;
   background: rgba(255, 118, 118, 0.08);
 }
@@ -917,14 +942,14 @@ document.querySelector('#check-online')?.addEventListener('change', () => { if (
   gap: 12px;
 }
 
-.priority-card {
+#check-results :global(.priority-card) {
   padding: 18px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 15px;
   background: rgba(255, 255, 255, 0.025);
 }
 
-.priority-type {
+#check-results :global(.priority-type) {
   display: inline-block;
   margin-bottom: 8px;
   color: var(--mint);
@@ -934,20 +959,20 @@ document.querySelector('#check-online')?.addEventListener('change', () => { if (
   text-transform: uppercase;
 }
 
-.priority-card h4 {
+#check-results :global(.priority-card h4) {
   margin: 0 0 12px;
   font-size: 1rem;
   line-height: 1.45;
 }
 
-.priority-card p {
+#check-results :global(.priority-card p) {
   margin: 7px 0 0;
   color: var(--muted);
   font-size: 0.9rem;
   line-height: 1.6;
 }
 
-.priority-card strong {
+#check-results :global(.priority-card strong) {
   color: var(--text);
 }
   .check-intro {
@@ -1386,7 +1411,7 @@ document.querySelector('#check-online')?.addEventListener('change', () => { if (
     margin-top: 24px;
   }
 
-  .detected-group {
+  #check-results :global(.detected-group) {
     padding: 20px;
 
     border: 1px solid rgba(255, 255, 255, 0.07);
@@ -1395,21 +1420,21 @@ document.querySelector('#check-online')?.addEventListener('change', () => { if (
     background: rgba(3, 10, 7, 0.38);
   }
 
-  .detected-group-heading {
+  #check-results :global(.detected-group-heading) {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 15px;
   }
 
-  .detected-group-heading h3 {
+  #check-results :global(.detected-group-heading h3) {
     margin: 0;
 
     color: var(--text);
     font-size: 0.98rem;
   }
 
-  .detected-group-heading > span {
+  #check-results :global(.detected-group-heading > span) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1427,7 +1452,7 @@ document.querySelector('#check-online')?.addEventListener('change', () => { if (
     font-weight: 800;
   }
 
-  .detected-group > p {
+  #check-results :global(.detected-group > p) {
     margin: 8px 0 15px;
 
     color: var(--muted);
@@ -1435,13 +1460,13 @@ document.querySelector('#check-online')?.addEventListener('change', () => { if (
     line-height: 1.6;
   }
 
-  .detected-tags {
+  #check-results :global(.detected-tags) {
     display: flex;
     flex-wrap: wrap;
     gap: 7px;
   }
 
-  .detected-tag {
+  #check-results :global(.detected-tag) {
     padding: 6px 9px;
 
     border: 1px solid rgba(255, 255, 255, 0.07);
@@ -1454,7 +1479,7 @@ document.querySelector('#check-online')?.addEventListener('change', () => { if (
   }
 
   .local-note,
-  .nothing-detected {
+  #check-results :global(.nothing-detected) {
     margin-top: 22px;
     padding: 18px;
 
@@ -1469,11 +1494,11 @@ document.querySelector('#check-online')?.addEventListener('change', () => { if (
   }
 
   .local-note strong,
-  .nothing-detected strong {
+  #check-results :global(.nothing-detected strong) {
     color: var(--text);
   }
 
-  .nothing-detected p {
+  #check-results :global(.nothing-detected p) {
     margin: 7px 0 0;
   }
 
@@ -1519,4 +1544,40 @@ document.querySelector('#check-online')?.addEventListener('change', () => { if (
 .arithmetic-results ul { padding-left: 20px; }
 .arithmetic-results li { margin-top: 12px; line-height: 1.7; }
 .local-review-note { margin-bottom: 25px; }
+.check-input-status {
+  min-height: 3em;
+  line-height: 1.5;
+}
+
+#check-button {
+  min-width: 210px;
+}
+
+#check-button:disabled {
+  cursor: wait;
+  opacity: 0.8;
+  transform: none;
+}
+
+.semantic-results {
+  margin-top: 28px;
+}
+
+/* Style elements created dynamically by JavaScript. */
+#check-results :global(.detected-tag) {
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+
+#check-results :global(.priority-card) {
+  overflow-wrap: anywhere;
+}
+</style>
+
+<style>
+  .check-page [hidden] { display: none !important; }
+  .results-card { min-width: 0; }
+  #check-results :global(.detected-group),
+  #check-results :global(.priority-card) { min-width: 0; overflow-wrap: anywhere; }
+  #check-results :global(.detected-tag) { display: inline-block; }
 </style>
