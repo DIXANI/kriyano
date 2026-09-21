@@ -1,8 +1,9 @@
-export const tools = [
+const availableTools = [
  { id:'list-cleaner', name:'Spreadsheet List Cleaner', category:'Office', icon:'list', href:'/tools/list-cleaner/', description:'Remove duplicates, tidy pasted columns and find differences between two lists.', action:'Clean a list', detail:'Copy or download · Runs locally', keywords:'excel csv text compare sku duplicates spaces column' },
  { id:'margin-calculator', name:'Margin & Markup Calculator', category:'Business', icon:'calculator', href:'/tools/margin-calculator/', description:'Find your selling price, understand your margin and see what a discount changes.', action:'Calculate a price', detail:'Instant results · Runs locally', keywords:'profit cost pricing percentage discount calculator' },
  { id:'quotation-builder', name:'Quotation Builder', category:'Business', icon:'document', href:'/tools/quotation-builder/', description:'Turn your line items into a clean quotation, ready to print or save as a PDF.', action:'Create a quotation', detail:'Print to PDF · No sign-up', keywords:'quote estimate customer document pdf price proposal' },
  { id:'check', name:'KRIYANO CHECK', category:'AI', icon:'check', href:'/check/', description:'Spot claims, assumptions and numbers in AI output that deserve a second look.', action:'Review AI output', detail:'Local signals + online AI review', keywords:'verify fact review output claims ai check' },
  { id:'prompt-builder', name:'AI Prompt Builder', category:'AI', icon:'spark', href:'/tools/prompt-builder/', description:'Give your AI a clearer task, useful context and the right output instructions.', action:'Build a prompt', detail:'Copy to your AI · Runs locally', keywords:'chatgpt gemini claude writing instructions prompt' },
 ];
+export const tools = [...availableTools.filter(tool => tool.category === 'AI'), ...availableTools.filter(tool => tool.category !== 'AI')];
 export type Tool = typeof tools[number];
