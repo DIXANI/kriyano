@@ -1,0 +1,329 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+---
+<ToolLayout title="Cron Expression Generator" description="Build standard 5-field cron expressions, understand the schedule, and preview upcoming run times in your browser." category="Developer">
+<section class="kit-workspace">
+ <div class="kit-panel">
+  <h2>Build a cron schedule</h2>
+  <div class="kit-field"><label for="cron-preset">Schedule type</label><select id="cron-preset"><option value="minutes">Every N minutes</option><option value="hourly">Every hour</option><option value="daily">Every day</option><option value="weekdays">Weekdays</option><option value="weekly">Every week</option><option value="monthly">Every month</option><option value="custom">Custom expression</option></select></div>
+  <div id="cron-dynamic" class="cron-dynamic"></div>
+  <div class="kit-field"><label for="cron-expression">Cron expression</label><input id="cron-expression" type="text" value="*/15 * * * *" spellcheck="false" autocomplete="off"/><p class="kit-help">Standard 5-field format: minute · hour · day of month · month · day of week.</p></div>
+  <div class="kit-actions"><button class="kit-btn primary" id="cron-generate" type="button">Generate schedule</button><button class="kit-btn" id="cron-copy" type="button">Copy expression</button></div><p class="kit-status" id="cron-status" role="status"></p>
+ </div>
+ <div class="kit-panel kit-result"><h2>Schedule preview</h2><div class="cron-summary"><span>Meaning</span><strong id="cron-description">Every 15 minutes</strong></div><div class="cron-summary"><span>Time zone</span><strong id="cron-zone">Your browser time zone</strong></div><h3 class="cron-next-title">Next 5 runs</h3><ol class="cron-runs" id="cron-runs"></ol></div>
+</section>
+<section class="kit-guide kit-reading"><h2>How cron expressions work</h2><p>A standard cron expression contains five fields: minute, hour, day of month, month and day of week. An asterisk means “any value”; ranges, lists and step values can narrow the schedule.</p><h2>Examples</h2><p><code>0 9 * * 1-5</code> runs at 9:00 AM Monday through Friday. <code>*/15 * * * *</code> runs every 15 minutes. <code>30 6 1 * *</code> runs at 6:30 AM on the first day of each month.</p><h2>Important</h2><p>This generator uses the common 5-field cron format and previews times in your browser's current time zone. Some platforms use six or seven fields or platform-specific syntax, so check the scheduler you are deploying to.</p></section>
+</ToolLayout>
+<script>
+const preset = document.querySelector('#cron-preset');
+const dynamic = document.querySelector('#cron-dynamic');
+const expression = document.querySelector('#cron-expression');
+const status = document.querySelector('#cron-status');
+const description = document.querySelector('#cron-description');
+const runs = document.querySelector('#cron-runs');
+const zone = document.querySelector('#cron-zone');
+const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+const pad = (number) => String(number).padStart(2, '0');
+
+function timeFields() {
+  return `
+    <div class="kit-fields">
+      <div class="kit-field">
+        <label for="cron-hour">Hour</label>
+        <input id="cron-hour" type="number" min="0" max="23" value="9" inputmode="numeric" />
+      </div>
+      <div class="kit-field">
+        <label for="cron-minute">Minute</label>
+        <input id="cron-minute" type="number" min="0" max="59" value="0" inputmode="numeric" />
+      </div>
+    </div>`;
+}
+
+function renderPreset() {
+  const value = preset.value;
+
+  if (value === 'minutes') {
+    dynamic.innerHTML = `
+      <div class="kit-field">
+        <label for="cron-interval">Run every</label>
+        <select id="cron-interval">
+          <option value="5">5 minutes</option>
+          <option value="10">10 minutes</option>
+          <option value="15" selected>15 minutes</option>
+          <option value="20">20 minutes</option>
+          <option value="30">30 minutes</option>
+        </select>
+      </div>`;
+  } else if (value === 'hourly') {
+    dynamic.innerHTML = `
+      <div class="kit-field">
+        <label for="cron-minute">Minute past each hour</label>
+        <input id="cron-minute" type="number" min="0" max="59" value="0" inputmode="numeric" />
+      </div>`;
+  } else if (value === 'daily' || value === 'weekdays') {
+    dynamic.innerHTML = timeFields();
+  } else if (value === 'weekly') {
+    const dayOptions = days
+      .map((day, index) => `<option value="${index}" ${index === 1 ? 'selected' : ''}>${day}</option>`)
+      .join('');
+    dynamic.innerHTML = `
+      <div class="kit-field">
+        <label for="cron-weekday">Day</label>
+        <select id="cron-weekday">${dayOptions}</select>
+      </div>
+      ${timeFields()}`;
+  } else if (value === 'monthly') {
+    dynamic.innerHTML = `
+      <div class="kit-field">
+        <label for="cron-monthday">Day of month</label>
+        <input id="cron-monthday" type="number" min="1" max="31" value="1" inputmode="numeric" />
+      </div>
+      ${timeFields()}`;
+  } else {
+    dynamic.innerHTML = '<p class="kit-help">Edit the expression directly below. Lists, ranges and steps are supported.</p>';
+  }
+
+  dynamic.querySelectorAll('input, select').forEach((element) => {
+    element.addEventListener('input', buildFromPreset);
+  });
+
+  if (value !== 'custom') buildFromPreset();
+}
+
+function clamp(id, min, max, fallback) {
+  const element = document.querySelector(`#${id}`);
+  if (!element) return fallback;
+
+  let number = Math.trunc(Number(element.value));
+  if (!Number.isFinite(number)) number = fallback;
+  number = Math.max(min, Math.min(max, number));
+  element.value = String(number);
+  return number;
+}
+
+function buildFromPreset() {
+  let nextExpression = expression.value;
+
+  switch (preset.value) {
+    case 'minutes': {
+      const interval = document.querySelector('#cron-interval');
+      const minutes = Number(interval?.value || 15);
+      nextExpression = `*/${minutes} * * * *`;
+      break;
+    }
+    case 'hourly': {
+      nextExpression = `${clamp('cron-minute', 0, 59, 0)} * * * *`;
+      break;
+    }
+    case 'daily': {
+      const minute = clamp('cron-minute', 0, 59, 0);
+      const hour = clamp('cron-hour', 0, 23, 9);
+      nextExpression = `${minute} ${hour} * * *`;
+      break;
+    }
+    case 'weekdays': {
+      const minute = clamp('cron-minute', 0, 59, 0);
+      const hour = clamp('cron-hour', 0, 23, 9);
+      nextExpression = `${minute} ${hour} * * 1-5`;
+      break;
+    }
+    case 'weekly': {
+      const minute = clamp('cron-minute', 0, 59, 0);
+      const hour = clamp('cron-hour', 0, 23, 9);
+      const weekday = document.querySelector('#cron-weekday')?.value || '1';
+      nextExpression = `${minute} ${hour} * * ${weekday}`;
+      break;
+    }
+    case 'monthly': {
+      const minute = clamp('cron-minute', 0, 59, 0);
+      const hour = clamp('cron-hour', 0, 23, 9);
+      const monthDay = clamp('cron-monthday', 1, 31, 1);
+      nextExpression = `${minute} ${hour} ${monthDay} * *`;
+      break;
+    }
+    default:
+      return;
+  }
+
+  expression.value = nextExpression;
+  preview();
+}
+
+function expandField(field, min, max, dayOfWeek = false) {
+  const values = new Set();
+
+  function add(value) {
+    let normalized = value;
+    if (dayOfWeek && normalized === 7) normalized = 0;
+    if (normalized < min || normalized > max) {
+      throw new Error(`Value ${normalized} is outside ${min}-${max}.`);
+    }
+    values.add(normalized);
+  }
+
+  for (const part of field.split(',')) {
+    if (!part) throw new Error('Empty cron list item.');
+
+    const [base, stepRaw] = part.split('/');
+    const step = stepRaw === undefined ? 1 : Number(stepRaw);
+
+    if (!Number.isInteger(step) || step < 1) {
+      throw new Error('Cron step values must be positive whole numbers.');
+    }
+
+    if (base === '*') {
+      for (let value = min; value <= max; value += step) add(value);
+      continue;
+    }
+
+    const range = base.match(/^(\d+)-(\d+)$/);
+    if (range) {
+      const first = Number(range[1]);
+      const last = Number(range[2]);
+      if (first > last) throw new Error('Cron ranges must run from lower to higher values.');
+      for (let value = first; value <= last; value += step) add(value);
+      continue;
+    }
+
+    if (!/^\d+$/.test(base)) throw new Error(`Unsupported cron field: ${part}`);
+    add(Number(base));
+  }
+
+  return values;
+}
+
+function parseCron(value) {
+  const fields = value.trim().split(/\s+/);
+  if (fields.length !== 5) {
+    throw new Error('Use exactly 5 cron fields: minute hour day month weekday.');
+  }
+
+  return {
+    minute: expandField(fields[0], 0, 59),
+    hour: expandField(fields[1], 0, 23),
+    dom: expandField(fields[2], 1, 31),
+    month: expandField(fields[3], 1, 12),
+    dow: expandField(fields[4], 0, 7, true),
+    domAny: fields[2] === '*',
+    dowAny: fields[4] === '*'
+  };
+}
+
+function matches(date, cron) {
+  const dayOfMonthMatches = cron.dom.has(date.getDate());
+  const dayOfWeekMatches = cron.dow.has(date.getDay());
+
+  let dayMatches;
+  if (cron.domAny && cron.dowAny) dayMatches = true;
+  else if (cron.domAny) dayMatches = dayOfWeekMatches;
+  else if (cron.dowAny) dayMatches = dayOfMonthMatches;
+  else dayMatches = dayOfMonthMatches || dayOfWeekMatches;
+
+  return cron.minute.has(date.getMinutes())
+    && cron.hour.has(date.getHours())
+    && cron.month.has(date.getMonth() + 1)
+    && dayMatches;
+}
+
+function nextRuns(cron, count = 5) {
+  const results = [];
+  let date = new Date();
+  date.setSeconds(0, 0);
+  date = new Date(date.getTime() + 60000);
+
+  const maxMinutes = 60 * 24 * 366 * 3;
+  for (let index = 0; index < maxMinutes && results.length < count; index += 1) {
+    if (matches(date, cron)) results.push(new Date(date));
+    date = new Date(date.getTime() + 60000);
+  }
+
+  return results;
+}
+
+function describe(value) {
+  const fields = value.trim().split(/\s+/);
+  if (fields.length !== 5) return 'Custom cron schedule';
+
+  const [minute, hour, dayOfMonth, month, dayOfWeek] = fields;
+
+  if (/^\*\/\d+$/.test(minute) && [hour, dayOfMonth, month, dayOfWeek].every((field) => field === '*')) {
+    return `Every ${minute.slice(2)} minutes`;
+  }
+  if (minute === '0' && [hour, dayOfMonth, month, dayOfWeek].every((field) => field === '*')) {
+    return 'Every hour';
+  }
+  if (/^\d+$/.test(minute) && hour === '*' && [dayOfMonth, month, dayOfWeek].every((field) => field === '*')) {
+    return `Every hour at minute ${pad(Number(minute))}`;
+  }
+  if (/^\d+$/.test(minute) && /^\d+$/.test(hour) && dayOfMonth === '*' && month === '*' && dayOfWeek === '*') {
+    return `Every day at ${pad(Number(hour))}:${pad(Number(minute))}`;
+  }
+  if (/^\d+$/.test(minute) && /^\d+$/.test(hour) && dayOfMonth === '*' && month === '*' && dayOfWeek === '1-5') {
+    return `Weekdays at ${pad(Number(hour))}:${pad(Number(minute))}`;
+  }
+
+  return 'Custom 5-field cron schedule';
+}
+
+function preview() {
+  try {
+    const parsed = parseCron(expression.value);
+    const upcoming = nextRuns(parsed);
+
+    if (!upcoming.length) {
+      throw new Error('No matching run was found within the next 3 years. Check the day and month combination.');
+    }
+
+    description.textContent = describe(expression.value);
+    runs.innerHTML = '';
+
+    for (const date of upcoming) {
+      const item = document.createElement('li');
+      item.textContent = date.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'medium' });
+      runs.append(item);
+    }
+
+    status.textContent = 'Valid 5-field cron expression.';
+    status.classList.remove('kit-error');
+  } catch (error) {
+    runs.innerHTML = '';
+    description.textContent = 'Schedule needs attention';
+    status.textContent = error instanceof Error ? error.message : 'Invalid cron expression.';
+    status.classList.add('kit-error');
+  }
+}
+
+preset.addEventListener('change', renderPreset);
+expression.addEventListener('input', () => {
+  if (preset.value !== 'custom') preset.value = 'custom';
+  preview();
+});
+
+document.querySelector('#cron-generate').addEventListener('click', () => {
+  if (preset.value === 'custom') preview();
+  else buildFromPreset();
+});
+
+document.querySelector('#cron-copy').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(expression.value);
+    status.textContent = 'Cron expression copied.';
+  } catch {
+    expression.select();
+    document.execCommand('copy');
+    status.textContent = 'Cron expression copied.';
+  }
+});
+
+try {
+  zone.textContent = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Your browser time zone';
+} catch {
+  zone.textContent = 'Your browser time zone';
+}
+
+renderPreset();
+</script>
+<style>
+.cron-dynamic{margin:18px 0}.cron-summary{display:flex;flex-direction:column;gap:7px;border-bottom:1px solid var(--line);padding:14px 0}.cron-summary span{font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}.cron-summary strong{font-size:1.05rem}.cron-next-title{font-size:1rem;margin:24px 0 12px}.cron-runs{display:grid;gap:10px;padding-left:22px;color:#d6e1d8}.cron-runs li{padding-left:5px;line-height:1.5}
+</style>

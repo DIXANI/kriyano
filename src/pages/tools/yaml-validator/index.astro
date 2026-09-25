@@ -1,0 +1,35 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+---
+<ToolLayout title="YAML Validator" description="Validate common YAML structures, catch syntax and indentation problems, and preview the parsed data locally in your browser." category="Text & Data">
+<section class="kit-workspace">
+ <div class="kit-panel">
+  <h2>Paste YAML</h2>
+  <div class="kit-field"><label for="yaml-input">YAML document</label><textarea id="yaml-input" rows="16" spellcheck="false" placeholder={'service:\n  name: kriyano\n  port: 8080\n  enabled: true\n  tags:\n    - developer\n    - web'}></textarea><p class="kit-help">Supports the common mappings, sequences, scalars and block text used in configuration files. Complex YAML tags and anchors are intentionally outside this lightweight validator.</p></div>
+  <div class="kit-actions"><button class="kit-btn primary" id="yaml-validate" type="button">Validate YAML</button><button class="kit-btn" id="yaml-example" type="button">Load example</button><button class="kit-btn" id="yaml-clear" type="button">Clear</button></div>
+  <p class="kit-status" id="yaml-status" role="status"></p>
+ </div>
+ <div class="kit-panel kit-result">
+  <h2>Validation result</h2>
+  <div class="yaml-result-state" id="yaml-state" data-state="idle"><strong id="yaml-state-title">Waiting for YAML</strong><span id="yaml-state-detail">Paste a document and run the validator.</span></div>
+  <div class="kit-field" style="margin-top:20px"><label for="yaml-output">Parsed JSON preview</label><textarea id="yaml-output" rows="12" readonly spellcheck="false" aria-label="Parsed JSON preview"></textarea></div>
+  <div class="kit-actions"><button class="kit-btn" id="yaml-copy" type="button" disabled>Copy JSON</button></div>
+ </div>
+</section>
+<section class="kit-guide kit-reading">
+ <h2>What does this YAML validator check?</h2><p>It checks indentation and parses common YAML mappings, lists, quoted and unquoted values, booleans, numbers, null values, inline arrays and objects, and basic block text. If parsing succeeds, the equivalent data structure is shown as formatted JSON.</p>
+ <h2>Common YAML problems</h2><p>Tabs in indentation, missing colons, inconsistent nesting and duplicate mapping keys are frequent causes of invalid configuration files. The validator reports the first problem it can identify so you can fix it quickly.</p>
+ <h2>Private by design</h2><p>Your YAML is processed in the browser. KRIYANO does not send the document to a validation API.</p>
+</section>
+</ToolLayout>
+<script>
+import { parseYaml } from '../../../utils/yaml-lite.mjs';
+const input=document.querySelector<HTMLTextAreaElement>('#yaml-input')!, output=document.querySelector<HTMLTextAreaElement>('#yaml-output')!, status=document.querySelector<HTMLElement>('#yaml-status')!, state=document.querySelector<HTMLElement>('#yaml-state')!, title=document.querySelector<HTMLElement>('#yaml-state-title')!, detail=document.querySelector<HTMLElement>('#yaml-state-detail')!, copy=document.querySelector<HTMLButtonElement>('#yaml-copy')!;
+const example=`service:\n  name: kriyano\n  port: 8080\n  enabled: true\n  tags:\n    - developer\n    - web\n  limits:\n    requests: 100\n    window: 60`;
+function resetResult(){output.value='';copy.disabled=true;state.dataset.state='idle';title.textContent='Waiting for YAML';detail.textContent='Paste a document and run the validator.';status.textContent='';status.classList.remove('kit-error');}
+function validate(){const source=input.value;if(!source.trim()){resetResult();status.textContent='Paste YAML to validate.';status.classList.add('kit-error');return;}try{const parsed=parseYaml(source);output.value=JSON.stringify(parsed,null,2);copy.disabled=false;state.dataset.state='valid';title.textContent='Valid YAML';detail.textContent='The document parsed successfully.';status.textContent='Valid YAML. Parsed locally in your browser.';status.classList.remove('kit-error');}catch(error){output.value='';copy.disabled=true;state.dataset.state='invalid';title.textContent='YAML needs attention';detail.textContent=error instanceof Error?error.message:'The document could not be parsed.';status.textContent=detail.textContent;status.classList.add('kit-error');}}
+document.querySelector('#yaml-validate')!.addEventListener('click',validate);document.querySelector('#yaml-example')!.addEventListener('click',()=>{input.value=example;validate();});document.querySelector('#yaml-clear')!.addEventListener('click',()=>{input.value='';resetResult();input.focus();});input.addEventListener('input',()=>{if(output.value||state.dataset.state!=='idle')resetResult();});copy.addEventListener('click',async()=>{if(!output.value)return;try{await navigator.clipboard.writeText(output.value);status.textContent='Parsed JSON copied.';}catch{output.select();document.execCommand('copy');status.textContent='Parsed JSON copied.';}});
+</script>
+<style>
+.yaml-result-state{display:flex;flex-direction:column;gap:7px;border:1px solid var(--line);border-radius:14px;padding:18px;background:#0d1812}.yaml-result-state strong{font-size:1.05rem}.yaml-result-state span{color:var(--muted);font-size:.9rem;line-height:1.55}.yaml-result-state[data-state="valid"]{border-color:#7ed95766;background:#132116}.yaml-result-state[data-state="valid"] strong{color:var(--lime)}.yaml-result-state[data-state="invalid"]{border-color:#e7987266;background:#231713}.yaml-result-state[data-state="invalid"] strong{color:#ffc0a2}
+</style>

@@ -31,3 +31,13 @@
 ## Checks
 
 130 pages build successfully. 14 automated tests cover pure calculations, generated production JavaScript interactions in jsdom and Worker behavior with mocked AI. 3,914 internal links/asset references resolve in the build. Real rendered mobile/desktop appearance, print pagination and live AI response quality still require review in a browser/Cloudflare environment.
+
+## 2026-09-25 — Technical pivot Phase 2
+
+- Added YAML Validator.
+- Added JSON ↔ YAML Converter.
+- Added Base64 Encoder & Decoder with Base64URL support.
+- Added Cron Expression Generator with 5-field validation and next-run preview.
+- Expanded homepage from four to eight featured technical tools.
+- Updated technical-tool directory, About content, footer links and sitemap validation.
+- Added YAML parser/stringifier tests for common configuration structures.

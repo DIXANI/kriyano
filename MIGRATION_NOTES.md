@@ -28,3 +28,14 @@ npm run validate
 ```
 
 The supplied project ZIP originally contained Windows `node_modules`; do not commit or reuse those dependencies on another operating system. Install dependencies fresh.
+
+## Phase 2 — technical toolkit expansion
+
+Added four browser-first technical utilities:
+
+- `/tools/yaml-validator/` — validates common YAML structures and previews parsed JSON.
+- `/tools/json-yaml-converter/` — two-way JSON/YAML conversion for common configuration data.
+- `/tools/base64-encoder/` — UTF-8-safe Base64 and Base64URL encode/decode.
+- `/tools/cron-expression-generator/` — builds standard 5-field cron expressions and previews upcoming runs.
+
+The homepage, tool directory, About page, footer, metadata and sitemap validation were updated to surface the expanded technical toolkit. Legacy prompt and AI routes remain unchanged and available.
