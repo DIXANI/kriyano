@@ -1,0 +1,36 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+---
+<ToolLayout title="UUID Generator" description="Generate secure UUID v4 identifiers instantly in your browser, one at a time or in bulk." category="Developer">
+<section class="kit-workspace">
+ <div class="kit-panel">
+  <h2>Generate UUIDs</h2>
+  <div class="kit-field"><label for="uuid-count">How many?</label><input id="uuid-count" type="number" min="1" max="100" value="5" inputmode="numeric"/><p class="kit-help">Generate between 1 and 100 UUID v4 values.</p></div>
+  <div class="kit-options"><label><input id="uuid-uppercase" type="checkbox"/> Uppercase</label><label><input id="uuid-hyphens" type="checkbox" checked/> Keep hyphens</label></div>
+  <div class="kit-actions"><button class="kit-btn primary" id="uuid-generate" type="button">Generate UUIDs</button><button class="kit-btn" id="uuid-clear" type="button">Clear</button></div>
+  <p class="kit-status" id="uuid-status" role="status"></p>
+ </div>
+ <div class="kit-panel kit-result">
+  <h2>Generated UUIDs</h2>
+  <textarea id="uuid-output" rows="11" readonly aria-label="Generated UUIDs"></textarea>
+  <div class="kit-actions"><button class="kit-btn" id="uuid-copy" type="button">Copy all</button><button class="kit-btn" id="uuid-download" type="button">Download TXT</button></div>
+ </div>
+</section>
+<section class="kit-guide kit-reading">
+ <h2>What is a UUID?</h2><p>A UUID is a 128-bit identifier commonly used to give records, objects and resources unique IDs without relying on a central counter. This tool generates version 4 UUIDs using browser cryptography.</p>
+ <h2>When to use UUID v4</h2><p>UUID v4 is useful for database keys, test fixtures, API payloads, temporary identifiers and distributed systems where randomly generated IDs are appropriate.</p>
+ <h2>Privacy</h2><p>Generation happens locally in your browser. The generated values are not sent to KRIYANO.</p>
+</section>
+</ToolLayout>
+<script>
+const count=document.querySelector<HTMLInputElement>('#uuid-count')!;
+const uppercase=document.querySelector<HTMLInputElement>('#uuid-uppercase')!;
+const hyphens=document.querySelector<HTMLInputElement>('#uuid-hyphens')!;
+const output=document.querySelector<HTMLTextAreaElement>('#uuid-output')!;
+const status=document.querySelector<HTMLElement>('#uuid-status')!;
+function fallbackUuid(){const bytes=new Uint8Array(16);crypto.getRandomValues(bytes);bytes[6]=(bytes[6]&15)|64;bytes[8]=(bytes[8]&63)|128;const hex=[...bytes].map(b=>b.toString(16).padStart(2,'0')).join('');return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`;}
+function one(){return typeof crypto.randomUUID==='function'?crypto.randomUUID():fallbackUuid();}
+function generate(){let n=Math.trunc(Number(count.value));if(!Number.isFinite(n))n=1;n=Math.min(100,Math.max(1,n));count.value=String(n);const values=Array.from({length:n},()=>{let v=one();if(!hyphens.checked)v=v.replaceAll('-','');if(uppercase.checked)v=v.toUpperCase();return v;});output.value=values.join('\n');status.textContent=`Generated ${n} UUID${n===1?'':'s'} locally.`;}
+async function copy(){if(!output.value){status.textContent='Generate UUIDs first.';return;}try{await navigator.clipboard.writeText(output.value);status.textContent='Copied to clipboard.';}catch{output.select();document.execCommand('copy');status.textContent='Copied to clipboard.';}}
+document.querySelector('#uuid-generate')!.addEventListener('click',generate);document.querySelector('#uuid-clear')!.addEventListener('click',()=>{output.value='';status.textContent='';});document.querySelector('#uuid-copy')!.addEventListener('click',copy);document.querySelector('#uuid-download')!.addEventListener('click',()=>{if(!output.value){status.textContent='Generate UUIDs first.';return;}const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([output.value+'\n'],{type:'text/plain'}));a.download='kriyano-uuids.txt';a.click();URL.revokeObjectURL(a.href);status.textContent='Download created.';});generate();
+</script>

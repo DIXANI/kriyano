@@ -1,0 +1,29 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+---
+<ToolLayout title="Unix Timestamp Converter" description="Convert Unix timestamps to readable dates and turn dates back into seconds or milliseconds." category="Developer">
+<section class="kit-workspace">
+ <div class="kit-panel">
+  <h2>Timestamp → date</h2>
+  <div class="kit-field"><label for="ts-input">Unix timestamp</label><input id="ts-input" type="text" inputmode="numeric" placeholder="e.g. 1760000000"/><p class="kit-help">10 digits usually means seconds; 13 digits usually means milliseconds.</p></div>
+  <div class="kit-actions"><button class="kit-btn primary" id="ts-convert" type="button">Convert timestamp</button><button class="kit-btn" id="ts-now" type="button">Use current time</button></div><p class="kit-status" id="ts-status" role="status"></p>
+ </div>
+ <div class="kit-panel kit-result">
+  <h2>Readable time</h2><dl><div><dt>UTC</dt><dd id="ts-utc">—</dd></div><div><dt>Local</dt><dd id="ts-local">—</dd></div><div><dt>ISO 8601</dt><dd id="ts-iso">—</dd></div><div><dt>Seconds</dt><dd id="ts-seconds">—</dd></div><div><dt>Milliseconds</dt><dd id="ts-ms">—</dd></div></dl>
+ </div>
+</section>
+<section class="kit-panel" style="margin-top:22px">
+ <h2>Date → timestamp</h2><div class="kit-fields"><div class="kit-field"><label for="date-input">Date and time</label><input id="date-input" type="datetime-local"/></div><div class="kit-field"><label for="date-zone">Interpret as</label><select id="date-zone"><option value="local">Your local time</option><option value="utc">UTC</option></select></div></div><div class="kit-actions"><button class="kit-btn primary" id="date-convert" type="button">Convert date</button></div><p class="kit-status" id="date-status" role="status"></p><div class="kit-stats"><div><strong id="date-seconds">—</strong><span>Unix seconds</span></div><div><strong id="date-ms">—</strong><span>Unix milliseconds</span></div></div>
+</section>
+<section class="kit-guide kit-reading"><h2>Unix timestamps explained</h2><p>A Unix timestamp counts elapsed time from 1 January 1970 at 00:00:00 UTC. Many APIs use seconds, while JavaScript and some services use milliseconds.</p><h2>Runs locally</h2><p>Conversions are performed by your browser and are not submitted to KRIYANO.</p></section>
+</ToolLayout>
+<script>
+const input=document.querySelector<HTMLInputElement>('#ts-input')!, status=document.querySelector<HTMLElement>('#ts-status')!;
+function showDate(date:Date){if(Number.isNaN(date.getTime())){status.textContent='Enter a valid timestamp.';status.classList.add('kit-error');return;}status.classList.remove('kit-error');document.querySelector('#ts-utc')!.textContent=date.toUTCString();document.querySelector('#ts-local')!.textContent=date.toLocaleString();document.querySelector('#ts-iso')!.textContent=date.toISOString();document.querySelector('#ts-seconds')!.textContent=String(Math.floor(date.getTime()/1000));document.querySelector('#ts-ms')!.textContent=String(date.getTime());status.textContent='Converted locally.';}
+function convertTs(){const raw=input.value.trim();if(!/^-?\d+$/.test(raw)){status.textContent='Enter a whole-number Unix timestamp.';status.classList.add('kit-error');return;}const n=Number(raw);const ms=Math.abs(n)<100000000000?n*1000:n;showDate(new Date(ms));}
+document.querySelector('#ts-convert')!.addEventListener('click',convertTs);document.querySelector('#ts-now')!.addEventListener('click',()=>{input.value=String(Math.floor(Date.now()/1000));convertTs();});
+const dateInput=document.querySelector<HTMLInputElement>('#date-input')!, zone=document.querySelector<HTMLSelectElement>('#date-zone')!, dateStatus=document.querySelector<HTMLElement>('#date-status')!;
+function fillNow(){const d=new Date();const local=new Date(d.getTime()-d.getTimezoneOffset()*60000);dateInput.value=local.toISOString().slice(0,16);}fillNow();
+document.querySelector('#date-convert')!.addEventListener('click',()=>{if(!dateInput.value){dateStatus.textContent='Choose a date and time.';return;}let d:Date;if(zone.value==='utc'){d=new Date(dateInput.value+':00Z');}else{d=new Date(dateInput.value);}if(Number.isNaN(d.getTime())){dateStatus.textContent='Choose a valid date and time.';return;}document.querySelector('#date-seconds')!.textContent=String(Math.floor(d.getTime()/1000));document.querySelector('#date-ms')!.textContent=String(d.getTime());dateStatus.textContent='Converted locally.';});
+document.querySelector('#ts-now')!.dispatchEvent(new Event('click'));
+</script>

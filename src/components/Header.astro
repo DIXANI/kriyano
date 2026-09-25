@@ -1,15 +1,20 @@
 ---
-const links = [ {href:'/tools/',label:'Tools'}, {href:'/prompts/',label:'Prompts'}, {href:'/learn/',label:'Learn'}, {href:'/creators/',label:'Creators'} ];
-const active = (href: string) => Astro.url.pathname.startsWith(href);
+const links = [
+ {href:'/tools/',label:'All Tools'},
+ {href:'/tools/#developer-tools',label:'Developer'},
+ {href:'/tools/#data-tools',label:'Data & Text'},
+ {href:'/tools/#web-tools',label:'Web Tools'}
+];
+const active = (href: string) => href === '/tools/' ? Astro.url.pathname.startsWith('/tools/') : false;
 ---
 <header class="site-header">
  <div class="container nav">
   <a href="/" class="brand" aria-label="KRIYANO home"><span class="brand-mark" aria-hidden="true"></span>KRIYANO</a>
   <nav class="desktop-nav" aria-label="Main navigation"><ul class="nav-links">{links.map(link=><li><a href={link.href} aria-current={active(link.href)?'page':undefined}>{link.label}</a></li>)}</ul></nav>
-  <a href="/check/" class="nav-cta">Check AI Output ↗</a>
+  <a href="/tools/" class="nav-cta">Browse tools ↗</a>
   <button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><span></span></button>
  </div>
- <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation" hidden><div class="container">{links.map(link=><a href={link.href} aria-current={active(link.href)?'page':undefined}>{link.label}</a>)}<a href="/check/" class="mobile-menu-cta">Check AI Output</a></div></nav>
+ <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation" hidden><div class="container">{links.map(link=><a href={link.href} aria-current={active(link.href)?'page':undefined}>{link.label}</a>)}<a href="/tools/" class="mobile-menu-cta">Browse all tools</a></div></nav>
 </header>
 <script>
 const toggle=document.querySelector<HTMLButtonElement>('.mobile-menu-toggle')!;

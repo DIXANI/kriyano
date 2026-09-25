@@ -105,6 +105,6 @@ async()=>{
  p.input('ai-output','New text');assert.equal(p.get('check-results').hidden,true);p.dom.window.close();
 };
 test('directory filters and navigation Escape state',async()=>{
- const p=await page('tools','src/pages/tools/index.astro');p.input('tool-search','Excel');assert.equal([...p.w.document.querySelectorAll('[data-tool-card]')].filter(e=>!e.hidden).length,1);p.input('tool-search','nothingmatches');assert.equal(p.get('tool-empty').hidden,false);p.get('reset-filters').click();assert.equal(p.get('tool-empty').hidden,true);
+ const p=await page('tools','src/pages/tools/index.astro');p.input('tool-search','Excel');assert.equal([...p.w.document.querySelectorAll('[data-tool-card]')].filter(e=>!e.closest('.legacy-tools')&&!e.hidden).length,1);p.input('tool-search','nothingmatches');assert.equal(p.get('tool-empty').hidden,false);p.get('reset-filters').click();assert.equal(p.get('tool-empty').hidden,true);
  const toggle=p.w.document.querySelector('.mobile-menu-toggle');assert.equal(p.get('mobile-menu').hidden,true);toggle.click();assert.equal(toggle.getAttribute('aria-expanded'),'true');p.w.document.dispatchEvent(new p.w.KeyboardEvent('keydown',{key:'Escape'}));assert.equal(p.get('mobile-menu').hidden,true);p.dom.window.close();
 });

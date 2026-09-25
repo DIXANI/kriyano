@@ -1,20 +1,31 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ToolCard from '../../components/ToolCard.astro';
-import { tools } from '../../data/tools';
+import { primaryTools, legacyTools } from '../../data/tools';
 import '../../styles/toolkit.css';
+const categories = [
+ {id:'developer-tools', label:'Developer', tools:primaryTools.filter(t=>t.category==='Developer')},
+ {id:'web-tools', label:'Web', tools:primaryTools.filter(t=>t.category==='Web')},
+ {id:'data-tools', label:'Text & Data', tools:primaryTools.filter(t=>t.category==='Text & Data')},
+];
 ---
-<BaseLayout title="AI & Work Tools | KRIYANO" description="Review AI output and build clearer prompts with free KRIYANO tools. Supporting spreadsheet, pricing and quotation utilities remain available.">
- <div class="container kit-page"><header class="kit-heading"><div class="section-kicker">The KRIYANO toolkit</div><h1>Build a prompt. Check the answer.</h1><p>Start with our AI tools for clearer instructions and more thoughtful review. You can also find our supporting office and business utilities below.</p></header>
- <div class="kit-filter-bar" id="tool-filters" hidden><div><label for="tool-search" class="kit-field-label">Find a tool</label><input id="tool-search" class="kit-search" type="search" placeholder="Try “Excel”, “pricing” or “AI”…" autocomplete="off"/></div><div class="kit-filters" role="group" aria-label="Filter tools by category">{['All','AI','Office','Business'].map(category=><button class="kit-btn" type="button" data-filter={category} aria-pressed={category==='All'}>{category}</button>)}</div></div>
- <p class="kit-help" id="tool-count" role="status" style="margin-bottom:20px">{tools.length} tools · Free to use · No sign-up</p><div class="kit-grid">{tools.map(tool=><ToolCard tool={tool}/>)}</div><div class="kit-empty" id="tool-empty" hidden><h2>No matching tools yet.</h2><p>Try a shorter search or choose another category.</p><button id="reset-filters" type="button" class="kit-btn" style="margin-top:16px">Show all tools</button></div>
- <section class="kit-guide"><div class="kit-guide-grid"><div><h3>Need a prompt?</h3><p>Browse task-specific templates for writing, operations and creative work.</p><a href="/prompts/">Open the Prompt Library →</a></div><div><h3>Know what leaves your browser.</h3><p>Prompt Builder and the office and business utilities work locally. CHECK’s AI review sends your text for processing.</p><a href="/privacy/">Read about privacy →</a></div><div><h3>Missing your everyday tool?</h3><p>Tell us the task you want to finish and what a useful result looks like.</p><a href="/contact/">Suggest a tool →</a></div></div></section></div>
+<BaseLayout title="Free Developer, Web & Data Tools | KRIYANO" description="Free browser-based developer utilities for UUIDs, timestamps, JWTs, URL encoding and data cleanup. Fast tools with no account required.">
+ <div class="container kit-page"><header class="kit-heading"><div class="section-kicker">The KRIYANO toolkit</div><h1>Developer and web tools that get one job done.</h1><p>Generate, decode, convert and clean technical data with focused browser-based utilities. No account required.</p></header>
+ <div class="kit-filter-bar" id="tool-filters" hidden><div><label for="tool-search" class="kit-field-label">Find a tool</label><input id="tool-search" class="kit-search" type="search" placeholder="Try “JWT”, “timestamp” or “URL”…" autocomplete="off"/></div><div class="kit-filters" role="group" aria-label="Filter tools by category">{['All','Developer','Web','Text & Data'].map(category=><button class="kit-btn" type="button" data-filter={category} aria-pressed={category==='All'}>{category}</button>)}</div></div>
+ <p class="kit-help" id="tool-count" role="status" style="margin-bottom:24px">{primaryTools.length} technical tools · Free to use · No sign-up</p>
+ {categories.map(group => group.tools.length > 0 && <section id={group.id} class="tool-category-section"><div class="kit-row"><div><div class="section-kicker">{group.label.toUpperCase()}</div><h2>{group.label} tools</h2></div></div><div class="kit-grid">{group.tools.map(tool=><ToolCard tool={tool}/>)}</div></section>)}
+ <div class="kit-empty" id="tool-empty" hidden><h2>No matching tools yet.</h2><p>Try a shorter search or choose another category.</p><button id="reset-filters" type="button" class="kit-btn" style="margin-top:16px">Show all tools</button></div>
+ <section class="kit-guide"><div class="kit-guide-grid"><div><h3>Privacy-first utilities</h3><p>The new technical tools are designed to work locally in your browser wherever possible.</p><a href="/privacy/">Read about privacy →</a></div><div><h3>Legacy AI resources</h3><p>The previous prompt library remains available while KRIYANO transitions toward developer and web utilities.</p><a href="/prompts/">Open the legacy prompt library →</a></div><div><h3>Missing a tool?</h3><p>Tell us the developer or web task you want to finish faster.</p><a href="/contact/">Suggest a tool →</a></div></div></section>
+ <details class="legacy-tools"><summary>Legacy utilities</summary><p>These older tools remain available during the transition but are no longer part of KRIYANO's main technical direction.</p><div class="kit-grid">{legacyTools.map(tool=><ToolCard tool={tool}/>)}</div></details>
+ </div>
 </BaseLayout>
 <script>
 const search=document.querySelector<HTMLInputElement>('#tool-search')!;
-const cards=[...document.querySelectorAll<HTMLElement>('[data-tool-card]')];
+const cards=[...document.querySelectorAll<HTMLElement>('[data-tool-card]')].filter(card=>!card.closest('.legacy-tools'));
+const sections=[...document.querySelectorAll<HTMLElement>('.tool-category-section')];
 const buttons=[...document.querySelectorAll<HTMLButtonElement>('[data-filter]')];
 let category='All'; document.querySelector<HTMLElement>('#tool-filters')!.hidden=false;
-function filter(){const words=search.value.trim().toLowerCase().split(/\s+/).filter(Boolean);let count=0;cards.forEach(card=>{const visible=(category==='All'||card.dataset.category===category)&&words.every(word=>card.dataset.search!.includes(word));card.hidden=!visible;if(visible)count++;});document.querySelector('#tool-count')!.textContent=`${count} ${count===1?'tool':'tools'} available`;document.querySelector<HTMLElement>('#tool-empty')!.hidden=count!==0;buttons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.filter===category)));}
+function filter(){const words=search.value.trim().toLowerCase().split(/\s+/).filter(Boolean);let count=0;cards.forEach(card=>{const visible=(category==='All'||card.dataset.category===category)&&words.every(word=>card.dataset.search!.includes(word));card.hidden=!visible;if(visible)count++;});sections.forEach(section=>{section.hidden=!section.querySelector('[data-tool-card]:not([hidden])');});document.querySelector('#tool-count')!.textContent=`${count} ${count===1?'tool':'tools'} available`;document.querySelector<HTMLElement>('#tool-empty')!.hidden=count!==0;buttons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.filter===category)));}
 search.addEventListener('input',filter);buttons.forEach(button=>button.addEventListener('click',()=>{category=button.dataset.filter!;filter();}));document.querySelector('#reset-filters')!.addEventListener('click',()=>{category='All';search.value='';filter();search.focus();});
 </script>
+<style>.tool-category-section{padding:12px 0 40px}.tool-category-section .kit-row{margin-bottom:18px}.legacy-tools{margin-top:46px;padding-top:26px;border-top:1px solid var(--line)}.legacy-tools summary{cursor:pointer;font-weight:700;font-size:1.05rem}.legacy-tools>p{color:var(--muted);margin:12px 0 20px;max-width:720px}</style>
