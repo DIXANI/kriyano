@@ -1,0 +1,21 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+---
+<ToolLayout title="URL Parser" description="Break a URL into protocol, host, port, path, query string, fragment and other browser-parsed components." category="Web">
+<section class="kit-workspace">
+  <div class="kit-panel">
+    <h2>URL input</h2><div class="kit-field"><label for="url-input">Paste a URL</label><textarea id="url-input" rows="9" spellcheck="false" placeholder="https://user@example.com:8443/tools/?q=jwt&page=2#result"></textarea></div>
+    <div class="kit-actions"><button class="kit-btn primary" id="url-run" type="button">Parse URL</button><button class="kit-btn" id="url-example" type="button">Load example</button><button class="kit-btn" id="url-clear" type="button">Clear</button></div><p class="kit-status" id="url-status" role="status"></p>
+  </div>
+  <div class="kit-panel kit-result"><h2>URL components</h2><dl id="url-parts"><div><dt>Protocol</dt><dd data-part="protocol">—</dd></div><div><dt>Hostname</dt><dd data-part="hostname">—</dd></div><div><dt>Port</dt><dd data-part="port">—</dd></div><div><dt>Path</dt><dd data-part="pathname">—</dd></div><div><dt>Query</dt><dd data-part="search">—</dd></div><div><dt>Fragment</dt><dd data-part="hash">—</dd></div><div><dt>Origin</dt><dd data-part="origin">—</dd></div></dl><div class="kit-actions"><button class="kit-btn" id="url-copy" type="button" disabled>Copy parsed JSON</button></div></div>
+</section>
+<section class="kit-guide kit-reading"><h2>Understand any URL quickly</h2><p>This tool uses the browser's URL parser to separate the main URL components, including the protocol, hostname, port, path, query string and fragment.</p><h2>Related tools</h2><p>Use the <a href="/tools/query-string-parser/">Query String Parser</a> to inspect individual parameters or the <a href="/tools/url-encoder/">URL Encoder & Decoder</a> when you need percent encoding.</p><h2>Local processing</h2><p>The URL is parsed in your browser and is not sent to KRIYANO.</p></section>
+</ToolLayout>
+<script>
+import { parseUrlValue } from '../../../utils/technical-tools.mjs';
+const input=document.querySelector('#url-input'),status=document.querySelector('#url-status'),copy=document.querySelector('#url-copy');
+let current:any=null;const fields=['protocol','hostname','port','pathname','search','hash','origin'];
+function reset(){current=null;copy.disabled=true;status.textContent='';status.classList.remove('kit-error');fields.forEach(key=>{const el=document.querySelector(`[data-part="${key}"]`);if(el)el.textContent='—';});}
+function run(){reset();try{current=parseUrlValue(input.value);fields.forEach(key=>{const el=document.querySelector(`[data-part="${key}"]`);if(el)el.textContent=current[key]||'—';});copy.disabled=false;status.textContent='URL parsed locally in your browser.';}catch(error){status.textContent=error instanceof Error?error.message:'Could not parse URL.';status.classList.add('kit-error');}}
+document.querySelector('#url-run').addEventListener('click',run);document.querySelector('#url-example').addEventListener('click',()=>{input.value='https://user@example.com:8443/tools/?q=jwt&page=2#result';run();});document.querySelector('#url-clear').addEventListener('click',()=>{input.value='';reset();input.focus();});input.addEventListener('input',reset);copy.addEventListener('click',async()=>{if(!current)return;const text=JSON.stringify(current,null,2);try{await navigator.clipboard.writeText(text);status.textContent='Parsed URL copied as JSON.';}catch{status.textContent='Copy is unavailable in this browser.';}});
+</script>

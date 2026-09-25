@@ -39,3 +39,14 @@ Added four browser-first technical utilities:
 - `/tools/cron-expression-generator/` — builds standard 5-field cron expressions and previews upcoming runs.
 
 The homepage, tool directory, About page, footer, metadata and sitemap validation were updated to surface the expanded technical toolkit. Legacy prompt and AI routes remain unchanged and available.
+
+## Phase 3
+Added six technical utilities without removing any legacy routes:
+- SQL Formatter
+- XML Formatter
+- URL Parser
+- Query String Parser
+- SHA-256 Generator
+- JSON Minifier
+
+The homepage, tools directory, footer, About page and sitemap validation were updated to surface the expanded technical toolkit.

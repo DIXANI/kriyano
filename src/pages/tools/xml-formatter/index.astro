@@ -1,0 +1,49 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+---
+<ToolLayout title="XML Formatter" description="Validate and pretty-print XML with readable indentation locally in your browser." category="Text & Data">
+<section class="kit-workspace">
+  <div class="kit-panel">
+    <h2>XML input</h2>
+    <div class="kit-field"><label for="xml-input">Paste XML</label><textarea id="xml-input" rows="17" spellcheck="false" placeholder="<catalog><item id=&quot;1&quot;><name>KRIYANO</name></item></catalog>"></textarea></div>
+    <div class="kit-fields"><div class="kit-field"><label for="xml-indent">Indentation</label><select id="xml-indent"><option value="2">2 spaces</option><option value="4">4 spaces</option></select></div></div>
+    <div class="kit-actions"><button class="kit-btn primary" id="xml-run" type="button">Format XML</button><button class="kit-btn" id="xml-example" type="button">Load example</button><button class="kit-btn" id="xml-clear" type="button">Clear</button></div>
+    <p class="kit-status" id="xml-status" role="status"></p>
+  </div>
+  <div class="kit-panel kit-result">
+    <h2>Formatted XML</h2>
+    <div class="kit-field"><label for="xml-output">Result</label><textarea id="xml-output" rows="17" readonly spellcheck="false"></textarea></div>
+    <div class="kit-actions"><button class="kit-btn" id="xml-copy" type="button" disabled>Copy XML</button></div>
+  </div>
+</section>
+<section class="kit-guide kit-reading">
+  <h2>Format and validate XML</h2><p>The browser parses the document first. If the XML is not well formed, the tool reports an error instead of producing misleading output.</p>
+  <h2>Private by design</h2><p>Formatting happens locally in your browser. The XML is not uploaded to KRIYANO.</p>
+  <h2>Related tools</h2><p>For other structured formats, use the <a href="/tools/yaml-validator/">YAML Validator</a> or <a href="/tools/json-minifier/">JSON Minifier</a>.</p>
+</section>
+</ToolLayout>
+<script>
+const input=document.querySelector('#xml-input');
+const output=document.querySelector('#xml-output');
+const indent=document.querySelector('#xml-indent');
+const status=document.querySelector('#xml-status');
+const copy=document.querySelector('#xml-copy');
+const example=`<?xml version="1.0"?><catalog><item id="1"><name>KRIYANO</name><type>developer-tool</type></item><item id="2"><name>XML Formatter</name><type>data-tool</type></item></catalog>`;
+function reset(){output.value='';copy.disabled=true;status.textContent='';status.classList.remove('kit-error');}
+function serialize(node:Node, level:number, pad:string):string{
+  if(node.nodeType===Node.TEXT_NODE){const text=(node.nodeValue||'').trim();return text?pad.repeat(level)+text:'';}
+  if(node.nodeType===Node.COMMENT_NODE)return pad.repeat(level)+`<!--${node.nodeValue||''}-->`;
+  if(node.nodeType===Node.CDATA_SECTION_NODE)return pad.repeat(level)+`<![CDATA[${node.nodeValue||''}]]>`;
+  if(node.nodeType===Node.PROCESSING_INSTRUCTION_NODE)return pad.repeat(level)+`<?${node.nodeName} ${node.nodeValue||''}?>`;
+  if(node.nodeType!==Node.ELEMENT_NODE)return '';
+  const el=node as Element;
+  const attrs=[...el.attributes].map(attr=>` ${attr.name}="${attr.value.replace(/&/g,'&amp;').replace(/"/g,'&quot;')}"`).join('');
+  const children=[...el.childNodes].filter(child=>!(child.nodeType===Node.TEXT_NODE && !(child.nodeValue||'').trim()));
+  if(children.length===0)return `${pad.repeat(level)}<${el.tagName}${attrs}/>`;
+  if(children.length===1 && children[0].nodeType===Node.TEXT_NODE)return `${pad.repeat(level)}<${el.tagName}${attrs}>${(children[0].nodeValue||'').trim()}</${el.tagName}>`;
+  const inner=children.map(child=>serialize(child,level+1,pad)).filter(Boolean).join('\n');
+  return `${pad.repeat(level)}<${el.tagName}${attrs}>\n${inner}\n${pad.repeat(level)}</${el.tagName}>`;
+}
+function run(){reset();if(!input.value.trim()){status.textContent='Paste XML to format.';status.classList.add('kit-error');return;}const doc=new DOMParser().parseFromString(input.value,'application/xml');const error=doc.querySelector('parsererror');if(error){status.textContent='XML is not well formed. Check tags, attributes and nesting.';status.classList.add('kit-error');return;}const pad=' '.repeat(Number(indent.value));const prefix=input.value.trim().startsWith('<?xml')?'<?xml version="1.0"?>\n':'';output.value=prefix+serialize(doc.documentElement,0,pad);copy.disabled=false;status.textContent='Valid XML formatted locally in your browser.';}
+document.querySelector('#xml-run').addEventListener('click',run);document.querySelector('#xml-example').addEventListener('click',()=>{input.value=example;run();});document.querySelector('#xml-clear').addEventListener('click',()=>{input.value='';reset();input.focus();});input.addEventListener('input',reset);indent.addEventListener('change',()=>{if(input.value.trim())run();});copy.addEventListener('click',async()=>{if(!output.value)return;try{await navigator.clipboard.writeText(output.value);status.textContent='Formatted XML copied.';}catch{output.select();document.execCommand('copy');status.textContent='Formatted XML copied.';}});
+</script>

@@ -1,0 +1,40 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+---
+<ToolLayout title="SQL Formatter" description="Format common SQL queries into cleaner, easier-to-read statements directly in your browser." category="Developer">
+<section class="kit-workspace">
+  <div class="kit-panel">
+    <h2>SQL input</h2>
+    <div class="kit-field"><label for="sql-input">Paste SQL</label><textarea id="sql-input" rows="17" spellcheck="false" placeholder="select id,name,email from users where active=1 order by name;"></textarea></div>
+    <div class="kit-fields"><div class="kit-field"><label for="sql-indent">Indentation</label><select id="sql-indent"><option value="2">2 spaces</option><option value="4">4 spaces</option></select></div></div>
+    <div class="kit-actions"><button class="kit-btn primary" id="sql-run" type="button">Format SQL</button><button class="kit-btn" id="sql-example" type="button">Load example</button><button class="kit-btn" id="sql-clear" type="button">Clear</button></div>
+    <p class="kit-status" id="sql-status" role="status"></p>
+  </div>
+  <div class="kit-panel kit-result">
+    <h2>Formatted SQL</h2>
+    <div class="kit-field"><label for="sql-output">Result</label><textarea id="sql-output" rows="17" readonly spellcheck="false"></textarea></div>
+    <div class="kit-actions"><button class="kit-btn" id="sql-copy" type="button" disabled>Copy SQL</button></div>
+  </div>
+</section>
+<section class="kit-guide kit-reading">
+  <h2>Fast formatting for everyday SQL</h2><p>This formatter improves spacing and line breaks for common SELECT, INSERT, UPDATE, DELETE, JOIN, GROUP BY and ORDER BY statements. It is designed as a lightweight formatter rather than a full SQL dialect parser.</p>
+  <h2>Runs locally</h2><p>Your SQL stays in the browser. KRIYANO does not send queries to a formatting API.</p>
+  <h2>Related tools</h2><p>Working with configuration or structured data too? Try the <a href="/tools/json-minifier/">JSON Minifier</a> or <a href="/tools/json-yaml-converter/">JSON ↔ YAML Converter</a>.</p>
+</section>
+</ToolLayout>
+<script>
+import { formatSql } from '../../../utils/technical-tools.mjs';
+const input = document.querySelector('#sql-input');
+const output = document.querySelector('#sql-output');
+const indent = document.querySelector('#sql-indent');
+const status = document.querySelector('#sql-status');
+const copy = document.querySelector('#sql-copy');
+const example = `SELECT u.id,u.name,u.email,o.total FROM users u LEFT JOIN orders o ON o.user_id=u.id WHERE u.active=1 AND o.total>=100 ORDER BY o.total DESC;`;
+function reset(){output.value='';copy.disabled=true;status.textContent='';status.classList.remove('kit-error');}
+function run(){try{output.value=formatSql(input.value,Number(indent.value));copy.disabled=false;status.textContent='SQL formatted locally in your browser.';status.classList.remove('kit-error');}catch(error){reset();status.textContent=error instanceof Error?error.message:'Could not format SQL.';status.classList.add('kit-error');}}
+document.querySelector('#sql-run').addEventListener('click',run);
+document.querySelector('#sql-example').addEventListener('click',()=>{input.value=example;run();});
+document.querySelector('#sql-clear').addEventListener('click',()=>{input.value='';reset();input.focus();});
+input.addEventListener('input',reset);indent.addEventListener('change',()=>{if(input.value.trim())run();});
+copy.addEventListener('click',async()=>{if(!output.value)return;try{await navigator.clipboard.writeText(output.value);status.textContent='Formatted SQL copied.';}catch{output.select();document.execCommand('copy');status.textContent='Formatted SQL copied.';}});
+</script>

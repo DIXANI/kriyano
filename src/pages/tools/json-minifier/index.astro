@@ -1,0 +1,138 @@
+---
+import ToolLayout from '../../../layouts/ToolLayout.astro';
+---
+
+<ToolLayout
+  title="JSON Minifier"
+  description="Validate and minify JSON by removing unnecessary whitespace while preserving the parsed data."
+  category="Text & Data"
+>
+  <section class="kit-workspace">
+    <div class="kit-panel">
+      <h2>JSON input</h2>
+      <div class="kit-field">
+        <label for="json-input">Paste JSON</label>
+        <textarea
+          id="json-input"
+          rows="17"
+          spellcheck="false"
+          placeholder={'{\n  "name": "KRIYANO",\n  "type": "developer-tools"\n}'}
+        ></textarea>
+      </div>
+      <div class="kit-actions">
+        <button class="kit-btn primary" id="json-run" type="button">Minify JSON</button>
+        <button class="kit-btn" id="json-example" type="button">Load example</button>
+        <button class="kit-btn" id="json-clear" type="button">Clear</button>
+      </div>
+      <p class="kit-status" id="json-status" role="status"></p>
+    </div>
+
+    <div class="kit-panel kit-result">
+      <h2>Minified JSON</h2>
+      <div class="kit-field">
+        <label for="json-output">Result</label>
+        <textarea id="json-output" rows="17" readonly spellcheck="false"></textarea>
+      </div>
+      <div class="kit-stats">
+        <div><strong id="json-before">0</strong><span>input chars</span></div>
+        <div><strong id="json-after">0</strong><span>output chars</span></div>
+        <div><strong id="json-saved">0%</strong><span>size reduction</span></div>
+      </div>
+      <div class="kit-actions">
+        <button class="kit-btn" id="json-copy" type="button" disabled>Copy JSON</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="kit-guide kit-reading">
+    <h2>Validate and compact JSON</h2>
+    <p>The tool parses the JSON first. If it is valid, it serializes the data again without indentation or unnecessary whitespace.</p>
+
+    <h2>Useful for payloads and configuration</h2>
+    <p>Minified JSON is easier to move through logs, request bodies and configuration fields where readability is less important than compactness.</p>
+
+    <h2>Related tools</h2>
+    <p>Need another structured format? Try <a href="/tools/json-yaml-converter/">JSON ↔ YAML Converter</a> or <a href="/tools/xml-formatter/">XML Formatter</a>.</p>
+  </section>
+</ToolLayout>
+
+<script>
+  import { minifyJson } from '../../../utils/technical-tools.mjs';
+
+  const input = document.querySelector('#json-input');
+  const output = document.querySelector('#json-output');
+  const status = document.querySelector('#json-status');
+  const copyButton = document.querySelector('#json-copy');
+  const before = document.querySelector('#json-before');
+  const after = document.querySelector('#json-after');
+  const saved = document.querySelector('#json-saved');
+  const runButton = document.querySelector('#json-run');
+  const exampleButton = document.querySelector('#json-example');
+  const clearButton = document.querySelector('#json-clear');
+
+  function resetResult() {
+    output.value = '';
+    copyButton.disabled = true;
+    before.textContent = '0';
+    after.textContent = '0';
+    saved.textContent = '0%';
+    status.textContent = '';
+    status.classList.remove('kit-error');
+  }
+
+  function runMinifier() {
+    resetResult();
+
+    try {
+      const result = minifyJson(input.value);
+      const inputLength = input.value.length;
+      const outputLength = result.length;
+      const reduction = inputLength > 0
+        ? Math.max(0, Math.round((1 - outputLength / inputLength) * 100))
+        : 0;
+
+      output.value = result;
+      before.textContent = String(inputLength);
+      after.textContent = String(outputLength);
+      saved.textContent = `${reduction}%`;
+      copyButton.disabled = false;
+      status.textContent = 'Valid JSON minified locally in your browser.';
+    } catch (error) {
+      status.textContent = error instanceof Error ? error.message : 'Could not minify JSON.';
+      status.classList.add('kit-error');
+    }
+  }
+
+  runButton.addEventListener('click', runMinifier);
+
+  exampleButton.addEventListener('click', () => {
+    input.value = `{
+  "name": "KRIYANO",
+  "category": "developer-tools",
+  "active": true,
+  "tags": ["json", "web"]
+}`;
+    runMinifier();
+  });
+
+  clearButton.addEventListener('click', () => {
+    input.value = '';
+    resetResult();
+    input.focus();
+  });
+
+  input.addEventListener('input', resetResult);
+
+  copyButton.addEventListener('click', async () => {
+    if (!output.value) return;
+
+    try {
+      await navigator.clipboard.writeText(output.value);
+      status.textContent = 'Minified JSON copied.';
+    } catch {
+      output.select();
+      document.execCommand('copy');
+      status.textContent = 'Minified JSON copied.';
+    }
+  });
+</script>
