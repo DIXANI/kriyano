@@ -50,3 +50,8 @@ Added six technical utilities without removing any legacy routes:
 - JSON Minifier
 
 The homepage, tools directory, footer, About page and sitemap validation were updated to surface the expanded technical toolkit.
+
+## AdSense/content-quality upgrade
+- Added substantial, unique supporting content to the 15 primary technical tool pages through a shared ToolGuide component.
+- Each core tool now includes purpose/use cases, a practical example, common mistakes, privacy/local-processing information, FAQs and contextual related-tool links.
+- Existing tool UI, URLs and legacy archive remain unchanged.

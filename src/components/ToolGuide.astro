@@ -1,0 +1,57 @@
+---
+import type { ToolGuide as ToolGuideData } from '../data/toolGuides';
+interface Props { guide: ToolGuideData; }
+const { guide } = Astro.props;
+---
+<section class="kit-guide kit-rich-guide" aria-labelledby="tool-guide-heading">
+  <div class="kit-reading">
+    <h2 id="tool-guide-heading">How to use this tool effectively</h2>
+    <p>{guide.purpose}</p>
+  </div>
+
+  <div class="kit-guide-grid kit-use-grid">
+    <div>
+      <h3>Common uses</h3>
+      <ul>{guide.useCases.map(item => <li>{item}</li>)}</ul>
+    </div>
+    <div>
+      <h3>{guide.example.title}</h3>
+      <div class="kit-example">
+        <div><span>Input</span><pre>{guide.example.input}</pre></div>
+        <div><span>Output</span><pre>{guide.example.output}</pre></div>
+      </div>
+      <p>{guide.example.explanation}</p>
+    </div>
+    <div>
+      <h3>Common mistakes to avoid</h3>
+      <ul>{guide.mistakes.map(item => <li>{item}</li>)}</ul>
+    </div>
+  </div>
+
+  <div class="kit-privacy-note">
+    <strong>Privacy</strong>
+    <p>{guide.privacy}</p>
+  </div>
+
+  <div class="kit-reading kit-faqs">
+    <h2>Frequently asked questions</h2>
+    {guide.faqs.map(item => (
+      <details>
+        <summary>{item.question}</summary>
+        <p>{item.answer}</p>
+      </details>
+    ))}
+  </div>
+
+  <div class="kit-related-block">
+    <h2>Related KRIYANO tools</h2>
+    <div class="kit-related-grid">
+      {guide.related.map(item => (
+        <a class="kit-related-card" href={item.href}>
+          <strong>{item.name}</strong>
+          <span>{item.note}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
