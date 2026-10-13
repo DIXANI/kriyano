@@ -8,8 +8,42 @@ const recoveryLinks = [
 ];
 ---
 <BaseLayout title="Page Not Found | KRIYANO" description="The page could not be found. Explore KRIYANO developer, web and data utilities." noindex={true}>
-<article class="error-page"><div class="container error-container"><section class="error-hero"><div class="error-code" aria-hidden="true">404</div><div class="section-kicker">PAGE NOT FOUND</div><h1>This path didn't <span>lead anywhere.</span></h1><p>The page may have moved, the address may be incorrect, or the resource may no longer exist.</p><div class="hero-actions"><a href="/" class="button button-primary">Back to Home</a><a href="/tools/" class="secondary-link">Browse tools ↗</a></div></section><section class="recovery-section"><div class="recovery-head"><div><div class="section-kicker">KEEP EXPLORING</div><h2>Try one of these paths.</h2></div><p>KRIYANO is building fast browser-based developer, web and data utilities while keeping useful legacy resources accessible.</p></div><div class="recovery-grid">{recoveryLinks.map(item=><a href={item.href} class="recovery-card"><div class="card-top"><span>{item.number}</span><span>↗</span></div><div><h3>{item.title}</h3><p>{item.description}</p></div></a>)}</div></section></div></article>
+<article class="min-h-[calc(100vh-80px)] bg-[radial-gradient(circle_at_50%_18%,rgba(183,255,74,.07),transparent_28%)]">
+ <div class="container pt-[90px] pb-[70px]">
+  <section class="relative max-w-[850px] pt-[42px]">
+   <div class="error-code absolute -top-[58px] -left-[10px] z-0 select-none pointer-events-none text-[rgba(183,255,74,.045)] text-[clamp(9rem,25vw,19rem)] font-black leading-none tracking-[-0.09em]" aria-hidden="true">404</div>
+   <div class="relative z-10">
+    <div class="section-kicker">PAGE NOT FOUND</div>
+    <h1 class="mt-[14px] text-[clamp(3.3rem,7vw,6.6rem)] leading-[0.94] tracking-[-0.065em]"><span class="block text-lime">lead anywhere.</span>This path didn't</h1>
+    <p class="max-w-[650px] mt-[24px] text-muted text-[0.9375rem] leading-[1.75]">The page may have moved, the address may be incorrect, or the resource may no longer exist.</p>
+    <div class="flex items-center flex-wrap gap-[22px] mt-[32px]">
+     <a href="/" class="button button-primary">Back to Home</a>
+     <a href="/tools/" class="text-lime text-[0.8125rem] font-semibold">Browse tools ↗</a>
+    </div>
+   </div>
+  </section>
+  <section class="mt-[110px] pt-[55px] border-t border-line">
+   <div class="grid grid-cols-[1fr_0.75fr] gap-x-[60px] gap-y-[11px] items-end">
+    <div>
+     <div class="section-kicker">KEEP EXPLORING</div>
+     <h2 class="mt-[11px] text-[clamp(2rem,4vw,3.4rem)] leading-none tracking-[-0.05em]">Try one of these paths.</h2>
+    </div>
+    <p class="max-w-[460px] text-muted text-[0.8125rem] leading-[1.7]">KRIYANO is building fast browser-based developer, web and data utilities while keeping useful legacy resources accessible.</p>
+   </div>
+   <div class="grid grid-cols-[repeat(4,1fr)] gap-[12px] mt-[35px]">
+    {recoveryLinks.map(item=>
+     <a href={item.href} class="flex flex-col justify-between min-h-[205px] p-[20px] border border-line rounded-[14px] bg-surface transition-[border-color] hover:border-lime">
+      <div class="flex justify-between text-lime text-[0.75rem] font-black">
+       <span>{item.number}</span><span>↗</span>
+      </div>
+      <div>
+       <h3 class="text-[1.0625rem] mb-[8px]">{item.title}</h3>
+       <p class="text-muted text-[0.8125rem] leading-[1.6]">{item.description}</p>
+      </div>
+     </a>
+    )}
+   </div>
+  </section>
+ </div>
+</article>
 </BaseLayout>
-<style>
-.error-page{min-height:calc(100vh - 80px);background:radial-gradient(circle at 50% 18%,rgba(183,255,74,.07),transparent 28%)}.error-container{padding-top:90px;padding-bottom:70px}.error-hero{position:relative;max-width:850px;padding-top:42px}.error-code{position:absolute;top:-58px;left:-10px;z-index:0;color:rgba(183,255,74,.045);font-size:clamp(9rem,25vw,19rem);font-weight:900;line-height:1;letter-spacing:-.09em;user-select:none;pointer-events:none}.error-hero>*:not(.error-code){position:relative;z-index:1}.error-hero h1{margin-top:14px;font-size:clamp(3.3rem,7vw,6.6rem);line-height:.94;letter-spacing:-.065em}.error-hero h1 span{display:block;color:var(--lime)}.error-hero>p{max-width:650px;margin-top:24px;color:var(--muted);line-height:1.75}.hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:22px;margin-top:32px}.secondary-link{color:var(--lime);font-size:.82rem;font-weight:750}.recovery-section{margin-top:110px;padding-top:55px;border-top:1px solid var(--line)}.recovery-head{display:grid;grid-template-columns:1fr .75fr;gap:60px;align-items:end}.recovery-head h2{margin-top:11px;font-size:clamp(2rem,4vw,3.4rem);line-height:1;letter-spacing:-.05em}.recovery-head>p{max-width:460px;color:var(--muted);font-size:.85rem;line-height:1.7}.recovery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:35px}.recovery-card{display:flex;flex-direction:column;justify-content:space-between;min-height:205px;padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}.recovery-card:hover{border-color:var(--lime)}.card-top{display:flex;justify-content:space-between;color:var(--lime);font-size:.75rem;font-weight:800}.recovery-card h3{font-size:1.08rem;margin-bottom:8px}.recovery-card p{color:var(--muted);font-size:.82rem;line-height:1.6}@media(max-width:900px){.recovery-grid{grid-template-columns:repeat(2,1fr)}.recovery-head{grid-template-columns:1fr;gap:20px}}@media(max-width:520px){.recovery-grid{grid-template-columns:1fr}.error-container{padding-top:58px}.recovery-section{margin-top:70px}}
-</style>

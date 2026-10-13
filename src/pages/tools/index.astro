@@ -2,7 +2,6 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ToolCard from '../../components/ToolCard.astro';
 import { primaryTools, legacyTools } from '../../data/tools';
-import '../../styles/toolkit.css';
 const categories = [
  {id:'developer-tools', label:'Developer', tools:primaryTools.filter(t=>t.category==='Developer')},
  {id:'web-tools', label:'Web', tools:primaryTools.filter(t=>t.category==='Web')},
@@ -28,4 +27,4 @@ let category='All'; document.querySelector<HTMLElement>('#tool-filters')!.hidden
 function filter(){const words=search.value.trim().toLowerCase().split(/\s+/).filter(Boolean);let count=0;cards.forEach(card=>{const visible=(category==='All'||card.dataset.category===category)&&words.every(word=>card.dataset.search!.includes(word));card.hidden=!visible;if(visible)count++;});sections.forEach(section=>{section.hidden=!section.querySelector('[data-tool-card]:not([hidden])');});document.querySelector('#tool-count')!.textContent=`${count} ${count===1?'tool':'tools'} available`;document.querySelector<HTMLElement>('#tool-empty')!.hidden=count!==0;buttons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.filter===category)));}
 search.addEventListener('input',filter);buttons.forEach(button=>button.addEventListener('click',()=>{category=button.dataset.filter!;filter();}));document.querySelector('#reset-filters')!.addEventListener('click',()=>{category='All';search.value='';filter();search.focus();});
 </script>
-<style>.tool-category-section{padding:12px 0 40px}.tool-category-section .kit-row{margin-bottom:18px}.legacy-tools{margin-top:46px;padding-top:26px;border-top:1px solid var(--line)}.legacy-tools summary{cursor:pointer;font-weight:700;font-size:1.05rem}.legacy-tools>p{color:var(--muted);margin:12px 0 20px;max-width:720px}</style>
+
