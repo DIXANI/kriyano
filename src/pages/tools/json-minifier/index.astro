@@ -58,6 +58,7 @@ import ToolLayout from '../../../layouts/ToolLayout.astro';
 
 <script>
   import { minifyJson } from '../../../utils/technical-tools.mjs';
+  import { copyText } from '../../../utils/tool-browser.ts';
 
   const input = document.querySelector('#json-input');
   const output = document.querySelector('#json-output');
@@ -69,6 +70,8 @@ import ToolLayout from '../../../layouts/ToolLayout.astro';
   const runButton = document.querySelector('#json-run');
   const exampleButton = document.querySelector('#json-example');
   const clearButton = document.querySelector('#json-clear');
+
+  const MAX_INPUT_CHARS = 10 * 1024 * 1024; // 10 MB limit
 
   function resetResult() {
     output.value = '';
@@ -82,6 +85,12 @@ import ToolLayout from '../../../layouts/ToolLayout.astro';
 
   function runMinifier() {
     resetResult();
+
+    if (input.value.length > MAX_INPUT_CHARS) {
+      status.textContent = 'Input exceeds the 10 MB character limit.';
+      status.classList.add('kit-error');
+      return;
+    }
 
     try {
       const result = minifyJson(input.value);
@@ -125,14 +134,6 @@ import ToolLayout from '../../../layouts/ToolLayout.astro';
 
   copyButton.addEventListener('click', async () => {
     if (!output.value) return;
-
-    try {
-      await navigator.clipboard.writeText(output.value);
-      status.textContent = 'Minified JSON copied.';
-    } catch {
-      output.select();
-      document.execCommand('copy');
-      status.textContent = 'Minified JSON copied.';
-    }
+    await copyText(output.value, status);
   });
 </script>
