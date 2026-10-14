@@ -7,8 +7,23 @@ const categories = [
  {id:'web-tools', label:'Web', tools:primaryTools.filter(t=>t.category==='Web')},
  {id:'data-tools', label:'Text & Data', tools:primaryTools.filter(t=>t.category==='Text & Data')},
 ];
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Free Developer, Web & Data Tools",
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+  mainEntity: {
+    "@type": "ItemList",
+    itemListElement: primaryTools.map((tool, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: tool.name,
+      url: new URL(tool.href, Astro.site).toString(),
+    })),
+  },
+};
 ---
-<BaseLayout title="Free Developer, Web & Data Tools | KRIYANO" description="Free browser-based developer utilities for UUIDs, timestamps, JWTs, Base64, YAML validation, JSON/YAML conversion, cron expressions, URL encoding and data cleanup.">
+<BaseLayout title="Free Developer, Web & Data Tools | KRIYANO" description="Free browser-based developer utilities for UUIDs, timestamps, JWTs, Base64, YAML validation, JSON/YAML conversion, cron expressions, URL encoding and data cleanup." schema={schema}>
  <div class="container kit-page"><header class="kit-heading"><div class="section-kicker">The KRIYANO toolkit</div><h1>Developer and web tools that get one job done.</h1><p>Generate, decode, validate, convert and clean technical data with focused browser-based utilities. No account required.</p></header>
  <div class="kit-filter-bar" id="tool-filters" hidden><div><label for="tool-search" class="kit-field-label">Find a tool</label><input id="tool-search" class="kit-search" type="search" placeholder="Try “YAML”, “Base64” or “cron”…" autocomplete="off"/></div><div class="kit-filters" role="group" aria-label="Filter tools by category">{['All','Developer','Web','Text & Data'].map(category=><button class="kit-btn" type="button" data-filter={category} aria-pressed={category==='All'}>{category}</button>)}</div></div>
  <p class="kit-help" id="tool-count" role="status" style="margin-bottom:24px">{primaryTools.length} technical tools · Free to use · No sign-up</p>

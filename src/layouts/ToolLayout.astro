@@ -5,9 +5,28 @@ import { getToolGuide } from '../data/toolGuides';
 interface Props { title: string; description: string; category: string; }
 const { title, description, category } = Astro.props;
 const guide = getToolGuide(Astro.url.pathname);
+const relatedTools: Record<string, { name: string; href: string }[]> = {
+  'uuid-generator': [{name:'SHA-256 Generator',href:'/tools/sha-256-generator/'},{name:'Timestamp Converter',href:'/tools/timestamp-converter/'}],
+  'json-minifier': [{name:'JSON ↔ YAML Converter',href:'/tools/json-yaml-converter/'},{name:'YAML Validator',href:'/tools/yaml-validator/'}],
+  'json-yaml-converter': [{name:'JSON Minifier',href:'/tools/json-minifier/'},{name:'YAML Validator',href:'/tools/yaml-validator/'}],
+  'yaml-validator': [{name:'JSON ↔ YAML Converter',href:'/tools/json-yaml-converter/'},{name:'JSON Minifier',href:'/tools/json-minifier/'}],
+  'xml-formatter': [{name:'JSON Minifier',href:'/tools/json-minifier/'},{name:'SQL Formatter',href:'/tools/sql-formatter/'}],
+  'jwt-decoder': [{name:'Base64 Encoder & Decoder',href:'/tools/base64-encoder/'},{name:'SHA-256 Generator',href:'/tools/sha-256-generator/'}],
+  'base64-encoder': [{name:'JWT Decoder',href:'/tools/jwt-decoder/'},{name:'URL Encoder',href:'/tools/url-encoder/'}],
+  'url-parser': [{name:'Query String Parser',href:'/tools/query-string-parser/'},{name:'URL Encoder',href:'/tools/url-encoder/'}],
+  'query-string-parser': [{name:'URL Parser',href:'/tools/url-parser/'},{name:'URL Encoder',href:'/tools/url-encoder/'}],
+  'url-encoder': [{name:'URL Parser',href:'/tools/url-parser/'},{name:'Query String Parser',href:'/tools/query-string-parser/'}],
+  'cron-expression-generator': [{name:'Timestamp Converter',href:'/tools/timestamp-converter/'},{name:'UUID Generator',href:'/tools/uuid-generator/'}],
+  'timestamp-converter': [{name:'Cron Expression Generator',href:'/tools/cron-expression-generator/'},{name:'UUID Generator',href:'/tools/uuid-generator/'}],
+  'sha-256-generator': [{name:'UUID Generator',href:'/tools/uuid-generator/'},{name:'Base64 Encoder & Decoder',href:'/tools/base64-encoder/'}],
+  'sql-formatter': [{name:'XML Formatter',href:'/tools/xml-formatter/'},{name:'JSON Minifier',href:'/tools/json-minifier/'}],
+  'list-cleaner': [{name:'JSON Minifier',href:'/tools/json-minifier/'},{name:'YAML Validator',href:'/tools/yaml-validator/'}],
+};
+const slug = Astro.url.pathname.split('/').filter(Boolean).at(-1) ?? '';
+const related = relatedTools[slug] ?? [];
 const applicationCategory = category === 'Developer' || category === 'Web' ? 'DeveloperApplication' : 'UtilitiesApplication';
 const schema = { '@context':'https://schema.org','@type':'WebApplication',name:title,description,url:new URL(Astro.url.pathname,Astro.site).toString(),applicationCategory,operatingSystem:'Any',isAccessibleForFree:true,offers:{'@type':'Offer',price:'0',priceCurrency:'USD'},publisher:{'@id':'https://kriyano.com/#organization'} };
 ---
 <BaseLayout title={`Free ${title} | KRIYANO`} description={description} schema={schema}>
- <div class="container kit-page"><a class="kit-back" href="/tools/">← All tools</a><header class="kit-heading"><div class="section-kicker">{category} · Free tool</div><h1>{title}</h1><p>{description}</p></header><noscript><p class="kit-panel">Enable JavaScript to use this tool. The instructions and examples below are still available.</p></noscript><slot/>{guide && <ToolGuide guide={guide} />}</div>
+ <div class="container kit-page"><a class="kit-back" href="/tools/">← All tools</a><header class="kit-heading"><div class="section-kicker">{category} · Free tool</div><h1>{title}</h1><p>{description}</p></header><noscript><p class="kit-panel">Enable JavaScript to use this tool. The instructions and examples below are still available.</p></noscript><slot/>{guide && <ToolGuide guide={guide} />}{related.length > 0 && <section class="kit-guide" aria-labelledby="related-tools-title"><h2 id="related-tools-title">Related developer tools</h2><p>Continue your workflow with these free browser-based utilities:</p><ul>{related.map(tool => <li><a href={tool.href}>{tool.name}</a></li>)}</ul></section>}</div>
 </BaseLayout>

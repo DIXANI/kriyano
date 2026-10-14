@@ -4,11 +4,24 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 const title = "KRIYANO CHECK — Check AI Output Before You Use It";
 const description =
   "Paste AI-generated output and identify claims, numbers, assumptions, sources and other information that may need verification before you use it.";
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "KRIYANO CHECK",
+  description,
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+  applicationCategory: "UtilitiesApplication",
+  operatingSystem: "Any",
+  isAccessibleForFree: true,
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  publisher: { "@id": "https://kriyano.com/#organization" },
+};
 ---
 
 <BaseLayout
   title={title}
   description={description}
+  schema={schema}
 >
   <div class="check-page">
 
