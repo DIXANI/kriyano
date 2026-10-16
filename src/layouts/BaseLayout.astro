@@ -26,7 +26,20 @@ const defaultImage = Astro.url.pathname.startsWith("/learn/")
   ? "/learn-default.png"
   : "/og-default.png";
 
-const socialImageUrl = new URL(image ?? defaultImage, siteUrl).toString();
+const socialImagePath = image ?? defaultImage;
+const socialImageUrl = new URL(socialImagePath, siteUrl).toString();
+
+/*
+ * Real intrinsic dimensions of the shipped social images (verified from the
+ * PNG IHDR headers, not assumed). Used for Open Graph image previews so
+ * crawlers can lay out the card before fetching the file.
+ */
+const socialImageMeta: Record<string, { width: number; height: number; type: string }> = {
+  "/og-default.png": { width: 1200, height: 630, type: "image/png" },
+  "/learn-default.png": { width: 1733, height: 907, type: "image/png" },
+};
+const socialImage = socialImageMeta[socialImagePath] ?? { width: 1200, height: 630, type: "image/png" };
+const socialImageAlt = `${title} — KRIYANO`;
 ---
 
 <!doctype html>
@@ -58,11 +71,16 @@ const socialImageUrl = new URL(image ?? defaultImage, siteUrl).toString();
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:type" content={socialImage.type} />
+    <meta property="og:image:width" content={String(socialImage.width)} />
+    <meta property="og:image:height" content={String(socialImage.height)} />
+    <meta property="og:image:alt" content={socialImageAlt} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageUrl} />
+    <meta name="twitter:image:alt" content={socialImageAlt} />
 
     <meta name="theme-color" content="#07110d" />
 
