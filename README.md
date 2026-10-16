@@ -24,7 +24,7 @@ npm run preview
 Open the URL printed by the preview command. For editing use `npm run dev`.
 The repo's AGENTS.md specifies `astro dev --background` for agent-managed development.
 
-`npm run validate` builds all pages, runs 14 tests, and checks the generated internal links, metadata, headings, landmarks and sitemap.
+`npm run validate` builds all pages, runs 30 tests, and checks the generated internal links, metadata, headings, landmarks, sitemap, consent defaults and analytics gating.
 The test suite uses Node's experimental VM modules and type stripping; their experimental notices are expected.
 The production app does not need jsdom or Node's experimental test flags in the browser.
 
@@ -41,15 +41,16 @@ Do not deploy only `dist` to an unrelated static host and expect online AI revie
 
 The three new tools and Prompt Builder operate in browser memory. They do not upload or automatically store their form contents. CHECK makes an API request only when the user enables online review. The application no longer logs review content or returns internal provider error details. Provider processing remains subject to Cloudflare's own policies and configuration.
 
-There is no new analytics service, advertising code, tracking ID or fake consent banner. Add measurement and AdSense only with the correct account configuration and current disclosures. Do not put pasted lists, quotations, customer details or AI text into analytics events.
+There is no advertising code and no fake consent banner. Google Analytics 4 is integrated with Measurement ID `G-GT7Q9ETXYM`, gated behind a real, accessible consent choice: gtag.js is only injected after a visitor accepts analytics, so **no request is sent to Google and no analytics cookie is set before consent**. Google Consent Mode v2 defaults to `analytics_storage: denied` (and `ad_storage`, `ad_user_data`, `ad_personalization: denied`) because no advertising is implemented. Visitors can accept or reject with equally prominent controls, the choice is remembered in `localStorage`, and a persistent **Cookie settings** control lets them change or withdraw it (withdrawal clears the Google Analytics cookies). Do not put pasted lists, quotations, customer details or AI text into analytics events; the integration does not send tool inputs to Google Analytics.
 
 ## Verification completed
 
-- Production build: 130 pages.
-- 14 passing tests: calculations, boundaries, production client bundle interactions in jsdom, Worker request validation and mocked AI response handling.
-- 3,914 generated internal links and asset references checked.
+- Production build: 144 pages.
+- 30 passing tests: calculations, boundaries, production client bundle interactions in jsdom, Worker request validation, mocked AI response handling and consent behaviour (initial denied state, acceptance, rejection, persistence and withdrawal).
+- 4,600+ generated internal links and asset references checked.
 - New tool routes included in sitemap; 404 excluded.
 - Existing nested main landmarks corrected in the guide pages and 404 page.
+- Consent Mode v2 defaults denied on every page; gtag.js is not present in the static HTML and is injected only after acceptance.
 
 Limitations: jsdom tests do not render pixels or verify real browser print pagination. The remote preview browser could not access this workspace's localhost. Visual desktop/mobile review, actual PDF pagination and the live Cloudflare AI integration still need a staging/local browser check. No Search Console, traffic analytics or AdSense account data was accessed.
 
@@ -60,5 +61,5 @@ Limitations: jsdom tests do not render pixels or verify real browser print pagin
 3. Verify hosting/AI data practices against the updated privacy wording.
 4. Verify `/api/check` in the existing Worker environment. Check request limits, AI usage budget and any Cloudflare rate limiting before promoting the tool broadly; no account-level limit was configured here.
 5. Review changes in a branch and deploy through the existing workflow only when ready.
-6. Submit/check the sitemap and URL indexing in Google Search Console. Measure starts, successful uses and return visits using your chosen analytics setup; those external accounts have not been configured.
+6. Submit/check the sitemap and URL indexing in Google Search Console. Measure starts, successful uses and return visits in GA4 (`G-GT7Q9ETXYM`). The Measurement ID is configured in code and gated behind consent; the GA4 property's data streams, retention settings, Enhanced Measurement and internal traffic filters still need to be configured in the Google Analytics account.
 7. Apply for AdSense once the live site, disclosures and account-specific requirements are ready. This release does not guarantee approval or search traffic.

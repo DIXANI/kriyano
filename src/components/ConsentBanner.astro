@@ -1,0 +1,160 @@
+---
+// Accessible, lightweight consent interface. Rendered on every page via
+// BaseLayout. It is hidden by default and revealed by the consent script only
+// when the visitor has not made a decision yet, so it adds no visual noise to
+// the page markup for returning visitors.
+---
+<div
+  id="consent-banner"
+  class="consent-banner"
+  role="dialog"
+  aria-modal="false"
+  aria-labelledby="consent-title"
+  aria-describedby="consent-description"
+  hidden
+>
+  <div class="consent-inner">
+    <div class="consent-copy">
+      <h2 id="consent-title" class="consent-title">Cookies and analytics</h2>
+      <p id="consent-description" class="consent-text">
+        We use Google Analytics 4 to understand how the site is used and improve
+        it. Analytics only runs if you accept. You can change or withdraw your
+        choice at any time with <strong>Cookie settings</strong>.
+      </p>
+    </div>
+    <div class="consent-actions">
+      <button type="button" class="consent-button consent-accept" data-consent="granted">
+        Accept analytics
+      </button>
+      <button type="button" class="consent-button consent-reject" data-consent="denied">
+        Reject analytics
+      </button>
+      <a class="consent-link" href="/privacy/">Privacy policy</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { readConsent, applyConsent } from "../scripts/consent";
+
+  const banner = document.getElementById("consent-banner") as HTMLElement | null;
+  const openers = () => document.querySelectorAll<HTMLElement>("[data-consent-open]");
+
+  function show() {
+    if (!banner) return;
+    banner.hidden = false;
+    // Move focus into the panel so keyboard users can act (and press Escape)
+    // immediately, without having to tab in from the top of the document.
+    banner.querySelector<HTMLElement>("[data-consent]")?.focus();
+  }
+  function hide() {
+    if (!banner) return;
+    banner.hidden = true;
+  }
+
+  // Reveal only when the visitor has not decided yet.
+  if (readConsent(localStorage) === null) show();
+
+  if (banner) {
+    banner.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement;
+      const decision = target.closest<HTMLElement>("[data-consent]")?.dataset.consent;
+      if (decision !== "granted" && decision !== "denied") return;
+      applyConsent(decision, { storage: localStorage, documentLike: document, windowLike: window });
+      hide();
+      (document.querySelector("[data-consent-open]") as HTMLElement | null)?.focus();
+    });
+
+    // Escape closes the panel without recording a decision.
+    banner.addEventListener("keydown", (event) => {
+      if ((event as KeyboardEvent).key === "Escape") {
+        hide();
+        (document.querySelector("[data-consent-open]") as HTMLElement | null)?.focus();
+      }
+    });
+  }
+
+  // Persistent "Cookie settings" control re-opens the same interface and moves
+  // focus to the first action so keyboard users land in a predictable place.
+  openers().forEach((opener) => opener.addEventListener("click", show));
+</script>
+
+<style>
+  .consent-banner[hidden] {
+    display: none;
+  }
+
+  .consent-banner {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 60;
+    padding: 16px;
+    background: rgba(7, 17, 13, 0.96);
+    border-top: 1px solid var(--line);
+    backdrop-filter: blur(8px);
+  }
+
+  .consent-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+    align-items: center;
+    justify-content: space-between;
+    max-width: var(--max);
+    margin: 0 auto;
+  }
+
+  .consent-title {
+    margin: 0 0 6px;
+    font-size: 1rem;
+  }
+
+  .consent-text {
+    max-width: 640px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .consent-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .consent-button {
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .consent-accept {
+    background: var(--lime);
+    border-color: var(--lime);
+    color: #07110d;
+  }
+
+  .consent-reject {
+    background: transparent;
+    color: var(--text);
+  }
+
+  .consent-link {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .consent-button:focus-visible,
+  .consent-link:focus-visible,
+  [data-consent-open]:focus-visible {
+    outline: 2px solid var(--lime);
+    outline-offset: 2px;
+  }
+</style>

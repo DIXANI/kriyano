@@ -64,3 +64,31 @@ for (const file of files) {
 
 console.log(`Validated ${files.length} pages, ${links} internal asset/link references and the new sitemap entries.`);
 console.log(`Validated ${files.length} pages for JSON-LD, html lang, absolute https og:image, skip-link target and Open Graph image metadata.`);
+
+/*
+ * Consent and analytics gating checks.
+ *
+ * Strict prior-consent model: the Consent Mode defaults must be denied on every
+ * page, and the Google tag itself must NOT be in the static HTML. The gtag.js
+ * loader is injected at runtime only after a visitor accepts analytics, so its
+ * absence here is the guarantee that no request reaches Google before consent.
+ */
+for (const file of files) {
+  const html = await readFile(file, 'utf8');
+
+  // Consent Mode v2 default block is present with denied storage.
+  assert.match(html, /gtag\('consent',\s*'default'/, `${file}: Consent Mode default call present`);
+  assert.match(html, /analytics_storage:\s*'denied'/, `${file}: analytics_storage denied by default`);
+  assert.match(html, /ad_storage:\s*'denied'/, `${file}: ad_storage denied by default`);
+
+  // The gtag.js library must not appear in the static HTML; it is injected after consent.
+  assert.ok(
+    !/<script[^>]+src="https:\/\/www\.googletagmanager\.com\/gtag\/js/.test(html),
+    `${file}: gtag.js must not be loaded before consent`
+  );
+
+  // A persistent way to change the choice must exist on every page.
+  assert.match(html, /data-consent-open/, `${file}: persistent cookie settings control present`);
+}
+
+console.log(`Validated ${files.length} pages for denied Consent Mode defaults, absent pre-consent gtag.js and a persistent cookie-settings control.`);

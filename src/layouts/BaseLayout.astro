@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import ConsentBanner from "../components/ConsentBanner.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -86,6 +87,26 @@ const socialImageAlt = `${title} — KRIYANO`;
 
     <meta name="generator" content={Astro.generator} />
 
+    <!--
+      Google Consent Mode v2 defaults.
+
+      This must run before any Google tag so the denied defaults are in place
+      first. The gtag.js library itself is NOT loaded here: ConsentBanner's
+      script only injects it after the visitor accepts analytics, so no request
+      is sent to Google and no analytics cookie is set before consent.
+    -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500
+      });
+    </script>
+
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
@@ -135,5 +156,6 @@ const socialImageAlt = `${title} — KRIYANO`;
     </main>
 
     <Footer />
+    <ConsentBanner />
   </body>
 </html>
