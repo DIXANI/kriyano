@@ -21,6 +21,7 @@ const relatedTools: Record<string, { name: string; href: string }[]> = {
   'sha-256-generator': [{name:'UUID Generator',href:'/tools/uuid-generator/'},{name:'Base64 Encoder & Decoder',href:'/tools/base64-encoder/'}],
   'sql-formatter': [{name:'XML Formatter',href:'/tools/xml-formatter/'},{name:'JSON Minifier',href:'/tools/json-minifier/'}],
   'list-cleaner': [{name:'JSON Minifier',href:'/tools/json-minifier/'},{name:'YAML Validator',href:'/tools/yaml-validator/'}],
+ 'margin-calculator': [{name:'Quotation Builder',href:'/tools/quotation-builder/'},{name:'Spreadsheet List Cleaner',href:'/tools/list-cleaner/'}],
 };
 const slug = Astro.url.pathname.split('/').filter(Boolean).at(-1) ?? '';
 const related = relatedTools[slug] ?? [];

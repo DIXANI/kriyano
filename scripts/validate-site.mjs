@@ -10,6 +10,22 @@ const sitemap=await readFile(join(root,'sitemap-0.xml'),'utf8');for(const route 
 assert.ok(!(await readFile(join(root,'index.html'),'utf8')).includes('Coming soon'));
 
 /*
+ * Canonical host and scheme checks.
+ *
+ * Search Console reported impressions on http:// and http://www. variants of
+ * the same URLs, so every sitemap location must use the single canonical
+ * origin. This locks in the worker redirect and prevents a regression back to
+ * mixed-protocol or www URLs.
+ */
+for (const match of sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+  assert.match(
+    match[1],
+    /^https:\/\/kriyano\.com\//,
+    `Sitemap location must use the canonical origin: ${match[1]}`
+  );
+}
+
+/*
  * SEO/metadata and accessibility checks.
  *
  * These are additive to the structural checks above. Each rule is written to
