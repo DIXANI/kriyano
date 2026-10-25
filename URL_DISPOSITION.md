@@ -36,13 +36,13 @@ mean position across those rows and is a triage guide rather than a weighted ave
 | `/check/` | IMPROVE | 17 | 0 | 6.9 | `src/pages/check/index.astro` | Tool ranking for real queries with zero clicks - fix title/meta and on-page intent. |
 | `/tools/list-cleaner/` | IMPROVE | 11 | 0 | 9.1 | `src/pages/tools/list-cleaner/index.astro` | Tool ranking for real queries with zero clicks - fix title/meta and on-page intent. |
 | `/tools/xml-formatter/` | IMPROVE | 10 | 0 | 60.5 | `src/pages/tools/xml-formatter/index.astro` | Tool ranking for real queries with zero clicks - fix title/meta and on-page intent. |
-| `/prompts/operations-logistics/` | CONNECT | 49 | 0 | 59.4 | `src/pages/prompts/operations-logistics/index.astro` | Legacy prompt with demand - keep, add contextual links to relevant tools. |
-| `/learn/accuracy-and-research/why-ai-can-produce-wrong-answers/` | CONNECT | 20 | 1 | 16.6 | `src/pages/learn/accuracy-and-research/why-ai-can-produce-wrong-answers/index.astro` | Learn page with demand - add CHECK and tool internal links. |
-| `/prompts/` | CONNECT | 18 | 0 | 11.4 | `src/pages/prompts/index.astro` | Legacy prompt with demand - keep, add contextual links to relevant tools. |
-| `/prompts/corrective-action-plan/` | CONNECT | 17 | 0 | 11.3 | `src/pages/prompts/corrective-action-plan/index.astro` | Legacy prompt with demand - keep, add contextual links to relevant tools. |
-| `/learn/` | CONNECT | 13 | 0 | 5.1 | `src/pages/learn/index.astro` | Learn page with demand - add CHECK and tool internal links. |
-| `/learn/accuracy-and-research/how-to-fact-check-ai-output/` | CONNECT | 13 | 0 | 30.5 | `src/pages/learn/accuracy-and-research/how-to-fact-check-ai-output/index.astro` | Learn page with demand - add CHECK and tool internal links. |
-| `/learn/better-ai-systems/combining-multiple-ai-tasks/` | CONNECT | 13 | 0 | 10.2 | `src/pages/learn/better-ai-systems/combining-multiple-ai-tasks/index.astro` | Learn page with demand - add CHECK and tool internal links. |
+| `/prompts/operations-logistics/` | CONNECT ✅ | 49 | 0 | 59.4 | `src/pages/prompts/operations-logistics/index.astro` | Legacy prompt with demand - supporting-tools block now links List Cleaner, Margin Calculator and CHECK. |
+| `/learn/accuracy-and-research/why-ai-can-produce-wrong-answers/` | CONNECT ✅ | 20 | 1 | 16.6 | `src/pages/learn/accuracy-and-research/why-ai-can-produce-wrong-answers/index.astro` | Learn page with demand - tool-callout retargeted from Prompt Builder to CHECK. |
+| `/prompts/` | CONNECT ✅ | 18 | 0 | 11.4 | `src/pages/prompts/index.astro` | Legacy prompt with demand - featured-header link now routes to CHECK. |
+| `/prompts/corrective-action-plan/` | CONNECT ✅ | 17 | 0 | 11.3 | `src/pages/prompts/corrective-action-plan/index.astro` | Legacy prompt with demand - new relatedTools block links CHECK and List Cleaner. |
+| `/learn/` | CONNECT ✅ | 13 | 0 | 5.1 | `src/pages/learn/index.astro` | Learn page with demand - CHECK added to quickResources above Prompt Builder. |
+| `/learn/accuracy-and-research/how-to-fact-check-ai-output/` | CONNECT ✅ | 13 | 0 | 30.5 | `src/pages/learn/accuracy-and-research/how-to-fact-check-ai-output/index.astro` | Learn page with demand - tool-callout retargeted from Prompt Builder to CHECK. |
+| `/learn/better-ai-systems/combining-multiple-ai-tasks/` | CONNECT ✅ | 13 | 0 | 10.2 | `src/pages/learn/better-ai-systems/combining-multiple-ai-tasks/index.astro` | Learn page with demand - new CHECK callout placed at the verify-at-handoff step. |
 | `/` | KEEP | 51 | 3 | 3.1 | `src/pages/index.astro` | Hub page at mean position 3.1 already earning clicks - hold, monitor. |
 | `/ai-for-business/` | KEEP | 7 | 0 | 9.6 | `src/pages/ai-for-business/index.astro` | Hub page with impressions - hold, monitor. |
 | `/contact/` | KEEP | 5 | 0 | 6.8 | `src/pages/contact/index.astro` | Hub page with impressions - hold, monitor. |
@@ -173,3 +173,48 @@ mean position across those rows and is a triage guide rather than a weighted ave
 - `MISSING` marks a GSC path with no matching route (trailing-slash or retired alias). Verify in GSC before redirecting.
 - `IMPROVE` is scoped to pages with **10+ impressions and 0 clicks**, so effort follows demonstrated demand
   rather than guesses. Pages at 3-9 impressions stay `KEEP` until the window shows more signal.
+
+## Progress log
+
+### Pass 2 — CONNECT internal linking (all 7 targets done)
+
+The GSC window showed every learn article ending in the same callout: "Open Prompt Builder".
+That pushed verification and research traffic into the weakest tool (`/tools/prompt-builder/`,
+24 impressions at position 79.1) instead of `/check/`, which is the page that actually does
+the work being described.
+
+Changes by page:
+
+| Page | Change |
+| --- | --- |
+| `/learn/accuracy-and-research/why-ai-can-produce-wrong-answers/` | `tool-callout` retargeted to `/check/` with copy about flagging unsupported claims. |
+| `/learn/accuracy-and-research/how-to-fact-check-ai-output/` | `tool-callout` retargeted to `/check/`. |
+| `/learn/accuracy-and-research/evaluating-sources/` | `tool-callout` retargeted to `/check/`. |
+| `/learn/accuracy-and-research/ai-assisted-research/` | `tool-callout` retargeted to `/check/`. |
+| `/learn/ai-fundamentals/where-ai-can-go-wrong/` | `tool-callout` retargeted to `/check/`. |
+| `/learn/better-ai-systems/combining-multiple-ai-tasks/` | New `tool-callout` at the "verify at the handoff" step. |
+| `/learn/` | `/check/` added to `quickResources` ahead of Prompt Builder. |
+| `/prompts/operations-logistics/` | `supporting-tools` block now lists List Cleaner, Margin Calculator and CHECK. |
+| `/prompts/corrective-action-plan/` | New `relatedTools` block (CHECK + List Cleaner). |
+| `/prompts/` | Featured-header link rerouted to `/check/`. |
+
+Supporting component work:
+
+- `PromptPage.astro` gained an optional `relatedTools` prop and a scoped `.related-tools` block.
+  It defaults to `[]`, so none of the existing prompt pages change.
+- The two claim-checking pages in the source cluster (`where-ai-can-go-wrong`,
+  `evaluating-sources`, `ai-assisted-research`) were added ahead of schedule because they sat
+  in the same semantic cluster as the CONNECT targets and shared the identical misdirected callout.
+
+Deliberately left on Prompt Builder: `what-ai-is-good-at`,
+`what-generative-ai-actually-does`, the four `prompting-fundamentals` guides,
+`ai-assisted-workflows`, `building-reusable-prompts`, `choosing-tasks-for-ai`,
+`what-not-to-share-with-ai` and `reviewing-and-improving-your-system`. Those pages are
+about *writing* prompts, where Prompt Builder is the correct destination.
+
+### Pass 1 — IMPROVE title/meta rewrites
+
+Seven zero-click pages rewritten in the earlier commit: `/tools/base64-encoder/`,
+`/tools/cron-expression-generator/`, `/creators/`, `/tools/`, `/tools/margin-calculator/`,
+`/check/`, `/about/`. Two tools promoted out of Legacy into a new Business category.
+
