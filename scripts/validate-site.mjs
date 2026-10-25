@@ -1,6 +1,7 @@
 import {readFile,readdir,stat} from 'node:fs/promises';
 import {resolve,join} from 'node:path';
 import assert from 'node:assert/strict';
+import {JSDOM} from 'jsdom';
 const root=resolve('dist');const files=[];
 async function walk(dir){for(const entry of await readdir(dir,{withFileTypes:true})){const path=join(dir,entry.name);if(entry.isDirectory())await walk(path);else if(path.endsWith('.html'))files.push(path);}}
 await walk(root);let links=0;const titles=new Set();
@@ -108,3 +109,64 @@ for (const file of files) {
 }
 
 console.log(`Validated ${files.length} pages for denied Consent Mode defaults, absent pre-consent gtag.js and a persistent cookie-settings control.`);
+
+/*
+ * Stylesheet selector resolution checks.
+ *
+ * The Prompt Builder shipped with every form control unstyled because its rules
+ * were written as `.builder-hero input`, but the form had been moved into a
+ * sibling `.builder-section`. Neither the unit tests nor the checks above caught
+ * it: they assert that markup and CSS exist, never that a selector resolves.
+ * The page rendered select options in the browser default white-on-white while
+ * the whole suite stayed green.
+ *
+ * The rule below encodes that specific failure. For each class-prefixed
+ * descendant selector that targets a form control, the class must actually
+ * contain that control somewhere in the built HTML. Scope is deliberately
+ * narrow so it stays high signal:
+ *  - Only class prefixes combined with input/select/textarea/option.
+ *  - Pseudo-classes and pseudo-elements are stripped, since :hover, :focus and
+ *    ::placeholder are styling states rather than containment paths.
+ *  - A selector passes if it matches on at least one page; wrappers such as
+ *    .quote-item are scoped to a tool page and need not appear everywhere.
+ *  - Rows rendered from a <template> are cloned into the DOM by script, so
+ *    <template> content is parsed and searched alongside the live document.
+ *    Without this, .quote-item input would false-positive even though the
+ *    markup is present and the selector resolves once a row is added.
+ */
+const stylesheets = (await readdir(join(root, '_astro'))).filter(name => name.endsWith('.css'));
+assert.ok(stylesheets.length > 0, 'dist/_astro contains built stylesheets');
+
+const controlSelector = /\.([a-z][a-z0-9-]*)\s+(input|select|textarea|option)\b(?![\w-])/g;
+const pairs = new Map();
+for (const name of stylesheets) {
+  const css = await readFile(join(root, '_astro', name), 'utf8');
+  const stripped = css.replace(/::?[a-z-]+(\([^)]*\))?/g, '');
+  for (const [, cls, control] of stripped.matchAll(controlSelector)) {
+    if (!pairs.has(`${cls} ${control}`)) pairs.set(`${cls} ${control}`, { cls, control });
+  }
+}
+
+let resolvedSelectors = 0;
+for (const { cls, control } of pairs.values()) {
+  let matched = false;
+  for (const file of files) {
+    const document = new JSDOM(await readFile(file, 'utf8')).window.document;
+    // Template content is inert and reachable only via .content, not as a child.
+    const scope = [document, ...[...document.querySelectorAll('template')].map(node => node.content)];
+    if (scope.some(node => node.querySelector(`.${cls} ${control}`) !== null)) {
+      matched = true;
+      break;
+    }
+  }
+  assert.ok(
+    matched,
+    `Stylesheet selector ".${cls} ${control}" matches no element in the built HTML; ` +
+      `the class must contain that control, or the rules silently do nothing`
+  );
+  resolvedSelectors++;
+}
+
+console.log(
+  `Validated ${resolvedSelectors} stylesheet class-prefixed form-control selectors resolve against the built HTML.`
+);
