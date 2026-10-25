@@ -41,6 +41,8 @@ interface Props {
 
   warningTitle?: string;
   warningText?: string;
+
+  relatedTools?: { href: string; label: string; description: string }[];
 }
 
 const {
@@ -70,6 +72,8 @@ const {
 
   warningTitle = "Quick tip",
   warningText = "Always review AI-generated content before using it for important work.",
+
+  relatedTools = [],
 } = Astro.props;
 ---
 
@@ -245,6 +249,29 @@ const {
           </section>
         )
       }
+
+      {
+        relatedTools.length > 0 && (
+          <section class="related-tools">
+            <div class="section-kicker">Free tools</div>
+
+            <h2>Do the mechanical part with a tool.</h2>
+
+            <div class="related-tool-list">
+              {relatedTools.map((tool) => (
+                <a href={tool.href} class="related-tool-row">
+                  <div>
+                    <strong>{tool.label}</strong>
+                    <p>{tool.description}</p>
+                  </div>
+
+                  <span>↗</span>
+                </a>
+              ))}
+            </div>
+          </section>
+        )
+      }
     </article>
 
     <aside class="sidebar">
@@ -356,6 +383,50 @@ const {
 </script>
 
 <style>
+
+  .related-tools {
+    margin-top: 45px;
+    padding-top: 40px;
+    border-top: 1px solid var(--line);
+  }
+
+  .related-tools h2 {
+    margin-top: 10px;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+  }
+
+  .related-tool-list {
+    margin-top: 20px;
+  }
+
+  .related-tool-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    padding: 19px 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .related-tool-row:hover strong {
+    color: var(--lime);
+  }
+
+  .related-tool-row strong {
+    font-size: 0.87rem;
+  }
+
+  .related-tool-row p {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 0.74rem;
+  }
+
+  .related-tool-row > span {
+    color: var(--lime);
+  }
 
   .prompt-jump-links {
     display: flex;

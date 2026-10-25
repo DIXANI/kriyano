@@ -1,7 +1,7 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
 ---
-<ToolLayout title="Base64 Encoder & Decoder" description="Encode UTF-8 text to Base64 or decode Base64 and Base64URL values back to readable text locally in your browser." category="Developer">
+<ToolLayout title="Base64 Encoder & Decoder" description="Encode text to Base64 or decode Base64 and Base64URL strings back to plain text. Handles UTF-8 and Unicode, runs entirely in your browser, and never uploads your data." category="Developer">
 <section class="kit-panel kit-controls-wide"><div class="kit-fields"><div class="kit-field"><label for="base64-mode">Mode</label><select id="base64-mode"><option value="encode">Encode text → Base64</option><option value="decode">Decode Base64 → text</option></select></div><div class="kit-field"><label for="base64-variant">Variant</label><select id="base64-variant"><option value="standard">Standard Base64</option><option value="url">Base64URL</option></select></div></div></section>
 <section class="kit-workspace" style="margin-top:22px">
  <div class="kit-panel"><h2 id="base64-input-title">Text to encode</h2><div class="kit-field"><label for="base64-input">Input</label><textarea id="base64-input" rows="15" spellcheck="false" placeholder="KRIYANO developer tools ✓"></textarea></div><div class="kit-actions"><button class="kit-btn primary" id="base64-run" type="button">Encode Base64</button><button class="kit-btn" id="base64-example" type="button">Load example</button><button class="kit-btn" id="base64-clear" type="button">Clear</button></div><p class="kit-status" id="base64-status" role="status"></p></div>

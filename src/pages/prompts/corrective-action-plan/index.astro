@@ -888,5 +888,19 @@ const tips = [
     sidebarDescription="Use KRIYANO's Root Cause Analysis Prompt when the underlying cause is still unclear before finalizing the corrective action plan."
     warningTitle="Evidence should drive the action"
     warningText="A corrective action is only as strong as the root-cause investigation behind it. Avoid assigning blame, changing procedures or closing actions without sufficient evidence that the identified cause and proposed control are valid."
+    relatedTools={[
+      {
+        href: "/check/",
+        label: "Review a generated plan with KRIYANO CHECK",
+        description:
+          "Flag statements in the AI plan that are not supported by the evidence you supplied.",
+      },
+      {
+        href: "/tools/list-cleaner/",
+        label: "Compare two action lists",
+        description:
+          "Check which open actions, SKUs or records appear in one list but not the other.",
+      },
+    ]}
   />
 </BaseLayout>

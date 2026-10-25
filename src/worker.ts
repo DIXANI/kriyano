@@ -4,12 +4,41 @@ interface Env {
   ASSETS: Fetcher;
 }
 
+const CANONICAL_ORIGIN = "https://kriyano.com";
+
 export default {
   async fetch(
     request: Request,
     env: Env
   ): Promise<Response> {
     const url = new URL(request.url);
+
+    /*
+     * Canonical host and scheme redirect.
+     *
+     * Search Console reports impressions on http:// and http://www. variants of
+     * the same URLs, which splits ranking signals across duplicate addresses.
+     * Any request that is not exactly https://kriyano.com is permanently
+     * redirected to the canonical origin, preserving path and query string.
+     *
+     * 308 preserves the request method, so this is safe for the POST API too.
+     * Only non-canonical traffic is affected: requests that already use the
+     * canonical origin (including local preview on other hostnames) fall
+     * through untouched.
+     */
+    if (url.hostname === "kriyano.com" && url.protocol !== "https:") {
+      return Response.redirect(
+        `${CANONICAL_ORIGIN}${url.pathname}${url.search}`,
+        308
+      );
+    }
+
+    if (url.hostname === "www.kriyano.com") {
+      return Response.redirect(
+        `${CANONICAL_ORIGIN}${url.pathname}${url.search}`,
+        308
+      );
+    }
 
     /*
      * KRIYANO CHECK API
