@@ -82,9 +82,9 @@
 .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 label{display:block;margin-bottom:8px;color:#dfe6e2;font-size:0.82rem;font-weight:700}
 label span{color:var(--color-lime)}
-.builder-hero input,.builder-hero select,.builder-hero textarea{width:100%;border:1px solid rgba(183,255,74,0.18);border-radius:11px;outline:none;background:#07120e;color:var(--color-text);padding:13px 14px;font-size:0.88rem;box-shadow:inset 0 1px 2px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.015);transition:border-color 0.2s ease,background 0.2s ease,box-shadow 0.2s ease}
-.builder-hero textarea{resize:vertical;min-height:90px}.builder-hero select{min-height:48px}.builder-hero option{background:#0d1b15;color:var(--color-text)}.builder-hero textarea::placeholder,.builder-hero input::placeholder,.builder-hero select::placeholder{color:#7f8e86;opacity:1}
-.builder-hero input:focus,.builder-hero textarea:focus,.builder-hero select:focus{background:#081610;border-color:rgba(183,255,74,0.65);box-shadow:0 0 0 3px rgba(183,255,74,0.08),inset 0 1px 2px rgba(0,0,0,0.3)}
+.builder-section input,.builder-section select,.builder-section textarea{width:100%;border:1px solid rgba(183,255,74,0.18);border-radius:11px;outline:none;background:#07120e;color:var(--color-text);padding:13px 14px;font-size:0.88rem;box-shadow:inset 0 1px 2px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.015);transition:border-color 0.2s ease,background 0.2s ease,box-shadow 0.2s ease}
+.builder-section textarea{resize:vertical;min-height:90px}.builder-section select{min-height:48px}.builder-section option{background:#0d1b15;color:var(--color-text)}.builder-section textarea::placeholder,.builder-section input::placeholder,.builder-section select::placeholder{color:#7f8e86;opacity:1}
+.builder-section input:focus,.builder-section textarea:focus,.builder-section select:focus{background:#081610;border-color:rgba(183,255,74,0.65);box-shadow:0 0 0 3px rgba(183,255,74,0.08),inset 0 1px 2px rgba(0,0,0,0.3)}
 .field-error{border-color:#ff7474!important;box-shadow:0 0 0 3px rgba(255,116,116,0.08)!important}
 .form-actions{display:flex;flex-wrap:wrap;gap:12px;padding-top:8px}
 .form-actions button,.result-actions button{border:0;cursor:pointer}
